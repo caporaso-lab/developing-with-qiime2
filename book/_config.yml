@@ -1,0 +1,27 @@
+title: Developing with QIIME 2
+author: QIIME 2 Project
+logo: assets/q2dev.svg
+copyright: "2023"
+exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints"]
+
+execute:
+  execute_notebooks: force
+
+latex:
+  latex_documents:
+    targetname: book.tex
+
+bibtex_bibfiles:
+  - assets/references.bib
+
+repository:
+  url: https://github.com/caporaso-lab/developing-with-qiime2
+  path_to_book: book
+  branch: main
+
+html:
+  use_issues_button: true
+  use_repository_button: true
+  favicon: assets/favicon.ico
+  comments:
+    hypothesis: true

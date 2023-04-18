@@ -1,0 +1,43 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: 00-intro
+parts:
+  - caption: "Tutorials"
+    chapters:
+      - file: 10-tutorial/00-intro
+      - file: 10-tutorial/10-plugins/00-intro
+        sections:
+        - file: 10-tutorial/10-plugins/10-plugin-setup
+      - file: 10-tutorial/20-interfaces/00-intro
+        sections:
+        - file: 10-tutorial/20-interfaces/10-plugin-manager
+  - caption: "Understanding QIIME 2"
+    chapters:
+      - file: 20-understanding/00-intro
+      - file: 20-understanding/10-plugins/00-intro
+        sections:
+        - file: 20-understanding/10-plugins/10-plugin
+      - file: 20-understanding/20-interfaces/00-intro
+        sections:
+        - file: 20-understanding/20-interfaces/10-plugin-manager
+  - caption: "How-to guides"
+    chapters:
+      - file: 30-how-to/00-intro
+      - file: 30-how-to/10-plugins/00-intro
+        sections:
+        - file: 30-how-to/10-plugins/10-type-mapping
+      - file: 30-how-to/20-interfaces/00-intro
+        sections:
+        - file: 30-how-to/20-interfaces/10-accessing-help-text
+  - caption: "Reference"
+    chapters:
+      - file: 40-reference/00-intro
+      - file: 40-reference/10-api/00-intro
+        sections:
+        - file: 40-reference/10-api/10-placeholder
+      - file: 40-reference/90-glossary
+  - caption: "Back matter"
+    chapters:
+      - file: 99-bibliography
