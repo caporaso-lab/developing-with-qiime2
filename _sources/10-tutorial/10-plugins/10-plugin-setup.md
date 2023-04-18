@@ -1,0 +1,1 @@
+# Instantiating the `qiime2.plugin.Plugin` object
