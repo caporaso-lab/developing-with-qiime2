@@ -1,1 +1,0 @@
-# Mapping input semantic types to output semantic types
