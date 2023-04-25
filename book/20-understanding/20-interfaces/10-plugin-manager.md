@@ -1,1 +1,1 @@
-# # The `qiime2.sdk.PluginManager` object
+# The `qiime2.sdk.PluginManager` object
