@@ -1,7 +1,7 @@
 Mapping input semantic types to output semantic types
 #####################################################
 
-We use the ``TypeMatch`` obejct to map input types to output types.
+We use the ``TypeMatch`` object to map input types to output types.
 
 .. code-block:: python
 
