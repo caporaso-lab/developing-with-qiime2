@@ -13,12 +13,6 @@ sphinx:
     - sphinx.ext.mathjax
     - sphinx.ext.githubpages
     - sphinxcontrib.bibtex
-    - q2doc.question
-    - q2doc.qiime1
-    - q2doc.checkpoint
-    - q2doc.command_block
-    - q2doc.external_links
-    - q2doc.usage
 
 execute:
   execute_notebooks: force
