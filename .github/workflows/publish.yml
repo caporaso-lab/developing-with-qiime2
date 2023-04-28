@@ -32,11 +32,13 @@ jobs:
         auto-activate-base: false
 
     - name: Install dependencies
+      shell: bash -e -l {0}
       run: |
         pip install -r requirements.txt
 
     # Build the book
     - name: Build the book
+      shell: bash -e -l {0}
       run: |
         jupyter-book build book
 
