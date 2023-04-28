@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Instantiating the qiime2.plugin.Plugin object &#8212; Developing with QIIME 2</title>
+    <title>Registering an Action &#8212; Developing with QIIME 2</title>
   
   
   
@@ -62,12 +62,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '10-tutorial/10-plugins/10-plugin-setup';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '10-tutorial/10-plugins/20-registering-actions';</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Registering an Action" href="20-registering-actions.html" />
-    <link rel="prev" title="Building your first QIIME 2 plugin" href="00-intro.html" />
+    <link rel="next" title="Building your first QIIME 2 interface" href="../20-interfaces/00-intro.html" />
+    <link rel="prev" title="Instantiating the qiime2.plugin.Plugin object" href="10-plugin-setup.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -162,8 +162,8 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00-intro.html">Introduction</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="00-intro.html">Building your first QIIME 2 plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Instantiating the <cite>qiime2.plugin.Plugin</cite> object</a></li>
-<li class="toctree-l2"><a class="reference internal" href="20-registering-actions.html">Registering an Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10-plugin-setup.html">Instantiating the <cite>qiime2.plugin.Plugin</cite> object</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Registering an Action</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../20-interfaces/00-intro.html">Building your first QIIME 2 interface</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -288,7 +288,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/caporaso-lab/developing-with-qiime2/issues/new?title=Issue%20on%20page%20%2F10-tutorial/10-plugins/10-plugin-setup.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/caporaso-lab/developing-with-qiime2/issues/new?title=Issue%20on%20page%20%2F10-tutorial/10-plugins/20-registering-actions.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -318,7 +318,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/10-tutorial/10-plugins/10-plugin-setup.rst" target="_blank"
+      <li><a href="../../_sources/10-tutorial/10-plugins/20-registering-actions.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -387,7 +387,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -398,11 +400,21 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Instantiating the qiime2.plugin.Plugin object</h1>
+    <h1>Registering an Action</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-a-method">Registering a Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-a-visualizer">Registering a Visualizer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-a-pipeline">Registering a Pipeline</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -412,32 +424,82 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="instantiating-the-qiime2-plugin-plugin-object">
-<h1>Instantiating the <cite>qiime2.plugin.Plugin</cite> object<a class="headerlink" href="#instantiating-the-qiime2-plugin-plugin-object" title="Permalink to this heading">#</a></h1>
-<p>The next step is to instantiate a QIIME 2 <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> object. This might look like the following:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Plugin</span>
-<span class="kn">import</span> <span class="nn">q2_diversity</span>
+  <section id="registering-an-action">
+<h1>Registering an Action<a class="headerlink" href="#registering-an-action" title="Permalink to this heading">#</a></h1>
+<p>Once you have functions that you’d like to register as <code class="docutils literal notranslate"><span class="pre">Actions</span></code> (i.e., either <code class="docutils literal notranslate"><span class="pre">Methods</span></code> or <code class="docutils literal notranslate"><span class="pre">Visualizers</span></code>), and you’ve instantiated your <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> object, you are ready to register those functions. This will likely be done in the file where the <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> object was instantiated, as it will use that instance (which will be referred to as <code class="docutils literal notranslate"><span class="pre">plugin</span></code> in the following examples).</p>
+<section id="registering-a-method">
+<h2>Registering a Method<a class="headerlink" href="#registering-a-method" title="Permalink to this heading">#</a></h2>
+<p>First we’ll register a <code class="docutils literal notranslate"><span class="pre">Method</span></code> by calling <code class="docutils literal notranslate"><span class="pre">plugin.methods.register_function</span></code> as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">q2_types</span> <span class="kn">import</span> <span class="p">(</span><span class="n">FeatureTable</span><span class="p">,</span> <span class="n">Frequency</span><span class="p">,</span> <span class="n">Phylogeny</span><span class="p">,</span>
+                      <span class="n">Rooted</span><span class="p">,</span> <span class="n">DistanceMatrix</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Str</span><span class="p">,</span> <span class="n">Choices</span><span class="p">,</span> <span class="n">Properties</span><span class="p">,</span> <span class="n">Metadata</span>
 
-<span class="n">plugin</span> <span class="o">=</span> <span class="n">Plugin</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;diversity&#39;</span><span class="p">,</span>
-    <span class="n">version</span><span class="o">=</span><span class="n">q2_diversity</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span>
-    <span class="n">website</span><span class="o">=</span><span class="s1">&#39;https://qiime2.org&#39;</span><span class="p">,</span>
-    <span class="n">user_support_text</span><span class="o">=</span><span class="s1">&#39;https://forum.qiime2.org&#39;</span><span class="p">,</span>
-    <span class="n">package</span><span class="o">=</span><span class="s1">&#39;q2_diversity&#39;</span>
+<span class="kn">import</span> <span class="nn">q2_diversity</span>
+<span class="kn">import</span> <span class="nn">q2_diversity._beta</span> <span class="k">as</span> <span class="nn">beta</span>
+
+<span class="n">plugin</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
+    <span class="n">function</span><span class="o">=</span><span class="n">q2_diversity</span><span class="o">.</span><span class="n">beta_phylogenetic</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;table&#39;</span><span class="p">:</span> <span class="n">FeatureTable</span><span class="p">[</span><span class="n">Frequency</span><span class="p">],</span>
+            <span class="s1">&#39;phylogeny&#39;</span><span class="p">:</span> <span class="n">Phylogeny</span><span class="p">[</span><span class="n">Rooted</span><span class="p">]},</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="n">Str</span> <span class="o">%</span> <span class="n">Choices</span><span class="p">(</span><span class="n">beta</span><span class="o">.</span><span class="n">phylogenetic_metrics</span><span class="p">())},</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;distance_matrix&#39;</span><span class="p">,</span> <span class="n">DistanceMatrix</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">(</span><span class="s1">&#39;phylogenetic&#39;</span><span class="p">))],</span>
+    <span class="n">input_descriptions</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;table&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;The feature table containing the samples over which beta &#39;</span>
+                  <span class="s1">&#39;diversity should be computed.&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;phylogeny&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Phylogenetic tree containing tip identifiers that &#39;</span>
+                      <span class="s1">&#39;correspond to the feature identifiers in the table. &#39;</span>
+                      <span class="s1">&#39;This tree can contain tip ids that are not present in &#39;</span>
+                      <span class="s1">&#39;the table, but all feature ids in the table must be &#39;</span>
+                      <span class="s1">&#39;present in this tree.&#39;</span><span class="p">)</span>
+    <span class="p">},</span>
+    <span class="n">parameter_descriptions</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="s1">&#39;The beta diversity metric to be computed.&#39;</span>
+    <span class="p">},</span>
+    <span class="n">output_descriptions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;distance_matrix&#39;</span><span class="p">:</span> <span class="s1">&#39;The resulting distance matrix.&#39;</span><span class="p">},</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Beta diversity (phylogenetic)&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Computes a user-specified phylogenetic beta diversity metric&quot;</span>
+                 <span class="s2">&quot; for all pairs of samples in a feature table.&quot;</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>This will provide QIIME with essential information about your <code class="docutils literal notranslate"><span class="pre">Plugin</span></code>.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">name</span></code> parameter is the name that users will use to access your plugin from within different QIIME 2 interfaces. It should be a “command line friendly” name, so should not contain spaces or punctuation. (Avoiding uppercase characters and using dashes (<code class="docutils literal notranslate"><span class="pre">-</span></code>) instead of underscores (<code class="docutils literal notranslate"><span class="pre">_</span></code>) are preferable in the plugin <code class="docutils literal notranslate"><span class="pre">name</span></code>, but not required).</p>
-<p><code class="docutils literal notranslate"><span class="pre">version</span></code> should be the version number of your package (the same that is used in its <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>).</p>
-<p><code class="docutils literal notranslate"><span class="pre">website</span></code> should be the page where you’d like end users to refer for more information about your package. Since <code class="docutils literal notranslate"><span class="pre">q2-diversity</span></code> doesn’t have its own website, we’re including the QIIME 2 website here.</p>
-<p><code class="docutils literal notranslate"><span class="pre">package</span></code> should be the Python package name for your plugin.</p>
-<p>While not shown in the previous example, plugin developers can optionally provide the following parameters to <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.Plugin</span></code>:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">citation_text</span></code>: free text describing how users should cite the plugin and/or the underlying tools it wraps. If not provided, users are told to cite the <code class="docutils literal notranslate"><span class="pre">website</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">user_support_text</span></code>: free text describing how users should get help with the plugin (e.g. issue tracker, StackOverflow tag, mailing list, etc.). If not provided, users are referred to the <code class="docutils literal notranslate"><span class="pre">website</span></code> for support. <code class="docutils literal notranslate"><span class="pre">q2-diversity</span></code> is supported on the QIIME 2 Forum, so we include that URL here. We encourage plugin developers to support their plugins on the QIIME 2 Forum, so you can include that URL as the <code class="docutils literal notranslate"><span class="pre">user_support_text</span></code> for your plugin. If you do that, you should get in the habit of monitoring the QIIME 2 Forum for technical support questions.</p></li>
-</ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> object can live anywhere in your project, but by convention it will be in a file called <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code>. For an example, see <code class="docutils literal notranslate"><span class="pre">q2_diversity/plugin_setup.py</span></code>.</p>
+<p>The values being provided are:</p>
+<p><code class="docutils literal notranslate"><span class="pre">function</span></code>: The function to be registered as a method.</p>
+<p><code class="docutils literal notranslate"><span class="pre">inputs</span></code>: A dictionary indicating the parameter name and its <em>semantic type</em>, for each input <code class="docutils literal notranslate"><span class="pre">Artifact</span></code>. These semantic types differ from the data types that you provided in your <a href="#id1"><span class="problematic" id="id2">`mypy`_</span></a> annotation of the input, as semantic types describe the data, where the data types indicate the structure of the data. The currently available semantic types can be viewed by running <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">tools</span> <span class="pre">import</span> <span class="pre">--show-importable-types</span></code> (until merge of <a class="reference external" href="https://github.com/qiime2/q2cli/pull/291">this PR</a>, which will improve on how this information is accessed from the command line). In the example above we’re indicating that the <code class="docutils literal notranslate"><span class="pre">table</span></code> parameter must be a <code class="docutils literal notranslate"><span class="pre">FeatureTable</span></code> of <code class="docutils literal notranslate"><span class="pre">Frequency</span></code> (i.e. counts), and that the <code class="docutils literal notranslate"><span class="pre">phylogeny</span></code> parameter must be a <code class="docutils literal notranslate"><span class="pre">Phylogeny</span></code> that is <code class="docutils literal notranslate"><span class="pre">Rooted</span></code>.  Notice that the keys in <code class="docutils literal notranslate"><span class="pre">inputs</span></code> map directly to the parameter names in <code class="docutils literal notranslate"><span class="pre">q2_diversity.beta_phylogenetic</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">parameters</span></code>: A dictionary indicating the parameter name and its <em>semantic type</em>, for each input <code class="docutils literal notranslate"><span class="pre">Parameter</span></code>. These parameters are primitive values (i.e., non-<code class="docutils literal notranslate"><span class="pre">Artifacts</span></code>). In the example above, we’re indicating that the <code class="docutils literal notranslate"><span class="pre">metric</span></code> should be a string from a specific set (in this case, the set of known phylogenetic beta diversity metrics).</p>
+<p><code class="docutils literal notranslate"><span class="pre">outputs</span></code>: A list of tuples indicating each output name and its semantic type.</p>
+<p><code class="docutils literal notranslate"><span class="pre">input_descriptions</span></code>: A dictionary containing input artifact names and their corresponding descriptions. This information is used by interfaces to instruct users how to use each specific input artifact.</p>
+<p><code class="docutils literal notranslate"><span class="pre">parameter_descriptions</span></code>: A dictionary containing parameter names and their corresponding descriptions. This information is used by interfaces to instruct users how to use each specific input parameter. You should not include any default parameter values in these descriptions, as these will generally be added automatically by an interface.</p>
+<p><code class="docutils literal notranslate"><span class="pre">output_descriptions</span></code>: A dictionary containing output artifact names and their corresponding descriptions. This information is used by interfaces to inform users what each specific output artifact will be.</p>
+<p><code class="docutils literal notranslate"><span class="pre">name</span></code>: A human-readable name for the <code class="docutils literal notranslate"><span class="pre">Method</span></code>. This may be presented to users in interfaces.</p>
+<p><code class="docutils literal notranslate"><span class="pre">description</span></code>: A human-readable description of the <code class="docutils literal notranslate"><span class="pre">Method</span></code>. This may be presented to users in interfaces.</p>
+</section>
+<section id="registering-a-visualizer">
+<h2>Registering a Visualizer<a class="headerlink" href="#registering-a-visualizer" title="Permalink to this heading">#</a></h2>
+<p>Registering <code class="docutils literal notranslate"><span class="pre">Visualizers</span></code> is the same as registering <code class="docutils literal notranslate"><span class="pre">Methods</span></code>, with two exceptions.</p>
+<p>First, you call <code class="docutils literal notranslate"><span class="pre">plugin.visualizers.register_function</span></code> to register a <code class="docutils literal notranslate"><span class="pre">Visualizer</span></code>.</p>
+<p>Next, you do not provide <code class="docutils literal notranslate"><span class="pre">outputs</span></code> or <code class="docutils literal notranslate"><span class="pre">output_descriptions</span></code> when making this call, as <code class="docutils literal notranslate"><span class="pre">Visualizers</span></code>, by definition, only return a single visualization. Since the visualization output path is a required parameter, you do not include this in an <code class="docutils literal notranslate"><span class="pre">outputs</span></code> list (it would be the same for every <code class="docutils literal notranslate"><span class="pre">Visualizer</span></code> that was ever registered, so it is added automatically).</p>
+<p>Registering <code class="docutils literal notranslate"><span class="pre">q2_diversity.alpha_group_significance</span></code> as a <code class="docutils literal notranslate"><span class="pre">Visualizer</span></code> looks like the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plugin</span><span class="o">.</span><span class="n">visualizers</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
+    <span class="n">function</span><span class="o">=</span><span class="n">q2_diversity</span><span class="o">.</span><span class="n">alpha_group_significance</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha_diversity&#39;</span><span class="p">:</span> <span class="n">SampleData</span><span class="p">[</span><span class="n">AlphaDiversity</span><span class="p">]},</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="n">Metadata</span><span class="p">},</span>
+    <span class="n">input_descriptions</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;alpha_diversity&#39;</span><span class="p">:</span> <span class="s1">&#39;Vector of alpha diversity values by sample.&#39;</span>
+    <span class="p">},</span>
+    <span class="n">parameter_descriptions</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="s1">&#39;The sample metadata.&#39;</span>
+    <span class="p">},</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Alpha diversity comparisons&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Visually and statistically compare groups of alpha diversity&quot;</span>
+                 <span class="s2">&quot; values.&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="registering-a-pipeline">
+<h2>Registering a Pipeline<a class="headerlink" href="#registering-a-pipeline" title="Permalink to this heading">#</a></h2>
+<p>TODO: put a pipeline registration here</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -472,20 +534,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="00-intro.html"
+       href="10-plugin-setup.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Building your first QIIME 2 plugin</p>
+        <p class="prev-next-title">Instantiating the <cite>qiime2.plugin.Plugin</cite> object</p>
       </div>
     </a>
     <a class="right-next"
-       href="20-registering-actions.html"
+       href="../20-interfaces/00-intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Registering an Action</p>
+        <p class="prev-next-title">Building your first QIIME 2 interface</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -498,6 +560,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-a-method">Registering a Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-a-visualizer">Registering a Visualizer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-a-pipeline">Registering a Pipeline</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

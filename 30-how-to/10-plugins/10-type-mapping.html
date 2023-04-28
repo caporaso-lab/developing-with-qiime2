@@ -162,7 +162,8 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../10-tutorial/00-intro.html">Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../10-tutorial/10-plugins/00-intro.html">Building your first QIIME 2 plugin</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../10-tutorial/10-plugins/10-plugin-setup.html">Instantiating the <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.Plugin</span></code> object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../10-tutorial/10-plugins/10-plugin-setup.html">Instantiating the <cite>qiime2.plugin.Plugin</cite> object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../10-tutorial/10-plugins/20-registering-actions.html">Registering an Action</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../10-tutorial/20-interfaces/00-intro.html">Building your first QIIME 2 interface</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -178,7 +179,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../20-understanding/20-interfaces/00-intro.html">Understanding QIIME 2 Interfaces</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../20-understanding/20-interfaces/10-plugin-manager.html"># The <code class="docutils literal notranslate"><span class="pre">qiime2.sdk.PluginManager</span></code> object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../20-understanding/20-interfaces/10-plugin-manager.html">The <code class="docutils literal notranslate"><span class="pre">qiime2.sdk.PluginManager</span></code> object</a></li>
 </ul>
 </li>
 </ul>
@@ -198,10 +199,20 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../40-reference/00-intro.html">Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../40-reference/10-api/00-intro.html">QIIME 2 API reference</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../40-reference/10-api/10-placeholder.html">Replace me!</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../40-reference/10-api/10-usage/00-index.html">Usage API</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../40-reference/10-api/10-usage/10-authors.html">Usage API (for example authors)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../40-reference/10-api/10-usage/20-drivers.html">Usage API (for interface drivers)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../40-reference/10-api/10-usage/30-implementations.html">Premade Usage Drivers</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../40-reference/90-glossary.html">QIIME 2 Developer Glossary</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../40-reference/10-api/20-cache/00-index.html">Artifact Cache</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../40-reference/10-api/20-cache/10-cache.html">Cache</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../40-reference/10-api/20-cache/20-pool.html">Pool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../40-reference/90-glossary.html">Glossary</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Back matter</span></p>
 <ul class="nav bd-sidenav">
@@ -307,7 +318,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/30-how-to/10-plugins/10-type-mapping.md" target="_blank"
+      <li><a href="../../_sources/30-how-to/10-plugins/10-type-mapping.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -317,7 +328,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.rst</span>
 </a>
 </li>
       
@@ -401,8 +412,51 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="mapping-input-semantic-types-to-output-semantic-types">
+  <section id="mapping-input-semantic-types-to-output-semantic-types">
 <h1>Mapping input semantic types to output semantic types<a class="headerlink" href="#mapping-input-semantic-types-to-output-semantic-types" title="Permalink to this heading">#</a></h1>
+<p>We use the <code class="docutils literal notranslate"><span class="pre">TypeMatch</span></code> object to map input types to output types.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Beginning of setup</span>
+<span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Plugin</span><span class="p">,</span> <span class="n">TypeMatch</span>
+<span class="kn">from</span> <span class="nn">qiime2.core.testing.type</span> <span class="kn">import</span> <span class="n">IntSequence1</span><span class="p">,</span> <span class="n">IntSequence2</span>
+<span class="kn">from</span> <span class="nn">qiime2.core.testing.method</span> <span class="kn">import</span> <span class="n">split_ints</span>
+<span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Citations</span>
+
+<span class="n">citations</span> <span class="o">=</span> <span class="n">Citations</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;citations.bib&#39;</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="s1">&#39;qiime2.core.testing&#39;</span><span class="p">)</span>
+<span class="n">dummy_plugin</span> <span class="o">=</span> <span class="n">Plugin</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;dummy-plugin&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Description of dummy plugin.&#39;</span><span class="p">,</span>
+    <span class="n">short_description</span><span class="o">=</span><span class="s1">&#39;Dummy plugin for testing.&#39;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.0.0-dev&#39;</span><span class="p">,</span>
+    <span class="n">website</span><span class="o">=</span><span class="s1">&#39;https://github.com/qiime2/qiime2&#39;</span><span class="p">,</span>
+    <span class="n">package</span><span class="o">=</span><span class="s1">&#39;qiime2.core.testing&#39;</span><span class="p">,</span>
+    <span class="n">user_support_text</span><span class="o">=</span><span class="s1">&#39;For help, see https://qiime2.org&#39;</span><span class="p">,</span>
+    <span class="n">citations</span><span class="o">=</span><span class="p">[</span><span class="n">citations</span><span class="p">[</span><span class="s1">&#39;unger1998does&#39;</span><span class="p">],</span> <span class="n">citations</span><span class="p">[</span><span class="s1">&#39;berry1997flying&#39;</span><span class="p">]]</span>
+<span class="p">)</span>
+<span class="c1"># End of setup</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeMatch</span><span class="p">([</span><span class="n">IntSequence1</span><span class="p">,</span> <span class="n">IntSequence2</span><span class="p">])</span>
+<span class="n">dummy_plugin</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
+    <span class="n">function</span><span class="o">=</span><span class="n">split_ints</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;ints&#39;</span><span class="p">:</span> <span class="n">T</span>
+    <span class="p">},</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{},</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;left&#39;</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span>
+        <span class="s1">&#39;right&#39;</span><span class="p">:</span> <span class="n">T</span>
+    <span class="p">},</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Split sequence of integers in half&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;This method splits a sequence of integers in half, returning &#39;</span>
+                <span class="s1">&#39;the two halves (left and right). If the input sequence</span><span class="se">\&#39;</span><span class="s1">s &#39;</span>
+                <span class="s1">&#39;length is not evenly divisible by 2, the right half will &#39;</span>
+                <span class="s1">&#39;have one more element than the left.&#39;</span><span class="p">,</span>
+    <span class="n">citations</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">citations</span><span class="p">[</span><span class="s1">&#39;witcombe2006sword&#39;</span><span class="p">],</span> <span class="n">citations</span><span class="p">[</span><span class="s1">&#39;reimers2012response&#39;</span><span class="p">]]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Create a <code class="docutils literal notranslate"><span class="pre">TypeMatch</span></code> object taking a list of the different types you intend to match. By convention, we name this variable T.</p>
+<p>Use this object as the type of the inputs and outputs you want to match. In the above example, <cite>ints</cite> can take an IntSequence1 or an IntSequence2. <cite>left</cite> and <cite>right</cite> will both be the same type as <cite>ints</cite>.</p>
 </section>
 
     <script type="text/x-thebe-config">
