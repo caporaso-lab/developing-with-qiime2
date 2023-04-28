@@ -5,6 +5,7 @@ on:
   push:
     branches:
     - main
+  pull_request:
 
 # This job installs dependencies, builds the book, and pushes it to `gh-pages`
 jobs:
@@ -19,6 +20,17 @@ jobs:
       with:
         python-version: 3.8
 
+    - name: Get latest QIIME 2 Environment
+      shell: bash
+      run: |
+        wget https://raw.githubusercontent.com/qiime2/environment-files/master/latest/staging/qiime2-latest-py38-linux-conda.yml
+
+    - uses: conda-incubator/setup-miniconda@v2
+      with:
+        activate-environment: qiime2
+        environment-file: qiime2-latest-py38-linux-conda.yml
+        auto-activate-base: false
+
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
@@ -31,6 +43,7 @@ jobs:
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
       uses: peaceiris/actions-gh-pages@v3.6.1
+      if: ${{ github.ref == 'refs/heads/main' }}
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./book/_build/html
