@@ -3,7 +3,7 @@ Building your first QIIME 2 plugin
 
 .. note:: This document is a work in progress, and serves as basic instructions for creating a QIIME 2 plugin. You can also find some (very preliminary) developer documentation at `https://dev.qiime2.org <https://dev.qiime2.org/latest/>`__.
 
-Creating a QIIME 2 plugin allows you to provide microbiome analysis functionality to QIIME 2 users. A plugin can be a standalone software project, or you can make a few small additions to your existing software project to make it a QIIME 2 plugin. Creating a single QIIME 2 plugin will make your functionality accessible through any QIIME 2 interface, including the :doc:`q2cli <../interfaces/q2cli>`, and the :doc:`Artifact API <../interfaces/artifact-api>`.
+Creating a QIIME 2 plugin allows you to provide microbiome analysis functionality to QIIME 2 users. A plugin can be a standalone software project, or you can make a few small additions to your existing software project to make it a QIIME 2 plugin. Creating a single QIIME 2 plugin will make your functionality accessible through any QIIME 2 interface, including the command line interface and the Python 3 API.
 
 Overview
 --------
@@ -19,7 +19,7 @@ These steps are covered in detail below.
 
 Writing a simple QIIME 2 plugin should be a straightforward process. For example, the `q2-emperor`_ plugin, which connects `Emperor`_ to QIIME 2, is written in only around 100 lines of code. It is a standalone plugin that defines how and which functionality in Emperor should be accessible through QIIME 2. Plugins will vary in their complexity. For example, a plugin that defines a lot of new functionality would likely be quite a bit bigger. `q2-diversity`_ is a good example of this. Unlike ``q2-emperor``, there is some specific functionality (and associated unit tests) defined in this project, and it depends on several other Python 3 compatible libraries.
 
-Before starting to write a plugin, you should :doc:`install QIIME 2 and some plugins <../install/index>` to familiarize yourself with the system and to provide a means for testing your plugin.
+Before starting to write a plugin, you should install QIIME 2 and some plugins to familiarize yourself with the system and to provide a means for testing your plugin.
 
 Plugin components
 -----------------
@@ -148,7 +148,7 @@ The values being provided are:
 
 ``function``: The function to be registered as a method.
 
-``inputs``: A dictionary indicating the parameter name and its *semantic type*, for each input ``Artifact``. These semantic types differ from the data types that you provided in your `mypy`_ annotation of the input, as semantic types describe the data, where the data types indicate the structure of the data. The currently available semantic types are :doc:`detailed here <../semantic-types>`, along with a discussion of the motivation for defining semantic types. In the example above we're indicating that the ``table`` parameter must be a ``FeatureTable`` of ``Frequency`` (i.e. counts), and that the ``phylogeny`` parameter must be a ``Phylogeny`` that is ``Rooted``.  Notice that the keys in ``inputs`` map directly to the parameter names in ``q2_diversity.beta_phylogenetic``.
+``inputs``: A dictionary indicating the parameter name and its *semantic type*, for each input ``Artifact``. These semantic types differ from the data types that you provided in your `mypy`_ annotation of the input, as semantic types describe the data, where the data types indicate the structure of the data. The currently available semantic types can be viewed by running `qiime tools import --show-importable-types` (until merge of [this PR](https://github.com/qiime2/q2cli/pull/291), which will improve on how this information is accessed from the command line). In the example above we're indicating that the ``table`` parameter must be a ``FeatureTable`` of ``Frequency`` (i.e. counts), and that the ``phylogeny`` parameter must be a ``Phylogeny`` that is ``Rooted``.  Notice that the keys in ``inputs`` map directly to the parameter names in ``q2_diversity.beta_phylogenetic``.
 
 ``parameters``: A dictionary indicating the parameter name and its *semantic type*, for each input ``Parameter``. These parameters are primitive values (i.e., non-``Artifacts``). In the example above, we're indicating that the ``metric`` should be a string from a specific set (in this case, the set of known phylogenetic beta diversity metrics).
 
