@@ -4,6 +4,16 @@ logo: assets/q2dev.svg
 copyright: "2023"
 exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints"]
 
+sphinx:
+  extra_extensions:
+    - sphinx.ext.autodoc
+    - sphinx.ext.doctest
+    - sphinx.ext.intersphinx
+    - sphinx.ext.coverage
+    - sphinx.ext.mathjax
+    - sphinx.ext.githubpages
+    - sphinxcontrib.bibtex
+
 execute:
   execute_notebooks: force
 
