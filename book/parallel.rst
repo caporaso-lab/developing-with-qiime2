@@ -28,8 +28,8 @@ For basic usage, we have supplied a vendored configuration that we load from a .
 
 You can read the Parsl docs for more details, but basically we seek to parallelize your jobs by splitting them across multiple threads in a `ThreadPoolExecutor <https://parsl.readthedocs.io/en/stable/stubs/parsl.executors.ThreadPoolExecutor.html?highlight=Threadpoolexecutor>`_ by default while also setting up what Parsl calls a `HighThroughputExecutor <https://parsl.readthedocs.io/en/stable/stubs/parsl.executors.HighThroughputExecutor.html?highlight=HighThroughputExecutor>`_  for bigger jobs.
 
-Parallelization Through the CLI
-+++++++++++++++++++++++++++++++
+Parallelization In The CLI
+++++++++++++++++++++++++++
 
 There are two flags that allow you to parallelize a pipeline through the cli. One is the `--parallel` flag. This flag will use the following process to determine the configuration it loads.
 
@@ -47,7 +47,58 @@ Note: this means that after your first time running this without a config in the
 
 The other flag to use Parsl through the cli is the `--parallel-config` flag followed by a path to a configuration file. This allows you to easily create and use your own custom configuration based on your system.
 
-Parallelization Through the Python API
-++++++++++++++++++++++++++++++++++++++
+Parallelization In The Python API
++++++++++++++++++++++++++++++++++
+
+Parallelization in the Python API is done using `ParallelConfig` objects as context managers. These objects take a parsl config object and a dictionary mapping action names to executor names. If no config is provided your vendored config will be used (found following the steps from the `--parallel` flag above).
+
+The Parsl config object itself can be created in several different ways.
+
+First, you can just create it using Parsl directly
+
+.. code-block:: Python
+
+    import psutil
+
+    from parsl.config import Config
+    from parsl.providers import LocalProvider
+    from parsl.executors.threads import ThreadPoolExecutor
+    from parsl.executors import HighThroughputExecutor
 
 
+    config = Config(executors=[
+                ThreadPoolExecutor(
+                    max_threads=max(psutil.cpu_count() - 1, 1),
+                    label='tpool'
+                ),
+                HighThroughputExecutor(
+                    label='default',
+                    max_workers=6,
+
+                    provider=LocalProvider()
+                )
+            ],
+            # AdHoc Clusters should not be setup with scaling strategy.
+            strategy=None,)
+
+Or, you can create it from a QIIME 2 config file
+
+.. code-block:: Python
+
+    from qiime2.sdk.parallel_config import get_config, get_mapping
+
+    config = get_config('path to config')
+    mapping = get_mapping(config)
+
+Once you have your config and/or your mapping, you do the following
+
+.. code-block:: Python
+
+    from qiime2.sdk.parallel_config import ParallelConfig
+
+
+    # Note that the mapping can also be a dictionary literal
+    with ParallelConfig(parsl_config=config, action_executor_mapping=mapping):
+        future = # <your_qiime2_action>.parallel(args)
+        # Make sure to call _result inside of the context manager
+        result = future._result()
