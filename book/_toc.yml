@@ -52,4 +52,4 @@ parts:
       - file: 99-bibliography
   - caption: "Stuff Temp Here"
     chapters:
-      - file: parsl
+      - file: parallel

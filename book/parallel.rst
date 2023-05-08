@@ -1,14 +1,14 @@
-Using Parsl to parallelize QIIME 2
-##################################
+Parallelizing QIIME 2 Pipelines
+###############################
 
 QIIME 2 supports parallelization of pipelines through `Parsl <https://parsl.readthedocs.io/en/stable/1-parsl-introduction.html>`_.
 This allows for faster execution of QIIME 2 pipelines by ensuring that pipeline steps that can run simultaneously do run simultaneously assuming the compute resources are available.
 
-From a user perspective, a Parsl configuration is required to use Parsl. This configuration tells Parsl what resources are available to it, and how to use them. How to create and use a Parsl configuration through QIIME 2 depends on which interface you're using and will be detailed on a per-interface basis later.
+From a user perspective, a Parsl configuration is required to use Parsl. This configuration tells Parsl what resources are available to it, and how to use them. How to create and use a Parsl configuration through QIIME 2 depends on which interface you're using and will be detailed on a per-interface basis below.
 
-For basic usage, we have supplied a vendored configuration that we load from a .toml file that will be loaded by default if you instruct QIIME 2 to use Parsl without a particular configuration. This configuration is shown below.
+For basic usage, we have supplied a vendored configuration that we load from a .toml file that will be loaded by default if you instruct QIIME 2 to execute in parallel without a particular configuration. This configuration is shown below.
 
-.. code-block:: toml
+.. code-block::
 
     [parsl]
     strategy = "None"
@@ -28,10 +28,10 @@ For basic usage, we have supplied a vendored configuration that we load from a .
 
 You can read the Parsl docs for more details, but basically we seek to parallelize your jobs by splitting them across multiple threads in a `ThreadPoolExecutor <https://parsl.readthedocs.io/en/stable/stubs/parsl.executors.ThreadPoolExecutor.html?highlight=Threadpoolexecutor>`_ by default while also setting up what Parsl calls a `HighThroughputExecutor <https://parsl.readthedocs.io/en/stable/stubs/parsl.executors.HighThroughputExecutor.html?highlight=HighThroughputExecutor>`_  for bigger jobs.
 
-Using Parsl through the cli
-+++++++++++++++++++++++++++
+Parallelization Through the CLI
++++++++++++++++++++++++++++++++
 
-There are two flags that allow use of Parsl through the cli. One is the `--parsl` flag. This flag will use the following process to determine the configuration it loads.
+There are two flags that allow you to parallelize a pipeline through the cli. One is the `--parallel` flag. This flag will use the following process to determine the configuration it loads.
 
 1. Check the environment variable QIIME2_CONFIG for a filepath to a configuration file.
 
@@ -45,9 +45,9 @@ There are two flags that allow use of Parsl through the cli. One is the `--parsl
 
 Note: this means that after your first time running this without a config in the first 3 locations the path referenced in step 4 will always exist and contain the default config unless you remove the file.
 
-The other flag to use Parsl through the cli is the `--parsl-config` flag followed by a path to a configuration file. This allows you to easily create and use your own custom configuration based on your system.
+The other flag to use Parsl through the cli is the `--parallel-config` flag followed by a path to a configuration file. This allows you to easily create and use your own custom configuration based on your system.
 
-Using Parsl through the Python API
-++++++++++++++++++++++++++++++++++
+Parallelization Through the Python API
+++++++++++++++++++++++++++++++++++++++
 
 
