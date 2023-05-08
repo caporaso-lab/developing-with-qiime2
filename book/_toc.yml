@@ -50,3 +50,6 @@ parts:
   - caption: "Back matter"
     chapters:
       - file: 99-bibliography
+  - caption: "Stuff Temp Here"
+    chapters:
+      - file: parsl
