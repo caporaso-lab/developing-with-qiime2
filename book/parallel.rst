@@ -28,7 +28,7 @@ For basic usage, we have supplied a vendored configuration that we load from a .
 
 You can read the Parsl docs for more details, but basically we seek to parallelize your jobs by splitting them across multiple threads in a `ThreadPoolExecutor <https://parsl.readthedocs.io/en/stable/stubs/parsl.executors.ThreadPoolExecutor.html?highlight=Threadpoolexecutor>`_ by default while also setting up what Parsl calls a `HighThroughputExecutor <https://parsl.readthedocs.io/en/stable/stubs/parsl.executors.HighThroughputExecutor.html?highlight=HighThroughputExecutor>`_  for bigger jobs.
 
-Parallelization In The CLI
+Parallelization in the CLI
 ++++++++++++++++++++++++++
 
 There are two flags that allow you to parallelize a pipeline through the cli. One is the `--parallel` flag. This flag will use the following process to determine the configuration it loads.
@@ -47,7 +47,7 @@ Note: this means that after your first time running this without a config in the
 
 The other flag to use Parsl through the cli is the `--parallel-config` flag followed by a path to a configuration file. This allows you to easily create and use your own custom configuration based on your system.
 
-Parallelization In The Python API
+Parallelization in the Python API
 +++++++++++++++++++++++++++++++++
 
 Parallelization in the Python API is done using `ParallelConfig` objects as context managers. These objects take a parsl config object and a dictionary mapping action names to executor names. If no config is provided your vendored config will be used (found following the steps from the `--parallel` flag above).
