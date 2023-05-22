@@ -1,12 +1,11 @@
 Parallelizing QIIME 2 Pipelines
 ###############################
 
-QIIME 2 supports parallelization of pipelines through `Parsl <https://parsl.readthedocs.io/en/stable/1-parsl-introduction.html>`_.
-This allows for faster execution of QIIME 2 pipelines by ensuring that pipeline steps that can run simultaneously do run simultaneously assuming the compute resources are available.
+QIIME 2 supports parallelization of pipelines through `Parsl <https://parsl.readthedocs.io/en/stable/1-parsl-introduction.html>`_. This allows for faster execution of QIIME 2 pipelines by ensuring that pipeline steps that can run simultaneously do run simultaneously assuming the compute resources are available.
 
-From a user perspective, a Parsl configuration is required to use Parsl. This configuration tells Parsl what resources are available to it, and how to use them. How to create and use a Parsl configuration through QIIME 2 depends on which interface you're using and will be detailed on a per-interface basis below.
+A `Parsl configuration <https://parsl.readthedocs.io/en/stable/userguide/configuring.html>`_ is required to use Parsl. This configuration tells Parsl what resources are available to it, and how to use them. How to create and use a Parsl configuration through QIIME 2 depends on which interface you're using and will be detailed on a per-interface basis below.
 
-For basic usage, we have supplied a vendored configuration that we load from a .toml file that will be loaded by default if you instruct QIIME 2 to execute in parallel without a particular configuration. This configuration is shown below.
+For basic usage, we have supplied a vendored configuration that we load from a .toml file that will be used by default if you instruct QIIME 2 to execute in parallel without a particular configuration. This configuration file is shown below.
 
 .. code-block::
 
@@ -26,7 +25,27 @@ For basic usage, we have supplied a vendored configuration that we load from a .
     [parsl.executors.provider]
     class = "LocalProvider"
 
-You can read the Parsl docs for more details, but basically we seek to parallelize your jobs by splitting them across multiple threads in a `ThreadPoolExecutor <https://parsl.readthedocs.io/en/stable/stubs/parsl.executors.ThreadPoolExecutor.html?highlight=Threadpoolexecutor>`_ by default while also setting up what Parsl calls a `HighThroughputExecutor <https://parsl.readthedocs.io/en/stable/stubs/parsl.executors.HighThroughputExecutor.html?highlight=HighThroughputExecutor>`_  for bigger jobs.
+And as an actual parsl.Config object in Python
+
+.. code-block:: Python
+
+    config = Config(
+        executors=[
+            ThreadPoolExecutor(
+                label='default',
+                max_threads=max(psutil.cpu_count() - 1, 1)
+            ),
+            HighThroughputExecutor(
+                label='htex',
+                max_workers=max(psutil.cpu_count() - 1, 1),
+                provider=LocalProvider()
+            )
+        ],
+        # AdHoc Clusters should not be setup with scaling strategy.
+        strategy=None
+    )
+
+You can read the Parsl docs for more details, but basically we seek to parallelize your jobs by splitting them across multiple threads in a `ThreadPoolExecutor <https://parsl.readthedocs.io/en/stable/stubs/parsl.executors.ThreadPoolExecutor.html?highlight=Threadpoolexecutor>`_ by default while also setting up what Parsl calls a `HighThroughputExecutor <https://parsl.readthedocs.io/en/stable/stubs/parsl.executors.HighThroughputExecutor.html?highlight=HighThroughputExecutor>`_  that you can use for bigger jobs. The HighThroughputExecutor splits jobs across multiple processes.
 
 Parallelization on the CLI
 ++++++++++++++++++++++++++
@@ -54,7 +73,7 @@ Parallelization in the Python API is done using `ParallelConfig` objects as cont
 
 The Parsl config object itself can be created in several different ways.
 
-First, you can just create it using Parsl directly
+First, you can just create it using Parsl directly:
 
 .. code-block:: Python
 
@@ -66,20 +85,21 @@ First, you can just create it using Parsl directly
     from parsl.executors import HighThroughputExecutor
 
 
-    config = Config(executors=[
-                ThreadPoolExecutor(
-                    max_threads=max(psutil.cpu_count() - 1, 1),
-                    label='tpool'
-                ),
-                HighThroughputExecutor(
-                    label='default',
-                    max_workers=6,
-
-                    provider=LocalProvider()
-                )
-            ],
-            # AdHoc Clusters should not be setup with scaling strategy.
-            strategy=None,)
+    config = Config(
+        executors=[
+            ThreadPoolExecutor(
+                label='default',
+                max_threads=max(psutil.cpu_count() - 1, 1)
+            ),
+            HighThroughputExecutor(
+                label='htex',
+                max_workers=max(psutil.cpu_count() - 1, 1),
+                provider=LocalProvider()
+            )
+        ],
+        # AdHoc Clusters should not be setup with scaling strategy.
+        strategy=None
+    )
 
 Or, you can create it from a QIIME 2 config file
 
