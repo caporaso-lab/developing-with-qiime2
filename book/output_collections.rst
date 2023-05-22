@@ -6,7 +6,7 @@ Output collections in QIIME 2 are created in the form of directories of artifact
 Registering an Action that Returns an Output Collection
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Returning an output collection works much the same as returning anything else in QIIME 2. You register your return as a Collection` of the type of Artifact you are returning.
+Returning an output collection works much the same as returning anything else in QIIME 2. You register your return as a Collection of the type of Artifact you are returning.
 
 .. code-block:: Python
 
