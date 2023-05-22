@@ -5,7 +5,7 @@ QIIME 2 supports parallelization of pipelines through `Parsl <https://parsl.read
 
 A `Parsl configuration <https://parsl.readthedocs.io/en/stable/userguide/configuring.html>`_ is required to use Parsl. This configuration tells Parsl what resources are available to it, and how to use them. How to create and use a Parsl configuration through QIIME 2 depends on which interface you're using and will be detailed on a per-interface basis below.
 
-For basic usage, we have supplied a vendored configuration that we load from a .toml file that will be used by default if you instruct QIIME 2 to execute in parallel without a particular configuration. This configuration file is shown below.
+For basic usage, we have supplied a vendored configuration that we load from a `.toml <https://toml.io/en/>`_ file that will be used by default if you instruct QIIME 2 to execute in parallel without a particular configuration. This configuration file is shown below. We write this file the first time you attempt to use it, and the "X # max(psutil.cpu_count() - 1, 1)" is calculated and written to the file at that time.
 
 .. code-block::
 
@@ -15,17 +15,20 @@ For basic usage, we have supplied a vendored configuration that we load from a .
     [[parsl.executors]]
     class = "ThreadPoolExecutor"
     label = "default"
-    max_threads = numCPUs - 1
+    max_threads = X # max(psutil.cpu_count() - 1, 1)
 
     [[parsl.executors]]
     class = "HighThroughputExecutor"
     label = "htex"
-    max_workers = numCPUs - 1
+    max_workers = X # max(psutil.cpu_count() - 1, 1)
 
     [parsl.executors.provider]
     class = "LocalProvider"
 
-And as an actual parsl.Config object in Python
+    [parsl.executor_mapping]
+    some_action = "htex"
+
+And as an actual Parsl Config object in Python.
 
 .. code-block:: Python
 
@@ -45,7 +48,14 @@ And as an actual parsl.Config object in Python
         strategy=None
     )
 
-You can read the Parsl docs for more details, but basically we seek to parallelize your jobs by splitting them across multiple threads in a `ThreadPoolExecutor <https://parsl.readthedocs.io/en/stable/stubs/parsl.executors.ThreadPoolExecutor.html?highlight=Threadpoolexecutor>`_ by default while also setting up what Parsl calls a `HighThroughputExecutor <https://parsl.readthedocs.io/en/stable/stubs/parsl.executors.HighThroughputExecutor.html?highlight=HighThroughputExecutor>`_  that you can use for bigger jobs. The HighThroughputExecutor splits jobs across multiple processes.
+    # This bit is not part of the actual Parsl Config, this is used to tell
+    # QIIME 2 which non-default executors (if any) you want your actions to run
+    # on
+    mapping = {'some_action': 'htex'}
+
+You can read the Parsl docs for more details, but basically we create a `ThreadPoolExecutor <https://parsl.readthedocs.io/en/stable/stubs/parsl.executors.ThreadPoolExecutor.html?highlight=Threadpoolexecutor>`_ that parallelizes jobs across multiple threads in a process and what Parsl calls a `HighThroughputExecutor <https://parsl.readthedocs.io/en/stable/stubs/parsl.executors.HighThroughputExecutor.html?highlight=HighThroughputExecutor>`_  that parallelizes jobs across multiple processes.
+
+Note: Your config MUST contain an executor with the label default. This is the executor that QIIME 2 will dispatch your jobs to if you do not specify an executor to use. The default executor in the default config is the ThreadPoolExecutor meaning that unless you specify otherwise all jobs that use the default config will run on the ThreadPoolExecutor.
 
 Parallelization on the CLI
 ++++++++++++++++++++++++++
@@ -66,14 +76,114 @@ Note: this means that after your first time running this without a config in the
 
 The other flag to use Parsl through the cli is the `--parallel-config` flag followed by a path to a configuration file. This allows you to easily create and use your own custom configuration based on your system.
 
+The Config File
+---------------
+
+Let's break down that config file from earlier a bit further by constructing it from the ground up using 7 as our max threads/workers.
+
+.. code-block::
+
+    [parsl]
+    strategy = "None"
+
+This very first part of the file indicates that this is the parsl section of our config. That will be the only section for now, but in the future you may be able to do more with this file! "strategy = 'None'" is a top level Parsl configuration parameter that you can read more about in the Parsl documentation. This may need to be set differently depending on your system. If you were to load this into Python using tomlkit you would get this dictionary.
+
+.. code-block:: Python
+
+    {
+        'parsl': {
+            'strategy': 'None'
+            }
+    }
+
+Now let's add an executor.
+
+.. code-block::
+
+    [[parsl.executors]]
+    class = "ThreadPoolExecutor"
+    label = "default"
+    max_threads = 7
+
+The [[ ]] indicates that this is a list and the "parsl.executors" in the middle indicates that this list is called "executors" and belongs under parsl. Now our dictionary looks like the following.
+
+.. code-block:: Python
+
+    {
+        'parsl': {
+            'strategy': 'None'
+            'executors': [
+                {'class': 'ThreadPoolExecutor',
+                 'label': 'default',
+                 'max_threads': 7}
+                ]
+            }
+    }
+
+To add another executor, we simply add another list element. Notice that we also have "parsl.executors.provider" for this one. Some classes of parsl executor require additional classes to fully configure them. These classes must be specified beneath the executor they belong to.
+
+.. code-block::
+
+    [[parsl.executors]]
+    class = "HighThroughputExecutor"
+    label = "htex"
+    max_workers = 7
+
+    [parsl.executors.provider]
+    class = "LocalProvider"
+
+Now our dictionary is this.
+
+.. code-block:: Python
+
+    {
+        'parsl': {
+            'strategy': 'None'
+            'executors': [
+                {'class': 'ThreadPoolExecutor',
+                 'label': 'default',
+                 'max_threads': 7},
+                {'class': 'HighThroughputExecutor',
+                 'label': 'htex',
+                 'max_workers': 7,
+                 'provider': {'class': 'LocalProvider'}}]
+            }
+    }
+
+Finally, we have the executor_mapping, this section tells us which actions you would like to run on which executors. If an action is unmapped, it will run on the default executor.
+
+.. code-block::
+
+    [parsl.executor_mapping]
+    some_action = "htex"
+
+And our final result is the following. We use the executor mapping internally to tell Parsl where you want you actions to run, the rest of the information is used to instantiate the Parsl Config object shown above.
+
+.. code-block:: Python
+
+    {
+        'parsl': {
+            'strategy': 'None'
+            'executors': [
+                {'class': 'ThreadPoolExecutor',
+                 'label': 'default',
+                 'max_threads': 7},
+                {'class': 'HighThroughputExecutor',
+                 'label': 'htex',
+                 'max_workers': 7,
+                 'provider': {'class': 'LocalProvider'}}],
+            'executor_mapping': {'some_action': 'htex'}
+            }
+    }
+
 Parallelization in the Python API
 +++++++++++++++++++++++++++++++++
 
-Parallelization in the Python API is done using `ParallelConfig` objects as context managers. These objects take a parsl config object and a dictionary mapping action names to executor names. If no config is provided your vendored config will be used (found following the steps from the `--parallel` flag above).
+Parallelization in the Python API is done using `ParallelConfig` objects as context managers. These objects take a Parsl Config object and a dictionary mapping action names to executor names. If no config is provided your default config will be used (found following the steps from the `--parallel` flag above).
 
-The Parsl config object itself can be created in several different ways.
+The Parsl Config object itself can be created in several different ways.
 
-First, you can just create it using Parsl directly:
+First, you can just create it using Parsl directly.
 
 .. code-block:: Python
 
@@ -101,7 +211,7 @@ First, you can just create it using Parsl directly:
         strategy=None
     )
 
-Or, you can create it from a QIIME 2 config file
+Or, you can create it from a QIIME 2 config file.
 
 .. code-block:: Python
 
