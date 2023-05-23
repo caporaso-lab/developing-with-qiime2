@@ -63,7 +63,7 @@ As you might imagine, this would look like {'foo': foo, 'bar': bar} internally i
 Using Collections in The Python API
 +++++++++++++++++++++++++++++++++++
 
-
+You can just pass in a list or a dict and it follows the same rules as the CLI. Internally QIIME 2 will turn it into the collection type it needs. If it needs a dict but you gave it a list it will use list indices as keys. Going the other way, it will just strip the keys and make a list of the values. 
 
 The ResultCollection Object
 +++++++++++++++++++++++++++
