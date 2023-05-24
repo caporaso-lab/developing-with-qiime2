@@ -23,7 +23,7 @@ When using the Python API, you simply with in a pool to be used for resumption. 
 
     from qiime2.core.cache import Cache
 
-    cache = Cache('/home/anthony/Documents/work/qiime2/cache')
+    cache = Cache('cache_path')
     pool = cache.create_pool('pool', reuse=True)
 
     # You can with in the cache and the pool separately (the pool you with in must belong to the cache you with in)
