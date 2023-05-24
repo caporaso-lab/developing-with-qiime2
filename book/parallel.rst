@@ -60,7 +60,7 @@ Note: Your config MUST contain an executor with the label default. This is the e
 Parallelization on the CLI
 ++++++++++++++++++++++++++
 
-There are two flags that allow you to parallelize a pipeline through the CLI. One is the `--parallel` flag. This flag will use the following process to determine the configuration it loads.
+There are two flags that allow you to parallelize a pipeline through the CLI. One is the --parallel flag. This flag will use the following process to determine the configuration it loads.
 
 1. Check the environment variable QIIME2_CONFIG for a filepath to a configuration file.
 
@@ -74,7 +74,7 @@ There are two flags that allow you to parallelize a pipeline through the CLI. On
 
 Note: this means that after your first time running this without a config in the first 3 locations the path referenced in step 4 will always exist and contain the default config unless you remove the file.
 
-The other flag to use Parsl through the CLI is the `--parallel-config` flag followed by a path to a configuration file. This allows you to easily create and use your own custom configuration based on your system.
+The other flag to use Parsl through the CLI is the --parallel-config flag followed by a path to a configuration file. This allows you to easily create and use your own custom configuration based on your system.
 
 The Config File
 ---------------
@@ -179,7 +179,7 @@ And our final result is the following. We use the executor mapping internally to
 Parallelization in the Python API
 +++++++++++++++++++++++++++++++++
 
-Parallelization in the Python API is done using `ParallelConfig` objects as context managers. These objects take a Parsl Config object and a dictionary mapping action names to executor names. If no config is provided your default config will be used (found following the steps from the `--parallel` flag above).
+Parallelization in the Python API is done using ParallelConfig objects as context managers. These objects take a Parsl Config object and a dictionary mapping action names to executor names. If no config is provided your default config will be used (found following the steps from the --parallel flag above).
 
 The Parsl Config object itself can be created in several different ways.
 
