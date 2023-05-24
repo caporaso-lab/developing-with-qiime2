@@ -57,29 +57,10 @@ You can read the Parsl docs for more details, but basically we create a `ThreadP
 
 Note: Your config MUST contain an executor with the label default. This is the executor that QIIME 2 will dispatch your jobs to if you do not specify an executor to use. The default executor in the default config is the ThreadPoolExecutor meaning that unless you specify otherwise all jobs that use the default config will run on the ThreadPoolExecutor.
 
-Parallelization on the CLI
-++++++++++++++++++++++++++
-
-There are two flags that allow you to parallelize a pipeline through the CLI. One is the --parallel flag. This flag will use the following process to determine the configuration it loads.
-
-1. Check the environment variable QIIME2_CONFIG for a filepath to a configuration file.
-
-2. Check the path appdirs.user_config_dir('qiime2')/qiime2_config.toml
-
-3. Check the path appdirs.site_config_dir('qiime2')/qiime2_config.toml
-
-4. Check the path CONDA_PREFIX/etc/qiime2_config.toml
-
-5. Write the vendored configuration to the path in step 4 and use that.
-
-Note: this means that after your first time running this without a config in the first 3 locations the path referenced in step 4 will always exist and contain the default config unless you remove the file.
-
-The other flag to use Parsl through the CLI is the --parallel-config flag followed by a path to a configuration file. This allows you to easily create and use your own custom configuration based on your system.
-
 The Config File
 ---------------
 
-Let's break down that config file from earlier a bit further by constructing it from the ground up using 7 as our max threads/workers.
+Let's break down that config file further by constructing it from the ground up using 7 as our max threads/workers.
 
 .. code-block::
 
@@ -175,6 +156,25 @@ And our final result is the following. We use the executor mapping internally to
             'executor_mapping': {'some_action': 'htex'}
             }
     }
+
+Parallelization on the CLI
+++++++++++++++++++++++++++
+
+There are two flags that allow you to parallelize a pipeline through the CLI. One is the --parallel flag. This flag will use the following process to determine the configuration it loads.
+
+1. Check the environment variable QIIME2_CONFIG for a filepath to a configuration file.
+
+2. Check the path appdirs.user_config_dir('qiime2')/qiime2_config.toml
+
+3. Check the path appdirs.site_config_dir('qiime2')/qiime2_config.toml
+
+4. Check the path CONDA_PREFIX/etc/qiime2_config.toml
+
+5. Write the vendored configuration to the path in step 4 and use that.
+
+Note: this means that after your first time running this without a config in the first 3 locations the path referenced in step 4 will always exist and contain the default config unless you remove the file.
+
+The other flag to use Parsl through the CLI is the --parallel-config flag followed by a path to a configuration file. This allows you to easily create and use your own custom configuration based on your system.
 
 Parallelization in the Python API
 +++++++++++++++++++++++++++++++++
