@@ -5,7 +5,7 @@ QIIME 2 supports parallelization of pipelines through `Parsl <https://parsl.read
 
 A `Parsl configuration <https://parsl.readthedocs.io/en/stable/userguide/configuring.html>`_ is required to use Parsl. This configuration tells Parsl what resources are available to it, and how to use them. How to create and use a Parsl configuration through QIIME 2 depends on which interface you're using and will be detailed on a per-interface basis below.
 
-For basic usage, we have supplied a vendored configuration that we load from a `.toml <https://toml.io/en/>`_ file that will be used by default if you instruct QIIME 2 to execute in parallel without a particular configuration. This configuration file is shown below. We write this file the first time you attempt to use it, and the "X # max(psutil.cpu_count() - 1, 1)" is calculated and written to the file at that time.
+For basic usage, we have supplied a vendored configuration that we load from a `.toml <https://toml.io/en/>`_ file that will be used by default if you instruct QIIME 2 to execute in parallel without a particular configuration. This configuration file is shown below. We write this file the first time you attempt to use it, and the "X = max(psutil.cpu_count() - 1, 1)" is calculated and written to the file at that time. An actual number is required there for all user made config files.
 
 .. code-block::
 
@@ -15,12 +15,12 @@ For basic usage, we have supplied a vendored configuration that we load from a `
     [[parsl.executors]]
     class = "ThreadPoolExecutor"
     label = "default"
-    max_threads = X # max(psutil.cpu_count() - 1, 1)
+    max_threads = X = max(psutil.cpu_count() - 1, 1)
 
     [[parsl.executors]]
     class = "HighThroughputExecutor"
     label = "htex"
-    max_workers = X # max(psutil.cpu_count() - 1, 1)
+    max_workers = X = max(psutil.cpu_count() - 1, 1)
 
     [parsl.executors.provider]
     class = "LocalProvider"
