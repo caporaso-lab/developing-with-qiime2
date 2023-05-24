@@ -1,7 +1,7 @@
-Input Collections in QIIME 2
-############################
+Collections in QIIME 2
+######################
 
-Commands in QIIME 2 may accept collection inputs in the form of lists or dictionaries.
+Commands in QIIME 2 can take collections of Artifacts as singular inputs or return collections of Artifacts as singular outputs. They may also take collections of primitives as single parameters.
 
 Registering an Action that Takes an Input Collection
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -36,53 +36,45 @@ In the actual function definition, the type annotation is the view type of the A
     def list_of_ints(int_list: int, int_dict: int, bool_list: bool, bool_dict: bool) -> int:
         return int_list.extend(list(int_dict.value()))
 
-Output Collections in QIIME 2
-#############################
-
-Output collections in QIIME 2 are created in the form of directories of artifacts that contain a .order file specifying the order the collection should have when loaded.
-
 Registering an Action that Returns an Output Collection
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Returning an output collection works much the same as returning anything else in QIIME 2. You register your return as a Collection of the type of Artifact you are returning.
+Returning an output collection works much the same as returning anything else in QIIME 2. Using the same example method as earlier, you register your return as a Collection of the type of Artifact you are returning.
 
 .. code-block:: Python
 
     dummy_plugin.methods.register_function(
-        function=list_of_ints,
+        function=example,
         inputs={
-            'ints': List[SingleInt]
+            'int_list': List[SingleInt],
+            'int_dict': Collection[SingleInt],
         },
-        parameters={},
+        parameters={
+            'bool_list': List[Bool],
+            'bool_dict': Collection[Bool]
+        },
         outputs=[
-            ('output', Collection[SingleInt])
+            ('return', Collection[SingleInt]),
         ],
-        name='Reverses list of inputs',
-        description='Some description',
-        input_descriptions={
-            'ints': 'Collection of ints'
-        },
-        output_descriptions={
-            'output': 'Reversed Collection of ints'
-        }
+        name='Example',
+        description=('Example collection method')
     )
 
-The return type annotation on the action itself is the view type of the Artifacts within the collection. In this case, even though we will be returning a collection of ints, our return annotation is still just int.
+The return type annotation on the action itself is still the view type of the Artifacts within the collection.
 
 .. code-block:: Python
 
-    def list_of_ints(ints: int) -> int:
-        assert isinstance(ints, list)
-        return ints
+    def list_of_ints(int_list: int, int_dict: int, bool_list: bool, bool_dict: bool) -> int:
+        return int_list.extend(list(int_dict.value()))
 
-In this instance, the value "ints" that is returned is a list. It could also have been a dict. The actual QIIME 2 Result you get is a ResultCollection object which is essentially a wrapper around a dictionary. If the original return was a list, the ResultCollection will use the list indices as keys.
+In this instance, the value "ints" that is returned is a list, but it could also have been a dict. The actual QIIME 2 Result you get is a ResultCollection object which is essentially a wrapper around a dictionary. If the original return is a list, the ResultCollection uses the list indices as keys.
 
 Using Collections on The CLI
 ++++++++++++++++++++++++++++
 
-On the CLI, output collections require an output path to a directory that does not exist yet. These collections can then be used as inputs to new actions by simply passing that directory as the input path. You can also create a new directory yourself and place artifacts in it manually to use as an input collection. This directory may or may not have a .order file. If it does not contain a .order file, the artifacts in the directory will be loaded in whatever order the file system presents them in (not defined by us).
+On the CLI, output collections require an output path to a directory that does not exist yet. The directory will be created, and the Artifacts in the collection will be written to the directory along with a .order file that lits the order of the Artifacts in the collection.
 
-A .order file is simply a text file with the names of the artifacts in it. Each line of the file has the name of one artifact in the collection, and the files are loaded in the order specified in the file. It is not required for the artifact names in the .order file to include the file extension.
+These collections can then be used as inputs to new actions by simply passing that directory as the input path. You can also create a new directory yourself and place artifacts in it manually to use as an input collection. This directory may or may not have a .order file. If it does not contain a .order file, the artifacts in the directory will be loaded in whatever order the file system presents them in (not defined by us).
 
 De-facto collections of parameters and inputs may also be created on the CLI by simply passing the argument multiple times. For example, the following will create a collection of foo.qza and bar.qza for the ints input.
 
@@ -106,7 +98,7 @@ You can just pass in a list or a dict and it follows the same rules as the CLI. 
 The ResultCollection Object
 +++++++++++++++++++++++++++
 
-QIIME 2 outputs collections in the form of ResultCollection objects. In the CLI, these objects are handled internally, but in the Python API they must be interacted with directly. Fortunately, these objects are very simple.
+QIIME 2 outputs collections in the form of ResultCollection objects. On the CLI, these objects are handled internally, but in the Python API they must be interacted with directly. Fortunately, these objects are very simple.
 
 A ResultCollection is basically just a wrapper around a dictionary that can be found at its "collection" attribute.
 
