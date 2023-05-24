@@ -50,3 +50,8 @@ parts:
   - caption: "Back matter"
     chapters:
       - file: 99-bibliography
+  - caption: "Stuff Temp Here"
+    chapters:
+      - file: parallel
+      - file: collections
+      - file: pipeline_resumption
