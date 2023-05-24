@@ -1,3 +1,41 @@
+Input Collections in QIIME 2
+############################
+
+Commands in QIIME 2 may accept collection inputs in the form of lists or dictionaries.
+
+Registering an Action that Takes an Input Collection
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Input or parameter collections can be in the form of lists or dictionaries. For inputs the type annotation for function registration is the QIIME 2 semantic type of the Artifacts expected. For parameters it is just the type of the parameter.
+
+An example of registering collection inputs and parameters is shown below. For a list input, the syntax is "List[SemanticType]" and for a dictionary it is "Collection[SemanticType]"
+
+.. code-block:: Python
+
+    dummy_plugin.methods.register_function(
+        function=example,
+        inputs={
+            'int_list': List[SingleInt],
+            'int_dict': Collection[SingleInt],
+        },
+        parameters={
+            'bool_list': List[Bool],
+            'bool_dict': Collection[Bool]
+        },
+        outputs=[
+            ('return', Collection[SingleInt]),
+        ],
+        name='Example',
+        description=('Example collection method')
+    )
+
+In the actual function definition, the type annotation is the view type of the Artifacts and does NOT contain the collection type annotation. The fact that they do not contain the collection type annotations is an implementation detail that may change in the future. The fact that the annotations indicate the view type and not the semantic type is due to the fact that by the time we reach the actual method "int_list" will be a list of integers and not SingleInt Artifacts.
+
+.. code-block:: Python
+
+    def list_of_ints(int_list: int, int_dict: int, bool_list: bool, bool_dict: bool) -> int:
+        return int_list.extend(list(int_dict.value()))
+
 Output Collections in QIIME 2
 #############################
 
@@ -63,7 +101,7 @@ As you might imagine, this would look like {'foo': foo, 'bar': bar} internally i
 Using Collections in The Python API
 +++++++++++++++++++++++++++++++++++
 
-You can just pass in a list or a dict and it follows the same rules as the CLI. Internally QIIME 2 will turn it into the collection type it needs. If it needs a dict but you gave it a list it will use list indices as keys. Going the other way, it will just strip the keys and make a list of the values. 
+You can just pass in a list or a dict and it follows the same rules as the CLI. Internally QIIME 2 will turn it into the collection type it needs. If it needs a dict but you gave it a list it will use list indices as keys. Going the other way, it will just strip the keys and make a list of the values.
 
 The ResultCollection Object
 +++++++++++++++++++++++++++

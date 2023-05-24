@@ -53,5 +53,5 @@ parts:
   - caption: "Stuff Temp Here"
     chapters:
       - file: parallel
-      - file: output_collections
+      - file: collections
       - file: pipeline_resumption
