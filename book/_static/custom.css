@@ -4,7 +4,11 @@
 
 .navbar-nav li {
     line-height: 1.4;
-    margin-top: 0.5rem;
+    margin-top: 0.2rem;
+}
+
+.bd-sidebar-primary .sidebar-primary-items__end {
+    margin-bottom: 0px !important;
 }
 
 /* I don't know why jupyter book did this
@@ -43,4 +47,8 @@ article a.internal {
 
 html {
     --pst-sidebar-font-size: 1rem;
+}
+
+dl.py {
+    margin-bottom: 3rem;
 }

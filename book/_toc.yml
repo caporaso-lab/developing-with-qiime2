@@ -4,10 +4,12 @@
 format: jb-book
 root: intro
 parts:
+
   - caption: "Docs"
     chapters:
       - file: docs/intro
         title: Introduction
+
   - caption: "Plugins"
     chapters:
       - file: plugins/intro
@@ -30,21 +32,42 @@ parts:
           - file: plugins/how-to-guides/add-ci
       - file: plugins/explainers/intro
       - file: plugins/references/intro
-        sections:
-          - file: plugins/references/api/usage.rst
+        title: "References"
 
   - caption: "Interfaces"
     chapters:
       - file: interfaces/intro
         title: Introduction
+
   - caption: "Framework Internals"
     chapters:
       - file: framework/intro
         title: Introduction
+
   - caption: "CI Internals"
     chapters:
       - file: ci/intro
         title: Introduction
+
+  - caption: "API Reference"
+    chapters:
+      - file: api/intro
+        title: Introduction
+      - file: api/metadata/intro
+      - file: api/results/intro
+      - file: api/cache
+      - file: api/usage/intro
+        sections:
+          - file: api/usage/authors
+            title: Example Authoring
+          - file: api/usage/drivers
+            title: Driver Implementation
+          - file: api/usage/implementations
+            title: Existing Drivers
+      - file: api/util
+      - file: api/plugin/intro
+      - file: api/sdk/intro
+
   - caption: "Back Matter"
     chapters:
       - file: bibliography

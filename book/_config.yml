@@ -6,12 +6,18 @@ exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints"]
 sphinx:
   extra_extensions:
     - sphinx.ext.autodoc
+    - sphinx.ext.napoleon
     - sphinx.ext.doctest
     - sphinx.ext.intersphinx
     - sphinx.ext.coverage
     - sphinx.ext.mathjax
     - sphinx.ext.githubpages
     - sphinxcontrib.bibtex
+  config:
+    html_theme_options:
+      logo:
+        image_light: _static/q2dev.svg
+        image_dark: _static/q2dev_darkmode.svg
 
 execute:
   execute_notebooks: force
@@ -32,10 +38,3 @@ html:
   use_issues_button: true
   use_repository_button: true
   favicon: _static/favicon.ico
-
-sphinx:
-  config:
-    html_theme_options:
-      logo:
-        image_light: _static/q2dev.svg
-        image_dark: _static/q2dev_darkmode.svg
