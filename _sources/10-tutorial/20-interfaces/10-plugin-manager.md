@@ -1,1 +1,0 @@
-# Instantiating `qiime2.sdk.PluginManager`

@@ -1,0 +1,54 @@
+#rtd-footer-container {
+    margin-top: 0px !important;
+}
+
+.navbar-nav li {
+    line-height: 1.4;
+    margin-top: 0.2rem;
+}
+
+.bd-sidebar-primary .sidebar-primary-items__end {
+    margin-bottom: 0px !important;
+}
+
+/* I don't know why jupyter book did this
+   The natural pydata theme has a good default already.
+*/
+.bd-main {
+    flex-grow: 1;
+}
+
+/* probably they noticed the weird center, but this is how you fix that: */
+.bd-main .bd-content {
+    justify-content: flex-start;
+}
+
+/* put prev-next navigation at the bottom of the page */
+.prev-next-footer {
+    /* the parent is a flexbox with a known size, so this work correctly */
+    margin-top: auto;
+    margin-bottom: 0.5rem;
+}
+
+/* Don't word-wrap internal references */
+article a.internal {
+    white-space: nowrap;
+}
+
+/* Fix the intra-page toc icon */
+.bd-sidebar-secondary .onthispage svg.fa-list {
+    margin-right: 1ch;
+}
+
+/* let's only have a single max-width please */
+.bd-main .bd-content .bd-article-container {
+    max-width: unset !important;
+}
+
+html {
+    --pst-sidebar-font-size: 1rem;
+}
+
+dl.py {
+    margin-bottom: 3rem;
+}
