@@ -49,25 +49,6 @@ parts:
       - file: ci/intro
         title: Introduction
 
-  - caption: "API Reference"
-    chapters:
-      - file: api/intro
-        title: Introduction
-      - file: api/metadata/intro
-      - file: api/results/intro
-      - file: api/cache
-      - file: api/usage/intro
-        sections:
-          - file: api/usage/authors
-            title: Example Authoring
-          - file: api/usage/drivers
-            title: Driver Implementation
-          - file: api/usage/implementations
-            title: Existing Drivers
-      - file: api/util
-      - file: api/plugin/intro
-      - file: api/sdk/intro
-
   - caption: "Back Matter"
     chapters:
       - file: bibliography

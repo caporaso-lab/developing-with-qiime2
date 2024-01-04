@@ -1,7 +1,7 @@
 # Developing with QIIME 2
 
-Hello and welcome to our book on QIIME 2 development {cite}`qiime2-2019`!
-*Developing with QIIME 2* is designed to help you write plugins, interfaces, and even the framework underneath QIIME 2.
+👋 Welcome to our book on QIIME 2 {cite}`qiime2-2019` development!
+*Developing with QIIME 2* is designed to help you write plugins, interfaces, and contribute to the QIIME 2 framework.
 
 ## About
 The content in this book is organized under the [Diátaxis](https://diataxis.fr/) framework {cite}`diataxis`.
@@ -34,5 +34,6 @@ For example, if you are interested in creating plugins,
 then the only section you need to concern yourself with is the **Plugins** section.
 Other topics, such as **Framework Internals** and **CI Internals**,
 are advanced topics that are mostly useful for the QIIME 2 Development Team itself.
+
 ```{tableofcontents}
 ```
