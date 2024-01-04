@@ -2,51 +2,53 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: 00-intro
+root: intro
 parts:
-  - caption: "Tutorials"
+
+  - caption: "Docs"
     chapters:
-      - file: 10-tutorial/00-intro
-      - file: 10-tutorial/10-plugins/00-intro
-        sections:
-        - file: 10-tutorial/10-plugins/10-plugin-setup
-        - file: 10-tutorial/10-plugins/20-registering-actions
-      - file: 10-tutorial/20-interfaces/00-intro
-        sections:
-        - file: 10-tutorial/20-interfaces/10-plugin-manager
-  - caption: "Understanding QIIME 2"
+      - file: docs/intro
+        title: Introduction
+
+  - caption: "Plugins"
     chapters:
-      - file: 20-understanding/00-intro
-      - file: 20-understanding/10-plugins/00-intro
+      - file: plugins/intro
+        title: Introduction
+      - file: plugins/tutorials/intro
         sections:
-        - file: 20-understanding/10-plugins/10-plugin
-      - file: 20-understanding/20-interfaces/00-intro
+          - file: plugins/tutorials/developing-code
+          - file: plugins/tutorials/create/intro
+            options:
+              numbered: true
+            sections:
+              - file: plugins/tutorials/create/getting-started
+              - file: plugins/tutorials/create/package
+              - file: plugins/tutorials/create/plugin
+      - file: plugins/how-to-guides/intro
         sections:
-        - file: 20-understanding/20-interfaces/10-plugin-manager
-  - caption: "How-to guides"
+          - file: plugins/how-to-guides/add-citation
+          - file: plugins/how-to-guides/usage-example
+          - file: plugins/how-to-guides/type-map
+          - file: plugins/how-to-guides/add-ci
+      - file: plugins/explainers/intro
+      - file: plugins/references/intro
+        title: "References"
+
+  - caption: "Interfaces"
     chapters:
-      - file: 30-how-to/00-intro
-      - file: 30-how-to/10-plugins/00-intro
-        sections:
-        - file: 30-how-to/10-plugins/10-type-mapping
-      - file: 30-how-to/20-interfaces/00-intro
-        sections:
-        - file: 30-how-to/20-interfaces/10-accessing-help-text
-  - caption: "Reference"
+      - file: interfaces/intro
+        title: Introduction
+
+  - caption: "Framework Internals"
     chapters:
-      - file: 40-reference/00-intro
-      - file: 40-reference/10-api/00-intro
-        sections:
-        - file: 40-reference/10-api/10-usage/00-index
-          sections:
-          - file: 40-reference/10-api/10-usage/10-authors
-          - file: 40-reference/10-api/10-usage/20-drivers
-          - file: 40-reference/10-api/10-usage/30-implementations
-        - file: 40-reference/10-api/20-cache/00-index
-          sections:
-          - file: 40-reference/10-api/20-cache/10-cache
-          - file: 40-reference/10-api/20-cache/20-pool
-      - file: 40-reference/90-glossary
-  - caption: "Back matter"
+      - file: framework/intro
+        title: Introduction
+
+  - caption: "CI Internals"
     chapters:
-      - file: 99-bibliography
+      - file: ci/intro
+        title: Introduction
+
+  - caption: "Back Matter"
+    chapters:
+      - file: bibliography

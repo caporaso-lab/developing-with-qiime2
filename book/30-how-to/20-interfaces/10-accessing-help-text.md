@@ -1,1 +1,0 @@
-# Accessing help text on plugins, actions, types, and formats
