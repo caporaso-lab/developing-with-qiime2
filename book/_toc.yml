@@ -31,9 +31,12 @@ parts:
           - file: plugins/how-to-guides/usage-example
           - file: plugins/how-to-guides/type-map
           - file: plugins/how-to-guides/add-ci
+          - file: plugins/how-to-guides/format-validation-levels.md
       - file: plugins/explainers/intro
       - file: plugins/references/intro
-        title: "References"
+        sections:
+          - file: plugins/references/antipatterns
+          - file: plugins/references/usage-api
 
   - caption: "Interfaces"
     chapters:
