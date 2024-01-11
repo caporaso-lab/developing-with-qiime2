@@ -26,6 +26,7 @@ parts:
               - file: plugins/tutorials/create/plugin
       - file: plugins/how-to-guides/intro
         sections:
+          - file: plugins/how-to-guides/set-up-development-environment
           - file: plugins/how-to-guides/add-citation
           - file: plugins/how-to-guides/usage-example
           - file: plugins/how-to-guides/type-map
