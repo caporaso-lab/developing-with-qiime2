@@ -168,7 +168,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="plugins/intro.html">Introduction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="plugins/tutorials/intro.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="plugins/tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="plugins/tutorials/developing-code.html">Developing Code</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="plugins/tutorials/create/intro.html">Creating a Plugin</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="plugins/tutorials/create/getting-started.html">1. Getting Started</a></li>
@@ -179,13 +179,14 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="plugins/how-to-guides/intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/add-citation.html">Adding Citations to your Plugin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/usage-example.html">Writing Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/type-map.html">Dynamic Output Types and Constraints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/add-ci.html">Adding Continuous Integration Tests</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="plugins/explainers/intro.html">Explainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins/explainers/intro.html">Explainers: Building a QIIME 2 Plugin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plugins/references/intro.html">References</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Interfaces</span></p>
@@ -370,6 +371,12 @@ document.write(`
 <h1>Developing with QIIME 2<a class="headerlink" href="#developing-with-qiime-2" title="Permalink to this heading">#</a></h1>
 <p>👋 Welcome to our book on QIIME 2 <span id="id1">[<a class="reference internal" href="bibliography.html#id2" title="Evan Bolyen, Jai Ram Rideout, Matthew R Dillon, Nicholas A Bokulich, Christian C Abnet, Gabriel A Al-Ghalith, Harriet Alexander, Eric J Alm, Manimozhiyan Arumugam, Francesco Asnicar, Yang Bai, Jordan E Bisanz, Kyle Bittinger, Asker Brejnrod, Colin J Brislawn, C Titus Brown, Benjamin J Callahan, Andrés Mauricio Caraballo-Rodríguez, John Chase, Emily K Cope, Ricardo Da Silva, Christian Diener, Pieter C Dorrestein, Gavin M Douglas, Daniel M Durall, Claire Duvallet, Christian F Edwardson, Madeleine Ernst, Mehrbod Estaki, Jennifer Fouquier, Julia M Gauglitz, Sean M Gibbons, Deanna L Gibson, Antonio Gonzalez, Kestrel Gorlick, Jiarong Guo, Benjamin Hillmann, Susan Holmes, Hannes Holste, Curtis Huttenhower, Gavin A Huttley, Stefan Janssen, Alan K Jarmusch, Lingjing Jiang, Benjamin D Kaehler, Kyo Bin Kang, Christopher R Keefe, Paul Keim, Scott T Kelley, Dan Knights, Irina Koester, Tomasz Kosciolek, Jorden Kreps, Morgan G I Langille, Joslynn Lee, Ruth Ley, Yong-Xin Liu, Erikka Loftfield, Catherine Lozupone, Massoud Maher, Clarisse Marotz, Bryan D Martin, Daniel McDonald, Lauren J McIver, Alexey V Melnik, Jessica L Metcalf, Sydney C Morgan, Jamie T Morton, Ahmad Turan Naimey, Jose A Navas-Molina, Louis Felix Nothias, Stephanie B Orchanian, Talima Pearson, Samuel L Peoples, Daniel Petras, Mary Lai Preuss, Elmar Pruesse, Lasse Buur Rasmussen, Adam Rivers, Michael S Robeson, 2nd, Patrick Rosenthal, Nicola Segata, Michael Shaffer, Arron Shiffer, Rashmi Sinha, Se Jin Song, John R Spear, Austin D Swafford, Luke R Thompson, Pedro J Torres, Pauline Trinh, Anupriya Tripathi, Peter J Turnbaugh, Sabah Ul-Hasan, Justin J J van der Hooft, Fernando Vargas, Yoshiki Vázquez-Baeza, Emily Vogtmann, Max von Hippel, William Walters, Yunhu Wan, Mingxun Wang, Jonathan Warren, Kyle C Weber, Charles H D Williamson, Amy D Willis, Zhenjiang Zech Xu, Jesse R Zaneveld, Yilong Zhang, Qiyun Zhu, Rob Knight, and J Gregory Caporaso. Reproducible, interactive, scalable and extensible microbiome data science using QIIME 2. Nat. Biotechnol., July 2019.">1</a>]</span> development!
 <em>Developing with QIIME 2</em> is designed to help you write plugins, interfaces, and contribute to the QIIME 2 framework.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you need help developing with QIIME 2, please feel free to reach out through the <a class="reference external" href="https://forum.qiime2.org/c/dev-discussion">QIIME 2 Forum Developer Discussion</a>.
+This is preferred over contacting developers directly as there are many developers monitoring the forum (so you get help quicker!), and others can learn from our answers to your questions (so we can spend more time developing cool new functionality for QIIME 2!).</p>
+<p><strong>We commit to responding to requests for help on the QIIME 2 Forum, but direct emails, posts on issues trackers, etc may be closed without reply.</strong></p>
+</div>
 <section id="about">
 <h2>About<a class="headerlink" href="#about" title="Permalink to this heading">#</a></h2>
 <p>The content in this book is organized under the <a class="reference external" href="https://diataxis.fr/">Diátaxis</a> framework <span id="id2">[<a class="reference internal" href="bibliography.html#id3" title="Daniele Procida. Diátaxis documentation framework. URL: https://diataxis.fr/.">2</a>]</span>.
@@ -415,7 +422,7 @@ are advanced topics that are mostly useful for the QIIME 2 Development Team itse
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="plugins/intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plugins/tutorials/intro.html">Tutorials</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="plugins/tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="plugins/tutorials/developing-code.html">Developing Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plugins/tutorials/create/intro.html">Creating a Plugin</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="plugins/tutorials/create/getting-started.html">1. Getting Started</a></li>
@@ -426,13 +433,14 @@ are advanced topics that are mostly useful for the QIIME 2 Development Team itse
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="plugins/how-to-guides/intro.html">How To Guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/add-citation.html">Adding Citations to your Plugin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/usage-example.html">Writing Usage Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/type-map.html">Dynamic Output Types and Constraints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/add-ci.html">Adding Continuous Integration Tests</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="plugins/explainers/intro.html">Explainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins/explainers/intro.html">Explainers: Building a QIIME 2 Plugin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plugins/references/intro.html">References</a></li>
 </ul>
 </div>
