@@ -38,3 +38,8 @@ html:
   use_issues_button: true
   use_repository_button: true
   favicon: _static/favicon.ico
+
+parse:
+  myst_substitutions:
+    miniconda_url: "[Miniconda](https://conda.io/miniconda.html)"
+    developer_discussion: "[QIIME 2 Forum Developer Discussion](https://forum.qiime2.org/c/dev-discussion)"
