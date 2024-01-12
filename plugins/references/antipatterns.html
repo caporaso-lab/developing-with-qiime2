@@ -358,7 +358,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#providing-input-filepaths-as-parameters">Providing input filepaths as parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#providing-input-or-output-filepaths-as-parameters">Providing input or output filepaths as parameters</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#skipping-format-validation">Skipping format validation</a></li>
 </ul>
             </nav>
@@ -374,25 +374,68 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="plugin-development-anti-patterns">
 <h1>Plugin development anti-patterns<a class="headerlink" href="#plugin-development-anti-patterns" title="Permalink to this heading">#</a></h1>
 <blockquote>
-<div><p>“An anti-pattern in software engineering, project management, and business processes is a common response to a recurring problem that is usually ineffective and risks being highly counterproductive.” <a class="reference external" href="https://en.wikipedia.org/wiki/Anti-pattern">Source: Wikipedia: Anti-patterns (Accessed 11 January 2024; last edited 5 December 2023</a>.</p>
+<div><p>“An anti-pattern in software engineering, project management, and business processes is a common response to a recurring problem that is usually ineffective and risks being highly counterproductive.” <a class="reference external" href="https://en.wikipedia.org/wiki/Anti-pattern">Source: Wikipedia – Anti-patterns (Accessed 11 January 2024; last edited 5 December 2023)</a>.</p>
 </div></blockquote>
 <p>This section documents common anti-patterns that we observe in plugin development.
 If you find yourself feeling like you need to apply one of these patterns in your plugin, feel free to reach out in the <a class="reference external" href="https://forum.qiime2.org/c/dev-discussion">QIIME 2 Forum Developer Discussion</a>.
 We’ll help you figure out the right way to achieve your goal.</p>
-<section id="providing-input-filepaths-as-parameters">
-<h2>Providing input filepaths as parameters<a class="headerlink" href="#providing-input-filepaths-as-parameters" title="Permalink to this heading">#</a></h2>
-<p>It’s not uncommon for new plugin developers to provide paths to inputs using parameter arguments (such as <code class="docutils literal notranslate"><span class="pre">--p-path-to-my-input</span></code>) when defining an <code class="docutils literal notranslate"><span class="pre">Action</span></code>.
-This circumvents the need to associate that input with a semantic type and format, which is convenient for the developer, and under some circumstances QIIME 2 will appear to work ok.
-This is a bad idea for at least a couple of reasons however.</p>
-<p>First, some interfaces (e.g., the QIIME 2 Galaxy interface) won’t work correctly.
-The user would have to type the path to their input in a text field, rather than being presented with the compatible input artifacts on the Galaxy server or being presented with a file upload box, and they likely won’t know what that path is (because it’ll be a file stored on the Galaxy server).
-Even if the user did know the path, expecting a Python <code class="docutils literal notranslate"><span class="pre">open</span></code> call to work on that path on the web server would be unreliable (e.g., the user that the server is executing jobs as might not have permission to access that path).</p>
-<p>Next, and more broadly problematic, the entry for this input in QIIME 2’s data provenance would simply be the path that was provided when the action was called.
-Unless the plugin is only used in a very controlled environment (and is not intended to be distributed to users who will use it in all kinds of environments), this will result in incomplete data provenance.
-There will be no UUID associated with the input (so it couldn’t be unambiguously identified), and the entry in provenance will only be meaningful if someone knows how to interpret that path (e.g., what computer the path is relative to) and knows that the file at that location hasn’t changed since the action was run.</p>
-<p>All data that is provided as input to QIIME 2 <code class="docutils literal notranslate"><span class="pre">Action(s)</span></code> should be in the form of QIIME 2 Artifacts.
-This is essential for ensuring that your <code class="docutils literal notranslate"><span class="pre">Action(s)</span></code> will be fully reproducible, and accessible to users with varying levels of computational expertise, which QIIME 2 users have come to expect.
-These are two of the key benefits that making your methods accessible through QIIME 2 plugins provides, but the cost is going through the upfront work of associating inputs with semantic types and formats.</p>
+<section id="providing-input-or-output-filepaths-as-parameters">
+<h2>Providing input or output filepaths as parameters<a class="headerlink" href="#providing-input-or-output-filepaths-as-parameters" title="Permalink to this heading">#</a></h2>
+<p>It’s not uncommon for new plugin developers to provide paths to inputs or outputs using <code class="docutils literal notranslate"><span class="pre">parameter</span></code> arguments, rather than <code class="docutils literal notranslate"><span class="pre">input</span></code> or <code class="docutils literal notranslate"><span class="pre">output</span></code> arguments, when defining and registering <code class="docutils literal notranslate"><span class="pre">Action</span></code>. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">my_action</span><span class="p">(</span><span class="n">feature_table</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+              <span class="n">taxonomy</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+              <span class="n">an_input_filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+              <span class="n">an_output_filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">an_input_filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">inf</span><span class="p">:</span>
+        <span class="o">...</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">an_output_filepath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outf</span><span class="p">:</span>
+        <span class="o">...</span>
+
+    <span class="c1"># return an empty dataframe as the dummy output</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+<span class="o">...</span>
+
+<span class="n">plugin</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
+    <span class="n">function</span><span class="o">=</span><span class="n">my_action</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;feature_table&#39;</span><span class="p">:</span> <span class="n">FeatureTable</span><span class="p">[</span><span class="n">Frequency</span><span class="p">],</span>
+            <span class="s1">&#39;taxonomy&#39;</span><span class="p">:</span> <span class="n">FeatureData</span><span class="p">[</span><span class="n">Taxonomy</span><span class="p">]},</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;an_input_filepath&#39;</span><span class="p">:</span> <span class="n">Str</span><span class="p">,</span>
+                <span class="s1">&#39;an_output_filepath&#39;</span><span class="p">:</span> <span class="n">Str</span><span class="p">},</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;dummy_output&#39;</span><span class="p">,</span> <span class="n">FeatureTable</span><span class="p">[</span><span class="n">Frequency</span><span class="p">])],</span>
+    <span class="n">input_descriptions</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;feature_table&#39;</span><span class="p">:</span> <span class="s1">&#39;The input feature table.&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;taxonomy&#39;</span><span class="p">:</span> <span class="s1">&#39;The input taxonomy.&#39;</span><span class="p">},</span>
+    <span class="n">parameter_descriptions</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;an_input_filepath&#39;</span><span class="p">:</span> <span class="s1">&#39;The input text file.&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;an_output_filepath&#39;</span><span class="p">:</span> <span class="s1">&#39;The path where output should be written.&#39;</span>
+        <span class="p">},</span>
+    <span class="n">output_descriptions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;dummy_output&#39;</span><span class="p">:</span> <span class="s1">&#39;Ignore me.&#39;</span><span class="p">},</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;My cool new action.&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Apply an operation to a feature table.&quot;</span><span class="p">),</span>
+    <span class="n">citations</span><span class="o">=</span><span class="p">[]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This approach circumvents the need to associate <code class="docutils literal notranslate"><span class="pre">an_input_filepath</span></code> and <code class="docutils literal notranslate"><span class="pre">an_output_filepath</span></code> with a semantic type (which may need to be defined, if it’s a new type).
+This is convenient for the developer, and under some circumstances QIIME 2 will appear to work ok, but it’s problematic for at least a couple of reasons.</p>
+<p>First, some QIIME 2 interfaces (e.g., web-based interfaces, such as the QIIME 2 Galaxy interface) won’t work correctly.
+The user would have to type the values for <code class="docutils literal notranslate"><span class="pre">an_input_filepath</span></code> and <code class="docutils literal notranslate"><span class="pre">an_output_filepath</span></code> in text fields, such as <code class="docutils literal notranslate"><span class="pre">C:\Path\to\my\input.txt</span></code> or <code class="docutils literal notranslate"><span class="pre">/path/to/my/input.txt</span></code>, not for example select paths on their system through a file upload/download dialog box, as they would most likely expect when providing files to or receiving files from a web server through their browser.
+They likely won’t know path to type (it would have to be a file on the web server, since the <code class="docutils literal notranslate"><span class="pre">Action</span></code> only knows that this is a string, not that handling as a filepath is needed), and even if they managed to provide the correct input path, they wouldn’t have access to the output that is created through the interface that they’re interacting with, because it’s just being written somewhere on the web server (which probably wouldn’t even be allowed).
+Expecting arbitrary paths to the two Python <code class="docutils literal notranslate"><span class="pre">open</span></code> calls in this example to work on the server would be unreliable at best.
+In practice, this just won’t work.</p>
+<p>Next, and more broadly problematic, the entries for <code class="docutils literal notranslate"><span class="pre">an_input_filepath</span></code> and <code class="docutils literal notranslate"><span class="pre">an_output_filepath</span></code> in QIIME 2’s data provenance would simply be the paths that were provided when the action was called.
+This will result in incomplete data provenance for <em>all</em> downstream <code class="docutils literal notranslate"><span class="pre">Results</span></code>.
+There will be no UUID associated with <code class="docutils literal notranslate"><span class="pre">an_input_filepath</span></code> and <code class="docutils literal notranslate"><span class="pre">an_output_filepath</span></code> (so the data they contain couldn’t be unambiguously identified by QIIME 2).
+As a result, the entries in provenance will only be meaningful to provenance consumers (users or machines) that know how to interpret the paths (e.g., what computer the paths are relative to) and are confident that the files at those locations haven’t changed since the action was run.</p>
+<p>All data that is provided as input to or generated as output from QIIME 2 <code class="docutils literal notranslate"><span class="pre">Action(s)</span></code> should be in the form of QIIME 2 Artifacts.
+This is essential for ensuring that workflows using your <code class="docutils literal notranslate"><span class="pre">Action(s)</span></code> will be fully reproducible, and that your plugin will be accessible to users with varying levels of computational expertise.
+These are two of the key benefits of making your methods accessible through QIIME 2 plugins, and are expectations of QIIME 2 users.
+The cost is going through the upfront work of associating inputs with semantic types and formats.</p>
 </section>
 <section id="skipping-format-validation">
 <h2>Skipping format validation<a class="headerlink" href="#skipping-format-validation" title="Permalink to this heading">#</a></h2>
@@ -412,7 +455,7 @@ That frustrates users who may walk away with a negative view of your plugin, or 
 That’s bad for everyone.
 Consider how often you go back to use software (e.g., a phone app) that you tried and decided was buggy.</p>
 <p>It’s also possible that the user won’t get an error message when they provide invalid data, but instead everything will appear to work correctly but in reality generate meaningless results because the input data was invalid (i.e., garbage in → garbage out).
-In this case, failure to validate could lead your user being misled, which can have major repercussions downstream including retracted publications, missed opportunities for scientific discovery, or even clinical misdiagnoses. Users will likely blame you for these outcomes!</p>
+In this case, failure to validate could lead to your user being misinformed, which can have major repercussions downstream including retracted publications, missed opportunities for scientific discovery, or even clinical misdiagnoses. Users will likely blame you for these outcomes!</p>
 <p>If you’re skipping validation to save time during development, consider what your goals are for your plugin development effort.
 If this is something you’ll use only in your own work, and you know the input is going to be valid (e.g., because it’s tested elsewhere first), then this may not be a big problem.
 However if you’re planning to distribute your plugin to users, you’ll never know where their data is coming from.
@@ -486,7 +529,7 @@ But be aware that validation that is too minimal can lead to all of the same pro
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#providing-input-filepaths-as-parameters">Providing input filepaths as parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#providing-input-or-output-filepaths-as-parameters">Providing input or output filepaths as parameters</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#skipping-format-validation">Skipping format validation</a></li>
 </ul>
   </nav></div>

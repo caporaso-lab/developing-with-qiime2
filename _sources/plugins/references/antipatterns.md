@@ -1,28 +1,73 @@
 # Plugin development anti-patterns
 
-> "An anti-pattern in software engineering, project management, and business processes is a common response to a recurring problem that is usually ineffective and risks being highly counterproductive." [Source: Wikipedia: Anti-patterns (Accessed 11 January 2024; last edited 5 December 2023](https://en.wikipedia.org/wiki/Anti-pattern).
+> "An anti-pattern in software engineering, project management, and business processes is a common response to a recurring problem that is usually ineffective and risks being highly counterproductive." [Source: Wikipedia -- Anti-patterns (Accessed 11 January 2024; last edited 5 December 2023)](https://en.wikipedia.org/wiki/Anti-pattern).
 
 This section documents common anti-patterns that we observe in plugin development.
 If you find yourself feeling like you need to apply one of these patterns in your plugin, feel free to reach out in the {{ developer_discussion }}.
 We'll help you figure out the right way to achieve your goal.
 
-## Providing input filepaths as parameters
+## Providing input or output filepaths as parameters
 
-It's not uncommon for new plugin developers to provide paths to inputs using parameter arguments (such as `--p-path-to-my-input`) when defining an `Action`.
-This circumvents the need to associate that input with a semantic type and format, which is convenient for the developer, and under some circumstances QIIME 2 will appear to work ok.
-This is a bad idea for at least a couple of reasons however.
+It's not uncommon for new plugin developers to provide paths to inputs or outputs using `parameter` arguments, rather than `input` or `output` arguments, when defining and registering `Action`. For example:
 
-First, some interfaces (e.g., the QIIME 2 Galaxy interface) won't work correctly.
-The user would have to type the path to their input in a text field, rather than being presented with the compatible input artifacts on the Galaxy server or being presented with a file upload box, and they likely won't know what that path is (because it'll be a file stored on the Galaxy server).
-Even if the user did know the path, expecting a Python `open` call to work on that path on the web server would be unreliable (e.g., the user that the server is executing jobs as might not have permission to access that path).
+```python
 
-Next, and more broadly problematic, the entry for this input in QIIME 2's data provenance would simply be the path that was provided when the action was called.
-Unless the plugin is only used in a very controlled environment (and is not intended to be distributed to users who will use it in all kinds of environments), this will result in incomplete data provenance.
-There will be no UUID associated with the input (so it couldn't be unambiguously identified), and the entry in provenance will only be meaningful if someone knows how to interpret that path (e.g., what computer the path is relative to) and knows that the file at that location hasn't changed since the action was run.
+...
 
-All data that is provided as input to QIIME 2 `Action(s)` should be in the form of QIIME 2 Artifacts.
-This is essential for ensuring that your `Action(s)` will be fully reproducible, and accessible to users with varying levels of computational expertise, which QIIME 2 users have come to expect.
-These are two of the key benefits that making your methods accessible through QIIME 2 plugins provides, but the cost is going through the upfront work of associating inputs with semantic types and formats.
+def my_action(feature_table: pd.DataFrame,
+              taxonomy: pd.DataFrame,
+              an_input_filepath: str,
+              an_output_filepath: str) -> pd.DataFrame:
+    with open(an_input_filepath) as inf:
+        ...
+
+    with open(an_output_filepath, 'w') as outf:
+        ...
+
+    # return an empty dataframe as the dummy output
+    return pd.DataFrame()
+
+...
+
+plugin.methods.register_function(
+    function=my_action,
+    inputs={'feature_table': FeatureTable[Frequency],
+            'taxonomy': FeatureData[Taxonomy]},
+    parameters={'an_input_filepath': Str,
+                'an_output_filepath': Str},
+    outputs=[('dummy_output', FeatureTable[Frequency])],
+    input_descriptions={
+        'feature_table': 'The input feature table.',
+        'taxonomy': 'The input taxonomy.'},
+    parameter_descriptions={
+        'an_input_filepath': 'The input text file.',
+        'an_output_filepath': 'The path where output should be written.'
+        },
+    output_descriptions={'dummy_output': 'Ignore me.'},
+    name='My cool new action.',
+    description=("Apply an operation to a feature table."),
+    citations=[]
+)
+```
+
+This approach circumvents the need to associate `an_input_filepath` and `an_output_filepath` with a semantic type (which may need to be defined, if it's a new type).
+This is convenient for the developer, and under some circumstances QIIME 2 will appear to work ok, but it's problematic for at least a couple of reasons.
+
+First, some QIIME 2 interfaces (e.g., web-based interfaces, such as the QIIME 2 Galaxy interface) won't work correctly.
+The user would have to type the values for `an_input_filepath` and `an_output_filepath` in text fields, such as `C:\Path\to\my\input.txt` or `/path/to/my/input.txt`, not for example select paths on their system through a file upload/download dialog box, as they would most likely expect when providing files to or receiving files from a web server through their browser.
+They likely won't know path to type (it would have to be a file on the web server, since the `Action` only knows that this is a string, not that handling as a filepath is needed), and even if they managed to provide the correct input path, they wouldn't have access to the output that is created through the interface that they're interacting with, because it's just being written somewhere on the web server (which probably wouldn't even be allowed).
+Expecting arbitrary paths to the two Python `open` calls in this example to work on the server would be unreliable at best.
+In practice, this just won't work.
+
+Next, and more broadly problematic, the entries for `an_input_filepath` and `an_output_filepath` in QIIME 2's data provenance would simply be the paths that were provided when the action was called.
+This will result in incomplete data provenance for *all* downstream `Results`.
+There will be no UUID associated with `an_input_filepath` and `an_output_filepath` (so the data they contain couldn't be unambiguously identified by QIIME 2).
+As a result, the entries in provenance will only be meaningful to provenance consumers (users or machines) that know how to interpret the paths (e.g., what computer the paths are relative to) and are confident that the files at those locations haven't changed since the action was run.
+
+All data that is provided as input to or generated as output from QIIME 2 `Action(s)` should be in the form of QIIME 2 Artifacts.
+This is essential for ensuring that workflows using your `Action(s)` will be fully reproducible, and that your plugin will be accessible to users with varying levels of computational expertise.
+These are two of the key benefits of making your methods accessible through QIIME 2 plugins, and are expectations of QIIME 2 users.
+The cost is going through the upfront work of associating inputs with semantic types and formats.
 
 ## Skipping format validation
 
@@ -46,7 +91,7 @@ That's bad for everyone.
 Consider how often you go back to use software (e.g., a phone app) that you tried and decided was buggy.
 
 It's also possible that the user won't get an error message when they provide invalid data, but instead everything will appear to work correctly but in reality generate meaningless results because the input data was invalid (i.e., garbage in → garbage out).
-In this case, failure to validate could lead your user being misled, which can have major repercussions downstream including retracted publications, missed opportunities for scientific discovery, or even clinical misdiagnoses. Users will likely blame you for these outcomes!
+In this case, failure to validate could lead to your user being misinformed, which can have major repercussions downstream including retracted publications, missed opportunities for scientific discovery, or even clinical misdiagnoses. Users will likely blame you for these outcomes!
 
 If you're skipping validation to save time during development, consider what your goals are for your plugin development effort.
 If this is something you'll use only in your own work, and you know the input is going to be valid (e.g., because it's tested elsewhere first), then this may not be a big problem.
