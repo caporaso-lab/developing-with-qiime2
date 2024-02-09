@@ -1,7 +1,12 @@
 # Developing with QIIME 2
 
-👋 Welcome to our book on QIIME 2 {cite}`qiime2-2019` development!
 *Developing with QIIME 2* is designed to help you write plugins, interfaces, and contribute to the QIIME 2 framework.
+
+```{note}
+We are currently (January 2024) transitioning content from the [old QIIME 2 Developer Documentation](https://dev.qiime2.org) to *Developing with QIIME 2*.
+For as long as this note is here, there may be content there that is not covered here, so it may be worth referring to both documents.
+Our goal is for this transition phase to be over fairly quickly.
+```
 
 ```{note}
 If you need help developing with QIIME 2, please feel free to reach out through the {{ developer_discussion }}.
