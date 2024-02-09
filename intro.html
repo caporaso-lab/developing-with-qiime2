@@ -168,30 +168,14 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="plugins/intro.html">Introduction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="plugins/tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="plugins/tutorials/developing-code.html">Developing Code</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="plugins/tutorials/create/intro.html">Creating a Plugin</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="plugins/tutorials/create/getting-started.html">1. Getting Started</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugins/tutorials/create/package.html">2. Python Package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugins/tutorials/create/plugin.html">3. Plugin Setup</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="plugins/how-to-guides/intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="plugins/tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="plugins/how-to-guides/intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/add-citation.html">Adding Citations to your Plugin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/usage-example.html">Writing Usage Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/type-map.html">Dynamic Output Types and Constraints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/add-ci.html">Adding Continuous Integration Tests</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/format-validation-levels.html">Defining different format validation levels</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="plugins/explainers/intro.html">Explainers: Building a QIIME 2 Plugin</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="plugins/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="plugins/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="plugins/references/antipatterns.html">Plugin development anti-patterns</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugins/references/usage-api.html">Usage API</a></li>
 </ul>
 </li>
 </ul>
@@ -359,9 +343,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about">About</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a><ul class="nav section-nav flex-column">
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
 </ul>
             </nav>
         </div>
@@ -391,7 +373,7 @@ This is preferred over contacting developers directly as there are many develope
 <section id="about">
 <h2>About<a class="headerlink" href="#about" title="Permalink to this heading">#</a></h2>
 <p>The content in this book is organized under the <a class="reference external" href="https://diataxis.fr/">Diátaxis</a> framework <span id="id1">[<a class="reference internal" href="bibliography.html#id3" title="Daniele Procida. Diátaxis documentation framework. URL: https://diataxis.fr/.">1</a>]</span>.
-This means that you can expect Tutorials, How-To-Guides, Explainers, and References which each serve a different goal for the reader.</p>
+This means that you can expect Tutorials, How-To-Guides, Explainations, and References which each serve a different goal for the reader.</p>
 <table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Type</p></th>
@@ -400,92 +382,39 @@ This means that you can expect Tutorials, How-To-Guides, Explainers, and Referen
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Tutorial</p></td>
-<td><p>Guided exploration of a topic</p></td>
+<td><p>Provides a guided exploration of a topic for <strong>learning</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p>How To Guide</p></td>
-<td><p>Specific instructions to complete a single task</p></td>
+<td><p>Provides step-by-step instructions on how to accomplish specific <strong>goals</strong></p></td>
 </tr>
-<tr class="row-even"><td><p>Explainer</p></td>
-<td><p>Explanation on the <em>why</em> behind some topic</p></td>
+<tr class="row-even"><td><p>Explanation</p></td>
+<td><p>Provides a discussion intended to aid in <strong>understanding</strong> a specific topic</p></td>
 </tr>
 <tr class="row-odd"><td><p>Reference</p></td>
-<td><p>A detailed specification of an entity or task</p></td>
+<td><p>Provide specific <strong>information</strong> (e.g., an API reference)</p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading">#</a></h2>
-<p>This book is split into multiple parts.
-Each part covers a complete topic in the QIIME 2 ecosystem.
+<p>This book is split into multiple parts covering topics in the QIIME 2 ecosystem including <strong>Plugins</strong>, <strong>Framework internals</strong>, and <strong>Interfaces</strong>.
 You do not need to master all of these sections to develop with QIIME 2.
-For example, if you are interested in creating plugins,
-then the only section you need to concern yourself with is the <strong>Plugins</strong> section.
-Other topics, such as <strong>Framework Internals</strong> and <strong>CI Internals</strong>,
-are advanced topics that are mostly useful for the QIIME 2 Development Team itself.</p>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Docs</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="docs/user-documentation.html">Contributing to the QIIME 2 user documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/developer-documentation.html">Contributing to the QIIME 2 developer documentation</a></li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="plugins/intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plugins/tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="plugins/tutorials/developing-code.html">Developing Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugins/tutorials/create/intro.html">Creating a Plugin</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="plugins/tutorials/create/getting-started.html">1. Getting Started</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugins/tutorials/create/package.html">2. Python Package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugins/tutorials/create/plugin.html">3. Plugin Setup</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="plugins/how-to-guides/intro.html">How To Guides</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/add-citation.html">Adding Citations to your Plugin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/usage-example.html">Writing Usage Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/type-map.html">Dynamic Output Types and Constraints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/add-ci.html">Adding Continuous Integration Tests</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/format-validation-levels.html">Defining different format validation levels</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="plugins/explainers/intro.html">Explainers: Building a QIIME 2 Plugin</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plugins/references/intro.html">References</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="plugins/references/antipatterns.html">Plugin development anti-patterns</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugins/references/usage-api.html">Usage API</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interfaces</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="interfaces/intro.html">Introduction</a></li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Framework Internals</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="framework/intro.html">Introduction</a></li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">CI Internals</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="ci/intro.html">Introduction</a></li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">List of works cited</a></li>
-</ul>
-</div>
+For example, if you are interested in creating plugins, then the only section you need to concern yourself with is the <strong>Plugins</strong> section.
+Other topics, such as <strong>Framework Internals</strong> and <strong>CI Internals</strong>, are advanced topics that are mostly useful for the QIIME 2 Development Team itself.</p>
 </section>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -543,9 +472,7 @@ are advanced topics that are mostly useful for the QIIME 2 Development Team itse
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about">About</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a><ul class="nav section-nav flex-column">
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
 </ul>
   </nav></div>
 

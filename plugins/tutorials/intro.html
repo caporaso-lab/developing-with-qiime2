@@ -67,8 +67,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Developing Code" href="developing-code.html" />
-    <link rel="prev" title="Introduction to Writing Plugins" href="../intro.html" />
+    <link rel="next" title="How To Guides" href="../how-to-guides/intro.html" />
+    <link rel="prev" title="Contributing to the QIIME 2 developer documentation" href="../../docs/developer-documentation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -169,30 +169,14 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Tutorials: Developing a QIIME 2 Plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="developing-code.html">Developing Code</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="create/intro.html">Creating a Plugin</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="create/getting-started.html">1. Getting Started</a></li>
-<li class="toctree-l3"><a class="reference internal" href="create/package.html">2. Python Package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="create/plugin.html">3. Plugin Setup</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tutorials: Developing a QIIME 2 Plugin</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../how-to-guides/add-citation.html">Adding Citations to your Plugin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../how-to-guides/usage-example.html">Writing Usage Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../how-to-guides/type-map.html">Dynamic Output Types and Constraints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../how-to-guides/add-ci.html">Adding Continuous Integration Tests</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../how-to-guides/format-validation-levels.html">Defining different format validation levels</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../explainers/intro.html">Explainers: Building a QIIME 2 Plugin</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../references/antipatterns.html">Plugin development anti-patterns</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../references/usage-api.html">Usage API</a></li>
 </ul>
 </li>
 </ul>
@@ -363,17 +347,24 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="tutorials-developing-a-qiime-2-plugin">
 <span id="start-plugin-tutorial"></span><h1>Tutorials: Developing a QIIME 2 Plugin<a class="headerlink" href="#tutorials-developing-a-qiime-2-plugin" title="Permalink to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="developing-code.html">Developing Code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="create/intro.html">Creating a Plugin</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="create/getting-started.html">1. Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="create/package.html">2. Python Package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="create/plugin.html">3. Plugin Setup</a></li>
-</ul>
-</li>
-</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This content is adapted from some notes I (&#64;gregcaporaso) put together as a temporary “5-minute plugin development tutorial”.
+This will be replaced with a much more comprehensive tutorial on this topic, but using <a class="reference external" href="https://diataxis.fr/">Diátaxis</a> as a guide:</p>
+<blockquote>
+<div><p>It’s natural to want to complete large tranches of work before you publish them, so that you have something substantial to show each time. Avoid this temptation - every step in the right direction is worth publishing immediately. <a class="reference external" href="https://diataxis.fr/foundations/">(source)</a></p>
+</div></blockquote>
+<p>… this is a step in that direction.</p>
 </div>
+<ol class="arabic simple">
+<li><p>Nick Bokulich’s lab maintains a template QIIME 2 plugin that is a great start for your plugin. You can find this here:
+<a class="github reference external" href="https://github.com/bokulich-lab/q2-plugin-template">bokulich-lab/q2-plugin-template</a>. There’s a link on that page to “Use this template”. Click that, and GitHub will fork that repository and you can start working on your plugin.</p></li>
+<li><p>To work on the plugin, first install a QIIME 2 development environment (see <a class="reference internal" href="../how-to-guides/set-up-development-environment.html#setup-dev-environment"><span class="std std-ref">Set up your development environment</span></a>).</p></li>
+<li><p>Then, clone your new plugin repository and run through the steps in <a class="reference external" href="https://github.com/bokulich-lab/q2-plugin-template/blob/main/README.md">the plugin template README</a>. I created <a class="reference external" href="https://github.com/gregcaporaso/q2-this-is-a-test">a test plugin</a> on 27 July 2023 and confirmed that it all works.</p></li>
+<li><p>Next, add an action. Let’s create one that that takes a <code class="docutils literal notranslate"><span class="pre">FeatureTable[Frequency]</span></code> (e.g., a biom file) as input and generates one as output. I created <a class="reference external" href="https://github.com/gregcaporaso/q2-this-is-a-test/blob/894918c4ecfcc936a83031a39404782e4a2a31e1/q2_this_is_a_test/plugin_setup.py">an action in my test plugin</a> with this signature - all it does is return a copy of the input table. Feel free to copy this into your plugin.</p></li>
+<li><p>Then, run <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dev</span> <span class="pre">refresh-cache</span></code>, and then <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">--help</span></code>. You should see your new plugin in the list of plugins. If you call help on it, you should see your new action.</p></li>
+</ol>
+<p><a class="reference external" href="https://dev.qiime2.org/latest/actions/methods/">This link</a> provides more context on adding an action to your plugin.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -407,20 +398,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../intro.html"
+       href="../../docs/developer-documentation.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Introduction to Writing Plugins</p>
+        <p class="prev-next-title">Contributing to the QIIME 2 developer documentation</p>
       </div>
     </a>
     <a class="right-next"
-       href="developing-code.html"
+       href="../how-to-guides/intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Developing Code</p>
+        <p class="prev-next-title">How To Guides</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
