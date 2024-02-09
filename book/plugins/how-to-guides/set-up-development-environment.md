@@ -1,4 +1,4 @@
-
+(setup-dev-environment)=
 # Set up your development environment
 
 This how-to guide describes how to install and set up a QIIME 2 development environment.

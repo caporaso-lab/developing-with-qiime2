@@ -12,7 +12,7 @@ This is preferred over contacting developers directly as there are many develope
 
 ## About
 The content in this book is organized under the [Diátaxis](https://diataxis.fr/) framework {cite}`diataxis`.
-This means that you can expect Tutorials, How-To-Guides, Explainers, and References which each serve a different goal for the reader.
+This means that you can expect Tutorials, How-To-Guides, Explainations, and References which each serve a different goal for the reader.
 
 ```{list-table}
 :header-rows: 1
@@ -21,26 +21,21 @@ This means that you can expect Tutorials, How-To-Guides, Explainers, and Referen
   - Purpose
 
 * - Tutorial
-  - Guided exploration of a topic
+  - Provides a guided exploration of a topic for **learning**
 
 * - How To Guide
-  - Specific instructions to complete a single task
+  - Provides step-by-step instructions on how to accomplish specific **goals**
 
-* - Explainer
-  - Explanation on the *why* behind some topic
+* - Explanation
+  - Provides a discussion intended to aid in **understanding** a specific topic
 
 * - Reference
-  - A detailed specification of an entity or task
+  - Provide specific **information** (e.g., an API reference)
 ```
 
 ## Table of Contents
-This book is split into multiple parts.
-Each part covers a complete topic in the QIIME 2 ecosystem.
+This book is split into multiple parts covering topics in the QIIME 2 ecosystem including **Plugins**, **Framework internals**, and **Interfaces**.
 You do not need to master all of these sections to develop with QIIME 2.
-For example, if you are interested in creating plugins,
-then the only section you need to concern yourself with is the **Plugins** section.
-Other topics, such as **Framework Internals** and **CI Internals**,
-are advanced topics that are mostly useful for the QIIME 2 Development Team itself.
+For example, if you are interested in creating plugins, then the only section you need to concern yourself with is the **Plugins** section.
+Other topics, such as **Framework Internals** and **CI Internals**, are advanced topics that are mostly useful for the QIIME 2 Development Team itself.
 
-```{tableofcontents}
-```

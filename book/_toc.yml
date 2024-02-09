@@ -12,31 +12,31 @@ parts:
 
   - caption: "Plugins"
     chapters:
-      - file: plugins/intro
-        title: Introduction
+      # - file: plugins/intro
+      #  title: Introduction
       - file: plugins/tutorials/intro
-        sections:
-          - file: plugins/tutorials/developing-code
-          - file: plugins/tutorials/create/intro
-            options:
-              numbered: true
-            sections:
-              - file: plugins/tutorials/create/getting-started
-              - file: plugins/tutorials/create/package
-              - file: plugins/tutorials/create/plugin
+        # sections:
+        #   - file: plugins/tutorials/developing-code
+        #   - file: plugins/tutorials/create/intro
+        #     options:
+        #       numbered: true
+        #     sections:
+        #       - file: plugins/tutorials/create/getting-started
+        #       - file: plugins/tutorials/create/package
+        #       - file: plugins/tutorials/create/plugin
       - file: plugins/how-to-guides/intro
         sections:
           - file: plugins/how-to-guides/set-up-development-environment
-          - file: plugins/how-to-guides/add-citation
-          - file: plugins/how-to-guides/usage-example
-          - file: plugins/how-to-guides/type-map
-          - file: plugins/how-to-guides/add-ci
-          - file: plugins/how-to-guides/format-validation-levels.md
+          # - file: plugins/how-to-guides/add-citation
+          # - file: plugins/how-to-guides/usage-example
+          # - file: plugins/how-to-guides/type-map
+          # - file: plugins/how-to-guides/add-ci
+          # - file: plugins/how-to-guides/format-validation-levels.md
       - file: plugins/explainers/intro
       - file: plugins/references/intro
         sections:
           - file: plugins/references/antipatterns
-          - file: plugins/references/usage-api
+          # - file: plugins/references/usage-api
 
   - caption: "Interfaces"
     chapters:
