@@ -1,6 +1,6 @@
 title: Developing with QIIME 2
-author: QIIME 2 Project
-copyright: "2023"
+author: Caporaso Lab
+copyright: "2024"
 exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints"]
 
 sphinx:
@@ -30,7 +30,7 @@ bibtex_bibfiles:
   - _static/references.bib
 
 repository:
-  url: https://github.com/caporaso-lab/developing-with-qiime2
+  url: https://cap-lab.bio/developing-with-qiime2/
   path_to_book: book
   branch: main
 

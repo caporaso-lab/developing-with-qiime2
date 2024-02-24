@@ -7,7 +7,7 @@ This will be replaced with a much more comprehensive tutorial on this topic, but
 
 > It’s natural to want to complete large tranches of work before you publish them, so that you have something substantial to show each time. Avoid this temptation - every step in the right direction is worth publishing immediately. [(source)](https://diataxis.fr/foundations/)
 
-... this is a step in that direction.
+The current content is a step in that direction.
 ```
 
 1. Nick Bokulich’s lab maintains a template QIIME 2 plugin that is a great start for your plugin. You can find this here:
