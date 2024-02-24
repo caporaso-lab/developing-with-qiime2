@@ -354,15 +354,23 @@ This will be replaced with a much more comprehensive tutorial on this topic, but
 <blockquote>
 <div><p>It’s natural to want to complete large tranches of work before you publish them, so that you have something substantial to show each time. Avoid this temptation - every step in the right direction is worth publishing immediately. <a class="reference external" href="https://diataxis.fr/foundations/">(source)</a></p>
 </div></blockquote>
-<p>… this is a step in that direction.</p>
+<p>The current content is a step in that direction.</p>
 </div>
 <ol class="arabic simple">
 <li><p>Nick Bokulich’s lab maintains a template QIIME 2 plugin that is a great start for your plugin. You can find this here:
 <a class="github reference external" href="https://github.com/bokulich-lab/q2-plugin-template">bokulich-lab/q2-plugin-template</a>. There’s a link on that page to “Use this template”. Click that, and GitHub will fork that repository and you can start working on your plugin.</p></li>
 <li><p>To work on the plugin, first install a QIIME 2 development environment (see <a class="reference internal" href="../how-to-guides/set-up-development-environment.html#setup-dev-environment"><span class="std std-ref">Set up your development environment</span></a>).</p></li>
-<li><p>Then, clone your new plugin repository and run through the steps in <a class="reference external" href="https://github.com/bokulich-lab/q2-plugin-template/blob/main/README.md">the plugin template README</a>. I created <a class="reference external" href="https://github.com/gregcaporaso/q2-this-is-a-test">a test plugin</a> on 27 July 2023 and confirmed that it all works.</p></li>
-<li><p>Next, add an action. Let’s create one that that takes a <code class="docutils literal notranslate"><span class="pre">FeatureTable[Frequency]</span></code> (e.g., a biom file) as input and generates one as output. I created <a class="reference external" href="https://github.com/gregcaporaso/q2-this-is-a-test/blob/894918c4ecfcc936a83031a39404782e4a2a31e1/q2_this_is_a_test/plugin_setup.py">an action in my test plugin</a> with this signature - all it does is return a copy of the input table. Feel free to copy this into your plugin.</p></li>
-<li><p>Then, run <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dev</span> <span class="pre">refresh-cache</span></code>, and then <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">--help</span></code>. You should see your new plugin in the list of plugins. If you call help on it, you should see your new action.</p></li>
+<li><p>Activate your development environment.</p></li>
+<li><p>Then, clone your new plugin repository and run through the steps in <a class="reference external" href="https://github.com/bokulich-lab/q2-plugin-template/blob/main/README.md">the plugin template README</a>. I created <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2">a test plugin</a> on 22 February 2024 and confirmed that it all works. <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/pull/1/files">Here are the changes I made</a> when I did this step.</p>
+<ul class="simple">
+<li><p>Tip: Rename the <code class="docutils literal notranslate"><span class="pre">q2_plugin_name</span></code> directory using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">mv</span> <span class="pre">q2_plugin_name</span> <span class="pre">&lt;new</span> <span class="pre">plugin</span> <span class="pre">name&gt;</span></code>.</p></li>
+<li><p>Tip: It’s easiest to replace <code class="docutils literal notranslate"><span class="pre">q2_plugin_name</span></code> in the files using a global search/replace - there are a bunch of occurences.</p></li>
+</ul>
+</li>
+<li><p>From the top-level directiory of your plugin repository, install your plugin in developer mode by running <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code>.</p></li>
+<li><p>To confirm that your plugin is now available, run <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">info</span></code>. You should see your new plugin in the list of available plugins. (If you get an error that says something like <code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError:</span> <span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span> <span class="pre">'q2_plugin_name'</span></code>, you didn’t replace all instances of <code class="docutils literal notranslate"><span class="pre">q2_plugin_name</span></code> in the template repository.)</p></li>
+<li><p>Next, add an action. Let’s create one that that takes a <code class="docutils literal notranslate"><span class="pre">FeatureTable[Frequency]</span></code> (i.e., a feature table with count data) as input and generates one as output. I created <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/blob/e8fe1e5b32bfc2a331d48611b3a70b0fa5b19165/q2_dwq2/plugin_setup.py">an action in my test plugin</a> with this signature - all it does is return a copy of the input table. Feel free to copy this into your plugin.</p></li>
+<li><p>Then, run <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dev</span> <span class="pre">refresh-cache</span></code>, and then <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">--help</span></code>. You should see your new plugin in the list of plugins. If you call help on it, you should see your new action. You should be able to run the <code class="docutils literal notranslate"><span class="pre">duplicate-table</span></code> action in your plugin as you can for any other QIIME 2 plugin.</p></li>
 </ol>
 <p><a class="reference external" href="https://dev.qiime2.org/latest/actions/methods/">This link</a> provides more context on adding an action to your plugin.</p>
 </section>
@@ -431,7 +439,7 @@ This will be replaced with a much more comprehensive tutorial on this topic, but
   <div class="footer-item">
     
 <p class="component-author">
-By QIIME 2 Project
+By Caporaso Lab
 </p>
 
   </div>
@@ -441,7 +449,7 @@ By QIIME 2 Project
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2024.
       <br/>
     
   </p>
