@@ -3,8 +3,19 @@
 > "An anti-pattern in software engineering, project management, and business processes is a common response to a recurring problem that is usually ineffective and risks being highly counterproductive." [Source: Wikipedia -- Anti-patterns (Accessed 11 January 2024; last edited 5 December 2023)](https://en.wikipedia.org/wiki/Anti-pattern).
 
 This section documents common anti-patterns that we observe in plugin development.
-If you find yourself feeling like you need to apply one of these patterns in your plugin, feel free to reach out in the {{ developer_discussion }}.
-We'll help you figure out the right way to achieve your goal.
+Generally speaking, the things documented on this page lead to plugins that, for the most part, work.
+So why avoid them?
+
+The extra work of making your methods accessible through QIIME 2, including things like defining the semantic types of your inputs and outputs, pays off in that you get things like cross-interface support and [Provenance Replay](https://doi.org/10.1371/journal.pcbi.1011676) for your methods for free.
+You don't have to test these things: we promise they'll work (and if they don't there is probably a bug somewhere that is our responsibility to fix - please do let us know).
+If you find yourself feeling like you need to apply one of these anti-patterns in your plugin, feel free to reach out through the {{ developer_discussion }}.
+We'll help you figure out the QIIME-y way to achieve your goal.
+
+```{warning}
+If you adopt the anti-patterns described on this page, the QIIME 2 framework developers explicitly provide no guarantee that your plugins will produce useful, replayable provenance, will be fully accessible (or even minimally functional) across the different interfaces that exist (e.g., Python and R APIs, command line interfaces, and graphical interfaces), or won't fail in other weird ways. We also provide no guarantee that these anti-patterns will continue to work with future versions of the QIIME 2 framework.
+
+If features such as access to your methods through different interfaces or their compatibility with Provenance Replay aren't a priority for your work (e.g., because you are prototyping, or because you have a provenance tracking mechanism external to QIIME 2), the extra effort required to build QIIME 2 plugins may not be worth it.
+```
 
 ## Providing input or output filepaths as parameters
 

@@ -362,8 +362,17 @@ document.write(`
 <div><p>“An anti-pattern in software engineering, project management, and business processes is a common response to a recurring problem that is usually ineffective and risks being highly counterproductive.” <a class="reference external" href="https://en.wikipedia.org/wiki/Anti-pattern">Source: Wikipedia – Anti-patterns (Accessed 11 January 2024; last edited 5 December 2023)</a>.</p>
 </div></blockquote>
 <p>This section documents common anti-patterns that we observe in plugin development.
-If you find yourself feeling like you need to apply one of these patterns in your plugin, feel free to reach out in the <a class="reference external" href="https://forum.qiime2.org/c/dev-discussion">QIIME 2 Forum Developer Discussion</a>.
-We’ll help you figure out the right way to achieve your goal.</p>
+Generally speaking, the things documented on this page lead to plugins that, for the most part, work.
+So why avoid them?</p>
+<p>The extra work of making your methods accessible through QIIME 2, including things like defining the semantic types of your inputs and outputs, pays off in that you get things like cross-interface support and <a class="reference external" href="https://doi.org/10.1371/journal.pcbi.1011676">Provenance Replay</a> for your methods for free.
+You don’t have to test these things: we promise they’ll work (and if they don’t there is probably a bug somewhere that is our responsibility to fix - please do let us know).
+If you find yourself feeling like you need to apply one of these anti-patterns in your plugin, feel free to reach out through the <a class="reference external" href="https://forum.qiime2.org/c/dev-discussion">QIIME 2 Forum Developer Discussion</a>.
+We’ll help you figure out the QIIME-y way to achieve your goal.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you adopt the anti-patterns described on this page, the QIIME 2 framework developers explicitly provide no guarantee that your plugins will produce useful, replayable provenance, will be fully accessible (or even minimally functional) across the different interfaces that exist (e.g., Python and R APIs, command line interfaces, and graphical interfaces), or won’t fail in other weird ways. We also provide no guarantee that these anti-patterns will continue to work with future versions of the QIIME 2 framework.</p>
+<p>If features such as access to your methods through different interfaces or their compatibility with Provenance Replay aren’t a priority for your work (e.g., because you are prototyping, or because you have a provenance tracking mechanism external to QIIME 2), the extra effort required to build QIIME 2 plugins may not be worth it.</p>
+</div>
 <section id="providing-input-or-output-filepaths-as-parameters">
 <h2>Providing input or output filepaths as parameters<a class="headerlink" href="#providing-input-or-output-filepaths-as-parameters" title="Permalink to this heading">#</a></h2>
 <p>It’s not uncommon for new plugin developers to provide paths to inputs or outputs using <code class="docutils literal notranslate"><span class="pre">parameter</span></code> arguments, rather than <code class="docutils literal notranslate"><span class="pre">input</span></code> or <code class="docutils literal notranslate"><span class="pre">output</span></code> arguments, when defining and registering <code class="docutils literal notranslate"><span class="pre">Action</span></code>. For example:</p>
