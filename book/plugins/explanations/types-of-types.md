@@ -4,9 +4,7 @@
 The term _type_ is overloaded with a few different concepts.
 The goal of this Explanation article is to disambiguate how it's used in QIIME 2.
 To achieve this, we'll discuss two ways that it's commonly used, and then introduce a third way that it's used less frequently but which is important to QIIME 2.
-The three kinds of types that are used in QIIME 2 are **file types (more frequently referred to file formats in QIIME 2)**, **data types**, and **semantic types**.
-
-
+The three kinds of types that are used in QIIME 2 are **file types**, **data types**, and **semantic types**.
 
 ````{margin}
 ```{admonition} Video
@@ -20,16 +18,16 @@ For example, newick is a file type that is used for storing phylogenetic trees.
 Files are used most commonly for archiving data when it's not actively in use.
 Data types refer to how data is represented in a computer's memory (i.e., RAM) while it's actively in use, such as the data structure or object class that a file is loaded into.
 
-For example, if you are adding a root to an unrooted phylogenetic tree (a concept discussed in Part 2 of this book), you may use a tool like IQTree2.
-You would provide a path to the file containing the unrooted phylogenetic tree to IQTree2, and IQTree2 would load that tree into some object in the computer's memory to work on it.
-The object that IQTree2 uses internally to represent the phylogenetic tree is synonymous with _data type_, as used here.
-The kind of object that is used is a decision made by the developers of IQTree2 based on available functionality, efficiency for an operation they plan to carry out, their familiarity with the object, or something else.
-If IQTree2 successfully completes the requested rooting operation, it could then write the resulting tree from its internal data type into a new newick-formatted file on the hard disk, and exit.
+For example, if you are adding a root to an unrooted phylogenetic tree, you may use a tool like [IQ-Tree](http://www.iqtree.org/).
+You would provide a path to the file containing the unrooted phylogenetic tree to IQ-Tree, and IQ-Tree would load that tree into some object in the computer's memory to work on it.
+The object that IQ-Tree uses internally to represent the phylogenetic tree is synonymous with _data type_, as used here.
+The kind of object that is used is a decision made by the developers of IQ-Tree based on available functionality, efficiency for an operation they plan to carry out, their familiarity with the object, or something else.
+If IQ-Tree successfully completes the requested rooting operation, it could then write the resulting tree from its internal data type into a new newick-formatted file on the hard disk, and exit.
 
-One thing to notice from this example is that there are at least three *independent* choices being made by the developer regarding "types": what file type to use as input, what data type to use internally, and what file type to use as output.
-Software users, shouldn't need to know or care about what data types are used internally by a program.
-They just care about what file types are used as input and output.
-Software developers, on the other hand, should care a lot about what data types are used by their program: choosing an appropriate tpye can have huge impacts on the performance of the software, for example.
+One thing to notice from this example is that there are at least three *independent* choices being made by the developer regarding *types*: what file type to use as input, what data type to use internally, and what file type to use as output.
+Users of command line software, like IQ-Tree, shouldn't need to know or care about what data types are used internally by a program.
+They just need to know what file types are used as input and output.
+Software developers, on the other hand, should care a lot about what data types are used by their program: choosing an appropriate type can have huge impacts on the performance of the software, for example.
 
 ## Semantic types
 The third _type_ that is important in QIIME 2 is the semantic type of data.
@@ -47,8 +45,7 @@ I'll typically check on the job for a few minutes, to make sure that it seems to
 I may then leave, with the hope that the job completes over the weekend and I'll have data to work with on Monday morning.
 It's very frustrating to come in Monday morning and find out that my job failed just a few minutes after I left on Friday for a reason that I could have quickly addressed had I known in time.
 
-
-```{warning}
+```{note}
 There's actually a worse outcome than a delayed error from a computer program when inappropriate input is provided.
 When a program fails and provides an error message to the user, whether or not that error message helps the user solve the problem, the program has failed loudly.
 Something went wrong, and it told the user about it.
@@ -78,6 +75,6 @@ Our example plugin `q2-dwq2` defines a action called `duplicate_table` which [ta
 The function registered to this action [declares that it will "view" the input `table` as a `pd.DataFrame`, and also return the output as a `pd.DataFrame`](https://github.com/caporaso-lab/q2-dwq2/blob/e8fe1e5b32bfc2a331d48611b3a70b0fa5b19165/q2_dwq2/plugin_setup.py#L32).
 File types are associated with semantic types when [Artifact Classes are defined](https://github.com/qiime2/q2-types/blob/e25f9355958755343977e037bbe39110cfb56a63/q2_types/feature_table/_type.py#L42).
 
-Each kind of type discussed here represents different information about the data: how it's stored on disk (file type), how it's used by a function (it's data type), and what it represents (it's semantic type).
+Each kind of type discussed here represents different information about the data: how it's stored on disk (file type), how it's used by a function (its data type), and what it represents (its semantic type).
 The motivation for creating QIIME 2's semantic type system was to avoid issues that can arise from providing inappropriate data to actions.
 The semantic type system also helps users and developers better understand the intent of QIIME 2 actions by assigning meaning to the input and output, and allows for the discovery of new potentially relevant QIIME 2 actions.
