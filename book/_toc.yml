@@ -32,7 +32,9 @@ parts:
           # - file: plugins/how-to-guides/type-map
           # - file: plugins/how-to-guides/add-ci
           # - file: plugins/how-to-guides/format-validation-levels.md
-      - file: plugins/explainers/intro
+      - file: plugins/explanations/intro
+        sections:
+          - file: plugins/explanations/types-of-types
       - file: plugins/references/intro
         sections:
           - file: plugins/references/antipatterns
