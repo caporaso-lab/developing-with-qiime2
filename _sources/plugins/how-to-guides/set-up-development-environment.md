@@ -90,7 +90,7 @@ At this stage you should now have a working development environment - time to st
 
 ### Building a new plugin
 
-If you're creating a new plugin, you can now move on to [](start-plugin-tutorial) or [](start-plugin-explainers), depending on whether you'd like to start with step-by-step instructions, or a narrative overview of how QIIME 2 plugins work (respectively).
+If you're creating a new plugin, you can now move on to [](start-plugin-tutorial) or [](start-plugin-explanations), depending on whether you'd like to start with step-by-step instructions, or a narrative overview of how QIIME 2 plugins work (respectively).
 
 ### Contributing to existing plugins
 If you want to make changes to the QIIME 2 framework, q2cli, or any existing plugins, follow these steps (for the sake of this example, we will focus on the example of contributing to developing ``q2-types``):

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Explainers: Building a QIIME 2 Plugin &#8212; Developing with QIIME 2</title>
+    <title>Explanations &#8212; Developing with QIIME 2</title>
   
   
   
@@ -63,11 +63,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/explainers/intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/explanations/intro';</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="References" href="../references/intro.html" />
+    <link rel="next" title="Semantic types, data types, and file formats" href="types-of-types.html" />
     <link rel="prev" title="Set up your development environment" href="../how-to-guides/set-up-development-environment.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -174,8 +174,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Explainers: Building a QIIME 2 Plugin</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Explanations</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="types-of-types.html">Semantic types, data types, and file formats</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../references/antipatterns.html">Plugin development anti-patterns</a></li>
 </ul>
 </li>
@@ -249,7 +252,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/plugins/explainers/intro.md" target="_blank"
+      <li><a href="../../_sources/plugins/explanations/intro.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -331,7 +334,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Explainers: Building a QIIME 2 Plugin</h1>
+    <h1>Explanations</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -345,11 +348,16 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="explainers-building-a-qiime-2-plugin">
-<span id="start-plugin-explainers"></span><h1>Explainers: Building a QIIME 2 Plugin<a class="headerlink" href="#explainers-building-a-qiime-2-plugin" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="explanations">
+<span id="start-plugin-explanations"></span><h1>Explanations<a class="headerlink" href="#explanations" title="Permalink to this heading">#</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>While <em>Developing with QIIME 2</em> is in early development, the original <a class="reference external" href="https://dev.qiime2.org">QIIME 2 Developer Documentation</a> is the best resource for this information.</p>
+<p>While <em>Developing with QIIME 2</em> is in early development, the original <a class="reference external" href="https://dev.qiime2.org">QIIME 2 Developer Documentation</a> is the best resource for information not in the table of contents below.</p>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="types-of-types.html">Semantic types, data types, and file formats</a></li>
+</ul>
 </div>
 </section>
 
@@ -366,7 +374,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./plugins/explainers"
+            path: "./plugins/explanations"
         },
         predefinedOutput: true
     }
@@ -393,11 +401,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="../references/intro.html"
+       href="types-of-types.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">References</p>
+        <p class="prev-next-title">Semantic types, data types, and file formats</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
