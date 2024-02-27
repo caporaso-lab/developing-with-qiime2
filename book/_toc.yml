@@ -49,6 +49,8 @@ parts:
     chapters:
       - file: framework/intro
         title: Introduction
+        sections:
+          - file: framework/explanations/architecture
 
   - caption: "CI Internals"
     chapters:

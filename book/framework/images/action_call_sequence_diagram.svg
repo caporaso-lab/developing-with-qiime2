@@ -1,0 +1,1498 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 232.30417 322.63565"
+   height="322.63565mm"
+   width="232.30417mm"
+   sodipodi:docname="action_call_sequence_diagram.svg"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="2346"
+     inkscape:window-height="1252"
+     id="namedview289"
+     showgrid="false"
+     inkscape:zoom="0.77414466"
+     inkscape:cx="421.19307"
+     inkscape:cy="882.38872"
+     inkscape:window-x="0"
+     inkscape:window-y="29"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g558" />
+  <defs
+     id="defs2" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(247.64869,-26.636201)"
+     id="layer1"
+     style="">
+    <g
+       transform="matrix(0.26458333,0,0,0.26458333,-247.64869,26.636201)"
+       id="g568"
+       style="">
+      <g
+         id="g4"
+         style="" />
+      <g
+         id="g6"
+         style="" />
+      <g
+         id="g8"
+         style="" />
+      <g
+         id="g10"
+         style="" />
+      <g
+         id="g12"
+         style="" />
+      <g
+         id="g14"
+         style="" />
+      <g
+         id="g16"
+         style="" />
+      <g
+         id="g18"
+         style="" />
+      <g
+         id="g20"
+         style="" />
+      <g
+         id="g22"
+         style="" />
+      <g
+         id="g24"
+         style="" />
+      <g
+         id="g26"
+         style="" />
+      <g
+         id="g28"
+         style="" />
+      <g
+         id="g30"
+         style="" />
+      <g
+         id="g32"
+         style="" />
+      <g
+         id="g34"
+         style="" />
+      <g
+         id="g36"
+         style="" />
+      <g
+         id="g38"
+         style="" />
+      <g
+         id="g40"
+         style="" />
+      <g
+         id="g42"
+         style="" />
+      <g
+         id="g44"
+         style="" />
+      <g
+         id="g46"
+         style="" />
+      <g
+         id="g48"
+         style="" />
+      <g
+         id="g50"
+         style="" />
+      <g
+         id="g52"
+         style="" />
+      <g
+         id="g54"
+         style="" />
+      <g
+         id="g56"
+         style="" />
+      <g
+         id="g58"
+         style="" />
+      <g
+         id="g60"
+         style="" />
+      <g
+         id="g62"
+         style="" />
+      <g
+         id="g64"
+         style="" />
+      <g
+         id="g68"
+         style="">
+        <rect
+           style="fill:#ffffff;stroke:none"
+           id="rect66"
+           height="1219"
+           width="878"
+           y="0"
+           x="0" />
+      </g>
+      <g
+         id="g72"
+         style="">
+        <text
+           style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+           id="text70"
+           dominant-baseline="alphabetic"
+           y="22.617973"
+           x="435.7045"
+           text-decoration="normal"
+           font-weight="normal"
+           font-style="normal"
+           font-size="16.5pt" />
+      </g>
+      <g
+         id="g82"
+         style="">
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:11.59896092, 5.02621640000000003;paint-order:fill stroke markers"
+           id="path74"
+           stroke-miterlimit="10"
+           d="M 40.899659,88.511671 V 1219.4104" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:11.59896092, 5.02621640000000003;paint-order:fill stroke markers"
+           id="path76"
+           stroke-miterlimit="10"
+           d="M 263.64871,88.511671 V 1219.4104" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:11.59896092, 5.02621640000000003;paint-order:fill stroke markers"
+           id="path78"
+           stroke-miterlimit="10"
+           d="M 444.9371,88.511671 V 1219.4104" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:11.59896092, 5.02621640000000003;paint-order:fill stroke markers"
+           id="path80"
+           stroke-miterlimit="10"
+           d="M 739.22548,88.511671 V 1219.4104" />
+      </g>
+      <g
+         id="g132"
+         style="">
+        <path
+           style="fill:none;stroke:none"
+           d=""
+           id="path84" />
+        <g
+           id="g88"
+           style="">
+          <path
+             style="fill:#ffffff;stroke:#000000;stroke-width:2.41258383;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+             id="path86"
+             stroke-miterlimit="10"
+             d="M 7.5393246,47.799318 H 74.259993 V 88.511671 H 7.5393246 Z" />
+        </g>
+        <g
+           id="g94"
+           style="">
+          <g
+             id="g90"
+             style="" />
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text92"
+             dominant-baseline="alphabetic"
+             y="73.433022"
+             x="23.899658"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">User</text>
+        </g>
+        <path
+           style="fill:none;stroke:none"
+           d=""
+           id="path96" />
+        <g
+           id="g100"
+           style="">
+          <path
+             style="fill:#ffffff;stroke:#000000;stroke-width:2.41258383;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+             id="path98"
+             stroke-miterlimit="10"
+             d="m 214.78838,47.799318 h 97.72067 v 40.712353 h -97.72067 z" />
+        </g>
+        <g
+           id="g106"
+           style="">
+          <g
+             id="g102"
+             style="" />
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text104"
+             dominant-baseline="alphabetic"
+             y="73.433022"
+             x="231.14871"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">Interface</text>
+        </g>
+        <path
+           style="fill:none;stroke:none"
+           d=""
+           id="path108" />
+        <g
+           id="g112"
+           style="">
+          <path
+             style="fill:#ffffff;stroke:#000000;stroke-width:2.41258383;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+             id="path110"
+             stroke-miterlimit="10"
+             d="M 388.07676,47.799318 H 501.79743 V 88.511671 H 388.07676 Z" />
+        </g>
+        <g
+           id="g118"
+           style="">
+          <text
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.33333397px;font-family:Consolas;-inkscape-font-specification:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none"
+             id="text116"
+             dominant-baseline="alphabetic"
+             y="73.433022"
+             x="410.4371"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">Framework</text>
+          <g
+             id="g114"
+             style="" />
+        </g>
+        <path
+           style="fill:none;stroke:none"
+           d=""
+           id="path120" />
+        <g
+           id="g124"
+           style="">
+          <path
+             style="fill:#ffffff;stroke:#000000;stroke-width:2.41258383;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+             id="path122"
+             stroke-miterlimit="10"
+             d="m 700.86514,47.799318 h 76.72067 v 40.712353 h -76.72067 z" />
+        </g>
+        <g
+           id="g130"
+           style="">
+          <g
+             id="g126"
+             style="" />
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text128"
+             dominant-baseline="alphabetic"
+             y="73.433022"
+             x="717.22546"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">Plugin</text>
+        </g>
+      </g>
+      <g
+         id="g558"
+         style="">
+        <path
+           style="fill:#ffffff;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+           id="path134"
+           stroke-miterlimit="10"
+           d="m 256.10939,153.34986 h 15.07865 V 1166.6351 H 256.10939 V 153.34986" />
+        <path
+           style="fill:#ffffff;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+           id="path136"
+           stroke-miterlimit="10"
+           d="m 437.39777,195.57008 h 15.07865 v 42.22022 h -15.07865 v -42.22022" />
+        <path
+           style="fill:#ffffff;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+           id="path138"
+           stroke-miterlimit="10"
+           d="m 437.39777,295.08916 h 15.07865 v 42.22022 h -15.07865 v -42.22022" />
+        <path
+           style="fill:#ffffff;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+           id="path140"
+           stroke-miterlimit="10"
+           d="m 437.39777,394.60825 h 15.07865 V 1024.8958 H 437.39777 V 394.60825" />
+        <path
+           style="fill:#ffffff;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+           id="path142"
+           stroke-miterlimit="10"
+           d="m 731.68615,524.28463 h 15.07865 v 42.22022 h -15.07865 v -42.22022" />
+        <path
+           style="fill:#ffffff;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+           id="path144"
+           stroke-miterlimit="10"
+           d="M 731.68615,623.80372 H 746.7648 V 738.40145 H 731.68615 V 623.80372" />
+        <path
+           style="fill:#ffffff;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+           id="path146"
+           stroke-miterlimit="10"
+           d="m 731.68615,795.70032 h 15.07865 v 42.22022 h -15.07865 v -42.22022" />
+        <path
+           style="fill:#ffffff;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+           id="path148"
+           stroke-miterlimit="10"
+           d="m 437.39777,1082.1947 h 15.07865 v 42.2202 h -15.07865 v -42.2202" />
+        <g
+           id="g166"
+           style="">
+          <g
+             id="g154"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path150" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect152"
+               height="19.602243"
+               width="98.523598"
+               y="118.66897"
+               x="58.742725" />
+          </g>
+          <g
+             id="g160"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path156" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect158"
+               height="19.602243"
+               width="179.52359"
+               y="133.74762"
+               x="58.742725" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text162"
+             dominant-baseline="alphabetic"
+             y="132.23975"
+             x="61.004524"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">plugin action</text>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text164"
+             dominant-baseline="alphabetic"
+             y="147.31841"
+             x="61.004524"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">(file paths, parameters)</text>
+        </g>
+        <g
+           id="g172"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+             id="path168"
+             stroke-miterlimit="10"
+             d="M 40.899659,153.34986 H 256.10939" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path170"
+             d="m 243.54385,147.06709 12.56554,6.28277 -12.56554,6.28277 z" />
+        </g>
+        <g
+           id="g182"
+           style="">
+          <g
+             id="g178"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path174" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect176"
+               height="19.602243"
+               width="77.523598"
+               y="175.96783"
+               x="315.5311" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text180"
+             dominant-baseline="alphabetic"
+             y="189.53862"
+             x="317.79291"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">get plugin</text>
+        </g>
+        <g
+           id="g188"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+             id="path184"
+             stroke-miterlimit="10"
+             d="M 271.18804,195.57008 H 437.39777" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path186"
+             d="m 424.83223,189.28731 12.56554,6.28277 -12.56554,6.28277 z" />
+        </g>
+        <g
+           id="g198"
+           style="">
+          <g
+             id="g194"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path190" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect192"
+               height="19.602243"
+               width="78.523598"
+               y="218.18805"
+               x="315.0311" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text196"
+             dominant-baseline="alphabetic"
+             y="231.75883"
+             x="317.29291"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">get action</text>
+        </g>
+        <g
+           id="g204"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+             id="path200"
+             stroke-miterlimit="10"
+             d="M 271.18804,237.7903 H 437.39777" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path202"
+             d="m 424.83223,231.50753 12.56554,6.28277 -12.56554,6.28277 z" />
+        </g>
+        <g
+           id="g222"
+           style="">
+          <g
+             id="g210"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path206" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect208"
+               height="19.602243"
+               width="101.5236"
+               y="260.40826"
+               x="303.5311" />
+          </g>
+          <g
+             id="g216"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path212" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect214"
+               height="19.602243"
+               width="84.523598"
+               y="275.48691"
+               x="303.5311" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text218"
+             dominant-baseline="alphabetic"
+             y="273.97906"
+             x="305.79291"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">load artifacts</text>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text220"
+             dominant-baseline="alphabetic"
+             y="289.05771"
+             x="305.79291"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">(file paths)</text>
+        </g>
+        <g
+           id="g228"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+             id="path224"
+             stroke-miterlimit="10"
+             d="M 271.18804,295.08916 H 437.39777" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path226"
+             d="m 424.83223,288.80639 12.56554,6.28277 -12.56554,6.28278 z" />
+        </g>
+        <g
+           id="g238"
+           style="">
+          <g
+             id="g234"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path230" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect232"
+               height="19.602243"
+               width="65.523598"
+               y="317.70715"
+               x="321.5311" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text236"
+             dominant-baseline="alphabetic"
+             y="331.27792"
+             x="323.79291"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">artifacts</text>
+        </g>
+        <g
+           id="g244"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:6.03145968;paint-order:fill stroke markers"
+             id="path240"
+             stroke-miterlimit="10"
+             d="M 437.39777,337.30938 H 271.18804" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path242"
+             d="m 283.75358,331.02661 -12.56554,6.28277 12.56554,6.28277 z" />
+        </g>
+        <g
+           id="g262"
+           style="">
+          <g
+             id="g250"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path246" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect248"
+               height="19.602243"
+               width="79.523598"
+               y="359.92737"
+               x="314.5311" />
+          </g>
+          <g
+             id="g256"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path252" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect254"
+               height="19.602243"
+               width="77.523598"
+               y="375.00601"
+               x="314.5311" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text258"
+             dominant-baseline="alphabetic"
+             y="373.49814"
+             x="316.79291"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">call action</text>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text260"
+             dominant-baseline="alphabetic"
+             y="388.57678"
+             x="316.79291"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">(artifacts)</text>
+        </g>
+        <g
+           id="g268"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+             id="path264"
+             stroke-miterlimit="10"
+             d="M 271.18804,394.60825 H 437.39777" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path266"
+             d="m 424.83223,388.32548 12.56554,6.28277 -12.56554,6.28277 z" />
+        </g>
+        <g
+           id="g286"
+           style="">
+          <g
+             id="g274"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path270" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect272"
+               height="19.602243"
+               width="105.5236"
+               y="417.22623"
+               x="470.31949" />
+          </g>
+          <g
+             id="g280"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path276" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect278"
+               height="19.602243"
+               width="172.52359"
+               y="432.30487"
+               x="470.31949" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text282"
+             dominant-baseline="alphabetic"
+             y="430.797"
+             x="472.5813"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">validate input</text>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text284"
+             dominant-baseline="alphabetic"
+             y="445.87567"
+             x="472.5813"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">(artifacts, parameters)</text>
+        </g>
+        <g
+           id="g292"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+             id="path288"
+             stroke-miterlimit="10"
+             d="m 452.47642,451.90712 h 60.3146 v 15.07865 h -60.3146" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path290"
+             d="m 465.04196,460.703 -12.56554,6.28277 12.56554,6.28277 z" />
+        </g>
+        <g
+           id="g310"
+           style="">
+          <g
+             id="g298"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path294" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect296"
+               height="19.602243"
+               width="76.523598"
+               y="489.60373"
+               x="553.31946" />
+          </g>
+          <g
+             id="g304"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path300" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect302"
+               height="19.602243"
+               width="77.523598"
+               y="504.6824"
+               x="553.31946" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text306"
+             dominant-baseline="alphabetic"
+             y="503.17453"
+             x="555.5813"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">transform</text>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text308"
+             dominant-baseline="alphabetic"
+             y="518.25317"
+             x="555.5813"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">(artifacts)</text>
+        </g>
+        <g
+           id="g316"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+             id="path312"
+             stroke-miterlimit="10"
+             d="M 452.47642,524.28463 H 731.68615" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path314"
+             d="m 719.12061,518.00186 12.56554,6.28277 -12.56554,6.28277 z" />
+        </g>
+        <g
+           id="g326"
+           style="">
+          <g
+             id="g322"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path318" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect320"
+               height="19.602243"
+               width="136.52359"
+               y="546.90259"
+               x="523.81946" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text324"
+             dominant-baseline="alphabetic"
+             y="560.47339"
+             x="526.0813"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">transformed input</text>
+        </g>
+        <g
+           id="g332"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:6.03145968;paint-order:fill stroke markers"
+             id="path328"
+             stroke-miterlimit="10"
+             d="M 731.68615,566.50485 H 452.47642" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path330"
+             d="m 465.04196,560.22208 -12.56554,6.28277 12.56554,6.28277 z" />
+        </g>
+        <g
+           id="g350"
+           style="">
+          <g
+             id="g338"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path334" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect336"
+               height="19.602243"
+               width="113.5236"
+               y="589.1228"
+               x="470.31949" />
+          </g>
+          <g
+             id="g344"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path340" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect342"
+               height="19.602243"
+               width="243.52359"
+               y="604.20148"
+               x="470.31949" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text346"
+             dominant-baseline="alphabetic"
+             y="602.6936"
+             x="472.5813"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">execute action</text>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text348"
+             dominant-baseline="alphabetic"
+             y="617.77228"
+             x="472.5813"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">(transformed input, parameters)</text>
+        </g>
+        <g
+           id="g356"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+             id="path352"
+             stroke-miterlimit="10"
+             d="M 452.47642,623.80372 H 731.68615" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path354"
+             d="m 719.12061,617.52095 12.56554,6.28277 -12.56554,6.28277 z" />
+        </g>
+        <g
+           id="g374"
+           style="">
+          <g
+             id="g362"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path358" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect360"
+               height="19.602243"
+               width="62.523594"
+               y="646.42169"
+               x="764.60785" />
+          </g>
+          <g
+             id="g368"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path364" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect366"
+               height="19.602243"
+               width="108.5236"
+               y="661.50037"
+               x="764.60785" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text370"
+             dominant-baseline="alphabetic"
+             y="659.99249"
+             x="766.86969"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">perform</text>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text372"
+             dominant-baseline="alphabetic"
+             y="675.07111"
+             x="766.86969"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">bioinformatics</text>
+        </g>
+        <g
+           id="g380"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+             id="path376"
+             stroke-miterlimit="10"
+             d="m 746.7648,681.10258 h 60.3146 v 15.07865 h -60.3146" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path378"
+             d="m 759.33034,689.89846 -12.56554,6.28277 12.56554,6.28277 z" />
+        </g>
+        <g
+           id="g390"
+           style="">
+          <g
+             id="g386"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path382" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect384"
+               height="19.602243"
+               width="54.523594"
+               y="718.79919"
+               x="564.81946" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text388"
+             dominant-baseline="alphabetic"
+             y="732.37"
+             x="567.0813"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">results</text>
+        </g>
+        <g
+           id="g396"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:6.03145968;paint-order:fill stroke markers"
+             id="path392"
+             stroke-miterlimit="10"
+             d="M 731.68615,738.40145 H 452.47642" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path394"
+             d="m 465.04196,732.11868 -12.56554,6.28277 12.56554,6.28277 z" />
+        </g>
+        <g
+           id="g414"
+           style="">
+          <g
+             id="g402"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path398" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect400"
+               height="19.602243"
+               width="76.523598"
+               y="761.01941"
+               x="553.81946" />
+          </g>
+          <g
+             id="g408"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path404" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect406"
+               height="19.602243"
+               width="66.523598"
+               y="776.09808"
+               x="553.81946" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text410"
+             dominant-baseline="alphabetic"
+             y="774.59021"
+             x="556.0813"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">transform</text>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text412"
+             dominant-baseline="alphabetic"
+             y="789.66888"
+             x="556.0813"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">(results)</text>
+        </g>
+        <g
+           id="g420"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+             id="path416"
+             stroke-miterlimit="10"
+             d="M 452.47642,795.70032 H 731.68615" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path418"
+             d="m 719.12061,789.41755 12.56554,6.28277 -12.56554,6.28277 z" />
+        </g>
+        <g
+           id="g430"
+           style="">
+          <g
+             id="g426"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path422" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect424"
+               height="19.602243"
+               width="149.52359"
+               y="818.3183"
+               x="517.31946" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text428"
+             dominant-baseline="alphabetic"
+             y="831.8891"
+             x="519.5813"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">transformed results</text>
+        </g>
+        <g
+           id="g436"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:6.03145968;paint-order:fill stroke markers"
+             id="path432"
+             stroke-miterlimit="10"
+             d="M 731.68615,837.92054 H 452.47642" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path434"
+             d="m 465.04196,831.63777 -12.56554,6.28277 12.56554,6.28277 z" />
+        </g>
+        <g
+           id="g454"
+           style="">
+          <g
+             id="g442"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path438" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect440"
+               height="19.602243"
+               width="89.523598"
+               y="860.53851"
+               x="470.31949" />
+          </g>
+          <g
+             id="g448"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path444" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect446"
+               height="19.602243"
+               width="161.52359"
+               y="875.61719"
+               x="470.31949" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text450"
+             dominant-baseline="alphabetic"
+             y="874.10931"
+             x="472.5813"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">write /data/</text>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text452"
+             dominant-baseline="alphabetic"
+             y="889.18793"
+             x="472.5813"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">(transformed results)</text>
+        </g>
+        <g
+           id="g460"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+             id="path456"
+             stroke-miterlimit="10"
+             d="m 452.47642,895.2194 h 60.3146 v 15.07865 h -60.3146" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path458"
+             d="m 465.04196,904.01528 -12.56554,6.28277 12.56554,6.28277 z" />
+        </g>
+        <g
+           id="g478"
+           style="">
+          <g
+             id="g466"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path462" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect464"
+               height="19.602243"
+               width="142.52359"
+               y="932.91602"
+               x="470.31949" />
+          </g>
+          <g
+             id="g472"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path468" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect470"
+               height="19.602243"
+               width="172.52359"
+               y="947.99469"
+               x="470.31949" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text474"
+             dominant-baseline="alphabetic"
+             y="946.48682"
+             x="472.5813"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">write /provenance/</text>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text476"
+             dominant-baseline="alphabetic"
+             y="961.56543"
+             x="472.5813"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">(artifacts, parameters)</text>
+        </g>
+        <g
+           id="g484"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+             id="path480"
+             stroke-miterlimit="10"
+             d="m 452.47642,967.59692 h 60.3146 v 15.07865 h -60.3146" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path482"
+             d="m 465.04196,976.3928 -12.56554,6.28277 12.56554,6.28277 z" />
+        </g>
+        <g
+           id="g494"
+           style="">
+          <g
+             id="g490"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path486" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect488"
+               height="19.602243"
+               width="112.5236"
+               y="1005.2935"
+               x="298.0311" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text492"
+             dominant-baseline="alphabetic"
+             y="1018.8643"
+             x="300.29291"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">result artifacts</text>
+        </g>
+        <g
+           id="g500"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:6.03145968;paint-order:fill stroke markers"
+             id="path496"
+             stroke-miterlimit="10"
+             d="M 437.39777,1024.8958 H 271.18804" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path498"
+             d="m 283.75358,1018.613 -12.56554,6.2828 12.56554,6.2828 z" />
+        </g>
+        <g
+           id="g518"
+           style="">
+          <g
+             id="g506"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path502" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect504"
+               height="19.602243"
+               width="39.523594"
+               y="1047.5138"
+               x="315.5311" />
+          </g>
+          <g
+             id="g512"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path508" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect510"
+               height="19.602243"
+               width="77.523598"
+               y="1062.5924"
+               x="315.5311" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text514"
+             dominant-baseline="alphabetic"
+             y="1061.0846"
+             x="317.79291"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">save</text>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text516"
+             dominant-baseline="alphabetic"
+             y="1076.1632"
+             x="317.79291"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">(artifacts)</text>
+        </g>
+        <g
+           id="g524"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:none;paint-order:fill stroke markers"
+             id="path520"
+             stroke-miterlimit="10"
+             d="M 271.18804,1082.1947 H 437.39777" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path522"
+             d="m 424.83223,1075.9119 12.56554,6.2828 -12.56554,6.2827 z" />
+        </g>
+        <g
+           id="g534"
+           style="">
+          <g
+             id="g530"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path526" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect528"
+               height="19.602243"
+               width="130.52359"
+               y="1104.8126"
+               x="289.0311" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text532"
+             dominant-baseline="alphabetic"
+             y="1118.3834"
+             x="291.29291"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">artifact file paths</text>
+        </g>
+        <g
+           id="g540"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:6.03145968;paint-order:fill stroke markers"
+             id="path536"
+             stroke-miterlimit="10"
+             d="M 437.39777,1124.4149 H 271.18804" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path538"
+             d="m 283.75358,1118.1321 -12.56554,6.2828 12.56554,6.2827 z" />
+        </g>
+        <g
+           id="g550"
+           style="">
+          <g
+             id="g546"
+             style="">
+            <path
+               style="fill:none;stroke:none"
+               d=""
+               id="path542" />
+            <rect
+               style="fill:#ffffff;stroke:none"
+               id="rect544"
+               height="19.602243"
+               width="130.52359"
+               y="1147.0328"
+               x="83.242729" />
+          </g>
+          <text
+             style="font-style:normal;font-weight:normal;font-size:13.33333388px;font-family:Consolas;dominant-baseline:alphabetic;text-anchor:start;fill:#000000;stroke:none;-inkscape-font-specification:Consolas;font-stretch:normal;font-variant:normal;"
+             id="text548"
+             dominant-baseline="alphabetic"
+             y="1160.6036"
+             x="85.504524"
+             text-decoration="normal"
+             font-weight="normal"
+             font-style="normal"
+             font-size="11pt">artifact file paths</text>
+        </g>
+        <g
+           id="g556"
+           style="">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.25655413;stroke-miterlimit:10;stroke-dasharray:6.03145968;paint-order:fill stroke markers"
+             id="path552"
+             stroke-miterlimit="10"
+             d="M 256.10939,1166.6351 H 40.899659" />
+          <path
+             style="fill:#000000;stroke:none;paint-order:stroke fill markers"
+             id="path554"
+             d="m 53.4652,1160.3523 -12.565541,6.2828 12.565541,6.2828 z" />
+        </g>
+      </g>
+      <g
+         id="g560"
+         style="" />
+      <g
+         id="g562"
+         style="" />
+      <g
+         id="g564"
+         style="" />
+      <g
+         id="g566"
+         style="" />
+    </g>
+  </g>
+</svg>
