@@ -66,4 +66,6 @@ parts:
 
   - caption: "Back Matter"
     chapters:
-      - file: bibliography
+      - file: back-matter/glossary
+      - file: back-matter/bibliography
+      - file: back-matter/genindex
