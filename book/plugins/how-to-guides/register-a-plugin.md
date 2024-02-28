@@ -1,5 +1,5 @@
 (howto-register-plugin)=
-# Registering a QIIME 2 plugin
+# Register a QIIME 2 plugin
 
 This document will describe how to `register` a plugin, allowing this plugin to interact with the QIIME 2 framework.
 
