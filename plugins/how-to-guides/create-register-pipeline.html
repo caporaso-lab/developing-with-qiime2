@@ -1,0 +1,610 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Create and register a pipeline &#8212; Developing with QIIME 2</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/how-to-guides/create-register-pipeline';</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Creating and registering a Transformer" href="create-register-transformer.html" />
+    <link rel="prev" title="Create and register a visualizer" href="create-register-visualizer.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/q2dev.svg" class="logo__image only-light" alt="Developing with QIIME 2 - Home"/>
+    <script>document.write(`<img src="../../_static/q2dev_darkmode.svg" class="logo__image only-dark" alt="Developing with QIIME 2 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Docs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../docs/user-documentation.html">Contributing to the QIIME 2 user documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/developer-documentation.html">Contributing to the QIIME 2 developer documentation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">How To Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="set-up-development-environment.html">Set up your development environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="register-a-plugin.html">Register a QIIME 2 plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create-register-method.html">Create and register a Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create-register-visualizer.html">Create and register a visualizer</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Create and register a pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create-register-transformer.html">Creating and registering a Transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../references/antipatterns.html">Plugin development anti-patterns</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../interfaces/intro.html">Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Framework Internals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../framework/intro.html">Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../framework/explanations/architecture.html">QIIME 2 architecture overview</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CI Internals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ci/intro.html">Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../back-matter/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../back-matter/bibliography.html">List of works cited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../back-matter/genindex.html">Index</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/plugins/how-to-guides/create-register-pipeline.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Create and register a pipeline</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-function-to-register-as-a-pipeline">Create a function to register as a Pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-the-pipeline">Registering the Pipeline</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="create-and-register-a-pipeline">
+<span id="howto-create-register-pipeline"></span><h1>Create and register a pipeline<a class="headerlink" href="#create-and-register-a-pipeline" title="Permalink to this heading">#</a></h1>
+<p>A <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> accepts some combination of QIIME 2 <code class="docutils literal notranslate"><span class="pre">Artifacts</span></code> and parameters as input, and produces one or more QIIME 2 artifacts and/or <code class="docutils literal notranslate"><span class="pre">Visualizations</span></code> as output.
+This is accomplished by stitching together one or more <code class="docutils literal notranslate"><span class="pre">Methods</span></code> and/or <code class="docutils literal notranslate"><span class="pre">Visualizers</span></code> into a single <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code>.</p>
+<section id="create-a-function-to-register-as-a-pipeline">
+<h2>Create a function to register as a Pipeline<a class="headerlink" href="#create-a-function-to-register-as-a-pipeline" title="Permalink to this heading">#</a></h2>
+<p>Defining a function that can be registered as a <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> is very similar to defining one that can be registered as a <code class="docutils literal notranslate"><span class="pre">Method</span></code> with a few distinctions.</p>
+<p>First, <code class="docutils literal notranslate"><span class="pre">Pipelines</span></code> do not use function annotations and instead receive <code class="docutils literal notranslate"><span class="pre">Artifact</span></code> objects as input and return <code class="docutils literal notranslate"><span class="pre">Artifact</span></code> and/or <code class="docutils literal notranslate"><span class="pre">Visualization</span></code> objects as output.</p>
+<p>Second, <code class="docutils literal notranslate"><span class="pre">Pipelines</span></code> must have <code class="docutils literal notranslate"><span class="pre">ctx</span></code> as their first parameter, which provides the following API:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ctx.get_action(plugin:</span> <span class="pre">str,</span> <span class="pre">action:</span> <span class="pre">str)</span></code>: returns a <em>sub-action</em> that can be called like a normal Artifact API call.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ctx.make_artifact(type,</span> <span class="pre">view,</span> <span class="pre">view_type=None)</span></code>: this has the same behavior as <code class="docutils literal notranslate"><span class="pre">Artifact.import_data</span></code>. It is wrapped by <code class="docutils literal notranslate"><span class="pre">ctx</span></code> for pipeline book-keeping.</p></li>
+</ul>
+<p>Let’s take a look at <a class="reference external" href="https://github.com/qiime2/q2-diversity/blob/99a0ccaaec14838b95845dbfe57f874d092b65c7/q2_diversity/_core_metrics.py#L10"><code class="docutils literal notranslate"><span class="pre">q2_diversity.core_metrics</span></code></a> for an example of a function that we can register as a <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">core_metrics</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">sampling_depth</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">rarefy</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get_action</span><span class="p">(</span><span class="s1">&#39;feature_table&#39;</span><span class="p">,</span> <span class="s1">&#39;rarefy&#39;</span><span class="p">)</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get_action</span><span class="p">(</span><span class="s1">&#39;diversity&#39;</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">)</span>
+    <span class="n">beta</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get_action</span><span class="p">(</span><span class="s1">&#39;diversity&#39;</span><span class="p">,</span> <span class="s1">&#39;beta&#39;</span><span class="p">)</span>
+    <span class="n">pcoa</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get_action</span><span class="p">(</span><span class="s1">&#39;diversity&#39;</span><span class="p">,</span> <span class="s1">&#39;pcoa&#39;</span><span class="p">)</span>
+    <span class="n">emperor_plot</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get_action</span><span class="p">(</span><span class="s1">&#39;emperor&#39;</span><span class="p">,</span> <span class="s1">&#39;plot&#39;</span><span class="p">)</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">rarefied_table</span><span class="p">,</span> <span class="o">=</span> <span class="n">rarefy</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">table</span><span class="p">,</span> <span class="n">sampling_depth</span><span class="o">=</span><span class="n">sampling_depth</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rarefied_table</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="s1">&#39;observed_otus&#39;</span><span class="p">,</span> <span class="s1">&#39;shannon&#39;</span><span class="p">,</span> <span class="s1">&#39;pielou_e&#39;</span><span class="p">:</span>
+        <span class="n">results</span> <span class="o">+=</span> <span class="n">alpha</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">rarefied_table</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">)</span>
+
+    <span class="n">dms</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="s1">&#39;jaccard&#39;</span><span class="p">,</span> <span class="s1">&#39;braycurtis&#39;</span><span class="p">:</span>
+        <span class="n">beta_results</span> <span class="o">=</span> <span class="n">beta</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">rarefied_table</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">+=</span> <span class="n">beta_results</span>
+        <span class="n">dms</span> <span class="o">+=</span> <span class="n">beta_results</span>
+
+    <span class="n">pcoas</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">dm</span> <span class="ow">in</span> <span class="n">dms</span><span class="p">:</span>
+        <span class="n">pcoa_results</span> <span class="o">=</span> <span class="n">pcoa</span><span class="p">(</span><span class="n">distance_matrix</span><span class="o">=</span><span class="n">dm</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">+=</span> <span class="n">pcoa_results</span>
+        <span class="n">pcoas</span> <span class="o">+=</span> <span class="n">pcoa_results</span>
+
+    <span class="k">for</span> <span class="n">pcoa</span> <span class="ow">in</span> <span class="n">pcoas</span><span class="p">:</span>
+        <span class="n">results</span> <span class="o">+=</span> <span class="n">emperor_plot</span><span class="p">(</span><span class="n">pcoa</span><span class="o">=</span><span class="n">pcoa</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="registering-the-pipeline">
+<h2>Registering the Pipeline<a class="headerlink" href="#registering-the-pipeline" title="Permalink to this heading">#</a></h2>
+<p>Registering <code class="docutils literal notranslate"><span class="pre">Pipelines</span></code> is the same as registering <code class="docutils literal notranslate"><span class="pre">Methods</span></code>, with a few exceptions.</p>
+<p>First, we register a <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> by calling <code class="docutils literal notranslate"><span class="pre">plugin.pipelines.register_function</span></code>.</p>
+<p>Second,<code class="docutils literal notranslate"><span class="pre">visualizations</span></code> produced as an output are listed in <code class="docutils literal notranslate"><span class="pre">outputs</span></code> as a <code class="docutils literal notranslate"><span class="pre">tuple</span></code> with <code class="docutils literal notranslate"><span class="pre">Visualization</span></code> as the second value.
+E.g., <code class="docutils literal notranslate"><span class="pre">('jaccard_emperor',</span> <span class="pre">Visualization)</span></code>.
+A description of this output should be included in <code class="docutils literal notranslate"><span class="pre">output_descriptions</span></code></p>
+<p>Citations do not need to be added for the pipeline unless unique citations are required for the pipeline that are not appropriate for the underlying <code class="docutils literal notranslate"><span class="pre">Methods</span></code> and <code class="docutils literal notranslate"><span class="pre">Visualizers</span></code> that it calls.
+Citations for these underlying actions are automatically logged in citation provenance for this pipeline.</p>
+<p>As an example for registering a <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code>, we can look at <code class="docutils literal notranslate"><span class="pre">q2_diversity.core_metrics</span></code> (find the original source <a class="reference external" href="https://github.com/qiime2/q2-diversity/blob/99a0ccaaec14838b95845dbfe57f874d092b65c7/q2_diversity/plugin_setup.py#L494">here</a>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plugin</span><span class="o">.</span><span class="n">pipelines</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
+    <span class="n">function</span><span class="o">=</span><span class="n">q2_diversity</span><span class="o">.</span><span class="n">core_metrics</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;table&#39;</span><span class="p">:</span> <span class="n">FeatureTable</span><span class="p">[</span><span class="n">Frequency</span><span class="p">],</span>
+    <span class="p">},</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;sampling_depth&#39;</span><span class="p">:</span> <span class="n">Int</span> <span class="o">%</span> <span class="n">Range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="n">Metadata</span><span class="p">,</span>
+        <span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="n">Int</span> <span class="o">%</span> <span class="n">Range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+    <span class="p">},</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;rarefied_table&#39;</span><span class="p">,</span> <span class="n">FeatureTable</span><span class="p">[</span><span class="n">Frequency</span><span class="p">]),</span>
+        <span class="p">(</span><span class="s1">&#39;observed_otus_vector&#39;</span><span class="p">,</span> <span class="n">SampleData</span><span class="p">[</span><span class="n">AlphaDiversity</span><span class="p">]),</span>
+        <span class="p">(</span><span class="s1">&#39;shannon_vector&#39;</span><span class="p">,</span> <span class="n">SampleData</span><span class="p">[</span><span class="n">AlphaDiversity</span><span class="p">]),</span>
+        <span class="p">(</span><span class="s1">&#39;evenness_vector&#39;</span><span class="p">,</span> <span class="n">SampleData</span><span class="p">[</span><span class="n">AlphaDiversity</span><span class="p">]),</span>
+        <span class="p">(</span><span class="s1">&#39;jaccard_distance_matrix&#39;</span><span class="p">,</span> <span class="n">DistanceMatrix</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;bray_curtis_distance_matrix&#39;</span><span class="p">,</span> <span class="n">DistanceMatrix</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;jaccard_pcoa_results&#39;</span><span class="p">,</span> <span class="n">PCoAResults</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;bray_curtis_pcoa_results&#39;</span><span class="p">,</span> <span class="n">PCoAResults</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;jaccard_emperor&#39;</span><span class="p">,</span> <span class="n">Visualization</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;bray_curtis_emperor&#39;</span><span class="p">,</span> <span class="n">Visualization</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="n">input_descriptions</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;table&#39;</span><span class="p">:</span> <span class="s1">&#39;The feature table containing the samples over which &#39;</span>
+                <span class="s1">&#39;diversity metrics should be computed.&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">parameter_descriptions</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;sampling_depth&#39;</span><span class="p">:</span> <span class="s1">&#39;The total frequency that each sample should be &#39;</span>
+                            <span class="s1">&#39;rarefied to prior to computing diversity metrics.&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="s1">&#39;The sample metadata to use in the emperor plots.&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="s1">&#39;[beta methods only] - </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">sklearn_n_jobs_description</span>
+    <span class="p">},</span>
+    <span class="n">output_descriptions</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;rarefied_table&#39;</span><span class="p">:</span> <span class="s1">&#39;The resulting rarefied feature table.&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;observed_otus_vector&#39;</span><span class="p">:</span> <span class="s1">&#39;Vector of Observed OTUs values by sample.&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;shannon_vector&#39;</span><span class="p">:</span> <span class="s1">&#39;Vector of Shannon diversity values by sample.&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;evenness_vector&#39;</span><span class="p">:</span> <span class="s1">&#39;Vector of Pielou</span><span class="se">\&#39;</span><span class="s1">s evenness values by sample.&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;jaccard_distance_matrix&#39;</span><span class="p">:</span>
+            <span class="s1">&#39;Matrix of Jaccard distances between pairs of samples.&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;bray_curtis_distance_matrix&#39;</span><span class="p">:</span>
+            <span class="s1">&#39;Matrix of Bray-Curtis distances between pairs of samples.&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;jaccard_pcoa_results&#39;</span><span class="p">:</span>
+            <span class="s1">&#39;PCoA matrix computed from Jaccard distances between samples.&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;bray_curtis_pcoa_results&#39;</span><span class="p">:</span>
+            <span class="s1">&#39;PCoA matrix computed from Bray-Curtis distances between samples.&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;jaccard_emperor&#39;</span><span class="p">:</span>
+            <span class="s1">&#39;Emperor plot of the PCoA matrix computed from Jaccard.&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;bray_curtis_emperor&#39;</span><span class="p">:</span>
+            <span class="s1">&#39;Emperor plot of the PCoA matrix computed from Bray-Curtis.&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Core diversity metrics (non-phylogenetic)&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Applies a collection of diversity metrics &quot;</span>
+                <span class="s2">&quot;(non-phylogenetic) to a feature table.&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>See the text describing <a class="reference internal" href="create-register-method.html#howto-register-method"><span class="std std-ref">registering methods</span></a> for a description of these values.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./plugins/how-to-guides"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="create-register-visualizer.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Create and register a visualizer</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="create-register-transformer.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Creating and registering a Transformer</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-function-to-register-as-a-pipeline">Create a function to register as a Pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-the-pipeline">Registering the Pipeline</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Caporaso Lab
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Writing Usage Examples &#8212; Developing with QIIME 2</title>
+    <title>Creating and registering a Transformer &#8212; Developing with QIIME 2</title>
   
   
   
@@ -63,10 +63,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/how-to-guides/usage-example';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/how-to-guides/create-register-transformer';</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Use Artifact Collections as Action inputs or outputs" href="artifact-collections-as-io.html" />
+    <link rel="prev" title="Create and register a pipeline" href="create-register-pipeline.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -166,15 +168,15 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../docs/developer-documentation.html">Contributing to the QIIME 2 developer documentation</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">How To Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="set-up-development-environment.html">Set up your development environment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="register-a-plugin.html">Register a QIIME 2 plugin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="create-register-method.html">Create and register a Method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="create-register-visualizer.html">Create and register a visualizer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="create-register-pipeline.html">Create and register a pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="create-register-transformer.html">Creating and registering a Transformer</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Creating and registering a Transformer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
 </ul>
 </li>
@@ -262,7 +264,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/plugins/how-to-guides/usage-example.md" target="_blank"
+      <li><a href="../../_sources/plugins/how-to-guides/create-register-transformer.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -344,7 +346,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Writing Usage Examples</h1>
+    <h1>Creating and registering a Transformer</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -358,8 +360,33 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="writing-usage-examples">
-<h1>Writing Usage Examples<a class="headerlink" href="#writing-usage-examples" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="creating-and-registering-a-transformer">
+<span id="howto-create-register-transformer"></span><h1>Creating and registering a Transformer<a class="headerlink" href="#creating-and-registering-a-transformer" title="Permalink to this heading">#</a></h1>
+<p>Transformers are often short Python functions that convert one file format or data type to another file format or data type.
+These functions are never directly called by users or developers, so by convention they don’t get informative function names (as the annotations of the input and output provide complete detail on what they do).</p>
+<p>Here’s are two example <code class="docutils literal notranslate"><span class="pre">transformer</span></code> that are <a class="reference external" href="https://github.com/qiime2/q2-types/blob/e25f9355958755343977e037bbe39110cfb56a63/q2_types/distance_matrix/_transformer.py#L16">defined and registered in <code class="docutils literal notranslate"><span class="pre">q2-types</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">skbio</span>
+
+<span class="kn">from</span> <span class="nn">..plugin_setup</span> <span class="kn">import</span> <span class="n">plugin</span>
+<span class="kn">from</span> <span class="nn">.</span>
+<span class="kn">import</span> <span class="n">LSMatFormat</span>
+
+
+<span class="nd">@plugin</span><span class="o">.</span><span class="n">register_transformer</span>
+<span class="k">def</span> <span class="nf">_1</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DistanceMatrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LSMatFormat</span><span class="p">:</span>
+    <span class="n">ff</span> <span class="o">=</span> <span class="n">LSMatFormat</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">ff</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;lsmat&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ff</span>
+
+
+<span class="nd">@plugin</span><span class="o">.</span><span class="n">register_transformer</span>
+<span class="k">def</span> <span class="nf">_2</span><span class="p">(</span><span class="n">ff</span><span class="p">:</span> <span class="n">LSMatFormat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DistanceMatrix</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DistanceMatrix</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ff</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;lsmat&#39;</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>These transformers define how an <code class="docutils literal notranslate"><span class="pre">skbio.DistanceMatrix</span></code> object is transformed into an <code class="docutils literal notranslate"><span class="pre">LSMatFormat</span></code> object (the underlying format of the data in a <code class="docutils literal notranslate"><span class="pre">DistanceMatrix</span></code> artifact class, defined <a class="reference external" href="https://github.com/qiime2/q2-types/blob/e25f9355958755343977e037bbe39110cfb56a63/q2_types/distance_matrix/_format.py#L15">here in q2-types</a>, and registered to the <code class="docutils literal notranslate"><span class="pre">DistanceMatrix</span></code> semantic type <a class="reference external" href="https://github.com/qiime2/q2-types/blob/e25f9355958755343977e037bbe39110cfb56a63/q2_types/distance_matrix/_type.py#L18">here</a>).
+The transformers are registered using the <code class="docutils literal notranslate"><span class="pre">&#64;plugin.register_transformer</span></code> decorator.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -392,6 +419,24 @@ document.write(`
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="create-register-pipeline.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Create and register a pipeline</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="artifact-collections-as-io.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Use Artifact Collections as Action inputs or outputs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               

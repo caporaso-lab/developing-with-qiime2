@@ -171,10 +171,17 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="plugins/tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="plugins/how-to-guides/intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/register-a-plugin.html">Register a QIIME 2 plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/create-register-method.html">Create and register a Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/create-register-visualizer.html">Create and register a visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/create-register-pipeline.html">Create and register a pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/create-register-transformer.html">Creating and registering a Transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/how-to-guides/artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="plugins/explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="plugins/explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/explanations/transformers.html">Transformers</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="plugins/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -188,7 +195,10 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Framework Internals</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="framework/intro.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="framework/intro.html">Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="framework/explanations/architecture.html">QIIME 2 architecture overview</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">CI Internals</span></p>
 <ul class="nav bd-sidenav">
@@ -196,7 +206,9 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">List of works cited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="back-matter/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="back-matter/bibliography.html">List of works cited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="back-matter/genindex.html">Index</a></li>
 </ul>
 
     </div>
@@ -375,7 +387,7 @@ This is preferred over contacting developers directly as there are many develope
 </div>
 <section id="about">
 <h2>About<a class="headerlink" href="#about" title="Permalink to this heading">#</a></h2>
-<p>The content in this book is organized under the <a class="reference external" href="https://diataxis.fr/">Diátaxis</a> framework <span id="id1">[<a class="reference internal" href="bibliography.html#id3" title="Daniele Procida. Diátaxis documentation framework. URL: https://diataxis.fr/.">1</a>]</span>.
+<p>The content in this book is organized under the <a class="reference external" href="https://diataxis.fr/">Diátaxis</a> framework <span id="id1">[<a class="reference internal" href="back-matter/bibliography.html#id3" title="Daniele Procida. Diátaxis documentation framework. URL: https://diataxis.fr/.">1</a>]</span>.
 This means that you can expect Tutorials, How-To-Guides, Explainations, and References which each serve a different goal for the reader.</p>
 <table class="table">
 <thead>

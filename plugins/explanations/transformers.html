@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Semantic types, data types, and file formats &#8212; Developing with QIIME 2</title>
+    <title>Transformers &#8212; Developing with QIIME 2</title>
   
   
   
@@ -63,12 +63,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/explanations/types-of-types';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/explanations/transformers';</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Transformers" href="transformers.html" />
-    <link rel="prev" title="Explanations" href="intro.html" />
+    <link rel="next" title="References" href="../references/intro.html" />
+    <link rel="prev" title="Semantic types, data types, and file formats" href="types-of-types.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,8 +181,8 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Explanations</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Semantic types, data types, and file formats</a></li>
-<li class="toctree-l2"><a class="reference internal" href="transformers.html">Transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Transformers</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -264,7 +264,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/plugins/explanations/types-of-types.md" target="_blank"
+      <li><a href="../../_sources/plugins/explanations/transformers.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -348,7 +348,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Semantic types, data types, and file formats</h1>
+    <h1>Transformers</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -358,9 +358,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-types-or-formats-and-data-types-or-objects">File types (or formats) and data types (or objects)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-types">Semantic types</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-together">Putting it together</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-are-transformers-used-by-a-plugin">How are transformers used by a plugin?</a></li>
 </ul>
             </nav>
         </div>
@@ -372,81 +370,36 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="semantic-types-data-types-and-file-formats">
-<span id="types-of-types"></span><h1>Semantic types, data types, and file formats<a class="headerlink" href="#semantic-types-data-types-and-file-formats" title="Permalink to this heading">#</a></h1>
-<p>The term <em>type</em> is overloaded with a few different concepts.
-The goal of this Explanation article is to disambiguate how it’s used in QIIME 2.
-To achieve this, we’ll discuss two ways that it’s commonly used, and then introduce a third way that it’s used less frequently but which is important to QIIME 2.
-The three kinds of types that are used in QIIME 2 are <strong>file types</strong>, <strong>data types</strong>, and <strong>semantic types</strong>.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<div class="admonition-video admonition">
-<p class="admonition-title">Video</p>
-<p><a class="reference external" href="https://www.youtube.com/watch?v=PUsvtJgpNtE">This video</a> on the QIIME 2 YouTube channel discusses semantic types.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="transformers">
+<span id="transformer-explanation"></span><h1>Transformers<a class="headerlink" href="#transformers" title="Permalink to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">Transformers</span></code> are functions for converting <code class="docutils literal notranslate"><span class="pre">Artifact</span> <span class="pre">Classes</span></code> into data types to be consumed by Python functions that are registered as <code class="docutils literal notranslate"><span class="pre">Actions</span></code>.
+These transformers are typically defined along with the semantic types for which they are designed, and <a class="reference external" href="https://github.com/qiime2/q2-types"><code class="docutils literal notranslate"><span class="pre">q2-types</span></code></a> provides a number of common types and associated transformers.
+Plugins can also define semantic types and/or transformers.</p>
+<section id="how-are-transformers-used-by-a-plugin">
+<h2>How are transformers used by a plugin?<a class="headerlink" href="#how-are-transformers-used-by-a-plugin" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Transformers</span></code> are not called directly at any time within a plugin.
+Transformations are handled by the QIIME 2 framework, as long as the appropriate <code class="docutils literal notranslate"><span class="pre">transformers</span></code> are registered.
+The framework identifies the <em>input</em> <code class="docutils literal notranslate"><span class="pre">Artifact</span></code> source format for the transformation as the format registered to the <code class="docutils literal notranslate"><span class="pre">Artifact</span></code>’s semantic type, and it identifies the transformation’s destination type based on the functional annotation associated with the input in an <code class="docutils literal notranslate"><span class="pre">Action</span></code>’s registered function.
+When <em>output</em> is generated by a <code class="docutils literal notranslate"><span class="pre">Method</span></code>, the framework identifies the source type for the transformation as the registered function’s output annotation, and the destination format for the output <code class="docutils literal notranslate"><span class="pre">Artifact</span></code> from the output’s semantic type defined in the <code class="docutils literal notranslate"><span class="pre">Action</span></code>’s registration.</p>
+<p>For example, we can see how functional annotations define input and output formats in <code class="docutils literal notranslate"><span class="pre">q2_diversity.beta_phylogenetic</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">beta_phylogenetic</span><span class="p">(</span><span class="n">table</span><span class="p">:</span> <span class="n">biom</span><span class="o">.</span><span class="n">Table</span><span class="p">,</span>
+                      <span class="n">phylogeny</span><span class="p">:</span> <span class="n">skbio</span><span class="o">.</span><span class="n">TreeNode</span><span class="p">,</span>
+                      <span class="n">metric</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DistanceMatrix</span><span class="p">:</span>
+</pre></div>
 </div>
-</aside>
-<section id="file-types-or-formats-and-data-types-or-objects">
-<h2>File types (or formats) and data types (or objects)<a class="headerlink" href="#file-types-or-formats-and-data-types-or-objects" title="Permalink to this heading">#</a></h2>
-<p>File types (or formats) refer to what you probably think of when you hear that phrase: the format of a file used to store some data.
-For example, newick is a file type that is used for storing phylogenetic trees.
-Files are used most commonly for archiving data when it’s not actively in use.
-Data types refer to how data is represented in a computer’s memory (i.e., RAM) while it’s actively in use, such as the data structure or object class that a file is loaded into.</p>
-<p>For example, if you are adding a root to an unrooted phylogenetic tree, you may use a tool like <a class="reference external" href="http://www.iqtree.org/">IQ-Tree</a>.
-You would provide a path to the file containing the unrooted phylogenetic tree to IQ-Tree, and IQ-Tree would load that tree into some object in the computer’s memory to work on it.
-The object that IQ-Tree uses internally to represent the phylogenetic tree is synonymous with <em>data type</em>, as used here.
-The kind of object that is used is a decision made by the developers of IQ-Tree based on available functionality, efficiency for an operation they plan to carry out, their familiarity with the object, or something else.
-If IQ-Tree successfully completes the requested rooting operation, it could then write the resulting tree from its internal data type into a new newick-formatted file on the hard disk, and exit.</p>
-<p>One thing to notice from this example is that there are at least three <em>independent</em> choices being made by the developer regarding <em>types</em>: what file type to use as input, what data type to use internally, and what file type to use as output.
-Users of command line software, like IQ-Tree, shouldn’t need to know or care about what data types are used internally by a program.
-They just need to know what file types are used as input and output.
-Software developers, on the other hand, should care a lot about what data types are used by their program: choosing an appropriate type can have huge impacts on the performance of the software, for example.</p>
-</section>
-<section id="semantic-types">
-<h2>Semantic types<a class="headerlink" href="#semantic-types" title="Permalink to this heading">#</a></h2>
-<p>The third <em>type</em> that is important in QIIME 2 is the semantic type of data.
-This is a representation of the <em>meaning</em> of the data, which is not necessarily represented by either a file type or a data type.
-For example, two semantic types used in QIIME 2 are <code class="docutils literal notranslate"><span class="pre">Phylogeny[Rooted]</span></code> and <code class="docutils literal notranslate"><span class="pre">Phylogeny[Unrooted]</span></code>, which are used to represent rooted and unrooted phylogenetic trees, respectively.
-Both rooted and unrooted trees are commonly described in newick-formatted files, and typically a computer program would need to parse a file to know if the tree it describes is rooted or unrooted.
-For large trees, this can be a slow operation.</p>
-<p>There are some operations, such as rooting a tree, that only make sense to perform on unrooted trees.
-So, if you have a very large tree that you want to root, you may provide a newick file to a program that will perform that rooting.
-If you accidentally provide a rooted tree, it may take the program some time to parse the file (say 20 minutes) after which it may fail if it discovers that the tree is already rooted.
-That sort of delayed notification can be very frustrating as a user, since it’s easily missed until a lot of time has passed.
-For example, I often will start a long-running command on my university cluster computer just before the weekend.
-I’ll typically check on the job for a few minutes, to make sure that it seems to be starting ok.
-I may then leave, with the hope that the job completes over the weekend and I’ll have data to work with on Monday morning.
-It’s very frustrating to come in Monday morning and find out that my job failed just a few minutes after I left on Friday for a reason that I could have quickly addressed had I known in time.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>There’s actually a worse outcome than a delayed error from a computer program when inappropriate input is provided.
-When a program fails and provides an error message to the user, whether or not that error message helps the user solve the problem, the program has failed loudly.
-Something went wrong, and it told the user about it.
-The program could instead fail quietly.
-This might happen if the program doesn’t realize the input the user provided is inappropriate (e.g., an already rooted tree is provided to a program that roots an unrooted phylogenetic tree), and it runs the rooted tree through its algorithm, misinterprets something because it was provided with the wrong input, and generates an incorrect rooted tree as a result.
-Quiet failures can be very difficult or impossible for a user to detect, because it looks like everything has worked as expected.
-Failing quietly is <em>much</em> worse than failing loudly: it could waste many hours of your time, and could even lead to you publishing invalid findings.</p>
+<p>This function requires <code class="docutils literal notranslate"><span class="pre">biom.Table</span></code> and <code class="docutils literal notranslate"><span class="pre">skbio.TreeNode</span></code> objects as input, and produces an <code class="docutils literal notranslate"><span class="pre">skbio.DistanceMatrix</span></code> object as output.</p>
+<p>We can examine the first few lines of the <code class="docutils literal notranslate"><span class="pre">Action</span></code> registration for this function to determine the semantic types of these input and output objects:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plugin</span><span class="o">.</span><span class="n">pipelines</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
+    <span class="n">function</span><span class="o">=</span><span class="n">q2_diversity</span><span class="o">.</span><span class="n">beta_phylogenetic</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;table&#39;</span><span class="p">:</span> <span class="n">FeatureTable</span><span class="p">[</span><span class="n">Frequency</span><span class="p">],</span>
+            <span class="s1">&#39;phylogeny&#39;</span><span class="p">:</span> <span class="n">Phylogeny</span><span class="p">[</span><span class="n">Rooted</span><span class="p">]},</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="n">Str</span> <span class="o">%</span> <span class="n">Choices</span><span class="p">(</span><span class="n">beta</span><span class="o">.</span><span class="n">phylogenetic_metrics</span><span class="p">())},</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;distance_matrix&#39;</span><span class="p">,</span> <span class="n">DistanceMatrix</span><span class="p">)],</span>
+</pre></div>
 </div>
-<p>QIIME 2 semantic types help with this, because they provide information on what the data in a QIIME 2 <code class="docutils literal notranslate"><span class="pre">.qza</span></code> file means without having to parse anything in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.
-All QIIME 2 artifacts have a semantic type associated with them (it’s one of the pieces of information stored in the <code class="docutils literal notranslate"><span class="pre">metadata.yaml</span></code> file), and QIIME 2 methods will describe what semantic types they take as input(s), and what semantic types they generate as output(s).</p>
-</section>
-<section id="putting-it-together">
-<h2>Putting it together<a class="headerlink" href="#putting-it-together" title="Permalink to this heading">#</a></h2>
-<p>There is a many-to-many relationship between file types, data types, and semantic types.
-It’s possible that a given semantic type could be represented on disk by different file types.
-That’s well exemplified by the many different formats that are used to store demultiplexed sequence and sequence quality data.
-For example, this may be in one a few variants of the fastq format, or in the fasta/qual format.
-Additionally, data from multiple samples may be contained in one single file or split into per-sample files.
-Regardless of which of these file formats the data is stored in, QIIME 2 will assign the same semantic type (in this case, <code class="docutils literal notranslate"><span class="pre">SampleData[SequencesWithQuality]</span></code>.
-Similarly, the data type used in memory might differ depending on what operations are to be performed on the data, or based on the preference of the programmer.</p>
-<p>QIIME 2 uses the semantic type <code class="docutils literal notranslate"><span class="pre">FeatureTable[Frequency]</span></code> to represent the idea of a feature table that contains counts of features (e.g., bacterial genera) on a per sample basis.
-Many different actions can be applied to <code class="docutils literal notranslate"><span class="pre">FeatureTable[Frequency]</span></code> artifacts in QIIME 2.
-When a plugin developer defines a new action that takes a <code class="docutils literal notranslate"><span class="pre">FeatureTable[Frequency]</span></code> as input, they can choose whether to load the table into a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> or <code class="docutils literal notranslate"><span class="pre">biom.Table</span></code> object, which are two different data types.
-Our example plugin <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code> defines a action called <code class="docutils literal notranslate"><span class="pre">duplicate_table</span></code> which <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/blob/e8fe1e5b32bfc2a331d48611b3a70b0fa5b19165/q2_dwq2/plugin_setup.py#L38">takes a <code class="docutils literal notranslate"><span class="pre">FeatureTable[Frequency]</span></code> as input</a>, and <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/blob/e8fe1e5b32bfc2a331d48611b3a70b0fa5b19165/q2_dwq2/plugin_setup.py#L40">generates the same semantic type as its output</a>.
-The function registered to this action <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/blob/e8fe1e5b32bfc2a331d48611b3a70b0fa5b19165/q2_dwq2/plugin_setup.py#L32">declares that it will “view” the input <code class="docutils literal notranslate"><span class="pre">table</span></code> as a <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>, and also return the output as a <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code></a>.
-File types are associated with semantic types when <a class="reference external" href="https://github.com/qiime2/q2-types/blob/e25f9355958755343977e037bbe39110cfb56a63/q2_types/feature_table/_type.py#L42">Artifact Classes are defined</a>.</p>
-<p>Each kind of type discussed here represents different information about the data: how it’s stored on disk (file type), how it’s used by a function (its data type), and what it represents (its semantic type).
-The motivation for creating QIIME 2’s semantic type system was to avoid issues that can arise from providing inappropriate data to actions.
-The semantic type system also helps users and developers better understand the intent of QIIME 2 actions by assigning meaning to the input and output, and allows for the discovery of new potentially relevant QIIME 2 actions.</p>
+<p>This pair of code examples illustrate that the <code class="docutils literal notranslate"><span class="pre">biom.Table</span></code> object used in <code class="docutils literal notranslate"><span class="pre">beta_phylogenetic</span></code> begins its life as a <code class="docutils literal notranslate"><span class="pre">FeatureTable[Frequency]</span></code> artifact, and the <code class="docutils literal notranslate"><span class="pre">skbio.TreeNode</span></code> comes from a <code class="docutils literal notranslate"><span class="pre">Phylogeny[Rooted]</span></code> artifact.
+The output <code class="docutils literal notranslate"><span class="pre">skbio.DistanceMatrix</span></code> generated by <code class="docutils literal notranslate"><span class="pre">beta_phylogenetic</span></code> must be coerced to become a <code class="docutils literal notranslate"><span class="pre">DistanceMatrix</span></code> artifact.
+The QIIME 2 framework takes care of all of those conversions for you, provided the appropriate transformers have been defined and registered (<a class="reference internal" href="../how-to-guides/create-register-transformer.html#howto-create-register-transformer"><span class="std std-ref">which you can learn how to do here</span></a>).</p>
 </section>
 </section>
 
@@ -481,20 +434,20 @@ The semantic type system also helps users and developers better understand the i
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="types-of-types.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Explanations</p>
+        <p class="prev-next-title">Semantic types, data types, and file formats</p>
       </div>
     </a>
     <a class="right-next"
-       href="transformers.html"
+       href="../references/intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Transformers</p>
+        <p class="prev-next-title">References</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -513,9 +466,7 @@ The semantic type system also helps users and developers better understand the i
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-types-or-formats-and-data-types-or-objects">File types (or formats) and data types (or objects)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-types">Semantic types</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-together">Putting it together</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-are-transformers-used-by-a-plugin">How are transformers used by a plugin?</a></li>
 </ul>
   </nav></div>
 

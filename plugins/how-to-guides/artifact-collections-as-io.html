@@ -1,0 +1,655 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Use Artifact Collections as Action inputs or outputs &#8212; Developing with QIIME 2</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/how-to-guides/artifact-collections-as-io';</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Explanations" href="../explanations/intro.html" />
+    <link rel="prev" title="Creating and registering a Transformer" href="create-register-transformer.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/q2dev.svg" class="logo__image only-light" alt="Developing with QIIME 2 - Home"/>
+    <script>document.write(`<img src="../../_static/q2dev_darkmode.svg" class="logo__image only-dark" alt="Developing with QIIME 2 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Docs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../docs/user-documentation.html">Contributing to the QIIME 2 user documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/developer-documentation.html">Contributing to the QIIME 2 developer documentation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">How To Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="set-up-development-environment.html">Set up your development environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="register-a-plugin.html">Register a QIIME 2 plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create-register-method.html">Create and register a Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create-register-visualizer.html">Create and register a visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create-register-pipeline.html">Create and register a pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create-register-transformer.html">Creating and registering a Transformer</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Use Artifact Collections as Action inputs or outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../references/antipatterns.html">Plugin development anti-patterns</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../interfaces/intro.html">Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Framework Internals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../framework/intro.html">Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../framework/explanations/architecture.html">QIIME 2 architecture overview</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CI Internals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ci/intro.html">Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../back-matter/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../back-matter/bibliography.html">List of works cited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../back-matter/genindex.html">Index</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/plugins/how-to-guides/artifact-collections-as-io.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Use Artifact Collections as Action inputs or outputs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-an-action-that-takes-an-input-collection">Registering an Action that Takes an Input Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-an-action-that-returns-an-output-collection">Registering an Action that Returns an Output Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-collections">Using Collections</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-collections-with-the-command-line-interface-cli">Using Collections with the command line interface (CLI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-collections-with-the-python-api">Using Collections with the Python API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-resultcollection-object">The <code class="docutils literal notranslate"><span class="pre">ResultCollection</span></code> object</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#init"><strong>init</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#load">load</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#save">save</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="use-artifact-collections-as-action-inputs-or-outputs">
+<span id="howto-artifact-collections-io"></span><h1>Use Artifact Collections as Action inputs or outputs<a class="headerlink" href="#use-artifact-collections-as-action-inputs-or-outputs" title="Permalink to this heading">#</a></h1>
+<p>Commands in QIIME 2 can take collections of Artifacts as singular inputs or return collections of Artifacts as singular outputs.
+They may also take collections of primitives as single parameters.</p>
+<section id="registering-an-action-that-takes-an-input-collection">
+<h2>Registering an Action that Takes an Input Collection<a class="headerlink" href="#registering-an-action-that-takes-an-input-collection" title="Permalink to this heading">#</a></h2>
+<p>Input or parameter collections can be in the form of lists or dictionaries.
+For inputs the type annotation for function registration is the QIIME 2 semantic type of the Artifacts expected.
+For parameters it is just the type of the parameter.</p>
+<p>An example of registering collection inputs and parameters is shown below.
+For a list input, the syntax is <code class="docutils literal notranslate"><span class="pre">&quot;List[SemanticType]&quot;</span></code> and for a dictionary it is <code class="docutils literal notranslate"><span class="pre">&quot;Collection[SemanticType]&quot;</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dummy_plugin</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
+    <span class="n">function</span><span class="o">=</span><span class="n">example</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;int_list&#39;</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SingleInt</span><span class="p">],</span>
+        <span class="s1">&#39;int_dict&#39;</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="n">SingleInt</span><span class="p">],</span>
+    <span class="p">},</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;bool_list&#39;</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Bool</span><span class="p">],</span>
+        <span class="s1">&#39;bool_dict&#39;</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="n">Bool</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;return&#39;</span><span class="p">,</span> <span class="n">Collection</span><span class="p">[</span><span class="n">SingleInt</span><span class="p">]),</span>
+    <span class="p">],</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Example&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Example collection method&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>In the actual function definition, the type annotation is the view type of the Artifacts and does NOT contain the collection type annotation.
+The fact that the annotations indicate the view type and not the semantic type is due to the fact that by the time we reach the actual method <code class="docutils literal notranslate"><span class="pre">int_list</span></code> will be a list of integers and not <code class="docutils literal notranslate"><span class="pre">SingleInt</span></code> Artifacts.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">list_of_ints</span><span class="p">(</span><span class="n">int_list</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                 <span class="n">int_dict</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                 <span class="n">bool_list</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                 <span class="n">bool_dict</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">int_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">int_dict</span><span class="o">.</span><span class="n">value</span><span class="p">()))</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The fact that function definitions do not contain the collection type annotations is an implementation detail that may change in the future.
+We will provide advance warning of this backward incompatible change on the QIIME 2 Forum at least one release prior to the change, if this does end up changing.</p>
+</div>
+</section>
+<section id="registering-an-action-that-returns-an-output-collection">
+<h2>Registering an Action that Returns an Output Collection<a class="headerlink" href="#registering-an-action-that-returns-an-output-collection" title="Permalink to this heading">#</a></h2>
+<p>Returning an output collection works much the same as returning anything else in QIIME 2.
+Using the same example method as earlier, you register your return as a Collection of the type of Artifact you are returning.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dummy_plugin</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
+    <span class="n">function</span><span class="o">=</span><span class="n">example</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;int_list&#39;</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SingleInt</span><span class="p">],</span>
+        <span class="s1">&#39;int_dict&#39;</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="n">SingleInt</span><span class="p">],</span>
+    <span class="p">},</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;bool_list&#39;</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Bool</span><span class="p">],</span>
+        <span class="s1">&#39;bool_dict&#39;</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="n">Bool</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;return&#39;</span><span class="p">,</span> <span class="n">Collection</span><span class="p">[</span><span class="n">SingleInt</span><span class="p">]),</span>
+    <span class="p">],</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Example&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Example collection method&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The return type annotation on the action itself is still the view type of the Artifacts within the collection.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">list_of_ints</span><span class="p">(</span><span class="n">int_list</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">int_dict</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">bool_list</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">bool_dict</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">int_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">int_dict</span><span class="o">.</span><span class="n">value</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>In this instance, the value <code class="docutils literal notranslate"><span class="pre">ints</span></code> that is returned is a list, but it could also have been a dict.
+The actual QIIME 2 Result you get is a <code class="docutils literal notranslate"><span class="pre">ResultCollection</span></code> object which is essentially a wrapper around a dictionary.
+If the original return is a list, the <code class="docutils literal notranslate"><span class="pre">ResultCollection</span></code> uses the list indices as keys.</p>
+</section>
+<section id="using-collections">
+<h2>Using Collections<a class="headerlink" href="#using-collections" title="Permalink to this heading">#</a></h2>
+<section id="using-collections-with-the-command-line-interface-cli">
+<h3>Using Collections with the command line interface (CLI)<a class="headerlink" href="#using-collections-with-the-command-line-interface-cli" title="Permalink to this heading">#</a></h3>
+<p>In the CLI, output collections require an output path to a directory that does not exist yet.
+The directory will be created, and the Artifacts in the collection will be written to the directory along with a .order file that lists the order of the Artifacts in the collection.</p>
+<p>These collections can then be used as inputs to new actions by simply passing that directory as the input path.
+You can also create a new directory yourself and place artifacts in it manually to use as an input collection.
+This directory may or may not have a .order file.
+If it does not contain a .order file, the artifacts in the directory will be loaded in whatever order the file system presents them in.</p>
+<p>De-facto collections of parameters and inputs may also be created on the CLI by simply passing the corresponding argument multiple times.
+For example, the following will create a collection of foo.qza and bar.qza for the ints input.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qiime<span class="w"> </span>plugin<span class="w"> </span>action<span class="w"> </span>--i-ints<span class="w"> </span>foo.qza<span class="w"> </span>--i-ints<span class="w"> </span>bar.qza
+</pre></div>
+</div>
+<p>The collection will be loaded in the order the arguments are presented to the command line in so in this case <code class="docutils literal notranslate"><span class="pre">[foo,</span> <span class="pre">bar]</span></code> if ints wants a list or <code class="docutils literal notranslate"><span class="pre">{'0':</span> <span class="pre">foo,</span> <span class="pre">'1':</span> <span class="pre">bar}</span></code> if it wants a dict.</p>
+<p>You may also explicitly key the values as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qiime<span class="w"> </span>plugin<span class="w"> </span>action<span class="w"> </span>--i-ints<span class="w"> </span>foo:foo.qza<span class="w"> </span>--i-ints<span class="w"> </span>bar:bar.qza
+</pre></div>
+</div>
+<p>As you might imagine, this would look like <code class="docutils literal notranslate"><span class="pre">{'foo':</span> <span class="pre">foo,</span> <span class="pre">'bar':</span> <span class="pre">bar}</span></code> internally if ints wanted a dict.
+If ints wanted a list, it would just strip the keys and be <code class="docutils literal notranslate"><span class="pre">[foo,</span> <span class="pre">bar]</span></code> again.</p>
+</section>
+<section id="using-collections-with-the-python-api">
+<h3>Using Collections with the Python API<a class="headerlink" href="#using-collections-with-the-python-api" title="Permalink to this heading">#</a></h3>
+<p>When working through QIIME 2’s Python API, you can pass in a list or a dict and it follows the same rules as the CLI.
+Internally QIIME 2 will turn it into the collection type it needs.
+If it needs a dict but you gave it a list it will use list indices as keys.
+If it needs a list but you gave it a dict, it will strip the keys and make a list of the values.</p>
+</section>
+<section id="the-resultcollection-object">
+<h3>The <code class="docutils literal notranslate"><span class="pre">ResultCollection</span></code> object<a class="headerlink" href="#the-resultcollection-object" title="Permalink to this heading">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following content will be moved to the <em>References</em> section as API documentation.</p>
+</div>
+<p>QIIME 2 outputs collections in the form of <code class="docutils literal notranslate"><span class="pre">ResultCollection</span></code> objects.
+On the CLI, these objects are handled internally, but in the Python API they must be interacted with directly.
+Fortunately, these objects are very simple.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">ResultCollection</span></code> is basically a simple wrapper around a dictionary that can be referenced through its <code class="docutils literal notranslate"><span class="pre">collection</span></code> attribute.</p>
+<section id="init">
+<h4><strong>init</strong><a class="headerlink" href="#init" title="Permalink to this heading">#</a></h4>
+<p>Instantiating a <code class="docutils literal notranslate"><span class="pre">ResultCollection</span></code> object without any arguments will create a <code class="docutils literal notranslate"><span class="pre">ResultCollection</span></code> with an empty dictionary as its collection.
+Instantiating a <code class="docutils literal notranslate"><span class="pre">ResultCollection</span></code> with a dictionary as its argument will create a <code class="docutils literal notranslate"><span class="pre">ResultCollection</span></code> with that dictionary as its collection.
+Instantiating a <code class="docutils literal notranslate"><span class="pre">ResultCollection</span></code> with any other iterable will enumerate the iterable and use the indices as keys to the dictionary that is used as the collection.</p>
+</section>
+<section id="load">
+<h4>load<a class="headerlink" href="#load" title="Permalink to this heading">#</a></h4>
+<p>You can load a directory of Artifacts (an output collection from CLI for example) into a <code class="docutils literal notranslate"><span class="pre">ResultCollection</span></code> by calling <code class="docutils literal notranslate"><span class="pre">ResultCollection.load('path</span> <span class="pre">to</span> <span class="pre">directory')</span></code>.
+If this directory contains a <code class="docutils literal notranslate"><span class="pre">.order</span></code> file, the Artifacts will be loaded in the order specified in the <code class="docutils literal notranslate"><span class="pre">.order</span></code> file.
+Otherwise they will be loaded in the order the OS presents them in (not defined by us).
+The names of the files will be used as the keys to the Artifacts.</p>
+</section>
+<section id="save">
+<h4>save<a class="headerlink" href="#save" title="Permalink to this heading">#</a></h4>
+<p>You can save your <code class="docutils literal notranslate"><span class="pre">ResultCollection</span></code> to disk by calling <code class="docutils literal notranslate"><span class="pre">ResultCollection.save('path</span> <span class="pre">to</span> <span class="pre">destination')</span></code> where the destination is a directory that does not exist yet.
+This will save all Artifacts in the collection to .qzas in the directory using their key as their name.
+It will also create a <code class="docutils literal notranslate"><span class="pre">.order</span></code> file in the directory that lists the keys in the collection in order.</p>
+<p>Other than these methods, you may set and read values on a <code class="docutils literal notranslate"><span class="pre">ResultCollection</span></code> just the same as a dictionary, you may also call keys, values, and items on a <code class="docutils literal notranslate"><span class="pre">ResultCollection</span></code> in the same way as a dictionary.
+The validate method also exists on <code class="docutils literal notranslate"><span class="pre">ResultCollection</span></code> objects and will validate all Artifacts that are part of the collection.</p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./plugins/how-to-guides"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="create-register-transformer.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Creating and registering a Transformer</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../explanations/intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Explanations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-an-action-that-takes-an-input-collection">Registering an Action that Takes an Input Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-an-action-that-returns-an-output-collection">Registering an Action that Returns an Output Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-collections">Using Collections</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-collections-with-the-command-line-interface-cli">Using Collections with the command line interface (CLI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-collections-with-the-python-api">Using Collections with the Python API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-resultcollection-object">The <code class="docutils literal notranslate"><span class="pre">ResultCollection</span></code> object</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#init"><strong>init</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#load">load</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#save">save</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Caporaso Lab
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
