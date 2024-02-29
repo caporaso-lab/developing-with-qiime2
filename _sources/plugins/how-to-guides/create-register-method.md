@@ -81,7 +81,7 @@ The values being provided are:
 - `function`: The function to be registered as a method.
 - `inputs`: A dictionary indicating the parameter name and its `semantic type`, for each input `Artifact`.
 These semantic types differ from the data types that you provided in your `mypy`_ annotation of the input, as `semantic types` describe the data, where the data types indicate the structure of the data.
-(See {ref}`(types-of-types)` for more detail on the difference between data types and semantic types.)
+(See [](types-of-types) for more detail on the difference between data types and semantic types.)
 In the example above we’re indicating that the table parameter must be a `FeatureTable` of `Frequency` (i.e. counts), and that the `phylogeny` parameter must be a `Phylogeny` that is `Rooted`.
  Notice that the keys in inputs map directly to the parameter names in `q2_diversity.beta_phylogenetic`.
  - `parameters`: A dictionary indicating the parameter name and its semantic type, for each input Parameter.

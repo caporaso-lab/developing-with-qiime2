@@ -178,6 +178,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="create-register-pipeline.html">Create and register a pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="create-register-transformer.html">Creating and registering a Transformer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="play-nicely-with-others.html">How to play nicely with other plugins</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -445,7 +446,7 @@ This will likely be done in the file where the <code class="docutils literal not
 <li><p><code class="docutils literal notranslate"><span class="pre">function</span></code>: The function to be registered as a method.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">inputs</span></code>: A dictionary indicating the parameter name and its <code class="docutils literal notranslate"><span class="pre">semantic</span> <span class="pre">type</span></code>, for each input <code class="docutils literal notranslate"><span class="pre">Artifact</span></code>.
 These semantic types differ from the data types that you provided in your <code class="docutils literal notranslate"><span class="pre">mypy</span></code>_ annotation of the input, as <code class="docutils literal notranslate"><span class="pre">semantic</span> <span class="pre">types</span></code> describe the data, where the data types indicate the structure of the data.
-(See <span class="xref std std-ref">(types-of-types)</span> for more detail on the difference between data types and semantic types.)
+(See <a class="reference internal" href="../explanations/types-of-types.html#types-of-types"><span class="std std-ref">Semantic types, data types, and file formats</span></a> for more detail on the difference between data types and semantic types.)
 In the example above we’re indicating that the table parameter must be a <code class="docutils literal notranslate"><span class="pre">FeatureTable</span></code> of <code class="docutils literal notranslate"><span class="pre">Frequency</span></code> (i.e. counts), and that the <code class="docutils literal notranslate"><span class="pre">phylogeny</span></code> parameter must be a <code class="docutils literal notranslate"><span class="pre">Phylogeny</span></code> that is <code class="docutils literal notranslate"><span class="pre">Rooted</span></code>.
 Notice that the keys in inputs map directly to the parameter names in <code class="docutils literal notranslate"><span class="pre">q2_diversity.beta_phylogenetic</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">parameters</span></code>: A dictionary indicating the parameter name and its semantic type, for each input Parameter.
