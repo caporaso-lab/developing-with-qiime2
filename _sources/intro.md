@@ -44,3 +44,7 @@ You do not need to master all of these sections to develop with QIIME 2.
 For example, if you are interested in creating plugins, then the only section you need to concern yourself with is the **Plugins** section.
 Other topics, such as **Framework Internals** and **CI Internals**, are advanced topics that are mostly useful for the QIIME 2 Development Team itself.
 
+## Contributing
+*Developing with QIIME 2* is a book being authored by [Greg Caporaso](https://github.com/gregcaporaso) and [Evan Bolyen](https://github.com/ebolyen). 
+To get information on contributing, see [](contributing-to-dwq2). 
+
