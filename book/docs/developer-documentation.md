@@ -1,3 +1,4 @@
+(contributing-to-dwq2)=
 # Contributing to *Developing with QIIME 2*
 
 *Developing with QIIME 2* is a book being authored by [Greg Caporaso](https://github.com/gregcaporaso) and [Evan Bolyen](https://github.com/ebolyen). 
