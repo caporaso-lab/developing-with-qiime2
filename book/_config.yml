@@ -1,5 +1,5 @@
 title: Developing with QIIME 2
-author: Caporaso Lab
+author: Greg Caporaso and Evan Bolyen
 copyright: "2024"
 exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints"]
 

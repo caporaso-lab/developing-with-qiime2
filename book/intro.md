@@ -45,6 +45,5 @@ For example, if you are interested in creating plugins, then the only section yo
 Other topics, such as **Framework Internals** and **CI Internals**, are advanced topics that are mostly useful for the QIIME 2 Development Team itself.
 
 ## Contributing
-*Developing with QIIME 2* is a book being authored by [Greg Caporaso](https://github.com/gregcaporaso) and [Evan Bolyen](https://github.com/ebolyen). 
-To get information on contributing, see [](contributing-to-dwq2). 
+To get information on contributing to *Developing with QIIME 2*, see [](contributing-to-dwq2). 
 
