@@ -47,6 +47,15 @@ conda env create -n q2dev-tiny --file qiime2-tiny-ubuntu-latest-conda.yml
 rm qiime2-tiny-ubuntu-latest-conda.yml
 ```
 ````
+
+````{tab-item} macOS (Apple Silicon)
+```bash
+wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
+CONDA_SUBDIR=osx-64 conda env create -n q2dev-tiny --file qiime2-tiny-macos-latest-conda.yml
+rm qiime2-tiny-macos-latest-conda.yml
+conda config --env --set subdir osx-64
+```
+````
 `````
 
 ## Activate the ``conda`` environment
@@ -138,6 +147,15 @@ conda env create -n q2dev-amplicon --file qiime2-amplicon-ubuntu-latest-conda.ym
 rm qiime2-amplicon-ubuntu-latest-conda.yml
 ```
 ````
+
+````{tab-item} macOS (Apple Silicon)
+```bash
+wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
+CONDA_SUBDIR=osx-64 conda env create -n q2dev-amplicon --file qiime2-amplicon-macos-latest-conda.yml
+rm qiime2-amplicon-macos-latest-conda.yml
+conda config --env --set subdir osx-64
+```
+````
 `````
 
 ### Shotgun distribution
@@ -156,6 +174,15 @@ rm qiime2-shotgun-macos-latest-conda.yml
 wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-shotgun-ubuntu-latest-conda.yml
 conda env create -n q2dev-shotgun --file qiime2-shotgun-ubuntu-latest-conda.yml
 rm qiime2-shotgun-ubuntu-latest-conda.yml
+```
+````
+
+````{tab-item} macOS (Apple Silicon)
+```bash
+wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-shotgun-macos-latest-conda.yml
+CONDA_SUBDIR=osx-64 conda env create -n q2dev-shotgun --file qiime2-shotgun-macos-latest-conda.yml
+rm qiime2-shotgun-macos-latest-conda.yml
+conda config --env --set subdir osx-64
 ```
 ````
 `````
