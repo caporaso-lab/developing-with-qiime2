@@ -1,0 +1,632 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>How to use Metadata &#8212; Developing with QIIME 2</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/how-to-guides/use-metadata';</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Explanations" href="../explanations/intro.html" />
+    <link rel="prev" title="How to play nicely with other plugins" href="play-nicely-with-others.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/q2dev.svg" class="logo__image only-light" alt="Developing with QIIME 2 - Home"/>
+    <script>document.write(`<img src="../../_static/q2dev_darkmode.svg" class="logo__image only-dark" alt="Developing with QIIME 2 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Docs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../docs/user-documentation.html">Contributing to the QIIME 2 user documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/developer-documentation.html">Contributing to <em>Developing with QIIME 2</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">How To Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="set-up-development-environment.html">Set up your development environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="register-a-plugin.html">Register a QIIME 2 plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create-register-method.html">Create and register a Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create-register-visualizer.html">Create and register a visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create-register-pipeline.html">Create and register a pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create-register-transformer.html">Creating and registering a Transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="play-nicely-with-others.html">How to play nicely with other plugins</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">How to use Metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../references/antipatterns.html">Plugin development anti-patterns</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../interfaces/intro.html">Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Framework Internals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../framework/intro.html">Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../framework/explanations/architecture.html">QIIME 2 architecture overview</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CI Internals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ci/intro.html">Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../back-matter/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../back-matter/bibliography.html">List of works cited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../back-matter/genindex.html">Index</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/plugins/how-to-guides/use-metadata.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>How to use Metadata</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">Metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-columns">Metadata Columns</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numeric-metadata-columns">Numeric Metadata Columns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-metadata-columns">Categorical Metadata Columns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-the-metadata-api-help-me">How can the Metadata API Help Me?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-metadata">Merging Metadata</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dropping-empty-columns">Dropping Empty Columns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizing-tsv-files">Normalizing TSV Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-filtering">Advanced Filtering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sql-filtering">SQL Filtering</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-artifacts-viewable-as-metadata">Making Artifacts Viewable as Metadata</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-visualizer-for-free">A visualizer for free!</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-metadata-as-output-from-visualizations">Generating metadata as output from visualizations</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="how-to-use-metadata">
+<span id="id1"></span><h1>How to use Metadata<a class="headerlink" href="#how-to-use-metadata" title="Permalink to this heading">#</a></h1>
+<p>Metadata (the <code class="docutils literal notranslate"><span class="pre">qiime2.metadata.Metadata</span></code> class, internally) allows users to annotate a QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Result"><span class="xref std std-term">Result</span></a> with study-specific values: age, elevation, body site, pH, etc.
+QIIME 2 offers a consistent API for developers to expose their <a class="reference internal" href="../../back-matter/glossary.html#term-Method"><span class="xref std std-term">Methods</span></a> and <a class="reference internal" href="../../back-matter/glossary.html#term-Visualizer"><span class="xref std std-term">Visualizers</span></a> to user-defined metadata.
+For more details about how users might create and utilize metadata in their studies, check out the <a class="reference external" href="https://docs.qiime2.org/2018.4/tutorials/metadata/">Metadata In QIIME 2</a> tutorial.</p>
+<section id="metadata">
+<h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this heading">#</a></h2>
+<p>Actions may request an entire <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> object to work on.
+At its core, <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> is just a pandas <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pd.Dataframe</a>, but the <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> object provides many convenience methods and properties, and unifies the code necessary for handling these data (or metadata).
+Examples of <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">Actions</span></a>  that consume and operate on <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> include:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.qiime2.org/2018.4/plugins/available/longitudinal/volatility/">q2-longitudinal’s <code class="docutils literal notranslate"><span class="pre">volatility</span></code></a></p></li>
+<li><p><a class="reference external" href="https://docs.qiime2.org/2018.4/plugins/available/metadata/tabulate/">q2-metadata’s <code class="docutils literal notranslate"><span class="pre">tabulate</span></code></a></p></li>
+<li><p><a class="reference external" href="https://docs.qiime2.org/2018.4/plugins/available/feature-table/filter-features/">q2-feature-table’s <code class="docutils literal notranslate"><span class="pre">filter-features</span></code></a></p></li>
+<li><p>And many more</p></li>
+</ul>
+<p>Plugins may work with metadata directly, or they may choose to filter, regroup, partition, pivot, etc. - it all depends on the intended outcome relevant to the <a class="reference internal" href="../../back-matter/glossary.html#term-Method"><span class="xref std std-term">method</span></a> or <a class="reference internal" href="../../back-matter/glossary.html#term-Visualizer"><span class="xref std std-term">visualizer</span></a> in question.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Metadata</span></code> is subject to framework-level validations, normalization, and verification.
+We recommend <a class="reference external" href="https://docs.qiime2.org/2018.4/tutorials/metadata/">familiarizing yourself</a> with this behavior before utilizing <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> in your <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">Action</span></a>.
+We think having this kind of behavior available via a centralized API helps ensure consistency for all users of <code class="docutils literal notranslate"><span class="pre">Metadata</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_viz</span><span class="p">(</span><span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">md</span><span class="p">:</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Metadata</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="metadata-columns">
+<h2>Metadata Columns<a class="headerlink" href="#metadata-columns" title="Permalink to this heading">#</a></h2>
+<p>Plugin <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">Actions</span></a> may also request one or more <code class="docutils literal notranslate"><span class="pre">MetadataColumns</span></code> (the <code class="docutils literal notranslate"><span class="pre">qiime2.metadata.MetadataColumn</span></code>, internally) to operate on, a good example of this is identifying which column of metadata contains barcodes, when using <a class="reference external" href="https://docs.qiime2.org/2018.4/plugins/available/demux/emp-single/">q2-demux’s <code class="docutils literal notranslate"><span class="pre">emp-single</span></code></a> or <a class="reference external" href="https://docs.qiime2.org/2018.4/plugins/available/cutadapt/demux-paired/">q2-cutadapt’s <code class="docutils literal notranslate"><span class="pre">demux-paired</span></code></a>, for example.</p>
+<p>Instances of <code class="docutils literal notranslate"><span class="pre">MetadataColumn</span></code> exist as one of two concrete classes: <code class="docutils literal notranslate"><span class="pre">NumericMetadataColumn</span></code> (<code class="docutils literal notranslate"><span class="pre">qiime2.metadata.NumericMetadataColumn</span></code>) and <code class="docutils literal notranslate"><span class="pre">CategoricalMetadataColumn</span></code> (<code class="docutils literal notranslate"><span class="pre">qiime2.metadata.CategoricalMetadataColumn</span></code>).</p>
+<p>By default, QIIME 2 will attempt to infer the type of each metadata column: if the column consists only of numbers or missing data, the column is inferred to be numeric.
+Otherwise, if the column contains any non-numeric values, the column is inferred to be categorical.
+Missing data (i.e. empty cells) are supported in categorical columns as well as numeric columns.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="n">numeric_md_cols</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">column_type</span><span class="o">=</span><span class="s1">&#39;numeric&#39;</span><span class="p">)</span>
+<span class="n">categorical_md_cols</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">column_type</span><span class="o">=</span><span class="s1">&#39;categorical&#39;</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>If your <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">Action</span></a> always needs one type of column or another, you can simply register that type in your plugin registration:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plugin</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
+    <span class="o">...</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="n">MetadataColumn</span><span class="p">[</span><span class="n">Numeric</span><span class="p">]},</span>
+    <span class="n">parameter_descriptions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="s1">&#39;Numeric metadata column to &#39;</span>
+                            <span class="s1">&#39;compute pairwise Euclidean distances from&#39;</span><span class="p">},</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>This will ensure that all the necessary type-checking is performed by the framework before these data are passed into the <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">Action</span></a> utilizing it.</p>
+<section id="numeric-metadata-columns">
+<h3>Numeric Metadata Columns<a class="headerlink" href="#numeric-metadata-columns" title="Permalink to this heading">#</a></h3>
+<p>Columns that consist only of numeric (or missing) values are eligible for being instantiated as <code class="docutils literal notranslate"><span class="pre">NumericMetadataColumn</span></code> (although these values can be loaded as <code class="docutils literal notranslate"><span class="pre">CategoricalMetadataColumn</span></code>, too).</p>
+</section>
+<section id="categorical-metadata-columns">
+<h3>Categorical Metadata Columns<a class="headerlink" href="#categorical-metadata-columns" title="Permalink to this heading">#</a></h3>
+<p>All types of data columns can be instantiated as <code class="docutils literal notranslate"><span class="pre">CategoricalMetadataColumn</span></code> - values will be cast to strings.</p>
+</section>
+</section>
+<section id="how-can-the-metadata-api-help-me">
+<h2>How can the Metadata API Help Me?<a class="headerlink" href="#how-can-the-metadata-api-help-me" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">qiime2.metadata.Metadata</span></code> API has many interesting features - here are some of the more commonly utlitized elements amongst the plugins within the Amplicon <a class="reference internal" href="../../back-matter/glossary.html#term-Distribution"><span class="xref std std-term">Distribution</span></a>.</p>
+<section id="merging-metadata">
+<h3>Merging Metadata<a class="headerlink" href="#merging-metadata" title="Permalink to this heading">#</a></h3>
+<p><a class="reference internal" href="../../back-matter/glossary.html#term-Interface"><span class="xref std std-term">Interfaces</span></a> can allow users to specify more than one metadata file at a time, the framework will handle merging the files or objects <code class="docutils literal notranslate"><span class="pre">qiime2.metadata.Metadata.merge</span></code> prior to handing the final merged set to your <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">Action</span></a>.</p>
+</section>
+<section id="dropping-empty-columns">
+<h3>Dropping Empty Columns<a class="headerlink" href="#dropping-empty-columns" title="Permalink to this heading">#</a></h3>
+<p>When working with a single metadata metadata column, plugin code can determine if there are missing values (<code class="docutils literal notranslate"><span class="pre">qiime2.metadata.MetadataColumn.has_missing_values</span></code>), and then subsequently drop those IDs (<code class="docutils literal notranslate"><span class="pre">qiime2.metadata.MetadataColumn.drop_missing_values</span></code>) from the column.</p>
+</section>
+<section id="normalizing-tsv-files">
+<h3>Normalizing TSV Files<a class="headerlink" href="#normalizing-tsv-files" title="Permalink to this heading">#</a></h3>
+<p>By saving (<code class="docutils literal notranslate"><span class="pre">qiime2.metadata.Metadata.save</span></code>) a materialized <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> instance, visualizations that want to provide data exports can do so in a consistent manner (e.g. <a class="reference external" href="https://docs.qiime2.org/2018.4/plugins/available/longitudinal/volatility/">q2-longitudinal’s <code class="docutils literal notranslate"><span class="pre">volatility</span></code></a>, and the <a class="reference external" href="https://github.com/qiime2/q2-longitudinal/blob/93558f4d6b5f34c9a01f8d7a63175dfba249b361/q2_longitudinal/_longitudinal.py#L330">relevant code</a>.</p>
+</section>
+<section id="advanced-filtering">
+<h3>Advanced Filtering<a class="headerlink" href="#advanced-filtering" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">filter</span></code> (<code class="docutils literal notranslate"><span class="pre">qiime2.metadata.Metadata.filter_columns</span></code>) method can be used to restrict column types, drop empty columns, or remove columns made entirely of unique values.</p>
+</section>
+<section id="sql-filtering">
+<h3>SQL Filtering<a class="headerlink" href="#sql-filtering" title="Permalink to this heading">#</a></h3>
+<p>Advanced metadata querying is enabled by SQL-based filtering (<code class="docutils literal notranslate"><span class="pre">qiime2.metadata.Metadata.get_ids</span></code>).</p>
+</section>
+</section>
+<section id="making-artifacts-viewable-as-metadata">
+<span id="artifacts-as-metadata"></span><h2>Making Artifacts Viewable as Metadata<a class="headerlink" href="#making-artifacts-viewable-as-metadata" title="Permalink to this heading">#</a></h2>
+<p>By <a class="reference internal" href="create-register-transformer.html#howto-create-register-transformer"><span class="std std-ref">registering a transformer</span></a> from a particular <a class="reference internal" href="../../back-matter/glossary.html#term-Format"><span class="xref std std-term">format</span></a> to <code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code>, the framework will allow the <a class="reference internal" href="../../back-matter/glossary.html#term-Type"><span class="xref std std-term">type</span></a> represented by that format to be <a class="reference internal" href="../../back-matter/glossary.html#term-View"><span class="xref std std-term">viewed</span></a> as <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> — this can open up all kinds of exciting opportunities for plugins!</p>
+<section id="a-visualizer-for-free">
+<span id="metadata-tabulate"></span><h3>A visualizer for free!<a class="headerlink" href="#a-visualizer-for-free" title="Permalink to this heading">#</a></h3>
+<p>If your <a class="reference internal" href="../../back-matter/glossary.html#term-Type"><span class="xref std std-term">type</span></a> is viewable as <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> (as in, the necessary transformers are registered), there is a general-purpose metadata visualization in the q2-metadata plugin called <code class="docutils literal notranslate"><span class="pre">tabulate</span></code>, which renders an interactive (searchable, sortable) table of the metadata in question.
+Cool!</p>
+</section>
+</section>
+<section id="generating-metadata-as-output-from-visualizations">
+<h2>Generating metadata as output from visualizations<a class="headerlink" href="#generating-metadata-as-output-from-visualizations" title="Permalink to this heading">#</a></h2>
+<p>In most cases, if you want to output something that looks like metadata from a QIIME 2 action, you should <a class="reference internal" href="#artifacts-as-metadata"><span class="std std-ref">assign it a semantic type that is viewable as <code class="docutils literal notranslate"><span class="pre">Metadata</span></code></span></a>.
+However in some cases you may want to output actual metadata.
+In this case, you can create an output for your action with the semantic type <code class="docutils literal notranslate"><span class="pre">ImmutableMetadata</span></code>.
+This will generate an artifact containing the metadata that your function provides as output.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ImmutableMetadata</span></code> artifacts can be <a class="reference internal" href="#artifacts-as-metadata"><span class="std std-ref">viewed as <code class="docutils literal notranslate"><span class="pre">Metadata</span></code></span></a>, so they can be used anywhere that a typical metadata <code class="docutils literal notranslate"><span class="pre">.tsv</span></code> file can be provided as input in QIIME 2.
+This includes q2-metadata’s <code class="docutils literal notranslate"><span class="pre">tabulate</span></code> visualizer.
+Additionally, if you want to obtain a <code class="docutils literal notranslate"><span class="pre">.tsv</span></code> file representation of an <code class="docutils literal notranslate"><span class="pre">ImmutableMetadata</span></code> artifact, you can <a class="reference external" href="https://docs.qiime2.org/2024.2/tutorials/exporting/">export it</a>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./plugins/how-to-guides"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="play-nicely-with-others.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">How to play nicely with other plugins</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../explanations/intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Explanations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">Metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-columns">Metadata Columns</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numeric-metadata-columns">Numeric Metadata Columns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-metadata-columns">Categorical Metadata Columns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-the-metadata-api-help-me">How can the Metadata API Help Me?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-metadata">Merging Metadata</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dropping-empty-columns">Dropping Empty Columns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizing-tsv-files">Normalizing TSV Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-filtering">Advanced Filtering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sql-filtering">SQL Filtering</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-artifacts-viewable-as-metadata">Making Artifacts Viewable as Metadata</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-visualizer-for-free">A visualizer for free!</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-metadata-as-output-from-visualizations">Generating metadata as output from visualizations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Greg Caporaso and Evan Bolyen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
