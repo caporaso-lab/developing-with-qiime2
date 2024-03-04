@@ -431,6 +431,16 @@ rm<span class="w"> </span>qiime2-tiny-ubuntu-latest-conda.yml
 </pre></div>
 </div>
 </div>
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-2">
+macOS (Apple Silicon)</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
+<span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-tiny<span class="w"> </span>--file<span class="w"> </span>qiime2-tiny-macos-latest-conda.yml
+rm<span class="w"> </span>qiime2-tiny-macos-latest-conda.yml
+conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w"> </span>--set<span class="w"> </span>subdir<span class="w"> </span>osx-64
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="activate-the-conda-environment">
@@ -500,8 +510,8 @@ make<span class="w"> </span><span class="nb">test</span>
 <section id="amplicon-distribution">
 <h3>Amplicon distribution<a class="headerlink" href="#amplicon-distribution" title="Permalink to this heading">#</a></h3>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-2">
+<input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-3">
 macOS</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
 conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-amplicon<span class="w"> </span>--file<span class="w"> </span>qiime2-amplicon-macos-latest-conda.yml
@@ -509,12 +519,22 @@ rm<span class="w"> </span>qiime2-amplicon-macos-latest-conda.yml
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-3">
+<input id="sd-tab-item-4" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-4">
 Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-ubuntu-latest-conda.yml
 conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-amplicon<span class="w"> </span>--file<span class="w"> </span>qiime2-amplicon-ubuntu-latest-conda.yml
 rm<span class="w"> </span>qiime2-amplicon-ubuntu-latest-conda.yml
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-5">
+macOS (Apple Silicon)</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
+<span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-amplicon<span class="w"> </span>--file<span class="w"> </span>qiime2-amplicon-macos-latest-conda.yml
+rm<span class="w"> </span>qiime2-amplicon-macos-latest-conda.yml
+conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w"> </span>--set<span class="w"> </span>subdir<span class="w"> </span>osx-64
 </pre></div>
 </div>
 </div>
@@ -523,8 +543,8 @@ rm<span class="w"> </span>qiime2-amplicon-ubuntu-latest-conda.yml
 <section id="shotgun-distribution">
 <h3>Shotgun distribution<a class="headerlink" href="#shotgun-distribution" title="Permalink to this heading">#</a></h3>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-4">
+<input checked="checked" id="sd-tab-item-6" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-6">
 macOS</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-shotgun-macos-latest-conda.yml
 conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-shotgun<span class="w"> </span>--file<span class="w"> </span>qiime2-shotgun-macos-latest-conda.yml
@@ -532,12 +552,22 @@ rm<span class="w"> </span>qiime2-shotgun-macos-latest-conda.yml
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-5">
+<input id="sd-tab-item-7" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-7">
 Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-shotgun-ubuntu-latest-conda.yml
 conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-shotgun<span class="w"> </span>--file<span class="w"> </span>qiime2-shotgun-ubuntu-latest-conda.yml
 rm<span class="w"> </span>qiime2-shotgun-ubuntu-latest-conda.yml
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-8" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-8">
+macOS (Apple Silicon)</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-shotgun-macos-latest-conda.yml
+<span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-shotgun<span class="w"> </span>--file<span class="w"> </span>qiime2-shotgun-macos-latest-conda.yml
+rm<span class="w"> </span>qiime2-shotgun-macos-latest-conda.yml
+conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w"> </span>--set<span class="w"> </span>subdir<span class="w"> </span>osx-64
 </pre></div>
 </div>
 </div>
