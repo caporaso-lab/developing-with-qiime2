@@ -34,6 +34,7 @@ parts:
           - file: plugins/how-to-guides/create-register-transformer
           - file: plugins/how-to-guides/artifact-collections-as-io
           - file: plugins/how-to-guides/play-nicely-with-others
+          - file: plugins/how-to-guides/use-metadata
           # - file: plugins/how-to-guides/add-citation
           # - file: plugins/how-to-guides/usage-example
           # - file: plugins/how-to-guides/type-map
