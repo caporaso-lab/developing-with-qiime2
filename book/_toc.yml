@@ -60,6 +60,7 @@ parts:
         title: Introduction
         sections:
           - file: framework/explanations/architecture
+          - file: framework/how-to-guides/parallel-configuration
 
   - caption: "CI Internals"
     chapters:
