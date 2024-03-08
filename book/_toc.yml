@@ -42,6 +42,7 @@ parts:
           # - file: plugins/how-to-guides/format-validation-levels.md
       - file: plugins/explanations/intro
         sections:
+          - file: plugins/explanations/actions
           - file: plugins/explanations/types-of-types
           - file: plugins/explanations/transformers
       - file: plugins/references/intro
@@ -60,8 +61,10 @@ parts:
         title: Introduction
         sections:
           - file: framework/explanations/architecture
+          - file: framework/explanations/data-storage
           - file: framework/how-to-guides/parallel-configuration
           - file: framework/how-to-guides/pipeline-resumption
+          - file: framework/references/archive-versions
 
   - caption: "CI Internals"
     chapters:
