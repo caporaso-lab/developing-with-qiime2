@@ -62,6 +62,10 @@ parts:
         sections:
           - file: framework/explanations/architecture
           - file: framework/explanations/data-storage
+          - file: framework/explanations/archives
+          - file: framework/explanations/types
+          - file: framework/explanations/formats
+          - file: framework/explanations/provenance
           - file: framework/how-to-guides/parallel-configuration
           - file: framework/how-to-guides/pipeline-resumption
           - file: framework/references/archive-versions
