@@ -27,7 +27,7 @@ In this situation, QIIME 2 will still try to reuse any results that are not depe
 
 ## Pipeline resumption through the Python 3 API
 
-When using the Python API, caches and pools are specified using context managers (i.e., using Python's `with` statement).
+When using the Python API, pools are specified using context managers (i.e., using Python's `with` statement).
 If you don't want to enable resumption, don't use the context manager. 
 
 ```python
@@ -36,14 +36,6 @@ from qiime2.core.cache import Cache
 cache = Cache('cache_path')
 pool = cache.create_pool('pool', reuse=True)
 
-# You can specify the cache and the pool contexts using independent 
-# `with` statements (the pool must belong to the cache)
-with cache:
-    with pool:
-        # run your pipeline here
-
-# Alternatively, you can specify only the pool context, which will 
-# inherit the cache context
 with pool:
     # run your pipeline here
 ```
