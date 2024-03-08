@@ -61,6 +61,7 @@ parts:
         sections:
           - file: framework/explanations/architecture
           - file: framework/how-to-guides/parallel-configuration
+          - file: framework/how-to-guides/pipeline-resumption
 
   - caption: "CI Internals"
     chapters:
