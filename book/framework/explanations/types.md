@@ -1,10 +1,10 @@
 (types-explanation)=
-# Semantic and Primitive Types
+# Semantic Types, Primitives, and Visualizations
+
+If you're unfamilar with the various ways that the word *type* is used in the context of QIIME 2, we recommend reading [](types-of-types) before this document. 
+This document provides a deep dive into semantic types, primitives, and visualizations in QIIME 2: in other words, descriptors of the various inputs and/or outputs to QIIME 2 {term}`Actions <Action>`.
 
 ```{eval-rst}
-
-QIIME 2 uses a combination of types and formats to represent: what data *means* and how to *use* it, respectively.
-This document will attempt to motivate why typing may be useful and outline how QIIME 2 implements types and what they can be used for.
 
 An Analogy
 ----------
@@ -304,7 +304,7 @@ Suppose we were a graphical interface. A common UI element is a dropdown list co
 predetermined choices. We can express that with a primitive type!
 
 Choices
-```````
+^^^^^^^
 Let's see an example of this, using the :data:`Choices<qiime2.plugin.Choices>` predicate:
 
 .. testcode:: primitives
@@ -386,7 +386,7 @@ The plugin developer does not need to worry about the representation.
 
 
 Range
-`````
+^^^^^
 Another predicate we can use is :data:`Range<qiime2.plugin.Range>`:
 
 .. testcode:: primitives
@@ -404,7 +404,7 @@ This can be combined with :data:`Int<qiime2.plugin.Int>` as well. As before we
 can nest these kinds of expressions inside of :data:`Set<qiime2.plugin.Int>` and :data:`List<qiime2.plugin.Int>`.
 
 Semantic Properties
-```````````````````
+^^^^^^^^^^^^^^^^^^^
 Leaving behind the primitive types and returning the the semantic types, there is a final
 trick we can use to constrain the semantics of a type. It is to use the :func:`Properties<qiime2.plugin.Properties>` predicate. This predicate can only be attached to semantic types, so we usually call them
 semantic properties of the type.
@@ -463,7 +463,7 @@ Here we have the makings of equality and inequality.
 We see that any instance of a ``Spoon`` can be substituted wherever a ``Spoon`` is required (which is obvious enough), and we also see that a ``Fork`` will not do, when a ``Spoon`` is needed (soup comes to mind).
 
 Unions
-``````
+^^^^^^
 Of course, this subtyping relationship isn't very interesting, let's use the union operator to *construct a supertype*:
 
 .. testcode:: utensils
@@ -500,7 +500,7 @@ In other words, these expressions are the same:
    assert  Writing[Pencil | Pen].equals(Writing[Pen | Pencil])
 
 Properties
-``````````
+^^^^^^^^^^
 Let us return now to the other way of constructing a subtyping relation, the :class:`semantic property<qiime2.plugin.Properties>`. We had the following definitions which we'll assign to a variable, since they are lengthy:
 
 .. testcode:: utensils
@@ -544,7 +544,7 @@ One consequence of this is that an unadorned type like ``Kitchen[Knife]`` is not
 As a matter of practice, it would probably be easier for everyone if "sharpen knife" were to just re-sharpen the already-sharp knife.
 
 Intersections
-`````````````
+^^^^^^^^^^^^^
 There is another kind of type known as the intersection type. Currently QIIME 2 implements this only in a very limited way.
 The idea is that you might have an instance that is simultanously many different types. For example, a *spork* is both a fork and a spoon (and good at neither).
 
