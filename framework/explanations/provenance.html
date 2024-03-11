@@ -1,0 +1,824 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Decentralized retrospective provenance tracking &#8212; Developing with QIIME 2</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'framework/explanations/provenance';</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="References" href="../references/intro.html" />
+    <link rel="prev" title="File Formats and Directory Formats" href="formats.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/q2dev.svg" class="logo__image only-light" alt="Developing with QIIME 2 - Home"/>
+    <script>document.write(`<img src="../../_static/q2dev_darkmode.svg" class="logo__image only-dark" alt="Developing with QIIME 2 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Docs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../docs/user-documentation.html">Contributing to the QIIME 2 user documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/developer-documentation.html">Contributing to <em>Developing with QIIME 2</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../plugins/how-to-guides/intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/register-a-plugin.html">Register a QIIME 2 plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/create-register-method.html">Create and register a Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/create-register-visualizer.html">Create and register a visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/create-register-pipeline.html">Create and register a pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/create-register-transformer.html">Creating and registering a Transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/play-nicely-with-others.html">How to play nicely with other plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/use-metadata.html">How to use Metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../plugins/explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/explanations/actions.html">Types of QIIME 2 Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/explanations/transformers.html">Transformers</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../plugins/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/references/antipatterns.html">Plugin development anti-patterns</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../interfaces/intro.html">Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Framework Internals</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction to QIIME 2 framework development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/intro.html">Tutorials</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-to guides</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../how-to-guides/parallel-configuration.html">Parallel configuration and usage in QIIME 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../how-to-guides/pipeline-resumption.html">Pipeline Resumption in QIIME 2</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Explanations</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="architecture.html">QIIME 2 architecture overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data-storage.html">How Data is Stored</a></li>
+<li class="toctree-l2"><a class="reference internal" href="archives.html">Anatomy of an Archive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html">Semantic Types, Primitives, and Visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">File Formats and Directory Formats</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Decentralized retrospective provenance tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../references/archive-versions.html">Archive versions</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CI Internals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ci/intro.html">Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../back-matter/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../back-matter/bibliography.html">List of works cited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../back-matter/genindex.html">Index</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/framework/explanations/provenance.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Decentralized retrospective provenance tracking</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-capture-provenance-data">Why Capture Provenance Data?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-provenance-data-is-captured">What Provenance Data is Captured?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-action-yaml-file">The <code class="docutils literal notranslate"><span class="pre">action.yaml</span></code> file</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-execution-block">The <code class="docutils literal notranslate"><span class="pre">execution</span></code> block</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-action-block">The <code class="docutils literal notranslate"><span class="pre">action</span></code> block</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-environment-block">The <code class="docutils literal notranslate"><span class="pre">environment</span></code> block</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-provenance">Pipeline Provenance</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-provenance-example">Pipeline provenance example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-provenance-take-aways">Pipeline provenance take-aways</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="decentralized-retrospective-provenance-tracking">
+<span id="provenance-explanation"></span><h1>Decentralized retrospective provenance tracking<a class="headerlink" href="#decentralized-retrospective-provenance-tracking" title="Permalink to this heading">#</a></h1>
+<p>QIIME 2 provides automatic, integrated, and decentralized tracking of analysis metadata, including information about the host system, the computing environment, Actions performed, parameters passed, primary sources cited, and more <span id="id1">[<a class="reference internal" href="../../back-matter/bibliography.html#id4" title="Christopher R Keefe, Matthew R Dillon, Elizabeth Gehret, Chloe Herman, Mary Jewell, Colin V Wood, Evan Bolyen, and J Gregory Caporaso. Facilitating bioinformatics reproducibility with QIIME 2 provenance replay. PLoS Comput. Biol., 19(11):e1011676, November 2023.">2</a>]</span>.
+We describe all of this information about <em>how an analysis was performed to produce a result</em> as the result’s <strong>provenance</strong>.</p>
+<p>The notion of a QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Result"><span class="xref std std-term">Result</span></a> is central here.
+Whenever an <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">Action</span></a> is performed on some data with QIIME 2, the framework captures relevant metadata about the action and environment in a <a class="reference internal" href="../../back-matter/glossary.html#term-Result"><span class="xref std std-term">Result</span></a> object, which is backed by an <a class="reference internal" href="../../back-matter/glossary.html#term-Archive"><span class="xref std std-term">Archive</span></a>.
+If that Result is saved as a <code class="docutils literal notranslate"><span class="pre">.qza</span></code> or <code class="docutils literal notranslate"><span class="pre">.qzv</span></code>, the captured provenance data persists within that zip archive.
+<a class="reference internal" href="archives.html#provenance-goes-in-provenance"><span class="std std-ref">Provenance Goes In /provenance/</span></a> contains a detailed discussion of the file structure which holds provenance metadata.</p>
+<p>This is a <strong>decentralized</strong> approach to provenance capture: every QIIME 2 Result’s provenance is packaged with the Result itself.
+This prevents disassociation of a Result with its provenance, for example when a simpler analysis outcome (e.g., a <code class="docutils literal notranslate"><span class="pre">.png</span></code> file containing a graph) is emailed to a colleague.
+It also prevents accidental mis-association of a Result with the wrong provenance, or with inaccurate or outdated provenance records.
+For example, with <em>centralized approaches to provenance tracking</em>, like saving scripts or computational notebooks, those records may be updated.
+If a result was generated prior to a script update, and the result is inadvertantly not updated, a subsequent user or viewer of that result may have inaccurate information about how it was created.
+In contrast, the provenance captured within a QIIME 2 Archive will always describe the way that Archive was actually created.</p>
+<p>QIIME 2’s approach is also a form of <strong>retrospective</strong> provenance capture.
+With a <em>prospective</em> provenance capture approach, a script, work plan, or computational notebook are used to document what will be done.
+Referring to the example from the previous paragraph, if the script is updated but not run to recreate a result of interest (e.g., because an older version of the result was already shared with a colleague, and they forget to download the new version) the script won’t accurately represent the provenance of that result, and it will be hard or impossible to discover that.
+Retrospective provenance, on the other hand, is captured when the result is generated, and therefore documents what <em>actually occurred</em>, supporting a more reliable recording of an analysis.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><em>When and if</em> <code class="docutils literal notranslate"><span class="pre">Results</span></code> are saved as <code class="docutils literal notranslate"><span class="pre">.qza</span></code> or <code class="docutils literal notranslate"><span class="pre">.qzv</span></code> ZIP archives is dependent on the interface that is being used to run QIIME 2.
+For example, results are saved automatically by <code class="docutils literal notranslate"><span class="pre">q2cli</span></code> (QIIME 2’s command line interface) every time a user runs a command.
+Results must be saved manually by users of the <a class="reference external" href="https://docs.qiime2.org/2021.4/interfaces/artifact-api/">Python 3 API</a>, if they want a <code class="docutils literal notranslate"><span class="pre">.qza</span></code> or <code class="docutils literal notranslate"><span class="pre">.qzv</span></code> ZIP archives (but importantly, provenance will be complete even if some intermediate results are not saved).
+This allows API users to reduce I/O, and keeps things simpler for CLI users.</p>
+</div>
+<section id="why-capture-provenance-data">
+<h2>Why Capture Provenance Data?<a class="headerlink" href="#why-capture-provenance-data" title="Permalink to this heading">#</a></h2>
+<p>QIIME 2’s provenance capture gives users, developers, support teams, manuscript reviewers, and research consummers valuable tools for documentation, study validation and reproduction, analysis transparancy, software maintenance and repair, and technical support.</p>
+<p>Among the benefits of this model are:</p>
+<ul class="simple">
+<li><p>Analyses are fully reproducible.</p></li>
+<li><p>Analyses self-document, reducing the reliance on the (possibly incomplete or incomprehensible) notes of the individual who ran the analysis.
+For example, q2view produces directed provenance graphs, <a class="reference external" href="https://view.qiime2.org/provenance/?src=https%3A%2F%2Fdocs.qiime2.org%2F2021.4%2Fdata%2Ftutorials%2Fmoving-pictures%2Fcore-metrics-results%2Funweighted_unifrac_emperor.qzv">like this one</a>, that allow any consummer of that result to understand exactly how it was created.</p></li>
+<li><p>QIIME 2 Artifacts bring their citations with them.</p></li>
+<li><p>Methods-section text could theoretically be generated from a collection of QIIME 2 Artifacts. (If you’re interested in contributing that functionality, please feel free to get in touch - large language models (LLMs) should make this easier than ever!)</p></li>
+<li><p>Analyses are automatically replay-able <span id="id2">[<a class="reference internal" href="../../back-matter/bibliography.html#id4" title="Christopher R Keefe, Matthew R Dillon, Elizabeth Gehret, Chloe Herman, Mary Jewell, Colin V Wood, Evan Bolyen, and J Gregory Caporaso. Facilitating bioinformatics reproducibility with QIIME 2 provenance replay. PLoS Comput. Biol., 19(11):e1011676, November 2023.">2</a>]</span>, meaning that you can generate new code from existing results.</p></li>
+<li><p>In the unlikely event of a data integrity bug, problematic combinations of hardware, environment, <code class="docutils literal notranslate"><span class="pre">Action</span></code>s, and parameters can be investigated effectively by users, developers, or technical support providers.
+Impacted results can be programatically identified, and could be programatically correctable in some cases.</p></li>
+<li><p>By capturing provenance metadata at the level of Actions and Results, QIIME 2 provenance is both host- and interface-agnostic.
+In other words, a QIIME 2 analysis can be performed across various host systems, using whatever interfaces the user prefers, without compromising the validity of the analysis or the provenance. The <code class="docutils literal notranslate"><span class="pre">Result</span></code> of every step in the analysis contains its own unique history.</p></li>
+</ul>
+</section>
+<section id="what-provenance-data-is-captured">
+<h2>What Provenance Data is Captured?<a class="headerlink" href="#what-provenance-data-is-captured" title="Permalink to this heading">#</a></h2>
+<p>In order to focus on provenance data, we will consider a relatively simple example QIIME 2 Archive structure, with limited non-provenance content.
+In <a class="reference internal" href="#whole-archive"><span class="std std-numref">Fig. 5</span></a> the outer <a class="reference internal" href="../../back-matter/glossary.html#term-UUID"><span class="xref std std-term">UUID</span></a> directory of this <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact"><span class="xref std std-term">Artifact</span></a> holds the data it produced in a <code class="docutils literal notranslate"><span class="pre">data</span></code> directory (see <a class="reference internal" href="archives.html#data-goes-in-data"><span class="std std-ref">Data Goes In /data/</span></a>), and a few “clerical” files (see <a class="reference internal" href="archives.html#archives"><span class="std std-ref">Anatomy of an Archive</span></a>).
+Here we focus on the <code class="docutils literal notranslate"><span class="pre">provenance/</span></code> directory.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Importantly, the <em>data</em> from the parent Results are not included in the current Result’s provenance: only their provenance <em>metadata</em>.
+Including their data would result in massive file sizes and duplication of data.</p>
+</div>
+</aside>
+<figure class="align-default" id="whole-archive">
+<img alt="Simplified representation of the files within one Archive, emphasizing how an Archive holds provenance for an arbitrary number of Actions." src="../../_images/whole-archive.svg" /><figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Simplified representation of the files within one Archive.</span><a class="headerlink" href="#whole-archive" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In <a class="reference internal" href="#whole-archive"><span class="std std-numref">Fig. 5</span></a>, we use a blue “multiple-files” icon to represent the collection of provenance data associated with one single QIIME 2 action.
+When this icon appears directly within <code class="docutils literal notranslate"><span class="pre">provenance/</span></code> the files describe the “current” <a class="reference internal" href="../../back-matter/glossary.html#term-Result"><span class="xref std std-term">Result</span></a>.
+All remaining icons appear within the <code class="docutils literal notranslate"><span class="pre">artifacts/</span></code> subdirectory.
+These file collections describe all “parent” Results used in the creation of the current Result, and are housed in directories named with their respective UUIDs.</p>
+<figure class="align-default" id="provenance-files">
+<img alt="A detail indicating how we abbreviate one action's provenance records with a single &quot;multiple-files&quot; icon." src="../../_images/provenance-files.svg" /><figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">A detail indicating how we abbreviate one action’s provenance records in <a class="reference internal" href="#whole-archive"><span class="std std-numref">Fig. 5</span></a>.</span><a class="headerlink" href="#provenance-files" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>With the exception of the current Result (whose provenance lives in <code class="docutils literal notranslate"><span class="pre">provenance/</span></code>, every Action is captured in a directory titled with the Action’s <a class="reference internal" href="../../back-matter/glossary.html#term-UUID"><span class="xref std std-term">UUID</span></a> <a class="reference internal" href="#provenance-files"><span class="std std-numref">Fig. 6</span></a>.</p>
+<p>That directory contains:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">VERSION</span></code> (see <a class="reference internal" href="archives.html#identifying-an-archive"><span class="std std-ref">Rules for identifying an archive</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metadata.yaml</span></code> (see <a class="reference internal" href="archives.html#metadata-yaml"><span class="std std-ref">The Most Important File: metadata.yaml</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">citations.bib</span></code>: All citations related to the run Action, in <a class="reference external" href="https://www.bibtex.com/g/bibtex-format/">bibtex format</a>.
+(This includes “passthrough” citations like those registered to transformers, regardless of the plugin where they are registered.)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">action/action.yaml</span></code>: A YAML description of the Action and its environment (i.e., the stuff we care most about).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">action/metadata.tsv</span></code> or other data files (optional): Data captured to provide additional Action context.</p></li>
+</ul>
+<section id="the-action-yaml-file">
+<h3>The <code class="docutils literal notranslate"><span class="pre">action.yaml</span></code> file<a class="headerlink" href="#the-action-yaml-file" title="Permalink to this heading">#</a></h3>
+<p>Here we’ll do a deep dive into the contents of a sample Visualization’s <code class="docutils literal notranslate"><span class="pre">action.yaml</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">action.yaml</span></code> files are broken into three top-level sections, in this order:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">execution</span></code>: the Execution ID and runtime of the Action that created this Result</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">action</span></code>: Action type, plugin, action, inputs, parameters, etc.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">environment</span></code>: a description of the system and the Python environment where this action was executed</p></li>
+</ul>
+<p>The sample Visualization we’re referring to can be viewed <a class="reference external" href="https://view.qiime2.org/provenance/?src=https%3A%2F%2Fdocs.qiime2.org%2F2021.4%2Fdata%2Ftutorials%2Fmoving-pictures%2Fcore-metrics-results%2Funweighted_unifrac_emperor.qzv">here</a>.
+That link will open directly to the <em>Provenance</em> tab where you can click on the bottom square in that provenance graph (not the circle within the square!) to cross-reference the information provided here.</p>
+<section id="the-execution-block">
+<h4>The <code class="docutils literal notranslate"><span class="pre">execution</span></code> block<a class="headerlink" href="#the-execution-block" title="Permalink to this heading">#</a></h4>
+<p>High-level information about this action and its run time.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">execution</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">uuid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3611a0c1-e5c5-4308-ac92-ebb5968ebafb</span>
+<span class="w">    </span><span class="nt">runtime</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">start</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2021-04-21T14:42:16.469998-07:00</span>
+<span class="w">        </span><span class="nt">end</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2021-04-21T14:42:21.080381-07:00</span>
+<span class="w">        </span><span class="nt">duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4 seconds, and 610383 microseconds</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Datetimes are formatted as <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime.isoformat">ISO 8601 timestamps</a>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">uuid</span></code> field captured here is a UUID V4 representing this <em>Execution</em>, and <em>not the Result</em> it produced.</p></li>
+</ul>
+<div class="note admonition" id="unique-ids">
+<p class="admonition-title">Unique IDs</p>
+<p>There are many elements of provenance that require unique IDs, to help us keep track of different aspects of an analysis.
+Archive provenance has separate Result and Execution IDs (the UUIDs in <code class="docutils literal notranslate"><span class="pre">metadata.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">action.yaml</span></code> respectively).
+This allows us to manage the common case where one Action produces multiple Results.</p>
+<p>Artifacts produced by QIIME 2 Pipelines have an additional <code class="docutils literal notranslate"><span class="pre">alias-of</span></code> UUID, allowing interfaces to display provenance in terms of Pipelines (rather than displaying all of the pipeline’s “nested” inner Actions).
+This enables a view of provenance that better reflects the user experience of pipelines, displaying them as single blocks, rather than as the full chain of inner Actions which the user generally does not specify directly.</p>
+<p>Terminal pipeline Results are redundant “aliases” of “real” Results nested within the pipeline.
+The <code class="docutils literal notranslate"><span class="pre">alias-of</span></code> UUID in the terminal/”alias” Result points to this “real” inner result.
+Further details are provided in <a class="reference internal" href="#pipeline-provenance"><span class="std std-ref">Pipeline Provenance</span></a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">unweighted_unifrac_emperor.qzv</span></code> described here has three different IDs:</p>
+<ul class="simple">
+<li><p>The Result UUID, in <code class="docutils literal notranslate"><span class="pre">metadata.yaml</span></code>, which is unique to this Result.</p></li>
+<li><p>The Execution UUID, in <code class="docutils literal notranslate"><span class="pre">action.yaml</span></code>’s <code class="docutils literal notranslate"><span class="pre">execution</span></code> block, which is unique to this Action’s current execution, and present in all Archives produced during this Actions’s current execution.
+All Results from a given run of an <code class="docutils literal notranslate"><span class="pre">Action</span></code> (<code class="docutils literal notranslate"><span class="pre">core-metrics-phylogenetic</span></code>, in our current example) share this ID.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">alias-of</span></code> UUID, in <code class="docutils literal notranslate"><span class="pre">action.yaml</span></code>’s <code class="docutils literal notranslate"><span class="pre">action</span></code> block, which is the Result UUID of the “inner” Visualization created during a <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> execution that is aliased by this Result.
+(Remember that a <a class="reference internal" href="../../back-matter/glossary.html#term-Pipeline"><span class="xref std std-term">Pipeline</span></a> is a type of <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">Action</span></a>.)</p></li>
+</ul>
+<p>We chose to use <a class="reference external" href="https://docs.python.org/3/library/uuid.html">v4 UUIDs</a> for our unique IDs,
+but there is nothing special about them that couldn’t be handled by a different unique identifier scheme.
+They’re just IDs.</p>
+</div>
+</section>
+<section id="the-action-block">
+<span id="action-block"></span><h4>The <code class="docutils literal notranslate"><span class="pre">action</span></code> block<a class="headerlink" href="#the-action-block" title="Permalink to this heading">#</a></h4>
+<p>Details about the action, including action and plugin names, inputs and parameters</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">action</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pipeline</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="kt">!ref</span><span class="w"> </span><span class="s">&#39;environment:plugins:diversity&#39;</span>
+<span class="w">    </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">core_metrics_phylogenetic</span>
+<span class="w">    </span><span class="nt">inputs</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">table</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">34b07e56-27a5-4f03-ae57-ff427b50aaa1</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">phylogeny</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">a10d5d44-62c7-4322-afbe-c9811bcaa3e6</span>
+<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">sampling_depth</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1103</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="kt">!metadata</span><span class="w"> </span><span class="s">&#39;metadata.tsv&#39;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">n_jobs_or_threads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">    </span><span class="nt">output-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unweighted_unifrac_emperor</span>
+<span class="w">    </span><span class="nt">alias-of</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2adb9f00-a692-411d-8dd3-a6d07fc80a01</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">type</span></code> field describes the <em>type of the Action</em>: a <a class="reference internal" href="../../back-matter/glossary.html#term-Method"><span class="xref std std-term">Method</span></a>, <a class="reference internal" href="../../back-matter/glossary.html#term-Visualizer"><span class="xref std std-term">Visualizer</span></a>, or <a class="reference internal" href="../../back-matter/glossary.html#term-Pipeline"><span class="xref std std-term">Pipeline</span></a>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">plugin</span></code> field describes the plugin which registered the Action, details about which can be found in <code class="docutils literal notranslate"><span class="pre">action.yaml</span></code>’s <code class="docutils literal notranslate"><span class="pre">environment:plugins</span></code> section.
+<code class="docutils literal notranslate"><span class="pre">!ref</span></code> is a custom YAML tag defined <a class="reference external" href="https://github.com/qiime2/qiime2/blob/6d8932eda130d4a9356f977fece2e252c135d0b9/qiime2/core/archive/provenance.py#L84">here</a>.
+Generally, these custom tags provide a way to express a structure not easily described by basic YAML.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">inputs</span></code> lists the registered names of all <a class="reference internal" href="../../back-matter/glossary.html#term-Input"><span class="xref std std-term">inputs</span></a> to the Action, as well as the UUIDs of the passed inputs.
+Note the distinction between inputs and parameters.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parameters</span></code> lists registered parameter names, and the user-passed (or selected default) values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output-name</span></code> is the name assigned to this Action’s output <em>at registration</em>, which can be useful when determining which of an Action’s multiple outputs a file represents.
+(This does not capture the user-passed filename, because file names are interface specific and may not always be relevent - for example, when using the Python API, files may not exist for inputs at the time of action execution.)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alias-of</span></code> is an optional field, present if the Action is the terminal result of a QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Pipeline"><span class="xref std std-term">Pipeline</span></a>.
+This value is the UUID of the “inner” result which this pipeline result aliases.</p></li>
+</ul>
+</section>
+<section id="the-environment-block">
+<h4>The <code class="docutils literal notranslate"><span class="pre">environment</span></code> block<a class="headerlink" href="#the-environment-block" title="Permalink to this heading">#</a></h4>
+<p>The environment block is a description of the computing environment in which this Action was run.
+It is not uncommon for QIIME 2 analyses to be run through multiple user interfaces, on multiple systems.
+For this reason, per-Action logging of system characteristics is useful.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">platform</span></code>: The operating system and version used to run the Action.
+For virtual machines (VMs), this is the client Operating System.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python</span></code>: python version details, as captured by <code class="docutils literal notranslate"><span class="pre">sys.version</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">framework</span></code>: Details about the QIIME 2 version used to perform this Action.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plugin</span></code>: The QIIME 2 plugin, its version, and registered source web site.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python-packages</span></code>: Package names and version numbers for all packages in the global <code class="docutils literal notranslate"><span class="pre">working_set</span></code> of the active Python distribution, as collected by <a class="reference external" href="https://setuptools.readthedocs.io/en/latest/pkg_resources.html#workingset-objects">pkg_resources</a>.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>QIIME 2 currently captures only Python package information in the environment block, and therefore doesn’t collect complete information about the environment.
+We plan to expand this to include all relevant packages in the environment regardless of language.
+See <a class="reference external" href="http://github.com/qiime2/qiime2/issues/587">GitHub issue #587</a> if you are interested in contributing to this effort.</p>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">platform</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">macosx-10.9-x86_64</span>
+<span class="w">    </span><span class="nt">python</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|-</span>
+<span class="w">        </span><span class="no">3.8.8 | packaged by conda-forge | (default, Feb 20 2021, 16:12:38)</span>
+<span class="w">        </span><span class="no">[Clang 11.0.1 ]</span>
+<span class="w">    </span><span class="nt">framework</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2021.4.0</span>
+<span class="w">        </span><span class="nt">website</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://qiime2.org</span>
+<span class="w">        </span><span class="nt">citations</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="kt">!cite</span><span class="w"> </span><span class="s">&#39;framework|qiime2:2021.4.0|0&#39;</span>
+<span class="w">    </span><span class="nt">plugins</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">diversity</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2021.4.0</span>
+<span class="w">            </span><span class="nt">website</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/qiime2/q2-diversity</span>
+<span class="w">    </span><span class="nt">python-packages</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">zipp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.4.1</span>
+<span class="w">        </span><span class="nt">xopen</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.1.0</span>
+
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+
+<span class="w">        </span><span class="nt">q2-dada2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2021.4.0</span>
+<span class="w">        </span><span class="nt">q2-composition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2021.4.0</span>
+<span class="w">        </span><span class="nt">q2-alignment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2021.4.0</span>
+
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+
+<span class="w">        </span><span class="nt">alabaster</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.7.12</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pipeline-provenance">
+<span id="id3"></span><h3>Pipeline Provenance<a class="headerlink" href="#pipeline-provenance" title="Permalink to this heading">#</a></h3>
+<p>As discussed in <a class="reference internal" href="#unique-ids"><span class="std std-ref">the Unique IDs note above</span></a>, <a class="reference internal" href="../../back-matter/glossary.html#term-Pipeline"><span class="xref std std-term">Pipeline</span></a> provenance is more complex than the provenance of other Actions.
+Most Pipelines wrap one or more <a class="reference internal" href="../../back-matter/glossary.html#term-Method"><span class="xref std std-term">Methods</span></a> or <a class="reference internal" href="../../back-matter/glossary.html#term-Visualizer"><span class="xref std std-term">Visualizers</span></a>.
+Pipeline users are often concerned primarily with ease of use and interpretation, rather than the fine-grained details of the Actions “nested” within the Pipeline.
+With this in mind, provenance viewing interfaces may choose to abstract away nested Actions, displaying only the Pipeline used to run those Actions.</p>
+<p>QIIME 2 View works in this way, and the simple graph shown in our <a class="reference external" href="https://view.qiime2.org/provenance/?src=https%3A%2F%2Fdocs.qiime2.org%2F2021.4%2Fdata%2Ftutorials%2Fmoving-pictures%2Fcore-metrics-results%2Funweighted_unifrac_emperor.qzv">provenance example</a> is the result of hiding ten nested Actions from view behind the two pipelines that use them.
+The user sees only five of the fifteen captured Results, each of which they ran themselves.
+Because the bottom two are pipelines, this view simply but completely represents the provenance of the Archive being viewed.</p>
+<p>This is possible because QIIME 2 captures redundant “terminal” pipeline outputs that alias the “real” pipeline outputs nested in provenance.
+These terminal outputs have the same <a class="reference internal" href="../../back-matter/glossary.html#term-Semantic-Type"><span class="xref std std-term">Semantic Type</span></a> as the Results they alias, but capture provenance details at the scope of the Pipeline, rather than at the scope of the Method or Visualizer they alias.</p>
+<section id="pipeline-provenance-example">
+<h4>Pipeline provenance example<a class="headerlink" href="#pipeline-provenance-example" title="Permalink to this heading">#</a></h4>
+<p>This Artifact’s root-level <code class="docutils literal notranslate"><span class="pre">metadata.yaml</span></code>, which can be accessed by clicking the circle within the bottom box of our <a class="reference external" href="https://view.qiime2.org/provenance/?src=https%3A%2F%2Fdocs.qiime2.org%2F2021.4%2Fdata%2Ftutorials%2Fmoving-pictures%2Fcore-metrics-results%2Funweighted_unifrac_emperor.qzv">example provenance DAG</a>, tells us it’s a Visualization:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">uuid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">87058ae3-e168-4e2f-a416-81b130d538c3</span>
+<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Visualization</span>
+<span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+<p>Next, clicking on the box (rather than the circle within the box) lets us view the <code class="docutils literal notranslate"><span class="pre">action.yaml</span></code> contents.
+The root-level <code class="docutils literal notranslate"><span class="pre">action.yaml</span></code> file tells us that this is the (terminal) result of a Pipeline (and not of a Visualizer).
+The <code class="docutils literal notranslate"><span class="pre">inputs</span></code> are the UUIDs passed by the user to the Pipeline.
+The <code class="docutils literal notranslate"><span class="pre">parameters</span></code>, too, are linked to the Pipeline, and not to the nested Visualizer.
+Finally, we see the <code class="docutils literal notranslate"><span class="pre">alias-of</span></code> key, whose value is the UUID of the nested “real” Visualization aliased by this terminal output.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">action</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pipeline</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="kt">!ref</span><span class="w"> </span><span class="s">&#39;environment:plugins:diversity&#39;</span>
+<span class="w">    </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">core_metrics_phylogenetic</span>
+<span class="w">    </span><span class="nt">inputs</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">table</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">34b07e56-27a5-4f03-ae57-ff427b50aaa1</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">phylogeny</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">a10d5d44-62c7-4322-afbe-c9811bcaa3e6</span>
+<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">sampling_depth</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1103</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="kt">!metadata</span><span class="w"> </span><span class="s">&#39;metadata.tsv&#39;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">n_jobs_or_threads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">    </span><span class="nt">output-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unweighted_unifrac_emperor</span>
+<span class="w">    </span><span class="nt">alias-of</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2adb9f00-a692-411d-8dd3-a6d07fc80a01</span>
+</pre></div>
+</div>
+<p>If we were to extract this <code class="docutils literal notranslate"><span class="pre">.qzv</span></code> (e.g., by opening it with an unzip utility), we could use this <code class="docutils literal notranslate"><span class="pre">alias-of</span></code> UUID to drill down into <code class="docutils literal notranslate"><span class="pre">provenance/artifacts/2adb9.../</span></code> to find the <code class="docutils literal notranslate"><span class="pre">action.yaml</span></code> of the aliased Visualization.
+There, the action type would be a <code class="docutils literal notranslate"><span class="pre">visualizer</span></code>, and the <code class="docutils literal notranslate"><span class="pre">inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">parameters</span></code> would be those passed to the <em>Visualizer</em> within the Pipeline.
+Notably, neither the Visualizer node shown below, nor its PCoA input, are visible in the provenance graph linked above, because they are neither inputs to nor terminal outputs from the containing <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">action</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">visualizer</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="kt">!ref</span><span class="w"> </span><span class="s">&#39;environment:plugins:emperor&#39;</span>
+<span class="w">    </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">plot</span>
+<span class="w">    </span><span class="nt">inputs</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">pcoa</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">93224813-ed5d-42b5-a983-cd4015db31da</span>
+<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="kt">!metadata</span><span class="w"> </span><span class="s">&#39;metadata.tsv&#39;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">custom_axes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">ignore_missing_samples</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">ignore_pcoa_features</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">output-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">visualization</span>
+</pre></div>
+</div>
+</section>
+<section id="pipeline-provenance-take-aways">
+<h4>Pipeline provenance take-aways<a class="headerlink" href="#pipeline-provenance-take-aways" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>All Results used in producing an Archive are captured in that Archive’s provenance, including “inner” pipeline results.
+Each Result has its own normal provenance directory.</p></li>
+<li><p>“Terminal” pipeline outputs are aliases, mirroring inner Actions.</p></li>
+<li><p>Different terminal outputs from the same pipeline will (generally) have different alias-of’s, <em>because they are aliasing different inner nodes</em>.
+For example, a Visualization aliases a Visualization, while the terminal PCoA results point to the inner PCoA results, and these inner Results have different UUIDs.</p></li>
+<li><p>Pipelines may wrap pipelines, so an arbitrary number of levels of nesting and aliasing are possible.
+Tools that aim to work with nested provenance will likely have to traverse from the terminal node.
+The traversal algorithm is discussed <a class="reference external" href="https://github.com/qiime2/dev-docs/pull/44#discussion_r673329452">here</a>. (Want to port that content over? Get in touch!).</p></li>
+<li><p>Inner “nested” pipeline Results are normal Results, and may be used as inputs to other nested Actions, or may be aliased by terminal pipeline results.
+The only “special” thing happening with pipelines is the aliasing of terminal pipeline Results.</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./framework/explanations"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="formats.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">File Formats and Directory Formats</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../references/intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">References</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-capture-provenance-data">Why Capture Provenance Data?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-provenance-data-is-captured">What Provenance Data is Captured?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-action-yaml-file">The <code class="docutils literal notranslate"><span class="pre">action.yaml</span></code> file</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-execution-block">The <code class="docutils literal notranslate"><span class="pre">execution</span></code> block</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-action-block">The <code class="docutils literal notranslate"><span class="pre">action</span></code> block</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-environment-block">The <code class="docutils literal notranslate"><span class="pre">environment</span></code> block</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-provenance">Pipeline Provenance</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-provenance-example">Pipeline provenance example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-provenance-take-aways">Pipeline provenance take-aways</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Greg Caporaso and Evan Bolyen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

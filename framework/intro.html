@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Introduction to the Framework &#8212; Developing with QIIME 2</title>
+    <title>Introduction to QIIME 2 framework development &#8212; Developing with QIIME 2</title>
   
   
   
@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="QIIME 2 architecture overview" href="explanations/architecture.html" />
+    <link rel="next" title="Tutorials" href="tutorials/intro.html" />
     <link rel="prev" title="Introduction to Writing Interfaces" href="../interfaces/intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -183,6 +183,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../plugins/explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/explanations/actions.html">Types of QIIME 2 Actions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../plugins/explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../plugins/explanations/transformers.html">Transformers</a></li>
 </ul>
@@ -198,9 +199,24 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Framework Internals</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Introduction</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="explanations/architecture.html">QIIME 2 architecture overview</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to QIIME 2 framework development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/intro.html">Tutorials</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="how-to-guides/intro.html">How-to guides</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="how-to-guides/parallel-configuration.html">Parallel configuration and usage in QIIME 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to-guides/pipeline-resumption.html">Pipeline Resumption in QIIME 2</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="explanations/architecture.html">QIIME 2 architecture overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="explanations/data-storage.html">How Data is Stored</a></li>
+<li class="toctree-l2"><a class="reference internal" href="explanations/archives.html">Anatomy of an Archive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="explanations/types.html">Semantic Types, Primitives, and Visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="explanations/formats.html">File Formats and Directory Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="explanations/provenance.html">Decentralized retrospective provenance tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="references/archive-versions.html">Archive versions</a></li>
 </ul>
 </li>
 </ul>
@@ -349,7 +365,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Introduction to the Framework</h1>
+    <h1>Introduction to QIIME 2 framework development</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -363,10 +379,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-the-framework">
-<h1>Introduction to the Framework<a class="headerlink" href="#introduction-to-the-framework" title="Permalink to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-qiime-2-framework-development">
+<h1>Introduction to QIIME 2 framework development<a class="headerlink" href="#introduction-to-qiime-2-framework-development" title="Permalink to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -409,11 +423,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="explanations/architecture.html"
+       href="tutorials/intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">QIIME 2 architecture overview</p>
+        <p class="prev-next-title">Tutorials</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

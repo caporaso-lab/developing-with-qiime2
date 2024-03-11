@@ -80,6 +80,7 @@ This is essential for ensuring that workflows using your `Action(s)` will be ful
 These are two of the key benefits of making your methods accessible through QIIME 2 plugins, and are expectations of QIIME 2 users.
 The cost is going through the upfront work of associating inputs with semantic types and formats.
 
+(antipattern-skipping-validation)=
 ## Skipping format validation
 
 To save time (either during development, or at run time) plugin developers will sometimes skip implementation of format validation when they create new formats. For example:

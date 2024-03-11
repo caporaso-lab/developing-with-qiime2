@@ -18,7 +18,7 @@ This configuration file is shown below.
 We write this file the first time you attempt to use it, and the `max(psutil.cpu_count() - 1, 1)` is evaluated and written to the file at that time.
 An actual number is required there for all user made config files.
 
-```toml
+```
 [parsl]
 strategy = "None"
 
@@ -78,7 +78,7 @@ The default executor in the default config is the ThreadPoolExecutor meaning tha
 
 Let's break down that config file further by constructing it from the ground up using 7 as our max threads/workers.
 
-```toml
+```
 [parsl]
 strategy = "None"
 ```
@@ -99,7 +99,7 @@ If you were to load this into Python using tomlkit you would get the following d
 
 Next, let's add an executor:
 
-```python
+```
 [[parsl.executors]]
 class = "ThreadPoolExecutor"
 label = "default"
@@ -127,7 +127,7 @@ Notice that we also have `parsl.executors.provider` for this one.
 Some classes of parsl executor require additional classes to fully configure them.
 These classes must be specified beneath the executor they belong to.
 
-```python
+```
 [[parsl.executors]]
 class = "HighThroughputExecutor"
 label = "htex"
@@ -158,7 +158,7 @@ Now our dictionary looks like the following:
 Finally, we have the executor_mapping, where you can define which actions, if any, you would like to run on which executors.
 If an action is unmapped, it will run on the default executor.
 
-```python
+```
 [parsl.executor_mapping]
 some_action = "htex"
 ```
