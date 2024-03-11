@@ -58,7 +58,12 @@ parts:
   - caption: "Framework Internals"
     chapters:
       - file: framework/intro
-        title: Introduction
+      - file: framework/tutorials/intro
+      - file: framework/how-to-guides/intro
+        sections:
+          - file: framework/how-to-guides/parallel-configuration
+          - file: framework/how-to-guides/pipeline-resumption
+      - file: framework/explanations/intro
         sections:
           - file: framework/explanations/architecture
           - file: framework/explanations/data-storage
@@ -66,8 +71,8 @@ parts:
           - file: framework/explanations/types
           - file: framework/explanations/formats
           - file: framework/explanations/provenance
-          - file: framework/how-to-guides/parallel-configuration
-          - file: framework/how-to-guides/pipeline-resumption
+      - file: framework/references/intro
+        sections:
           - file: framework/references/archive-versions
 
   - caption: "CI Internals"
