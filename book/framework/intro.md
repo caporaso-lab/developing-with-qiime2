@@ -1,1 +1,4 @@
-# Introduction to the Framework
+# Introduction to QIIME 2 framework development
+
+```{tableofcontents}
+```
