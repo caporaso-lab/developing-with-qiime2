@@ -1,5 +1,0 @@
-# Creating a Plugin
-
-
-```{tableofcontents}
-```
