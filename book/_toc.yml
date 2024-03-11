@@ -72,6 +72,8 @@ parts:
           - file: framework/explanations/types
           - file: framework/explanations/formats
           - file: framework/explanations/provenance
+          - file: framework/explanations/garbage-collection
+          - file: framework/explanations/metaprogramming
       - file: framework/references/intro
         sections:
           - file: framework/references/archive-versions
