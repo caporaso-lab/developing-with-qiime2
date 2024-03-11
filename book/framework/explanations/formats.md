@@ -11,6 +11,7 @@ QIIME 2 doesn't have much of an opinion on how data should be represented or sto
 The simplest `Formats` are the `TextFileFormat` (`qiime2.plugin.TextFileFormat`) and the `BinaryFileFormat` (`qiime2.plugin.BinaryFileFormat`).
 These formats represent a single file with a fixed on-disk representation.
 
+(formats-validation-explanation)=
 ### Validation
 
 Both types of `FileFormat` support validation.
