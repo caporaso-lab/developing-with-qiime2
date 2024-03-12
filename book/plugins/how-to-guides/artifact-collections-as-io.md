@@ -15,7 +15,7 @@ For a list input, the syntax is `"List[SemanticType]"` and for a dictionary it i
 
 ```python
 dummy_plugin.methods.register_function(
-    function=example,
+    function=example_function,
     inputs={
         'int_list': List[SingleInt],
         'int_dict': Collection[SingleInt],
@@ -36,10 +36,12 @@ In the actual function definition, the type annotation is the view type of the A
 The fact that the annotations indicate the view type and not the semantic type is due to the fact that by the time we reach the actual method `int_list` will be a list of integers and not `SingleInt` Artifacts.
 
 ```python
-def list_of_ints(int_list: int,
-                 int_dict: int,
-                 bool_list: bool,
-                 bool_dict: bool) -> int:
+# Note type annotations are currently just int or bool,
+# not dict[int] or list[bool] as you might expect.
+def example_function(int_list: int,
+                     int_dict: int,
+                     bool_list: bool,
+                     bool_dict: bool) -> int:
     return int_list.extend(list(int_dict.value()))
 ```
 
@@ -55,7 +57,7 @@ Using the same example method as earlier, you register your return as a Collecti
 
 ```python
 dummy_plugin.methods.register_function(
-    function=example,
+    function=example_function,
     inputs={
         'int_list': List[SingleInt],
         'int_dict': Collection[SingleInt],
@@ -75,7 +77,12 @@ dummy_plugin.methods.register_function(
 The return type annotation on the action itself is still the view type of the Artifacts within the collection.
 
 ```python
-def list_of_ints(int_list: int, int_dict: int, bool_list: bool, bool_dict: bool) -> int:
+# Note type annotations are currently just int or bool,
+# not dict[int] or list[bool] as you might expect.
+def example_function(int_list: int,
+                     int_dict: int,
+                     bool_list: bool,
+                     bool_dict: bool) -> int:
     return int_list.extend(list(int_dict.value()))
 ```
 
