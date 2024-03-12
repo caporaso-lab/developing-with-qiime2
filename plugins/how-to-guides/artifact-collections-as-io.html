@@ -180,6 +180,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Use Artifact Collections as Action inputs or outputs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="play-nicely-with-others.html">How to play nicely with other plugins</a></li>
 <li class="toctree-l2"><a class="reference internal" href="use-metadata.html">How to use Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-plugins.html">How to test QIIME 2 plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage-examples.html">Writing Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="format-validation-levels.html">Defining different Format validation levels</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -213,6 +216,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../../framework/explanations/types.html">Semantic Types, Primitives, and Visualizations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../framework/explanations/formats.html">File Formats and Directory Formats</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../framework/explanations/provenance.html">Decentralized retrospective provenance tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../framework/explanations/garbage-collection.html">Garbage Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../framework/explanations/metaprogramming.html">Metaprogramming</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../framework/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -413,7 +418,7 @@ For parameters it is just the type of the parameter.</p>
 <p>An example of registering collection inputs and parameters is shown below.
 For a list input, the syntax is <code class="docutils literal notranslate"><span class="pre">&quot;List[SemanticType]&quot;</span></code> and for a dictionary it is <code class="docutils literal notranslate"><span class="pre">&quot;Collection[SemanticType]&quot;</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dummy_plugin</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
-    <span class="n">function</span><span class="o">=</span><span class="n">example</span><span class="p">,</span>
+    <span class="n">function</span><span class="o">=</span><span class="n">example_function</span><span class="p">,</span>
     <span class="n">inputs</span><span class="o">=</span><span class="p">{</span>
         <span class="s1">&#39;int_list&#39;</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SingleInt</span><span class="p">],</span>
         <span class="s1">&#39;int_dict&#39;</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="n">SingleInt</span><span class="p">],</span>
@@ -432,10 +437,12 @@ For a list input, the syntax is <code class="docutils literal notranslate"><span
 </div>
 <p>In the actual function definition, the type annotation is the view type of the Artifacts and does NOT contain the collection type annotation.
 The fact that the annotations indicate the view type and not the semantic type is due to the fact that by the time we reach the actual method <code class="docutils literal notranslate"><span class="pre">int_list</span></code> will be a list of integers and not <code class="docutils literal notranslate"><span class="pre">SingleInt</span></code> Artifacts.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">list_of_ints</span><span class="p">(</span><span class="n">int_list</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                 <span class="n">int_dict</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                 <span class="n">bool_list</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                 <span class="n">bool_dict</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note type annotations are currently just int or bool,</span>
+<span class="c1"># not dict[int] or list[bool] as you might expect.</span>
+<span class="k">def</span> <span class="nf">example_function</span><span class="p">(</span><span class="n">int_list</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                     <span class="n">int_dict</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                     <span class="n">bool_list</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                     <span class="n">bool_dict</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">int_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">int_dict</span><span class="o">.</span><span class="n">value</span><span class="p">()))</span>
 </pre></div>
 </div>
@@ -450,7 +457,7 @@ We will provide advance warning of this backward incompatible change on the QIIM
 <p>Returning an output collection works much the same as returning anything else in QIIME 2.
 Using the same example method as earlier, you register your return as a Collection of the type of Artifact you are returning.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dummy_plugin</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
-    <span class="n">function</span><span class="o">=</span><span class="n">example</span><span class="p">,</span>
+    <span class="n">function</span><span class="o">=</span><span class="n">example_function</span><span class="p">,</span>
     <span class="n">inputs</span><span class="o">=</span><span class="p">{</span>
         <span class="s1">&#39;int_list&#39;</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SingleInt</span><span class="p">],</span>
         <span class="s1">&#39;int_dict&#39;</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="n">SingleInt</span><span class="p">],</span>
@@ -468,7 +475,12 @@ Using the same example method as earlier, you register your return as a Collecti
 </pre></div>
 </div>
 <p>The return type annotation on the action itself is still the view type of the Artifacts within the collection.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">list_of_ints</span><span class="p">(</span><span class="n">int_list</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">int_dict</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">bool_list</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">bool_dict</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note type annotations are currently just int or bool,</span>
+<span class="c1"># not dict[int] or list[bool] as you might expect.</span>
+<span class="k">def</span> <span class="nf">example_function</span><span class="p">(</span><span class="n">int_list</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                     <span class="n">int_dict</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                     <span class="n">bool_list</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                     <span class="n">bool_dict</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">int_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">int_dict</span><span class="o">.</span><span class="n">value</span><span class="p">()))</span>
 </pre></div>
 </div>

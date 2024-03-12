@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Dynamic Output Types and Constraints &#8212; Developing with QIIME 2</title>
+    <title>Metaprogramming &#8212; Developing with QIIME 2</title>
   
   
   
@@ -63,10 +63,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/how-to-guides/type-map';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'framework/explanations/metaprogramming';</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="References" href="../references/intro.html" />
+    <link rel="prev" title="Garbage Collection" href="garbage-collection.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -167,27 +169,30 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="set-up-development-environment.html">Set up your development environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="register-a-plugin.html">Register a QIIME 2 plugin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="create-register-method.html">Create and register a Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="create-register-visualizer.html">Create and register a visualizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="create-register-pipeline.html">Create and register a pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="create-register-transformer.html">Creating and registering a Transformer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="play-nicely-with-others.html">How to play nicely with other plugins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="use-metadata.html">How to use Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../plugins/how-to-guides/intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/register-a-plugin.html">Register a QIIME 2 plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/create-register-method.html">Create and register a Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/create-register-visualizer.html">Create and register a visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/create-register-pipeline.html">Create and register a pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/create-register-transformer.html">Creating and registering a Transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/play-nicely-with-others.html">How to play nicely with other plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/use-metadata.html">How to use Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/test-plugins.html">How to test QIIME 2 plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/usage-examples.html">Writing Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/format-validation-levels.html">Defining different Format validation levels</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../explanations/actions.html">Types of QIIME 2 Actions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../plugins/explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/explanations/actions.html">Types of QIIME 2 Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/explanations/transformers.html">Transformers</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../references/antipatterns.html">Plugin development anti-patterns</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../plugins/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/references/antipatterns.html">Plugin development anti-patterns</a></li>
 </ul>
 </li>
 </ul>
@@ -196,25 +201,27 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../interfaces/intro.html">Introduction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Framework Internals</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../framework/intro.html">Introduction to QIIME 2 framework development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../framework/tutorials/intro.html">Tutorials</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../framework/how-to-guides/intro.html">How-to guides</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../framework/how-to-guides/parallel-configuration.html">Parallel configuration and usage in QIIME 2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../framework/how-to-guides/pipeline-resumption.html">Pipeline Resumption in QIIME 2</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction to QIIME 2 framework development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/intro.html">Tutorials</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-to guides</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../how-to-guides/parallel-configuration.html">Parallel configuration and usage in QIIME 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../how-to-guides/pipeline-resumption.html">Pipeline Resumption in QIIME 2</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../framework/explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../framework/explanations/architecture.html">QIIME 2 architecture overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../framework/explanations/data-storage.html">How Data is Stored</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../framework/explanations/archives.html">Anatomy of an Archive</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../framework/explanations/types.html">Semantic Types, Primitives, and Visualizations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../framework/explanations/formats.html">File Formats and Directory Formats</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../framework/explanations/provenance.html">Decentralized retrospective provenance tracking</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Explanations</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="architecture.html">QIIME 2 architecture overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data-storage.html">How Data is Stored</a></li>
+<li class="toctree-l2"><a class="reference internal" href="archives.html">Anatomy of an Archive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html">Semantic Types, Primitives, and Visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">File Formats and Directory Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="provenance.html">Decentralized retrospective provenance tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="garbage-collection.html">Garbage Collection</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Metaprogramming</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../framework/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../framework/references/archive-versions.html">Archive versions</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../references/archive-versions.html">Archive versions</a></li>
 </ul>
 </li>
 </ul>
@@ -281,7 +288,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/plugins/how-to-guides/type-map.md" target="_blank"
+      <li><a href="../../_sources/framework/explanations/metaprogramming.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -363,7 +370,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Dynamic Output Types and Constraints</h1>
+    <h1>Metaprogramming</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -377,8 +384,17 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="dynamic-output-types-and-constraints">
-<h1>Dynamic Output Types and Constraints<a class="headerlink" href="#dynamic-output-types-and-constraints" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="metaprogramming">
+<span id="metaprogramming-explanation"></span><h1>Metaprogramming<a class="headerlink" href="#metaprogramming" title="Permalink to this heading">#</a></h1>
+<p>The framework uses a significant amount of runtime metaprogramming in which properties and methods are swapped out or constructed at the last minute based on plugin information.
+This list shows some of the aspects of the Python language that are used to achieve this:</p>
+<ul class="simple">
+<li><p>decorators (used everywhere, <code class="docutils literal notranslate"><span class="pre">qiime2.sdk.action:Action</span></code> is really just a decorator-object)</p></li>
+<li><p>descriptor protocol (used in <code class="docutils literal notranslate"><span class="pre">qiime2.core.util:LateBindingAttribute</span></code>)</p></li>
+<li><p>import hooks (used by Artifact API)</p></li>
+<li><p>metaclasses (used by <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.model.directory_format</span></code>)</p></li>
+<li><p>eval (<code class="docutils literal notranslate"><span class="pre">qiime2.skd.util:parse_type</span></code> and <code class="docutils literal notranslate"><span class="pre">decorator</span></code> package for signature rewriting)</p></li>
+</ul>
 </section>
 
     <script type="text/x-thebe-config">
@@ -394,7 +410,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./plugins/how-to-guides"
+            path: "./framework/explanations"
         },
         predefinedOutput: true
     }
@@ -411,6 +427,24 @@ document.write(`
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="garbage-collection.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Garbage Collection</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../references/intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">References</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               

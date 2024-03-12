@@ -44,6 +44,9 @@ You do not need to master all of these sections to develop with QIIME 2.
 For example, if you are interested in creating plugins, then the only section you need to concern yourself with is the **Plugins** section.
 Other topics, such as **Framework Internals** and **CI Internals**, are advanced topics that are mostly useful for the QIIME 2 Development Team itself.
 
+## Getting Help
+For the most up-to-date information on how to get help with QIIME 2, as a user or developer, see [here](https://github.com/qiime2/.github/blob/main/SUPPORT.md).
+
 ## Contributing
 To get information on contributing to *Developing with QIIME 2*, see [](contributing-to-dwq2). 
 
