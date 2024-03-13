@@ -1,0 +1,1076 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>qiime2.sdk.result &#8212; Developing with QIIME 2</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/qiime2/sdk/result';</script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/q2dev.svg" class="logo__image only-light" alt="Developing with QIIME 2 - Home"/>
+    <script>document.write(`<img src="../../../_static/q2dev_darkmode.svg" class="logo__image only-dark" alt="Developing with QIIME 2 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Docs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/user-documentation.html">Contributing to the QIIME 2 user documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developer-documentation.html">Contributing to <em>Developing with QIIME 2</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/intro.html">Introduction to Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../plugins/how-to-guides/intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/register-a-plugin.html">Register a QIIME 2 plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/create-register-method.html">Create and register a Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/create-register-visualizer.html">Create and register a visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/create-register-pipeline.html">Create and register a pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/create-register-transformer.html">Creating and registering a Transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/play-nicely-with-others.html">How to play nicely with other plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/use-metadata.html">How to use Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/test-plugins.html">How to test QIIME 2 plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/usage-examples.html">Writing Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/format-validation-levels.html">Defining different Format validation levels</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../plugins/explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/explanations/actions.html">Types of QIIME 2 Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/explanations/transformers.html">Transformers</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../plugins/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/references/antipatterns.html">Plugin development anti-patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/references/api.html">Plugin developer API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/references/metadata-api.html"><code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> API</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../interfaces/intro.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../interfaces/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../interfaces/references/api.html">Interface developer API</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Framework Internals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../framework/intro.html">Introduction to QIIME 2 framework development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../framework/tutorials/intro.html">Tutorials</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../framework/how-to-guides/intro.html">How-to guides</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/how-to-guides/parallel-configuration.html">Parallel configuration and usage in QIIME 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/how-to-guides/pipeline-resumption.html">Pipeline Resumption in QIIME 2</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../framework/explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/architecture.html">QIIME 2 architecture overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/data-storage.html">How Data is Stored</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/archives.html">Anatomy of an Archive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/types.html">Semantic Types, Primitives, and Visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/formats.html">File Formats and Directory Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/provenance.html">Decentralized retrospective provenance tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/garbage-collection.html">Garbage Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/metaprogramming.html">Metaprogramming</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../framework/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/references/archive-versions.html">Archive versions</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CI Internals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../ci/intro.html">Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../back-matter/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../back-matter/bibliography.html">List of works cited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../back-matter/genindex.html">Index</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for qiime2.sdk.result</h1><div class="highlight"><pre>
+<span></span><span class="c1"># ----------------------------------------------------------------------------</span>
+<span class="c1"># Copyright (c) 2016-2023, QIIME 2 development team.</span>
+<span class="c1">#</span>
+<span class="c1"># Distributed under the terms of the Modified BSD License.</span>
+<span class="c1">#</span>
+<span class="c1"># The full license is in the file LICENSE, distributed with this software.</span>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">distutils.dir_util</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">get_args</span><span class="p">,</span> <span class="n">get_origin</span>
+
+<span class="kn">import</span> <span class="nn">qiime2.metadata</span>
+<span class="kn">import</span> <span class="nn">qiime2.plugin</span>
+<span class="kn">import</span> <span class="nn">qiime2.sdk</span>
+<span class="kn">import</span> <span class="nn">qiime2.core.type</span>
+<span class="kn">import</span> <span class="nn">qiime2.core.transform</span> <span class="k">as</span> <span class="nn">transform</span>
+<span class="kn">import</span> <span class="nn">qiime2.core.archive</span> <span class="k">as</span> <span class="nn">archive</span>
+<span class="kn">import</span> <span class="nn">qiime2.plugin.model</span> <span class="k">as</span> <span class="nn">model</span>
+<span class="kn">import</span> <span class="nn">qiime2.core.util</span> <span class="k">as</span> <span class="nn">util</span>
+<span class="kn">import</span> <span class="nn">qiime2.core.exceptions</span> <span class="k">as</span> <span class="nn">exceptions</span>
+
+<span class="c1"># Note: Result, Artifact, and Visualization classes are in this file to avoid</span>
+<span class="c1"># circular dependencies between Result and its subclasses. Result is tightly</span>
+<span class="c1"># coupled to Artifact and Visualization because it is a base class and a</span>
+<span class="c1"># factory, so having the classes in the same file helps make this coupling</span>
+<span class="c1"># explicit.</span>
+
+
+<span class="n">ResultMetadata</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;ResultMetadata&#39;</span><span class="p">,</span>
+                                        <span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;format&#39;</span><span class="p">])</span>
+
+
+<div class="viewcode-block" id="Result"><a class="viewcode-back" href="../../../interfaces/references/api.html#qiime2.sdk.Result">[docs]</a><span class="k">class</span> <span class="nc">Result</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for QIIME 2 result classes (Artifact and Visualization).</span>
+
+<span class="sd">    This class is not intended to be instantiated. Instead, it acts as a public</span>
+<span class="sd">    factory and namespace for interacting with Artifacts and Visualizations in</span>
+<span class="sd">    a generic way. It also acts as a base class for code reuse and provides an</span>
+<span class="sd">    API shared by Artifact and Visualization.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Subclasses must override to provide a file extension.</span>
+    <span class="n">extension</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_is_valid_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">type_</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Subclasses should override this method.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">peek</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ResultMetadata</span><span class="p">(</span><span class="o">*</span><span class="n">archive</span><span class="o">.</span><span class="n">Archiver</span><span class="o">.</span><span class="n">peek</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">extract</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Unzip contents of Artifacts and Visualizations.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">archive</span><span class="o">.</span><span class="n">Archiver</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Factory for loading Artifacts and Visualizations.&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">qiime2.core.cache</span> <span class="kn">import</span> <span class="n">get_cache</span>
+
+        <span class="c1"># Check if the data is already in the cache (if the uuid is in</span>
+        <span class="c1"># cache.data) and load it from the cache if it is. Avoids unzipping the</span>
+        <span class="c1"># qza again if we already have it.</span>
+        <span class="n">cache</span> <span class="o">=</span> <span class="n">get_cache</span><span class="p">()</span>
+        <span class="n">peek</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">peek</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+        <span class="n">archiver</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">_load_uuid</span><span class="p">(</span><span class="n">peek</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">archiver</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">archiver</span> <span class="o">=</span> <span class="n">archive</span><span class="o">.</span><span class="n">Archiver</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">errno</span> <span class="o">==</span> <span class="mi">28</span><span class="p">:</span>
+                    <span class="n">temp</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">tempdir</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;There was not enough space left on &#39;</span>
+                                     <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">temp</span><span class="si">!r}</span><span class="s1"> to extract the artifact &#39;</span>
+                                     <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">filepath</span><span class="si">!r}</span><span class="s1">. (Try setting $TMPDIR to &#39;</span>
+                                     <span class="s1">&#39;a directory with more space, or &#39;</span>
+                                     <span class="sa">f</span><span class="s1">&#39;increasing the size of </span><span class="si">{</span><span class="n">temp</span><span class="si">!r}</span><span class="s1">)&#39;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">e</span>
+
+        <span class="k">if</span> <span class="n">Artifact</span><span class="o">.</span><span class="n">_is_valid_type</span><span class="p">(</span><span class="n">archiver</span><span class="o">.</span><span class="n">type</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">Artifact</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">Artifact</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">Visualization</span><span class="o">.</span><span class="n">_is_valid_type</span><span class="p">(</span><span class="n">archiver</span><span class="o">.</span><span class="n">type</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">Visualization</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">Visualization</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;Cannot load filepath </span><span class="si">%r</span><span class="s2"> into an Artifact or Visualization &quot;</span>
+                <span class="s2">&quot;because type </span><span class="si">%r</span><span class="s2"> is not supported.&quot;</span>
+                <span class="o">%</span> <span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">archiver</span><span class="o">.</span><span class="n">type</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">cls</span> <span class="ow">and</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Result</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;Attempting to load </span><span class="si">%s</span><span class="s2"> with `</span><span class="si">%s</span><span class="s2">.load`. Use `</span><span class="si">%s</span><span class="s2">.load` instead.&quot;</span>
+                <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                   <span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+
+        <span class="n">result</span><span class="o">.</span><span class="n">_archiver</span> <span class="o">=</span> <span class="n">archiver</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_from_archiver</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">archiver</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">Artifact</span><span class="o">.</span><span class="n">_is_valid_type</span><span class="p">(</span><span class="n">archiver</span><span class="o">.</span><span class="n">type</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">Artifact</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">Artifact</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">Visualization</span><span class="o">.</span><span class="n">_is_valid_type</span><span class="p">(</span><span class="n">archiver</span><span class="o">.</span><span class="n">type</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">Visualization</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">Visualization</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;Cannot load filepath </span><span class="si">%r</span><span class="s2"> into an Artifact or Visualization &quot;</span>
+                <span class="s2">&quot;because type </span><span class="si">%r</span><span class="s2"> is not supported.&quot;</span>
+                <span class="o">%</span> <span class="p">(</span><span class="n">archiver</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">archiver</span><span class="o">.</span><span class="n">type</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">cls</span> <span class="ow">and</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Result</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;Attempting to load </span><span class="si">%s</span><span class="s2"> with `</span><span class="si">%s</span><span class="s2">.load`. Use `</span><span class="si">%s</span><span class="s2">.load` instead.&quot;</span>
+                <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                   <span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+
+        <span class="n">result</span><span class="o">.</span><span class="n">_archiver</span> <span class="o">=</span> <span class="n">archiver</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_archiver</span><span class="o">.</span><span class="n">type</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">uuid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_archiver</span><span class="o">.</span><span class="n">uuid</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_archiver</span><span class="o">.</span><span class="n">format</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">citations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_archiver</span><span class="o">.</span><span class="n">citations</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="si">%(classname)s</span><span class="s2"> constructor is private, use `</span><span class="si">%(classname)s</span><span class="s2">.load`, &quot;</span>
+            <span class="s2">&quot;`</span><span class="si">%(classname)s</span><span class="s2">.peek`, or `</span><span class="si">%(classname)s</span><span class="s2">.extract`.&quot;</span>
+            <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;classname&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">})</span>
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">_archiver</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;&lt;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%r</span><span class="s2"> uuid: </span><span class="si">%s</span><span class="s2">&gt;&quot;</span>
+                <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="c1"># Checking the UUID is mostly sufficient but requiring an exact type</span>
+        <span class="c1"># match makes it safer in case `other` is a subclass or a completely</span>
+        <span class="c1"># different type that happens to have a `.uuid` property. We want to</span>
+        <span class="c1"># ensure (as best as we can) that the UUIDs we are comparing are linked</span>
+        <span class="c1"># to the same type of QIIME 2 object.</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">uuid</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span> <span class="o">==</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">export_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">):</span>
+        <span class="n">distutils</span><span class="o">.</span><span class="n">dir_util</span><span class="o">.</span><span class="n">copy_tree</span><span class="p">(</span>
+            <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_archiver</span><span class="o">.</span><span class="n">data_dir</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">output_dir</span><span class="p">))</span>
+        <span class="c1"># Return None for now, although future implementations that include</span>
+        <span class="c1"># format tranformations may return the invoked transformers</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_destructor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_archiver</span><span class="o">.</span><span class="n">_destructor</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save to a file.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filepath : str</span>
+<span class="sd">            Path to save file at.</span>
+
+<span class="sd">        extension : str</span>
+<span class="sd">            Preferred file extension (.qza, .qzv, .txt, etc).</span>
+<span class="sd">            If no preferred extension input is included,</span>
+<span class="sd">            Artifact extension will default to .qza and</span>
+<span class="sd">            Visualization extension will default to .qzv.</span>
+<span class="sd">            Including a period in the extension is</span>
+<span class="sd">            optional, and any additional periods delimiting</span>
+<span class="sd">            the filepath and the extension will be reduced</span>
+<span class="sd">            to a single period.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Filepath and extension (if provided) that the</span>
+<span class="sd">            file was saved to.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        load</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ext</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ext</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extension</span>
+
+        <span class="c1"># This accounts for edge cases in the filename extension</span>
+        <span class="c1"># and ensures that there is only a single period in the ext.</span>
+        <span class="c1"># Caste to str incase we received a pathlib.Path or similar</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">filepath</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+        <span class="n">ext</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">ext</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">filepath</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">ext</span><span class="p">):</span>
+            <span class="n">filepath</span> <span class="o">+=</span> <span class="n">ext</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_archiver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">filepath</span>
+
+    <span class="k">def</span> <span class="nf">_alias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">provenance_capture</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">clone_original</span><span class="p">(</span><span class="n">into</span><span class="p">):</span>
+            <span class="c1"># directory is empty, this function is meant to fix that, so we</span>
+            <span class="c1"># can rmdir so that copytree is happy</span>
+            <span class="n">into</span><span class="o">.</span><span class="n">rmdir</span><span class="p">()</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_archiver</span><span class="o">.</span><span class="n">data_dir</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">into</span><span class="p">),</span>
+                            <span class="n">copy_function</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">link</span><span class="p">)</span>  <span class="c1"># Use hardlinks</span>
+
+        <span class="bp">cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">alias</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="n">alias</span><span class="o">.</span><span class="n">_archiver</span> <span class="o">=</span> <span class="n">archive</span><span class="o">.</span><span class="n">Archiver</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">,</span> <span class="n">clone_original</span><span class="p">,</span> <span class="n">provenance_capture</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">alias</span>
+
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="bp">NotImplemented</span><span class="p">):</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_archiver</span><span class="o">.</span><span class="n">validate_checksums</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">diff</span><span class="o">.</span><span class="n">changed</span> <span class="ow">or</span> <span class="n">diff</span><span class="o">.</span><span class="n">added</span> <span class="ow">or</span> <span class="n">diff</span><span class="o">.</span><span class="n">removed</span><span class="p">:</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+            <span class="k">if</span> <span class="n">diff</span><span class="o">.</span><span class="n">added</span><span class="p">:</span>
+                <span class="n">error</span> <span class="o">+=</span> <span class="s2">&quot;Unrecognized files:</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">diff</span><span class="o">.</span><span class="n">added</span><span class="p">:</span>
+                <span class="n">error</span> <span class="o">+=</span> <span class="s2">&quot;  - </span><span class="si">%r</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">key</span>
+            <span class="k">if</span> <span class="n">diff</span><span class="o">.</span><span class="n">removed</span><span class="p">:</span>
+                <span class="n">error</span> <span class="o">+=</span> <span class="s2">&quot;Missing files:</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">diff</span><span class="o">.</span><span class="n">removed</span><span class="p">:</span>
+                <span class="n">error</span> <span class="o">+=</span> <span class="s2">&quot;  - </span><span class="si">%r</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">key</span>
+            <span class="k">if</span> <span class="n">diff</span><span class="o">.</span><span class="n">changed</span><span class="p">:</span>
+                <span class="n">error</span> <span class="o">+=</span> <span class="s2">&quot;Changed files:</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="n">obs</span><span class="p">))</span> <span class="ow">in</span> <span class="n">diff</span><span class="o">.</span><span class="n">changed</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">error</span> <span class="o">+=</span> <span class="s2">&quot;  - </span><span class="si">%r</span><span class="s2">: </span><span class="si">%s</span><span class="s2"> -&gt; </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">exp</span><span class="p">,</span> <span class="n">obs</span><span class="p">)</span>
+
+            <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Noop to provide standardized interface with ProxyResult.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Artifact"><a class="viewcode-back" href="../../../interfaces/references/api.html#qiime2.sdk.Artifact">[docs]</a><span class="k">class</span> <span class="nc">Artifact</span><span class="p">(</span><span class="n">Result</span><span class="p">):</span>
+    <span class="n">extension</span> <span class="o">=</span> <span class="s1">&#39;.qza&#39;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_is_valid_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">type_</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">is_semantic_type</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span> <span class="ow">and</span> <span class="n">type_</span><span class="o">.</span><span class="n">is_concrete</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">import_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">view_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">validate_level</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="p">):</span>
+        <span class="n">type_</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">,</span> <span class="n">__builtins__</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">validate_level</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Expected &#39;min&#39; or &#39;max&#39; for `validate_level`.&quot;</span><span class="p">)</span>
+
+        <span class="n">is_format</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">type_</span> <span class="o">=</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">sdk</span><span class="o">.</span><span class="n">parse_type</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">view_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">view_type</span> <span class="o">=</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">sdk</span><span class="o">.</span><span class="n">parse_format</span><span class="p">(</span><span class="n">view_type</span><span class="p">)</span>
+            <span class="n">is_format</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="n">view_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">view</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">PurePath</span><span class="p">):</span>
+                <span class="n">is_format</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">pm</span> <span class="o">=</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">sdk</span><span class="o">.</span><span class="n">PluginManager</span><span class="p">()</span>
+                <span class="n">output_dir_fmt</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">get_directory_format</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">view</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">output_dir_fmt</span><span class="p">,</span>
+                                      <span class="n">model</span><span class="o">.</span><span class="n">SingleFileDirectoryFormatBase</span><span class="p">):</span>
+                        <span class="k">raise</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">plugin</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span>
+                            <span class="s2">&quot;Importing </span><span class="si">%r</span><span class="s2"> requires a directory, not </span><span class="si">%s</span><span class="s2">&quot;</span>
+                            <span class="o">%</span> <span class="p">(</span><span class="n">output_dir_fmt</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">view</span><span class="p">))</span>
+                    <span class="n">view_type</span> <span class="o">=</span> <span class="n">output_dir_fmt</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">format</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">view_type</span> <span class="o">=</span> <span class="n">output_dir_fmt</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">view_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">view</span><span class="p">)</span>
+
+        <span class="n">format_</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">md5sums</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">is_format</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">view</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+                <span class="n">md5sums</span> <span class="o">=</span> <span class="p">{</span><span class="n">path</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">util</span><span class="o">.</span><span class="n">md5sum</span><span class="p">(</span><span class="n">path</span><span class="p">)}</span>
+            <span class="k">elif</span> <span class="n">path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+                <span class="n">md5sums</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">md5sum_directory</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">plugin</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span>
+                    <span class="s2">&quot;Path &#39;</span><span class="si">%s</span><span class="s2">&#39; does not exist.&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+            <span class="n">format_</span> <span class="o">=</span> <span class="n">view_type</span>
+
+        <span class="n">provenance_capture</span> <span class="o">=</span> <span class="n">archive</span><span class="o">.</span><span class="n">ImportProvenanceCapture</span><span class="p">(</span><span class="n">format_</span><span class="p">,</span> <span class="n">md5sums</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_from_view</span><span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">view_type</span><span class="p">,</span> <span class="n">provenance_capture</span><span class="p">,</span>
+                              <span class="n">validate_level</span><span class="o">=</span><span class="n">validate_level</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_from_view</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">view_type</span><span class="p">,</span> <span class="n">provenance_capture</span><span class="p">,</span>
+                   <span class="n">validate_level</span><span class="o">=</span><span class="s1">&#39;min&#39;</span><span class="p">):</span>
+        <span class="n">type_raw</span> <span class="o">=</span> <span class="nb">type</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="nb">type</span> <span class="o">=</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">sdk</span><span class="o">.</span><span class="n">parse_type</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_is_valid_type</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;An artifact requires a concrete semantic type, not type </span><span class="si">%r</span><span class="s2">.&quot;</span>
+                <span class="o">%</span> <span class="nb">type</span><span class="p">)</span>
+
+        <span class="n">pm</span> <span class="o">=</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">sdk</span><span class="o">.</span><span class="n">PluginManager</span><span class="p">()</span>
+        <span class="n">output_dir_fmt</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">get_directory_format</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">view_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># lookup default format for the type</span>
+            <span class="n">view_type</span> <span class="o">=</span> <span class="n">output_dir_fmt</span>
+
+        <span class="n">from_type</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">ModelType</span><span class="o">.</span><span class="n">from_view_type</span><span class="p">(</span><span class="n">view_type</span><span class="p">)</span>
+        <span class="n">to_type</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">ModelType</span><span class="o">.</span><span class="n">from_view_type</span><span class="p">(</span><span class="n">output_dir_fmt</span><span class="p">)</span>
+
+        <span class="n">recorder</span> <span class="o">=</span> <span class="n">provenance_capture</span><span class="o">.</span><span class="n">transformation_recorder</span><span class="p">(</span><span class="s1">&#39;return&#39;</span><span class="p">)</span>
+        <span class="n">transformation</span> <span class="o">=</span> <span class="n">from_type</span><span class="o">.</span><span class="n">make_transformation</span><span class="p">(</span><span class="n">to_type</span><span class="p">,</span>
+                                                       <span class="n">recorder</span><span class="o">=</span><span class="n">recorder</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">transformation</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">validate_level</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">type_raw</span> <span class="ow">in</span> <span class="n">pm</span><span class="o">.</span><span class="n">validators</span><span class="p">:</span>
+            <span class="n">validation_object</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">validators</span><span class="p">[</span><span class="nb">type</span><span class="p">]</span>
+            <span class="n">validation_object</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">result</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">validate_level</span><span class="p">)</span>
+
+        <span class="n">artifact</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="n">artifact</span><span class="o">.</span><span class="n">_archiver</span> <span class="o">=</span> <span class="n">archive</span><span class="o">.</span><span class="n">Archiver</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span>
+            <span class="nb">type</span><span class="p">,</span> <span class="n">output_dir_fmt</span><span class="p">,</span>
+            <span class="n">data_initializer</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">_move_or_copy</span><span class="p">,</span>
+            <span class="n">provenance_capture</span><span class="o">=</span><span class="n">provenance_capture</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">artifact</span>
+
+    <span class="k">def</span> <span class="nf">view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view_type</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_view</span><span class="p">(</span><span class="n">view_type</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view_type</span><span class="p">,</span> <span class="n">recorder</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">view_type</span> <span class="ow">is</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Metadata</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_metadata</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;Artifact </span><span class="si">%r</span><span class="s2"> cannot be viewed as QIIME 2 Metadata.&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span>
+
+        <span class="n">from_type</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">ModelType</span><span class="o">.</span><span class="n">from_view_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">get_origin</span><span class="p">(</span><span class="n">view_type</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">Union</span><span class="p">)):</span>
+            <span class="n">transformation</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">get_args</span><span class="p">(</span><span class="n">view_type</span><span class="p">):</span>
+                <span class="n">to_type</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">ModelType</span><span class="o">.</span><span class="n">from_view_type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">transformation</span> <span class="o">=</span> <span class="n">from_type</span><span class="o">.</span><span class="n">make_transformation</span><span class="p">(</span>
+                        <span class="n">to_type</span><span class="p">,</span> <span class="n">recorder</span><span class="o">=</span><span class="n">recorder</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">transformation</span><span class="p">:</span>
+                        <span class="k">break</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;No transformation from&quot;</span><span class="p">):</span>
+                        <span class="k">continue</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">e</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">transformation</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                    <span class="s2">&quot;No transformation into either of </span><span class="si">%s</span><span class="s2"> was found&quot;</span> <span class="o">%</span>
+                    <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">view_type</span><span class="o">.</span><span class="n">__args__</span><span class="p">])</span>
+                <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">to_type</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">ModelType</span><span class="o">.</span><span class="n">from_view_type</span><span class="p">(</span><span class="n">view_type</span><span class="p">)</span>
+            <span class="n">transformation</span> <span class="o">=</span> <span class="n">from_type</span><span class="o">.</span><span class="n">make_transformation</span><span class="p">(</span><span class="n">to_type</span><span class="p">,</span>
+                                                           <span class="n">recorder</span><span class="o">=</span><span class="n">recorder</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">transformation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_archiver</span><span class="o">.</span><span class="n">data_dir</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">view_type</span> <span class="ow">is</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Metadata</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">_add_artifacts</span><span class="p">([</span><span class="bp">self</span><span class="p">])</span>
+
+        <span class="n">to_type</span><span class="o">.</span><span class="n">set_user_owned</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">has_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Checks for metadata within an artifact</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">           True if the artifact has metadata (i.e. can be viewed as</span>
+<span class="sd">           ``qiime2.Metadata``), False otherwise.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">from_type</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">ModelType</span><span class="o">.</span><span class="n">from_view_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+        <span class="n">to_type</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">ModelType</span><span class="o">.</span><span class="n">from_view_type</span><span class="p">(</span><span class="n">qiime2</span><span class="o">.</span><span class="n">Metadata</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">from_type</span><span class="o">.</span><span class="n">has_transformation</span><span class="p">(</span><span class="n">to_type</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Validates the data contents of an artifact</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValidationError</span>
+<span class="sd">            If the artifact is invalid at the specified level of validation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">),</span> <span class="n">level</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Visualization"><a class="viewcode-back" href="../../../interfaces/references/api.html#qiime2.sdk.Visualization">[docs]</a><span class="k">class</span> <span class="nc">Visualization</span><span class="p">(</span><span class="n">Result</span><span class="p">):</span>
+    <span class="n">extension</span> <span class="o">=</span> <span class="s1">&#39;.qzv&#39;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_is_valid_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">type_</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">type_</span> <span class="o">==</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">Visualization</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_from_data_dir</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">,</span> <span class="n">provenance_capture</span><span class="p">):</span>
+        <span class="c1"># shutil.copytree doesn&#39;t allow the destination directory to exist.</span>
+        <span class="k">def</span> <span class="nf">data_initializer</span><span class="p">(</span><span class="n">destination</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">distutils</span><span class="o">.</span><span class="n">dir_util</span><span class="o">.</span><span class="n">copy_tree</span><span class="p">(</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">data_dir</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">destination</span><span class="p">))</span>
+
+        <span class="n">viz</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">_archiver</span> <span class="o">=</span> <span class="n">archive</span><span class="o">.</span><span class="n">Archiver</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span>
+            <span class="n">qiime2</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">Visualization</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">data_initializer</span><span class="o">=</span><span class="n">data_initializer</span><span class="p">,</span>
+            <span class="n">provenance_capture</span><span class="o">=</span><span class="n">provenance_capture</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">viz</span>
+
+    <span class="k">def</span> <span class="nf">get_index_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">abspath</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_archiver</span><span class="o">.</span><span class="n">data_dir</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+            <span class="n">data_path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">abspath</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_archiver</span><span class="o">.</span><span class="n">data_dir</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">data_path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;index.&#39;</span><span class="p">):</span>
+                <span class="n">relpath</span> <span class="o">=</span> <span class="n">abspath</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_archiver</span><span class="o">.</span><span class="n">root_dir</span><span class="p">)</span>
+                <span class="n">ext</span> <span class="o">=</span> <span class="n">relpath</span><span class="o">.</span><span class="n">suffix</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+                <span class="k">if</span> <span class="n">ext</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="s2">&quot;Multiple index files identified with </span><span class="si">%s</span><span class="s2"> &quot;</span>
+                        <span class="s2">&quot;extension (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">). This is currently &quot;</span>
+                        <span class="s2">&quot;unsupported.&quot;</span> <span class="o">%</span>
+                        <span class="p">(</span><span class="n">ext</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="n">ext</span><span class="p">],</span> <span class="n">relpath</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">ext</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">relpath</span><span class="p">)</span> <span class="k">if</span> <span class="n">relative</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">abspath</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">_repr_html_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">qiime2.jupyter</span> <span class="kn">import</span> <span class="n">make_html</span>
+        <span class="k">return</span> <span class="n">make_html</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_archiver</span><span class="o">.</span><span class="n">path</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ResultCollection"><a class="viewcode-back" href="../../../interfaces/references/api.html#qiime2.sdk.ResultCollection">[docs]</a><span class="k">class</span> <span class="nc">ResultCollection</span><span class="p">:</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Determines how to load a Collection of QIIME 2 Artifacts in a</span>
+<span class="sd">            directory and dispatches to helpers</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Given filepath &#39;</span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s2">&#39; is not a directory&quot;</span><span class="p">)</span>
+
+        <span class="n">order_fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="s1">&#39;.order&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">order_fp</span><span class="p">):</span>
+            <span class="n">collection</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_load_ordered</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">order_fp</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The directory &#39;</span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s2">&#39; does not contain a &quot;</span>
+                          <span class="s2">&quot;.order file. The files will be read into the &quot;</span>
+                          <span class="s2">&quot;collection in the order the filesystem provides &quot;</span>
+                          <span class="s2">&quot;them in.&quot;</span><span class="p">)</span>
+            <span class="n">collection</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_load_unordered</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">collection</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_load_ordered</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">order_fp</span><span class="p">):</span>
+        <span class="n">collection</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">order_fp</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">order_fh</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">result_name</span> <span class="ow">in</span> <span class="n">order_fh</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+                <span class="n">result_fp</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_result_fp</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">result_name</span><span class="p">)</span>
+                <span class="n">collection</span><span class="p">[</span><span class="n">result_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">Result</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">result_fp</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">collection</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_load_unordered</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory</span><span class="p">):</span>
+        <span class="n">collection</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+            <span class="n">result_fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+            <span class="n">result_name</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;.qza&#39;</span><span class="p">)</span>
+            <span class="n">result_name</span> <span class="o">=</span> <span class="n">result_name</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;.qzv&#39;</span><span class="p">)</span>
+
+            <span class="n">collection</span><span class="p">[</span><span class="n">result_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">Result</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">result_fp</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">collection</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_result_fp</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">result_name</span><span class="p">):</span>
+        <span class="n">result_fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">result_name</span><span class="p">)</span>
+
+        <span class="c1"># Check if thing in .order file exists and if not try it with .qza at</span>
+        <span class="c1"># the end and if not try it with .qzv at the end</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">result_fp</span><span class="p">):</span>
+            <span class="n">result_fp</span> <span class="o">+=</span> <span class="s1">&#39;.qza&#39;</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">result_fp</span><span class="p">):</span>
+                <span class="c1"># Get rid of the trailing .qza before adding .qzv</span>
+                <span class="n">result_fp</span> <span class="o">=</span> <span class="n">result_fp</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
+                <span class="n">result_fp</span> <span class="o">+=</span> <span class="s1">&#39;.qzv&#39;</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">result_fp</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;The Result &#39;</span><span class="si">{</span><span class="n">result_name</span><span class="si">}</span><span class="s2">&#39; is referenced in the &quot;</span>
+                        <span class="s2">&quot;order file but does not exist in the directory.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result_fp</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">collection</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">collection</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">qiime2</span><span class="o">.</span><span class="n">sdk</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">validate_result_collection_keys</span><span class="p">(</span><span class="o">*</span><span class="n">collection</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">collection</span> <span class="o">=</span> <span class="n">collection</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">collection</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">collection</span><span class="p">)}</span>
+
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection</span> <span class="o">==</span> <span class="n">other</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">ResultCollection</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">collection</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Equality between &#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39; and &quot;</span>
+                            <span class="s2">&quot;ResultCollection is undefined.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">collection</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">qiime2</span><span class="o">.</span><span class="n">sdk</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">validate_result_collection_keys</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">collection</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">inner_type</span> <span class="o">=</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">grammar</span><span class="o">.</span><span class="n">UnionExp</span><span class="p">(</span>
+            <span class="n">v</span><span class="o">.</span><span class="n">type</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection</span><span class="o">.</span><span class="n">values</span><span class="p">())</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">Collection</span><span class="p">[</span><span class="n">inner_type</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">extension</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Collection[Visualization]&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;.qzv&#39;</span>
+
+        <span class="k">return</span> <span class="s1">&#39;.qza&#39;</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Saves a collection of QIIME 2 Results into a given directory with</span>
+<span class="sd">           an order file.</span>
+
+<span class="sd">           NOTE: The directory given must not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The given directory &#39;</span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s2">&#39; already &quot;</span>
+                             <span class="s2">&quot;exists. A new directory must be given to save &quot;</span>
+                             <span class="s2">&quot;the collection to.&quot;</span><span class="p">)</span>
+
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="s1">&#39;.order&#39;</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">result_fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">result_fp</span><span class="p">)</span>
+                <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Do this to give us a unified API with Result.save</span>
+        <span class="k">return</span> <span class="n">directory</span>
+
+    <span class="k">def</span> <span class="nf">save_unordered</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Saves a collection of QIIME 2 Results into a given directory without</span>
+<span class="sd">           an order file. This is used by q2galaxy where an order file will be</span>
+<span class="sd">           interpreted as another dataset in the collection which is not</span>
+<span class="sd">           desirable</span>
+
+<span class="sd">           NOTE: The directory given must not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The given directory &#39;</span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s2">&#39; already &quot;</span>
+                             <span class="s2">&quot;exists. A new directory must be given to save &quot;</span>
+                             <span class="s2">&quot;the collection to.&quot;</span><span class="p">)</span>
+
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">result_fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">result_fp</span><span class="p">)</span>
+
+        <span class="c1"># Do this to give us a unified API with Result.save</span>
+        <span class="k">return</span> <span class="n">directory</span>
+
+    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Noop to provide standardized interface with ProxyResultCollection.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Greg Caporaso and Evan Bolyen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

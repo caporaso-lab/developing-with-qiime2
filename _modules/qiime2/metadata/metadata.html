@@ -1,0 +1,1729 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>qiime2.metadata.metadata &#8212; Developing with QIIME 2</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/qiime2/metadata/metadata';</script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/q2dev.svg" class="logo__image only-light" alt="Developing with QIIME 2 - Home"/>
+    <script>document.write(`<img src="../../../_static/q2dev_darkmode.svg" class="logo__image only-dark" alt="Developing with QIIME 2 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Docs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/user-documentation.html">Contributing to the QIIME 2 user documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developer-documentation.html">Contributing to <em>Developing with QIIME 2</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/intro.html">Introduction to Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../plugins/how-to-guides/intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/register-a-plugin.html">Register a QIIME 2 plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/create-register-method.html">Create and register a Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/create-register-visualizer.html">Create and register a visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/create-register-pipeline.html">Create and register a pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/create-register-transformer.html">Creating and registering a Transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/play-nicely-with-others.html">How to play nicely with other plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/use-metadata.html">How to use Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/test-plugins.html">How to test QIIME 2 plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/usage-examples.html">Writing Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/format-validation-levels.html">Defining different Format validation levels</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../plugins/explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/explanations/actions.html">Types of QIIME 2 Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/explanations/transformers.html">Transformers</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../plugins/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/references/antipatterns.html">Plugin development anti-patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/references/api.html">Plugin developer API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/references/metadata-api.html"><code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> API</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../interfaces/intro.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../interfaces/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../interfaces/references/api.html">Interface developer API</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Framework Internals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../framework/intro.html">Introduction to QIIME 2 framework development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../framework/tutorials/intro.html">Tutorials</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../framework/how-to-guides/intro.html">How-to guides</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/how-to-guides/parallel-configuration.html">Parallel configuration and usage in QIIME 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/how-to-guides/pipeline-resumption.html">Pipeline Resumption in QIIME 2</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../framework/explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/architecture.html">QIIME 2 architecture overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/data-storage.html">How Data is Stored</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/archives.html">Anatomy of an Archive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/types.html">Semantic Types, Primitives, and Visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/formats.html">File Formats and Directory Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/provenance.html">Decentralized retrospective provenance tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/garbage-collection.html">Garbage Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/metaprogramming.html">Metaprogramming</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../framework/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/references/archive-versions.html">Archive versions</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CI Internals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../ci/intro.html">Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../back-matter/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../back-matter/bibliography.html">List of works cited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../back-matter/genindex.html">Index</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for qiime2.metadata.metadata</h1><div class="highlight"><pre>
+<span></span><span class="c1"># ----------------------------------------------------------------------------</span>
+<span class="c1"># Copyright (c) 2016-2023, QIIME 2 development team.</span>
+<span class="c1">#</span>
+<span class="c1"># Distributed under the terms of the Modified BSD License.</span>
+<span class="c1">#</span>
+<span class="c1"># The full license is in the file LICENSE, distributed with this software.</span>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<span class="kn">import</span> <span class="nn">abc</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">import</span> <span class="nn">types</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">qiime2</span>
+<span class="kn">from</span> <span class="nn">qiime2.core.util</span> <span class="kn">import</span> <span class="n">find_duplicates</span>
+<span class="kn">import</span> <span class="nn">qiime2.core.missing</span> <span class="k">as</span> <span class="nn">_missing</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">SUPPORTED_COLUMN_TYPES</span><span class="p">,</span> <span class="n">FORMATTED_ID_HEADERS</span><span class="p">,</span> <span class="n">is_id_header</span>
+
+
+<span class="n">DEFAULT_MISSING</span> <span class="o">=</span> <span class="n">_missing</span><span class="o">.</span><span class="n">DEFAULT_MISSING</span>
+
+
+<span class="k">class</span> <span class="nc">_MetadataBase</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for functionality shared between Metadata and MetadataColumn.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    index : pandas.Index</span>
+<span class="sd">        IDs associated with the metadata.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">id_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Name identifying the IDs associated with the metadata.</span>
+
+<span class="sd">        This property is read-only.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Name of IDs associated with the metadata.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id_header</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ids</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;IDs associated with the metadata.</span>
+
+<span class="sd">        This property is read-only.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple of str</span>
+<span class="sd">            Metadata IDs.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ids</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">id_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Number of metadata IDs.</span>
+
+<span class="sd">        This property is read-only.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            Number of metadata IDs.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ids</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">artifacts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Artifacts that are the source of the metadata.</span>
+
+<span class="sd">        This property is read-only.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple of qiime2.Artifact</span>
+<span class="sd">            Source artifacts of the metadata.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_artifacts</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> must contain at least one ID.&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+        <span class="n">id_header</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_assert_valid_id_header</span><span class="p">(</span><span class="n">id_header</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_id_header</span> <span class="o">=</span> <span class="n">id_header</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_index</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ids</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_artifacts</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_id_header</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_id_header</span> <span class="ow">and</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_artifacts</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_artifacts</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span> <span class="o">==</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_add_artifacts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">artifacts</span><span class="p">):</span>
+        <span class="n">deduped</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_artifacts</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">artifact</span> <span class="ow">in</span> <span class="n">artifacts</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">artifact</span><span class="p">,</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Artifact</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                    <span class="s2">&quot;Expected Artifact object, received </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">artifact</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">artifact</span> <span class="ow">in</span> <span class="n">deduped</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Duplicate source artifacts are not supported on </span><span class="si">%s</span><span class="s2"> &quot;</span>
+                    <span class="s2">&quot;objects. The following artifact is a duplicate of &quot;</span>
+                    <span class="s2">&quot;another source artifact: </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span>
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">artifact</span><span class="p">))</span>
+            <span class="n">deduped</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">artifact</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_artifacts</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">artifacts</span><span class="p">)</span>
+
+    <span class="c1"># Static helpers below for code reuse in Metadata and MetadataColumn</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_assert_valid_id_header</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_id_header</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;pandas index name (`Index.name`) must be one of the &quot;</span>
+                <span class="s2">&quot;following values, not </span><span class="si">%r</span><span class="s2">:</span><span class="se">\n\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+                <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">FORMATTED_ID_HEADERS</span><span class="p">))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_validate_index</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">axis</span> <span class="o">==</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;ID&#39;</span>
+        <span class="k">elif</span> <span class="n">axis</span> <span class="o">==</span> <span class="s1">&#39;column&#39;</span><span class="p">:</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;column name&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">index</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                    <span class="s2">&quot;Detected non-string metadata </span><span class="si">%s</span><span class="s2"> of type </span><span class="si">%r</span><span class="s2">: </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span>
+                    <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">value</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Detected empty metadata </span><span class="si">%s</span><span class="s2">. </span><span class="si">%s</span><span class="s2">s must consist of at least &quot;</span>
+                    <span class="s2">&quot;one character.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">label</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">axis</span> <span class="o">==</span> <span class="s1">&#39;id&#39;</span> <span class="ow">and</span> <span class="n">value</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Detected metadata </span><span class="si">%s</span><span class="s2"> that begins with a pound sign &quot;</span>
+                    <span class="s2">&quot;(#): </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">is_id_header</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Detected metadata </span><span class="si">%s</span><span class="s2"> </span><span class="si">%r</span><span class="s2"> that conflicts with a name &quot;</span>
+                    <span class="s2">&quot;reserved for the ID header. Reserved ID headers:</span><span class="se">\n\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+                    <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">FORMATTED_ID_HEADERS</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">index</span><span class="p">)):</span>
+            <span class="n">duplicates</span> <span class="o">=</span> <span class="n">find_duplicates</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Metadata </span><span class="si">%s</span><span class="s2">s must be unique. The following </span><span class="si">%s</span><span class="s2">s are &quot;</span>
+                <span class="s2">&quot;duplicated: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+                <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">duplicates</span><span class="p">))))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_filter_ids_helper</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">df_or_series</span><span class="p">,</span> <span class="n">ids</span><span class="p">,</span> <span class="n">ids_to_keep</span><span class="p">):</span>
+        <span class="c1"># `ids_to_keep` can be any iterable, so turn it into a list so that it</span>
+        <span class="c1"># can be iterated over multiple times below (and length-checked).</span>
+        <span class="n">ids_to_keep</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ids_to_keep</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ids_to_keep</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`ids_to_keep` must contain at least one ID.&quot;</span><span class="p">)</span>
+
+        <span class="n">duplicates</span> <span class="o">=</span> <span class="n">find_duplicates</span><span class="p">(</span><span class="n">ids_to_keep</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">duplicates</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;`ids_to_keep` must contain unique IDs. The following IDs are &quot;</span>
+                <span class="s2">&quot;duplicated: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+                <span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">duplicates</span><span class="p">))))</span>
+
+        <span class="n">ids_to_keep</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">ids_to_keep</span><span class="p">)</span>
+        <span class="n">missing_ids</span> <span class="o">=</span> <span class="n">ids_to_keep</span> <span class="o">-</span> <span class="n">ids</span>
+        <span class="k">if</span> <span class="n">missing_ids</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;The following IDs are not present in the metadata: </span><span class="si">%s</span><span class="s2">&quot;</span>
+                <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">missing_ids</span><span class="p">))))</span>
+
+        <span class="c1"># While preserving order, get rid of any IDs not contained in</span>
+        <span class="c1"># `ids_to_keep`.</span>
+        <span class="n">ids_to_discard</span> <span class="o">=</span> <span class="n">ids</span> <span class="o">-</span> <span class="n">ids_to_keep</span>
+        <span class="k">return</span> <span class="n">df_or_series</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">ids_to_discard</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">,</span>
+                                 <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;raise&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save a TSV metadata file.</span>
+
+<span class="sd">        The TSV metadata file format is described at https://docs.qiime2.org in</span>
+<span class="sd">        the Metadata Tutorial.</span>
+
+<span class="sd">        The file will always include the ``#q2:types`` directive in order to</span>
+<span class="sd">        make the file roundtrippable without relying on column type inference.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filepath : str</span>
+<span class="sd">            Path to save TSV metadata file at.</span>
+
+<span class="sd">        ext : str</span>
+<span class="sd">            Preferred file extension (.tsv, .txt, etc).</span>
+<span class="sd">            Will be left blank if no extension is included.</span>
+<span class="sd">            Including a period in the extension is</span>
+<span class="sd">            optional, and any additional periods delimiting</span>
+<span class="sd">            the filepath and the extension will be reduced</span>
+<span class="sd">            to a single period.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Filepath and extension (if provided) that the</span>
+<span class="sd">            file was saved to.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        Metadata.load</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.io</span> <span class="kn">import</span> <span class="n">MetadataWriter</span>
+
+        <span class="k">if</span> <span class="n">ext</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ext</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ext</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">ext</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">filepath</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">filepath</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">ext</span><span class="p">):</span>
+            <span class="n">filepath</span> <span class="o">+=</span> <span class="n">ext</span>
+
+        <span class="n">MetadataWriter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">filepath</span>
+
+
+<span class="c1"># Other properties such as units can be included here in the future!</span>
+<span class="n">ColumnProperties</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;ColumnProperties&#39;</span><span class="p">,</span>
+                                          <span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;missing_scheme&#39;</span><span class="p">])</span>
+
+
+<div class="viewcode-block" id="Metadata"><a class="viewcode-back" href="../../../plugins/references/metadata-api.html#qiime2.metadata.Metadata">[docs]</a><span class="k">class</span> <span class="nc">Metadata</span><span class="p">(</span><span class="n">_MetadataBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Store metadata associated with identifiers in a study.</span>
+
+<span class="sd">    Metadata is tabular in nature, mapping study identifiers (e.g. sample or</span>
+<span class="sd">    feature IDs) to columns of metadata associated with each ID.</span>
+
+<span class="sd">    For more details about metadata in QIIME 2, including the TSV metadata file</span>
+<span class="sd">    format, see the Metadata Tutorial at https://docs.qiime2.org.</span>
+
+<span class="sd">    The following text focuses on design and considerations when working with</span>
+<span class="sd">    ``Metadata`` objects at the API level.</span>
+
+<span class="sd">    A ``Metadata`` object is composed of zero or more ``MetadataColumn``</span>
+<span class="sd">    objects. A ``Metadata`` object always contains at least one ID, regardless</span>
+<span class="sd">    of the number of columns. Each column in the ``Metadata`` object has an</span>
+<span class="sd">    associated column type representing either *categorical* or *numeric*</span>
+<span class="sd">    data. Each metadata column is represented by an object corresponding to the</span>
+<span class="sd">    column&#39;s type: ``CategoricalMetadataColumn`` or ``NumericMetadataColumn``,</span>
+<span class="sd">    respectively.</span>
+
+<span class="sd">    A ``Metadata`` object is closely linked to its corresponding TSV metadata</span>
+<span class="sd">    file format described at https://docs.qiime2.org. Therefore, certain</span>
+<span class="sd">    requirements present in the file format are also enforced on the in-memory</span>
+<span class="sd">    object in order to make serialized ``Metadata`` objects roundtrippable when</span>
+<span class="sd">    loaded from disk again. For example, IDs cannot begin with a pound</span>
+<span class="sd">    character (``#``) because those IDs would be interpreted as comment rows</span>
+<span class="sd">    when written to disk as TSV. See the metadata file format spec for more</span>
+<span class="sd">    details about data formatting requirements.</span>
+
+<span class="sd">    In addition to being loaded from or saved to disk, a ``Metadata`` object</span>
+<span class="sd">    can be constructed from a ``pandas.DataFrame`` object. See the *Parameters*</span>
+<span class="sd">    section below for details on how to construct ``Metadata`` objects from</span>
+<span class="sd">    dataframes.</span>
+
+<span class="sd">    ``Metadata`` objects have various methods to access, filter, and merge</span>
+<span class="sd">    data. A dataframe can be retrieved from the ``Metadata`` object for further</span>
+<span class="sd">    data manipulation using the pandas API. Individual ``MetadataColumn``</span>
+<span class="sd">    objects can be retrieved to gain access to APIs applicable to a single</span>
+<span class="sd">    metadata column.</span>
+
+<span class="sd">    Missing values may be encoded in one of the following schemes:</span>
+
+<span class="sd">    &#39;blank&#39;</span>
+<span class="sd">      The default, which treats `None`/`NaN` as the only valid missing values.</span>
+
+<span class="sd">    &#39;no-missing&#39;</span>
+<span class="sd">      Indicates there are no missing values in a column, any `None`/`NaN`</span>
+<span class="sd">      values should be considered an error. If a scheme other than &#39;blank&#39; is</span>
+<span class="sd">      used by default, this scheme can be provided to preserve strings as</span>
+<span class="sd">      categorical terms.</span>
+
+<span class="sd">    &#39;INSDC:missing&#39;</span>
+<span class="sd">      The INSDC vocabulary for missing values. The current implementation</span>
+<span class="sd">      supports only lower-case terms which match exactly:</span>
+<span class="sd">      &#39;not applicable&#39;, &#39;missing&#39;, &#39;not provided&#39;, &#39;not collected&#39;, and</span>
+<span class="sd">      &#39;restricted access&#39;.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dataframe : pandas.DataFrame</span>
+<span class="sd">        Dataframe containing metadata. The dataframe&#39;s index defines the IDs,</span>
+<span class="sd">        and the index name (``Index.name``) must match one of the required ID</span>
+<span class="sd">        headers described in the metadata file format spec. Each column in the</span>
+<span class="sd">        dataframe defines a metadata column, and the metadata column&#39;s type</span>
+<span class="sd">        (i.e. *categorical* or *numeric*) is determined based on the column&#39;s</span>
+<span class="sd">        dtype. If a column has ``dtype=object``, it may contain strings or</span>
+<span class="sd">        pandas missing values (e.g. ``np.nan``, ``None``). Columns matching</span>
+<span class="sd">        this requirement are assumed to be *categorical*. If a column in the</span>
+<span class="sd">        dataframe has ``dtype=float`` or ``dtype=int``, it may contain floating</span>
+<span class="sd">        point numbers or integers, as well as pandas missing values</span>
+<span class="sd">        (e.g. ``np.nan``). Columns matching this requirement are assumed to be</span>
+<span class="sd">        *numeric*. Regardless of column type (categorical vs numeric), the</span>
+<span class="sd">        dataframe stored within the ``Metadata`` object will have any missing</span>
+<span class="sd">        values normalized to ``np.nan``. Columns with ``dtype=int`` will be</span>
+<span class="sd">        cast to ``dtype=float``. To obtain a dataframe from the ``Metadata``</span>
+<span class="sd">        object containing these normalized data types and values, use</span>
+<span class="sd">        ``Metadata.to_dataframe()``.</span>
+<span class="sd">    column_missing_schemes : dict, optional</span>
+<span class="sd">        Describe the metadata column handling for missing values described</span>
+<span class="sd">        in the dataframe. This is a dict mapping column names (str) to</span>
+<span class="sd">        missing-value schemes (str).  Valid values are &#39;blank&#39;,</span>
+<span class="sd">        &#39;no-missing&#39;, and &#39;INSDC:missing&#39;. Column names may be omitted.</span>
+<span class="sd">    default_missing_scheme : str, optional</span>
+<span class="sd">        The missing scheme to use when none has been provided in the file</span>
+<span class="sd">        or in `column_missing_schemes`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">column_types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">column_missing_schemes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">default_missing_scheme</span><span class="o">=</span><span class="n">DEFAULT_MISSING</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load a TSV metadata file.</span>
+
+<span class="sd">        The TSV metadata file format is described at https://docs.qiime2.org in</span>
+<span class="sd">        the Metadata Tutorial.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filepath : str</span>
+<span class="sd">            Path to TSV metadata file to be loaded.</span>
+<span class="sd">        column_types : dict, optional</span>
+<span class="sd">            Override metadata column types specified or inferred in the file.</span>
+<span class="sd">            This is a dict mapping column names (str) to column types (str).</span>
+<span class="sd">            Valid column types are &#39;categorical&#39; and &#39;numeric&#39;. Column names</span>
+<span class="sd">            may be omitted from this dict to use the column types read from the</span>
+<span class="sd">            file.</span>
+<span class="sd">        column_missing_schemes : dict, optional</span>
+<span class="sd">            Override the metadata column handling for missing values described</span>
+<span class="sd">            in the file. This is a dict mapping column names (str) to</span>
+<span class="sd">            missing-value schemes (str).  Valid values are &#39;blank&#39;,</span>
+<span class="sd">            &#39;no-missing&#39;, and &#39;INSDC:missing&#39;. Column names may be omitted.</span>
+<span class="sd">        default_missing_scheme : str, optional</span>
+<span class="sd">            The missing scheme to use when none has been provided in the file</span>
+<span class="sd">            or in `column_missing_schemes`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Metadata</span>
+<span class="sd">            Metadata object loaded from `filepath`.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        MetadataFileError</span>
+<span class="sd">            If the metadata file is invalid in any way (e.g. doesn&#39;t meet the</span>
+<span class="sd">            file format&#39;s requirements).</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        save</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.io</span> <span class="kn">import</span> <span class="n">MetadataReader</span>
+        <span class="k">return</span> <span class="n">MetadataReader</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>
+            <span class="n">into</span><span class="o">=</span><span class="bp">cls</span><span class="p">,</span>
+            <span class="n">column_types</span><span class="o">=</span><span class="n">column_types</span><span class="p">,</span>
+            <span class="n">column_missing_schemes</span><span class="o">=</span><span class="n">column_missing_schemes</span><span class="p">,</span>
+            <span class="n">default_missing_scheme</span><span class="o">=</span><span class="n">default_missing_scheme</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">columns</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Ordered mapping of column names to ColumnProperties.</span>
+
+<span class="sd">        The mapping that is returned is read-only. This property is also</span>
+<span class="sd">        read-only.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        types.MappingProxyType</span>
+<span class="sd">            Ordered mapping of column names to ColumnProperties.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Read-only proxy to the OrderedDict mapping column names to</span>
+        <span class="c1"># ColumnProperties.</span>
+        <span class="k">return</span> <span class="n">types</span><span class="o">.</span><span class="n">MappingProxyType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_columns</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">column_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Number of metadata columns.</span>
+
+<span class="sd">        This property is read-only.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            Number of metadata columns.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Zero metadata columns are allowed.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        id_count</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_columns</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">,</span> <span class="n">column_missing_schemes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">default_missing_scheme</span><span class="o">=</span><span class="n">DEFAULT_MISSING</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> constructor requires a pandas.DataFrame object, not &quot;</span>
+                <span class="s2">&quot;</span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)))</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">column_missing_schemes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">column_missing_schemes</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dataframe</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalize_dataframe</span><span class="p">(</span>
+            <span class="n">dataframe</span><span class="p">,</span> <span class="n">column_missing_schemes</span><span class="p">,</span> <span class="n">default_missing_scheme</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dataframe</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;column&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_normalize_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">,</span> <span class="n">column_missing_schemes</span><span class="p">,</span>
+                             <span class="n">default_missing_scheme</span><span class="p">):</span>
+        <span class="n">norm_df</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># Do not attempt to strip empty metadata</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">norm_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">norm_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">norm_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="n">norm_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">norm_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="n">columns</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">column_name</span><span class="p">,</span> <span class="n">series</span> <span class="ow">in</span> <span class="n">norm_df</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">missing_scheme</span> <span class="o">=</span> <span class="n">column_missing_schemes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">column_name</span><span class="p">,</span>
+                                                        <span class="n">default_missing_scheme</span><span class="p">)</span>
+            <span class="n">metadata_column</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metadata_column_factory</span><span class="p">(</span><span class="n">series</span><span class="p">,</span>
+                                                            <span class="n">missing_scheme</span><span class="p">)</span>
+            <span class="n">norm_df</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata_column</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span>
+            <span class="n">properties</span> <span class="o">=</span> <span class="n">ColumnProperties</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">metadata_column</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+                                          <span class="n">missing_scheme</span><span class="o">=</span><span class="n">missing_scheme</span><span class="p">)</span>
+            <span class="n">columns</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span>
+
+        <span class="k">return</span> <span class="n">norm_df</span><span class="p">,</span> <span class="n">columns</span>
+
+    <span class="k">def</span> <span class="nf">_metadata_column_factory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series</span><span class="p">,</span> <span class="n">missing_scheme</span><span class="p">):</span>
+        <span class="n">series</span> <span class="o">=</span> <span class="n">_missing</span><span class="o">.</span><span class="n">series_encode_missing</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">missing_scheme</span><span class="p">)</span>
+        <span class="c1"># Collapse dtypes except for all NaN columns so that we can preserve</span>
+        <span class="c1"># empty categorical columns. Empty numeric columns will already have</span>
+        <span class="c1"># the expected dtype and values</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">series</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+            <span class="n">series</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">infer_objects</span><span class="p">()</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">dtype</span>
+        <span class="k">if</span> <span class="n">NumericMetadataColumn</span><span class="o">.</span><span class="n">_is_supported_dtype</span><span class="p">(</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="n">column</span> <span class="o">=</span> <span class="n">NumericMetadataColumn</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">missing_scheme</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">CategoricalMetadataColumn</span><span class="o">.</span><span class="n">_is_supported_dtype</span><span class="p">(</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="n">column</span> <span class="o">=</span> <span class="n">CategoricalMetadataColumn</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">missing_scheme</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;Metadata column </span><span class="si">%r</span><span class="s2"> has an unsupported pandas dtype of </span><span class="si">%s</span><span class="s2">. &quot;</span>
+                <span class="s2">&quot;Supported dtypes: float, int, object&quot;</span> <span class="o">%</span>
+                <span class="p">(</span><span class="n">series</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">dtype</span><span class="p">))</span>
+
+        <span class="n">column</span><span class="o">.</span><span class="n">_add_artifacts</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">artifacts</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">column</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String summary of the metadata and its columns.&quot;&quot;&quot;</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Header</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+
+        <span class="c1"># Dimensions</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> ID</span><span class="si">%s</span><span class="s1"> x </span><span class="si">%d</span><span class="s1"> column</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">id_count</span><span class="p">,</span>
+            <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">id_count</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">column_count</span><span class="p">,</span>
+            <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_count</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span>
+        <span class="p">))</span>
+
+        <span class="c1"># Column properties</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_count</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">max_name_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">props</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">padding</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="p">((</span><span class="n">max_name_len</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">:</span><span class="si">%s%r</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">padding</span><span class="p">,</span> <span class="n">props</span><span class="p">))</span>
+
+        <span class="c1"># Epilogue</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Call to_dataframe() for a tabular representation.&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine if this metadata is equal to another.</span>
+
+<span class="sd">        ``Metadata`` objects are equal if their IDs, columns (including column</span>
+<span class="sd">        names, types, and ordering), ID headers, source artifacts, and metadata</span>
+<span class="sd">        values are equal.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : Metadata</span>
+<span class="sd">            Metadata to test for equality.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Indicates whether this ``Metadata`` object is equal to `other`.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        __ne__</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_columns</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_columns</span> <span class="ow">and</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dataframe</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_dataframe</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine if this metadata is not equal to another.</span>
+
+<span class="sd">        ``Metadata`` objects are not equal if their IDs, columns (including</span>
+<span class="sd">        column names, types, or ordering), ID headers, source artifacts, or</span>
+<span class="sd">        metadata values are not equal.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : Metadata</span>
+<span class="sd">            Metadata to test for inequality.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Indicates whether this ``Metadata`` object is not equal to `other`.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        __eq__</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span> <span class="o">==</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">to_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encode_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a pandas dataframe from the metadata.</span>
+
+<span class="sd">        The dataframe&#39;s index name (``Index.name``) will match this metadata</span>
+<span class="sd">        object&#39;s ``id_header``, and the index will contain this metadata</span>
+<span class="sd">        object&#39;s IDs. The dataframe&#39;s column names will match the column names</span>
+<span class="sd">        in this metadata. Categorical columns will be stored as</span>
+<span class="sd">        ``dtype=object`` (containing strings), and numeric columns will be</span>
+<span class="sd">        stored as ``dtype=float``.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        encode_missing : bool, optional</span>
+<span class="sd">            Whether to convert missing values (NaNs) back into their original</span>
+<span class="sd">            vocabulary (strings) if a missing scheme was used.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pandas.DataFrame</span>
+<span class="sd">            Dataframe constructed from the metadata.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dataframe</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">encode_missing</span><span class="p">:</span>
+            <span class="k">def</span> <span class="nf">replace_nan</span><span class="p">(</span><span class="n">series</span><span class="p">):</span>
+                <span class="n">missing</span> <span class="o">=</span> <span class="n">_missing</span><span class="o">.</span><span class="n">series_extract_missing</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
+                <span class="c1"># avoid dtype changing if there&#39;s no missing values</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">missing</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+                    <span class="n">series</span><span class="p">[</span><span class="n">missing</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">missing</span>
+                <span class="k">return</span> <span class="n">series</span>
+
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">replace_nan</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">df</span>
+
+    <span class="k">def</span> <span class="nf">get_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve metadata column based on column name.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            Name of the metadata column to retrieve.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        MetadataColumn</span>
+<span class="sd">            Requested metadata column (``CategoricalMetadataColumn`` or</span>
+<span class="sd">            ``NumericMetadataColumn``).</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        get_ids</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dataframe</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="n">missing_scheme</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_columns</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">missing_scheme</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;</span><span class="si">%r</span><span class="s1"> is not a column in the metadata. Available columns: &#39;</span>
+                <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">)))</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metadata_column_factory</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">missing_scheme</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve IDs matching search criteria.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        where : str, optional</span>
+<span class="sd">            SQLite WHERE clause specifying criteria IDs must meet to be</span>
+<span class="sd">            included in the results. All IDs are included by default.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        set</span>
+<span class="sd">            IDs matching search criteria specified in `where`.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        ids</span>
+<span class="sd">        filter_ids</span>
+<span class="sd">        get_column</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The ID header (``Metadata.id_header``) may be used in the `where`</span>
+<span class="sd">        clause to query the table&#39;s ID column.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">where</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ids</span><span class="p">)</span>
+
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;:memory:&#39;</span><span class="p">)</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">row_factory</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># https://github.com/pandas-dev/pandas/blob/</span>
+        <span class="c1"># 7c7bd569ce8e0f117c618d068e3d2798134dbc73/pandas/io/sql.py#L1306</span>
+        <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span>
+                <span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="s1">&#39;The spaces in these column names will not.*&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dataframe</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">index_label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id_header</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+        <span class="c1"># In general we wouldn&#39;t want to format our query in this way because</span>
+        <span class="c1"># it leaves us open to sql injection, but it seems acceptable here for</span>
+        <span class="c1"># a few reasons:</span>
+        <span class="c1"># 1) This is a throw-away database which we&#39;re just creating to have</span>
+        <span class="c1">#    access to the query language, so any malicious behavior wouldn&#39;t</span>
+        <span class="c1">#    impact any data that isn&#39;t temporary</span>
+        <span class="c1"># 2) The substitution syntax recommended in the docs doesn&#39;t allow</span>
+        <span class="c1">#    us to specify complex `where` statements, which is what we need to</span>
+        <span class="c1">#    do here. For example, we need to specify things like:</span>
+        <span class="c1">#        WHERE Subject=&#39;subject-1&#39; AND SampleType=&#39;gut&#39;</span>
+        <span class="c1">#    but their qmark/named-style syntaxes only supports substition of</span>
+        <span class="c1">#    variables, such as:</span>
+        <span class="c1">#        WHERE Subject=?</span>
+        <span class="c1"># 3) sqlite3.Cursor.execute will only execute a single statement so</span>
+        <span class="c1">#    inserting multiple statements</span>
+        <span class="c1">#    (e.g., &quot;Subject=&#39;subject-1&#39;; DROP...&quot;) will result in an</span>
+        <span class="c1">#    OperationalError being raised.</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;SELECT &quot;</span><span class="si">{0}</span><span class="s1">&quot; FROM metadata WHERE </span><span class="si">{1}</span><span class="s1"> GROUP BY &quot;</span><span class="si">{0}</span><span class="s1">&quot; &#39;</span>
+                 <span class="s1">&#39;ORDER BY &quot;</span><span class="si">{0}</span><span class="s1">&quot;;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_header</span><span class="p">,</span> <span class="n">where</span><span class="p">))</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">OperationalError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Selection of IDs failed with query:</span><span class="se">\n</span><span class="s2"> </span><span class="si">%s</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+                             <span class="s2">&quot;If one of the metadata column names specified &quot;</span>
+                             <span class="s2">&quot;in the `where` statement is on this list &quot;</span>
+                             <span class="s2">&quot;of reserved keywords &quot;</span>
+                             <span class="s2">&quot;(http://www.sqlite.org/lang_keywords.html), &quot;</span>
+                             <span class="s2">&quot;please ensure it is quoted appropriately in the &quot;</span>
+                             <span class="s2">&quot;`where` statement.&quot;</span> <span class="o">%</span> <span class="n">query</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+
+        <span class="n">ids</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">ids</span>
+
+    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">others</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Merge this ``Metadata`` object with other ``Metadata`` objects.</span>
+
+<span class="sd">        Returns a new ``Metadata`` object containing the merged contents of</span>
+<span class="sd">        this ``Metadata`` object and `others`. The merge is not in-place and</span>
+<span class="sd">        will always return a **new** merged ``Metadata`` object.</span>
+
+<span class="sd">        The merge will include only those IDs that are shared across **all**</span>
+<span class="sd">        ``Metadata`` objects being merged (i.e. the merge is an *inner join*).</span>
+
+<span class="sd">        Each metadata column being merged must have a unique name; merging</span>
+<span class="sd">        metadata with overlapping column names will result in an error.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        others : tuple</span>
+<span class="sd">            One or more ``Metadata`` objects to merge with this ``Metadata``</span>
+<span class="sd">            object.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Metadata</span>
+<span class="sd">            New object containing merged metadata. The merged IDs will be in</span>
+<span class="sd">            the same relative order as the IDs in this ``Metadata`` object</span>
+<span class="sd">            after performing the inner join. The merged column order will match</span>
+<span class="sd">            the column order of ``Metadata`` objects being merged from left to</span>
+<span class="sd">            right.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If zero ``Metadata`` objects are provided in `others` (there is</span>
+<span class="sd">            nothing to merge in this case).</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The merged ``Metadata`` object will always have its ``id_header``</span>
+<span class="sd">        property set to ``&#39;id&#39;``, regardless of the ``id_header`` values on the</span>
+<span class="sd">        ``Metadata`` objects being merged.</span>
+
+<span class="sd">        The merged ``Metadata`` object tracks all source artifacts that it was</span>
+<span class="sd">        built from to preserve provenance (i.e. the ``.artifacts`` property</span>
+<span class="sd">        on all ``Metadata`` objects is merged).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">others</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;At least one Metadata object must be provided to merge into &quot;</span>
+                <span class="s2">&quot;this Metadata object (otherwise there is nothing to merge).&quot;</span><span class="p">)</span>
+
+        <span class="n">dfs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">artifacts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">md</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">([</span><span class="bp">self</span><span class="p">],</span> <span class="n">others</span><span class="p">):</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">_dataframe</span>
+            <span class="n">dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+            <span class="n">columns</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+            <span class="n">artifacts</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">md</span><span class="o">.</span><span class="n">artifacts</span><span class="p">)</span>
+
+        <span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">columns</span><span class="o">.</span><span class="n">has_duplicates</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Cannot merge metadata with overlapping columns. The &quot;</span>
+                <span class="s2">&quot;following columns overlap: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+                <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span>
+                           <span class="n">columns</span><span class="p">[</span><span class="n">columns</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()]</span><span class="o">.</span><span class="n">unique</span><span class="p">()]))</span>
+
+        <span class="n">merged_df</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Not using DataFrame.empty because empty columns are allowed in</span>
+        <span class="c1"># Metadata.</span>
+        <span class="k">if</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Cannot merge because there are no IDs shared across metadata &quot;</span>
+                <span class="s2">&quot;objects.&quot;</span><span class="p">)</span>
+
+        <span class="n">merged_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;id&#39;</span>
+        <span class="n">merged_md</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">merged_df</span><span class="p">)</span>
+        <span class="n">merged_md</span><span class="o">.</span><span class="n">_add_artifacts</span><span class="p">(</span><span class="n">artifacts</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">merged_md</span>
+
+    <span class="k">def</span> <span class="nf">filter_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids_to_keep</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter metadata by IDs.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ids_to_keep : iterable of str</span>
+<span class="sd">            IDs that should be retained in the filtered ``Metadata`` object. If</span>
+<span class="sd">            any IDs in `ids_to_keep` are not contained in this ``Metadata``</span>
+<span class="sd">            object, a ``ValueError`` will be raised. The filtered ``Metadata``</span>
+<span class="sd">            object will retain the same relative ordering of IDs in this</span>
+<span class="sd">            ``Metadata`` object. Thus, the ordering of IDs in `ids_to_keep`</span>
+<span class="sd">            does not determine the ordering of IDs in the filtered ``Metadata``</span>
+<span class="sd">            object.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Metadata</span>
+<span class="sd">            The metadata filtered by IDs.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        get_ids</span>
+<span class="sd">        filter_columns</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">filtered_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_ids_helper</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dataframe</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ids</span><span class="p">(),</span>
+                                              <span class="n">ids_to_keep</span><span class="p">)</span>
+        <span class="n">filtered_md</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">)</span>
+        <span class="n">filtered_md</span><span class="o">.</span><span class="n">_add_artifacts</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">artifacts</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">filtered_md</span>
+
+    <span class="k">def</span> <span class="nf">filter_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">column_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">drop_all_unique</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                       <span class="n">drop_zero_variance</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">drop_all_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter metadata by columns.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        column_type : str, optional</span>
+<span class="sd">            If supplied, will retain only columns of this type. The currently</span>
+<span class="sd">            supported column types are &#39;numeric&#39; and &#39;categorical&#39;.</span>
+<span class="sd">        drop_all_unique : bool, optional</span>
+<span class="sd">            If ``True``, columns that contain a unique value for every ID will</span>
+<span class="sd">            be dropped. Missing data (``np.nan``) are ignored when determining</span>
+<span class="sd">            unique values. If a column consists solely of missing data, it will</span>
+<span class="sd">            be dropped.</span>
+<span class="sd">        drop_zero_variance : bool, optional</span>
+<span class="sd">            If ``True``, columns that contain the same value for every ID will</span>
+<span class="sd">            be dropped. Missing data (``np.nan``) are ignored when determining</span>
+<span class="sd">            variance. If a column consists solely of missing data, it will be</span>
+<span class="sd">            dropped.</span>
+<span class="sd">        drop_all_missing : bool, optional</span>
+<span class="sd">            If ``True``, columns that have a missing value (``np.nan``) for</span>
+<span class="sd">            every ID will be dropped.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Metadata</span>
+<span class="sd">            The metadata filtered by columns.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        filter_ids</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">column_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span>
+                <span class="n">column_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SUPPORTED_COLUMN_TYPES</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Unknown column type </span><span class="si">%r</span><span class="s2">. Supported column types: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+                <span class="p">(</span><span class="n">column_type</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">SUPPORTED_COLUMN_TYPES</span><span class="p">))))</span>
+
+        <span class="c1"># Build up a set of columns to drop. Short-circuit as soon as we know a</span>
+        <span class="c1"># given column can be dropped (no need to apply further filters to it).</span>
+        <span class="n">columns_to_drop</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">column</span><span class="p">,</span> <span class="n">props</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">column_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">props</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="n">column_type</span><span class="p">:</span>
+                <span class="n">columns_to_drop</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="n">series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dataframe</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">drop_all_unique</span> <span class="ow">or</span> <span class="n">drop_zero_variance</span><span class="p">:</span>
+                <span class="c1"># Ignore nans in the unique count, and compare to the number of</span>
+                <span class="c1"># non-nan values in the series.</span>
+                <span class="n">num_unique</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">nunique</span><span class="p">(</span><span class="n">dropna</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">drop_all_unique</span> <span class="ow">and</span> <span class="n">num_unique</span> <span class="o">==</span> <span class="n">series</span><span class="o">.</span><span class="n">count</span><span class="p">():</span>
+                    <span class="n">columns_to_drop</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="c1"># If num_unique == 0, the series was empty (all nans). If</span>
+                <span class="c1"># num_unique == 1, the series contained only a single unique</span>
+                <span class="c1"># value (ignoring nans).</span>
+                <span class="k">if</span> <span class="n">drop_zero_variance</span> <span class="ow">and</span> <span class="n">num_unique</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">columns_to_drop</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">drop_all_missing</span> <span class="ow">and</span> <span class="n">series</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="n">columns_to_drop</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+        <span class="n">filtered_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dataframe</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns_to_drop</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                           <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">filtered_md</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">)</span>
+        <span class="n">filtered_md</span><span class="o">.</span><span class="n">_add_artifacts</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">artifacts</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">filtered_md</span></div>
+
+
+<div class="viewcode-block" id="MetadataColumn"><a class="viewcode-back" href="../../../plugins/references/metadata-api.html#qiime2.metadata.MetadataColumn">[docs]</a><span class="k">class</span> <span class="nc">MetadataColumn</span><span class="p">(</span><span class="n">_MetadataBase</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract base class representing a single metadata column.</span>
+
+<span class="sd">    Concrete subclasses represent specific metadata column types, e.g.</span>
+<span class="sd">    ``CategoricalMetadataColumn`` and ``NumericMetadataColumn``.</span>
+
+<span class="sd">    See the ``Metadata`` class docstring for details about ``Metadata`` and</span>
+<span class="sd">    ``MetadataColumn`` objects, including a description of column types.</span>
+
+<span class="sd">    The main difference in constructing ``MetadataColumn`` vs ``Metadata``</span>
+<span class="sd">    objects is that ``MetadataColumn`` objects are constructed from a</span>
+<span class="sd">    ``pandas.Series`` object instead of a ``pandas.DataFrame``. Otherwise, the</span>
+<span class="sd">    same restrictions, considerations, and data normalization are applied as</span>
+<span class="sd">    with ``Metadata`` objects.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    series : pd.Series</span>
+<span class="sd">        The series to construct a column from.</span>
+<span class="sd">    missing_scheme : &quot;blank&quot;, &quot;no-missing&quot;, &quot;INSDC:missing&quot;</span>
+<span class="sd">        How to interpret terms for missing values. These will be converted</span>
+<span class="sd">        to NaN. The default treatment is to take no action.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Abstract, must be defined by subclasses.</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">_is_supported_dtype</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dtype</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Contract: Return ``True`` if the series `dtype` is supported by this</span>
+<span class="sd">        object and can be handled appropriately by ``_normalize_``. Return</span>
+<span class="sd">        ``False`` otherwise.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">_normalize_</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">series</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Contract: Return a copy of `series` that has been converted to the</span>
+<span class="sd">        appropriate internal dtype and has any other necessary normalization or</span>
+<span class="sd">        validation applied (e.g. missing value representations, disallowing</span>
+<span class="sd">        certain values, etc). Raise an error with a detailed error message if</span>
+<span class="sd">        the operation cannot be completed.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Metadata column name.</span>
+
+<span class="sd">        This property is read-only.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Metadata column name.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_series</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">missing_scheme</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The vocabulary used to encode missing values</span>
+
+<span class="sd">        This property is read-only.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">           &quot;blank&quot;, &quot;no-missing&quot;, or &quot;INSDC:missing&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_missing_scheme</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series</span><span class="p">,</span> <span class="n">missing_scheme</span><span class="o">=</span><span class="n">DEFAULT_MISSING</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> constructor requires a pandas.Series object, not </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">series</span><span class="p">)))</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">series</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="n">series</span> <span class="o">=</span> <span class="n">_missing</span><span class="o">.</span><span class="n">series_encode_missing</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">missing_scheme</span><span class="p">)</span>
+        <span class="c1"># if the series has values with a consistent dtype, make the series</span>
+        <span class="c1"># that dtype. Don&#39;t change the dtype if there is a column of all NaN</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">series</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+            <span class="n">series</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">infer_objects</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_supported_dtype</span><span class="p">(</span><span class="n">series</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%r</span><span class="s2"> does not support a pandas.Series object with dtype </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">series</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">series</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_missing_scheme</span> <span class="o">=</span> <span class="n">missing_scheme</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalize_</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_index</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_series</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;column&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String summary of the metadata column.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;&lt;</span><span class="si">%s</span><span class="s1"> name=</span><span class="si">%r</span><span class="s1"> id_count=</span><span class="si">%d</span><span class="s1">&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                                             <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">id_count</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine if this metadata column is equal to another.</span>
+
+<span class="sd">        ``MetadataColumn`` objects are equal if their IDs, column names, column</span>
+<span class="sd">        types, ID headers, source artifacts, and metadata values are equal.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : MetadataColumn</span>
+<span class="sd">            Metadata column to test for equality.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Indicates whether this ``MetadataColumn`` object is equal to</span>
+<span class="sd">            `other`.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        __ne__</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="ow">and</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_series</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_series</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine if this metadata column is not equal to another.</span>
+
+<span class="sd">        ``MetadataColumn`` objects are not equal if their IDs, column names,</span>
+<span class="sd">        column types, ID headers, source artifacts, or metadata values are not</span>
+<span class="sd">        equal.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : MetadataColumn</span>
+<span class="sd">            Metadata column to test for inequality.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Indicates whether this ``MetadataColumn`` object is not equal to</span>
+<span class="sd">            `other`.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        __eq__</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span> <span class="o">==</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">to_series</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encode_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a pandas series from the metadata column.</span>
+
+<span class="sd">        The series index name (``Index.name``) will match this metadata</span>
+<span class="sd">        column&#39;s ``id_header``, and the index will contain this metadata</span>
+<span class="sd">        column&#39;s IDs. The series name will match this metadata column&#39;s name.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        encode_missing : bool, optional</span>
+<span class="sd">            Whether to convert missing values (NaNs) back into their original</span>
+<span class="sd">            vocabulary (strings) if a missing scheme was used.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pandas.Series</span>
+<span class="sd">            Series constructed from the metadata column.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        to_dataframe</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_series</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">encode_missing</span><span class="p">:</span>
+            <span class="n">missing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_missing</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">missing</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+                <span class="n">series</span><span class="p">[</span><span class="n">missing</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">missing</span>
+
+        <span class="k">return</span> <span class="n">series</span>
+
+    <span class="k">def</span> <span class="nf">to_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encode_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a pandas dataframe from the metadata column.</span>
+
+<span class="sd">        The dataframe will contain exactly one column. The dataframe&#39;s index</span>
+<span class="sd">        name (``Index.name``) will match this metadata column&#39;s ``id_header``,</span>
+<span class="sd">        and the index will contain this metadata column&#39;s IDs. The dataframe&#39;s</span>
+<span class="sd">        column name will match this metadata column&#39;s name.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        encode_missing : bool, optional</span>
+<span class="sd">            Whether to convert missing values (NaNs) back into their original</span>
+<span class="sd">            vocabulary (strings) if a missing scheme was used.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pandas.DataFrame</span>
+<span class="sd">            Dataframe constructed from the metadata column.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        to_series</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_series</span><span class="p">(</span><span class="n">encode_missing</span><span class="o">=</span><span class="n">encode_missing</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_missing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a series containing only missing values (with an index).</span>
+
+<span class="sd">        If the column was constructed with a missing scheme, then the values</span>
+<span class="sd">        of the series will be the original terms instead of NaN.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_missing</span><span class="o">.</span><span class="n">series_extract_missing</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_series</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve metadata column value associated with an ID.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        id : str</span>
+<span class="sd">            ID corresponding to the metadata column value to retrieve.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        object</span>
+<span class="sd">            Value associated with the provided `id`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_series</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ID </span><span class="si">%r</span><span class="s2"> is not present in </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_series</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">has_missing_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine if the metadata column has one or more missing values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` if the metadata column has one or more missing values</span>
+<span class="sd">            (``np.nan``), ``False`` otherwise.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        drop_missing_values</span>
+<span class="sd">        get_ids</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_ids</span><span class="p">(</span><span class="n">where_values_missing</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">drop_missing_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter out missing values from the metadata column.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        MetadataColumn</span>
+<span class="sd">            Metadata column with missing values removed.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        has_missing_values</span>
+<span class="sd">        get_ids</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">missing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ids</span><span class="p">(</span><span class="n">where_values_missing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">present</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ids</span><span class="p">()</span> <span class="o">-</span> <span class="n">missing</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_ids</span><span class="p">(</span><span class="n">present</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">where_values_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve IDs matching search criteria.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        where_values_missing : bool, optional</span>
+<span class="sd">            If ``True``, only return IDs that are associated with missing</span>
+<span class="sd">            values (``np.nan``). If ``False`` (the default), return all IDs in</span>
+<span class="sd">            the metadata column.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        set</span>
+<span class="sd">            IDs matching search criteria.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        ids</span>
+<span class="sd">        filter_ids</span>
+<span class="sd">        has_missing_values</span>
+<span class="sd">        drop_missing_values</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">where_values_missing</span><span class="p">:</span>
+            <span class="n">ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_series</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_series</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ids</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">filter_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids_to_keep</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Filter metadata column by IDs.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ids_to_keep : iterable of str</span>
+<span class="sd">            IDs that should be retained in the filtered ``MetadataColumn``</span>
+<span class="sd">            object. If any IDs in `ids_to_keep` are not contained in this</span>
+<span class="sd">            ``MetadataColumn`` object, a ``ValueError`` will be raised. The</span>
+<span class="sd">            filtered ``MetadataColumn`` object will retain the same relative</span>
+<span class="sd">            ordering of IDs in this ``MetadataColumn`` object. Thus, the</span>
+<span class="sd">            ordering of IDs in `ids_to_keep` does not determine the ordering of</span>
+<span class="sd">            IDs in the filtered ``MetadataColumn`` object.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        MetadataColumn</span>
+<span class="sd">            The metadata column filtered by IDs.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        get_ids</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">filtered_series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_ids_helper</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_series</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ids</span><span class="p">(),</span>
+                                                  <span class="n">ids_to_keep</span><span class="p">)</span>
+        <span class="n">filtered_mdc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">filtered_series</span><span class="p">)</span>
+        <span class="n">filtered_mdc</span><span class="o">.</span><span class="n">_add_artifacts</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">artifacts</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">filtered_mdc</span></div>
+
+
+<div class="viewcode-block" id="CategoricalMetadataColumn"><a class="viewcode-back" href="../../../plugins/references/metadata-api.html#qiime2.metadata.CategoricalMetadataColumn">[docs]</a><span class="k">class</span> <span class="nc">CategoricalMetadataColumn</span><span class="p">(</span><span class="n">MetadataColumn</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A single metadata column containing categorical data.</span>
+
+<span class="sd">    See the ``Metadata`` class docstring for details about ``Metadata`` and</span>
+<span class="sd">    ``MetadataColumn`` objects, including a description of column types and</span>
+<span class="sd">    supported data formats.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="s1">&#39;categorical&#39;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_is_supported_dtype</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dtype</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">dtype</span> <span class="o">==</span> <span class="s1">&#39;object&#39;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_normalize_</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">series</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> does not support empty strings as values. Use an &quot;</span>
+                        <span class="s2">&quot;appropriate pandas missing value type &quot;</span>
+                        <span class="s2">&quot;(e.g. `numpy.nan`) or supply a non-empty string as &quot;</span>
+                        <span class="s2">&quot;the value in column </span><span class="si">%r</span><span class="s2">.&quot;</span> <span class="o">%</span>
+                        <span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">series</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">value</span>
+            <span class="k">elif</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>  <span class="c1"># permits np.nan, Python float nan, None</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="n">value</span>
+                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                    <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> only supports strings or missing values. Found value &quot;</span>
+                    <span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> of type </span><span class="si">%r</span><span class="s2"> in column </span><span class="si">%r</span><span class="s2">.&quot;</span> <span class="o">%</span>
+                    <span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">series</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="n">norm_series</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">normalize</span><span class="p">,</span> <span class="n">convert_dtype</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">norm_series</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">norm_series</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">norm_series</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">norm_series</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">norm_series</span></div>
+
+
+<div class="viewcode-block" id="NumericMetadataColumn"><a class="viewcode-back" href="../../../plugins/references/metadata-api.html#qiime2.metadata.NumericMetadataColumn">[docs]</a><span class="k">class</span> <span class="nc">NumericMetadataColumn</span><span class="p">(</span><span class="n">MetadataColumn</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A single metadata column containing numeric data.</span>
+
+<span class="sd">    See the ``Metadata`` class docstring for details about ``Metadata`` and</span>
+<span class="sd">    ``MetadataColumn`` objects, including a description of column types and</span>
+<span class="sd">    supported data formats.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="s1">&#39;numeric&#39;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_is_supported_dtype</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dtype</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">dtype</span> <span class="o">==</span> <span class="s1">&#39;float&#39;</span> <span class="ow">or</span> <span class="n">dtype</span> <span class="o">==</span> <span class="s1">&#39;int&#39;</span> <span class="ow">or</span> <span class="n">dtype</span> <span class="o">==</span> <span class="s1">&#39;int64&#39;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_normalize_</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">series</span><span class="p">):</span>
+        <span class="n">series</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;raise&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">series</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> does not support positive or negative infinity as a &quot;</span>
+                <span class="s2">&quot;floating point value in column </span><span class="si">%r</span><span class="s2">.&quot;</span> <span class="o">%</span>
+                <span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">series</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">series</span></div>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Greg Caporaso and Evan Bolyen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

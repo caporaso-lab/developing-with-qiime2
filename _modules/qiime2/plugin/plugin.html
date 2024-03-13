@@ -1,0 +1,807 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>qiime2.plugin.plugin &#8212; Developing with QIIME 2</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/qiime2/plugin/plugin';</script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/q2dev.svg" class="logo__image only-light" alt="Developing with QIIME 2 - Home"/>
+    <script>document.write(`<img src="../../../_static/q2dev_darkmode.svg" class="logo__image only-dark" alt="Developing with QIIME 2 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Docs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/user-documentation.html">Contributing to the QIIME 2 user documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developer-documentation.html">Contributing to <em>Developing with QIIME 2</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/intro.html">Introduction to Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../plugins/how-to-guides/intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/register-a-plugin.html">Register a QIIME 2 plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/create-register-method.html">Create and register a Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/create-register-visualizer.html">Create and register a visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/create-register-pipeline.html">Create and register a pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/create-register-transformer.html">Creating and registering a Transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/play-nicely-with-others.html">How to play nicely with other plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/use-metadata.html">How to use Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/test-plugins.html">How to test QIIME 2 plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/usage-examples.html">Writing Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/how-to-guides/format-validation-levels.html">Defining different Format validation levels</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../plugins/explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/explanations/actions.html">Types of QIIME 2 Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/explanations/transformers.html">Transformers</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../plugins/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/references/antipatterns.html">Plugin development anti-patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/references/api.html">Plugin developer API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/references/metadata-api.html"><code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> API</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../interfaces/intro.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../interfaces/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../interfaces/references/api.html">Interface developer API</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Framework Internals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../framework/intro.html">Introduction to QIIME 2 framework development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../framework/tutorials/intro.html">Tutorials</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../framework/how-to-guides/intro.html">How-to guides</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/how-to-guides/parallel-configuration.html">Parallel configuration and usage in QIIME 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/how-to-guides/pipeline-resumption.html">Pipeline Resumption in QIIME 2</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../framework/explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/architecture.html">QIIME 2 architecture overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/data-storage.html">How Data is Stored</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/archives.html">Anatomy of an Archive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/types.html">Semantic Types, Primitives, and Visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/formats.html">File Formats and Directory Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/provenance.html">Decentralized retrospective provenance tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/garbage-collection.html">Garbage Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/explanations/metaprogramming.html">Metaprogramming</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../framework/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../framework/references/archive-versions.html">Archive versions</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">CI Internals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../ci/intro.html">Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../back-matter/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../back-matter/bibliography.html">List of works cited</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../back-matter/genindex.html">Index</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for qiime2.plugin.plugin</h1><div class="highlight"><pre>
+<span></span><span class="c1"># ----------------------------------------------------------------------------</span>
+<span class="c1"># Copyright (c) 2016-2023, QIIME 2 development team.</span>
+<span class="c1">#</span>
+<span class="c1"># Distributed under the terms of the Modified BSD License.</span>
+<span class="c1">#</span>
+<span class="c1"># The full license is in the file LICENSE, distributed with this software.</span>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">types</span>
+
+<span class="kn">import</span> <span class="nn">qiime2.sdk</span>
+<span class="kn">import</span> <span class="nn">qiime2.core.type.grammar</span> <span class="k">as</span> <span class="nn">grammar</span>
+<span class="kn">from</span> <span class="nn">qiime2.core.validate</span> <span class="kn">import</span> <span class="n">ValidationObject</span>
+<span class="kn">from</span> <span class="nn">qiime2.plugin.model</span> <span class="kn">import</span> <span class="n">DirectoryFormat</span>
+<span class="kn">from</span> <span class="nn">qiime2.plugin.model.base</span> <span class="kn">import</span> <span class="n">FormatBase</span>
+<span class="kn">from</span> <span class="nn">qiime2.core.type</span> <span class="kn">import</span> <span class="n">is_semantic_type</span>
+<span class="kn">from</span> <span class="nn">qiime2.core.util</span> <span class="kn">import</span> <span class="n">get_view_name</span>
+
+
+<span class="n">TransformerRecord</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span>
+    <span class="s1">&#39;TransformerRecord&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;transformer&#39;</span><span class="p">,</span> <span class="s1">&#39;plugin&#39;</span><span class="p">,</span> <span class="s1">&#39;citations&#39;</span><span class="p">])</span>
+<span class="n">SemanticTypeRecord</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span>
+    <span class="s1">&#39;SemanticTypeRecord&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;semantic_type&#39;</span><span class="p">,</span> <span class="s1">&#39;plugin&#39;</span><span class="p">])</span>
+<span class="n">SemanticTypeFragmentRecord</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span>
+    <span class="s1">&#39;SemanticTypeFragmentRecord&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;fragment&#39;</span><span class="p">,</span> <span class="s1">&#39;plugin&#39;</span><span class="p">])</span>
+<span class="n">FormatRecord</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;FormatRecord&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;format&#39;</span><span class="p">,</span> <span class="s1">&#39;plugin&#39;</span><span class="p">])</span>
+<span class="n">ViewRecord</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span>
+    <span class="s1">&#39;ViewRecord&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;plugin&#39;</span><span class="p">,</span> <span class="s1">&#39;citations&#39;</span><span class="p">])</span>
+<span class="c1"># semantic_type and type_expression will point to the same value in</span>
+<span class="c1"># ArtifactClassRecords as type_expression is deprecated in favor of</span>
+<span class="c1"># semantic_type</span>
+<span class="n">ArtifactClassRecord</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span>
+    <span class="s1">&#39;ArtifactClassRecord&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;semantic_type&#39;</span><span class="p">,</span> <span class="s1">&#39;format&#39;</span><span class="p">,</span> <span class="s1">&#39;plugin&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span>
+                            <span class="s1">&#39;examples&#39;</span><span class="p">,</span> <span class="s1">&#39;type_expression&#39;</span><span class="p">])</span>
+<span class="n">ValidatorRecord</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span>
+    <span class="s1">&#39;ValidatorRecord&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;validator&#39;</span><span class="p">,</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;plugin&#39;</span><span class="p">,</span> <span class="s1">&#39;context&#39;</span><span class="p">])</span>
+
+
+<div class="viewcode-block" id="Plugin"><a class="viewcode-back" href="../../../plugins/references/api.html#qiime2.plugin.Plugin">[docs]</a><span class="k">class</span> <span class="nc">Plugin</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">website</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">project_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">citation_text</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">user_support_text</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">short_description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">citations</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">version</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">website</span> <span class="o">=</span> <span class="n">website</span>
+
+        <span class="c1"># Filled in by the PluginManager if not provided.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">package</span> <span class="o">=</span> <span class="n">package</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project_name</span> <span class="o">=</span> <span class="n">project_name</span>
+
+        <span class="k">if</span> <span class="n">user_support_text</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user_support_text</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Please post to the QIIME 2 forum for &#39;</span>
+                                      <span class="s1">&#39;help with this plugin: https://forum.&#39;</span>
+                                      <span class="s1">&#39;qiime2.org&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user_support_text</span> <span class="o">=</span> <span class="n">user_support_text</span>
+
+        <span class="k">if</span> <span class="n">short_description</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">short_description</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">short_description</span> <span class="o">=</span> <span class="n">short_description</span>
+
+        <span class="k">if</span> <span class="n">description</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;No description available. &#39;</span>
+                                <span class="s1">&#39;See plugin website: </span><span class="si">%s</span><span class="s1">&#39;</span>
+                                <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">website</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+
+        <span class="k">if</span> <span class="n">citations</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">citations</span> <span class="o">=</span> <span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">citations</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">citations</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">methods</span> <span class="o">=</span> <span class="n">PluginMethods</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">visualizers</span> <span class="o">=</span> <span class="n">PluginVisualizers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pipelines</span> <span class="o">=</span> <span class="n">PluginPipelines</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">formats</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">views</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_fragments</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transformers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">artifact_classes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validators</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">freeze</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">actions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># TODO this doesn&#39;t handle method/visualizer name collisions. The</span>
+        <span class="c1"># auto-generated `qiime2.plugins.&lt;plugin-name&gt;.actions` API has the</span>
+        <span class="c1"># same problem. This should be solved at method/visualizer registration</span>
+        <span class="c1"># time, which will solve the problem for both APIs.</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">actions</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">methods</span><span class="p">)</span>
+        <span class="n">actions</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">visualizers</span><span class="p">)</span>
+        <span class="n">actions</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pipelines</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">types</span><span class="o">.</span><span class="n">MappingProxyType</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">artifact_classes</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">type_formats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># self.type_formats was replaced with self.artifact_classes - this</span>
+        <span class="c1"># property provides backward compatibility</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">artifact_classes</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">register_formats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">formats</span><span class="p">,</span> <span class="n">citations</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">for</span> <span class="nb">format</span> <span class="ow">in</span> <span class="n">formats</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="nb">format</span><span class="p">,</span> <span class="n">FormatBase</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not a valid format.&quot;</span> <span class="o">%</span> <span class="nb">format</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_views</span><span class="p">(</span><span class="o">*</span><span class="n">formats</span><span class="p">,</span> <span class="n">citations</span><span class="o">=</span><span class="n">citations</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">register_views</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">views</span><span class="p">,</span> <span class="n">citations</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">citations</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">citations</span> <span class="o">=</span> <span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">citations</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">citations</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">view</span> <span class="ow">in</span> <span class="n">views</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> should be a class.&quot;</span> <span class="o">%</span> <span class="n">view</span><span class="p">)</span>
+
+            <span class="n">is_format</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">FormatBase</span><span class="p">):</span>
+                <span class="n">is_format</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="n">name</span> <span class="o">=</span> <span class="n">get_view_name</span><span class="p">(</span><span class="n">view</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="s2">&quot;View </span><span class="si">%r</span><span class="s2"> is already registered by this &quot;</span>
+                                <span class="s2">&quot;plugin.&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">views</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">ViewRecord</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">view</span><span class="o">=</span><span class="n">view</span><span class="p">,</span> <span class="n">plugin</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">citations</span><span class="o">=</span><span class="n">citations</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">is_format</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">formats</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">FormatRecord</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="n">view</span><span class="p">,</span> <span class="n">plugin</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">register_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">semantic_expression</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_semantic_type</span><span class="p">(</span><span class="n">semantic_expression</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is not a Semantic Type&#39;</span> <span class="o">%</span> <span class="n">semantic_expression</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">validator</span><span class="p">):</span>
+
+            <span class="n">validator_signature</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getfullargspec</span><span class="p">(</span><span class="n">validator</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;data&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">validator_signature</span><span class="o">.</span><span class="n">annotations</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;No expected view type provided as annotation&#39;</span>
+                                <span class="s1">&#39; for `data` variable in </span><span class="si">%r</span><span class="s1">.&#39;</span> <span class="o">%</span>
+                                <span class="p">(</span><span class="n">validator</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;level&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">validator_signature</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;The function signature: </span><span class="si">%r</span><span class="s1"> does not contain&#39;</span>
+                                <span class="s1">&#39; the required arguments and only the required&#39;</span>
+                                <span class="s1">&#39; arguments: </span><span class="si">%r</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span>
+                                    <span class="n">validator_signature</span><span class="o">.</span><span class="n">args</span><span class="p">,</span>
+                                    <span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;level&#39;</span><span class="p">]))</span>
+
+            <span class="k">for</span> <span class="n">semantic_type</span> <span class="ow">in</span> <span class="n">semantic_expression</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">semantic_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">validators</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">validators</span><span class="p">[</span><span class="n">semantic_type</span><span class="p">]</span> <span class="o">=</span> \
+                        <span class="n">ValidationObject</span><span class="p">(</span><span class="n">semantic_type</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">validators</span><span class="p">[</span><span class="n">semantic_type</span><span class="p">]</span><span class="o">.</span><span class="n">add_validator</span><span class="p">(</span>
+                    <span class="n">ValidatorRecord</span><span class="p">(</span>
+                        <span class="n">validator</span><span class="o">=</span><span class="n">validator</span><span class="p">,</span>
+                        <span class="n">view</span><span class="o">=</span><span class="n">validator</span><span class="o">.</span><span class="vm">__annotations__</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span>
+                        <span class="n">plugin</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+                        <span class="n">context</span><span class="o">=</span><span class="n">semantic_expression</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">validator</span>
+        <span class="k">return</span> <span class="n">decorator</span>
+
+    <span class="k">def</span> <span class="nf">register_transformer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_fn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">citations</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A transformer has the type Callable[[type], type]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># `_fn` allows us to figure out if we are called with or without</span>
+        <span class="c1"># arguments in order to support both:</span>
+        <span class="c1"># ```</span>
+        <span class="c1"># @plugin.register_transformer</span>
+        <span class="c1"># def _(x: A) -&gt; B:</span>
+        <span class="c1">#    ...</span>
+        <span class="c1"># ```</span>
+        <span class="c1"># and</span>
+        <span class="c1"># ```</span>
+        <span class="c1"># @plugin.register_transformer(restrict=True)</span>
+        <span class="c1"># def _(x: A) -&gt; B:</span>
+        <span class="c1">#   ...</span>
+        <span class="c1"># ```</span>
+        <span class="k">if</span> <span class="n">citations</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">citations</span> <span class="o">=</span> <span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">citations</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">citations</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">transformer</span><span class="p">):</span>
+            <span class="n">annotations</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="vm">__annotations__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">annotations</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;A transformer must only have a single input&quot;</span>
+                                <span class="s2">&quot; and output annotation.&quot;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="n">annotations</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;return&#39;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;A transformer must provide a return type.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">tuple</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;A transformer can only return a single type,&quot;</span>
+                                <span class="s2">&quot; not </span><span class="si">%r</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">output</span><span class="p">,))</span>
+
+            <span class="nb">input</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">annotations</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformers</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Duplicate transformer (</span><span class="si">%r</span><span class="s2">) from </span><span class="si">%r</span><span class="s2"> to </span><span class="si">%r</span><span class="s2">.&quot;</span>
+                                <span class="o">%</span> <span class="p">(</span><span class="n">transformer</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">input</span> <span class="o">==</span> <span class="n">output</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Plugins should not register identity&quot;</span>
+                                <span class="s2">&quot; transformations (</span><span class="si">%r</span><span class="s2">, </span><span class="si">%r</span><span class="s2"> to </span><span class="si">%r</span><span class="s2">).&quot;</span>
+                                <span class="o">%</span> <span class="p">(</span><span class="n">transformer</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">transformers</span><span class="p">[</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">]</span> <span class="o">=</span> <span class="n">TransformerRecord</span><span class="p">(</span>
+                <span class="n">transformer</span><span class="o">=</span><span class="n">transformer</span><span class="p">,</span> <span class="n">plugin</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">citations</span><span class="o">=</span><span class="n">citations</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">transformer</span>
+
+        <span class="k">if</span> <span class="n">_fn</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">decorator</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Apply the decorator as we were applied with a single function</span>
+            <span class="k">return</span> <span class="n">decorator</span><span class="p">(</span><span class="n">_fn</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">register_semantic_types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">type_fragments</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">type_fragment</span> <span class="ow">in</span> <span class="n">type_fragments</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_semantic_type</span><span class="p">(</span><span class="n">type_fragment</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not a semantic type.&quot;</span> <span class="o">%</span> <span class="n">type_fragment</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">type_fragment</span><span class="p">,</span> <span class="n">grammar</span><span class="o">.</span><span class="n">IncompleteExp</span><span class="p">)</span> <span class="ow">or</span>
+                    <span class="p">(</span><span class="n">type_fragment</span><span class="o">.</span><span class="n">is_concrete</span><span class="p">()</span> <span class="ow">and</span>
+                    <span class="ow">not</span> <span class="n">type_fragment</span><span class="o">.</span><span class="n">fields</span><span class="p">)):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not a semantic type symbol.&quot;</span>
+                                 <span class="o">%</span> <span class="n">type_fragment</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">type_fragment</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_fragments</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Duplicate semantic type symbol </span><span class="si">%r</span><span class="s2">.&quot;</span>
+                                 <span class="o">%</span> <span class="n">type_fragment</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">type_fragments</span><span class="p">[</span><span class="n">type_fragment</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="n">SemanticTypeFragmentRecord</span><span class="p">(</span>
+                    <span class="n">fragment</span><span class="o">=</span><span class="n">type_fragment</span><span class="p">,</span> <span class="n">plugin</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_register_artifact_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">semantic_type</span><span class="p">,</span> <span class="n">directory_format</span><span class="p">,</span>
+                                 <span class="n">description</span><span class="p">,</span> <span class="n">examples</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">directory_format</span><span class="p">,</span> <span class="n">DirectoryFormat</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not a directory format.&quot;</span> <span class="o">%</span> <span class="n">directory_format</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_semantic_type</span><span class="p">(</span><span class="n">semantic_type</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> is not a semantic type.&quot;</span> <span class="o">%</span> <span class="n">semantic_type</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">semantic_type</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">predicate</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> has a predicate, differentiating format&quot;</span>
+                                 <span class="s2">&quot; on predicate is not supported.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">description</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">examples</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">examples</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># register_semantic_type_to_format can accept type expressions such as</span>
+        <span class="c1"># Kennel[Dog | Cat]. By iterating, we will register the concrete types</span>
+        <span class="c1"># (e.g., Kennel[Dog] and Kennel[Cat], not the type expression)</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">semantic_type</span><span class="p">):</span>
+            <span class="n">semantic_type_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">semantic_type_str</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">artifact_classes</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="s2">&quot;Artifact class </span><span class="si">%s</span><span class="s2"> was registered more than &quot;</span>
+                                <span class="s2">&quot;once. Artifact classes can only be &quot;</span>
+                                <span class="s2">&quot;registered once.&quot;</span> <span class="o">%</span> <span class="n">semantic_type_str</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">artifact_classes</span><span class="p">[</span><span class="n">semantic_type_str</span><span class="p">]</span> <span class="o">=</span>\
+                <span class="n">ArtifactClassRecord</span><span class="p">(</span>
+                    <span class="n">semantic_type</span><span class="o">=</span><span class="n">e</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">directory_format</span><span class="p">,</span>
+                    <span class="n">plugin</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+                    <span class="n">examples</span><span class="o">=</span><span class="n">types</span><span class="o">.</span><span class="n">MappingProxyType</span><span class="p">(</span><span class="n">examples</span><span class="p">),</span>
+                    <span class="n">type_expression</span><span class="o">=</span><span class="n">e</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">register_semantic_type_to_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">semantic_type</span><span class="p">,</span>
+                                         <span class="n">artifact_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                         <span class="n">directory_format</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># Handle the deprecated parameter name, artifact_format. This is being</span>
+        <span class="c1"># replaced with directory_format for clarity.</span>
+        <span class="k">if</span> <span class="n">artifact_format</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">directory_format</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;directory_format and artifact_format were both&#39;</span>
+                             <span class="s1">&#39;provided when registering artifact class </span><span class="si">%s</span><span class="s1">.&#39;</span>
+                             <span class="s1">&#39;Please provide directory_format only as &#39;</span>
+                             <span class="s1">&#39;artifact_format is deprecated.&#39;</span>
+                             <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">semantic_type</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">artifact_format</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">directory_format</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;directory_format or artifact_format must be &#39;</span>
+                             <span class="s1">&#39;provided when registering artifact class </span><span class="si">%s</span><span class="s1">.&#39;</span>
+                             <span class="s1">&#39;Please provide directory_format only as &#39;</span>
+                             <span class="s1">&#39;artifact_format is deprecated.&#39;</span>
+                             <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">semantic_type</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">directory_format</span> <span class="o">=</span> <span class="n">directory_format</span> <span class="ow">or</span> <span class="n">artifact_format</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register_artifact_class</span><span class="p">(</span><span class="n">semantic_type</span><span class="o">=</span><span class="n">semantic_type</span><span class="p">,</span>
+                                      <span class="n">directory_format</span><span class="o">=</span><span class="n">directory_format</span><span class="p">,</span>
+                                      <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                      <span class="n">examples</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">register_artifact_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">semantic_type</span><span class="p">,</span> <span class="n">directory_format</span><span class="p">,</span>
+                                <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">semantic_type</span><span class="o">.</span><span class="n">is_concrete</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Only a single type can be registered at a time &quot;</span>
+                            <span class="s2">&quot;with register_artifact_class. Registration &quot;</span>
+                            <span class="s2">&quot;attempted for </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">semantic_type</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register_artifact_class</span><span class="p">(</span>
+            <span class="n">semantic_type</span><span class="p">,</span> <span class="n">directory_format</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">examples</span><span class="p">)</span></div>
+
+
+<span class="k">class</span> <span class="nc">PluginActions</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plugin</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_plugin_id</span> <span class="o">=</span> <span class="n">plugin</span><span class="o">.</span><span class="n">id</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">PluginMethods</span><span class="p">(</span><span class="n">PluginActions</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">register_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>
+                          <span class="n">description</span><span class="p">,</span> <span class="n">input_descriptions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                          <span class="n">parameter_descriptions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                          <span class="n">output_descriptions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">citations</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                          <span class="n">deprecated</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">citations</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">citations</span> <span class="o">=</span> <span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">citations</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">citations</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">examples</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">examples</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">method</span> <span class="o">=</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">sdk</span><span class="o">.</span><span class="n">Method</span><span class="o">.</span><span class="n">_init</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span>
+                                         <span class="bp">self</span><span class="o">.</span><span class="n">_plugin_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span>
+                                         <span class="n">input_descriptions</span><span class="p">,</span>
+                                         <span class="n">parameter_descriptions</span><span class="p">,</span>
+                                         <span class="n">output_descriptions</span><span class="p">,</span> <span class="n">citations</span><span class="p">,</span>
+                                         <span class="n">deprecated</span><span class="p">,</span> <span class="n">examples</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">[</span><span class="n">method</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">method</span>
+
+
+<span class="k">class</span> <span class="nc">PluginVisualizers</span><span class="p">(</span><span class="n">PluginActions</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">register_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>
+                          <span class="n">description</span><span class="p">,</span> <span class="n">input_descriptions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                          <span class="n">parameter_descriptions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">citations</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                          <span class="n">deprecated</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">citations</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">citations</span> <span class="o">=</span> <span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">citations</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">citations</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">examples</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">examples</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">visualizer</span> <span class="o">=</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">sdk</span><span class="o">.</span><span class="n">Visualizer</span><span class="o">.</span><span class="n">_init</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span>
+                                                 <span class="bp">self</span><span class="o">.</span><span class="n">_plugin_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>
+                                                 <span class="n">description</span><span class="p">,</span>
+                                                 <span class="n">input_descriptions</span><span class="p">,</span>
+                                                 <span class="n">parameter_descriptions</span><span class="p">,</span>
+                                                 <span class="n">citations</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">,</span>
+                                                 <span class="n">examples</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">[</span><span class="n">visualizer</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">visualizer</span>
+
+
+<span class="k">class</span> <span class="nc">PluginPipelines</span><span class="p">(</span><span class="n">PluginActions</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">register_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>
+                          <span class="n">description</span><span class="p">,</span> <span class="n">input_descriptions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                          <span class="n">parameter_descriptions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                          <span class="n">output_descriptions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">citations</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                          <span class="n">deprecated</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">citations</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">citations</span> <span class="o">=</span> <span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">citations</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">citations</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">examples</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">examples</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">pipeline</span> <span class="o">=</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">sdk</span><span class="o">.</span><span class="n">Pipeline</span><span class="o">.</span><span class="n">_init</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span>
+                                             <span class="n">outputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plugin_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>
+                                             <span class="n">description</span><span class="p">,</span> <span class="n">input_descriptions</span><span class="p">,</span>
+                                             <span class="n">parameter_descriptions</span><span class="p">,</span>
+                                             <span class="n">output_descriptions</span><span class="p">,</span> <span class="n">citations</span><span class="p">,</span>
+                                             <span class="n">deprecated</span><span class="p">,</span> <span class="n">examples</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">[</span><span class="n">pipeline</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">pipeline</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Greg Caporaso and Evan Bolyen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

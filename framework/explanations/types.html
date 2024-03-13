@@ -169,6 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/intro.html">Introduction to Writing Plugins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../plugins/tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../plugins/how-to-guides/intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../plugins/how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
@@ -193,23 +194,29 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../plugins/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../plugins/references/antipatterns.html">Plugin development anti-patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/references/api.html">Plugin developer API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/references/metadata-api.html"><code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> API</a></li>
 </ul>
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Interfaces</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../interfaces/intro.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../interfaces/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../interfaces/references/api.html">Interface developer API</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Framework Internals</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction to QIIME 2 framework development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/intro.html">Tutorials</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-to guides</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-to guides</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../how-to-guides/parallel-configuration.html">Parallel configuration and usage in QIIME 2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../how-to-guides/pipeline-resumption.html">Pipeline Resumption in QIIME 2</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Explanations</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Explanations</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="architecture.html">QIIME 2 architecture overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data-storage.html">How Data is Stored</a></li>
 <li class="toctree-l2"><a class="reference internal" href="archives.html">Anatomy of an Archive</a></li>
@@ -220,7 +227,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="metaprogramming.html">Metaprogramming</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../references/archive-versions.html">Archive versions</a></li>
 </ul>
 </li>
@@ -451,7 +458,7 @@ A good type system should be a compromise between the fuzzy (and indistinct) wor
 Only one of these kinds can be extended, the <a class="reference internal" href="../../back-matter/glossary.html#term-Semantic-Type"><span class="xref std std-term">Semantic Type</span></a>.
 The other two, <a class="reference internal" href="../../back-matter/glossary.html#term-Primitive-Type"><span class="xref std std-term">Primitive Type</span></a> and <a class="reference internal" href="../../back-matter/glossary.html#term-Visualization"><span class="xref std std-term">Visualization</span></a>, are built into the framework.</p>
 <p>Semantic types are the only kind that can be extended, so let’s start there with our example from before.</p>
-<p>To create a type, we use the <code class="xref py py-func docutils literal notranslate"><span class="pre">SemanticType</span></code> factory:</p>
+<p>To create a type, we use the <a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.SemanticType" title="qiime2.plugin.SemanticType"><code class="xref py py-func docutils literal notranslate"><span class="pre">SemanticType</span></code></a> factory:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Pencil</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Pencil&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -463,7 +470,7 @@ The other two, <a class="reference internal" href="../../back-matter/glossary.ht
 </pre></div>
 </div>
 <p>To let QIIME 2 know that these new types exist, we’ll need to register them on
-our <code class="xref py py-class docutils literal notranslate"><span class="pre">plugin</span> <span class="pre">object</span></code> with <code class="xref py py-func docutils literal notranslate"><span class="pre">register_semantic_types</span></code>:</p>
+our <a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Plugin" title="qiime2.plugin.Plugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">plugin</span> <span class="pre">object</span></code></a> with <code class="xref py py-func docutils literal notranslate"><span class="pre">register_semantic_types</span></code>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">plugin</span><span class="o">.</span><span class="n">register_semantic_types</span><span class="p">(</span><span class="n">Pencil</span><span class="p">,</span> <span class="n">Pen</span><span class="p">,</span> <span class="n">Fork</span><span class="p">,</span> <span class="n">Spoon</span><span class="p">,</span> <span class="n">Chalk</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -541,7 +548,7 @@ while still being able to organize them into our existing hierarchy of labels.</
 </pre></div>
 </div>
 <p>Breaking this down, it is similar to some of the earlier invocations of the
-<code class="xref py py-func docutils literal notranslate"><span class="pre">SemanticType</span></code> factory, but there’s a new argument for
+<a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.SemanticType" title="qiime2.plugin.SemanticType"><code class="xref py py-func docutils literal notranslate"><span class="pre">SemanticType</span></code></a> factory, but there’s a new argument for
 <code class="docutils literal notranslate"><span class="pre">variant_of</span></code> which seems to be providing a list of <em>fields</em> from other <em>composite types</em>.
 This means a plugin can extend existing types as needed. In this case, we’ve
 suggested that in addition to forks and spoons, there are knives.</p>
@@ -581,27 +588,27 @@ extra tricks up their sleeves to make it possible to automatically generate rich
 The purpose of these types is to explain what kinds of parameters can be provided to an <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">action</span></a>.</p>
 <p>There are a few basic types:</p>
 <ul class="simple">
-<li><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Int</span></code></p></li>
-<li><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Bool</span></code></p></li>
-<li><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Float</span></code></p></li>
-<li><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Str</span></code></p></li>
+<li><p><a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Int" title="qiime2.plugin.Int"><code class="xref py py-data docutils literal notranslate"><span class="pre">Int</span></code></a></p></li>
+<li><p><a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Bool" title="qiime2.plugin.Bool"><code class="xref py py-data docutils literal notranslate"><span class="pre">Bool</span></code></a></p></li>
+<li><p><a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Float" title="qiime2.plugin.Float"><code class="xref py py-data docutils literal notranslate"><span class="pre">Float</span></code></a></p></li>
+<li><p><a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Str" title="qiime2.plugin.Str"><code class="xref py py-data docutils literal notranslate"><span class="pre">Str</span></code></a></p></li>
 </ul>
 <p>These work essentially as you would expect, an <code class="docutils literal notranslate"><span class="pre">Int</span></code> holds an integer, a <code class="docutils literal notranslate"><span class="pre">Str</span></code> holds a unicode string.
 They are capitalized to make differentiating them from their Python counterparts (<code class="docutils literal notranslate"><span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">str</span></code>) simpler.</p>
 <p>There are a few collection types:</p>
 <ul class="simple">
-<li><p><code class="xref py py-data docutils literal notranslate"><span class="pre">List[{elements}]</span></code></p></li>
-<li><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Set[{elements}]</span></code></p></li>
+<li><p><a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.List" title="qiime2.plugin.List"><code class="xref py py-data docutils literal notranslate"><span class="pre">List[{elements}]</span></code></a></p></li>
+<li><p><a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Set" title="qiime2.plugin.Set"><code class="xref py py-data docutils literal notranslate"><span class="pre">Set[{elements}]</span></code></a></p></li>
 </ul>
 <p>Each of these allows you to provide one of the above basic types to their <code class="docutils literal notranslate"><span class="pre">{elements}</span></code> field.</p>
 <p>There are also some metadata types:</p>
 <ul class="simple">
-<li><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Metadata</span></code> (the type, not the <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code>)</p></li>
-<li><p><code class="xref py py-data docutils literal notranslate"><span class="pre">MetadataColumn[{type}]</span></code>
+<li><p><a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Metadata" title="qiime2.plugin.Metadata"><code class="xref py py-data docutils literal notranslate"><span class="pre">Metadata</span></code></a> (the type, not the <a class="reference internal" href="../../plugins/references/metadata-api.html#qiime2.metadata.Metadata" title="qiime2.metadata.Metadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a>)</p></li>
+<li><p><a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.MetadataColumn" title="qiime2.plugin.MetadataColumn"><code class="xref py py-data docutils literal notranslate"><span class="pre">MetadataColumn[{type}]</span></code></a>
 which has the following column types (for the <code class="docutils literal notranslate"><span class="pre">{type}</span></code> field):</p>
 <ul>
-<li><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Numeric</span></code></p></li>
-<li><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Categorical</span></code></p></li>
+<li><p><a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Numeric" title="qiime2.plugin.Numeric"><code class="xref py py-data docutils literal notranslate"><span class="pre">Numeric</span></code></a></p></li>
+<li><p><a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Categorical" title="qiime2.plugin.Categorical"><code class="xref py py-data docutils literal notranslate"><span class="pre">Categorical</span></code></a></p></li>
 </ul>
 </li>
 </ul>
@@ -648,7 +655,7 @@ Thats a formal definition anyway. The important piece is the <em>predicate</em>,
 predetermined choices. We can express that with a primitive type!</p>
 <section id="choices">
 <h3>Choices<a class="headerlink" href="#choices" title="Permalink to this heading">#</a></h3>
-<p>Let’s see an example of this, using the <code class="xref py py-data docutils literal notranslate"><span class="pre">Choices</span></code> predicate:</p>
+<p>Let’s see an example of this, using the <a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Choices" title="qiime2.plugin.Choices"><code class="xref py py-data docutils literal notranslate"><span class="pre">Choices</span></code></a> predicate:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># These are Python objects, so we can assign to variables:</span>
 <span class="n">dropdown</span> <span class="o">=</span> <span class="n">Str</span> <span class="o">%</span> <span class="n">Choices</span><span class="p">({</span><span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;pear&#39;</span><span class="p">})</span>
 
@@ -717,7 +724,7 @@ provide a JSON structure describing the type in a machine-friendly representatio
 </section>
 <section id="range">
 <h3>Range<a class="headerlink" href="#range" title="Permalink to this heading">#</a></h3>
-<p>Another predicate we can use is <code class="xref py py-data docutils literal notranslate"><span class="pre">Range</span></code>:</p>
+<p>Another predicate we can use is <a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Range" title="qiime2.plugin.Range"><code class="xref py py-data docutils literal notranslate"><span class="pre">Range</span></code></a>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">proportion</span> <span class="o">=</span> <span class="n">Float</span> <span class="o">%</span> <span class="n">Range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inclusive_end</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">assert</span>      <span class="mi">0</span> <span class="ow">in</span> <span class="n">proportion</span>
@@ -728,13 +735,13 @@ provide a JSON structure describing the type in a machine-friendly representatio
 <span class="k">assert</span> <span class="ow">not</span> <span class="s1">&#39;banana&#39;</span> <span class="ow">in</span> <span class="n">proportion</span>
 </pre></div>
 </div>
-<p>This can be combined with <code class="xref py py-data docutils literal notranslate"><span class="pre">Int</span></code> as well. As before we
-can nest these kinds of expressions inside of <code class="xref py py-data docutils literal notranslate"><span class="pre">Set</span></code> and <code class="xref py py-data docutils literal notranslate"><span class="pre">List</span></code>.</p>
+<p>This can be combined with <a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Int" title="qiime2.plugin.Int"><code class="xref py py-data docutils literal notranslate"><span class="pre">Int</span></code></a> as well. As before we
+can nest these kinds of expressions inside of <a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Int" title="qiime2.plugin.Int"><code class="xref py py-data docutils literal notranslate"><span class="pre">Set</span></code></a> and <a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Int" title="qiime2.plugin.Int"><code class="xref py py-data docutils literal notranslate"><span class="pre">List</span></code></a>.</p>
 </section>
 <section id="semantic-properties">
 <h3>Semantic Properties<a class="headerlink" href="#semantic-properties" title="Permalink to this heading">#</a></h3>
 <p>Leaving behind the primitive types and returning the the semantic types, there is a final
-trick we can use to constrain the semantics of a type. It is to use the <code class="xref py py-func docutils literal notranslate"><span class="pre">Properties</span></code> predicate. This predicate can only be attached to semantic types, so we usually call them
+trick we can use to constrain the semantics of a type. It is to use the <a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Properties" title="qiime2.plugin.Properties"><code class="xref py py-func docutils literal notranslate"><span class="pre">Properties</span></code></a> predicate. This predicate can only be attached to semantic types, so we usually call them
 semantic properties of the type.</p>
 <p>Thinking back to our example involving utensiles, there was a type named:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span><span class="p">]</span>
@@ -808,7 +815,7 @@ We see that any instance of a <code class="docutils literal notranslate"><span c
 </section>
 <section id="properties">
 <h3>Properties<a class="headerlink" href="#properties" title="Permalink to this heading">#</a></h3>
-<p>Let us return now to the other way of constructing a subtyping relation, the <code class="xref py py-class docutils literal notranslate"><span class="pre">semantic</span> <span class="pre">property</span></code>. We had the following definitions which we’ll assign to a variable, since they are lengthy:</p>
+<p>Let us return now to the other way of constructing a subtyping relation, the <a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Properties" title="qiime2.plugin.Properties"><code class="xref py py-class docutils literal notranslate"><span class="pre">semantic</span> <span class="pre">property</span></code></a>. We had the following definitions which we’ll assign to a variable, since they are lengthy:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">sharp_fillet</span> <span class="o">=</span> <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;fillet&#39;</span><span class="p">,</span> <span class="s1">&#39;sharp&#39;</span><span class="p">])]</span>
 <span class="n">dull_paring</span>  <span class="o">=</span> <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;paring&#39;</span><span class="p">],</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sharp&#39;</span><span class="p">])]</span>
 </pre></div>
