@@ -38,11 +38,11 @@ This means that you can expect Tutorials, How-To-Guides, Explainations, and Refe
   - Provide specific **information** (e.g., an API reference)
 ```
 
-## Table of Contents
-This book is split into multiple parts covering topics in the QIIME 2 ecosystem including **Plugins**, **Framework internals**, and **Interfaces**.
+## Contents
+This book is split into multiple parts covering topics in QIIME 2 development including [plugin development](plugin-intro), [interface development](interface-intro), and [documentation development](documentation-intro).
 You do not need to master all of these sections to develop with QIIME 2.
-For example, if you are interested in creating plugins, then the only section you need to concern yourself with is the **Plugins** section.
-Other topics, such as **Framework Internals** and **CI Internals**, are advanced topics that are mostly useful for the QIIME 2 Development Team itself.
+For example, if you are interested in creating plugins, then the only section you need to concern yourself with is the [plugin development](plugin-intro) section.
+Other topics, such as [framework development](framework-intro) and [distribution development](ci-intro), are advanced topics that are primarily targeted for the development team in the [Caporaso Lab](https://cap-lab.bio).
 
 ## Getting Help
 For the most up-to-date information on how to get help with QIIME 2, as a user or developer, see [here](https://github.com/qiime2/.github/blob/main/SUPPORT.md).
