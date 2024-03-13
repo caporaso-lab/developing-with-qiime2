@@ -1,4 +1,4 @@
-(archives)=
+(archive-anatomy)=
 # Anatomy of an Archive
 
 QIIME 2 stores data in a directory structure called an {term}`Archive`.
