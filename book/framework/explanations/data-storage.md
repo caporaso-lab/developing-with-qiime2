@@ -51,7 +51,7 @@ Some software manipulates ZIP files directly (often built into an operating syst
 Because it is so widely used, maintaining the long-term accessibility of data is much more likely.
 
 The following documents provide more detailed information about directory structure and ZIP file used in QIIME 2 `Archives`:
-- [](archives)
+- [](archive-anatomy)
 - [](archive-versions)
 
 
