@@ -3,7 +3,7 @@
 
 When developing a QIIME 2 interface, you will use APIs defined in the `qiime2.sdk` submodule. 
 
-## API Reference
+## Interface development API
 
 ### The `PluginManager` Object
 

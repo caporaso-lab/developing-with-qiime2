@@ -3,7 +3,7 @@
 
 When developing a QIIME 2 plugin, you will use APIs defined in the `qiime2.plugin` submodule. 
 
-## API Reference
+## Plugin development API
 
 ### The `Plugin` object
 ```{eval-rst}
@@ -71,4 +71,11 @@ When developing a QIIME 2 plugin, you will use APIs defined in the `qiime2.plugi
 ### Exceptions
 ```{eval-rst}
 .. autofunction:: qiime2.plugin.ValidationError
+```
+
+## Plugin testing API
+
+```{eval-rst}
+.. automodule:: qiime2.plugin.testing
+    :members:
 ```
