@@ -12,6 +12,7 @@ parts:
 
   - caption: "Plugins"
     chapters:
+      - file: plugins/intro
       - file: plugins/tutorials/intro
       - file: plugins/how-to-guides/intro
         sections:
@@ -35,6 +36,7 @@ parts:
       - file: plugins/references/intro
         sections:
           - file: plugins/references/antipatterns
+          - file: plugins/references/api
 
   - caption: "Interfaces"
     chapters:
