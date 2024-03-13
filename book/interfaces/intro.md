@@ -1,1 +1,5 @@
-# Introduction to Writing Interfaces
+(interface-intro)=
+# Interface Development
+
+```{tableofcontents}
+```

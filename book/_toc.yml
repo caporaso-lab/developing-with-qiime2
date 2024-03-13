@@ -5,77 +5,81 @@ format: jb-book
 root: intro
 parts:
 
-  - caption: "Docs"
+  - caption: "Documentation 📚"
     chapters:
-      - file: docs/user-documentation
-      - file: docs/developer-documentation
+      - file: docs/intro
+        sections:
+        - file: docs/user-documentation
+        - file: docs/developer-documentation
 
-  - caption: "Plugins"
+  - caption: "Plugins 🔌"
     chapters:
       - file: plugins/intro
-      - file: plugins/tutorials/intro
-      - file: plugins/how-to-guides/intro
         sections:
-          - file: plugins/how-to-guides/set-up-development-environment
-          - file: plugins/how-to-guides/register-a-plugin
-          - file: plugins/how-to-guides/create-register-method
-          - file: plugins/how-to-guides/create-register-visualizer
-          - file: plugins/how-to-guides/create-register-pipeline
-          - file: plugins/how-to-guides/create-register-transformer
-          - file: plugins/how-to-guides/artifact-collections-as-io
-          - file: plugins/how-to-guides/play-nicely-with-others
-          - file: plugins/how-to-guides/use-metadata
-          - file: plugins/how-to-guides/test-plugins
-          - file: plugins/how-to-guides/usage-examples
-          - file: plugins/how-to-guides/format-validation-levels.md
-      - file: plugins/explanations/intro
-        sections:
-          - file: plugins/explanations/actions
-          - file: plugins/explanations/types-of-types
-          - file: plugins/explanations/transformers
-      - file: plugins/references/intro
-        sections:
-          - file: plugins/references/antipatterns
-          - file: plugins/references/api
-          - file: plugins/references/metadata-api
+        - file: plugins/tutorials/intro
+        - file: plugins/how-to-guides/intro
+          sections:
+            - file: plugins/how-to-guides/set-up-development-environment
+            - file: plugins/how-to-guides/register-a-plugin
+            - file: plugins/how-to-guides/create-register-method
+            - file: plugins/how-to-guides/create-register-visualizer
+            - file: plugins/how-to-guides/create-register-pipeline
+            - file: plugins/how-to-guides/create-register-transformer
+            - file: plugins/how-to-guides/artifact-collections-as-io
+            - file: plugins/how-to-guides/play-nicely-with-others
+            - file: plugins/how-to-guides/use-metadata
+            - file: plugins/how-to-guides/test-plugins
+            - file: plugins/how-to-guides/usage-examples
+            - file: plugins/how-to-guides/format-validation-levels.md
+        - file: plugins/explanations/intro
+          sections:
+            - file: plugins/explanations/actions
+            - file: plugins/explanations/types-of-types
+            - file: plugins/explanations/transformers
+        - file: plugins/references/intro
+          sections:
+            - file: plugins/references/antipatterns
+            - file: plugins/references/api
+            - file: plugins/references/metadata-api
 
-  - caption: "Interfaces"
+  - caption: "Interfaces 🧩"
     chapters:
       - file: interfaces/intro
-        title: Introduction
-      - file: interfaces/references/intro
         sections:
-          - file: interfaces/references/api 
+        - file: interfaces/references/intro
+          sections:
+            - file: interfaces/references/api 
 
-  - caption: "Framework Internals"
+  - caption: "The Framework 🌳"
     chapters:
       - file: framework/intro
-      - file: framework/tutorials/intro
-      - file: framework/how-to-guides/intro
         sections:
-          - file: framework/how-to-guides/parallel-configuration
-          - file: framework/how-to-guides/pipeline-resumption
-      - file: framework/explanations/intro
-        sections:
-          - file: framework/explanations/architecture
-          - file: framework/explanations/data-storage
-          - file: framework/explanations/archives
-          - file: framework/explanations/types
-          - file: framework/explanations/formats
-          - file: framework/explanations/provenance
-          - file: framework/explanations/garbage-collection
-          - file: framework/explanations/metaprogramming
-      - file: framework/references/intro
-        sections:
-          - file: framework/references/archive-versions
+        - file: framework/how-to-guides/intro
+          sections:
+            - file: framework/how-to-guides/parallel-configuration
+            - file: framework/how-to-guides/pipeline-resumption
+        - file: framework/explanations/intro
+          sections:
+            - file: framework/explanations/architecture
+            - file: framework/explanations/data-storage
+            - file: framework/explanations/archives
+            - file: framework/explanations/types
+            - file: framework/explanations/formats
+            - file: framework/explanations/provenance
+            - file: framework/explanations/garbage-collection
+            - file: framework/explanations/metaprogramming
+        - file: framework/references/intro
+          sections:
+            - file: framework/references/archive-versions
 
-  - caption: "CI Internals"
+  - caption: "Continuous Integration 🛠️"
     chapters:
       - file: ci/intro
-        title: Introduction
 
-  - caption: "Back Matter"
+  - caption: "Back Matter 🗂️"
     chapters:
-      - file: back-matter/glossary
-      - file: back-matter/bibliography
-      - file: back-matter/genindex
+      - file: back-matter/intro
+        sections:
+        - file: back-matter/glossary
+        - file: back-matter/bibliography
+        - file: back-matter/genindex
