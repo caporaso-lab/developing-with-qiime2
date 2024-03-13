@@ -10,8 +10,7 @@ If you run into issues, please let us know [here](https://github.com/caporaso-la
 ```{eval-rst}
 
 Congratulations! You built a plugin, and now you want people to use it.
-QIIME 2 provides a :doc:`/api-reference/usage/index` you can use to give examples of
-how plugin actions should be run.
+QIIME 2 enables you to write *usage examples* that give examples of how plugin actions can be run by your users.
 It uses `dependency injection <https://en.wikipedia.org/wiki/Dependency_injection>`__
 to generate appropriate usage examples for any interface with a "usage driver".
 You define and register each usage example once,
@@ -29,9 +28,9 @@ in the rendered usage example, but will not execute your example.
 The API is split into two sides -
 one which allows plugin developers to define usage examples,
 and one which allows interface developers to write the usage drivers that make those examples go.
-*In this tutorial, we will focus exclusively on the plugin-developer facing usage example side of the API.*
+*In this how-to guide, we will focus exclusively on the plugin-developer facing usage example side of the API.*
 
-**In this tutorial, we will cover:**
+**In this how-to guide, we will cover:**
 
 * `Data factories for usage examples`_
 * `Defining usage examples`_
@@ -79,7 +78,6 @@ The methods called inside of the function are "public" (non-underscore-prefixed)
 defined in ``qiime2.sdk.usage.Usage``.
 This "Usage API" is common to all Usage drivers,
 which reimplement the methods to meet their own needs.
-Full details are available in the :doc:`/api-reference/usage/index` reference.
 
 .. code-block:: python
 
@@ -150,7 +148,7 @@ Testing usage examples
 You might be wondering how to confirm that your examples are working.
 Great question!
 Support for usage example testing is available via QIIME 2's `TestPluginBase.execute_examples()`
-and the :ref:`results-and-assertions` exposed by the ``UsageVariable`` class
+and the `results-and-assertions` exposed by the ``UsageVariable`` class
 and optionally implemented in its driver-specific subclasses.
 
 You can test your usage examples by making Semantic Type and file-contents assertions
@@ -302,6 +300,6 @@ Comments can provide context
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For complex usage examples, you may want to provide additional context to the user.
-:ref:`usage-annotations` are available to help with this.
+`usage-annotations` are available to help with this.
 The linked documentation provides worked examples.
 ```
