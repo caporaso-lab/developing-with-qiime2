@@ -6,6 +6,7 @@ exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints"]
 sphinx:
   extra_extensions:
     - sphinx.ext.autodoc
+    - sphinx.ext.viewcode
     - sphinx.ext.napoleon
     - sphinx.ext.doctest
     - sphinx.ext.intersphinx
@@ -14,6 +15,7 @@ sphinx:
     - sphinx.ext.githubpages
     - sphinxcontrib.bibtex
   config:
+    add_module_names: False
     html_theme_options:
       logo:
         image_light: _static/q2dev.svg
