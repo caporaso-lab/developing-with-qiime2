@@ -1,18 +1,20 @@
 # Developing with QIIME 2
 
-*Developing with QIIME 2* is designed to help you write plugins, interfaces, and contribute to the QIIME 2 framework.
+Your guide for writing, testing, and distributing QIIME 2 plugins, interfaces, and documentation.
 
 ```{note}
-We are currently (January 2024) transitioning content from the [old QIIME 2 Developer Documentation](https://dev.qiime2.org) to *Developing with QIIME 2*.
-For as long as this note is here, there may be content there that is not covered here, so it may be worth referring to both documents.
-Our goal is for this transition phase to be over fairly quickly.
+As of 13 March 2024, most of the content from the [old QIIME 2 Developer Documentation](https://dev.qiime2.org) has been transitioned to *Developing with QIIME 2*. 
+This book will be moving over to https://dev.qiime2.org shortly. 
+
+*Developing with QIIME 2* remains in very active development between March and April of 2024.
+It should be getting more complete by the day. 🚀
 ```
 
 ```{note}
 If you need help developing with QIIME 2, please feel free to reach out through the {{ developer_discussion }}.
 This is preferred over contacting developers directly as there are many developers monitoring the forum (so you get help quicker!), and others can learn from our answers to your questions (so we can spend more time developing cool new functionality for QIIME 2!).
 
-**We commit to responding to requests for help on the QIIME 2 Forum, but direct emails, posts on issues trackers, etc may be closed without reply.**
+**We commit to responding to requests for help on the QIIME 2 Forum, but direct emails, posts on issues trackers, etc may not get responses.**
 ```
 
 ## About
