@@ -48,7 +48,7 @@ Among the benefits of this model are:
 ## What Provenance Data is Captured?
 
 In order to focus on provenance data, we will consider a relatively simple example QIIME 2 Archive structure, with limited non-provenance content.
-In {numref}`whole-archive` the outer {term}`UUID` directory of this {term}`Artifact` holds the data it produced in a `data` directory (see [](data-goes-in-data)), and a few "clerical" files (see [](archives)).
+In {numref}`whole-archive` the outer {term}`UUID` directory of this {term}`Artifact` holds the data it produced in a `data` directory (see [](data-goes-in-data)), and a few "clerical" files (see [](archive-anatomy)).
 Here we focus on the `provenance/` directory.
 
 ````{margin}

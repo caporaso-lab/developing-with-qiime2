@@ -1,4 +1,5 @@
-# Introduction to Writing Plugins
+(plugin-intro)=
+# Plugin Development
 
 ```{tableofcontents}
 ```

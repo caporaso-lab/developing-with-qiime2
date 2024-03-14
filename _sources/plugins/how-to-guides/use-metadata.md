@@ -5,6 +5,12 @@ Metadata (the `qiime2.metadata.Metadata` class, internally) allows users to anno
 QIIME 2 offers a consistent API for developers to expose their {term}`Methods <Method>` and {term}`Visualizers <Visualizer>` to user-defined metadata.
 For more details about how users might create and utilize metadata in their studies, check out the [Metadata In QIIME 2](https://docs.qiime2.org/2018.4/tutorials/metadata/) tutorial.
 
+````{margin}
+```{note}
+Refer to the [](metadata-api) for additional information on using metadata in your plugins.
+```
+````
+
 ## Metadata
 
 Actions may request an entire `Metadata` object to work on.
@@ -95,7 +101,7 @@ Advanced metadata querying is enabled by SQL-based filtering (`qiime2.metadata.M
 
 By [registering a transformer](howto-create-register-transformer) from a particular {term}`format <Format>` to `qiime2.Metadata`, the framework will allow the {term}`type <Type>` represented by that format to be {term}`viewed <View>` as `Metadata` --- this can open up all kinds of exciting opportunities for plugins!
 
-```{python}
+```python
 @plugin.register_transformer
 def _1(data: cool_project.InterestingDataFormat) -> qiime2.Metadata:
     df = pd.Dataframe(data)
