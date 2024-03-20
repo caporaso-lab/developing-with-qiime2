@@ -17,6 +17,10 @@ parts:
       - file: plugins/intro
         sections:
         - file: plugins/tutorials/intro
+          sections:
+            - file: plugins/tutorials/create-from-template
+            - file: plugins/tutorials/add-nw-align-method
+            - file: plugins/tutorials/add-nw-align-usage-example
         - file: plugins/how-to-guides/intro
           sections:
             - file: plugins/how-to-guides/set-up-development-environment
@@ -48,7 +52,7 @@ parts:
         sections:
         - file: interfaces/references/intro
           sections:
-            - file: interfaces/references/api 
+            - file: interfaces/references/api
 
   - caption: "The Framework 🌳"
     chapters:
