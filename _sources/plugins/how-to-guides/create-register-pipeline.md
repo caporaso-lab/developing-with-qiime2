@@ -54,7 +54,7 @@ Registering `Pipelines` is the same as registering `Methods`, with a few excepti
 
 First, we register a `Pipeline` by calling `plugin.pipelines.register_function`.
 
-Second,`visualizations` produced as an output are listed in `outputs` as a `tuple` with `Visualization` as the second value.
+Second, `visualizations` produced as an output are listed in `outputs` as a `tuple` with `Visualization` as the second value.
 E.g., `('jaccard_emperor', Visualization)`.
 A description of this output should be included in `output_descriptions`
 
