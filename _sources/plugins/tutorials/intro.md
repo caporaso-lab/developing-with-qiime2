@@ -1,11 +1,10 @@
 (start-plugin-tutorial)=
 # Tutorials: Developing a QIIME 2 Plugin
 
+> It’s natural to want to complete large tranches of work before you publish them, so that you have something substantial to show each time. Avoid this temptation - every step in the right direction is worth publishing immediately. [Daniele Procida - Diátaxis](https://diataxis.fr/foundations/)
+
 ```{note}
-
-> It’s natural to want to complete large tranches of work before you publish them, so that you have something substantial to show each time. Avoid this temptation - every step in the right direction is worth publishing immediately. [(source)](https://diataxis.fr/foundations/)
-
-The content in this tutorial is a work-in-progress prototype.
+The content in this tutorial is a work-in-progress. 🚜
 ```
 
 This tutorial will walk step by step through building a first QIIME 2 plugin.
