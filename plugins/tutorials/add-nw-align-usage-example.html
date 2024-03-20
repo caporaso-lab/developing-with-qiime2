@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Register a QIIME 2 plugin &#8212; Developing with QIIME 2</title>
+    <title>Add a first usage example &#8212; Developing with QIIME 2</title>
   
   
   
@@ -63,12 +63,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/how-to-guides/register-a-plugin';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/tutorials/add-nw-align-usage-example';</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Create and register a Method" href="create-register-method.html" />
-    <link rel="prev" title="Set up your development environment" href="set-up-development-environment.html" />
+    <link rel="next" title="How To Guides" href="../how-to-guides/intro.html" />
+    <link rel="prev" title="Add a first (real) action to our plugin" href="add-nw-align-method.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -173,25 +173,25 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins 🔌</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Creating your plugin from an existing template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) action to our plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-usage-example.html">Add a first usage example</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Tutorials: Developing a QIIME 2 Plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="create-from-template.html">Creating your plugin from an existing template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-nw-align-method.html">Add a first (real) action to our plugin</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Add a first usage example</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">How To Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="set-up-development-environment.html">Set up your development environment</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Register a QIIME 2 plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="create-register-method.html">Create and register a Method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="create-register-visualizer.html">Create and register a visualizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="create-register-pipeline.html">Create and register a pipeline</a></li>
-<li class="toctree-l3"><a class="reference internal" href="create-register-transformer.html">Creating and registering a Transformer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="play-nicely-with-others.html">How to play nicely with other plugins</a></li>
-<li class="toctree-l3"><a class="reference internal" href="use-metadata.html">How to use Metadata</a></li>
-<li class="toctree-l3"><a class="reference internal" href="test-plugins.html">How to test QIIME 2 plugins</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage-examples.html">Writing Usage Examples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="format-validation-levels.html">Defining different Format validation levels</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/register-a-plugin.html">Register a QIIME 2 plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/create-register-method.html">Create and register a Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/create-register-visualizer.html">Create and register a visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/create-register-pipeline.html">Create and register a pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/create-register-transformer.html">Creating and registering a Transformer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/play-nicely-with-others.html">How to play nicely with other plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/use-metadata.html">How to use Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/test-plugins.html">How to test QIIME 2 plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/usage-examples.html">Writing Usage Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/format-validation-levels.html">Defining different Format validation levels</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -311,7 +311,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/plugins/how-to-guides/register-a-plugin.md" target="_blank"
+      <li><a href="../../_sources/plugins/tutorials/add-nw-align-usage-example.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -382,9 +382,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -395,21 +393,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Register a QIIME 2 plugin</h1>
+    <h1>Add a first usage example</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instantiating-a-plugin">Instantiating a plugin</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-your-plugin-object-as-an-entry-point">Defining your plugin object as an entry point</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -419,91 +407,15 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="register-a-qiime-2-plugin">
-<span id="howto-register-plugin"></span><h1>Register a QIIME 2 plugin<a class="headerlink" href="#register-a-qiime-2-plugin" title="Permalink to this heading">#</a></h1>
-<p>This document will describe how to <code class="docutils literal notranslate"><span class="pre">register</span></code> a plugin, allowing this plugin to interact with the QIIME 2 framework.</p>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
-<p>There are several high-level steps to registering a QIIME 2 plugin:</p>
-<ol class="arabic simple">
-<li><p>A QIIME 2 plugin must define one or more Python 3 functions that will be accessible through QIIME.</p></li>
-<li><p>The plugin must be a Python 3 package that can be installed with <code class="docutils literal notranslate"><span class="pre">setuptools</span></code>.</p></li>
-<li><p>The plugin must then instantiate a <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.Plugin</span></code> object and define some information including the name of the plugin and its URL. In the plugin package’s <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file, this instance will be defined as an <code class="docutils literal notranslate"><span class="pre">entry</span> <span class="pre">point</span></code>.</p></li>
-<li><p>The plugin must then register its functions as QIIME 2 Actions, which will be accessible to users through any of the QIIME 2 interfaces.</p></li>
-<li><p>Optionally, the plugin could be distributed through <a class="reference external" href="https://anaconda.org/">Anaconda</a> or <a class="reference external" href="https://pypi.org/">pypi</a> as that will simplify installation for QIIME 2 users.</p></li>
-</ol>
-<p>These steps are covered in detail below.</p>
-<p>Writing a simple QIIME 2 plugin should be a straightforward process.
-For example, the <a class="reference external" href="https://github.com/qiime2/q2-emperor"><code class="docutils literal notranslate"><span class="pre">q2-emperor</span></code></a> plugin, which connects Emperor to QIIME 2, is written in a little over 100 lines of code (excluding unit tests and assets).
-It is a standalone plugin that defines how and which functionality in Emperor should be accessible through QIIME 2.
-Plugins will vary in their complexity.
-For example, a plugin that defines a lot of new functionality would likely be quite a bit bigger.
-<a class="reference external" href="https://github.com/qiime2/q2-diversity">q2-diversity</a> is a good example of this.
-Unlike <code class="docutils literal notranslate"><span class="pre">q2-emperor</span></code>, there is some specific functionality (and associated unit tests) defined in this project, and it depends on several other Python 3 compatible libraries.</p>
-<p>Before starting to write a plugin, you should install QIIME 2 and some plugins to familiarize yourself with the system and to provide a means for testing your plugin.</p>
-</section>
-<section id="instantiating-a-plugin">
-<h2>Instantiating a plugin<a class="headerlink" href="#instantiating-a-plugin" title="Permalink to this heading">#</a></h2>
-<p>The next step is to instantiate a QIIME 2 <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> object.
-This might look like the following:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Plugin</span>
-<span class="kn">import</span> <span class="nn">q2_diversity</span>
-
-<span class="n">plugin</span> <span class="o">=</span> <span class="n">Plugin</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;diversity&#39;</span><span class="p">,</span>
-    <span class="n">version</span><span class="o">=</span><span class="n">q2_diversity</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span>
-    <span class="n">website</span><span class="o">=</span><span class="s1">&#39;https://github.com/qiime2/q2-diversity&#39;</span><span class="p">,</span>
-    <span class="n">package</span><span class="o">=</span><span class="s1">&#39;q2_diversity&#39;</span><span class="p">,</span>
-    <span class="n">description</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;This QIIME 2 plugin supports metrics for calculating &#39;</span>
-                <span class="s1">&#39;and exploring community alpha and beta diversity through &#39;</span>
-                <span class="s1">&#39;statistics and visualizations in the context of sample &#39;</span>
-                <span class="s1">&#39;metadata.&#39;</span><span class="p">),</span>
-    <span class="n">short_description</span><span class="o">=</span><span class="s1">&#39;Plugin for exploring community diversity.&#39;</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>This will provide QIIME with essential information about your <code class="docutils literal notranslate"><span class="pre">Plugin</span></code>.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">name</span></code> parameter is the name that users will use to access your plugin from within different QIIME 2 interfaces.
-It should be a “command-line-friendly” name, so should not contain spaces or punctuation.
-(Avoiding uppercase characters and using dashes (<code class="docutils literal notranslate"><span class="pre">-</span></code>) instead of underscores (<code class="docutils literal notranslate"><span class="pre">_</span></code>) are preferable in the plugin <code class="docutils literal notranslate"><span class="pre">name</span></code>, but not required).</p>
-<p><code class="docutils literal notranslate"><span class="pre">version</span></code> should be the version number of your package (the same that is used in its <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>).</p>
-<p><code class="docutils literal notranslate"><span class="pre">website</span></code> should be the page where you’d like end users to refer for more information about your package.</p>
-<p><code class="docutils literal notranslate"><span class="pre">package</span></code> should be the Python package name for your plugin.</p>
-<p><code class="docutils literal notranslate"><span class="pre">description</span></code> should give a brief description of this plugin’s functionality.
-This will be displayed when that plugin’s help documentation is accessed via the QIIME 2 framework.</p>
-<p><code class="docutils literal notranslate"><span class="pre">short_description</span></code> should give a very brief description of this plugin’s functionality.
-This will be displayed when the QIIME 2 help documentation is accessed.</p>
-<p>While not shown in the previous example, plugin developers can optionally provide the following parameters to <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.Plugin</span></code>:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">citations</span></code>: A list of bibtex-formatted citations.
-These are provided in a separate <code class="docutils literal notranslate"><span class="pre">citations.bib</span></code> file, loaded via the <code class="docutils literal notranslate"><span class="pre">Citations</span></code> API, and accessed by using their bibtex indices as keys.
-Citations can be listed during plugin or action registration, or both, but will usually only be listed for individual actions unless if a single reference is appropriate for all actions in that plugin.
-<code class="docutils literal notranslate"><span class="pre">q2-diversity</span></code> has no such plugin-wide citation listed here.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">user_support_text</span></code>: free text describing how users should get help with the plugin (e.g.
-issue tracker, StackOverflow tag, mailing list, etc.).
-If not provided, users are referred to the <code class="docutils literal notranslate"><span class="pre">website</span></code> for support.
-Plugin developers are free to support their plugins on the QIIME 2 Forum, so you can include that URL as the <code class="docutils literal notranslate"><span class="pre">user_support_text</span></code> for your plugin.
-If you do that, you should get in the habit of monitoring the QIIME 2 Forum for technical support questions.</p></li>
-</ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> object can live anywhere in your project, but by convention it will be in a file called <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code>.
-You can see a complete working example in q2-dwq2 <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/blob/e8fe1e5b32bfc2a331d48611b3a70b0fa5b19165/q2_dwq2/plugin_setup.py#L21">here</a>.</p>
-</section>
-<section id="defining-your-plugin-object-as-an-entry-point">
-<h2>Defining your plugin object as an entry point<a class="headerlink" href="#defining-your-plugin-object-as-an-entry-point" title="Permalink to this heading">#</a></h2>
-<p>Finally, you need to tell QIIME where to find your instantiated <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> object.
-This is done by defining it as an <code class="docutils literal notranslate"><span class="pre">entry_point</span></code> in your project’s <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file.
-In <code class="docutils literal notranslate"><span class="pre">q2-diversity</span></code>, this is done as follows:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span>
-    <span class="o">...</span>
-    <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;qiime2.plugins&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;q2-diversity=q2_diversity.plugin_setup:plugin&#39;</span><span class="p">]</span>
-    <span class="p">}</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>The relevant key in the <code class="docutils literal notranslate"><span class="pre">entry_points</span></code> dictionary will be <code class="docutils literal notranslate"><span class="pre">'qiime2.plugins'</span></code>, and the value will be a single element list containing a string formatted as <code class="docutils literal notranslate"><span class="pre">&lt;distribution-name&gt;=&lt;import-path&gt;:&lt;instance-name&gt;</span></code>.
-<code class="docutils literal notranslate"><span class="pre">&lt;distribution-name&gt;</span></code> is the name of the Python package distribution (matching the value passed for <code class="docutils literal notranslate"><span class="pre">name</span></code> in this call to <code class="docutils literal notranslate"><span class="pre">setup</span></code>); <code class="docutils literal notranslate"><span class="pre">&lt;import-path&gt;</span></code> is the import path for the <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> instance you created above; and <code class="docutils literal notranslate"><span class="pre">&lt;instance-name&gt;</span></code> is the name for the <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> instance you created above.</p>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="add-a-first-usage-example">
+<span id="add-nw-align-usage"></span><h1>Add a first usage example<a class="headerlink" href="#add-a-first-usage-example" title="Permalink to this heading">#</a></h1>
+<p>Your new functionality isn’t <em>really</em> done until you document it, so let’s do that now.
+This will ensure that users know how to use your code, and will give them something to try after they install your plugin to convince them that it’s working.
+I generally find that I’m the first person to benefit from my documentation, and in some cases I’m also the person who most frequently benefits from my documentation (e.g., if it’s code that I write for my own purposes, rather than something I intend to broadly disseminate).</p>
+<p>QIIME 2 provides a framework for defining <code class="docutils literal notranslate"><span class="pre">UsageExamples</span></code> for plugins.
+These are defined abstractly, and the QIIME 2 framework knows how to translate those abstract definitions into usage examples for different interfaces (Python 3, q2cli, and Galaxy, as of this writing).
+So, by writing a single usage example, you really get multiple usage examples.
+This is one way the framework supports our goal of meeting users where they are in terms of their computational experience, and it’s one of the big benefits that you as a plugin developer gets by developing with QIIME 2.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -519,7 +431,7 @@ In <code class="docutils literal notranslate"><span class="pre">q2-diversity</sp
         },
         kernelOptions: {
             name: "python3",
-            path: "./plugins/how-to-guides"
+            path: "./plugins/tutorials"
         },
         predefinedOutput: true
     }
@@ -537,20 +449,20 @@ In <code class="docutils literal notranslate"><span class="pre">q2-diversity</sp
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="set-up-development-environment.html"
+       href="add-nw-align-method.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Set up your development environment</p>
+        <p class="prev-next-title">Add a first (real) action to our plugin</p>
       </div>
     </a>
     <a class="right-next"
-       href="create-register-method.html"
+       href="../how-to-guides/intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Create and register a Method</p>
+        <p class="prev-next-title">How To Guides</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -560,22 +472,6 @@ In <code class="docutils literal notranslate"><span class="pre">q2-diversity</sp
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instantiating-a-plugin">Instantiating a plugin</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-your-plugin-object-as-an-entry-point">Defining your plugin object as an entry point</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
