@@ -18,4 +18,4 @@ This section will be adapted to build from a [cookiecutter project template](htt
 1. Next, add an action. Let's create one that that takes a `FeatureTable[Frequency]` (i.e., a feature table with count data) as input and generates one as output. I created [an action in my test plugin](https://github.com/caporaso-lab/q2-dwq2/blob/e8fe1e5b32bfc2a331d48611b3a70b0fa5b19165/q2_dwq2/plugin_setup.py) with this signature - all it does is return a copy of the input table. Copy this into your plugin.
 1. Then, run `qiime dev refresh-cache`, and then `qiime --help`. You should see your new plugin in the list of plugins. If you call help on it, you should see your new action. You should be able to run the `duplicate-table` action in your plugin as you can for any other QIIME 2 plugin.
 
-Next, we'll add a first (real) action to our plugin.
+Next, we'll [add a first (real) action to our plugin](add-nw-align-method).

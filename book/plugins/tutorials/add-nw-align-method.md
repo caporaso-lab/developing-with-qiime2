@@ -1,15 +1,262 @@
 (add-nw-align-method)=
 # Add a first (real) action to our plugin
 
-At the most basic level, a QIIME 2 action is simply an annotation of a Python function that provides additional detail on the inputs and outputs.
-As a next step, we'll create a powerful action that demonstrates this idea.
+At the most basic level, a QIIME 2 {term}`action` is simply an annotation of a Python function that describes in detail the inputs and outputs to that function.
+Here we'll create a powerful action that illustrates this idea.
+
+The type of action that we'll create is a {term}`method`, meaning that it will take zero or more QIIME 2 {term}`artifacts <Artifact>` as input, and it will generate one or more QIIME 2 artifacts as output.
+
+```{admonition} tl;dr
+:class: tip
+The complete code that I developed to add this action to my plugin can be found [here](https://github.com/caporaso-lab/q2-dwq2/pull/3/files) and [here](https://github.com/caporaso-lab/q2-dwq2/pull/4/files).
+
+({term}`What does "tl;dr" mean? <tl;dr>`)
+```
 
 ## Pairwise sequence alignment
 
-One of the most fundamental tools in bioinformatics is pairwise sequence alignment.
-Pairwise sequence alignment forms the basis of [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi), many genome assemblers, phylogenetic inference from molecular sequence data, assigning taxonomy to environmental DNA sequences, and so much more.
-The action we'll add to our plugin in this chapter performs pairwise sequence alignment using the Needleman-Wunsch global pairwise alignment algorithm {cite}`Needleman1970`.
-You don't need to understand how the algorithm works to implement this action, but if you do want to learn more this topic, including the specific algorithm and code that we're going to reference here, is covered in detail in [*An Introduction to Applied Bioinformatics*](https://readiab.org) {cite}`iab-2`.
+One of the most fundamental tools in bioinformatics is {term}`pairwise sequence alignment`.
+{term}`Pairwise sequence alignment` forms the basis of [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi), many genome assemblers, phylogenetic inference from molecular sequence data, assigning taxonomy to environmental DNA sequences, and so much more.
+The first real action that we'll add to our plugin is a method that performs pairwise sequence alignment using the Needleman-Wunsch global pairwise alignment algorithm {cite}`Needleman1970`.
 
-The complete code that I developed to add this action to my plugin can be found [here](https://github.com/caporaso-lab/q2-dwq2/pull/3/files).
+You don't need to understand how the NW algorithm works interally to implement our method, because we're going to work with a Python function that implements the algorithm for us.
+But, you'll need to understand what its input and outputs are to be able to annotate them, and you'll need to understand at a basic level what it does so that you can test that your code is working as expected.
+
+If you do want to learn more about pairwise sequence alignment, the specific algorithm and implementation that we're going to work with here is covered in detail in the *Pairwise Sequence Alignment* chapter of [*An Introduction to Applied Bioinformatics*](https://readiab.org) {cite}`iab-2`. Briefly:
+
+> The goal of pairwise sequence alignment is, given two DNA, RNA, or protein sequences, to generate a hypothesis about which sequence positions derived from a common ancestral sequence position. {cite}`iab-2`
+
+Our method will take two DNA sequences as input.
+It will attempt to align like positions with each other, inserting gap (i.e., `-`) characters where it seems likely that insertion/deletion events have occurred over the course of evolution.
+The output will be a pairwise sequence alignment (or more briefly, an *alignment*), which is a special case of a multiple sequence alignment that contains exactly two sequences.
+Our method will also take a few {term}`parameters <Parameter>` as input.
+These parameters include things like the score that should be assigned when a pair of positions contains matching characters (we'll call this `match_score`), or the score penalty that is incurred when a gap character is added to the alignment.
+
+The [scikit-bio](https://scikit.bio) library implements Needleman-Wunsch global pairwise alignment algorithm as [`skbio.alignment.global_pairwise_align_nucleotide`](https://scikit.bio/docs/dev/generated/skbio.alignment.global_pairwise_align_nucleotide.html#skbio.alignment.global_pairwise_align_nucleotide).
+We're going to make this accessible through our plugin by writing a simple wrapper of this function.
+
+## Write a wrapper function
+
+````{margin}
+```{note}
+In subsequent sections of the book, we'll apply test-driven development where we write unit tests for our functions before writing the functions themselves.
+That may seem counter-intuitive if you've never done it before, but it's a powerful way to develop software as it focuses you on defining the specifications for your code before writing the code.
+```
+````
+
+Technically we don't need to write a wrapper function of `skbio.alignment.global_pairwise_align_nucleotide`, but rather we could register that function directly.
+But for our first pass at this action there are a couple of things we're going to need to do to get data from QIIME 2 into `skbio.alignment.global_pairwise_align_nucleotide`.
+I started by creating a new file in my plugin at the path `q2-dwq2/q2_dwq2/_methods.py`.
+The `_` at the beginning of `_methods.py` is convention that conveys that this is intended to be a private submodule: in other words, consummers of this code outside of the q2-dwq2 Python package shouldn't access anything in this file directly.
+
+The complete code that I put in this file follows.
+You should create a `_methods.py` file in your plugin, and copy/paste this code to it.
+
+```python
+# ----------------------------------------------------------------------------
+# Copyright (c) 2024, Greg Caporaso.
+#
+# Distributed under the terms of the Modified BSD License.
+#
+# The full license is in the file LICENSE, distributed with this software.
+# ----------------------------------------------------------------------------
+
+from skbio.alignment import global_pairwise_align_nucleotide, TabularMSA
+
+from q2_types.feature_data import DNAIterator
+
+
+def nw_align(seq1: DNAIterator,
+             seq2: DNAIterator,
+             gap_open_penalty: float = 5,
+             gap_extend_penalty: float = 2,
+             match_score: float = 1,
+             mismatch_score: float = -2) -> TabularMSA:
+    seq1 = next(iter(seq1))
+    seq2 = next(iter(seq2))
+
+    msa, _, _ = global_pairwise_align_nucleotide(
+        seq1=seq1, seq2=seq2, gap_open_penalty=gap_open_penalty,
+        gap_extend_penalty=gap_extend_penalty, match_score=match_score,
+        mismatch_score=mismatch_score
+    )
+
+    return msa
+```
+
+Here I defined a new function, `nw_align` (for *Needleman-Wunsch Alignment*).
+At its core, what this function is doing is passing some inputs through to `skbio.alignment.global_pairwise_align_nucleotide`.
+The aspects of this that might make this look different from what you typically see in a Python function definition are the [type hints](https://docs.python.org/3/library/typing.html), which are not used by Python directly, but are intended to be used by other tools (like QIIME 2).
+
+The type hints define the [data type](types-of-types) associated with each input and output from our function, and are one of the ways that we annotate a function so that QIIME 2 knows how to interact with it.
+Some of these are built-in types (in this case, we are providing four `float` values).
+The others, `DNAIterator` and `TabularMSA`, are defined in the q2-types QIIME 2 plugin and in scikit-bio, respectively.
+A `DNAIterator` is a Python object that enables iteration over a collection of zero or more `skbio.DNA` objects (which represent DNA sequences), and a `TabularMSA` object represents a **m**ultiple **s**equence **a**lignment.
+A little bit later we'll come back to how you decide what type hints to provide here.
+
+The first couple of lines in this function are a little bit odd, and stem from the fact that (as of this writing) there isn't an existing QIIME 2 {term}`semantic type` for individual DNA sequences, but rather only for collections of DNA sequences.
+We are therefore going to work-around this right now, and in a subsequent lesson we'll define our own QIIME 2 semantic type to represent a single DNA sequence.
+We need two sequences as input to pairwise sequence alignment (by definition), and we'll take those as inputs through the `seq1` and `seq2` parameters.
+These will come in in `DNAIterator` objects, and our work-around is that we read the first sequence from each of these two input sequence collections by getting the `next()` item from each collection, one time each, and reassigning them to the variables `seq1` and `seq2`.
+
+Next, we call `skbio.alignment.global_pairwise_align_nucleotide`, passing in all of our inputs.
+`skbio.alignment.global_pairwise_align_nucleotide` returns three outputs.
+For now, we're only going to concern ourselves with the first: the multiple sequence alignment, which we'll store in a varriable called `msa`.
+By convention in Python, unused return values are assigned to a variable named `_`.
+Finally, we'll return the `msa` variable.
+
+So for the most part, this works like a normal Python function.
+The unusual aspects are the type hints, and our workaround for getting the first sequence out of each of our input `DNAIterators`.
+
+```{note}
+Note that in defining this wrapper function, we haven't yet touched the concept of QIIME 2 {term}`Artifacts <Artifact>`.
+The underlying functions that we register as methods or visualizers don't know anything about Artifacts.
+You can also use this function just as you would any other Python function - as mentioned above, Python itself ignores the type hints, so you could just consider these detailed documentation of the input and output types of your function.
+```
+
+### Register the wrapper function as a plugin action
+
+Now that we have a function, `nw_align`, that we want to register as an action in our plugin, let's do it.
+
+#### Define a citation for this action
+
+If the action that you're performing has a relevant citation, adding that during action registration will allow your users to discover what they should be citing when they use your action.
+This is a good way, for example, to ensure that your users know that they should be citing your work (and not just citing QIIME 2).
+
+To associate a citation with our new action, the first thing we'll do is add the bibtex-formatted citation to `q2-dwq2/q2_dwq2/citations.bib`.
+Bibtex is a standard format recognizes by nearly all (or all) citation managers, including Paperpile and EndNote.
+You can generally export a bibtex citation from those tools, or alternatively get one from [Google Scholar](https://scholar.google.com/).
+The relevant citation for Needleman-Wunsch alignment is titled *A general method applicable to the search for similarities in the amino acid sequence of two proteins*, and was published in 1970.
+Find this citation using your favorite tool.
+If you use Google Scholar, search for the title of the article, and then identify it in the search results (it should be the first one).
+As of this writing, you would next click "Cite" under the search result, and then click "Bibtex".
+That should bring you to a page that contains the following bibtex-formatted citation:
+
+```bibtex
+@article{needleman1970general,
+  title={A general method applicable to the search for similarities in the amino acid sequence of two proteins},
+  author={Needleman, Saul B and Wunsch, Christian D},
+  journal={Journal of molecular biology},
+  volume={48},
+  number={3},
+  pages={443--453},
+  year={1970},
+  publisher={Elsevier}
+}
+```
+
+I copied this and then pasted it at the bottom of the `q2-dwq2/q2_dwq2/citations.bib` file.
+I also changed the citation key on the first line of this bibtext record (`needleman1970general`) to `Needleman1970`.
+This is how we'll reference this citation when we associate it with our action, and my version of the key is just a little easier for me to remember.
+
+#### Register the action in `plugin_setup.py`
+
+Now we have what we need to register our function as a plugin method.
+By convention, this is done in `q2-dwq2/q2_dwq2/plugin_setup.py`, and that's what we'll do here.
+I chose to remove the templated `duplicate_table` action, now that I'm adding one of my own, but whether or not you want to do that too is up to you.
+
+To register a function as a method, you'll use `plugin.methods.register_function`, where `plugin` is the `qiime2.plugin.Plugin` action that is instantiated in this file.
+Add the following code to your `q2-dwq2/q2_dwq2/plugin_setup.py` file, and then we'll work through it line by line.
+Note that this won't work yet - we still need to add some `import` statements to the top of the file, but we'll add those as we work through the code where the imported functionality is used.
+
+```python
+plugin.methods.register_function(
+    function=nw_align,
+    inputs={'seq1': FeatureData[Sequence],
+            'seq2': FeatureData[Sequence]},
+    parameters={
+        'gap_open_penalty': Float % Range(0, None, inclusive_start=False),
+        'gap_extend_penalty': Float % Range(0, None, inclusive_start=False),
+        'match_score': Float % Range(0, None, inclusive_start=False),
+        'mismatch_score': Float % Range(None, 0, inclusive_end=True)},
+    outputs={'aligned_sequences': FeatureData[AlignedSequence]},
+    input_descriptions={'seq1': 'The first sequence to align.',
+                        'seq2': 'The second sequence to align.'},
+    parameter_descriptions={
+        'gap_open_penalty': ('The penalty incurred for opening a new gap. By '
+                             'convention this is a positive number.'),
+        'gap_extend_penalty': ('The penalty incurred for extending an existing '
+                               'gap. By convention this is a positive number.'),
+        'match_score': ('The score for matching characters at an alignment '
+                        'position. By convention, this is a positive number.'),
+        'mismatch_score': ('The score for mismatching characters at an '
+                           'alignment position. By convention, this is a '
+                           'negative number.')},
+    output_descriptions={
+        'aligned_sequences': 'The pairwise aligned sequences.'
+    },
+    name='Pairwise global sequence alignment.',
+    description=("Align two DNA sequences using Needleman-Wunsch (NW). "
+                 "This is a Python implementation of NW, so it is very slow! "
+                 "This action is for demonstration purposes only. 🐌"),
+    citations=[citations['Needleman1970']]
+)
+```
+
+First, we call `plugin.methods.register_function`.
+This function call takes a number of parameters, and you can find full detail by following the `[source]` link from the [`Plugin` API documentation](Plugin-api-docs).
+Here's what each is:
+ - `function`: This is the Python function to be registered as a plugin action.
+   We defined ours above as `nw_align`.
+   If you add the import statement `from q2_dwq2._methods import nw_align` to the top of this file, you can provide `nw_align`.
+ - `inputs`: This is a Python `dict` mapping the variable names of the {term}`inputs <Input>` to the plugin action to the semantic types of the inputs.
+   As mentioned above, QIIME 2 doesn't define a semantic type for a single DNA sequence, so we're going to use the type that is commonly used for defining collections of DNA sequences, and we'll just end up working with the first sequence in each input.
+   The type we use here is `FeatureData[Sequence]`.
+   A little bit later we'll come back to how you identify the semantic types that should be assigned to your input, and how to define your own sematic types if there isn't already a relevant one.
+   {term}`Inputs <Input>` to QIIME 2 actions are data in the form of {term}`Artifacts <Artifact>`, and these are different than {term}`Parameters <Parameter>`.
+   It is at this stage, when registering a function as an action, that this distinction is made.
+   The semantic types we're using here need to be imported from q2-types.
+   To do this, add the line `from q2_types.feature_data import FeatureData, Sequence` to the top of the file.
+- `parameters`: This is a Python `dict` mapping the names of parameters to their {term}`Primitive Type`.
+  This information is used to validate input provided by users of your plugin, but more importantly to allow QIIME 2 interfaces to determine how this information should be collected from a user.
+  For example, in a graphical interface the value of a `Boolean` parameter could be collected from a user using a checkbox, while a `Float` parameter could be collected using a text field that only accepts numbers.
+  Our four parameters are all `Floats`, and each has a `Range` that values must fall in.
+  Import these primitive types for use here by adding the line `from qiime2.plugin import Float, Range` to the top of the file.
+  The `gap_open_penalty` parameter, for example, is defined here as taking a floating point value greater than 0.
+ - `outputs`: This is a Python `dict` mapping the variable names of the {term}`outputs <Output>` from the plugin action to their semantic types.
+ The type we use here is `FeatureData[AlignedSequence]`, representing a collection of aligned DNA sequences.
+ A more appropriate type might represent a pair of aligned sequences specifically, rather than one or more aligned sequences which is what this semantic type implies, but again we'll come back to that a later.
+ We'll need to import `AlignedSequence` here as well, which you can do by adding the line `from q2_types.feature_data import AlignedSequence` to the top of the file (or adding `AlignedSequence` to the imports you already added from `q2_types.feature_data`).
+ - `input_descriptions`, `parameter_descriptions`, and `output_descriptions`: These are Python `dicts` that provide descriptions of each input, parameter, and output, respectively, for use in help text through different interfaces.
+ - `name`: A brief name for this action.
+ This shows up, for example, when listing the actions that are available in a plugin.
+ - `description`: A longer description of the action.
+ This is generally presented to a user when they request more detail on an action (for example, by passing a `--help` parameter through a command line interface).
+ - `citations`: A list of the citations that should be associated with this action.
+ Earlier in the `plugin_setup.py` file we instantiated a `citations` lookup, and we can now use that to associate the citation we added to `citations.bib` with this action.
+
+After adding this code and the corresponding `import` statements to your `plugin_setup.py`, you should be ready to try this action out.
+
+My `import` statements now look like the following:
+
+```python
+from qiime2.plugin import Citations, Plugin, Float, Range
+from q2_types.feature_data import FeatureData, Sequence, AlignedSequence
+from q2_dwq2 import __version__
+from q2_dwq2._methods import nw_align
+```
+
+### Calling the action with {term}`q2cli`
+
+Activate your development environment and run `qiime dev refresh-cache`.
+If your code doesn't have any syntax errors, and you addressed all of the additions described in this document, you should then be able to run `qiime dwq2 --help`, and see your new `nw-align` action show up in the list of actions associated with your plugin.
+If you call `qiime dwq2 nw-align --help`, you'll see the more detailed help text for the `nw-align` action.
+
+**This section is incomplete.**
+
+### Write unit tests
+
+Your code is *not ready for use* until you write unit tests, to ensure that it's doing what you expect.
+
+**This section is incomplete.**
+
+
+## An optional exercise
+
+Now that you have this method working, try adding a method for local pairwise alignment of nucleotide sequences using the Smith-Waterman (SW) algorithm.
+scikit-bio provides an implementation of SW as [`skbio.alignment.local_pairwise_align_nucleotide`](https://scikit.bio/docs/dev/generated/skbio.alignment.local_pairwise_align_nucleotide.html).
+Don't forget to write your unit tests!
+
+Throughout the next few chapters, additional exercises will build on this functionality.
+
 

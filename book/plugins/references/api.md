@@ -1,10 +1,11 @@
 (plugin-developer-api)=
 # Plugin developer API
 
-When developing a QIIME 2 plugin, you will use APIs defined in the `qiime2.plugin` submodule. 
+When developing a QIIME 2 plugin, you will use APIs defined in the `qiime2.plugin` submodule.
 
 ## Plugin development API
 
+(Plugin-api-docs)=
 ### The `Plugin` object
 ```{eval-rst}
 .. autofunction:: qiime2.plugin.Plugin
