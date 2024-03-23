@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Register a QIIME 2 plugin" href="register-a-plugin.html" />
-    <link rel="prev" title="How To Guides" href="intro.html" />
+    <link rel="prev" title="How-To Guides" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -173,13 +173,13 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins 🔌</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/intro.html">Tutorials: Developing a QIIME 2 Plugin</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Creating your plugin from an existing template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) action to our plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-usage-example.html">Add a first usage example</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">How To Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">How-To Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Set up your development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="register-a-plugin.html">Register a QIIME 2 plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="create-register-method.html">Create and register a Method</a></li>
@@ -409,7 +409,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-latest-development-version-of-the-qiime-2-tiny-distribution">Install the latest development version of the QIIME 2 “Tiny Distribution”</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activate-the-conda-environment">Activate the <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next steps</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-new-plugin">Building a new plugin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-your-first-plugin">Building your first plugin</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-to-existing-plugins">Contributing to existing plugins</a></li>
 </ul>
 </li>
@@ -520,9 +520,9 @@ conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w">
 </section>
 <section id="next-steps">
 <h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this heading">#</a></h2>
-<section id="building-a-new-plugin">
-<h3>Building a new plugin<a class="headerlink" href="#building-a-new-plugin" title="Permalink to this heading">#</a></h3>
-<p>If you’re creating a new plugin, you can now move on to <a class="reference internal" href="../tutorials/intro.html#start-plugin-tutorial"><span class="std std-ref">Tutorials: Developing a QIIME 2 Plugin</span></a> or <a class="reference internal" href="../explanations/intro.html#start-plugin-explanations"><span class="std std-ref">Explanations</span></a>, depending on whether you’d like to start with step-by-step instructions, or a narrative overview of how QIIME 2 plugins work (respectively).</p>
+<section id="building-your-first-plugin">
+<h3>Building your first plugin<a class="headerlink" href="#building-your-first-plugin" title="Permalink to this heading">#</a></h3>
+<p>If you’re creating your first plugin, you can now move on to <a class="reference internal" href="../tutorials/intro.html#plugin-tutorial-intro"><span class="std std-ref">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</span></a>.</p>
 </section>
 <section id="contributing-to-existing-plugins">
 <h3>Contributing to existing plugins<a class="headerlink" href="#contributing-to-existing-plugins" title="Permalink to this heading">#</a></h3>
@@ -657,7 +657,7 @@ conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">How To Guides</p>
+        <p class="prev-next-title">How-To Guides</p>
       </div>
     </a>
     <a class="right-next"
@@ -688,7 +688,7 @@ conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-latest-development-version-of-the-qiime-2-tiny-distribution">Install the latest development version of the QIIME 2 “Tiny Distribution”</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activate-the-conda-environment">Activate the <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next steps</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-new-plugin">Building a new plugin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-your-first-plugin">Building your first plugin</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-to-existing-plugins">Contributing to existing plugins</a></li>
 </ul>
 </li>

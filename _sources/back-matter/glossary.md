@@ -12,6 +12,9 @@ Archive
 Artifact
   A QIIME 2 {term}`Result` that contains data to operate on.
 
+Artifact API
+  See {term}`Python 3 API`.
+
 Deployment
   An installation of QIIME 2 as well as zero-or-more {term}`interfaces <Interface>` and {term}`plugins <Plugin>`.
   The collection of interfaces and plugins in a deployment can be defined by a {term}`distribution` of QIIME 2.
@@ -29,6 +32,9 @@ Format
 
 Framework
   The engine of orchestration that enables QIIME 2 to function together as a cohesive unit.
+
+Galaxy
+  [Galaxy](https://usegalaxy.org) is a browser-based graphical interface used to access bioinformatics (and other data science tools) without having to write command line or other code. QIIME 2 provides a Galaxy interface to support access to plugins through a web browser.
 
 Identifier
   A unique value that denotes an individual sample or feature.
@@ -51,6 +57,11 @@ Method
 Output
   Objects returned by an {term}`action`. Can be {term}`artifact(s) <Artifact>` or {term}`visualization(s) <Visualization>`.
 
+Pairwise sequence alignment
+  1. (noun) A hypothesis about which positions in a pair of biological sequences (i.e., a DNA, RNA, or protein sequence) were derived from a common ancestral sequence position.
+  2. (verb) The process of generating a pairwise sequence alignment (noun).
+  For additional detail, see the *Pairwise Sequence Alignment* chapter of [*An Introduction to Applied Bioinformatics*](https://readiab.org) {cite}`iab-2`.
+
 Parameter
   A value that alters the behavior of an {term}`action`.
 
@@ -66,16 +77,30 @@ Plugin
 Primitive Type
   A {term}`type` that is used to communicate parameters to an {term}`interface`.  These are predefined by the {term}`framework` and cannot be extended.
 
+Provenance
+  In the context of QIIME 2, provenance or data provenance refers to the history of how a given {term}`result` was generated.
+  Provenance information describes the host system, the computing environment, Actions performed, parameters passed, primary sources cited, and more.
+
+Provenance Replay
+  The QIIME 2 functionality that enables new executable code to be generated from an existing QIIME 2 {term}`result's <Result>` {term}`provenance`.
+  For additional detail, refer to {cite}`Keefe2023-oy`.
+
+Python 3 API
+  When *the Python 3 API* is referred to in the context of QIIME 2, this refers to the interface that allows users to work with QIIME 2 plugins and actions natively in Python 3 (for example in a Jupyter Notebook environment). This was formerly referred to as the Artifact API.
+
+q2cli
+  [q2cli](https://github.com/qiime2/q2cli) is the original (and still primary, as of March 2024) command line interface for QIIME 2.
+
 Result
   A generic term for either a {term}`Visualization` or an {term}`Artifact`.
-
-Provenance
-  Data describing how an analysis was performed, captured automatically whenever users perform a QIIME 2 {term}`Action`.
-  Provenance information describes the host system, the computing environment, Actions performed, parameters passed, primary sources cited, and more.
 
 Semantic Type
   A {term}`type` that is used to classify {term}`artifacts<Artifact>` and how they can be used.
   These types may be extended by {term}`plugins<Plugin>`.
+
+tl;dr
+  "Too long; didn't read."
+  In other words, a quick summary of the content that follows.
 
 Transformer
   A function registered on the {term}`framework` capable of converting data in one {term}`format` into data of another {term}`format`.

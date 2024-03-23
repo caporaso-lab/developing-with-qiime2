@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Tutorials: Developing a QIIME 2 Plugin &#8212; Developing with QIIME 2</title>
+    <title>Tutorial: A step-by-step guide to building your first QIIME 2 plugin &#8212; Developing with QIIME 2</title>
   
   
   
@@ -173,13 +173,13 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins 🔌</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">Tutorials: Developing a QIIME 2 Plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="create-from-template.html">Creating your plugin from an existing template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-nw-align-method.html">Add a first (real) action to our plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-nw-align-usage-example.html">Add a first usage example</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/register-a-plugin.html">Register a QIIME 2 plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/create-register-method.html">Create and register a Method</a></li>
@@ -393,7 +393,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Tutorials: Developing a QIIME 2 Plugin</h1>
+    <h1>Tutorial: A step-by-step guide to building your first QIIME 2 plugin</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -407,17 +407,32 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="tutorials-developing-a-qiime-2-plugin">
-<span id="start-plugin-tutorial"></span><h1>Tutorials: Developing a QIIME 2 Plugin<a class="headerlink" href="#tutorials-developing-a-qiime-2-plugin" title="Permalink to this heading">#</a></h1>
-<blockquote>
-<div><p>It’s natural to want to complete large tranches of work before you publish them, so that you have something substantial to show each time. Avoid this temptation - every step in the right direction is worth publishing immediately. <a class="reference external" href="https://diataxis.fr/foundations/">Daniele Procida - Diátaxis</a></p>
-</div></blockquote>
+  <section class="tex2jax_ignore mathjax_ignore" id="tutorial-a-step-by-step-guide-to-building-your-first-qiime-2-plugin">
+<span id="plugin-tutorial-intro"></span><h1>Tutorial: A step-by-step guide to building your first QIIME 2 plugin<a class="headerlink" href="#tutorial-a-step-by-step-guide-to-building-your-first-qiime-2-plugin" title="Permalink to this heading">#</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The content in this tutorial is a work-in-progress. 🚜</p>
+<p>My approach to writing <em>Developing with QIIME 2</em> is to publish early, and to publish often.
+This is well captured in this quote by Daniele Procida from Diátaxis:</p>
+<blockquote>
+<div><p>It’s natural to want to complete large tranches of work before you publish them, so that you have something substantial to show each time. Avoid this temptation - every step in the right direction is worth publishing immediately. <a class="reference external" href="https://diataxis.fr/foundations/">(source)</a></p>
+</div></blockquote>
+<p>One caveat that I’ll add, since <em>Developing with QIIME 2</em> is about developing software while Diátaxis is about developing documentation, is that functional code should only be “published” (e.g., applied in real world applications or shared with others who may do that) <strong>after</strong> it has been sufficiently tested.
+I’ll come back to software testing shortly.</p>
+<p>This tutorial is a work-in-progress. 🚜</p>
 </div>
-<p>This tutorial will walk step by step through building a first QIIME 2 plugin.
-The plugin you’ll create in this tutorial will provide support for some of the most fundamental algorithms in bioinformatics, and will ultimately contain a mix of QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Method"><span class="xref std std-term">methods</span></a>, <a class="reference internal" href="../../back-matter/glossary.html#term-Visualizer"><span class="xref std std-term">visualizers</span></a>, and <a class="reference internal" href="../../back-matter/glossary.html#term-Pipeline"><span class="xref std std-term">pipelines</span></a>.</p>
+<p>This tutorial will walk step-by-step through building a first QIIME 2 plugin, and is intended to be read from beginning to end.</p>
+<p>The plugin you’ll create will provide support for some of the most fundamental algorithms in bioinformatics, and will ultimately contain a mix of QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Method"><span class="xref std std-term">methods</span></a>, <a class="reference internal" href="../../back-matter/glossary.html#term-Visualizer"><span class="xref std std-term">visualizers</span></a>, and <a class="reference internal" href="../../back-matter/glossary.html#term-Pipeline"><span class="xref std std-term">pipelines</span></a>.
+You’ll learn to define <a class="reference internal" href="../../back-matter/glossary.html#term-Format"><span class="xref std std-term">formats</span></a>, <a class="reference internal" href="../../back-matter/glossary.html#term-Transformer"><span class="xref std std-term">transformers</span></a>, and new <a class="reference internal" href="../../back-matter/glossary.html#term-Semantic-Type"><span class="xref std std-term">semantic types</span></a>.
+You’ll add parallel computing supporting to a <a class="reference internal" href="../../back-matter/glossary.html#term-Method"><span class="xref std std-term">method</span></a> that is initially implemented without parallel support.
+You’ll develop executable usage examples, so your users can learn how to apply your plugin, and you can receive automated notifications if changes you (or others) make to your code are backward incompatible, necessitating changes to the documentation.
+And, as with all QIIME 2 plugins, the plugin you build will record data provenance when it’s used, support <a class="reference internal" href="../../back-matter/glossary.html#term-Provenance-Replay"><span class="xref std std-term">provenance replay</span></a>, and will be immediately accessible through multiple interfaces including <a class="reference internal" href="../../back-matter/glossary.html#term-q2cli"><span class="xref std std-term">q2cli</span></a> and the <a class="reference internal" href="../../back-matter/glossary.html#term-Python-3-API"><span class="xref std std-term">Python 3 API</span></a>.
+You’ll also be able to run a few additional commands to generate <a class="reference internal" href="../../back-matter/glossary.html#term-Galaxy"><span class="xref std std-term">Galaxy</span></a> workflows for all of your plugin actions.
+Finally, you’ll receive guidance on how to move forward to create your own QIIME 2 plugin as a next step.</p>
+<p>Let’s <a class="reference internal" href="create-from-template.html#plugin-from-template"><span class="std std-ref">get started</span></a>!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you’re already comfortable with plugin development and are looking for instructions to achieve a specific task, you may find more targeted instructions in the <a class="reference internal" href="../how-to-guides/intro.html#plugin-how-to-guides"><span class="std std-ref">Plugin Development How-To Guides</span></a>.</p>
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </section>

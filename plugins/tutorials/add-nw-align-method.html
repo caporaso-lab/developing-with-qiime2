@@ -173,13 +173,13 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins 🔌</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Tutorials: Developing a QIIME 2 Plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="create-from-template.html">Creating your plugin from an existing template</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Add a first (real) action to our plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-nw-align-usage-example.html">Add a first usage example</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/register-a-plugin.html">Register a QIIME 2 plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/create-register-method.html">Create and register a Method</a></li>
@@ -406,6 +406,25 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pairwise-sequence-alignment">Pairwise sequence alignment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-wrapper-function">Write a wrapper function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#register-the-wrapper-function-as-a-plugin-action">Register the wrapper function as a plugin action</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-citation-for-this-action">Define a citation for this action</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#register-the-action-in-plugin-setup-py">Register the action in <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-the-action-with-q2cli-and-the-python-3-api">Calling the action with <span class="xref std std-term">q2cli</span> and the <span class="xref std std-term">Python 3 API</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-unit-tests">Write unit tests</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-test-and-what-not-to-test">What to test and what not to test</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-test-of-our-plugin-action">A first test of our plugin action</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-second-test-of-our-action">A second test of our action</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-few-additional-tests">A few additional tests</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#wrapping-up-testing">Wrapping up testing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trying-the-new-action">Trying the new action</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-optional-exercise">An optional exercise</a></li>
 </ul>
             </nav>
         </div>
@@ -419,15 +438,657 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="add-a-first-real-action-to-our-plugin">
 <span id="add-nw-align-method"></span><h1>Add a first (real) action to our plugin<a class="headerlink" href="#add-a-first-real-action-to-our-plugin" title="Permalink to this heading">#</a></h1>
-<p>At the most basic level, a QIIME 2 action is simply an annotation of a Python function that provides additional detail on the inputs and outputs.
-As a next step, we’ll create a powerful action that demonstrates this idea.</p>
+<p>At the most basic level, a QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">action</span></a> is simply an annotation of a Python function that describes in detail the inputs and outputs to that function.
+Here we’ll create a powerful action that illustrates this idea.</p>
+<p>The type of action that we’ll create is a <a class="reference internal" href="../../back-matter/glossary.html#term-Method"><span class="xref std std-term">method</span></a>, meaning that it will take zero or more QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact"><span class="xref std std-term">artifacts</span></a> as input, and it will generate one or more QIIME 2 artifacts as output.</p>
+<div class="tip admonition" id="add-nw-align-method-prs">
+<p class="admonition-title">tl;dr</p>
+<p>The complete code that I developed to add this action to my plugin can be found <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/pull/3/files">here</a> and <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/pull/4/files">here</a>.</p>
+<p>(<a class="reference internal" href="../../back-matter/glossary.html#term-tl-dr"><span class="xref std std-term">What does “tl;dr” mean?</span></a>)</p>
+</div>
 <section id="pairwise-sequence-alignment">
 <h2>Pairwise sequence alignment<a class="headerlink" href="#pairwise-sequence-alignment" title="Permalink to this heading">#</a></h2>
-<p>One of the most fundamental tools in bioinformatics is pairwise sequence alignment.
-Pairwise sequence alignment forms the basis of <a class="reference external" href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">BLAST</a>, many genome assemblers, phylogenetic inference from molecular sequence data, assigning taxonomy to environmental DNA sequences, and so much more.
-The action we’ll add to our plugin in this chapter performs pairwise sequence alignment using the Needleman-Wunsch global pairwise alignment algorithm <span id="id1">[<a class="reference internal" href="../../back-matter/bibliography.html#id6" title="S B Needleman and C D Wunsch. A general method applicable to the search for similarities in the amino acid sequence of two proteins. J. Mol. Biol., 48(3):443–453, March 1970.">2</a>]</span>.
-You don’t need to understand how the algorithm works to implement this action, but if you do want to learn more this topic, including the specific algorithm and code that we’re going to reference here, is covered in detail in <a class="reference external" href="https://readiab.org"><em>An Introduction to Applied Bioinformatics</em></a> <span id="id2">[<a class="reference internal" href="../../back-matter/bibliography.html#id5" title="J Gregory Caporaso. An introduction to applied bioinformatics, 2nd edition. 2021. URL: https://readiab.org.">3</a>]</span>.</p>
-<p>The complete code that I developed to add this action to my plugin can be found <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/pull/3/files">here</a>.</p>
+<p>One of the most fundamental tools in bioinformatics is <a class="reference internal" href="../../back-matter/glossary.html#term-Pairwise-sequence-alignment"><span class="xref std std-term">pairwise sequence alignment</span></a>.
+<a class="reference internal" href="../../back-matter/glossary.html#term-Pairwise-sequence-alignment"><span class="xref std std-term">Pairwise sequence alignment</span></a> forms the basis of <a class="reference external" href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">BLAST</a>, many genome assemblers, phylogenetic inference from molecular sequence data, assigning taxonomy to environmental DNA sequences, and so much more.
+The first real action that we’ll add to our plugin is a method that performs pairwise sequence alignment using the Needleman-Wunsch global pairwise alignment algorithm <span id="id1">[<a class="reference internal" href="../../back-matter/bibliography.html#id6" title="S B Needleman and C D Wunsch. A general method applicable to the search for similarities in the amino acid sequence of two proteins. J. Mol. Biol., 48(3):443–453, March 1970.">2</a>]</span>.</p>
+<p>You don’t need to understand how the NW algorithm works interally to implement our method, because we’re going to work with a Python function that implements the algorithm for us.
+But, you’ll need to understand what its input and outputs are to be able to annotate them, and you’ll need to understand at a basic level what it does so that you can test that your code is working as expected.</p>
+<p>If you do want to learn more about pairwise sequence alignment, the specific algorithm and implementation that we’re going to work with here is covered in detail in the <em>Pairwise Sequence Alignment</em> chapter of <a class="reference external" href="https://readiab.org"><em>An Introduction to Applied Bioinformatics</em></a> <span id="id2">[<a class="reference internal" href="../../back-matter/bibliography.html#id5" title="J Gregory Caporaso. An introduction to applied bioinformatics, 2nd edition. 2021. URL: https://readiab.org.">3</a>]</span>. Briefly:</p>
+<blockquote>
+<div><p>The goal of pairwise sequence alignment is, given two DNA, RNA, or protein sequences, to generate a hypothesis about which sequence positions derived from a common ancestral sequence position. <span id="id3">[<a class="reference internal" href="../../back-matter/bibliography.html#id5" title="J Gregory Caporaso. An introduction to applied bioinformatics, 2nd edition. 2021. URL: https://readiab.org.">3</a>]</span></p>
+</div></blockquote>
+<p>Our method will take two DNA sequences as input.
+It will attempt to align like positions with each other, inserting gap (i.e., <code class="docutils literal notranslate"><span class="pre">-</span></code>) characters where it seems likely that insertion/deletion events have occurred over the course of evolution.
+The output will be a pairwise sequence alignment (or more briefly, an <em>alignment</em>), which is a special case of a multiple sequence alignment that contains exactly two sequences.
+Our method will also take a few <a class="reference internal" href="../../back-matter/glossary.html#term-Parameter"><span class="xref std std-term">parameters</span></a> as input.
+These parameters include things like the score that should be assigned when a pair of positions contains matching characters (we’ll call this <code class="docutils literal notranslate"><span class="pre">match_score</span></code>), or the score penalty that is incurred when a gap character is added to the alignment.</p>
+<p>The <a class="reference external" href="https://scikit.bio">scikit-bio</a> library implements Needleman-Wunsch global pairwise alignment algorithm as <a class="reference external" href="https://scikit.bio/docs/dev/generated/skbio.alignment.global_pairwise_align_nucleotide.html#skbio.alignment.global_pairwise_align_nucleotide"><code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code></a>.
+We’re going to make this accessible through our plugin by writing a simple wrapper of this function.</p>
+</section>
+<section id="write-a-wrapper-function">
+<h2>Write a wrapper function<a class="headerlink" href="#write-a-wrapper-function" title="Permalink to this heading">#</a></h2>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In subsequent sections of the book, we’ll apply test-driven development where we write unit tests for our functions before writing the functions themselves.
+That may seem counter-intuitive if you’ve never done it before, but it’s a powerful way to develop software as it focuses you on defining the specifications for your code before writing the code.</p>
+</div>
+</aside>
+<p>Technically we don’t need to write a wrapper function of <code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code>, but rather we could register that function directly.
+But for our first pass at this action there are a couple of things we’re going to need to do to get data from QIIME 2 into <code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code>.
+I started by creating a new file in my plugin at the path <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_methods.py</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">_</span></code> at the beginning of <code class="docutils literal notranslate"><span class="pre">_methods.py</span></code> is convention that conveys that this is intended to be a private submodule: in other words, consummers of this code outside of the q2-dwq2 Python package shouldn’t access anything in this file directly.</p>
+<p>The complete code that I put in this file follows.
+You should create a <code class="docutils literal notranslate"><span class="pre">_methods.py</span></code> file in your plugin, and copy/paste this code to it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ----------------------------------------------------------------------------</span>
+<span class="c1"># Copyright (c) 2024, Greg Caporaso.</span>
+<span class="c1">#</span>
+<span class="c1"># Distributed under the terms of the Modified BSD License.</span>
+<span class="c1">#</span>
+<span class="c1"># The full license is in the file LICENSE, distributed with this software.</span>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<span class="kn">from</span> <span class="nn">skbio.alignment</span> <span class="kn">import</span> <span class="n">global_pairwise_align_nucleotide</span><span class="p">,</span> <span class="n">TabularMSA</span>
+
+<span class="kn">from</span> <span class="nn">q2_types.feature_data</span> <span class="kn">import</span> <span class="n">DNAIterator</span>
+
+
+<span class="k">def</span> <span class="nf">nw_align</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="n">DNAIterator</span><span class="p">,</span>
+             <span class="n">seq2</span><span class="p">:</span> <span class="n">DNAIterator</span><span class="p">,</span>
+             <span class="n">gap_open_penalty</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+             <span class="n">gap_extend_penalty</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+             <span class="n">match_score</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+             <span class="n">mismatch_score</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TabularMSA</span><span class="p">:</span>
+    <span class="n">seq1</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">seq1</span><span class="p">))</span>
+    <span class="n">seq2</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">seq2</span><span class="p">))</span>
+
+    <span class="n">msa</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">global_pairwise_align_nucleotide</span><span class="p">(</span>
+        <span class="n">seq1</span><span class="o">=</span><span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="o">=</span><span class="n">seq2</span><span class="p">,</span> <span class="n">gap_open_penalty</span><span class="o">=</span><span class="n">gap_open_penalty</span><span class="p">,</span>
+        <span class="n">gap_extend_penalty</span><span class="o">=</span><span class="n">gap_extend_penalty</span><span class="p">,</span> <span class="n">match_score</span><span class="o">=</span><span class="n">match_score</span><span class="p">,</span>
+        <span class="n">mismatch_score</span><span class="o">=</span><span class="n">mismatch_score</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">msa</span>
+</pre></div>
+</div>
+<p>Here I defined a new function, <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> (for <em>Needleman-Wunsch Alignment</em>).
+At its core, what this function is doing is passing some inputs through to <code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code>.
+The aspects of this that might make this look different from what you typically see in a Python function definition are the <a class="reference external" href="https://docs.python.org/3/library/typing.html">type hints</a>, which are not used by Python directly, but are intended to be used by other tools (like QIIME 2).</p>
+<p>The type hints define the <a class="reference internal" href="../explanations/types-of-types.html#types-of-types"><span class="std std-ref">data type</span></a> associated with each input and output from our function, and are one of the ways that we annotate a function so that QIIME 2 knows how to interact with it.
+Some of these are built-in types (in this case, we are providing four <code class="docutils literal notranslate"><span class="pre">float</span></code> values).
+The others, <code class="docutils literal notranslate"><span class="pre">DNAIterator</span></code> and <code class="docutils literal notranslate"><span class="pre">TabularMSA</span></code>, are defined in the q2-types QIIME 2 plugin and in scikit-bio, respectively.
+A <code class="docutils literal notranslate"><span class="pre">DNAIterator</span></code> is a Python object that enables iteration over a collection of zero or more <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> objects (which represent DNA sequences), and a <code class="docutils literal notranslate"><span class="pre">TabularMSA</span></code> object represents a <strong>m</strong>ultiple <strong>s</strong>equence <strong>a</strong>lignment.
+A little bit later we’ll come back to how you decide what type hints to provide here.</p>
+<p>The first couple of lines in this function are a little bit odd, and stem from the fact that (as of this writing) there isn’t an existing QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Semantic-Type"><span class="xref std std-term">semantic type</span></a> for individual DNA sequences, but rather only for collections of DNA sequences.
+We are therefore going to work-around this right now, and in a subsequent lesson we’ll define our own QIIME 2 semantic type to represent a single DNA sequence.
+We need two sequences as input to pairwise sequence alignment (by definition), and we’ll take those as inputs through the <code class="docutils literal notranslate"><span class="pre">seq1</span></code> and <code class="docutils literal notranslate"><span class="pre">seq2</span></code> parameters.
+These will come in in <code class="docutils literal notranslate"><span class="pre">DNAIterator</span></code> objects, and our work-around is that we read the first sequence from each of these two input sequence collections by getting the <code class="docutils literal notranslate"><span class="pre">next()</span></code> item from each collection, one time each, and reassigning them to the variables <code class="docutils literal notranslate"><span class="pre">seq1</span></code> and <code class="docutils literal notranslate"><span class="pre">seq2</span></code>.</p>
+<p>Next, we call <code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code>, passing in all of our inputs.
+<code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code> returns three outputs.
+For now, we’re only going to concern ourselves with the first: the multiple sequence alignment, which we’ll store in a varriable called <code class="docutils literal notranslate"><span class="pre">msa</span></code>.
+By convention in Python, unused return values are assigned to a variable named <code class="docutils literal notranslate"><span class="pre">_</span></code>.
+Finally, we’ll return the <code class="docutils literal notranslate"><span class="pre">msa</span></code> variable.</p>
+<p>So for the most part, this works like a normal Python function.
+The unusual aspects are the type hints, and our workaround for getting the first sequence out of each of our input <code class="docutils literal notranslate"><span class="pre">DNAIterators</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that in defining this wrapper function, we haven’t yet touched the concept of QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact"><span class="xref std std-term">Artifacts</span></a>.
+The underlying functions that we register as methods or visualizers don’t know anything about Artifacts.
+You can also use this function just as you would any other Python function - as mentioned above, Python itself ignores the type hints, so you could just consider these detailed documentation of the input and output types of your function.</p>
+</div>
+<section id="register-the-wrapper-function-as-a-plugin-action">
+<h3>Register the wrapper function as a plugin action<a class="headerlink" href="#register-the-wrapper-function-as-a-plugin-action" title="Permalink to this heading">#</a></h3>
+<p>Now that we have a function, <code class="docutils literal notranslate"><span class="pre">nw_align</span></code>, that we want to register as an action in our plugin, let’s do it.</p>
+<section id="define-a-citation-for-this-action">
+<h4>Define a citation for this action<a class="headerlink" href="#define-a-citation-for-this-action" title="Permalink to this heading">#</a></h4>
+<p>If the action that you’re performing has a relevant citation, adding that during action registration will allow your users to discover what they should be citing when they use your action.
+This is a good way, for example, to ensure that your users know that they should be citing your work (and not just citing QIIME 2).</p>
+<p>To associate a citation with our new action, the first thing we’ll do is add the bibtex-formatted citation to <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/citations.bib</span></code>.
+Bibtex is a standard format recognizes by nearly all (or all) citation managers, including Paperpile and EndNote.
+You can generally export a bibtex citation from those tools, or alternatively get one from <a class="reference external" href="https://scholar.google.com/">Google Scholar</a>.
+The relevant citation for Needleman-Wunsch alignment is titled <em>A general method applicable to the search for similarities in the amino acid sequence of two proteins</em>, and was published in 1970.
+Find this citation using your favorite tool.
+If you use Google Scholar, search for the title of the article, and then identify it in the search results (it should be the first one).
+As of this writing, you would next click “Cite” under the search result, and then click “Bibtex”.
+That should bring you to a page that contains the following bibtex-formatted citation:</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">needleman1970general</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="p">=</span><span class="s">{A general method applicable to the search for similarities in the amino acid sequence of two proteins}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="p">=</span><span class="s">{Needleman, Saul B and Wunsch, Christian D}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">journal</span><span class="p">=</span><span class="s">{Journal of molecular biology}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">volume</span><span class="p">=</span><span class="s">{48}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">number</span><span class="p">=</span><span class="s">{3}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">pages</span><span class="p">=</span><span class="s">{443--453}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="p">=</span><span class="s">{1970}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">publisher</span><span class="p">=</span><span class="s">{Elsevier}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>I copied this and then pasted it at the bottom of the <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/citations.bib</span></code> file.
+I also changed the citation key on the first line of this bibtext record (<code class="docutils literal notranslate"><span class="pre">needleman1970general</span></code>) to <code class="docutils literal notranslate"><span class="pre">Needleman1970</span></code>.
+This is how we’ll reference this citation when we associate it with our action, and my version of the key is just a little easier for me to remember.</p>
+</section>
+<section id="register-the-action-in-plugin-setup-py">
+<h4>Register the action in <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code><a class="headerlink" href="#register-the-action-in-plugin-setup-py" title="Permalink to this heading">#</a></h4>
+<p>Now we have what we need to register our function as a plugin method.
+By convention, this is done in <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/plugin_setup.py</span></code>, and that’s what we’ll do here.
+I chose to remove the templated <code class="docutils literal notranslate"><span class="pre">duplicate_table</span></code> action, now that I’m adding one of my own, but whether or not you want to do that too is up to you.</p>
+<p>To register a function as a method, you’ll use <code class="docutils literal notranslate"><span class="pre">plugin.methods.register_function</span></code>, where <code class="docutils literal notranslate"><span class="pre">plugin</span></code> is the <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.Plugin</span></code> action that is instantiated in this file.
+Add the following code to your <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/plugin_setup.py</span></code> file, and then we’ll work through it line by line.
+Note that this won’t work yet - we still need to add some <code class="docutils literal notranslate"><span class="pre">import</span></code> statements to the top of the file, but we’ll add those as we work through the code where the imported functionality is used.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plugin</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
+    <span class="n">function</span><span class="o">=</span><span class="n">nw_align</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;seq1&#39;</span><span class="p">:</span> <span class="n">FeatureData</span><span class="p">[</span><span class="n">Sequence</span><span class="p">],</span>
+            <span class="s1">&#39;seq2&#39;</span><span class="p">:</span> <span class="n">FeatureData</span><span class="p">[</span><span class="n">Sequence</span><span class="p">]},</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;gap_open_penalty&#39;</span><span class="p">:</span> <span class="n">Float</span> <span class="o">%</span> <span class="n">Range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">inclusive_start</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+        <span class="s1">&#39;gap_extend_penalty&#39;</span><span class="p">:</span> <span class="n">Float</span> <span class="o">%</span> <span class="n">Range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">inclusive_start</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+        <span class="s1">&#39;match_score&#39;</span><span class="p">:</span> <span class="n">Float</span> <span class="o">%</span> <span class="n">Range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">inclusive_start</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+        <span class="s1">&#39;mismatch_score&#39;</span><span class="p">:</span> <span class="n">Float</span> <span class="o">%</span> <span class="n">Range</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">inclusive_end</span><span class="o">=</span><span class="kc">True</span><span class="p">)},</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;aligned_sequences&#39;</span><span class="p">:</span> <span class="n">FeatureData</span><span class="p">[</span><span class="n">AlignedSequence</span><span class="p">]},</span>
+    <span class="n">input_descriptions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;seq1&#39;</span><span class="p">:</span> <span class="s1">&#39;The first sequence to align.&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;seq2&#39;</span><span class="p">:</span> <span class="s1">&#39;The second sequence to align.&#39;</span><span class="p">},</span>
+    <span class="n">parameter_descriptions</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;gap_open_penalty&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;The penalty incurred for opening a new gap. By &#39;</span>
+                             <span class="s1">&#39;convention this is a positive number.&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;gap_extend_penalty&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;The penalty incurred for extending an existing &#39;</span>
+                               <span class="s1">&#39;gap. By convention this is a positive number.&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;match_score&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;The score for matching characters at an alignment &#39;</span>
+                        <span class="s1">&#39;position. By convention, this is a positive number.&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;mismatch_score&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;The score for mismatching characters at an &#39;</span>
+                           <span class="s1">&#39;alignment position. By convention, this is a &#39;</span>
+                           <span class="s1">&#39;negative number.&#39;</span><span class="p">)},</span>
+    <span class="n">output_descriptions</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;aligned_sequences&#39;</span><span class="p">:</span> <span class="s1">&#39;The pairwise aligned sequences.&#39;</span>
+    <span class="p">},</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Pairwise global sequence alignment.&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Align two DNA sequences using Needleman-Wunsch (NW). &quot;</span>
+                 <span class="s2">&quot;This is a Python implementation of NW, so it is very slow! &quot;</span>
+                 <span class="s2">&quot;This action is for demonstration purposes only. 🐌&quot;</span><span class="p">),</span>
+    <span class="n">citations</span><span class="o">=</span><span class="p">[</span><span class="n">citations</span><span class="p">[</span><span class="s1">&#39;Needleman1970&#39;</span><span class="p">]]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>First, we call <code class="docutils literal notranslate"><span class="pre">plugin.methods.register_function</span></code>.
+This function call takes a number of parameters, and you can find full detail by following the <code class="docutils literal notranslate"><span class="pre">[source]</span></code> link from the <a class="reference internal" href="../references/api.html#plugin-api-docs"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">Plugin</span></code> API documentation</span></a>.
+Here’s what each is:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">function</span></code>: This is the Python function to be registered as a plugin action.
+We defined ours above as <code class="docutils literal notranslate"><span class="pre">nw_align</span></code>.
+If you add the import statement <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">q2_dwq2._methods</span> <span class="pre">import</span> <span class="pre">nw_align</span></code> to the top of this file, you can provide <code class="docutils literal notranslate"><span class="pre">nw_align</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">inputs</span></code>: This is a Python <code class="docutils literal notranslate"><span class="pre">dict</span></code> mapping the variable names of the <a class="reference internal" href="../../back-matter/glossary.html#term-Input"><span class="xref std std-term">inputs</span></a> to the plugin action to the semantic types of the inputs.
+As mentioned above, QIIME 2 doesn’t define a semantic type for a single DNA sequence, so we’re going to use the type that is commonly used for defining collections of DNA sequences, and we’ll just end up working with the first sequence in each input.
+The type we use here is <code class="docutils literal notranslate"><span class="pre">FeatureData[Sequence]</span></code>.
+A little bit later we’ll come back to how you identify the semantic types that should be assigned to your input, and how to define your own sematic types if there isn’t already a relevant one.
+<a class="reference internal" href="../../back-matter/glossary.html#term-Input"><span class="xref std std-term">Inputs</span></a> to QIIME 2 actions are data in the form of <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact"><span class="xref std std-term">Artifacts</span></a>, and these are different than <a class="reference internal" href="../../back-matter/glossary.html#term-Parameter"><span class="xref std std-term">Parameters</span></a>.
+It is at this stage, when registering a function as an action, that this distinction is made.
+The semantic types we’re using here need to be imported from q2-types.
+To do this, add the line <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">q2_types.feature_data</span> <span class="pre">import</span> <span class="pre">FeatureData,</span> <span class="pre">Sequence</span></code> to the top of the file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parameters</span></code>: This is a Python <code class="docutils literal notranslate"><span class="pre">dict</span></code> mapping the names of parameters to their <a class="reference internal" href="../../back-matter/glossary.html#term-Primitive-Type"><span class="xref std std-term">Primitive Type</span></a>.
+This information is used to validate input provided by users of your plugin, but more importantly to allow QIIME 2 interfaces to determine how this information should be collected from a user.
+For example, in a graphical interface the value of a <code class="docutils literal notranslate"><span class="pre">Boolean</span></code> parameter could be collected from a user using a checkbox, while a <code class="docutils literal notranslate"><span class="pre">Float</span></code> parameter could be collected using a text field that only accepts numbers.
+Our four parameters are all <code class="docutils literal notranslate"><span class="pre">Floats</span></code>, and each has a <code class="docutils literal notranslate"><span class="pre">Range</span></code> that values must fall in.
+Import these primitive types for use here by adding the line <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">qiime2.plugin</span> <span class="pre">import</span> <span class="pre">Float,</span> <span class="pre">Range</span></code> to the top of the file.
+The <code class="docutils literal notranslate"><span class="pre">gap_open_penalty</span></code> parameter, for example, is defined here as taking a floating point value greater than 0.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">outputs</span></code>: This is a Python <code class="docutils literal notranslate"><span class="pre">dict</span></code> mapping the variable names of the <a class="reference internal" href="../../back-matter/glossary.html#term-Output"><span class="xref std std-term">outputs</span></a> from the plugin action to their semantic types.
+The type we use here is <code class="docutils literal notranslate"><span class="pre">FeatureData[AlignedSequence]</span></code>, representing a collection of aligned DNA sequences.
+A more appropriate type might represent a pair of aligned sequences specifically, rather than one or more aligned sequences which is what this semantic type implies, but again we’ll come back to that a later.
+We’ll need to import <code class="docutils literal notranslate"><span class="pre">AlignedSequence</span></code> here as well, which you can do by adding the line <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">q2_types.feature_data</span> <span class="pre">import</span> <span class="pre">AlignedSequence</span></code> to the top of the file (or adding <code class="docutils literal notranslate"><span class="pre">AlignedSequence</span></code> to the imports you already added from <code class="docutils literal notranslate"><span class="pre">q2_types.feature_data</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input_descriptions</span></code>, <code class="docutils literal notranslate"><span class="pre">parameter_descriptions</span></code>, and <code class="docutils literal notranslate"><span class="pre">output_descriptions</span></code>: These are Python <code class="docutils literal notranslate"><span class="pre">dicts</span></code> that provide descriptions of each input, parameter, and output, respectively, for use in help text through different interfaces.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: A brief name for this action.
+This shows up, for example, when listing the actions that are available in a plugin.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: A longer description of the action.
+This is generally presented to a user when they request more detail on an action (for example, by passing a <code class="docutils literal notranslate"><span class="pre">--help</span></code> parameter through a command line interface).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">citations</span></code>: A list of the citations that should be associated with this action.
+Earlier in the <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code> file we instantiated a <code class="docutils literal notranslate"><span class="pre">citations</span></code> lookup, and we can now use that to associate the citation we added to <code class="docutils literal notranslate"><span class="pre">citations.bib</span></code> with this action.</p></li>
+</ul>
+<p>After adding this code and the corresponding <code class="docutils literal notranslate"><span class="pre">import</span></code> statements to your <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code>, you should be ready to try this action out.</p>
+<p>My <code class="docutils literal notranslate"><span class="pre">import</span></code> statements now look like the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Citations</span><span class="p">,</span> <span class="n">Plugin</span><span class="p">,</span> <span class="n">Float</span><span class="p">,</span> <span class="n">Range</span>
+<span class="kn">from</span> <span class="nn">q2_types.feature_data</span> <span class="kn">import</span> <span class="n">FeatureData</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">AlignedSequence</span>
+<span class="kn">from</span> <span class="nn">q2_dwq2</span> <span class="kn">import</span> <span class="n">__version__</span>
+<span class="kn">from</span> <span class="nn">q2_dwq2._methods</span> <span class="kn">import</span> <span class="n">nw_align</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="calling-the-action-with-q2cli-and-the-python-3-api">
+<h3>Calling the action with <a class="reference internal" href="../../back-matter/glossary.html#term-q2cli"><span class="xref std std-term">q2cli</span></a> and the <a class="reference internal" href="../../back-matter/glossary.html#term-Python-3-API"><span class="xref std std-term">Python 3 API</span></a><a class="headerlink" href="#calling-the-action-with-q2cli-and-the-python-3-api" title="Permalink to this heading">#</a></h3>
+<p>Activate your development environment and run <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dev</span> <span class="pre">refresh-cache</span></code>.
+If your code doesn’t have any syntax errors, and you addressed all of the additions described in this document, you should then be able to run <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dwq2</span> <span class="pre">--help</span></code>, and see your new <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> action show up in the list of actions associated with your plugin.
+It should look something like this:</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When I present command line calls and their output, I’ll use <code class="docutils literal notranslate"><span class="pre">$</span></code> to indicate the command prompt.</p>
+</div>
+</aside>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>qiime<span class="w"> </span>dwq2<span class="w"> </span>--help
+Usage:<span class="w"> </span>qiime<span class="w"> </span>dwq2<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
+
+<span class="w">  </span>Description:<span class="w"> </span>A<span class="w"> </span>prototype<span class="w"> </span>of<span class="w"> </span>a<span class="w"> </span>demonstration<span class="w"> </span>plugin<span class="w"> </span><span class="k">for</span><span class="w"> </span>use<span class="w"> </span>by<span class="w"> </span>readers<span class="w"> </span>of
+<span class="w">  </span>*Developing<span class="w"> </span>with<span class="w"> </span>QIIME<span class="w"> </span><span class="m">2</span>*<span class="w"> </span><span class="o">(</span>DWQ2<span class="o">)</span>.
+
+<span class="w">  </span>Plugin<span class="w"> </span>website:<span class="w"> </span>https://cap-lab.bio/developing-with-qiime2/
+
+<span class="w">  </span>Getting<span class="w"> </span>user<span class="w"> </span>support:<span class="w"> </span>Please<span class="w"> </span>post<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>QIIME<span class="w"> </span><span class="m">2</span><span class="w"> </span>forum<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nb">help</span><span class="w"> </span>with<span class="w"> </span>this
+<span class="w">  </span>plugin:<span class="w"> </span>https://forum.qiime2.org
+
+Options:
+<span class="w">  </span>--version<span class="w">            </span>Show<span class="w"> </span>the<span class="w"> </span>version<span class="w"> </span>and<span class="w"> </span>exit.
+<span class="w">  </span>--example-data<span class="w"> </span>PATH<span class="w">  </span>Write<span class="w"> </span>example<span class="w"> </span>data<span class="w"> </span>and<span class="w"> </span>exit.
+<span class="w">  </span>--citations<span class="w">          </span>Show<span class="w"> </span>citations<span class="w"> </span>and<span class="w"> </span>exit.
+<span class="w">  </span>--help<span class="w">               </span>Show<span class="w"> </span>this<span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span>exit.
+
+Commands:
+<span class="w">  </span>nw-align<span class="w">  </span>Pairwise<span class="w"> </span>global<span class="w"> </span>sequence<span class="w"> </span>alignment.
+</pre></div>
+</div>
+<p>If you call <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dwq2</span> <span class="pre">nw-align</span> <span class="pre">--help</span></code>, you’ll see the more detailed help text for the <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> action.
+It should look something like this:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>qiime<span class="w"> </span>dwq2<span class="w"> </span>nw-align<span class="w"> </span>--help
+Usage:<span class="w"> </span>qiime<span class="w"> </span>dwq2<span class="w"> </span>nw-align<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+
+<span class="w">  </span>Align<span class="w"> </span>two<span class="w"> </span>DNA<span class="w"> </span>sequences<span class="w"> </span>using<span class="w"> </span>Needleman-Wunsch<span class="w"> </span><span class="o">(</span>NW<span class="o">)</span>.<span class="w"> </span>This<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>Python
+<span class="w">  </span>implementation<span class="w"> </span>of<span class="w"> </span>NW,<span class="w"> </span>so<span class="w"> </span>it<span class="w"> </span>is<span class="w"> </span>very<span class="w"> </span>slow!<span class="w"> </span>This<span class="w"> </span>action<span class="w"> </span>is<span class="w"> </span><span class="k">for</span><span class="w"> </span>demonstration
+<span class="w">  </span>purposes<span class="w"> </span>only.<span class="w"> </span>🐌
+
+Inputs:
+<span class="w">  </span>--i-seq1<span class="w"> </span>ARTIFACT<span class="w"> </span>FeatureData<span class="o">[</span>Sequence<span class="o">]</span>
+<span class="w">                          </span>The<span class="w"> </span>first<span class="w"> </span>sequence<span class="w"> </span>to<span class="w"> </span>align.<span class="w">              </span><span class="o">[</span>required<span class="o">]</span>
+<span class="w">  </span>--i-seq2<span class="w"> </span>ARTIFACT<span class="w"> </span>FeatureData<span class="o">[</span>Sequence<span class="o">]</span>
+<span class="w">                          </span>The<span class="w"> </span>second<span class="w"> </span>sequence<span class="w"> </span>to<span class="w"> </span>align.<span class="w">             </span><span class="o">[</span>required<span class="o">]</span>
+Parameters:
+<span class="w">  </span>--p-gap-open-penalty<span class="w"> </span>NUMBER<span class="w"> </span>Range<span class="o">(</span><span class="m">0</span>,<span class="w"> </span>None,<span class="w"> </span><span class="nv">inclusive_start</span><span class="o">=</span>False<span class="o">)</span>
+<span class="w">                          </span>The<span class="w"> </span>penalty<span class="w"> </span>incurred<span class="w"> </span><span class="k">for</span><span class="w"> </span>opening<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>gap.<span class="w"> </span>By
+<span class="w">                          </span>convention<span class="w"> </span>this<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>positive<span class="w"> </span>number.<span class="w">   </span><span class="o">[</span>default:<span class="w"> </span><span class="m">5</span><span class="o">]</span>
+<span class="w">  </span>--p-gap-extend-penalty<span class="w"> </span>NUMBER<span class="w"> </span>Range<span class="o">(</span><span class="m">0</span>,<span class="w"> </span>None,<span class="w"> </span><span class="nv">inclusive_start</span><span class="o">=</span>False<span class="o">)</span>
+<span class="w">                          </span>The<span class="w"> </span>penalty<span class="w"> </span>incurred<span class="w"> </span><span class="k">for</span><span class="w"> </span>extending<span class="w"> </span>an<span class="w"> </span>existing<span class="w"> </span>gap.
+<span class="w">                          </span>By<span class="w"> </span>convention<span class="w"> </span>this<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>positive<span class="w"> </span>number.
+<span class="w">                                                                  </span><span class="o">[</span>default:<span class="w"> </span><span class="m">2</span><span class="o">]</span>
+<span class="w">  </span>--p-match-score<span class="w"> </span>NUMBER<span class="w"> </span>Range<span class="o">(</span><span class="m">0</span>,<span class="w"> </span>None,<span class="w"> </span><span class="nv">inclusive_start</span><span class="o">=</span>False<span class="o">)</span>
+<span class="w">                          </span>The<span class="w"> </span>score<span class="w"> </span><span class="k">for</span><span class="w"> </span>matching<span class="w"> </span>characters<span class="w"> </span>at<span class="w"> </span>an<span class="w"> </span>alignment
+<span class="w">                          </span>position.<span class="w"> </span>By<span class="w"> </span>convention,<span class="w"> </span>this<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>positive<span class="w"> </span>number.
+<span class="w">                                                                  </span><span class="o">[</span>default:<span class="w"> </span><span class="m">1</span><span class="o">]</span>
+<span class="w">  </span>--p-mismatch-score<span class="w"> </span>NUMBER<span class="w"> </span>Range<span class="o">(</span>None,<span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="nv">inclusive_end</span><span class="o">=</span>True<span class="o">)</span>
+<span class="w">                          </span>The<span class="w"> </span>score<span class="w"> </span><span class="k">for</span><span class="w"> </span>mismatching<span class="w"> </span>characters<span class="w"> </span>at<span class="w"> </span>an
+<span class="w">                          </span>alignment<span class="w"> </span>position.<span class="w"> </span>By<span class="w"> </span>convention,<span class="w"> </span>this<span class="w"> </span>is<span class="w"> </span>a
+<span class="w">                          </span>negative<span class="w"> </span>number.<span class="w">                       </span><span class="o">[</span>default:<span class="w"> </span>-2<span class="o">]</span>
+Outputs:
+<span class="w">  </span>--o-aligned-sequences<span class="w"> </span>ARTIFACT<span class="w"> </span>FeatureData<span class="o">[</span>AlignedSequence<span class="o">]</span>
+<span class="w">                          </span>The<span class="w"> </span>pairwise<span class="w"> </span>aligned<span class="w"> </span>sequences.<span class="w">           </span><span class="o">[</span>required<span class="o">]</span>
+Miscellaneous:
+<span class="w">  </span>--output-dir<span class="w"> </span>PATH<span class="w">       </span>Output<span class="w"> </span>unspecified<span class="w"> </span>results<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>directory
+<span class="w">  </span>--verbose<span class="w"> </span>/<span class="w"> </span>--quiet<span class="w">     </span>Display<span class="w"> </span>verbose<span class="w"> </span>output<span class="w"> </span>to<span class="w"> </span>stdout<span class="w"> </span>and/or<span class="w"> </span>stderr
+<span class="w">                          </span>during<span class="w"> </span>execution<span class="w"> </span>of<span class="w"> </span>this<span class="w"> </span>action.<span class="w"> </span>Or<span class="w"> </span>silence<span class="w"> </span>output
+<span class="w">                          </span><span class="k">if</span><span class="w"> </span>execution<span class="w"> </span>is<span class="w"> </span>successful<span class="w"> </span><span class="o">(</span>silence<span class="w"> </span>is<span class="w"> </span>golden<span class="o">)</span>.
+<span class="w">  </span>--example-data<span class="w"> </span>PATH<span class="w">     </span>Write<span class="w"> </span>example<span class="w"> </span>data<span class="w"> </span>and<span class="w"> </span>exit.
+<span class="w">  </span>--citations<span class="w">             </span>Show<span class="w"> </span>citations<span class="w"> </span>and<span class="w"> </span>exit.
+<span class="w">  </span>--help<span class="w">                  </span>Show<span class="w"> </span>this<span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span>exit.
+</pre></div>
+</div>
+<p>Similarly, if you start a Python session (e.g., by calling <code class="docutils literal notranslate"><span class="pre">ipython</span></code> in your activated development environment), you can access the <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> method through its Python 3 API as follows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qiime2.plugins.dwq2</span>
+<span class="n">help</span><span class="p">(</span><span class="n">qiime2</span><span class="o">.</span><span class="n">plugins</span><span class="o">.</span><span class="n">dwq2</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">nw_align</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This call should produce the following help text:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Call signature:
+qiime2.plugins.dwq2.actions.nw_align(
+    seq1: FeatureData[Sequence],
+    seq2: FeatureData[Sequence],
+    gap_open_penalty: Float % Range(0, None, inclusive_start=False) = 5,
+    gap_extend_penalty: Float % Range(0, None, inclusive_start=False) = 2,
+    match_score: Float % Range(0, None, inclusive_start=False) = 1,
+    mismatch_score: Float % Range(None, 0, inclusive_end=True) = -2,
+) -&gt; (FeatureData[AlignedSequence],)
+Type:           Method
+String form:    &lt;method qiime2.plugins.dwq2.methods.nw_align&gt;
+File:           ~/miniconda3/envs/dwq2/lib/python3.8/site-packages/qiime2/sdk/action.py
+Docstring:      QIIME 2 Method
+Call docstring:
+Pairwise global sequence alignment.
+
+Align two DNA sequences using Needleman-Wunsch (NW). This is a Python
+implementation of NW, so it is very slow! This action is for demonstration
+purposes only. 🐌
+
+Parameters
+----------
+seq1 : FeatureData[Sequence]
+    The first sequence to align.
+seq2 : FeatureData[Sequence]
+    The second sequence to align.
+gap_open_penalty : Float % Range(0, None, inclusive_start=False), optional
+    The penalty incurred for opening a new gap. By convention this is a
+    positive number.
+gap_extend_penalty : Float % Range(0, None, inclusive_start=False), optional
+    The penalty incurred for extending an existing gap. By convention this
+    is a positive number.
+match_score : Float % Range(0, None, inclusive_start=False), optional
+    The score for matching characters at an alignment position. By
+    convention, this is a positive number.
+mismatch_score : Float % Range(None, 0, inclusive_end=True), optional
+    The score for mismatching characters at an alignment position. By
+    convention, this is a negative number.
+
+Returns
+-------
+aligned_sequences : FeatureData[AlignedSequence]
+    The pairwise aligned sequences.
+</pre></div>
+</div>
+<p>There are now two interfaces to your method, and you didn’t have to write either of them — cool! 😎</p>
+<p>Take a minute to review both the command line and Python help text, and relate it to the parameters we set when we registered the action.</p>
+</section>
+<section id="write-unit-tests">
+<h3>Write unit tests<a class="headerlink" href="#write-unit-tests" title="Permalink to this heading">#</a></h3>
+<p>Your code is <em>not ready for use</em> until you write unit tests, to ensure that it’s doing what you expect.
+We’ll write our unit tests for <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> in a new file in our Python package, <code class="docutils literal notranslate"><span class="pre">q2_dwq2/tests/test_methods.py</span></code>.
+QIIME 2 provides a class, <code class="docutils literal notranslate"><span class="pre">TestPluginBase</span></code>, that facilitates unit testing plugins.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><em>Developing with QIIME 2</em> assumes that you have some background in software engineering.
+If writing unit tests or software testing in general are new to you, you should learn about these topics before developing software that you intend to use for “real” analysis.
+Small errors in code can have huge implications, including angry users, paper retractions, and clinical errors.</p>
+<p>I highly recommend reading <a class="reference external" href="https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/"><em>The Pragmatic Programmer: Your Journey to Mastery</em> (20th Anniversary Edition)</a>.
+Topic 41 discusses software testing, but the whole book is worth reading if you’re serious about developing high-quality software.</p>
+</div>
+<section id="what-to-test-and-what-not-to-test">
+<h4>What to test and what not to test<a class="headerlink" href="#what-to-test-and-what-not-to-test" title="Permalink to this heading">#</a></h4>
+<p>When testing a QIIME 2 plugin, your goal is to confirm that the functionality that you developed works as expected.
+You can’t test that <em>every</em> possible input produces its expected output, so instead you want to think about what tests will convince you that it’s working across the range of inputs that would be expected.
+It’s also a good idea to test that invalid input results in a failure, and ideally also provides an informative error message.</p>
+<p>If you’re simply wrapping a function, like we are here, you don’t need to test the underlying function in detail as that should have been tested already in the library that provides that function.
+(If that’s not the case, you should reconsider whether this function is the one that you want to use!)</p>
+<p>You also don’t need to test things such as whether your method works through q2cli, the Python 3 API, and Galaxy.
+That is functionality that you get for free when developing QIIME 2 plugins: the developers of the QIIME 2 framework and the other related tools have already tested this, and this should work as long as you’re not adopting any of the <a class="reference internal" href="../references/antipatterns.html#plugin-antipatterns"><span class="std std-ref">plugin development antipatterns</span></a>.</p>
+</section>
+<section id="a-first-test-of-our-plugin-action">
+<h4>A first test of our plugin action<a class="headerlink" href="#a-first-test-of-our-plugin-action" title="Permalink to this heading">#</a></h4>
+<p>The following is a first test of our <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> method.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are a couple of extra <code class="docutils literal notranslate"><span class="pre">import</span></code>s in here right now.
+We’ll use those shortly.</p>
+</div>
+</aside>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skbio.alignment</span> <span class="kn">import</span> <span class="n">TabularMSA</span>
+<span class="kn">from</span> <span class="nn">skbio.sequence</span> <span class="kn">import</span> <span class="n">DNA</span>
+
+<span class="kn">from</span> <span class="nn">qiime2.plugin.testing</span> <span class="kn">import</span> <span class="n">TestPluginBase</span>
+<span class="kn">from</span> <span class="nn">qiime2.plugin.util</span> <span class="kn">import</span> <span class="n">transform</span>
+<span class="kn">from</span> <span class="nn">q2_types.feature_data</span> <span class="kn">import</span> <span class="n">DNAFASTAFormat</span><span class="p">,</span> <span class="n">DNAIterator</span>
+
+<span class="kn">from</span> <span class="nn">q2_dwq2._methods</span> <span class="kn">import</span> <span class="n">nw_align</span>
+
+
+<span class="k">class</span> <span class="nc">NWAlignTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
+    <span class="n">package</span> <span class="o">=</span> <span class="s1">&#39;q2_dwq2.tests&#39;</span>
+
+    <span class="k">def</span> <span class="nf">test_simple1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># test alignment of a pair of sequences</span>
+        <span class="n">sequence1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAAAAAGGTGGCCTTTTTTTT&#39;</span><span class="p">)</span>
+        <span class="n">sequence1</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">sequence1</span><span class="p">])</span>
+        <span class="n">sequence2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAAAAAGGGGCCTTTTTTTT&#39;</span><span class="p">)</span>
+        <span class="n">sequence2</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">sequence2</span><span class="p">])</span>
+        <span class="n">observed</span> <span class="o">=</span> <span class="n">nw_align</span><span class="p">(</span><span class="n">sequence1</span><span class="p">,</span> <span class="n">sequence2</span><span class="p">)</span>
+
+        <span class="n">aligned_sequence1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAAAAAGGTGGCCTTTTTTTT&#39;</span><span class="p">)</span>
+        <span class="n">aligned_sequence2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAAAAAGG-GGCCTTTTTTTT&#39;</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">TabularMSA</span><span class="p">([</span><span class="n">aligned_sequence1</span><span class="p">,</span> <span class="n">aligned_sequence2</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>First, we import some functions and classes that we’ll use in our tests.
+Then, we define a class, <code class="docutils literal notranslate"><span class="pre">NWAlignTests</span></code>, that inherits from <code class="docutils literal notranslate"><span class="pre">TestPluginBase</span></code>, a class used to facilitate testing of QIIME 2 plugins.
+<code class="docutils literal notranslate"><span class="pre">TestPluginBase</span></code> has you define a class variable, <code class="docutils literal notranslate"><span class="pre">package</span></code>, defining the submodule that we’re working in - we’ll come back to how this is used shortly.
+Finally, we’re ready to start defining unit tests.</p>
+<p>The first test that I typically define for a function is a test of its default behavior on some very simple input where it’s easy for me to determine what the expected outcome should be.
+In the example here, I’m creating two <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> sequence objects, turning them into <code class="docutils literal notranslate"><span class="pre">DNAIterators</span></code> (remember that that is what <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> expects as input), and then calling <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> on those two inputs.
+I call the return value from <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> <code class="docutils literal notranslate"><span class="pre">observed</span></code>, because it is my observed output.</p>
+<p>I very specifically chose the sequences here because I could tell based on my knowledge of Needleman-Wunsch alignment what the output would be: it’s clear that the two sequences differ only in that there appears to have either been an insertion of a <code class="docutils literal notranslate"><span class="pre">T</span></code> character in <code class="docutils literal notranslate"><span class="pre">sequence1</span></code>, or a deletion of a <code class="docutils literal notranslate"><span class="pre">T</span></code> character in <code class="docutils literal notranslate"><span class="pre">sequence2</span></code> since the ancestral sequence.
+Alternatively, in a case like this, it’s also fair game to generate the expected output by calling the underlying function (<code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code>) directly.
+This is because we’re not testing that <code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code> does what it’s supposed (again, we trust that it is, or we wouldn’t be using it).
+We’re only testing that our wrapper generates the output that we would expect from <code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code>.</p>
+<p>After getting my <code class="docutils literal notranslate"><span class="pre">observed</span></code> output, I define my <code class="docutils literal notranslate"><span class="pre">expected</span></code> output (i.e., what <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> should return if it’s working as expected).
+In this case, that’s a pairwise alignment of <code class="docutils literal notranslate"><span class="pre">sequence1</span></code> and <code class="docutils literal notranslate"><span class="pre">sequence2</span></code> with a <code class="docutils literal notranslate"><span class="pre">-</span></code> character added where the insertion/deletion event is hypothesized to have occurred.</p>
+<p>Finally, we compare our <code class="docutils literal notranslate"><span class="pre">observed</span></code> output to our <code class="docutils literal notranslate"><span class="pre">expected</span></code> output.</p>
+<p>An important thing to note here is that I didn’t need to load any data from file or use any QIIME 2 artifacts when testing my method.
+Because my method is just a Python function that I registered with my <code class="docutils literal notranslate"><span class="pre">Plugin</span></code>, I can provide input objects as I would to any other Python function.
+It is possible to store QIIME 2 Artifacts in the repository and load them for use in the tests, but that gets a little clunky so it’s best avoided when possible.
+For example, you’ll often want to test multiple minor variations on the input to test edge cases (i.e., boundary conditions).
+That’s much easier to do if you’re working with Python objects as input, rather than if you need to create a whole bunch of different QIIME 2 artifacts and store them in the repository.
+Storing artifacts in the repository to use as inputs in unit tests can also increase the repository size, and it’s not straight-forward to compare how inputs have changed across different revisions of the code.</p>
+<p>We can now run the test using <code class="docutils literal notranslate"><span class="pre">py.test</span></code> on the command line from your <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code> directory.
+This should look something like the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>py.test
+
+...
+q2_dwq2/tests/test_methods.py::NWAlignTests::test_simple1
+
+...
+
+<span class="o">====</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>passed,<span class="w"> </span><span class="m">5</span><span class="w"> </span>warnings<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">0</span>.17s<span class="w"> </span><span class="o">====</span>
+</pre></div>
+</div>
+<p>At the moment we’re not concerned about the warnings that are being reported.
+We see from this output that we defined one test, and that one test passed.
+So we’re ready to move on.</p>
+</section>
+<section id="a-second-test-of-our-action">
+<h4>A second test of our action<a class="headerlink" href="#a-second-test-of-our-action" title="Permalink to this heading">#</a></h4>
+<p>All of that said, sometimes you do want to store data that you use in tests in files in the repository (for example, if they are large - in which case it’s a pain to store the test data in your unit test Python files).
+The following unit test illustrates how this can be achieved.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">test_simple2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># test alignment of a different pair of sequences</span>
+        <span class="c1"># loaded from file this time, for demonstration purposes</span>
+        <span class="n">sequence1</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_data_path</span><span class="p">(</span><span class="s1">&#39;nw_align/seq-1.fasta&#39;</span><span class="p">),</span>
+            <span class="n">from_type</span><span class="o">=</span><span class="n">DNAFASTAFormat</span><span class="p">,</span>
+            <span class="n">to_type</span><span class="o">=</span><span class="n">DNAIterator</span><span class="p">)</span>
+        <span class="n">sequence2</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_data_path</span><span class="p">(</span><span class="s1">&#39;nw_align/seq-2.fasta&#39;</span><span class="p">),</span>
+            <span class="n">from_type</span><span class="o">=</span><span class="n">DNAFASTAFormat</span><span class="p">,</span>
+            <span class="n">to_type</span><span class="o">=</span><span class="n">DNAIterator</span><span class="p">)</span>
+        <span class="n">observed</span> <span class="o">=</span> <span class="n">nw_align</span><span class="p">(</span><span class="n">sequence1</span><span class="p">,</span> <span class="n">sequence2</span><span class="p">)</span>
+
+        <span class="n">aligned_sequence1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;ACCGGTGGAACCGG-TAACACCCAC&#39;</span><span class="p">)</span>
+        <span class="n">aligned_sequence2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;ACCGGT--AACCGGTTAACACCCAC&#39;</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">TabularMSA</span><span class="p">([</span><span class="n">aligned_sequence1</span><span class="p">,</span> <span class="n">aligned_sequence2</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertNotEqual</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this example, data is loaded from a file path that is relative to the <code class="docutils literal notranslate"><span class="pre">TestPluginBase.package</span></code> variable that we set above.
+In this case, the data needs to be transformed from a fasta file, which QIIME 2 represents as an instance of <code class="docutils literal notranslate"><span class="pre">q2-type</span></code>’s <code class="docutils literal notranslate"><span class="pre">DNAFASTAFormat</span></code> object to a <code class="docutils literal notranslate"><span class="pre">DNAIterator</span></code>, so it can be provided as input to <code class="docutils literal notranslate"><span class="pre">nw_align</span></code>.
+Here we use the <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.util.transform</span></code> method to perform the transformation.
+After loading the files and transforming them, the test looks identical to the previous test case that we defined, except that the <code class="docutils literal notranslate"><span class="pre">expected</span></code> output is different, because the sequences we loaded differ from those used in the <code class="docutils literal notranslate"><span class="pre">test_simple1</span></code> method.</p>
+<p>A couple of additional things are required for this test to pass in your development environment.
+First, you must actually have the two <code class="docutils literal notranslate"><span class="pre">.fasta</span></code> files that are being loaded in the submodule as specified here (i.e., you should have the files <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/data/seq-1.fasta</span></code> and <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/data/seq-1.fasta</span></code> in your Python package).
+Second, you should indicate that there is <code class="docutils literal notranslate"><span class="pre">package_data</span></code> in your <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>.
+Refer back to <a class="reference internal" href="#add-nw-align-method-prs"><span class="std std-ref">the pull requests referenced at the top of this chapter</span></a> to see where all of this is done.</p>
+<p>After defining this test in your plugin, run the unit tests and confirm that you now have two passing tests.</p>
+</section>
+<section id="a-few-additional-tests">
+<h4>A few additional tests<a class="headerlink" href="#a-few-additional-tests" title="Permalink to this heading">#</a></h4>
+<p>Because we want to test that our function generates the results that we would expect from <code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code>, it’s good to check that the parameter values that we provide impact the results in the expected ways.
+I did this with four additional unit tests, each focused on a different input parameter.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">test_alt_match_score</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAATTT&#39;</span><span class="p">)</span>
+        <span class="n">sequence1</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s1</span><span class="p">])</span>
+        <span class="n">s2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAGGTTT&#39;</span><span class="p">)</span>
+        <span class="n">sequence2</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s2</span><span class="p">])</span>
+        <span class="c1"># call with default value for match score</span>
+        <span class="n">observed</span> <span class="o">=</span> <span class="n">nw_align</span><span class="p">(</span><span class="n">sequence1</span><span class="p">,</span> <span class="n">sequence2</span><span class="p">)</span>
+
+        <span class="n">aligned_sequence1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;--AAAATTT&#39;</span><span class="p">)</span>
+        <span class="n">aligned_sequence2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAGGTTT&#39;</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">TabularMSA</span><span class="p">([</span><span class="n">aligned_sequence1</span><span class="p">,</span> <span class="n">aligned_sequence2</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+
+        <span class="n">sequence1</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s1</span><span class="p">])</span>
+        <span class="n">sequence2</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s2</span><span class="p">])</span>
+        <span class="c1"># call with non-default value for match_score</span>
+        <span class="n">observed</span> <span class="o">=</span> <span class="n">nw_align</span><span class="p">(</span><span class="n">sequence1</span><span class="p">,</span> <span class="n">sequence2</span><span class="p">,</span> <span class="n">match_score</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+        <span class="c1"># the following expected outcome was determined by calling</span>
+        <span class="c1"># skbio.alignment.global_pairwise_align_nucleotide directly. the</span>
+        <span class="c1"># goal isn&#39;t to test that the underlying library code (i.e.,</span>
+        <span class="c1"># skbio.alignment.global_pairwise_align_nucleotide) is working, b/c</span>
+        <span class="c1"># I trust that that is already tested (or I wouldn&#39;t use it). rather,</span>
+        <span class="c1"># the goal is to test that my wrapper of it is working. in this case,</span>
+        <span class="c1"># specifically, i&#39;m testing that passing an alternative value for</span>
+        <span class="c1"># match_score changes the output alignment</span>
+        <span class="n">aligned_sequence1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAA--TTT&#39;</span><span class="p">)</span>
+        <span class="n">aligned_sequence2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAGGTTT&#39;</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">TabularMSA</span><span class="p">([</span><span class="n">aligned_sequence1</span><span class="p">,</span> <span class="n">aligned_sequence2</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_alt_gap_open_penalty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAATTT&#39;</span><span class="p">)</span>
+        <span class="n">sequence1</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s1</span><span class="p">])</span>
+        <span class="n">s2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAGGTTT&#39;</span><span class="p">)</span>
+        <span class="n">sequence2</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s2</span><span class="p">])</span>
+        <span class="n">observed</span> <span class="o">=</span> <span class="n">nw_align</span><span class="p">(</span><span class="n">sequence1</span><span class="p">,</span> <span class="n">sequence2</span><span class="p">,</span> <span class="n">gap_open_penalty</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+        <span class="n">aligned_sequence1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAA-T-TT-&#39;</span><span class="p">)</span>
+        <span class="n">aligned_sequence2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAG-GTTT&#39;</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">TabularMSA</span><span class="p">([</span><span class="n">aligned_sequence1</span><span class="p">,</span> <span class="n">aligned_sequence2</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+
+        <span class="n">sequence1</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s1</span><span class="p">])</span>
+        <span class="n">sequence2</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s2</span><span class="p">])</span>
+        <span class="n">observed</span> <span class="o">=</span> <span class="n">nw_align</span><span class="p">(</span><span class="n">sequence1</span><span class="p">,</span> <span class="n">sequence2</span><span class="p">)</span>
+
+        <span class="n">aligned_sequence1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;--AAAATTT&#39;</span><span class="p">)</span>
+        <span class="n">aligned_sequence2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAGGTTT&#39;</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">TabularMSA</span><span class="p">([</span><span class="n">aligned_sequence1</span><span class="p">,</span> <span class="n">aligned_sequence2</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_alt_gap_extend_penalty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAATTT&#39;</span><span class="p">)</span>
+        <span class="n">sequence1</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s1</span><span class="p">])</span>
+        <span class="n">s2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAGGTTT&#39;</span><span class="p">)</span>
+        <span class="n">sequence2</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s2</span><span class="p">])</span>
+        <span class="n">observed</span> <span class="o">=</span> <span class="n">nw_align</span><span class="p">(</span><span class="n">sequence1</span><span class="p">,</span> <span class="n">sequence2</span><span class="p">,</span> <span class="n">gap_open_penalty</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+        <span class="n">aligned_sequence1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAA-T-TT-&#39;</span><span class="p">)</span>
+        <span class="n">aligned_sequence2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAG-GTTT&#39;</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">TabularMSA</span><span class="p">([</span><span class="n">aligned_sequence1</span><span class="p">,</span> <span class="n">aligned_sequence2</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+
+        <span class="n">sequence1</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s1</span><span class="p">])</span>
+        <span class="n">sequence2</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s2</span><span class="p">])</span>
+        <span class="n">observed</span> <span class="o">=</span> <span class="n">nw_align</span><span class="p">(</span><span class="n">sequence1</span><span class="p">,</span> <span class="n">sequence2</span><span class="p">,</span> <span class="n">gap_open_penalty</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+                            <span class="n">gap_extend_penalty</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+
+        <span class="n">aligned_sequence1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAA--TTT&#39;</span><span class="p">)</span>
+        <span class="n">aligned_sequence2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAGGTTT&#39;</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">TabularMSA</span><span class="p">([</span><span class="n">aligned_sequence1</span><span class="p">,</span> <span class="n">aligned_sequence2</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_alt_mismatch_score</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAATTT&#39;</span><span class="p">)</span>
+        <span class="n">sequence1</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s1</span><span class="p">])</span>
+        <span class="n">s2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAGGTTT&#39;</span><span class="p">)</span>
+        <span class="n">sequence2</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s2</span><span class="p">])</span>
+        <span class="n">observed</span> <span class="o">=</span> <span class="n">nw_align</span><span class="p">(</span><span class="n">sequence1</span><span class="p">,</span> <span class="n">sequence2</span><span class="p">,</span> <span class="n">gap_open_penalty</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+        <span class="n">aligned_sequence1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAA-T-TT-&#39;</span><span class="p">)</span>
+        <span class="n">aligned_sequence2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAG-GTTT&#39;</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">TabularMSA</span><span class="p">([</span><span class="n">aligned_sequence1</span><span class="p">,</span> <span class="n">aligned_sequence2</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+
+        <span class="n">sequence1</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s1</span><span class="p">])</span>
+        <span class="n">sequence2</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s2</span><span class="p">])</span>
+        <span class="n">observed</span> <span class="o">=</span> <span class="n">nw_align</span><span class="p">(</span><span class="n">sequence1</span><span class="p">,</span> <span class="n">sequence2</span><span class="p">,</span> <span class="n">gap_open_penalty</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                            <span class="n">mismatch_score</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">)</span>
+
+        <span class="n">aligned_sequence1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;-AAA-ATTT&#39;</span><span class="p">)</span>
+        <span class="n">aligned_sequence2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAGGTTT&#39;</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">TabularMSA</span><span class="p">([</span><span class="n">aligned_sequence1</span><span class="p">,</span> <span class="n">aligned_sequence2</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="wrapping-up-testing">
+<h4>Wrapping up testing<a class="headerlink" href="#wrapping-up-testing" title="Permalink to this heading">#</a></h4>
+<p>When these tests are all in place (or in the process of putting them in place), you can run them by calling <code class="docutils literal notranslate"><span class="pre">py.test</span></code> on the command line.
+If everything is working as expected, you should see something like the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>py.test
+
+...
+
+q2_dwq2/tests/test_methods.py::NWAlignTests::test_alt_gap_extend_penalty
+q2_dwq2/tests/test_methods.py::NWAlignTests::test_alt_gap_open_penalty
+q2_dwq2/tests/test_methods.py::NWAlignTests::test_alt_match_score
+q2_dwq2/tests/test_methods.py::NWAlignTests::test_alt_mismatch_score
+q2_dwq2/tests/test_methods.py::NWAlignTests::test_simple1
+q2_dwq2/tests/test_methods.py::NWAlignTests::test_simple2
+
+...
+
+<span class="o">====</span><span class="w"> </span><span class="m">6</span><span class="w"> </span>passed,<span class="w"> </span><span class="m">23</span><span class="w"> </span>warnings<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span>.17s<span class="w"> </span><span class="o">====</span>
+</pre></div>
+</div>
+<p>If your tests pass, and you can see the action on the command line, you should be in good shape so let’s try running the method.</p>
+</section>
+</section>
+</section>
+<section id="trying-the-new-action">
+<h2>Trying the new action<a class="headerlink" href="#trying-the-new-action" title="Permalink to this heading">#</a></h2>
+<p>To run the new action, you’ll need two input files, each containing a DNA sequence to align.
+At this stage, your inputs need to be QIIME 2 artifacts.
+You should be able to do this with any <code class="docutils literal notranslate"><span class="pre">FeatureData[Sequence]</span></code> artifacts you have access to.
+If you don’t have any, you can use the ones that we used in <code class="docutils literal notranslate"><span class="pre">test_simple2</span></code> by importing.</p>
+<p>To do this, change to a temporary directory and copy the two files referenced in <code class="docutils literal notranslate"><span class="pre">test_simple2</span></code> to that directory.
+You should then be able to run the following commands to import those files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qiime<span class="w"> </span>tools<span class="w"> </span>import<span class="w"> </span>--input-path<span class="w"> </span>seq-1.fasta<span class="w"> </span>--type<span class="w"> </span><span class="s2">&quot;FeatureData[Sequence]&quot;</span><span class="w"> </span>--output-path<span class="w"> </span>seq-1.qza
+qiime<span class="w"> </span>tools<span class="w"> </span>import<span class="w"> </span>--input-path<span class="w"> </span>seq-2.fasta<span class="w"> </span>--type<span class="w"> </span><span class="s2">&quot;FeatureData[Sequence]&quot;</span><span class="w"> </span>--output-path<span class="w"> </span>seq-2.qza
+</pre></div>
+</div>
+<p>Then, you can apply your new action to these two inputs as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qiime<span class="w"> </span>dwq2<span class="w"> </span>nw-align<span class="w"> </span>--i-seq1<span class="w"> </span>seq-1.qza<span class="w"> </span>--i-seq2<span class="w"> </span>seq-2.qza<span class="w"> </span>--o-aligned-sequences<span class="w"> </span>aligned-seqs.qza
+</pre></div>
+</div>
+<p>This should create a new output, <code class="docutils literal notranslate"><span class="pre">aligned-seqs.qza</span></code>.
+Since this is a method, it’s generating a new artifact as an output.
+As always, artifacts aren’t intended for human consumption, but rather to be used as input to other QIIME 2 actions or exported for use with other (non-QIIME 2) tools.
+If you want to take a peek at what’s in there, you can export it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qiime<span class="w"> </span>tools<span class="w"> </span><span class="nb">export</span><span class="w"> </span>--input-path<span class="w"> </span>aligned-seqs.qza<span class="w"> </span>--output-path<span class="w"> </span>aligned-seqs
+</pre></div>
+</div>
+<p>Then, you can view the file contents as you would with any .fasta file.
+For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cat<span class="w"> </span>aligned-seqs/aligned-dna-sequences.fasta
+&gt;example-sequence-1
+ACCGGTGGAACCGG-TAACACCCAC
+&gt;example-sequence-2
+ACCGGT--AACCGGTTAACACCCAC
+</pre></div>
+</div>
+<p>So there you have it - a first action in our QIIME 2 plugin. ✅</p>
+<p>As a next step, let’s make this a little more user-friendly by defining a <a class="reference internal" href="../../back-matter/glossary.html#term-Visualizer"><span class="xref std std-term">Visualizer</span></a> that will let us look at the outcome of our pairwise alignment without having to export it from QIIME 2.</p>
+</section>
+<section id="an-optional-exercise">
+<h2>An optional exercise<a class="headerlink" href="#an-optional-exercise" title="Permalink to this heading">#</a></h2>
+<p>Now that you have this method working, try adding a method for local pairwise alignment of nucleotide sequences using the Smith-Waterman (SW) algorithm.
+scikit-bio provides an implementation of SW as <a class="reference external" href="https://scikit.bio/docs/dev/generated/skbio.alignment.local_pairwise_align_nucleotide.html"><code class="docutils literal notranslate"><span class="pre">skbio.alignment.local_pairwise_align_nucleotide</span></code></a>.
+Don’t forget to write your unit tests!</p>
+<p>Throughout the next few chapters, additional exercises will build on this functionality.</p>
 </section>
 </section>
 
@@ -495,6 +1156,25 @@ You don’t need to understand how the algorithm works to implement this action,
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pairwise-sequence-alignment">Pairwise sequence alignment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-wrapper-function">Write a wrapper function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#register-the-wrapper-function-as-a-plugin-action">Register the wrapper function as a plugin action</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-citation-for-this-action">Define a citation for this action</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#register-the-action-in-plugin-setup-py">Register the action in <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-the-action-with-q2cli-and-the-python-3-api">Calling the action with <span class="xref std std-term">q2cli</span> and the <span class="xref std std-term">Python 3 API</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-unit-tests">Write unit tests</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-test-and-what-not-to-test">What to test and what not to test</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-test-of-our-plugin-action">A first test of our plugin action</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-second-test-of-our-action">A second test of our action</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-few-additional-tests">A few additional tests</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#wrapping-up-testing">Wrapping up testing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trying-the-new-action">Trying the new action</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-optional-exercise">An optional exercise</a></li>
 </ul>
   </nav></div>
 

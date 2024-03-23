@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Add a first (real) action to our plugin" href="add-nw-align-method.html" />
-    <link rel="prev" title="Tutorials: Developing a QIIME 2 Plugin" href="intro.html" />
+    <link rel="prev" title="Tutorial: A step-by-step guide to building your first QIIME 2 plugin" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -173,13 +173,13 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins 🔌</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Tutorials: Developing a QIIME 2 Plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Creating your plugin from an existing template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-nw-align-method.html">Add a first (real) action to our plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-nw-align-usage-example.html">Add a first usage example</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/register-a-plugin.html">Register a QIIME 2 plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/create-register-method.html">Create and register a Method</a></li>
@@ -430,7 +430,7 @@ This section will be adapted to build from a <a class="reference external" href=
 <li><p>Next, add an action. Let’s create one that that takes a <code class="docutils literal notranslate"><span class="pre">FeatureTable[Frequency]</span></code> (i.e., a feature table with count data) as input and generates one as output. I created <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/blob/e8fe1e5b32bfc2a331d48611b3a70b0fa5b19165/q2_dwq2/plugin_setup.py">an action in my test plugin</a> with this signature - all it does is return a copy of the input table. Copy this into your plugin.</p></li>
 <li><p>Then, run <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dev</span> <span class="pre">refresh-cache</span></code>, and then <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">--help</span></code>. You should see your new plugin in the list of plugins. If you call help on it, you should see your new action. You should be able to run the <code class="docutils literal notranslate"><span class="pre">duplicate-table</span></code> action in your plugin as you can for any other QIIME 2 plugin.</p></li>
 </ol>
-<p>Next, we’ll add a first (real) action to our plugin.</p>
+<p>Next, we’ll <a class="reference internal" href="add-nw-align-method.html#add-nw-align-method"><span class="std std-ref">add a first (real) action to our plugin</span></a>.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -469,7 +469,7 @@ This section will be adapted to build from a <a class="reference external" href=
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tutorials: Developing a QIIME 2 Plugin</p>
+        <p class="prev-next-title">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</p>
       </div>
     </a>
     <a class="right-next"
