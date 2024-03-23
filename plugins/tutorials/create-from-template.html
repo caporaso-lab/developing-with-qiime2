@@ -409,28 +409,74 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="creating-your-plugin-from-an-existing-template">
 <span id="plugin-from-template"></span><h1>Creating your plugin from an existing template<a class="headerlink" href="#creating-your-plugin-from-an-existing-template" title="Permalink to this heading">#</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This content is adapted from notes I (&#64;gregcaporaso) put together as a temporary “5-minute plugin development tutorial”.
-This section will be adapted to build from a <a class="reference external" href="https://cookiecutter.readthedocs.io/en/stable/">cookiecutter project template</a>, replacing many of the manual steps required here.</p>
+<p>The easiest way to create a new QIIME 2 plugin is using our <a class="reference external" href="https://cookiecutter.readthedocs.io/en/stable/">Cookiecutter template</a>, which can be found at <a class="github reference external" href="https://github.com/caporaso-lab/cookiecutter-qiime2-plugin">caporaso-lab/cookiecutter-qiime2-plugin</a>.
+Here we’ll work through building your QIIME 2 plugin from this template.</p>
+<p>To start building your new plugin, first install a QIIME 2 development environment (see <a class="reference internal" href="../how-to-guides/set-up-development-environment.html#setup-dev-environment"><span class="std std-ref">Set up your development environment</span></a>). Then, activate your development environment.</p>
+<p>Next, install cookiecutter in your QIIME 2 development environment using the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>cookiecutter
+</pre></div>
 </div>
-<ol class="arabic simple">
-<li><p>Nick Bokulich’s lab maintains a template QIIME 2 plugin that is a great start for your plugin. You can find this here:
-<a class="github reference external" href="https://github.com/bokulich-lab/q2-plugin-template">bokulich-lab/q2-plugin-template</a>. There’s a link on that page to “Use this template”. Click that, and GitHub will fork that repository and you can start working on your plugin.</p></li>
-<li><p>To work on the plugin, first install a QIIME 2 development environment (see <a class="reference internal" href="../how-to-guides/set-up-development-environment.html#setup-dev-environment"><span class="std std-ref">Set up your development environment</span></a>).</p></li>
-<li><p>Activate your development environment.</p></li>
-<li><p>Then, clone your new plugin repository and run through the steps in <a class="reference external" href="https://github.com/bokulich-lab/q2-plugin-template/blob/main/README.md">the plugin template README</a>. I created <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2">a test plugin</a> on 22 February 2024 and confirmed that it all works. <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/pull/1/files">Here are the changes I made</a> when I did this step (and the <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/pull/2/files">second set of changes I made, when I realized I missed some occurences</a>).</p>
-<ul class="simple">
-<li><p>Tip: Rename the <code class="docutils literal notranslate"><span class="pre">q2_plugin_name</span></code> directory using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">mv</span> <span class="pre">q2_plugin_name</span> <span class="pre">&lt;new</span> <span class="pre">plugin</span> <span class="pre">name&gt;</span></code>.</p></li>
-<li><p>Tip: It’s easiest to replace <code class="docutils literal notranslate"><span class="pre">q2-plugin-name</span></code>, <code class="docutils literal notranslate"><span class="pre">q2_plugin_name</span></code>, <code class="docutils literal notranslate"><span class="pre">plugin_name</span></code>, and <code class="docutils literal notranslate"><span class="pre">plugin-name</span></code> in the files using a global search/replace - there are many occurences.</p></li>
-</ul>
-</li>
-<li><p>From the top-level directiory of your plugin repository, install your plugin in developer mode by running <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code>.</p></li>
-<li><p>To confirm that your plugin is now available, run <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">info</span></code>. You should see your new plugin in the list of available plugins. (If you get an error that says something like <code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError:</span> <span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span> <span class="pre">'q2_plugin_name'</span></code>, you didn’t replace all instances of <code class="docutils literal notranslate"><span class="pre">q2_plugin_name</span></code> in the template repository.)</p></li>
-<li><p>Next, add an action. Let’s create one that that takes a <code class="docutils literal notranslate"><span class="pre">FeatureTable[Frequency]</span></code> (i.e., a feature table with count data) as input and generates one as output. I created <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/blob/e8fe1e5b32bfc2a331d48611b3a70b0fa5b19165/q2_dwq2/plugin_setup.py">an action in my test plugin</a> with this signature - all it does is return a copy of the input table. Copy this into your plugin.</p></li>
-<li><p>Then, run <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dev</span> <span class="pre">refresh-cache</span></code>, and then <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">--help</span></code>. You should see your new plugin in the list of plugins. If you call help on it, you should see your new action. You should be able to run the <code class="docutils literal notranslate"><span class="pre">duplicate-table</span></code> action in your plugin as you can for any other QIIME 2 plugin.</p></li>
-</ol>
-<p>Next, we’ll <a class="reference internal" href="add-nw-align-method.html#add-nw-align-method"><span class="std std-ref">add a first (real) action to our plugin</span></a>.</p>
+<p>Then, use <code class="docutils literal notranslate"><span class="pre">cookiecutter</span></code> to create your plugin from the template using the following command.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cookiecutter<span class="w"> </span>gh:caporaso-lab/cookiecutter-qiime2-plugin
+</pre></div>
+</div>
+<p>During the plugin creation, you’ll be prompted for information on your plugin.
+Fill this information in as it’s requested, or accept the default values - either is fine.
+The plugin I’m going to create will be called <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code> (for <em>Developing with QIIME 2</em>). You can call your plugin <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code>, or whatever you prefer.</p>
+<p>After the plugin has been created, change into the top-level directory for the plugin.
+For me, that’s <code class="docutils literal notranslate"><span class="pre">q2-dwq2/</span></code>.
+Run the following command to install your plugin in developer mode:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Then, have the command line interface can cache information about your plugin by running:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>qiime<span class="w"> </span>dev<span class="w"> </span>refresh-cache
+</pre></div>
+</div>
+<p>You should do this any time you’re making changes related to the interface of your plugins (e.g., adding or changing help text, or adding or removing actions).</p>
+<p>To confirm that your plugin is now available, run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>qiime<span class="w"> </span>info
+</pre></div>
+</div>
+<p>You should see your new plugin in the list of available plugins. If you request help text on your plugin (e.g., <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dwq2</span> <span class="pre">--help</span></code>), you should see some of the information you provided when creating the plugin.</p>
+<p>The template plugin includes a simple (and silly) action called <code class="docutils literal notranslate"><span class="pre">duplicate-table</span></code>, along with associated unit tests. This provides an example action and example unit tests. You’ll ultimately want to delete this action, but for now let’s use this action to make sure everything is working as expected.</p>
+<p>First, run the unit tests as follows:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>py.test
+</pre></div>
+</div>
+<p>This should produce a bunch of output, ending with text that looks like the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">====</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>passed,<span class="w"> </span><span class="m">7</span><span class="w"> </span>warnings<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">2</span>.75s<span class="w"> </span><span class="o">====</span>
+</pre></div>
+</div>
+<p>This tells you that the unit tests for your plugin all passed (we’re not concerned about the warnings right now).</p>
+<p>Next, if you call your plugin’s <code class="docutils literal notranslate"><span class="pre">duplicate-table</span></code> action with the <code class="docutils literal notranslate"><span class="pre">--help</span></code> parameter (e.g., <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dwq2</span> <span class="pre">duplicate-table</span> <span class="pre">--help</span></code>), you should see text that looks like the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Usage:<span class="w"> </span>qiime<span class="w"> </span>dwq2<span class="w"> </span>duplicate-table<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+
+<span class="w">  </span>Create<span class="w"> </span>a<span class="w"> </span>copy<span class="w"> </span>of<span class="w"> </span>a<span class="w"> </span>feature<span class="w"> </span>table<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>uuid.<span class="w"> </span>This<span class="w"> </span>is<span class="w"> </span><span class="k">for</span><span class="w"> </span>demonstration
+<span class="w">  </span>purposes<span class="w"> </span>only.<span class="w"> </span>🧐
+
+Inputs:
+<span class="w">  </span>--i-table<span class="w"> </span>ARTIFACT<span class="w"> </span>FeatureTable<span class="o">[</span>Frequency<span class="o">]</span>
+<span class="w">                          </span>The<span class="w"> </span>feature<span class="w"> </span>table<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>duplicated.<span class="w">       </span><span class="o">[</span>required<span class="o">]</span>
+Outputs:
+<span class="w">  </span>--o-new-table<span class="w"> </span>ARTIFACT<span class="w"> </span>FeatureTable<span class="o">[</span>Frequency<span class="o">]</span>
+<span class="w">                          </span>The<span class="w"> </span>duplicated<span class="w"> </span>feature<span class="w"> </span>table.<span class="w">             </span><span class="o">[</span>required<span class="o">]</span>
+Miscellaneous:
+<span class="w">  </span>--output-dir<span class="w"> </span>PATH<span class="w">       </span>Output<span class="w"> </span>unspecified<span class="w"> </span>results<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>directory
+<span class="w">  </span>--verbose<span class="w"> </span>/<span class="w"> </span>--quiet<span class="w">     </span>Display<span class="w"> </span>verbose<span class="w"> </span>output<span class="w"> </span>to<span class="w"> </span>stdout<span class="w"> </span>and/or<span class="w"> </span>stderr
+<span class="w">                          </span>during<span class="w"> </span>execution<span class="w"> </span>of<span class="w"> </span>this<span class="w"> </span>action.<span class="w"> </span>Or<span class="w"> </span>silence<span class="w"> </span>output
+<span class="w">                          </span><span class="k">if</span><span class="w"> </span>execution<span class="w"> </span>is<span class="w"> </span>successful<span class="w"> </span><span class="o">(</span>silence<span class="w"> </span>is<span class="w"> </span>golden<span class="o">)</span>.
+<span class="w">  </span>--example-data<span class="w"> </span>PATH<span class="w">     </span>Write<span class="w"> </span>example<span class="w"> </span>data<span class="w"> </span>and<span class="w"> </span>exit.
+<span class="w">  </span>--citations<span class="w">             </span>Show<span class="w"> </span>citations<span class="w"> </span>and<span class="w"> </span>exit.
+<span class="w">  </span>--help<span class="w">                  </span>Show<span class="w"> </span>this<span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span>exit.
+</pre></div>
+</div>
+<p>After you’ve confirmed that both of the above commands worked as expected, you’re ready to start working on this plugin.
+Open the top-level plugin directory in your text editor of choice (I recommend <a class="reference external" href="https://code.visualstudio.com/">VS Code</a>, if you don’t already have one that you’re comfortable with).
+Poke through all of the files to familiarize yourself with the structure of your plugin’s Python package.
+Don’t worry if it’s not clear what everything is yet - we’ll get to all of that.</p>
+<p>Congratulations - you’ve created a working QIIME 2 plugin from a template!
+Next, we’ll <a class="reference internal" href="add-nw-align-method.html#add-nw-align-method"><span class="std std-ref">Add a first (real) action to our plugin</span></a>.</p>
 </section>
 
     <script type="text/x-thebe-config">
