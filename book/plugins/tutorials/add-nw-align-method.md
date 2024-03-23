@@ -236,17 +236,393 @@ from q2_dwq2 import __version__
 from q2_dwq2._methods import nw_align
 ```
 
-### Calling the action with {term}`q2cli`
+### Calling the action with {term}`q2cli` and the {term}`Python 3 API`
 
 Activate your development environment and run `qiime dev refresh-cache`.
 If your code doesn't have any syntax errors, and you addressed all of the additions described in this document, you should then be able to run `qiime dwq2 --help`, and see your new `nw-align` action show up in the list of actions associated with your plugin.
-If you call `qiime dwq2 nw-align --help`, you'll see the more detailed help text for the `nw-align` action.
+It should look something like this:
 
-**This section is incomplete.**
+````{margin}
+```{note}
+When I present command line calls and their output, I'll use `$` to indicate the command prompt.
+```
+````
+
+```shell
+$ qiime dwq2 --help
+Usage: qiime dwq2 [OPTIONS] COMMAND [ARGS]...
+
+  Description: A prototype of a demonstration plugin for use by readers of
+  *Developing with QIIME 2* (DWQ2).
+
+  Plugin website: https://cap-lab.bio/developing-with-qiime2/
+
+  Getting user support: Please post to the QIIME 2 forum for help with this
+  plugin: https://forum.qiime2.org
+
+Options:
+  --version            Show the version and exit.
+  --example-data PATH  Write example data and exit.
+  --citations          Show citations and exit.
+  --help               Show this message and exit.
+
+Commands:
+  nw-align  Pairwise global sequence alignment.
+```
+
+If you call `qiime dwq2 nw-align --help`, you'll see the more detailed help text for the `nw-align` action.
+It should look something like this:
+
+```shell
+$ qiime dwq2 nw-align --help
+Usage: qiime dwq2 nw-align [OPTIONS]
+
+  Align two DNA sequences using Needleman-Wunsch (NW). This is a Python
+  implementation of NW, so it is very slow! This action is for demonstration
+  purposes only. 🐌
+
+Inputs:
+  --i-seq1 ARTIFACT FeatureData[Sequence]
+                          The first sequence to align.              [required]
+  --i-seq2 ARTIFACT FeatureData[Sequence]
+                          The second sequence to align.             [required]
+Parameters:
+  --p-gap-open-penalty NUMBER Range(0, None, inclusive_start=False)
+                          The penalty incurred for opening a new gap. By
+                          convention this is a positive number.   [default: 5]
+  --p-gap-extend-penalty NUMBER Range(0, None, inclusive_start=False)
+                          The penalty incurred for extending an existing gap.
+                          By convention this is a positive number.
+                                                                  [default: 2]
+  --p-match-score NUMBER Range(0, None, inclusive_start=False)
+                          The score for matching characters at an alignment
+                          position. By convention, this is a positive number.
+                                                                  [default: 1]
+  --p-mismatch-score NUMBER Range(None, 0, inclusive_end=True)
+                          The score for mismatching characters at an
+                          alignment position. By convention, this is a
+                          negative number.                       [default: -2]
+Outputs:
+  --o-aligned-sequences ARTIFACT FeatureData[AlignedSequence]
+                          The pairwise aligned sequences.           [required]
+Miscellaneous:
+  --output-dir PATH       Output unspecified results to a directory
+  --verbose / --quiet     Display verbose output to stdout and/or stderr
+                          during execution of this action. Or silence output
+                          if execution is successful (silence is golden).
+  --example-data PATH     Write example data and exit.
+  --citations             Show citations and exit.
+  --help                  Show this message and exit.
+```
+
+Similarly, if you start a Python session (e.g., by calling `ipython` in your activated development environment), you can access the `nw_align` method through its Python 3 API as follows.
+
+```python
+In [1]: import qiime2.plugins.dwq2
+
+In [3]: qiime2.plugins.dwq2.actions.nw_align?
+Call signature:
+qiime2.plugins.dwq2.actions.nw_align(
+    seq1: FeatureData[Sequence],
+    seq2: FeatureData[Sequence],
+    gap_open_penalty: Float % Range(0, None, inclusive_start=False) = 5,
+    gap_extend_penalty: Float % Range(0, None, inclusive_start=False) = 2,
+    match_score: Float % Range(0, None, inclusive_start=False) = 1,
+    mismatch_score: Float % Range(None, 0, inclusive_end=True) = -2,
+) -> (FeatureData[AlignedSequence],)
+Type:           Method
+String form:    <method qiime2.plugins.dwq2.methods.nw_align>
+File:           ~/miniconda3/envs/dwq2/lib/python3.8/site-packages/qiime2/sdk/action.py
+Docstring:      QIIME 2 Method
+Call docstring:
+Pairwise global sequence alignment.
+
+Align two DNA sequences using Needleman-Wunsch (NW). This is a Python
+implementation of NW, so it is very slow! This action is for demonstration
+purposes only. 🐌
+
+Parameters
+----------
+seq1 : FeatureData[Sequence]
+    The first sequence to align.
+seq2 : FeatureData[Sequence]
+    The second sequence to align.
+gap_open_penalty : Float % Range(0, None, inclusive_start=False), optional
+    The penalty incurred for opening a new gap. By convention this is a
+    positive number.
+gap_extend_penalty : Float % Range(0, None, inclusive_start=False), optional
+    The penalty incurred for extending an existing gap. By convention this
+    is a positive number.
+match_score : Float % Range(0, None, inclusive_start=False), optional
+    The score for matching characters at an alignment position. By
+    convention, this is a positive number.
+mismatch_score : Float % Range(None, 0, inclusive_end=True), optional
+    The score for mismatching characters at an alignment position. By
+    convention, this is a negative number.
+
+Returns
+-------
+aligned_sequences : FeatureData[AlignedSequence]
+    The pairwise aligned sequences.
+```
+
+Take a minute to review both the command line and Python help text, and relate it to the parameters we set when we registered the action.
 
 ### Write unit tests
 
 Your code is *not ready for use* until you write unit tests, to ensure that it's doing what you expect.
+We'll write our unit tests for `nw_align` in a new file in our Python packae, `q2_dwq2/tests/test_methods.py`.
+QIIME 2 provides a class, `TestPluginBase`, that facilitates unit testing plugins.
+
+#### What to test and what not to test
+
+When testing a QIIME 2 plugin, your goal is to confirm that the functionality that developed works as expected.
+You can't test that *every* possible input produces its expected output, so instead you want to think about what tests will convince you that it's working across the range of inputs that would be expected.
+It's also a good idea to test that invalid input results in a failure, and ideally also provides an informative error message.
+
+If you're simply wrapping a function, like we are here, you don't need to test the underlying function in detail as that should have been tested already in the library that provides that function.
+(If that's not the case, you should reconsider whether this function is the one that you want to use!)
+You also don't need to test things such as whether your method works through q2cli, the Python 3 API, and Galaxy.
+That is functionality that you get for free when developing QIIME 2 plugins: the developers of the QIIME 2 framework and the other related tools have already tested this.
+
+#### A first test of our plugin action
+
+The following is a first test of our `nw_align` method.
+
+````{margin}
+```{note}
+There are a couple of extra `import`s in here right now.
+We'll use those shortly.
+```
+````
+
+```python
+from skbio.alignment import TabularMSA
+from skbio.sequence import DNA
+
+from qiime2.plugin.testing import TestPluginBase
+from qiime2.plugin.util import transform
+from q2_types.feature_data import DNAFASTAFormat, DNAIterator
+
+from q2_dwq2._methods import nw_align
+
+
+class NWAlignTests(TestPluginBase):
+    package = 'q2_dwq2.tests'
+
+    def test_simple1(self):
+        # test alignment of a pair of sequences
+        sequence1 = DNA('AAAAAAAAGGTGGCCTTTTTTTT')
+        sequence1 = DNAIterator([sequence1])
+        sequence2 = DNA('AAAAAAAAGGGGCCTTTTTTTT')
+        sequence2 = DNAIterator([sequence2])
+        observed = nw_align(sequence1, sequence2)
+
+        aligned_sequence1 = DNA('AAAAAAAAGGTGGCCTTTTTTTT')
+        aligned_sequence2 = DNA('AAAAAAAAGG-GGCCTTTTTTTT')
+        expected = TabularMSA([aligned_sequence1, aligned_sequence2])
+
+        self.assertEqual(observed, expected)
+```
+
+First, we import some functions and classes that we'll use in our tests.
+Then, we define a class, `NWAlignTests`, that inherits from `TestPluginBase`, a class used to facilitate testing of QIIME 2 plugins.
+`TestPluginBase` has you define a class variable, `package`, defining the submodule that we're working in - we'll come back to how this is used shortly.
+Finally, we're ready to start defining unit tests.
+
+The first test that I typically define for a function is a test of its default behavior on some very simple input where it's easy for me to determine what the expected outcome should be.
+In the example here, I'm creating two `skbio.DNA` sequence objects, turning them into `DNAIterators` (remember that that is what `nw_align` expects as input), and then calling `nw_align` on those two inputs.
+I call the return value from `nw_align` `observed`, because it is my observed output.
+
+I very specifically chose the sequences here because I could tell based on my knowledge of Needleman-Wunsch alignment what the output would be: it's clear that the two sequences differ only in that there appears to have either been an insertion of a `T` character in `sequence1`, or a deletion of a `T` character in `sequence2` since the ancestral sequence.
+Alternatively, in a case like this, it's also fair game to generate the expected output by calling the underlying function (`skbio.alignment.global_pairwise_align_nucleotide`) directly.
+This is because we're not testing that `skbio.alignment.global_pairwise_align_nucleotide` does what it's supposed (again, we trust that it is, or we wouldn't be using it).
+We're only testing that our wrapper generates the output that we would expect from `skbio.alignment.global_pairwise_align_nucleotide`.
+
+After getting my `observed` output, I define my `expected` output (i.e., what `nw_align` should return if it's working as expected).
+In this case, that's a pairwise alignment of `sequence1` and `sequence2` with a `-` character added where the insertion/deletion event is hypothesized to have occurred.
+
+Finally, we compare our `observed` output to our `expected` output.
+
+An important thing to note here is that I didn't need to load any data from file or use any QIIME 2 artifacts when testing my method.
+Because my method is just a registered Python function, I can provide input objects as I would to any other Python function.
+While it is possible to store QIIME 2 Artifacts in the repository and load them for use in the tests, that gets a little clunky so it's best avoided.
+For example, you'll often want to test multiple minor variations on the input to test edge cases (i.e., boundary conditions).
+That's much easier to do if you're working with Python objects as input, rather than if you need to create a whole bunch of different QIIME 2 artifacts and store them in the repository.
+Storing artifacts in the repository to use as inputs in unit tests can also increase the repository size, and it's not straight-forward to compare how inputs have changed across different revisions of the code.
+
+#### A second test of our action
+
+All of that said, sometimes you do want to store data that you use in tests in files in the repository (for example, if they are large - in which case it's a pain to store the test data in your unit test Python files).
+The following unit test illustrates how this can be achieved.
+
+```python
+    def test_simple2(self):
+        # test alignment of a different pair of sequences
+        # loaded from file this time, for demonstration purposes
+        sequence1 = transform(
+            self.get_data_path('nw_align/seq-1.fasta'),
+            from_type=DNAFASTAFormat,
+            to_type=DNAIterator)
+        sequence2 = transform(
+            self.get_data_path('nw_align/seq-2.fasta'),
+            from_type=DNAFASTAFormat,
+            to_type=DNAIterator)
+        observed = nw_align(sequence1, sequence2)
+
+        aligned_sequence1 = DNA('ACCGGTGGAACCGG-TAACACCCAC')
+        aligned_sequence2 = DNA('ACCGGT--AACCGGTTAACACCCAC')
+        expected = TabularMSA([aligned_sequence1, aligned_sequence2])
+
+        self.assertNotEqual(observed, expected)
+```
+
+In this example, data is loaded from a file path that is relative to the `TestPluginBase.package` variable that we set above.
+In this case, the data needs to be transformed from a fasta file, which QIIME 2 represents as an instance of `q2-type`'s `DNAFASTAFormat` object to a `DNAIterator`, so it can be provided as input to `nw_align`.
+Here we use the `qiime2.plugin.util.transform` method to perform the transformation.
+After loading the files and transforming them, the test looks identical to the previous test case that we defined, except that the `expected` output is different, because the sequences we loaded differ from those used in the `test_simple1` method.
+
+A couple of additional things are required for this test to pass in your development environment.
+First, you must actually have the two `.fasta` files that are being loaded in the submodule as specified here (i.e., you should have the files `q2-dwq2/q2_dwq2/tests/data/seq-1.fasta` and `q2-dwq2/q2_dwq2/tests/data/seq-1.fasta` in your Python package).
+Second, you should indicate that there is `package_data` in your `setup.py`.
+Refer back to the pull requests referenced at the top of this chapter to see where all of this is done.
+
+#### A few additional tests
+
+Because we want to test that our function generates the results that we would expect from `skbio.alignment.global_pairwise_align_nucleotide`, it's good to check that the parameter values that we provide impact the results in the expected ways.
+I did this with four additional unit tests, each focused on a different input parameter.
+
+```python
+    def test_alt_match_score(self):
+        s1 = DNA('AAAATTT')
+        sequence1 = DNAIterator([s1])
+        s2 = DNA('AAAAGGTTT')
+        sequence2 = DNAIterator([s2])
+        # call with default value for match score
+        observed = nw_align(sequence1, sequence2)
+
+        aligned_sequence1 = DNA('--AAAATTT')
+        aligned_sequence2 = DNA('AAAAGGTTT')
+        expected = TabularMSA([aligned_sequence1, aligned_sequence2])
+
+        self.assertEqual(observed, expected)
+
+        sequence1 = DNAIterator([s1])
+        sequence2 = DNAIterator([s2])
+        # call with non-default value for match_score
+        observed = nw_align(sequence1, sequence2, match_score=10)
+
+        # the following expected outcome was determined by calling
+        # skbio.alignment.global_pairwise_align_nucleotide directly. the
+        # goal isn't to test that the underlying library code (i.e.,
+        # skbio.alignment.global_pairwise_align_nucleotide) is working, b/c
+        # I trust that that is already tested (or I wouldn't use it). rather,
+        # the goal is to test that my wrapper of it is working. in this case,
+        # specifically, i'm testing that passing an alternative value for
+        # match_score changes the output alignment
+        aligned_sequence1 = DNA('AAAA--TTT')
+        aligned_sequence2 = DNA('AAAAGGTTT')
+        expected = TabularMSA([aligned_sequence1, aligned_sequence2])
+
+        self.assertEqual(observed, expected)
+
+    def test_alt_gap_open_penalty(self):
+        s1 = DNA('AAAATTT')
+        sequence1 = DNAIterator([s1])
+        s2 = DNA('AAAAGGTTT')
+        sequence2 = DNAIterator([s2])
+        observed = nw_align(sequence1, sequence2, gap_open_penalty=0.01)
+
+        aligned_sequence1 = DNA('AAAA-T-TT-')
+        aligned_sequence2 = DNA('AAAAG-GTTT')
+        expected = TabularMSA([aligned_sequence1, aligned_sequence2])
+
+        self.assertEqual(observed, expected)
+
+        sequence1 = DNAIterator([s1])
+        sequence2 = DNAIterator([s2])
+        observed = nw_align(sequence1, sequence2)
+
+        aligned_sequence1 = DNA('--AAAATTT')
+        aligned_sequence2 = DNA('AAAAGGTTT')
+        expected = TabularMSA([aligned_sequence1, aligned_sequence2])
+
+        self.assertEqual(observed, expected)
+
+    def test_alt_gap_extend_penalty(self):
+        s1 = DNA('AAAATTT')
+        sequence1 = DNAIterator([s1])
+        s2 = DNA('AAAAGGTTT')
+        sequence2 = DNAIterator([s2])
+        observed = nw_align(sequence1, sequence2, gap_open_penalty=0.01)
+
+        aligned_sequence1 = DNA('AAAA-T-TT-')
+        aligned_sequence2 = DNA('AAAAG-GTTT')
+        expected = TabularMSA([aligned_sequence1, aligned_sequence2])
+
+        self.assertEqual(observed, expected)
+
+        sequence1 = DNAIterator([s1])
+        sequence2 = DNAIterator([s2])
+        observed = nw_align(sequence1, sequence2, gap_open_penalty=0.01,
+                            gap_extend_penalty=0.001)
+
+        aligned_sequence1 = DNA('AAAA--TTT')
+        aligned_sequence2 = DNA('AAAAGGTTT')
+        expected = TabularMSA([aligned_sequence1, aligned_sequence2])
+
+        self.assertEqual(observed, expected)
+
+    def test_alt_mismatch_score(self):
+        s1 = DNA('AAAATTT')
+        sequence1 = DNAIterator([s1])
+        s2 = DNA('AAAAGGTTT')
+        sequence2 = DNAIterator([s2])
+        observed = nw_align(sequence1, sequence2, gap_open_penalty=0.01)
+
+        aligned_sequence1 = DNA('AAAA-T-TT-')
+        aligned_sequence2 = DNA('AAAAG-GTTT')
+        expected = TabularMSA([aligned_sequence1, aligned_sequence2])
+
+        self.assertEqual(observed, expected)
+
+        sequence1 = DNAIterator([s1])
+        sequence2 = DNAIterator([s2])
+        observed = nw_align(sequence1, sequence2, gap_open_penalty=0.1,
+                            mismatch_score=-0.1)
+
+        aligned_sequence1 = DNA('-AAA-ATTT')
+        aligned_sequence2 = DNA('AAAAGGTTT')
+        expected = TabularMSA([aligned_sequence1, aligned_sequence2])
+
+        self.assertEqual(observed, expected)
+```
+
+#### Wrapping up testing
+
+When these tests are all in place (or in the process of putting them in place), you can run them by calling `py.test` on the command line.
+If everything is working as expected, you should see something like the following:
+
+```shell
+$ py.test
+
+...
+
+q2_dwq2/tests/test_methods.py::NWAlignTests::test_alt_gap_extend_penalty
+q2_dwq2/tests/test_methods.py::NWAlignTests::test_alt_gap_open_penalty
+q2_dwq2/tests/test_methods.py::NWAlignTests::test_alt_match_score
+q2_dwq2/tests/test_methods.py::NWAlignTests::test_alt_mismatch_score
+q2_dwq2/tests/test_methods.py::NWAlignTests::test_simple1
+q2_dwq2/tests/test_methods.py::NWAlignTests::test_simple2
+
+...
+
+==== 6 passed, 23 warnings in 1.17s ====
+```
+
+If your tests pass, and you can see the action on the command line, you should be in good shape.
+
+## Trying the new action
 
 **This section is incomplete.**
 
