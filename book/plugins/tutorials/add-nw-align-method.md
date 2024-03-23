@@ -6,6 +6,7 @@ Here we'll create a powerful action that illustrates this idea.
 
 The type of action that we'll create is a {term}`method`, meaning that it will take zero or more QIIME 2 {term}`artifacts <Artifact>` as input, and it will generate one or more QIIME 2 artifacts as output.
 
+(add-nw-align-method-prs)=
 ```{admonition} tl;dr
 :class: tip
 The complete code that I developed to add this action to my plugin can be found [here](https://github.com/caporaso-lab/q2-dwq2/pull/3/files) and [here](https://github.com/caporaso-lab/q2-dwq2/pull/4/files).
@@ -318,9 +319,13 @@ Miscellaneous:
 Similarly, if you start a Python session (e.g., by calling `ipython` in your activated development environment), you can access the `nw_align` method through its Python 3 API as follows.
 
 ```python
-In [1]: import qiime2.plugins.dwq2
+import qiime2.plugins.dwq2
+help(qiime2.plugins.dwq2.actions.nw_align)
+```
 
-In [3]: qiime2.plugins.dwq2.actions.nw_align?
+This call should produce the following help text:
+
+```
 Call signature:
 qiime2.plugins.dwq2.actions.nw_align(
     seq1: FeatureData[Sequence],
@@ -366,24 +371,36 @@ aligned_sequences : FeatureData[AlignedSequence]
     The pairwise aligned sequences.
 ```
 
+There are now two interfaces to your method, and you didn't have to write either of them --- cool! 😎
+
 Take a minute to review both the command line and Python help text, and relate it to the parameters we set when we registered the action.
 
 ### Write unit tests
 
 Your code is *not ready for use* until you write unit tests, to ensure that it's doing what you expect.
-We'll write our unit tests for `nw_align` in a new file in our Python packae, `q2_dwq2/tests/test_methods.py`.
+We'll write our unit tests for `nw_align` in a new file in our Python package, `q2_dwq2/tests/test_methods.py`.
 QIIME 2 provides a class, `TestPluginBase`, that facilitates unit testing plugins.
+
+```{warning}
+*Developing with QIIME 2* assumes that you have some background in software engineering.
+If writing unit tests or software testing in general are new to you, you should learn about these topics before developing software that you intend to use for "real" analysis.
+Small errors in code can have huge implications, including angry users, paper retractions, and clinical errors.
+
+I highly recommend reading [*The Pragmatic Programmer: Your Journey to Mastery* (20th Anniversary Edition)](https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/).
+Topic 41 discusses software testing, but the whole book is worth reading if you're serious about developing high-quality software.
+```
 
 #### What to test and what not to test
 
-When testing a QIIME 2 plugin, your goal is to confirm that the functionality that developed works as expected.
+When testing a QIIME 2 plugin, your goal is to confirm that the functionality that you developed works as expected.
 You can't test that *every* possible input produces its expected output, so instead you want to think about what tests will convince you that it's working across the range of inputs that would be expected.
 It's also a good idea to test that invalid input results in a failure, and ideally also provides an informative error message.
 
 If you're simply wrapping a function, like we are here, you don't need to test the underlying function in detail as that should have been tested already in the library that provides that function.
 (If that's not the case, you should reconsider whether this function is the one that you want to use!)
+
 You also don't need to test things such as whether your method works through q2cli, the Python 3 API, and Galaxy.
-That is functionality that you get for free when developing QIIME 2 plugins: the developers of the QIIME 2 framework and the other related tools have already tested this.
+That is functionality that you get for free when developing QIIME 2 plugins: the developers of the QIIME 2 framework and the other related tools have already tested this, and this should work as long as you're not adopting any of the [plugin development antipatterns](plugin-antipatterns).
 
 #### A first test of our plugin action
 
@@ -445,11 +462,29 @@ In this case, that's a pairwise alignment of `sequence1` and `sequence2` with a 
 Finally, we compare our `observed` output to our `expected` output.
 
 An important thing to note here is that I didn't need to load any data from file or use any QIIME 2 artifacts when testing my method.
-Because my method is just a registered Python function, I can provide input objects as I would to any other Python function.
-While it is possible to store QIIME 2 Artifacts in the repository and load them for use in the tests, that gets a little clunky so it's best avoided.
+Because my method is just a Python function that I registered with my `Plugin`, I can provide input objects as I would to any other Python function.
+It is possible to store QIIME 2 Artifacts in the repository and load them for use in the tests, but that gets a little clunky so it's best avoided when possible.
 For example, you'll often want to test multiple minor variations on the input to test edge cases (i.e., boundary conditions).
 That's much easier to do if you're working with Python objects as input, rather than if you need to create a whole bunch of different QIIME 2 artifacts and store them in the repository.
 Storing artifacts in the repository to use as inputs in unit tests can also increase the repository size, and it's not straight-forward to compare how inputs have changed across different revisions of the code.
+
+We can now run the test using `py.test` on the command line from your `q2-dwq2` directory.
+This should look something like the following:
+
+```shell
+$ py.test
+
+...
+q2_dwq2/tests/test_methods.py::NWAlignTests::test_simple1
+
+...
+
+==== 1 passed, 5 warnings in 0.17s ====
+```
+
+At the moment we're not concerned about the warnings that are being reported.
+We see from this output that we defined one test, and that one test passed.
+So we're ready to move on.
 
 #### A second test of our action
 
@@ -485,7 +520,9 @@ After loading the files and transforming them, the test looks identical to the p
 A couple of additional things are required for this test to pass in your development environment.
 First, you must actually have the two `.fasta` files that are being loaded in the submodule as specified here (i.e., you should have the files `q2-dwq2/q2_dwq2/tests/data/seq-1.fasta` and `q2-dwq2/q2_dwq2/tests/data/seq-1.fasta` in your Python package).
 Second, you should indicate that there is `package_data` in your `setup.py`.
-Refer back to the pull requests referenced at the top of this chapter to see where all of this is done.
+Refer back to [the pull requests referenced at the top of this chapter](add-nw-align-method-prs) to see where all of this is done.
+
+After defining this test in your plugin, run the unit tests and confirm that you now have two passing tests.
 
 #### A few additional tests
 
@@ -620,12 +657,52 @@ q2_dwq2/tests/test_methods.py::NWAlignTests::test_simple2
 ==== 6 passed, 23 warnings in 1.17s ====
 ```
 
-If your tests pass, and you can see the action on the command line, you should be in good shape.
+If your tests pass, and you can see the action on the command line, you should be in good shape so let's try running the method.
 
 ## Trying the new action
 
-**This section is incomplete.**
+To run the new action, you'll need two input files, each containing a DNA sequence to align.
+At this stage, your inputs need to be QIIME 2 artifacts.
+You should be able to do this with any `FeatureData[Sequence]` artifacts you have access to.
+If you don't have any, you can use the ones that we used in `test_simple2` by importing.
 
+To do this, change to a temporary directory and copy the two files referenced in `test_simple2` to that directory.
+You should then be able to run the following commands to import those files:
+
+```bash
+qiime tools import --input-path seq-1.fasta --type "FeatureData[Sequence]" --output-path seq-1.qza
+qiime tools import --input-path seq-2.fasta --type "FeatureData[Sequence]" --output-path seq-2.qza
+```
+
+Then, you can apply your new action to these two inputs as follows:
+
+```bash
+qiime dwq2 nw-align --i-seq1 seq-1.qza --i-seq2 seq-2.qza --o-aligned-sequences aligned-seqs.qza
+```
+
+This should create a new output, `aligned-seqs.qza`.
+Since this is a method, it's generating a new artifact as an output.
+As always, artifacts aren't intended for human consumption, but rather to be used as input to other QIIME 2 actions or exported for use with other (non-QIIME 2) tools.
+If you want to take a peek at what's in there, you can export it:
+
+```bash
+qiime tools export --input-path aligned-seqs.qza --output-path aligned-seqs
+```
+
+Then, you can view the file contents as you would with any .fasta file.
+For example:
+
+```bash
+$ cat aligned-seqs/aligned-dna-sequences.fasta
+>example-sequence-1
+ACCGGTGGAACCGG-TAACACCCAC
+>example-sequence-2
+ACCGGT--AACCGGTTAACACCCAC
+```
+
+So there you have it - a first action in our QIIME 2 plugin. ✅
+
+As a next step, let's make this a little more user-friendly by defining a {term}`Visualizer` that will let us look at the outcome of our pairwise alignment without having to export it from QIIME 2.
 
 ## An optional exercise
 
