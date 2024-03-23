@@ -1,3 +1,4 @@
+(plugin-antipatterns)=
 # Plugin development anti-patterns
 
 > "An anti-pattern in software engineering, project management, and business processes is a common response to a recurring problem that is usually ineffective and risks being highly counterproductive." [Source: Wikipedia -- Anti-patterns (Accessed 11 January 2024; last edited 5 December 2023)](https://en.wikipedia.org/wiki/Anti-pattern).
