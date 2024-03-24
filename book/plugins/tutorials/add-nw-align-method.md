@@ -1,4 +1,3 @@
-(add-nw-align-method)=
 # Add a first (real) action to our plugin
 
 At the most basic level, a QIIME 2 {term}`action` is simply an annotation of a Python function that describes in detail the inputs and outputs to that function.
@@ -16,14 +15,14 @@ The complete code that I developed to add this action to my plugin can be found 
 
 ## Pairwise sequence alignment
 
-One of the most fundamental tools in bioinformatics is {term}`pairwise sequence alignment`.
+One of the most fundamental algorithms in bioinformatics is {term}`pairwise sequence alignment`.
 {term}`Pairwise sequence alignment` forms the basis of [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi), many genome assemblers, phylogenetic inference from molecular sequence data, assigning taxonomy to environmental DNA sequences, and so much more.
 The first real action that we'll add to our plugin is a method that performs pairwise sequence alignment using the Needleman-Wunsch global pairwise alignment algorithm {cite}`Needleman1970`.
 
 You don't need to understand how the NW algorithm works interally to implement our method, because we're going to work with a Python function that implements the algorithm for us.
 But, you'll need to understand what its input and outputs are to be able to annotate them, and you'll need to understand at a basic level what it does so that you can test that your code is working as expected.
 
-If you do want to learn more about pairwise sequence alignment, the specific algorithm and implementation that we're going to work with here is covered in detail in the *Pairwise Sequence Alignment* chapter of [*An Introduction to Applied Bioinformatics*](https://readiab.org) {cite}`iab-2`. Briefly:
+If you do want to learn more about pairwise sequence alignment, the specific algorithm and implementation that we're going to work with here is presented in detail in the *Pairwise Sequence Alignment* chapter of [*An Introduction to Applied Bioinformatics*](https://readiab.org) {cite}`iab-2`. Briefly:
 
 > The goal of pairwise sequence alignment is, given two DNA, RNA, or protein sequences, to generate a hypothesis about which sequence positions derived from a common ancestral sequence position. {cite}`iab-2`
 
@@ -31,7 +30,7 @@ Our method will take two DNA sequences as input.
 It will attempt to align like positions with each other, inserting gap (i.e., `-`) characters where it seems likely that insertion/deletion events have occurred over the course of evolution.
 The output will be a pairwise sequence alignment (or more briefly, an *alignment*), which is a special case of a multiple sequence alignment that contains exactly two sequences.
 Our method will also take a few {term}`parameters <Parameter>` as input.
-These parameters include things like the score that should be assigned when a pair of positions contains matching characters (we'll call this `match_score`), or the score penalty that is incurred when a gap character is added to the alignment.
+These parameters include things like the score that should be assigned when a pair of positions contains matching characters (we'll call this `match_score`), or the score penalty that is incurred when a new gap is opened in the alignment (`gap_open_penalty`).
 
 The [scikit-bio](https://scikit.bio) library implements Needleman-Wunsch global pairwise alignment algorithm as [`skbio.alignment.global_pairwise_align_nucleotide`](https://scikit.bio/docs/dev/generated/skbio.alignment.global_pairwise_align_nucleotide.html#skbio.alignment.global_pairwise_align_nucleotide).
 We're going to make this accessible through our plugin by writing a simple wrapper of this function.
@@ -47,11 +46,12 @@ That may seem counter-intuitive if you've never done it before, but it's a power
 
 Technically we don't need to write a wrapper function of `skbio.alignment.global_pairwise_align_nucleotide`, but rather we could register that function directly.
 But for our first pass at this action there are a couple of things we're going to need to do to get data from QIIME 2 into `skbio.alignment.global_pairwise_align_nucleotide`.
-I started by creating a new file in my plugin at the path `q2-dwq2/q2_dwq2/_methods.py`.
-The `_` at the beginning of `_methods.py` is convention that conveys that this is intended to be a private submodule: in other words, consummers of this code outside of the q2-dwq2 Python package shouldn't access anything in this file directly.
+Let's add this wrapper to our `q2-dwq2/q2_dwq2/_methods.py`.
+(Remember that my package name is `q2-dwq2`, and my module name is `q2_dwq2`.
+If yours are different, you'll need to adjust that relative file path accordingly.)
+The `_` at the beginning of `_methods.py` is convention that conveys that this is intended to be a private submodule: in other words, consummers of this code outside of the this Python package shouldn't access anything in this file directly.
 
-The complete code that I put in this file follows.
-You should create a `_methods.py` file in your plugin, and copy/paste this code to it.
+Since the `duplicate_table` method that was defined in this plugin was only intended to get us started, I am going to remove it now, replacing all of the content of that file with the following code:
 
 ```python
 # ----------------------------------------------------------------------------
@@ -154,7 +154,7 @@ This is how we'll reference this citation when we associate it with our action, 
 
 Now we have what we need to register our function as a plugin method.
 By convention, this is done in `q2-dwq2/q2_dwq2/plugin_setup.py`, and that's what we'll do here.
-I chose to remove the templated `duplicate_table` action, now that I'm adding one of my own, but whether or not you want to do that too is up to you.
+I am chosing to remove the registration of the `duplicate_table` action, now that I'm adding one of my own, but whether or not you want to do that too is up to you.
 
 To register a function as a method, you'll use `plugin.methods.register_function`, where `plugin` is the `qiime2.plugin.Plugin` action that is instantiated in this file.
 Add the following code to your `q2-dwq2/q2_dwq2/plugin_setup.py` file, and then we'll work through it line by line.
@@ -240,7 +240,7 @@ from q2_dwq2._methods import nw_align
 ### Calling the action with {term}`q2cli` and the {term}`Python 3 API`
 
 Activate your development environment and run `qiime dev refresh-cache`.
-If your code doesn't have any syntax errors, and you addressed all of the additions described in this document, you should then be able to run `qiime dwq2 --help`, and see your new `nw-align` action show up in the list of actions associated with your plugin.
+If your code doesn't have any syntax errors, and you addressed all of the additions described in this document, you should then be able to run `qiime dwq2 --help` (replacing `dwq2` with your plugin's name, if it's different), and see your new `nw-align` action show up in the list of actions associated with your plugin.
 It should look something like this:
 
 ````{margin}
@@ -316,11 +316,11 @@ Miscellaneous:
   --help                  Show this message and exit.
 ```
 
-Similarly, if you start a Python session (e.g., by calling `ipython` in your activated development environment), you can access the `nw_align` method through its Python 3 API as follows.
+Similarly, if you start an iPython session by calling `ipython` in your activated development environment, you can access the `nw_align` method through its Python 3 API as follows.
 
 ```python
-import qiime2.plugins.dwq2
-help(qiime2.plugins.dwq2.actions.nw_align)
+In [1]: import qiime2.plugins.dwq2
+In [2]: qiime2.plugins.dwq2.actions.nw_align?
 ```
 
 This call should produce the following help text:
@@ -378,13 +378,13 @@ Take a minute to review both the command line and Python help text, and relate i
 ### Write unit tests
 
 Your code is *not ready for use* until you write unit tests, to ensure that it's doing what you expect.
-We'll write our unit tests for `nw_align` in a new file in our Python package, `q2_dwq2/tests/test_methods.py`.
+We'll write our unit tests for `nw_align` in `q2_dwq2/tests/test_methods.py`.
 QIIME 2 provides a class, `TestPluginBase`, that facilitates unit testing plugins.
 
 ```{warning}
 *Developing with QIIME 2* assumes that you have some background in software engineering.
 If writing unit tests or software testing in general are new to you, you should learn about these topics before developing software that you intend to use for "real" analysis.
-Small errors in code can have huge implications, including angry users, paper retractions, and clinical errors.
+Small errors in code can have huge implications, including angry users, paper retractions, and even clinical errors that could impact someone's medical treatment.
 
 I highly recommend reading [*The Pragmatic Programmer: Your Journey to Mastery* (20th Anniversary Edition)](https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/).
 Topic 41 discusses software testing, but the whole book is worth reading if you're serious about developing high-quality software.
@@ -393,18 +393,19 @@ Topic 41 discusses software testing, but the whole book is worth reading if you'
 #### What to test and what not to test
 
 When testing a QIIME 2 plugin, your goal is to confirm that the functionality that you developed works as expected.
-You can't test that *every* possible input produces its expected output, so instead you want to think about what tests will convince you that it's working across the range of inputs that would be expected.
+You can't test that *every* possible input produces its expected output, so instead you need to think about what tests will convince you that it's working across the range of inputs that would be expected.
 It's also a good idea to test that invalid input results in a failure, and ideally also provides an informative error message.
 
 If you're simply wrapping a function, like we are here, you don't need to test the underlying function in detail as that should have been tested already in the library that provides that function.
 (If that's not the case, you should reconsider whether this function is the one that you want to use!)
 
 You also don't need to test things such as whether your method works through q2cli, the Python 3 API, and Galaxy.
-That is functionality that you get for free when developing QIIME 2 plugins: the developers of the QIIME 2 framework and the other related tools have already tested this, and this should work as long as you're not adopting any of the [plugin development antipatterns](plugin-antipatterns).
+That is functionality that you get for free when developing QIIME 2 plugins: the developers of the QIIME 2 framework and the other related tools have already tested this, and this should work as long as you're not adopting any [plugin development antipatterns](plugin-antipatterns).
 
 #### A first test of our plugin action
 
 The following is a first test of our `nw_align` method.
+I'm replacing the tests of `duplicate_table` that were already in this file, as I decided to remove that action from my plugin.
 
 ````{margin}
 ```{note}
@@ -496,11 +497,11 @@ The following unit test illustrates how this can be achieved.
         # test alignment of a different pair of sequences
         # loaded from file this time, for demonstration purposes
         sequence1 = transform(
-            self.get_data_path('nw_align/seq-1.fasta'),
+            self.get_data_path('seq-1.fasta'),
             from_type=DNAFASTAFormat,
             to_type=DNAIterator)
         sequence2 = transform(
-            self.get_data_path('nw_align/seq-2.fasta'),
+            self.get_data_path('seq-2.fasta'),
             from_type=DNAFASTAFormat,
             to_type=DNAIterator)
         observed = nw_align(sequence1, sequence2)
@@ -517,10 +518,34 @@ In this case, the data needs to be transformed from a fasta file, which QIIME 2 
 Here we use the `qiime2.plugin.util.transform` method to perform the transformation.
 After loading the files and transforming them, the test looks identical to the previous test case that we defined, except that the `expected` output is different, because the sequences we loaded differ from those used in the `test_simple1` method.
 
-A couple of additional things are required for this test to pass in your development environment.
-First, you must actually have the two `.fasta` files that are being loaded in the submodule as specified here (i.e., you should have the files `q2-dwq2/q2_dwq2/tests/data/seq-1.fasta` and `q2-dwq2/q2_dwq2/tests/data/seq-1.fasta` in your Python package).
-Second, you should indicate that there is `package_data` in your `setup.py`.
-Refer back to [the pull requests referenced at the top of this chapter](add-nw-align-method-prs) to see where all of this is done.
+In order for this test to pass, you must actually have the two `.fasta` files that are being loaded in the submodule as specified here (i.e., you should have the files `q2-dwq2/q2_dwq2/tests/data/seq-1.fasta` and `q2-dwq2/q2_dwq2/tests/data/seq-2.fasta` in your Python package).
+
+Save the following text in a new file, `q2-dwq2/q2_dwq2/tests/data/seq-1.fasta`.
+```
+>example-sequence-1
+ACCGGTGGAACCGGTAACACCCAC
+```
+
+Save the following text in a new file, `q2-dwq2/q2_dwq2/tests/data/seq-2.fasta`.
+```
+>example-sequence-2
+ACCGGTAACCGGTTAACACCCAC
+```
+
+While adding these files, I also removed `q2-dwq2/q2_dwq2/tests/data/table-1.biom`, which I'm not using any more since I removed the `duplicate_table` action and its tests, using the command:
+
+```shell
+rm q2_dwq2/tests/data/table-1.biom
+```
+
+````{note}
+If you initialized a git repository for this plugin when you started working on it, you should instead remove the file with:
+
+```shell
+git rm q2_dwq2/tests/data/table-1.biom
+```
+````
+
 
 After defining this test in your plugin, run the unit tests and confirm that you now have two passing tests.
 
@@ -700,9 +725,9 @@ ACCGGTGGAACCGG-TAACACCCAC
 ACCGGT--AACCGGTTAACACCCAC
 ```
 
-So there you have it - a first action in our QIIME 2 plugin. ✅
+So there you have it - a first (real) action in our QIIME 2 plugin. ✅
 
-As a next step, let's make this a little more user-friendly by defining a {term}`Visualizer` that will let us look at the outcome of our pairwise alignment without having to export it from QIIME 2.
+As a next step, let's make this a little more user-friendly by defining a {term}`Visualizer` that will let us look at the outcome of our pairwise alignment directly, without having to export it from QIIME 2.
 
 ## An optional exercise
 
