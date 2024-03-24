@@ -1,5 +1,5 @@
 (plugin-from-template)=
-# Creating your plugin from an existing template
+# Create the plugin from a template
 
 The easiest way to create a new QIIME 2 plugin is using our [Cookiecutter template](https://cookiecutter.readthedocs.io/en/stable/), which can be found at https://github.com/caporaso-lab/cookiecutter-qiime2-plugin.
 Here we'll work through building your QIIME 2 plugin from this template.

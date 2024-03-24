@@ -1,4 +1,4 @@
-# Add a first (real) action to our plugin
+# Add a first (real) method to the plugin
 
 At the most basic level, a QIIME 2 {term}`action` is simply an annotation of a Python function that describes in detail the inputs and outputs to that function.
 Here we'll create a powerful action that illustrates this idea.
@@ -727,7 +727,7 @@ ACCGGT--AACCGGTTAACACCCAC
 
 So there you have it - a first (real) action in our QIIME 2 plugin. ✅
 
-As a next step, let's make this a little more user-friendly by defining a {term}`Visualizer` that will let us look at the outcome of our pairwise alignment directly, without having to export it from QIIME 2.
+As a next step, let's make this a little more user-friendly by [adding a {term}`Visualizer`](add-alignment-visualizer) that will let us look at the outcome of our pairwise alignment directly, without having to export it from QIIME 2.
 
 ## An optional exercise
 
