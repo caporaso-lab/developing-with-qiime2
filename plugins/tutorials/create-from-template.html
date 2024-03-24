@@ -427,16 +427,9 @@ The plugin I’m going to create will be called <code class="docutils literal no
 <p>After the plugin has been created, change into the top-level directory for the plugin.
 For me, that’s <code class="docutils literal notranslate"><span class="pre">q2-dwq2/</span></code>.
 Run the following command to install your plugin in developer mode:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>dev
 </pre></div>
 </div>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You should run <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dev</span> <span class="pre">refresh-cache</span></code> any time you’re making changes related to the interface of your plugins (e.g., adding or changing help text, or adding or removing actions).</p>
-</div>
-</aside>
 <p>Then, have the command line interface cache information about your plugin by running:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>qiime<span class="w"> </span>dev<span class="w"> </span>refresh-cache
 </pre></div>
@@ -486,6 +479,10 @@ Don’t worry if it’s not clear what everything is yet - we’ll get to all of
 If you’d like to try the action out, you can call your <code class="docutils literal notranslate"><span class="pre">duplicate-table</span></code> action on any QIIME 2 <code class="docutils literal notranslate"><span class="pre">FeatureTable[Frequency]</span></code> artifact (e.g., you can download one from the <a class="reference external" href="https://docs.qiime2.org">QIIME 2 user documentation</a>).
 Load your duplicated table with <a class="reference external" href="https://view.qiime2.org">QIIME 2 View</a>, and poke through its Provenance to see how data provenance is recorded for your plugin.</p>
 <p>Next, we’ll <a class="reference internal" href="add-nw-align-method.html"><span class="doc std std-doc">Add a first (real) method to the plugin</span></a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can see my code after following these steps by looking at <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/3465ea40b18ae15825411a5930cfd24016f5d872">the specific commit in my plugin repository on GitHub</a>.</p>
+</div>
 </section>
 
     <script type="text/x-thebe-config">

@@ -444,7 +444,7 @@ Here we’ll create a powerful action that illustrates this idea.</p>
 <p>The type of action that we’ll create is a <a class="reference internal" href="../../back-matter/glossary.html#term-Method"><span class="xref std std-term">method</span></a>, meaning that it will take zero or more QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact"><span class="xref std std-term">artifacts</span></a> as input, and it will generate one or more QIIME 2 artifacts as output.</p>
 <div class="tip admonition" id="add-nw-align-method-prs">
 <p class="admonition-title">tl;dr</p>
-<p>The complete code that I developed to add this action to my plugin can be found <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/pull/3/files">here</a> and <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/pull/4/files">here</a>.</p>
+<p>The complete code that I developed to add this action to my plugin can be found <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/e54d7438d409453093cbcb4f2c06c100784afbe8">here</a>.</p>
 <p>(<a class="reference internal" href="../../back-matter/glossary.html#term-tl-dr"><span class="xref std std-term">What does “tl;dr” mean?</span></a>)</p>
 </div>
 <section id="pairwise-sequence-alignment">
@@ -512,6 +512,7 @@ The <code class="docutils literal notranslate"><span class="pre">_</span></code>
     <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">msa</span>
+
 </pre></div>
 </div>
 <p>Here I defined a new function, <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> (for <em>Needleman-Wunsch Alignment</em>).
@@ -609,6 +610,7 @@ Note that this won’t work yet - we still need to add some <code class="docutil
                  <span class="s2">&quot;This action is for demonstration purposes only. 🐌&quot;</span><span class="p">),</span>
     <span class="n">citations</span><span class="o">=</span><span class="p">[</span><span class="n">citations</span><span class="p">[</span><span class="s1">&#39;Needleman1970&#39;</span><span class="p">]]</span>
 <span class="p">)</span>
+
 </pre></div>
 </div>
 <p>First, we call <code class="docutils literal notranslate"><span class="pre">plugin.methods.register_function</span></code>.
@@ -867,9 +869,9 @@ It is possible to store QIIME 2 Artifacts in the repository and load them for us
 For example, you’ll often want to test multiple minor variations on the input to test edge cases (i.e., boundary conditions).
 That’s much easier to do if you’re working with Python objects as input, rather than if you need to create a whole bunch of different QIIME 2 artifacts and store them in the repository.
 Storing artifacts in the repository to use as inputs in unit tests can also increase the repository size, and it’s not straight-forward to compare how inputs have changed across different revisions of the code.</p>
-<p>We can now run the test using <code class="docutils literal notranslate"><span class="pre">py.test</span></code> on the command line from your <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code> directory.
+<p>We can now run the test using <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> on the command line from your <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code> directory.
 This should look something like the following:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>py.test
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span><span class="nb">test</span>
 
 ...
 q2_dwq2/tests/test_methods.py::NWAlignTests::test_simple1
@@ -1047,9 +1049,9 @@ I did this with four additional unit tests, each focused on a different input pa
 </section>
 <section id="wrapping-up-testing">
 <h4>Wrapping up testing<a class="headerlink" href="#wrapping-up-testing" title="Permalink to this heading">#</a></h4>
-<p>When these tests are all in place (or in the process of putting them in place), you can run them by calling <code class="docutils literal notranslate"><span class="pre">py.test</span></code> on the command line.
+<p>When these tests are all in place (or in the process of putting them in place), you can run them by calling <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> on the command line.
 If everything is working as expected, you should see something like the following:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>py.test
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span><span class="nb">test</span>
 
 ...
 
