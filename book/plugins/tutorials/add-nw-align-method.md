@@ -8,7 +8,7 @@ The type of action that we'll create is a {term}`method`, meaning that it will t
 (add-nw-align-method-prs)=
 ```{admonition} tl;dr
 :class: tip
-The complete code that I developed to add this action to my plugin can be found [here](https://github.com/caporaso-lab/q2-dwq2/pull/3/files) and [here](https://github.com/caporaso-lab/q2-dwq2/pull/4/files).
+The complete code that I developed to add this action to my plugin can be found [here](https://github.com/caporaso-lab/q2-dwq2/commit/e54d7438d409453093cbcb4f2c06c100784afbe8).
 
 ({term}`What does "tl;dr" mean? <tl;dr>`)
 ```
@@ -83,6 +83,7 @@ def nw_align(seq1: DNAIterator,
     )
 
     return msa
+
 ```
 
 Here I defined a new function, `nw_align` (for *Needleman-Wunsch Alignment*).
@@ -144,6 +145,7 @@ That should bring you to a page that contains the following bibtex-formatted cit
   year={1970},
   publisher={Elsevier}
 }
+
 ```
 
 I copied this and then pasted it at the bottom of the `q2-dwq2/q2_dwq2/citations.bib` file.
@@ -192,6 +194,7 @@ plugin.methods.register_function(
                  "This action is for demonstration purposes only. 🐌"),
     citations=[citations['Needleman1970']]
 )
+
 ```
 
 First, we call `plugin.methods.register_function`.
@@ -469,11 +472,11 @@ For example, you'll often want to test multiple minor variations on the input to
 That's much easier to do if you're working with Python objects as input, rather than if you need to create a whole bunch of different QIIME 2 artifacts and store them in the repository.
 Storing artifacts in the repository to use as inputs in unit tests can also increase the repository size, and it's not straight-forward to compare how inputs have changed across different revisions of the code.
 
-We can now run the test using `py.test` on the command line from your `q2-dwq2` directory.
+We can now run the test using `make test` on the command line from your `q2-dwq2` directory.
 This should look something like the following:
 
 ```shell
-$ py.test
+$ make test
 
 ...
 q2_dwq2/tests/test_methods.py::NWAlignTests::test_simple1
@@ -662,11 +665,11 @@ I did this with four additional unit tests, each focused on a different input pa
 
 #### Wrapping up testing
 
-When these tests are all in place (or in the process of putting them in place), you can run them by calling `py.test` on the command line.
+When these tests are all in place (or in the process of putting them in place), you can run them by calling `make test` on the command line.
 If everything is working as expected, you should see something like the following:
 
 ```shell
-$ py.test
+$ make test
 
 ...
 

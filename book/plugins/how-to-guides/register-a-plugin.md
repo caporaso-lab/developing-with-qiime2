@@ -79,7 +79,7 @@ Plugin developers are free to support their plugins on the QIIME 2 Forum, so you
 If you do that, you should get in the habit of monitoring the QIIME 2 Forum for technical support questions.
 
 The `Plugin` object can live anywhere in your project, but by convention it will be in a file called `plugin_setup.py`.
-You can see a complete working example in q2-dwq2 [here](https://github.com/caporaso-lab/q2-dwq2/blob/e8fe1e5b32bfc2a331d48611b3a70b0fa5b19165/q2_dwq2/plugin_setup.py#L21).
+You can see a complete working example in q2-dwq2 [here](https://github.com/caporaso-lab/q2-dwq2/blob/3465ea40b18ae15825411a5930cfd24016f5d872/q2_dwq2/plugin_setup.py#L16).
 
 
 ## Defining your plugin object as an entry point
