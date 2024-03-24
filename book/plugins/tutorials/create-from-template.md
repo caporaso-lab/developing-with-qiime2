@@ -27,14 +27,8 @@ For me, that's `q2-dwq2/`.
 Run the following command to install your plugin in developer mode:
 
 ```shell
-pip install -e .
+make dev
 ```
-
-````{margin}
-```{note}
- You should run `qiime dev refresh-cache` any time you're making changes related to the interface of your plugins (e.g., adding or changing help text, or adding or removing actions).
- ```
- ````
 
 Then, have the command line interface cache information about your plugin by running:
 
@@ -101,3 +95,7 @@ If you'd like to try the action out, you can call your `duplicate-table` action 
 Load your duplicated table with [QIIME 2 View](https://view.qiime2.org), and poke through its Provenance to see how data provenance is recorded for your plugin.
 
 Next, we'll [](add-nw-align-method).
+
+```{tip}
+You can see my code after following these steps by looking at [the specific commit in my plugin repository on GitHub](https://github.com/caporaso-lab/q2-dwq2/commit/3465ea40b18ae15825411a5930cfd24016f5d872).
+```
