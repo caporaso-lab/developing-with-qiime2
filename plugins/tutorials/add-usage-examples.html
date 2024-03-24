@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Defining different Format validation levels &#8212; Developing with QIIME 2</title>
+    <title>Add usage examples to the plugin &#8212; Developing with QIIME 2</title>
   
   
   
@@ -63,12 +63,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/how-to-guides/format-validation-levels';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/tutorials/add-usage-examples';</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Explanations" href="../explanations/intro.html" />
-    <link rel="prev" title="Writing Usage Examples" href="usage-examples.html" />
+    <link rel="next" title="How-To Guides" href="../how-to-guides/intro.html" />
+    <link rel="prev" title="Add a first visualizer to the plugin" href="add-alignment-visualizer.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -173,26 +173,26 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins 🔌</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Create the plugin from a template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) method to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-alignment-visualizer.html">Add a first visualizer to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-usage-examples.html">Add usage examples to the plugin</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="create-from-template.html">Create the plugin from a template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-nw-align-method.html">Add a first (real) method to the plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-alignment-visualizer.html">Add a first visualizer to the plugin</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Add usage examples to the plugin</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">How-To Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="set-up-development-environment.html">Set up your development environment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="register-a-plugin.html">Register a QIIME 2 plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="create-register-method.html">Create and register a Method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="create-register-visualizer.html">Create and register a visualizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="create-register-pipeline.html">Create and register a pipeline</a></li>
-<li class="toctree-l3"><a class="reference internal" href="create-register-transformer.html">Creating and registering a Transformer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="play-nicely-with-others.html">How to play nicely with other plugins</a></li>
-<li class="toctree-l3"><a class="reference internal" href="use-metadata.html">How to use Metadata</a></li>
-<li class="toctree-l3"><a class="reference internal" href="test-plugins.html">How to test QIIME 2 plugins</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage-examples.html">Writing Usage Examples</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Defining different Format validation levels</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/register-a-plugin.html">Register a QIIME 2 plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/create-register-method.html">Create and register a Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/create-register-visualizer.html">Create and register a visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/create-register-pipeline.html">Create and register a pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/create-register-transformer.html">Creating and registering a Transformer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/play-nicely-with-others.html">How to play nicely with other plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/use-metadata.html">How to use Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/test-plugins.html">How to test QIIME 2 plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/usage-examples.html">Writing Usage Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/format-validation-levels.html">Defining different Format validation levels</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -312,7 +312,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/plugins/how-to-guides/format-validation-levels.md" target="_blank"
+      <li><a href="../../_sources/plugins/tutorials/add-usage-examples.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -394,7 +394,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Defining different Format validation levels</h1>
+    <h1>Add usage examples to the plugin</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -408,11 +408,16 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="defining-different-format-validation-levels">
-<span id="howto-format-validation-levels"></span><h1>Defining different Format validation levels<a class="headerlink" href="#defining-different-format-validation-levels" title="Permalink to this heading">#</a></h1>
-<p>Part of defining a new <code class="docutils literal notranslate"><span class="pre">Format</span></code> is defining its <code class="docutils literal notranslate"><span class="pre">_validate_</span></code> function.
-QIIME 2 provides the ability to perform minimal validation or more extensive validation.
-Unitl a more detailed How-to guide is developed on this topic, you can refer to the <a class="reference internal" href="../../framework/explanations/formats.html#formats-validation-explanation"><span class="std std-ref">validation discussion in the Framework Explanation on <code class="docutils literal notranslate"><span class="pre">Formats</span></code></span></a>.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="add-usage-examples-to-the-plugin">
+<span id="add-nw-align-usage"></span><h1>Add usage examples to the plugin<a class="headerlink" href="#add-usage-examples-to-the-plugin" title="Permalink to this heading">#</a></h1>
+<p>Your new functionality isn’t <em>really</em> done until you document it, so let’s do that now.
+This will ensure that users know how to use your code, and will give them something to try after they install your plugin to convince them that it’s working.
+I generally find that I’m the first person to benefit from my documentation, and in some cases I’m also the person who most frequently benefits from my documentation (e.g., if it’s code that I write for my own purposes, rather than something I intend to broadly disseminate).</p>
+<p>QIIME 2 provides a framework for defining <code class="docutils literal notranslate"><span class="pre">UsageExamples</span></code> for plugins.
+These are defined abstractly, and the QIIME 2 framework knows how to translate those abstract definitions into usage examples for different interfaces (the <a class="reference internal" href="../../back-matter/glossary.html#term-Python-3-API"><span class="xref std std-term">Python 3 API</span></a>, <a class="reference internal" href="../../back-matter/glossary.html#term-q2cli"><span class="xref std std-term">q2cli</span></a>, and <a class="reference internal" href="../../back-matter/glossary.html#term-Galaxy"><span class="xref std std-term">Galaxy</span></a>, as of this writing).
+So, by writing a single usage example, your documentatation is targeted toward users with different levels of computational expertise.
+This is one way the framework supports our goal of meeting users where they are in terms of their computational experience, and it’s one of the big benefits that you as a plugin developer gets by developing with QIIME 2.</p>
+<p><strong>This section is incomplete.</strong></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -428,7 +433,7 @@ Unitl a more detailed How-to guide is developed on this topic, you can refer to 
         },
         kernelOptions: {
             name: "python3",
-            path: "./plugins/how-to-guides"
+            path: "./plugins/tutorials"
         },
         predefinedOutput: true
     }
@@ -446,20 +451,20 @@ Unitl a more detailed How-to guide is developed on this topic, you can refer to 
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="usage-examples.html"
+       href="add-alignment-visualizer.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Writing Usage Examples</p>
+        <p class="prev-next-title">Add a first visualizer to the plugin</p>
       </div>
     </a>
     <a class="right-next"
-       href="../explanations/intro.html"
+       href="../how-to-guides/intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Explanations</p>
+        <p class="prev-next-title">How-To Guides</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

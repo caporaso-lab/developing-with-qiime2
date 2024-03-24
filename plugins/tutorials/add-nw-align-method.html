@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Add a first (real) action to our plugin &#8212; Developing with QIIME 2</title>
+    <title>Add a first (real) method to the plugin &#8212; Developing with QIIME 2</title>
   
   
   
@@ -67,8 +67,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Add a first usage example" href="add-nw-align-usage-example.html" />
-    <link rel="prev" title="Creating your plugin from an existing template" href="create-from-template.html" />
+    <link rel="next" title="Add a first visualizer to the plugin" href="add-alignment-visualizer.html" />
+    <link rel="prev" title="Create the plugin from a template" href="create-from-template.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -174,9 +174,10 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="create-from-template.html">Creating your plugin from an existing template</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Add a first (real) action to our plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-nw-align-usage-example.html">Add a first usage example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create-from-template.html">Create the plugin from a template</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Add a first (real) method to the plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-alignment-visualizer.html">Add a first visualizer to the plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-usage-examples.html">Add usage examples to the plugin</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -395,7 +396,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Add a first (real) action to our plugin</h1>
+    <h1>Add a first (real) method to the plugin</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -436,8 +437,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="add-a-first-real-action-to-our-plugin">
-<span id="add-nw-align-method"></span><h1>Add a first (real) action to our plugin<a class="headerlink" href="#add-a-first-real-action-to-our-plugin" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="add-a-first-real-method-to-the-plugin">
+<h1>Add a first (real) method to the plugin<a class="headerlink" href="#add-a-first-real-method-to-the-plugin" title="Permalink to this heading">#</a></h1>
 <p>At the most basic level, a QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">action</span></a> is simply an annotation of a Python function that describes in detail the inputs and outputs to that function.
 Here we’ll create a powerful action that illustrates this idea.</p>
 <p>The type of action that we’ll create is a <a class="reference internal" href="../../back-matter/glossary.html#term-Method"><span class="xref std std-term">method</span></a>, meaning that it will take zero or more QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact"><span class="xref std std-term">artifacts</span></a> as input, and it will generate one or more QIIME 2 artifacts as output.</p>
@@ -448,12 +449,12 @@ Here we’ll create a powerful action that illustrates this idea.</p>
 </div>
 <section id="pairwise-sequence-alignment">
 <h2>Pairwise sequence alignment<a class="headerlink" href="#pairwise-sequence-alignment" title="Permalink to this heading">#</a></h2>
-<p>One of the most fundamental tools in bioinformatics is <a class="reference internal" href="../../back-matter/glossary.html#term-Pairwise-sequence-alignment"><span class="xref std std-term">pairwise sequence alignment</span></a>.
+<p>One of the most fundamental algorithms in bioinformatics is <a class="reference internal" href="../../back-matter/glossary.html#term-Pairwise-sequence-alignment"><span class="xref std std-term">pairwise sequence alignment</span></a>.
 <a class="reference internal" href="../../back-matter/glossary.html#term-Pairwise-sequence-alignment"><span class="xref std std-term">Pairwise sequence alignment</span></a> forms the basis of <a class="reference external" href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">BLAST</a>, many genome assemblers, phylogenetic inference from molecular sequence data, assigning taxonomy to environmental DNA sequences, and so much more.
 The first real action that we’ll add to our plugin is a method that performs pairwise sequence alignment using the Needleman-Wunsch global pairwise alignment algorithm <span id="id1">[<a class="reference internal" href="../../back-matter/bibliography.html#id6" title="S B Needleman and C D Wunsch. A general method applicable to the search for similarities in the amino acid sequence of two proteins. J. Mol. Biol., 48(3):443–453, March 1970.">2</a>]</span>.</p>
 <p>You don’t need to understand how the NW algorithm works interally to implement our method, because we’re going to work with a Python function that implements the algorithm for us.
 But, you’ll need to understand what its input and outputs are to be able to annotate them, and you’ll need to understand at a basic level what it does so that you can test that your code is working as expected.</p>
-<p>If you do want to learn more about pairwise sequence alignment, the specific algorithm and implementation that we’re going to work with here is covered in detail in the <em>Pairwise Sequence Alignment</em> chapter of <a class="reference external" href="https://readiab.org"><em>An Introduction to Applied Bioinformatics</em></a> <span id="id2">[<a class="reference internal" href="../../back-matter/bibliography.html#id5" title="J Gregory Caporaso. An introduction to applied bioinformatics, 2nd edition. 2021. URL: https://readiab.org.">3</a>]</span>. Briefly:</p>
+<p>If you do want to learn more about pairwise sequence alignment, the specific algorithm and implementation that we’re going to work with here is presented in detail in the <em>Pairwise Sequence Alignment</em> chapter of <a class="reference external" href="https://readiab.org"><em>An Introduction to Applied Bioinformatics</em></a> <span id="id2">[<a class="reference internal" href="../../back-matter/bibliography.html#id5" title="J Gregory Caporaso. An introduction to applied bioinformatics, 2nd edition. 2021. URL: https://readiab.org.">3</a>]</span>. Briefly:</p>
 <blockquote>
 <div><p>The goal of pairwise sequence alignment is, given two DNA, RNA, or protein sequences, to generate a hypothesis about which sequence positions derived from a common ancestral sequence position. <span id="id3">[<a class="reference internal" href="../../back-matter/bibliography.html#id5" title="J Gregory Caporaso. An introduction to applied bioinformatics, 2nd edition. 2021. URL: https://readiab.org.">3</a>]</span></p>
 </div></blockquote>
@@ -461,7 +462,7 @@ But, you’ll need to understand what its input and outputs are to be able to an
 It will attempt to align like positions with each other, inserting gap (i.e., <code class="docutils literal notranslate"><span class="pre">-</span></code>) characters where it seems likely that insertion/deletion events have occurred over the course of evolution.
 The output will be a pairwise sequence alignment (or more briefly, an <em>alignment</em>), which is a special case of a multiple sequence alignment that contains exactly two sequences.
 Our method will also take a few <a class="reference internal" href="../../back-matter/glossary.html#term-Parameter"><span class="xref std std-term">parameters</span></a> as input.
-These parameters include things like the score that should be assigned when a pair of positions contains matching characters (we’ll call this <code class="docutils literal notranslate"><span class="pre">match_score</span></code>), or the score penalty that is incurred when a gap character is added to the alignment.</p>
+These parameters include things like the score that should be assigned when a pair of positions contains matching characters (we’ll call this <code class="docutils literal notranslate"><span class="pre">match_score</span></code>), or the score penalty that is incurred when a new gap is opened in the alignment (<code class="docutils literal notranslate"><span class="pre">gap_open_penalty</span></code>).</p>
 <p>The <a class="reference external" href="https://scikit.bio">scikit-bio</a> library implements Needleman-Wunsch global pairwise alignment algorithm as <a class="reference external" href="https://scikit.bio/docs/dev/generated/skbio.alignment.global_pairwise_align_nucleotide.html#skbio.alignment.global_pairwise_align_nucleotide"><code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code></a>.
 We’re going to make this accessible through our plugin by writing a simple wrapper of this function.</p>
 </section>
@@ -477,10 +478,11 @@ That may seem counter-intuitive if you’ve never done it before, but it’s a p
 </aside>
 <p>Technically we don’t need to write a wrapper function of <code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code>, but rather we could register that function directly.
 But for our first pass at this action there are a couple of things we’re going to need to do to get data from QIIME 2 into <code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code>.
-I started by creating a new file in my plugin at the path <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_methods.py</span></code>.
-The <code class="docutils literal notranslate"><span class="pre">_</span></code> at the beginning of <code class="docutils literal notranslate"><span class="pre">_methods.py</span></code> is convention that conveys that this is intended to be a private submodule: in other words, consummers of this code outside of the q2-dwq2 Python package shouldn’t access anything in this file directly.</p>
-<p>The complete code that I put in this file follows.
-You should create a <code class="docutils literal notranslate"><span class="pre">_methods.py</span></code> file in your plugin, and copy/paste this code to it.</p>
+Let’s add this wrapper to our <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_methods.py</span></code>.
+(Remember that my package name is <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code>, and my module name is <code class="docutils literal notranslate"><span class="pre">q2_dwq2</span></code>.
+If yours are different, you’ll need to adjust that relative file path accordingly.)
+The <code class="docutils literal notranslate"><span class="pre">_</span></code> at the beginning of <code class="docutils literal notranslate"><span class="pre">_methods.py</span></code> is convention that conveys that this is intended to be a private submodule: in other words, consummers of this code outside of the this Python package shouldn’t access anything in this file directly.</p>
+<p>Since the <code class="docutils literal notranslate"><span class="pre">duplicate_table</span></code> method that was defined in this plugin was only intended to get us started, I am going to remove it now, replacing all of the content of that file with the following code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ----------------------------------------------------------------------------</span>
 <span class="c1"># Copyright (c) 2024, Greg Caporaso.</span>
 <span class="c1">#</span>
@@ -572,7 +574,7 @@ This is how we’ll reference this citation when we associate it with our action
 <h4>Register the action in <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code><a class="headerlink" href="#register-the-action-in-plugin-setup-py" title="Permalink to this heading">#</a></h4>
 <p>Now we have what we need to register our function as a plugin method.
 By convention, this is done in <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/plugin_setup.py</span></code>, and that’s what we’ll do here.
-I chose to remove the templated <code class="docutils literal notranslate"><span class="pre">duplicate_table</span></code> action, now that I’m adding one of my own, but whether or not you want to do that too is up to you.</p>
+I am chosing to remove the registration of the <code class="docutils literal notranslate"><span class="pre">duplicate_table</span></code> action, now that I’m adding one of my own, but whether or not you want to do that too is up to you.</p>
 <p>To register a function as a method, you’ll use <code class="docutils literal notranslate"><span class="pre">plugin.methods.register_function</span></code>, where <code class="docutils literal notranslate"><span class="pre">plugin</span></code> is the <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.Plugin</span></code> action that is instantiated in this file.
 Add the following code to your <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/plugin_setup.py</span></code> file, and then we’ll work through it line by line.
 Note that this won’t work yet - we still need to add some <code class="docutils literal notranslate"><span class="pre">import</span></code> statements to the top of the file, but we’ll add those as we work through the code where the imported functionality is used.</p>
@@ -655,7 +657,7 @@ Earlier in the <code class="docutils literal notranslate"><span class="pre">plug
 <section id="calling-the-action-with-q2cli-and-the-python-3-api">
 <h3>Calling the action with <a class="reference internal" href="../../back-matter/glossary.html#term-q2cli"><span class="xref std std-term">q2cli</span></a> and the <a class="reference internal" href="../../back-matter/glossary.html#term-Python-3-API"><span class="xref std std-term">Python 3 API</span></a><a class="headerlink" href="#calling-the-action-with-q2cli-and-the-python-3-api" title="Permalink to this heading">#</a></h3>
 <p>Activate your development environment and run <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dev</span> <span class="pre">refresh-cache</span></code>.
-If your code doesn’t have any syntax errors, and you addressed all of the additions described in this document, you should then be able to run <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dwq2</span> <span class="pre">--help</span></code>, and see your new <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> action show up in the list of actions associated with your plugin.
+If your code doesn’t have any syntax errors, and you addressed all of the additions described in this document, you should then be able to run <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dwq2</span> <span class="pre">--help</span></code> (replacing <code class="docutils literal notranslate"><span class="pre">dwq2</span></code> with your plugin’s name, if it’s different), and see your new <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> action show up in the list of actions associated with your plugin.
 It should look something like this:</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
@@ -728,9 +730,9 @@ Miscellaneous:
 <span class="w">  </span>--help<span class="w">                  </span>Show<span class="w"> </span>this<span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span>exit.
 </pre></div>
 </div>
-<p>Similarly, if you start a Python session (e.g., by calling <code class="docutils literal notranslate"><span class="pre">ipython</span></code> in your activated development environment), you can access the <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> method through its Python 3 API as follows.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qiime2.plugins.dwq2</span>
-<span class="n">help</span><span class="p">(</span><span class="n">qiime2</span><span class="o">.</span><span class="n">plugins</span><span class="o">.</span><span class="n">dwq2</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">nw_align</span><span class="p">)</span>
+<p>Similarly, if you start an iPython session by calling <code class="docutils literal notranslate"><span class="pre">ipython</span></code> in your activated development environment, you can access the <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> method through its Python 3 API as follows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>In [1]: import qiime2.plugins.dwq2
+In [2]: qiime2.plugins.dwq2.actions.nw_align?
 </pre></div>
 </div>
 <p>This call should produce the following help text:</p>
@@ -785,29 +787,30 @@ aligned_sequences : FeatureData[AlignedSequence]
 <section id="write-unit-tests">
 <h3>Write unit tests<a class="headerlink" href="#write-unit-tests" title="Permalink to this heading">#</a></h3>
 <p>Your code is <em>not ready for use</em> until you write unit tests, to ensure that it’s doing what you expect.
-We’ll write our unit tests for <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> in a new file in our Python package, <code class="docutils literal notranslate"><span class="pre">q2_dwq2/tests/test_methods.py</span></code>.
+We’ll write our unit tests for <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> in <code class="docutils literal notranslate"><span class="pre">q2_dwq2/tests/test_methods.py</span></code>.
 QIIME 2 provides a class, <code class="docutils literal notranslate"><span class="pre">TestPluginBase</span></code>, that facilitates unit testing plugins.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p><em>Developing with QIIME 2</em> assumes that you have some background in software engineering.
 If writing unit tests or software testing in general are new to you, you should learn about these topics before developing software that you intend to use for “real” analysis.
-Small errors in code can have huge implications, including angry users, paper retractions, and clinical errors.</p>
+Small errors in code can have huge implications, including angry users, paper retractions, and even clinical errors that could impact someone’s medical treatment.</p>
 <p>I highly recommend reading <a class="reference external" href="https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/"><em>The Pragmatic Programmer: Your Journey to Mastery</em> (20th Anniversary Edition)</a>.
 Topic 41 discusses software testing, but the whole book is worth reading if you’re serious about developing high-quality software.</p>
 </div>
 <section id="what-to-test-and-what-not-to-test">
 <h4>What to test and what not to test<a class="headerlink" href="#what-to-test-and-what-not-to-test" title="Permalink to this heading">#</a></h4>
 <p>When testing a QIIME 2 plugin, your goal is to confirm that the functionality that you developed works as expected.
-You can’t test that <em>every</em> possible input produces its expected output, so instead you want to think about what tests will convince you that it’s working across the range of inputs that would be expected.
+You can’t test that <em>every</em> possible input produces its expected output, so instead you need to think about what tests will convince you that it’s working across the range of inputs that would be expected.
 It’s also a good idea to test that invalid input results in a failure, and ideally also provides an informative error message.</p>
 <p>If you’re simply wrapping a function, like we are here, you don’t need to test the underlying function in detail as that should have been tested already in the library that provides that function.
 (If that’s not the case, you should reconsider whether this function is the one that you want to use!)</p>
 <p>You also don’t need to test things such as whether your method works through q2cli, the Python 3 API, and Galaxy.
-That is functionality that you get for free when developing QIIME 2 plugins: the developers of the QIIME 2 framework and the other related tools have already tested this, and this should work as long as you’re not adopting any of the <a class="reference internal" href="../references/antipatterns.html#plugin-antipatterns"><span class="std std-ref">plugin development antipatterns</span></a>.</p>
+That is functionality that you get for free when developing QIIME 2 plugins: the developers of the QIIME 2 framework and the other related tools have already tested this, and this should work as long as you’re not adopting any <a class="reference internal" href="../references/antipatterns.html#plugin-antipatterns"><span class="std std-ref">plugin development antipatterns</span></a>.</p>
 </section>
 <section id="a-first-test-of-our-plugin-action">
 <h4>A first test of our plugin action<a class="headerlink" href="#a-first-test-of-our-plugin-action" title="Permalink to this heading">#</a></h4>
-<p>The following is a first test of our <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> method.</p>
+<p>The following is a first test of our <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> method.
+I’m replacing the tests of <code class="docutils literal notranslate"><span class="pre">duplicate_table</span></code> that were already in this file, as I decided to remove that action from my plugin.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <div class="admonition note">
@@ -888,11 +891,11 @@ The following unit test illustrates how this can be achieved.</p>
         <span class="c1"># test alignment of a different pair of sequences</span>
         <span class="c1"># loaded from file this time, for demonstration purposes</span>
         <span class="n">sequence1</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">get_data_path</span><span class="p">(</span><span class="s1">&#39;nw_align/seq-1.fasta&#39;</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_data_path</span><span class="p">(</span><span class="s1">&#39;seq-1.fasta&#39;</span><span class="p">),</span>
             <span class="n">from_type</span><span class="o">=</span><span class="n">DNAFASTAFormat</span><span class="p">,</span>
             <span class="n">to_type</span><span class="o">=</span><span class="n">DNAIterator</span><span class="p">)</span>
         <span class="n">sequence2</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">get_data_path</span><span class="p">(</span><span class="s1">&#39;nw_align/seq-2.fasta&#39;</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_data_path</span><span class="p">(</span><span class="s1">&#39;seq-2.fasta&#39;</span><span class="p">),</span>
             <span class="n">from_type</span><span class="o">=</span><span class="n">DNAFASTAFormat</span><span class="p">,</span>
             <span class="n">to_type</span><span class="o">=</span><span class="n">DNAIterator</span><span class="p">)</span>
         <span class="n">observed</span> <span class="o">=</span> <span class="n">nw_align</span><span class="p">(</span><span class="n">sequence1</span><span class="p">,</span> <span class="n">sequence2</span><span class="p">)</span>
@@ -908,10 +911,28 @@ The following unit test illustrates how this can be achieved.</p>
 In this case, the data needs to be transformed from a fasta file, which QIIME 2 represents as an instance of <code class="docutils literal notranslate"><span class="pre">q2-type</span></code>’s <code class="docutils literal notranslate"><span class="pre">DNAFASTAFormat</span></code> object to a <code class="docutils literal notranslate"><span class="pre">DNAIterator</span></code>, so it can be provided as input to <code class="docutils literal notranslate"><span class="pre">nw_align</span></code>.
 Here we use the <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.util.transform</span></code> method to perform the transformation.
 After loading the files and transforming them, the test looks identical to the previous test case that we defined, except that the <code class="docutils literal notranslate"><span class="pre">expected</span></code> output is different, because the sequences we loaded differ from those used in the <code class="docutils literal notranslate"><span class="pre">test_simple1</span></code> method.</p>
-<p>A couple of additional things are required for this test to pass in your development environment.
-First, you must actually have the two <code class="docutils literal notranslate"><span class="pre">.fasta</span></code> files that are being loaded in the submodule as specified here (i.e., you should have the files <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/data/seq-1.fasta</span></code> and <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/data/seq-1.fasta</span></code> in your Python package).
-Second, you should indicate that there is <code class="docutils literal notranslate"><span class="pre">package_data</span></code> in your <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>.
-Refer back to <a class="reference internal" href="#add-nw-align-method-prs"><span class="std std-ref">the pull requests referenced at the top of this chapter</span></a> to see where all of this is done.</p>
+<p>In order for this test to pass, you must actually have the two <code class="docutils literal notranslate"><span class="pre">.fasta</span></code> files that are being loaded in the submodule as specified here (i.e., you should have the files <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/data/seq-1.fasta</span></code> and <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/data/seq-2.fasta</span></code> in your Python package).</p>
+<p>Save the following text in a new file, <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/data/seq-1.fasta</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="n">example</span><span class="o">-</span><span class="n">sequence</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">ACCGGTGGAACCGGTAACACCCAC</span>
+</pre></div>
+</div>
+<p>Save the following text in a new file, <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/data/seq-2.fasta</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="n">example</span><span class="o">-</span><span class="n">sequence</span><span class="o">-</span><span class="mi">2</span>
+<span class="n">ACCGGTAACCGGTTAACACCCAC</span>
+</pre></div>
+</div>
+<p>While adding these files, I also removed <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/data/table-1.biom</span></code>, which I’m not using any more since I removed the <code class="docutils literal notranslate"><span class="pre">duplicate_table</span></code> action and its tests, using the command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>q2_dwq2/tests/data/table-1.biom
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you initialized a git repository for this plugin when you started working on it, you should instead remove the file with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>rm<span class="w"> </span>q2_dwq2/tests/data/table-1.biom
+</pre></div>
+</div>
+</div>
 <p>After defining this test in your plugin, run the unit tests and confirm that you now have two passing tests.</p>
 </section>
 <section id="a-few-additional-tests">
@@ -1080,8 +1101,8 @@ ACCGGTGGAACCGG-TAACACCCAC
 ACCGGT--AACCGGTTAACACCCAC
 </pre></div>
 </div>
-<p>So there you have it - a first action in our QIIME 2 plugin. ✅</p>
-<p>As a next step, let’s make this a little more user-friendly by defining a <a class="reference internal" href="../../back-matter/glossary.html#term-Visualizer"><span class="xref std std-term">Visualizer</span></a> that will let us look at the outcome of our pairwise alignment without having to export it from QIIME 2.</p>
+<p>So there you have it - a first (real) action in our QIIME 2 plugin. ✅</p>
+<p>As a next step, let’s make this a little more user-friendly by <a class="reference internal" href="add-alignment-visualizer.html"><span class="doc std std-doc">adding a <a class="reference internal" href="../../back-matter/glossary.html#term-Visualizer"><span class="xref std std-term">Visualizer</span></a></span></a> that will let us look at the outcome of our pairwise alignment directly, without having to export it from QIIME 2.</p>
 </section>
 <section id="an-optional-exercise">
 <h2>An optional exercise<a class="headerlink" href="#an-optional-exercise" title="Permalink to this heading">#</a></h2>
@@ -1128,15 +1149,15 @@ Don’t forget to write your unit tests!</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Creating your plugin from an existing template</p>
+        <p class="prev-next-title">Create the plugin from a template</p>
       </div>
     </a>
     <a class="right-next"
-       href="add-nw-align-usage-example.html"
+       href="add-alignment-visualizer.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Add a first usage example</p>
+        <p class="prev-next-title">Add a first visualizer to the plugin</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -28,3 +28,8 @@ Let's [get started](plugin-from-template)!
 ```{note}
 If you're already comfortable with plugin development and are looking for instructions to achieve a specific task, you may find more targeted instructions in the [Plugin Development How-To Guides](plugin-how-to-guides).
 ```
+
+## Tutorial table of contents
+
+```{tableofcontents}
+```
