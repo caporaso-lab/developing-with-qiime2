@@ -1,5 +1,5 @@
 (add-nw-align-usage)=
-# Add a first usage example
+# Add usage examples to the plugin
 
 Your new functionality isn't *really* done until you document it, so let's do that now.
 This will ensure that users know how to use your code, and will give them something to try after they install your plugin to convince them that it's working.

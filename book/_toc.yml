@@ -20,7 +20,8 @@ parts:
           sections:
             - file: plugins/tutorials/create-from-template
             - file: plugins/tutorials/add-nw-align-method
-            - file: plugins/tutorials/add-nw-align-usage-example
+            - file: plugins/tutorials/add-alignment-visualizer
+            - file: plugins/tutorials/add-usage-examples
         - file: plugins/how-to-guides/intro
           sections:
             - file: plugins/how-to-guides/set-up-development-environment

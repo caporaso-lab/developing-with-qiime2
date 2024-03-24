@@ -1,5 +1,5 @@
 (plugin-from-template)=
-# Creating your plugin from an existing template
+# Create the plugin from a template
 
 The easiest way to create a new QIIME 2 plugin is using our [Cookiecutter template](https://cookiecutter.readthedocs.io/en/stable/), which can be found at https://github.com/caporaso-lab/cookiecutter-qiime2-plugin.
 Here we'll work through building your QIIME 2 plugin from this template.
@@ -12,7 +12,7 @@ Next, install cookiecutter in your QIIME 2 development environment using the fol
 pip install cookiecutter
 ```
 
-Then, use `cookiecutter` to create your plugin from the template using the following command.
+Then, use `cookiecutter` to create your plugin from the template using the following command:
 
 ```shell
 cookiecutter gh:caporaso-lab/cookiecutter-qiime2-plugin
@@ -30,13 +30,18 @@ Run the following command to install your plugin in developer mode:
 pip install -e .
 ```
 
-Then, have the command line interface can cache information about your plugin by running:
+````{margin}
+```{note}
+ You should run `qiime dev refresh-cache` any time you're making changes related to the interface of your plugins (e.g., adding or changing help text, or adding or removing actions).
+ ```
+ ````
+
+Then, have the command line interface cache information about your plugin by running:
 
 ```shell
 qiime dev refresh-cache
 ```
 
- You should do this any time you're making changes related to the interface of your plugins (e.g., adding or changing help text, or adding or removing actions).
 
  To confirm that your plugin is now available, run:
 
@@ -92,4 +97,7 @@ Poke through all of the files to familiarize yourself with the structure of your
 Don't worry if it's not clear what everything is yet - we'll get to all of that.
 
 Congratulations - you've created a working QIIME 2 plugin from a template!
+If you'd like to try the action out, you can call your `duplicate-table` action on any QIIME 2 `FeatureTable[Frequency]` artifact (e.g., you can download one from the [QIIME 2 user documentation](https://docs.qiime2.org)).
+Load your duplicated table with [QIIME 2 View](https://view.qiime2.org), and poke through its Provenance to see how data provenance is recorded for your plugin.
+
 Next, we'll [](add-nw-align-method).
