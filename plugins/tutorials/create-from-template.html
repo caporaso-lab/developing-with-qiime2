@@ -441,7 +441,7 @@ Run the following command to install your plugin in developer mode:</p>
 <p>You should see your new plugin in the list of available plugins. If you request help text on your plugin (e.g., <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dwq2</span> <span class="pre">--help</span></code>), you should see some of the information you provided when creating the plugin.</p>
 <p>The template plugin includes a simple (and silly) action called <code class="docutils literal notranslate"><span class="pre">duplicate-table</span></code>, along with associated unit tests. This provides an example action and example unit tests. You’ll ultimately want to delete this action, but for now let’s use this action to make sure everything is working as expected.</p>
 <p>First, run the unit tests as follows:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>py.test
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nb">test</span>
 </pre></div>
 </div>
 <p>This should produce a bunch of output, ending with text that looks like the following:</p>

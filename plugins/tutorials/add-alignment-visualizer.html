@@ -383,7 +383,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -399,6 +401,17 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-the-visualizer-function">Write the visualizer function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-testing-the-visualizer-function">Unit testing the visualizer function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#register-your-python-function-as-a-plugin-action">Register your Python function as a plugin action</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-optional-exercise">An optional exercise</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -412,8 +425,174 @@ document.write(`
 <h1>Add a first visualizer to the plugin<a class="headerlink" href="#add-a-first-visualizer-to-the-plugin" title="Permalink to this heading">#</a></h1>
 <p>In the last chapter we created a first method for our plugin which performed pairwise alignment of DNA sequences.
 We were able to run this to generate an alignment, but we didn’t have any way to visualize the result without exporting it from QIIME 2.
-In this lesson we’ll address that by adding a <a class="reference internal" href="../../back-matter/glossary.html#term-Visualizer"><span class="xref std std-term">Visualizer</span></a> to our plugin which takes a <code class="docutils literal notranslate"><span class="pre">TabularMSA</span></code> artifact as input (which is what our previous action generated as output), and generates a <code class="docutils literal notranslate"><span class="pre">Visualization</span></code> that we can review using <a class="reference external" href="https://view.qiime2.org">QIIME 2 View</a>.</p>
-<p><strong>This section is incomplete.</strong></p>
+In this lesson we’ll address that by adding a simple <a class="reference internal" href="../../back-matter/glossary.html#term-Visualizer"><span class="xref std std-term">Visualizer</span></a> to our plugin which takes a <code class="docutils literal notranslate"><span class="pre">TabularMSA</span></code> artifact as input (which is what our previous action generated as output), and generates a <code class="docutils literal notranslate"><span class="pre">Visualization</span></code> that we can review using <a class="reference external" href="https://view.qiime2.org">QIIME 2 View</a>.</p>
+<div class="tip admonition" id="add-alignment-visualizer-commit">
+<p class="admonition-title">tl;dr</p>
+<p>The complete code that I developed to add this visualizer to my plugin can be found <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/e9738ecc707dd84d57bcecc00c068631044dfcb3">here</a>.</p>
+</div>
+<section id="write-the-visualizer-function">
+<h2>Write the visualizer function<a class="headerlink" href="#write-the-visualizer-function" title="Permalink to this heading">#</a></h2>
+<p>As with adding our alignment method, the first thing we’ll do to define a new visualizer is write the underlying Python function.
+Visualizer functions, at a minimum, take an <code class="docutils literal notranslate"><span class="pre">output_dir</span></code> (directory where output files should be written) as a string as input, but they also generally take one or more QIIME 2 artifacts, as well as metadata, as input.
+Our action will take the sequence alignment artifact that we generated as input, in addition to the <code class="docutils literal notranslate"><span class="pre">output_dir</span></code> parameter.</p>
+<p>The main function of a visualizer is to write some content to <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>.
+This information will all be packaged as part of the output <a class="reference internal" href="../../back-matter/glossary.html#term-Visualization"><span class="xref std std-term">Visualization</span></a> that QIIME 2 creates when the visualizer is called.
+When the visualization is viewed by a user using a QIIME 2 result viewer (such as <a class="reference external" href="https://view.qiime2.org">QIIME 2 View</a>), the viewer looks for an <code class="docutils literal notranslate"><span class="pre">index</span></code> file in the directory content created by the visualization, and presents that through the viewer.
+Most often, the <code class="docutils literal notranslate"><span class="pre">index</span></code> file is an HTML file (<code class="docutils literal notranslate"><span class="pre">index.html</span></code>), though technically other file types are possible.
+Visualizers are intentionally very flexible.
+As long as content can be packaged as HTML content and doesn’t require a server, it should work ok in the visualizer.</p>
+<p>Our task in writing this visualizer is to create some sort of useful, human-readable display of the alignment that is provided as input in an HTML file.
+Luckily, scikit-bio’s <code class="docutils literal notranslate"><span class="pre">TabularMSA</span></code> object has a built-in function for creating a text-based human-readable alignment display through its <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> function.
+We’ll use that here, even though the representation it creates is a little crude.
+(I’ll leave it as an exercise to you at the end of this chapter to make it look nicer, if you’re so inclined.)</p>
+<p>Start by creating a new file, <code class="docutils literal notranslate"><span class="pre">_visualizers.py</span></code> in your module’s top-level directory. For me, this file will be <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_visualizers.py</span></code>. Add the following code to that file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span>
+
+<span class="kn">from</span> <span class="nn">skbio.alignment</span> <span class="kn">import</span> <span class="n">TabularMSA</span>
+
+
+<span class="k">def</span> <span class="nf">summarize_alignment</span><span class="p">(</span><span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">msa</span><span class="p">:</span> <span class="n">TabularMSA</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;index.html&quot;</span><span class="p">),</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_html_template</span> <span class="o">%</span> <span class="nb">repr</span><span class="p">(</span><span class="n">msa</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;br&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">))</span>
+
+
+<span class="n">_html_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">&lt;!DOCTYPE html&gt;</span>
+<span class="s2">&lt;html lang=&quot;en&quot;&gt;</span>
+<span class="s2">&lt;head&gt;</span>
+<span class="s2">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span>
+<span class="s2">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span>
+<span class="s2">    &lt;title&gt;Alignment summary&lt;/title&gt;</span>
+<span class="s2">    &lt;style&gt;</span>
+<span class="s2">        body {</span>
+<span class="s2">            padding: 20px;</span>
+<span class="s2">        }</span>
+<span class="s2">        p.alignment {</span>
+<span class="s2">            font-family: &#39;Courier New&#39;, Courier, monospace;</span>
+<span class="s2">        }</span>
+<span class="s2">    &lt;/style&gt;</span>
+<span class="s2">&lt;/head&gt;</span>
+<span class="s2">&lt;body&gt;</span>
+<span class="s2">    &lt;p class=&quot;alignment&quot;&gt;</span>
+<span class="s2">    </span><span class="si">%s</span>
+<span class="s2">    &lt;/p&gt;</span>
+<span class="s2">&lt;/body&gt;</span>
+<span class="s2">&lt;/html&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>The majority of the code in this file is the <code class="docutils literal notranslate"><span class="pre">_html_template</span></code> variable, which sets up the HTML file and leaves a format specifier (<code class="docutils literal notranslate"><span class="pre">%s</span></code>) for us to insert a string of text.
+As templates like this get bigger or more complex, it often makes sense to store them in other files that are loaded by your visualizer code, but we’ll keep the template in the same file for now to keep it simple.</p>
+<p>The other bit of code in here is our viusalizer function.
+As described above, this takes an <code class="docutils literal notranslate"><span class="pre">output_dir</span></code> (always the first parameter to a visualizer) and our multiple sequence alignment as input, and doesn’t <code class="docutils literal notranslate"><span class="pre">return</span></code> anything.
+As with all Python functions that get registered as plugin actions, our function employs type hints so that QIIME 2 knows what data type should be provided as input for each parameter.
+In our case, <code class="docutils literal notranslate"><span class="pre">output_dir</span></code> is provided as a string (<code class="docutils literal notranslate"><span class="pre">str</span></code>), <code class="docutils literal notranslate"><span class="pre">msa</span></code> is provided as a <code class="docutils literal notranslate"><span class="pre">skbio.alignment.TabularMSA</span></code>, and the return type is <code class="docutils literal notranslate"><span class="pre">None</span></code>, indicating no return value.</p>
+<p>Our visualizer code is short and sweet.
+It opens a new file, <code class="docutils literal notranslate"><span class="pre">index.html</span></code> in <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>.
+It then writes the html template to file, replacing the format specifier in the template with the <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> of our <code class="docutils literal notranslate"><span class="pre">msa</span></code>.
+To format lines correctly for HTML, it replaces all occurences of <code class="docutils literal notranslate"><span class="pre">\n</span></code> (new lines) with <code class="docutils literal notranslate"><span class="pre">&lt;br&gt;\n</span></code> (HTML line breaks).
+(The trailing <code class="docutils literal notranslate"><span class="pre">\n</span></code> after the HTML line break isn’t needed for proper HTML formatting, but it makes the raw HTML file easier to look at.)</p>
+<p>That’s it for the underlying visualizer function.
+Let’s write a quick test of it before we hook it up to the plugin, to verify that the function works as expected.</p>
+</section>
+<section id="unit-testing-the-visualizer-function">
+<h2>Unit testing the visualizer function<a class="headerlink" href="#unit-testing-the-visualizer-function" title="Permalink to this heading">#</a></h2>
+<p>I wrote my test of this visualizer in a new file, <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/test_visualizers.py</span></code>.
+Create a file for your test in your plugin, and add the following content.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span>
+
+<span class="kn">from</span> <span class="nn">skbio.alignment</span> <span class="kn">import</span> <span class="n">TabularMSA</span>
+<span class="kn">from</span> <span class="nn">skbio.sequence</span> <span class="kn">import</span> <span class="n">DNA</span>
+
+<span class="kn">from</span> <span class="nn">qiime2.plugin.testing</span> <span class="kn">import</span> <span class="n">TestPluginBase</span>
+
+<span class="kn">from</span> <span class="nn">q2_dwq2._visualizers</span> <span class="kn">import</span> <span class="n">summarize_alignment</span>
+
+
+<span class="k">class</span> <span class="nc">SummarizeAlignmentTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
+    <span class="n">package</span> <span class="o">=</span> <span class="s1">&#39;q2_dwq2.tests&#39;</span>
+
+    <span class="k">def</span> <span class="nf">test_simple1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">aligned_sequence1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAAAAAGGTGGCCTTTTTTTT&#39;</span><span class="p">)</span>
+        <span class="n">aligned_sequence2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAAAAAGG-GGCCTTTTTTTT&#39;</span><span class="p">)</span>
+        <span class="n">msa</span> <span class="o">=</span> <span class="n">TabularMSA</span><span class="p">([</span><span class="n">aligned_sequence1</span><span class="p">,</span> <span class="n">aligned_sequence2</span><span class="p">])</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="k">as</span> <span class="n">output_dir</span><span class="p">:</span>
+            <span class="n">summarize_alignment</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">msa</span><span class="p">)</span>
+
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s1">&#39;index.html&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+                <span class="n">observed</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;AAAAAAAAGGTGGCCTTTTTTTT&#39;</span><span class="p">,</span> <span class="n">observed</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;AAAAAAAAGG-GGCCTTTTTTTT&#39;</span><span class="p">,</span> <span class="n">observed</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>Our test again uses <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.testing.TestPluginBase</span></code>, which is good practice for all tests of your QIIME 2 plugin functions as it provides some convenient functionality.
+We then create a <code class="docutils literal notranslate"><span class="pre">TabularMSA</span></code>, similar to how we created our <code class="docutils literal notranslate"><span class="pre">expected</span></code> values in our <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> tests in the previous section.
+Then, we use <code class="docutils literal notranslate"><span class="pre">TestPluginBase</span></code>’s <code class="docutils literal notranslate"><span class="pre">temp_dir</span></code> property as an output directory, and call our <code class="docutils literal notranslate"><span class="pre">summarize_alignment</span></code> function providing the <code class="docutils literal notranslate"><span class="pre">output_dir</span></code> and the alignment as input.</p>
+<p>Determining what to test with a visualizer is always a little tricker, as we don’t want to make the test more fragile than it needs to be.
+In this case, we do know what the entire HTML file is supposed to look like, so we could compare that as our <code class="docutils literal notranslate"><span class="pre">expected</span></code> to the <code class="docutils literal notranslate"><span class="pre">observed</span></code> value character by character and fail if any characters differ.
+That could get a bit clunky though, as a lot of that test would just be ensuring that Python correctly wrote a string (our <code class="docutils literal notranslate"><span class="pre">_html_template</span></code>) variable to file, and any changes to our <code class="docutils literal notranslate"><span class="pre">_html_template</span></code> would require changes to the test code as well.
+Instead, I’m just going to test that the expected aligned sequence strings were correctly written to file.
+I do that using <code class="docutils literal notranslate"><span class="pre">assertIn</span></code>, which in this case is checking that a given string is <code class="docutils literal notranslate"><span class="pre">in</span></code> another given string (i.e., the first string is a substring of the second string).</p>
+<p>Save this file, and run the tests using:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nb">test</span>
+</pre></div>
+</div>
+<p>This will generate a bunch of output, but if everything is working as expected you should see a line like:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>q2_dwq2/tests/test_visualizers.py<span class="w"> </span>.
+</pre></div>
+</div>
+<p>in the output. This indicates that one test ran and passed (indicated by the single <code class="docutils literal notranslate"><span class="pre">.</span></code> character - you’ll have one <code class="docutils literal notranslate"><span class="pre">.</span></code> per test that passed) from the <code class="docutils literal notranslate"><span class="pre">q2_dwq2/tests/test_visualizers.py</span></code> file.</p>
+<p>If the test didn’t pass, take a few minutes to figure out what went wrong, and re-run the test until it passes.</p>
+<p>If you get stuck, refer to <a class="reference internal" href="#add-alignment-visualizer-commit"><span class="std std-ref">the code that I wrote for this section</span></a>.</p>
+</section>
+<section id="register-your-python-function-as-a-plugin-action">
+<h2>Register your Python function as a plugin action<a class="headerlink" href="#register-your-python-function-as-a-plugin-action" title="Permalink to this heading">#</a></h2>
+<p>The last step in defining a visualizer for your plugin is to register the function we just wrote as a visualizer.
+To do this, we’ll go back to the <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code> file.</p>
+<p>In that file, you’ll first need to import your visualizer function so you can register it by adding the following line to the top of the file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">q2_dwq2._visualizers</span> <span class="kn">import</span> <span class="n">summarize_alignment</span>
+</pre></div>
+</div>
+<p>Then, you’ll call <code class="docutils literal notranslate"><span class="pre">plugin.visualizers.register_function</span></code>, as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plugin</span><span class="o">.</span><span class="n">visualizers</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
+    <span class="n">function</span><span class="o">=</span><span class="n">summarize_alignment</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;msa&#39;</span><span class="p">:</span> <span class="n">FeatureData</span><span class="p">[</span><span class="n">AlignedSequence</span><span class="p">]},</span>
+    <span class="n">input_descriptions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;msa&#39;</span><span class="p">:</span> <span class="s1">&#39;The multiple sequence alignment to summarize.&#39;</span><span class="p">},</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{},</span>
+    <span class="n">parameter_descriptions</span><span class="o">=</span><span class="p">{},</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Summarize an alignment.&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Summarize a multiple sequence alignment.&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This is very similar to how we registered our <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> function, except that because this is a <code class="docutils literal notranslate"><span class="pre">visualizer</span></code>, we’re calling <code class="docutils literal notranslate"><span class="pre">plugin.</span></code><strong><code class="docutils literal notranslate"><span class="pre">visualizers</span></code></strong><code class="docutils literal notranslate"><span class="pre">.register_function</span></code>, rather than <code class="docutils literal notranslate"><span class="pre">plugin.</span></code><strong><code class="docutils literal notranslate"><span class="pre">methods</span></code></strong><code class="docutils literal notranslate"><span class="pre">.register_function</span></code>.
+We still provide the <code class="docutils literal notranslate"><span class="pre">function</span></code> we want to register, <code class="docutils literal notranslate"><span class="pre">inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">input_descriptions</span></code>, <code class="docutils literal notranslate"><span class="pre">parameters</span></code> and <code class="docutils literal notranslate"><span class="pre">parameter_descriptions</span></code>, a <code class="docutils literal notranslate"><span class="pre">name</span></code>, a <code class="docutils literal notranslate"><span class="pre">description</span></code>, and <code class="docutils literal notranslate"><span class="pre">citations</span></code> if we had any (but we don’t here).</p>
+<p>If you now save this file, and call <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dev</span> <span class="pre">refresh-cache</span></code>, you should be able to see and use your visualizer.
+Try out your new visualizer by providing one of the <code class="docutils literal notranslate"><span class="pre">FeatureData[AlignedSequence]</span></code> artifacts that you generated as output from calling your <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> action.
+To see what it looks like, load the visualizer with <a class="reference external" href="https://view.qiime2.org">QIIME 2 View</a>.
+You should see something like this at QIIME 2 View:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">TabularMSA</span><span class="p">[</span><span class="n">DNA</span><span class="p">]</span>
+<span class="o">-------------------------</span>
+<span class="n">Stats</span><span class="p">:</span>
+<span class="n">sequence</span> <span class="n">count</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">position</span> <span class="n">count</span><span class="p">:</span> <span class="mi">25</span>
+<span class="o">-------------------------</span>
+<span class="n">ACCGGTGGAACCGG</span><span class="o">-</span><span class="n">TAACACCCAC</span>
+<span class="n">ACCGGT</span><span class="o">--</span><span class="n">AACCGGTTAACACCCAC</span>
+</pre></div>
+</div>
+<p>While you’re there, also take a minute to review the Provenance of your visualizer using the <em>Provenance</em> tab on that page.</p>
+</section>
+<section id="an-optional-exercise">
+<h2>An optional exercise<a class="headerlink" href="#an-optional-exercise" title="Permalink to this heading">#</a></h2>
+<p>As mentioned above, our visualizer is a little crude.
+Spend some time making it look a little nicer.
+For example, color the different nucleotide characters differently, or use colors or other formatting to indicate where there are matches, mismatches, and gaps in the alignment.
+You don’t have to use the <code class="docutils literal notranslate"><span class="pre">repr</span></code> function - you can access other parts of the <code class="docutils literal notranslate"><span class="pre">TabularMSA</span></code> API to display the information however you’d like.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -470,6 +649,23 @@ In this lesson we’ll address that by adding a <a class="reference internal" hr
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-the-visualizer-function">Write the visualizer function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-testing-the-visualizer-function">Unit testing the visualizer function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#register-your-python-function-as-a-plugin-action">Register your Python function as a plugin action</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-optional-exercise">An optional exercise</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
