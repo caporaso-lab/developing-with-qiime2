@@ -50,7 +50,7 @@ The template plugin includes a simple (and silly) action called `duplicate-table
 First, run the unit tests as follows:
 
 ```shell
-py.test
+make test
 ```
 
 This should produce a bunch of output, ending with text that looks like the following:
