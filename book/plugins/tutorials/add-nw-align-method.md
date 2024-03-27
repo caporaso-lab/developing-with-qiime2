@@ -5,7 +5,7 @@ Here we'll create a powerful action that illustrates this idea.
 
 The type of action that we'll create is a {term}`method`, meaning that it will take zero or more QIIME 2 {term}`artifacts <Artifact>` as input, and it will generate one or more QIIME 2 artifacts as output.
 
-(add-nw-align-method-prs)=
+(add-nw-align-method-commit)=
 ```{admonition} tl;dr
 :class: tip
 The complete code that I developed to add this action to my plugin can be found [here](https://github.com/caporaso-lab/q2-dwq2/commit/e54d7438d409453093cbcb4f2c06c100784afbe8).
