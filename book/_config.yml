@@ -18,8 +18,8 @@ sphinx:
     add_module_names: False
     html_theme_options:
       logo:
-        image_light: _static/q2dev.svg
-        image_dark: _static/q2dev_darkmode.svg
+        image_light: _static/dwq2-light.png
+        image_dark: _static/dwq2-dark.png
 
 execute:
   execute_notebooks: force
