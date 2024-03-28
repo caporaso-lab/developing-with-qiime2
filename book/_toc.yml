@@ -14,6 +14,7 @@ parts:
             - file: plugins/tutorials/create-from-template
             - file: plugins/tutorials/add-nw-align-method
             - file: plugins/tutorials/add-alignment-visualizer
+            - file: plugins/tutorials/add-type-format-transformer
             - file: plugins/tutorials/add-usage-examples
         - file: plugins/how-to-guides/intro
           sections:
