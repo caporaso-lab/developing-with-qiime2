@@ -389,7 +389,7 @@ QIIME 2 provides a class, `TestPluginBase`, that facilitates unit testing plugin
 If writing unit tests or software testing in general are new to you, you should learn about these topics before developing software that you intend to use for "real" analysis.
 Small errors in code can have huge implications, including angry users, paper retractions, and even clinical errors that could impact someone's medical treatment.
 
-I highly recommend reading [*The Pragmatic Programmer: Your Journey to Mastery* (20th Anniversary Edition)](https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/).
+I highly recommend reading [*The Pragmatic Programmer: Your Journey to Mastery* (20th Anniversary Edition)](https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/) {cite}`pragprog20`.
 Topic 41 discusses software testing, but the whole book is worth reading if you're serious about developing high-quality software.
 ```
 
