@@ -5,13 +5,6 @@ format: jb-book
 root: intro
 parts:
 
-  - caption: "Documentation 📚"
-    chapters:
-      - file: docs/intro
-        sections:
-        - file: docs/user-documentation
-        - file: docs/developer-documentation
-
   - caption: "Plugins 🔌"
     chapters:
       - file: plugins/intro
@@ -76,6 +69,13 @@ parts:
         - file: framework/references/intro
           sections:
             - file: framework/references/archive-versions
+
+  - caption: "Documentation 📚"
+    chapters:
+      - file: docs/intro
+        sections:
+        - file: docs/user-documentation
+        - file: docs/developer-documentation
 
   - caption: "Continuous Integration 🛠️"
     chapters:
