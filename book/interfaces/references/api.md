@@ -1,7 +1,7 @@
 (interface-developer-api)=
-# Interface developer API
+# Interface developer API reference
 
-When developing a QIIME 2 interface, you will use APIs defined in the `qiime2.sdk` submodule. 
+When developing a QIIME 2 interface, you will use APIs defined in the `qiime2.sdk` submodule.
 
 ## Interface development API
 
