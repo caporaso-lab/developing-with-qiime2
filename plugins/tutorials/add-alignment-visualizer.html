@@ -428,7 +428,7 @@ We were able to run this to generate an alignment, but we didn’t have any way 
 In this lesson we’ll address that by adding a simple <a class="reference internal" href="../../back-matter/glossary.html#term-Visualizer"><span class="xref std std-term">Visualizer</span></a> to our plugin which takes a <code class="docutils literal notranslate"><span class="pre">TabularMSA</span></code> artifact as input (which is what our previous action generated as output), and generates a <code class="docutils literal notranslate"><span class="pre">Visualization</span></code> that we can review using <a class="reference external" href="https://view.qiime2.org">QIIME 2 View</a>.</p>
 <div class="tip admonition" id="add-alignment-visualizer-commit">
 <p class="admonition-title">tl;dr</p>
-<p>The complete code that I developed to add this visualizer to my plugin can be found <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/e9738ecc707dd84d57bcecc00c068631044dfcb3">here</a>.</p>
+<p>The complete code that I developed to add this visualizer to my plugin can be found <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/1e802ea841ef40a40cfcdf53fca124061fcfccad">here</a>.</p>
 </div>
 <section id="write-the-visualizer-function">
 <h2>Write the visualizer function<a class="headerlink" href="#write-the-visualizer-function" title="Permalink to this heading">#</a></h2>
@@ -442,9 +442,10 @@ Most often, the <code class="docutils literal notranslate"><span class="pre">ind
 Visualizers are intentionally very flexible.
 As long as content can be packaged as HTML content and doesn’t require a server, it should work ok in the visualizer.</p>
 <p>Our task in writing this visualizer is to create some sort of useful, human-readable display of the alignment that is provided as input in an HTML file.
-Luckily, scikit-bio’s <code class="docutils literal notranslate"><span class="pre">TabularMSA</span></code> object has a built-in function for creating a text-based human-readable alignment display through its <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> function.
-We’ll use that here, even though the representation it creates is a little crude.
-(I’ll leave it as an exercise to you at the end of this chapter to make it look nicer, if you’re so inclined.)</p>
+Luckily, scikit-bio’s <code class="docutils literal notranslate"><span class="pre">TabularMSA</span></code> object has a built-in function for creating a text-based human-readable alignment summary through its <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> function.
+We’ll use that here, even though the representation it creates is a little crude and it is only a summary rather than a display of the full alignment.
+(Since our goal here is just to write a vizualizer — not actually enable exploration of alignments — this will suffice for our purposes.
+I’ll leave it as an exercise to you at the end of this chapter to expand on this visualization.)</p>
 <p>Start by creating a new file, <code class="docutils literal notranslate"><span class="pre">_visualizers.py</span></code> in your module’s top-level directory. For me, this file will be <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_visualizers.py</span></code>. Add the following code to that file.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span>
 
@@ -453,7 +454,7 @@ We’ll use that here, even though the representation it creates is a little cru
 
 <span class="k">def</span> <span class="nf">summarize_alignment</span><span class="p">(</span><span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">msa</span><span class="p">:</span> <span class="n">TabularMSA</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;index.html&quot;</span><span class="p">),</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
-        <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_html_template</span> <span class="o">%</span> <span class="nb">repr</span><span class="p">(</span><span class="n">msa</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;br&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">))</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_html_template</span> <span class="o">%</span> <span class="nb">repr</span><span class="p">(</span><span class="n">msa</span><span class="p">))</span>
 
 
 <span class="n">_html_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -473,9 +474,9 @@ We’ll use that here, even though the representation it creates is a little cru
 <span class="s2">    &lt;/style&gt;</span>
 <span class="s2">&lt;/head&gt;</span>
 <span class="s2">&lt;body&gt;</span>
-<span class="s2">    &lt;p class=&quot;alignment&quot;&gt;</span>
-<span class="s2">    </span><span class="si">%s</span>
-<span class="s2">    &lt;/p&gt;</span>
+<span class="s2">    &lt;pre&gt;</span>
+<span class="si">%s</span>
+<span class="s2">    &lt;/pre&gt;</span>
 <span class="s2">&lt;/body&gt;</span>
 <span class="s2">&lt;/html&gt;</span>
 <span class="s2">&quot;&quot;&quot;</span>
@@ -489,9 +490,7 @@ As with all Python functions that get registered as plugin actions, our function
 In our case, <code class="docutils literal notranslate"><span class="pre">output_dir</span></code> is provided as a string (<code class="docutils literal notranslate"><span class="pre">str</span></code>), <code class="docutils literal notranslate"><span class="pre">msa</span></code> is provided as a <code class="docutils literal notranslate"><span class="pre">skbio.alignment.TabularMSA</span></code>, and the return type is <code class="docutils literal notranslate"><span class="pre">None</span></code>, indicating no return value.</p>
 <p>Our visualizer code is short and sweet.
 It opens a new file, <code class="docutils literal notranslate"><span class="pre">index.html</span></code> in <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>.
-It then writes the html template to file, replacing the format specifier in the template with the <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> of our <code class="docutils literal notranslate"><span class="pre">msa</span></code>.
-To format lines correctly for HTML, it replaces all occurences of <code class="docutils literal notranslate"><span class="pre">\n</span></code> (new lines) with <code class="docutils literal notranslate"><span class="pre">&lt;br&gt;\n</span></code> (HTML line breaks).
-(The trailing <code class="docutils literal notranslate"><span class="pre">\n</span></code> after the HTML line break isn’t needed for proper HTML formatting, but it makes the raw HTML file easier to look at.)</p>
+It then writes the html template to file, replacing the format specifier in the template with the <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> of our <code class="docutils literal notranslate"><span class="pre">msa</span></code>.</p>
 <p>That’s it for the underlying visualizer function.
 Let’s write a quick test of it before we hook it up to the plugin, to verify that the function works as expected.</p>
 </section>
@@ -588,10 +587,10 @@ You should see something like this at QIIME 2 View:</p>
 </section>
 <section id="an-optional-exercise">
 <h2>An optional exercise<a class="headerlink" href="#an-optional-exercise" title="Permalink to this heading">#</a></h2>
-<p>As mentioned above, our visualizer is a little crude.
-Spend some time making it look a little nicer.
+<p>As mentioned above, our visualizer is a little crude and if you try to summarize long alignments (longer than 80 positions) you won’t see the full alignment.
+Spend some time making it look a little nicer, and maybe even expanding this to see the full alignment for longer alignments.
 For example, color the different nucleotide characters differently, or use colors or other formatting to indicate where there are matches, mismatches, and gaps in the alignment.
-You don’t have to use the <code class="docutils literal notranslate"><span class="pre">repr</span></code> function - you can access other parts of the <code class="docutils literal notranslate"><span class="pre">TabularMSA</span></code> API to display the information however you’d like.</p>
+You don’t have to use the <code class="docutils literal notranslate"><span class="pre">repr</span></code> function - you can access other parts of the <code class="docutils literal notranslate"><span class="pre">TabularMSA</span></code> API to display whatever information you’d like.</p>
 </section>
 </section>
 
