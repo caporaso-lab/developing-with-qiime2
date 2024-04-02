@@ -7,7 +7,7 @@ In this lesson we'll address that by adding a simple {term}`Visualizer` to our p
 (add-alignment-visualizer-commit)=
 ```{admonition} tl;dr
 :class: tip
-The complete code that I developed to add this visualizer to my plugin can be found [here](https://github.com/caporaso-lab/q2-dwq2/commit/e9738ecc707dd84d57bcecc00c068631044dfcb3).
+The complete code that I developed to add this visualizer to my plugin can be found [here](https://github.com/caporaso-lab/q2-dwq2/commit/1e802ea841ef40a40cfcdf53fca124061fcfccad).
 ```
 
 ## Write the visualizer function
@@ -24,9 +24,10 @@ Visualizers are intentionally very flexible.
 As long as content can be packaged as HTML content and doesn't require a server, it should work ok in the visualizer.
 
 Our task in writing this visualizer is to create some sort of useful, human-readable display of the alignment that is provided as input in an HTML file.
-Luckily, scikit-bio's `TabularMSA` object has a built-in function for creating a text-based human-readable alignment display through its `__repr__` function.
-We'll use that here, even though the representation it creates is a little crude.
-(I'll leave it as an exercise to you at the end of this chapter to make it look nicer, if you're so inclined.)
+Luckily, scikit-bio's `TabularMSA` object has a built-in function for creating a text-based human-readable alignment summary through its `__repr__` function.
+We'll use that here, even though the representation it creates is a little crude and it is only a summary rather than a display of the full alignment.
+(Since our goal here is just to write a vizualizer --- not actually enable exploration of alignments --- this will suffice for our purposes.
+I'll leave it as an exercise to you at the end of this chapter to expand on this visualization.)
 
 Start by creating a new file, `_visualizers.py` in your module's top-level directory. For me, this file will be `q2-dwq2/q2_dwq2/_visualizers.py`. Add the following code to that file.
 
@@ -38,7 +39,7 @@ from skbio.alignment import TabularMSA
 
 def summarize_alignment(output_dir: str, msa: TabularMSA) -> None:
     with open(os.path.join(output_dir, "index.html"), "w") as fh:
-        fh.write(_html_template % repr(msa).replace('\n', '<br>\n'))
+        fh.write(_html_template % repr(msa))
 
 
 _html_template = """
@@ -58,9 +59,9 @@ _html_template = """
     </style>
 </head>
 <body>
-    <p class="alignment">
-    %s
-    </p>
+    <pre>
+%s
+    </pre>
 </body>
 </html>
 """
@@ -77,8 +78,6 @@ In our case, `output_dir` is provided as a string (`str`), `msa` is provided as 
 Our visualizer code is short and sweet.
 It opens a new file, `index.html` in `output_dir`.
 It then writes the html template to file, replacing the format specifier in the template with the `__repr__` of our `msa`.
-To format lines correctly for HTML, it replaces all occurences of `\n` (new lines) with `<br>\n` (HTML line breaks).
-(The trailing `\n` after the HTML line break isn't needed for proper HTML formatting, but it makes the raw HTML file easier to look at.)
 
 That's it for the underlying visualizer function.
 Let's write a quick test of it before we hook it up to the plugin, to verify that the function works as expected.
@@ -194,10 +193,10 @@ While you're there, also take a minute to review the Provenance of your visualiz
 
 ## An optional exercise
 
-As mentioned above, our visualizer is a little crude.
-Spend some time making it look a little nicer.
+As mentioned above, our visualizer is a little crude and if you try to summarize long alignments (longer than 80 positions) you won't see the full alignment.
+Spend some time making it look a little nicer, and maybe even expanding this to see the full alignment for longer alignments.
 For example, color the different nucleotide characters differently, or use colors or other formatting to indicate where there are matches, mismatches, and gaps in the alignment.
-You don't have to use the `repr` function - you can access other parts of the `TabularMSA` API to display the information however you'd like.
+You don't have to use the `repr` function - you can access other parts of the `TabularMSA` API to display whatever information you'd like.
 
 
 
