@@ -12,6 +12,10 @@ Archive
 Artifact
   A QIIME 2 {term}`Result` that contains data to operate on.
 
+Artifact class
+  A kind of {term}`Artifact` that can exist.
+  This is defined by a plugin developer by associating a {term}`semantic type` with a {term}`format`.
+
 Artifact API
   See {term}`Python 3 API`.
 

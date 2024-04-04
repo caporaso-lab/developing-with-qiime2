@@ -96,6 +96,7 @@ The others, `DNAIterator` and `TabularMSA`, are defined in the q2-types QIIME 2 
 A `DNAIterator` is a Python object that enables iteration over a collection of zero or more `skbio.DNA` objects (which represent DNA sequences), and a `TabularMSA` object represents a **m**ultiple **s**equence **a**lignment.
 A little bit later we'll come back to how you decide what type hints to provide here.
 
+(suboptimal-initial-types)=
 The first couple of lines in this function are a little bit odd, and stem from the fact that (as of this writing) there isn't an existing QIIME 2 {term}`semantic type` for individual DNA sequences, but rather only for collections of DNA sequences.
 We are therefore going to work-around this right now, and in a subsequent lesson we'll define our own QIIME 2 semantic type to represent a single DNA sequence.
 We need two sequences as input to pairwise sequence alignment (by definition), and we'll take those as inputs through the `seq1` and `seq2` parameters.
