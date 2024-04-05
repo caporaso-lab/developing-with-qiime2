@@ -2,7 +2,7 @@
 # Adding a new Artifact Class
 
 Now that we've built a basic method and a basic visualizer, let's step into another unique aspect of developing with QIIME 2: defining {term}`Artifact classes <artifact class>`.
-*Artifact classes* are closely related to terms you have probably already encountered in the QIIME 2 ecosystem: {term}`semantic types <semantic type>`, {term}`file formats <format>`, and {term}`transformers <transformer>`.
+*Artifact classes* are closely related to terms you have probably already encountered in the QIIME 2 ecosystem: {term}`semantic types <semantic type>`, {term}`file formats <file format>`, and {term}`transformers <transformer>`.
 For most of the new QIIME 2 developers who I've worked with, defining a new artifact class (and the associated semantic type, file format(s), and transformer(s)) is the most obscure step.
 However it's what gives QIIME 2 a lot of its power (for example, its ability to be accessed through different interfaces and to help users avoid analytic errors) and flexibility (for example, its ability to load the same artifact into different data types, depending on what you want to do with it).
 
@@ -18,14 +18,14 @@ And finally, the majority of this section of the tutorial will focus on creating
 (add-artifact-class-commit)=
 ```{admonition} tl;dr
 :class: tip
-The complete code that I developed to define my new artifact class, including the corresponding semantic type, file formats, and transformer, can be found [here](https://github.com/caporaso-lab/q2-dwq2/pull/6/commits/e183b1630be81517689ce7539476e30ffa0ecfd9).
-The code that I developed to transition my `nw-align` action to use my new artifact class can be found [here](https://github.com/caporaso-lab/q2-dwq2/pull/6/commits/33b039c66995321ddd0ab245581b37e62b9080e5).
+The complete code that I developed to define my new artifact class, including the corresponding semantic type, file formats, and transformer, can be found [here](https://github.com/caporaso-lab/q2-dwq2/pull/6/commits/08e2922f87025ffc869aab430a17759acf539d88).
+The code that I developed to transition my `nw-align` action to use my new artifact class can be found [here](https://github.com/caporaso-lab/q2-dwq2/pull/6/commits/dcfe9a49ce9647ee0a79840b3eeb1ec74d456438).
 ```
 
 ## Artifact classes
 
 I'm going to begin by defining an {term}`artifact class` as **a kind of QIIME 2 artifact that can exist**.
-A new artifact class can be registered by a plugin developer by associating a {term}`semantic type` with a {term}`file format <format>`.
+A new artifact class can be registered by a plugin developer by associating a {term}`semantic type` with a {term}`file format <file format>`.
 Let's briefly discuss both of those terms.
 
 Semantic types define the meaning of the data - i.e., what it represents.
@@ -116,8 +116,10 @@ That code defines a new semantic type, which can be referred to as `SingleDNASeq
 The next thing we'll do is define a file format that we'll use with this semantic type to define our artifact class. We'll call our format `SingleRecordDNAFASTAFormat`, implying that is a fasta-formatted file for storing a single DNA sequence record.
 
 Our `SingleRecordDNAFASTAFormat` will be a subclass of QIIME 2's `TextFileFormat` class.
-The only requirement of our subclass is that it define a method called `_validate_`, and that method should take a validation `level` as input.
+The only requirement of our subclass is that it define a method called `_validate_`, and that method should take a validation `level` as input and not return any output.
 `level` will always be provided as either `max` (the default) or `min`.
+If a problem is discovered during validation, a `qiime2.plugin.ValidationError` should be raised.
+If `_validate_` returns without raising a `ValidationError`, that indicates that validation has succeeded.
 
 It's up to you as the format developer to define what happens in the `_validate_` function, and that can range from no validation whatsoever (i.e., just `pass` in the function body; we don't recommend this and [consider it a plugin development anti-pattern](antipattern-skipping-validation)), to extremely detailed validation.
 The `level` is used to define whether minimal or maximal validation should be performed.
@@ -133,6 +135,11 @@ The less you trust the creator of a file, the more important validation is. If y
 No offense to your users: creating files can be tedious, and tedious work is error prone when done by humans (we get bored and make mistakes).
 Computers on the other hand are great at it.
 So automate everything you can... but I digress.
+```
+
+```{tip}
+One feature to be aware of here, though we won't use it right away, is that since you're defining your file format class, you can add additional methods or properties to it that will be convenient for you if/when you work directly with instances of the format in your actions.
+For example, if you wanted an easy way to get the identifier of the sequence in this object, you could add a `SingleRecordDNAFASTAFormat.get_sequence_id()` method (for example), then access that in the normal way when you have an instance of this class.
 ```
 
 Add the following code to `_types_and_formats.py` (note that I'm building on my `import` statement from the previous code block here):
@@ -199,7 +206,13 @@ How is the validation level being used here?
 
 ### Defining a new directory format
 
-**This section is incomplete - start with definition of the directory format.**
+In the previous sections we discussed that QIIME 2 uses file formats to describe how data is organized in artifacts for specific artifact classes.
+In a QIIME 2 artifact, the relevant data is stored in the `data/` directory.
+For some artifact classes, including the one we're building here, all of the relevant data is contained in a single file.
+However in other cases, there may be multiple files and/or subdirectories.
+Because we're defining the contents of a directory when registering a new artifact class, we actually need to associate a `qiime2.plugin.DirectoryFormat` with our new artifact class.
+For simple cases like ours, where there will only be a single file in that directory, QIIME 2 has a helper function, `qiime2.plugin.model.SingleFileDirectoryFormat`, which we can use to create a our directory format.
+Add the following code to `_types_and_formats.py` to define your directory format.
 
 ```python
 from skbio import DNA
@@ -211,3 +224,41 @@ SingleRecordDNAFASTADirectoryFormat = model.SingleFileDirectoryFormat(
     'SingleRecordDNAFASTADirectoryFormat', 'sequence.fasta',
     SingleRecordDNAFASTAFormat)
 ```
+
+This code creates a new object, `SingleRecordDNAFASTADirectoryFormat`.
+The parameters being provided in the call to `SingleFileDirectoryFormat` are the name of the directory format, what we'd like to call the single file in the directory format, and what format this file will be in.
+We'll call the file in our directory format `sequence.fasta` (it can be anything, but making it descriptive helps), and it will be of the type we just defined, `SingleRecordDNAFASTAFormat`.
+
+At this stage, we have defined our sematic type and the formats that we'll associated with this semantic type.
+We'll now move on to registering these, so we can use them.
+
+## Registering an Artifact Class
+
+### Make type and formats publicly importable
+
+Next, open the `__init__.py` in the top-level directory of your module.
+For me, this will be `q2-dwq2/q2_dwq2/__init__.py`.
+Add the following lines to the imports at the top of your file:
+
+```python
+from ._types_and_formats import (
+    SingleDNASequence, SingleRecordDNAFASTAFormat,
+    SingleRecordDNAFASTADirectoryFormat)
+```
+
+Then add the following lines at the bottom of the file:
+
+```python
+__all__ = [
+    "SingleDNASequence", "SingleRecordDNAFASTAFormat",
+    "SingleRecordDNAFASTADirectoryFormat"]
+```
+
+This will allow you and others to import your semantic type and formats directly from the module without accessing files that are intended to be private (e.g., by calling `from q2_dwq2 import SingleDNASequence`).
+This gives you the freedom to reorganize files or file contents internally in your plugin without changing the public-facing API - even if you update the import statements in this file, your users won't need to change their import statements.
+
+### Register type, formats, and artifact class
+
+Next, we're...
+
+
