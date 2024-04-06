@@ -18,8 +18,8 @@ And finally, the majority of this section of the tutorial will focus on creating
 (add-artifact-class-commit)=
 ```{admonition} tl;dr
 :class: tip
-The complete code that I developed to define my new artifact class, including the corresponding semantic type, formats, and transformer, can be found [here](https://github.com/caporaso-lab/q2-dwq2/pull/6/commits/4bfb64296a83c0ac9f03bcb24f4b15d97f3953a3).
-The code that I developed to transition my `nw-align` action to use my new artifact class can be found [here](https://github.com/caporaso-lab/q2-dwq2/pull/6/commits/da9e5bf919224630dd3e1aba2c7dc4c466cb4a79).
+The complete code that I developed to define my new artifact class, including the corresponding semantic type, formats, and transformer, can be found [here](https://github.com/caporaso-lab/q2-dwq2/commit/161c8a3a130393d24e5e538e9a622dfef51ead11).
+The code that I developed to transition my `nw-align` action to use my new artifact class can be found [here](https://github.com/caporaso-lab/q2-dwq2/commit/b625b7f0b8194128c5d1c9a5892ce5bcd85ec81b).
 ```
 
 ## Artifact classes
