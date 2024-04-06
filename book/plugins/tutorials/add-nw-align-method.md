@@ -688,6 +688,7 @@ q2_dwq2/tests/test_methods.py::NWAlignTests::test_simple2
 
 If your tests pass, and you can see the action on the command line, you should be in good shape so let's try running the method.
 
+(trying-nw-align)=
 ## Trying the new action
 
 To run the new action, you'll need two input files, each containing a DNA sequence to align.

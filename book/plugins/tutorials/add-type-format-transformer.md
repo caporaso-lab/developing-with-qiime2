@@ -18,8 +18,8 @@ And finally, the majority of this section of the tutorial will focus on creating
 (add-artifact-class-commit)=
 ```{admonition} tl;dr
 :class: tip
-The complete code that I developed to define my new artifact class, including the corresponding semantic type, file formats, and transformer, can be found [here](https://github.com/caporaso-lab/q2-dwq2/pull/6/commits/08e2922f87025ffc869aab430a17759acf539d88).
-The code that I developed to transition my `nw-align` action to use my new artifact class can be found [here](https://github.com/caporaso-lab/q2-dwq2/pull/6/commits/dcfe9a49ce9647ee0a79840b3eeb1ec74d456438).
+The complete code that I developed to define my new artifact class, including the corresponding semantic type, file formats, and transformer, can be found [here](https://github.com/caporaso-lab/q2-dwq2/pull/6/commits/4bfb64296a83c0ac9f03bcb24f4b15d97f3953a3).
+The code that I developed to transition my `nw-align` action to use my new artifact class can be found [here](https://github.com/caporaso-lab/q2-dwq2/pull/6/commits/da9e5bf919224630dd3e1aba2c7dc4c466cb4a79).
 ```
 
 ## Artifact classes
@@ -229,12 +229,15 @@ This code creates a new object, `SingleRecordDNAFASTADirectoryFormat`.
 The parameters being provided in the call to `SingleFileDirectoryFormat` are the name of the directory format, what we'd like to call the single file in the directory format, and what format this file will be in.
 We'll call the file in our directory format `sequence.fasta` (it can be anything, but making it descriptive helps), and it will be of the type we just defined, `SingleRecordDNAFASTAFormat`.
 
-At this stage, we have defined our sematic type and the formats that we'll associated with this semantic type.
-We'll now move on to registering these, so we can use them.
+This completes the code you'll need in `_types_and_formats.py`.
+Compare your code against [mine](add-artifact-class-commit) to make sure it's functionally identical.
 
 ## Registering an Artifact Class
 
-### Make type and formats publicly importable
+At this stage, we have defined our sematic type and the formats that we'll associated with this semantic type.
+We'll now move on to registering these, so we can use them.
+
+### Making the new type and formats publicly importable
 
 Next, open the `__init__.py` in the top-level directory of your module.
 For me, this will be `q2-dwq2/q2_dwq2/__init__.py`.
@@ -257,8 +260,303 @@ __all__ = [
 This will allow you and others to import your semantic type and formats directly from the module without accessing files that are intended to be private (e.g., by calling `from q2_dwq2 import SingleDNASequence`).
 This gives you the freedom to reorganize files or file contents internally in your plugin without changing the public-facing API - even if you update the import statements in this file, your users won't need to change their import statements.
 
-### Register type, formats, and artifact class
+### Registering the type, formats, and artifact class
 
-Next, we're...
+Next, we'll edit our `plugin_setup.py` file to register our new type, our new formats, and our new artifact class.
+To do this, first we'll import those three objects in `plugin_setup.py`:
+
+```python
+from q2_dwq2 import (
+    SingleDNASequence, SingleRecordDNAFASTAFormat,
+    SingleRecordDNAFASTADirectoryFormat)
+```
+
+Notice that because of the additions we made in `__init__.py` we import these from our top-level module directly (not from `q2_dwq2._types_and_formats.py`, where they are defined).
+
+Next, we'll call three methods on our `plugin` object as follows:
+
+```python
+# Register semantic types
+plugin.register_semantic_types(SingleDNASequence)
+
+# Register formats
+plugin.register_formats(SingleRecordDNAFASTAFormat,
+                        SingleRecordDNAFASTADirectoryFormat)
+
+# Define and register new ArtifactClass
+plugin.register_artifact_class(SingleDNASequence,
+                               SingleRecordDNAFASTADirectoryFormat,
+                               description="A single DNA sequence.")
+```
+
+The first two should be self-explanatory: we register the new semantic type and the new formats.
+Each of these calls takes `*args` as input, which means that you can provide all the types and formats that you want to register as arguments to these methods.
+Each method takes one or more arguments.
+
+The final method call in that block is the one we've been working toward - it's where we associate our new semantic type with a directory format, and provide a description of what this artifact class is for users or other developers who may wish to use it.
+At this point, your plugin has defined a new artifact class and you should see it in the list of artifact classes if you run the following commands:
+
+```shell
+qiime dev refresh-cache
+qiime tools list-types
+```
+
+```{note}
+As mentioned earlier, when you add or update actions, types, or formats you'll need to run `qiime dev refresh-cache` to see those modifications through {term}`q2cli`.
+```
+
+## Defining and registering a transformer
+
+There are a couple of last things that we need to do before we're ready to use our new artifact class.
+The first is define how an instance of our artifact class (e.g., a `.qza` file) can be loaded in the form that we want to use it in inside of our action.
+In QIIME 2 jargon, we review to the different ways an artifact can be used inside of an action as different *views* of an artifact class.
+For example, if we want to recieve the fasta file directly, we can request to view the artifact as a `SingleRecordDNAFASTAFormat`.
+We could then open that, and do whatever we need to with it - this approach is common, for example, when processing raw sequence data such as collections of demutiplexed sequence reads.
+This might look like the following in our action definition:
+
+```python
+# this is just an example - don't put this code in your plugin
+def nw_align(seq1: SingleRecordDNAFASTAFormat,
+             seq2: SingleRecordDNAFASTAFormat,
+             ...
+```
+
+In our case, we want to load our sequences into `skbio.DNA` objects, as that's what the `skbio.alignment.global_pairwise_align_nucleotide` function that we're calling takes as input.
+So, we need to transform our fasta-formatted file into an `skbio.DNA` object, and we do that with a {term}`transformer`.
+
+Create a new file, `_transformers.py`, in your top-level module directory.
+Mine is called `q2-dwq2/q2_dwq2/_transformers.py`.
+Add the following code to that file:
+
+```python
+from skbio import DNA
+
+from q2_dwq2 import SingleRecordDNAFASTAFormat
+
+from .plugin_setup import plugin
 
 
+# Define and register transformers
+@plugin.register_transformer
+def _1(ff: SingleRecordDNAFASTAFormat) -> DNA:
+    # by default, DNA.read will read the first sequence in the file
+    with ff.open() as fh:
+        return DNA.read(fh)
+```
+
+This code first imports the objects that we want to transform to (`skbio.DNA`) and from (`SingleRecordDNAFASTAFormat`).
+We then import our `plugin` object from `plugin_setup.py`, which we'll use to register our transformer.
+Finally, we define our transformer function and register it with our plugin using a decorator.
+
+Your transformer function can be called anything you want, but by convention they receive arbitrary names.
+This is because the transformers are never called directly by users or developers, and because the function signature's type hints most clearly define what it does.
+Before we adopted this convention we had a lot of functions with names like `_transform_SingleRecordDNAFASTAFormat_to_DNA`, which was starting to feel silly (but if you prefer that, there are no issues with naming your transformers that way).
+Internally, this function does whatever it needs to to convert (or transform) the input object to the output object.
+In our case, we're opening the file format (`ff`) object provided as input, and reading the first (and only, in this case) sequence from it using `skbio.DNA.read`, and returning the result.
+
+````{note}
+You may have noticed that our artifact class stores data as defined in our  `SingleRecordDNAFASTADirectoryFormat` class, but we're working with it here in a `SingleRecordDNAFASTAFormat` object.
+QIIME 2 automatically creates transformers from directory formats to file formats for single-file directory formats when they are created with `model.SingleFileDirectoryFormat`, as we did above.
+QIIME 2 also knows how to chain transformers, such that when we attempt to view an artifact of our artifact class as `skbio.DNA`, it will first transform from `SingleRecordDNAFASTADirectoryFormat` to `SingleRecordDNAFASTAFormat`, and then transform from `SingleRecordDNAFASTAFormat` to `skbio.DNA`.
+If you're concerned that a chained transformation will be too slow, you can also define a transformer that skips the intermediate step.
+In this case, that might have a signature like:
+
+```python
+_2(df: SingleRecordDNAFASTADirectoryFormat) -> skbio.DNA
+```
+
+That won't be needed here however.
+````
+
+If you'd like to be able to view a `SingleDNASequence` artifact as another data type for use in your actions - for example, as a Python string (`str`) - you can define another transformer for it (e.g., `_3(ff: SingleRecordDNAFASTAFormat) -> str`, or `_4(seq: DNA) -> str`).
+
+To make this transformer accessible to your plugin, there's just one last thing to do, which is make sure that the code in this file runs when the `plugin` object is created.
+For this, we go back to `plugin_setup.py`.
+Add the following line to the imports at the top of that file:
+
+```python
+import importlib
+```
+
+Then, add the following as the last line in your file:
+
+```python
+importlib.import_module('q2_dwq2._transformers')
+```
+
+This will load and run our `_transformers.py` file, ensuring that our transformer is registered after the `plugin` object has been instantiated and our type and formats have been registered.
+
+## Unit testing
+
+As always, before we use this code, we're going to test it.
+At a high-level, there are three things we need to test: the semantic type we defined, the formats we defined, and the transformer we defined.
+Let's start with the type and formats.
+
+### Testing the semantic type and formats
+
+As you probably noticed, there isn't much to a semantic type - we're essentially just defining a name that will be linked to an artifact class.
+We therefore just want to confirm that the type is registered with the plugin.
+`qiime2.plugin.testing.TestPluginBase` provides a method for this, `assertRegisteredSemanticType`.
+
+For our formats, most of the action is happening inside of the `_validate_` function, so that's mostly what we're testing.
+I like to start with confirming that a few valid examples of my format pass validation, and then provide invalid files that are invalid for different reasons to confirm that those files fail validation.
+It's also a good idea to confirm that your validation level is functioning as expected.
+
+Below is my test code, which lives in `q2-dwq2/q2_dwq2/tests/test_types_and_formats.py`.
+I added a few new test data files, which you can access from [my code on GitHub](add-artifact-class-commit).
+
+```python
+from qiime2.plugin import ValidationError
+from qiime2.plugin.testing import TestPluginBase
+
+from q2_dwq2 import (
+    SingleDNASequence, SingleRecordDNAFASTAFormat
+)
+
+
+class SingleDNASequenceTests(TestPluginBase):
+    package = 'q2_dwq2.tests'
+
+    def test_semantic_type_registration(self):
+        self.assertRegisteredSemanticType(SingleDNASequence)
+
+
+class SingleRecordDNAFASTAFormatTests(TestPluginBase):
+    package = 'q2_dwq2.tests'
+
+    def test_simple1(self):
+        filenames = ['seq-1.fasta', 'seq-2.fasta', 't-thermophilis-rrna.fasta']
+        filepaths = [self.get_data_path(fn) for fn in filenames]
+
+        for fp in filepaths:
+            format = SingleRecordDNAFASTAFormat(fp, mode='r')
+            format.validate()
+
+    def test_invalid_default_validation(self):
+        fp = self.get_data_path('bad-sequence-1.fasta')
+        format = SingleRecordDNAFASTAFormat(fp, mode='r')
+        self.assertRaisesRegex(ValidationError,
+                               "4 non-ACGT characters.*171 positions.",
+                               format.validate)
+
+    def test_invalid_max_validation(self):
+        fp = self.get_data_path('bad-sequence-1.fasta')
+        format = SingleRecordDNAFASTAFormat(fp, mode='r')
+        self.assertRaisesRegex(ValidationError,
+                               "4 non-ACGT characters.*171 positions.",
+                               format.validate,
+                               level='max')
+
+    def test_invalid_min_validation(self):
+        fp = self.get_data_path('bad-sequence-1.fasta')
+        format = SingleRecordDNAFASTAFormat(fp, mode='r')
+        # min validation is successful
+        format.validate(level='min')
+        # but max validation raises an error
+        self.assertRaisesRegex(ValidationError,
+                               "4 non-ACGT characters.*171 positions.",
+                               format.validate,
+                               level='max')
+
+        fp = self.get_data_path('bad-sequence-2.fasta')
+        format = SingleRecordDNAFASTAFormat(fp, mode='r')
+        self.assertRaisesRegex(ValidationError,
+                               "4 non-ACGT characters.*50 positions.",
+                               format.validate,
+                               level='min')
+```
+
+### Testing the transformer
+
+Next, we'll test our transformers.
+Here, we should provide a few different valid inputs, and test that they are transformed to the expected output.
+Generally you should use the `transform_format` action in `qiime2.plugin.testing.TestPluginBase` to access and run the transformer (as opposed to importing the function directly from `_transformers.py`), which also tests that the transformer is registered with the plugin.
+
+The test code that I wrote for this is in `q2-dwq2/q2_dwq2/tests/test_transformers.py`, and follows here:
+
+```python
+from skbio import DNA
+
+from qiime2.plugin.testing import TestPluginBase
+
+from q2_dwq2 import SingleRecordDNAFASTAFormat
+
+
+class SingleDNASequenceTransformerTests(TestPluginBase):
+    package = 'q2_dwq2.tests'
+
+    def test_single_record_fasta_to_DNA_simple1(self):
+        _, observed = self.transform_format(
+            SingleRecordDNAFASTAFormat, DNA, filename='seq-1.fasta')
+
+        expected = DNA('ACCGGTGGAACCGGTAACACCCAC',
+                       metadata={'id': 'example-sequence-1', 'description': ''})
+
+        self.assertEqual(observed, expected)
+
+    def test_single_record_fasta_to_DNA_simple2(self):
+        _, observed = self.transform_format(
+            SingleRecordDNAFASTAFormat, DNA, filename='seq-2.fasta')
+
+        expected = DNA('ACCGGTAACCGGTTAACACCCAC',
+                       metadata={'id': 'example-sequence-2', 'description': ''})
+
+        self.assertEqual(observed, expected)
+```
+
+Write your tests, and then run them with `make test`.
+You should see something like the following:
+
+```shell
+$ make test
+...
+====== 14 passed, 23 warnings in 1.51s ======
+```
+
+If you have failing tests, work through them to figure out what's wrong.
+If you get stuck, refer back to my code.
+At this point, you should have implemented everything in [the first of my commits associated with this section](add-artifact-class-commit).
+
+## Updating `nw-align` to use the new artifact class
+
+Ok.
+That was a lot of work.
+But hopefully you can see that none of the coding is very hard, even if conceptually it's a little challenging as you get started.
+As we continue to work through the tutorial, I'll point out places where the work we did here provides powerful benefits for our plugin users and for us as plugin developers.
+
+Now let's update our `nw-align` method to use the new artifact class that we defined.
+As discussed earlier, this will enable us to simplify the code and associated tests.
+Since we're looking at code changes here, rather than new code, the most convenient view you'll have is GitHub's diff of this commit against the previous.
+To see this, open the link to the [second of my commits associated with this section](add-artifact-class-commit).
+
+The work that we're doing here is transitioning our use of the `FeatureData[Sequence]` artifact class for our new `SingleDNASequence` artifact class, and transitioning our use of the `DNAIterator` view inside `nw-align` to use `skbio.DNA` as our view.
+
+Start by looking at the changes in `test_methods.py`, and adapt your code in the same way.
+Notice that in the second test case (`test_simple2`), we're using `qiime2.plugin.util.transform` to load files stored in our `tests/data` directory into `skbio.DNA` objects for use in the tests.
+
+```{note}
+Pending [a fix for an oversight in `TestPluginBase`](https://github.com/qiime2/qiime2/issues/757), it will be possible to use `qiime2.plugin.testing.TestPluginBase.transform_format` for performing the fasta file to `skbio.DNA` transformation.
+This will enable tests of actions to use the same machinery used during testing of transformers.
+```
+
+If you run your unit tests now with `make test`, you should get some test failures.
+That's expected, as we updated the tests but haven't yet updated the code.
+Let's now update the code, and we'll know we're done when these tests pass.
+
+First, update the method itself, as I did in `q2-dwq2/q2_dwq2/_methods.py`.
+Here you're telling QIIME 2 to use a different view type inside this function, and then we're removing some of the clunky code that we no longer need.
+
+Then, update `plugin_setup.py` to associate our new artifact class with the sequence inputs.
+
+After making the changes that I made, all tests should pass when you run `make tests`.
+You should then run `qiime dev refresh-cache`, and then call help your plugin action.
+You should see the new types associated with the `seq1` and `seq2` inputs.
+Refer back to [where we tried out the nw-align action](trying-nw-align) for the first time.
+Using those same fasta files (or any others you'd like), adapt the commands in that section to import sequence data into artifacts of our new artifact class, and run `nw-align` on them.
+
+## An optional exercise
+
+Try making a new visualizer that will create a visual summary of a `SingleDNASequence` artifact class.
+Define a transformer to a view type other than `skbio.DNA`, and use that in your visualizer.
+For example, does another library like BioPython provide an object with a convenient view that you could use here?
+(Note that you may need to install any other library that you're using here in your development environment.)
