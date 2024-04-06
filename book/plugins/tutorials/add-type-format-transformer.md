@@ -1,15 +1,15 @@
 (plugin-tutorial-add-type-format-transformer)=
 # Adding a new Artifact Class
 
-Now that we've built a basic method and a basic visualizer, let's step into another unique aspect of developing with QIIME 2: defining {term}`Artifact classes <artifact class>`.
-*Artifact classes* are closely related to terms you have probably already encountered in the QIIME 2 ecosystem: {term}`semantic types <semantic type>`, {term}`file formats <file format>`, and {term}`transformers <transformer>`.
-For most of the new QIIME 2 developers who I've worked with, defining a new artifact class (and the associated semantic type, file format(s), and transformer(s)) is the most obscure step.
+Now that we've built a basic method and a basic visualizer, let's step into another unique aspect of developing with QIIME 2: defining {term}`artifact classes <artifact class>`.
+*Artifact classes* are closely related to terms you have probably already encountered in the QIIME 2 ecosystem: {term}`semantic types <semantic type>`, {term}`formats <format>`, and {term}`transformers <transformer>`.
+For most of the new QIIME 2 developers who I've worked with, defining a new artifact class (and the associated semantic type, format(s), and transformer(s)) is the most obscure step.
 However it's what gives QIIME 2 a lot of its power (for example, its ability to be accessed through different interfaces and to help users avoid analytic errors) and flexibility (for example, its ability to load the same artifact into different data types, depending on what you want to do with it).
 
 [Recall that when we initially built our `nw-align` method](suboptimal-initial-types), we used artifact classes that were suboptimal because there weren't relevant existing ones.
 Two questions may arise here.
 First, as a plugin developer, how do you know what relevant artifact classes are available to you for use in development?
-And second, how do you add one or more new artifact classes if there are no relevant ones?
+And second, how do you add one or more new artifact classes if you need some that don't exist?
 
 We'll start here with a brief *explanation* to set the stage for the work we'll do in this section of the tutorial.
 Then, we'll address the first question with a very brief *how-to*, because if you don't need to define a new semantic type, that's ideal.
@@ -18,35 +18,35 @@ And finally, the majority of this section of the tutorial will focus on creating
 (add-artifact-class-commit)=
 ```{admonition} tl;dr
 :class: tip
-The complete code that I developed to define my new artifact class, including the corresponding semantic type, file formats, and transformer, can be found [here](https://github.com/caporaso-lab/q2-dwq2/pull/6/commits/4bfb64296a83c0ac9f03bcb24f4b15d97f3953a3).
+The complete code that I developed to define my new artifact class, including the corresponding semantic type, formats, and transformer, can be found [here](https://github.com/caporaso-lab/q2-dwq2/pull/6/commits/4bfb64296a83c0ac9f03bcb24f4b15d97f3953a3).
 The code that I developed to transition my `nw-align` action to use my new artifact class can be found [here](https://github.com/caporaso-lab/q2-dwq2/pull/6/commits/da9e5bf919224630dd3e1aba2c7dc4c466cb4a79).
 ```
 
 ## Artifact classes
 
 I'm going to begin by defining an {term}`artifact class` as **a kind of QIIME 2 artifact that can exist**.
-A new artifact class can be registered by a plugin developer by associating a {term}`semantic type` with a {term}`file format <file format>`.
+A new artifact class can be registered by a plugin developer by associating a {term}`semantic type` with a {term}`format`.
 Let's briefly discuss both of those terms.
 
 Semantic types define the meaning of the data - i.e., what it represents.
 For example, QIIME 2 defines a `Phylogeny[Rooted]` artifact class, and the semantic type associated with the artifact class is `Phylogeny` (i.e., a phylogenetic tree) with a sub-semantic-type `Rooted` (i.e., implying that the phylogenetic tree contains a specified root node).
 Together, therefore, the `Phylogeny[Rooted]` artifact class can be described as a rooted phylogenetic tree.
 
-File formats describe how the data will be represented inside the artifact when it is serialized for storage (i.e., generally meaning written to file, in this context).
+Formats describe how the data will be represented inside the artifact when it is serialized for storage (generally meaning written to file, in this context).
 Continuing with our phylogenetic tree example, multiple different file formats have been defined to represent a rooted phylogenetic tree, including newick and NEXUS, and this is typical for most types of information in bioinformatics (and other fields).
 Similarly, a single file format can be used to store semantically different information - for example, newick can also be used to store unrooted phylogenetic trees.
 
-This means that file formats are inherently independent of semantic types: a semantic type doesn't imply a specific file format, and a file format doesn't imply a specific semantic type.
-When a new artifact class is registered by a developer, they associate a semantic type with a file format.
-This enables QIIME 2 to know how an artifact class should be used, and how it can be read from and written to disk.
+This means that formats are inherently independent of semantic types: a semantic type doesn't imply a specific format, and a format doesn't imply a specific semantic type.
+When a new artifact class is registered by a developer, they associate a semantic type with a format.
+This enables QIIME 2 to know what an artifact class is intended to represent, and how it can be read from and written to disk.
 With this information, an artifact class can exist.
 
-{term}`Transformers <transformer>`, which we'll come back to later, can be associated with file formats and used to convert (transform) between file formats.
-Transformers enable a given artifact class to update its format in new versions of QIIME 2, for example if a more efficient format becomes available, without end-users needing to know that anything changed.
+{term}`Transformers <transformer>`, which we'll come back to later, can be associated with formats and used to convert (transform) between formats, load formats in data types, and more.
+Among other things, transformers enable a given artifact class to update its format in new versions of QIIME 2, for example if a more efficient format becomes available, without end-users needing to know that anything changed.
 
 ## Discovering artifact classes
 
-The main way that plugin developers become aware of artifact classes that are relevant for their plugin is through familiarity from using QIIME 2.
+The main way that plugin developers become aware of the existing artifact classes that are relevant for their plugin is through familiarity from using QIIME 2.
 For example, if you're planning to add a new method for feature table normalization, you may know that you start with the same feature table artifact class that is used by the `rarefy` action in the `q2-feature-table` plugin.
 That gives you a lead on the artifact class you're going to use.
 
@@ -84,10 +84,10 @@ The ability to add descriptions to artifact classes was added relatively recentl
 ```
 
 Some of these are self-explanatory and some are a bit opaque.
-You can review this list to identify relevant artifact classes.
+Take a minute to review this list to identify artifact classes that you've used before, and any others that might be relevant in your work.
 
 ```{note}
-A how-to article is [planned](https://github.com/caporaso-lab/developing-with-qiime2/issues/58) that will provide additional detail on selecting an existing artifact class for use in your plugin.
+A how-to article is [planned](https://github.com/caporaso-lab/developing-with-qiime2/issues/58) that will provide additional detail on identifying an existing artifact class for use in your plugin.
 In the meantime, please feel free to [reach out on the forum](https://forum.qiime2.org/c/dev-discussion/7) if you're strugging to identify a relevant semantic type - we know this can be challenging, and we don't mind helping.
 ```
 
@@ -110,10 +110,11 @@ SingleDNASequence = SemanticType("SingleDNASequence")
 ```
 
 That code defines a new semantic type, which can be referred to as `SingleDNASequence`.
+Defining new semantic types is the easier part of defining new artifact classes.
 
 ### Defining a new file format
 
-The next thing we'll do is define a file format that we'll use with this semantic type to define our artifact class. We'll call our format `SingleRecordDNAFASTAFormat`, implying that is a fasta-formatted file for storing a single DNA sequence record.
+The next thing we'll do is define a file format that we'll use with this semantic type to define our artifact class. We'll call our file format `SingleRecordDNAFASTAFormat`, implying that it is a fasta-formatted file for storing a single DNA sequence record.
 
 Our `SingleRecordDNAFASTAFormat` will be a subclass of QIIME 2's `TextFileFormat` class.
 The only requirement of our subclass is that it define a method called `_validate_`, and that method should take a validation `level` as input and not return any output.
@@ -123,13 +124,13 @@ If `_validate_` returns without raising a `ValidationError`, that indicates that
 
 It's up to you as the format developer to define what happens in the `_validate_` function, and that can range from no validation whatsoever (i.e., just `pass` in the function body; we don't recommend this and [consider it a plugin development anti-pattern](antipattern-skipping-validation)), to extremely detailed validation.
 The `level` is used to define whether minimal or maximal validation should be performed.
-The trade-off is that maximal validation can take a long time, slowing down use of this format (which will likely be percieved as your plugin being slow), but if written well can make sure that invalid data is never packaged in this format.
+The trade-off is that maximal validation can take a long time, slowing down use of this file format (which will likely be percieved as your plugin being slow), but if written well can prevent against invalid data being packaged in this file format.
 Minimal validation on the other hand can be very quick, but may allow some errors to sneak through.
 You don't have to do anything differently inside of `_validate_` based on whether a user requests minimal or maximal validation, but it's a good idea to vary what is being done if maximal validation will be slow.
 
 ```{note}
-As a practical example of when minimal validation can be helpful, think of the case where large machine-generated fastq files are stored with a QIIME 2 format (e.g., during import).
-Validating the entire file can take a very long time, and since the fastq file is machine generated, it's (presumably) unlikely to contain errors because the developers of the code that wrote that fastq (presumably) tested that code well.
+As a practical example of when minimal validation can be helpful, think of the case where large machine-generated fastq files are associated with a QIIME 2 format (e.g., during import).
+Validating each file in its entirety can take a very long time, and since the fastq files are machine generated, they're (presumably) unlikely to contain errors because the developers of the code that wrote that fastq (presumably) tested that code well.
 
 The less you trust the creator of a file, the more important validation is. If your users are manually creating a file, that's an important case for extensive validation.
 No offense to your users: creating files can be tedious, and tedious work is error prone when done by humans (we get bored and make mistakes).
@@ -138,8 +139,8 @@ So automate everything you can... but I digress.
 ```
 
 ```{tip}
-One feature to be aware of here, though we won't use it right away, is that since you're defining your file format class, you can add additional methods or properties to it that will be convenient for you if/when you work directly with instances of the format in your actions.
-For example, if you wanted an easy way to get the identifier of the sequence in this object, you could add a `SingleRecordDNAFASTAFormat.get_sequence_id()` method (for example), then access that in the normal way when you have an instance of this class.
+One feature to be aware of here, though we won't use it right away, is that since you're defining your format class, you can add additional methods or properties to it that will be convenient for you if/when you work directly with instances of the format in your actions.
+For example, if you wanted an easy way to get the identifier of the sequence in this object, you could add a `SingleRecordDNAFASTAFormat.get_sequence_id()` method (for example), and then access that in the normal way when you have an instance of this class.
 ```
 
 Add the following code to `_types_and_formats.py` (note that I'm building on my `import` statement from the previous code block here):
@@ -211,7 +212,8 @@ In a QIIME 2 artifact, the relevant data is stored in the `data/` directory.
 For some artifact classes, including the one we're building here, all of the relevant data is contained in a single file.
 However in other cases, there may be multiple files and/or subdirectories.
 Because we're defining the contents of a directory when registering a new artifact class, we actually need to associate a `qiime2.plugin.DirectoryFormat` with our new artifact class.
-For simple cases like ours, where there will only be a single file in that directory, QIIME 2 has a helper function, `qiime2.plugin.model.SingleFileDirectoryFormat`, which we can use to create a our directory format.
+
+For simple cases like ours, where there will only be a single file in that directory, QIIME 2 has a helper function, `qiime2.plugin.model.SingleFileDirectoryFormat`, which we can use to create a directory format.
 Add the following code to `_types_and_formats.py` to define your directory format.
 
 ```python
@@ -258,7 +260,7 @@ __all__ = [
 ```
 
 This will allow you and others to import your semantic type and formats directly from the module without accessing files that are intended to be private (e.g., by calling `from q2_dwq2 import SingleDNASequence`).
-This gives you the freedom to reorganize files or file contents internally in your plugin without changing the public-facing API - even if you update the import statements in this file, your users won't need to change their import statements.
+This gives you the freedom to reorganize files or file contents internally in your plugin without changing the public-facing API - even if you update the import statements in this file, anyone importing from your code (e.g., plugin developers who are building other plugins that depend on yours) shouldn't need to change their code.
 
 ### Registering the type, formats, and artifact class
 
@@ -308,10 +310,12 @@ As mentioned earlier, when you add or update actions, types, or formats you'll n
 ## Defining and registering a transformer
 
 There are a couple of last things that we need to do before we're ready to use our new artifact class.
-The first is define how an instance of our artifact class (e.g., a `.qza` file) can be loaded in the form that we want to use it in inside of our action.
-In QIIME 2 jargon, we review to the different ways an artifact can be used inside of an action as different *views* of an artifact class.
-For example, if we want to recieve the fasta file directly, we can request to view the artifact as a `SingleRecordDNAFASTAFormat`.
-We could then open that, and do whatever we need to with it - this approach is common, for example, when processing raw sequence data such as collections of demutiplexed sequence reads.
+The first is define how an instance of our artifact class (e.g., an artifact stored in a `.qza` file) can be loaded in the form that we want to use it in inside of our action.
+
+In QIIME 2 jargon, we review to the different ways an artifact can be used inside of an action as different **views of an artifact class**.
+For example, if we want to recieve the fasta file directly, we can request to *view* the artifact as a `SingleRecordDNAFASTAFormat`.
+Inside of our action, we could then open that and do whatever we need to with it.
+This approach of working with file formats or directory formats directly is common, for example, when processing raw sequence data such as collections of demutiplexed sequence reads.
 This might look like the following in our action definition:
 
 ```python
@@ -346,18 +350,18 @@ def _1(ff: SingleRecordDNAFASTAFormat) -> DNA:
 
 This code first imports the objects that we want to transform to (`skbio.DNA`) and from (`SingleRecordDNAFASTAFormat`).
 We then import our `plugin` object from `plugin_setup.py`, which we'll use to register our transformer.
-Finally, we define our transformer function and register it with our plugin using a decorator.
+Finally, we define our transformer function and register it with our plugin using a function decorator.
 
 Your transformer function can be called anything you want, but by convention they receive arbitrary names.
-This is because the transformers are never called directly by users or developers, and because the function signature's type hints most clearly define what it does.
-Before we adopted this convention we had a lot of functions with names like `_transform_SingleRecordDNAFASTAFormat_to_DNA`, which was starting to feel silly (but if you prefer that, there are no issues with naming your transformers that way).
+This is because the transformers are never called directly by users or developers, and because the function signature's type hints unambiguously define what it does.
+Before we adopted this convention we had a lot of functions with names like `_transform_SingleRecordDNAFASTAFormat_to_DNA`, which was starting to feel silly and in some cases the names were ambiguous (but if you prefer that, there are no issues with naming your transformers that way).
 Internally, this function does whatever it needs to to convert (or transform) the input object to the output object.
 In our case, we're opening the file format (`ff`) object provided as input, and reading the first (and only, in this case) sequence from it using `skbio.DNA.read`, and returning the result.
 
 ````{note}
 You may have noticed that our artifact class stores data as defined in our  `SingleRecordDNAFASTADirectoryFormat` class, but we're working with it here in a `SingleRecordDNAFASTAFormat` object.
 QIIME 2 automatically creates transformers from directory formats to file formats for single-file directory formats when they are created with `model.SingleFileDirectoryFormat`, as we did above.
-QIIME 2 also knows how to chain transformers, such that when we attempt to view an artifact of our artifact class as `skbio.DNA`, it will first transform from `SingleRecordDNAFASTADirectoryFormat` to `SingleRecordDNAFASTAFormat`, and then transform from `SingleRecordDNAFASTAFormat` to `skbio.DNA`.
+QIIME 2 also knows how to chain transformers, such that when we attempt to view an instance of our artifact class as `skbio.DNA`, it will first transform from `SingleRecordDNAFASTADirectoryFormat` to `SingleRecordDNAFASTAFormat`, and then transform from `SingleRecordDNAFASTAFormat` to `skbio.DNA`.
 If you're concerned that a chained transformation will be too slow, you can also define a transformer that skips the intermediate step.
 In this case, that might have a signature like:
 
@@ -368,7 +372,20 @@ _2(df: SingleRecordDNAFASTADirectoryFormat) -> skbio.DNA
 That won't be needed here however.
 ````
 
-If you'd like to be able to view a `SingleDNASequence` artifact as another data type for use in your actions - for example, as a Python string (`str`) - you can define another transformer for it (e.g., `_3(ff: SingleRecordDNAFASTAFormat) -> str`, or `_4(seq: DNA) -> str`).
+````{note}
+If you'd like to be able to view a `SingleDNASequence` artifact as another data type for use in your actions - for example, as a Python string (`str`) - you can define another transformer for it.
+For example:
+
+```python
+_3(ff: SingleRecordDNAFASTAFormat) -> str
+```
+
+or
+
+```python
+_4(seq: skbio.DNA) -> str
+```
+````
 
 To make this transformer accessible to your plugin, there's just one last thing to do, which is make sure that the code in this file runs when the `plugin` object is created.
 For this, we go back to `plugin_setup.py`.
@@ -384,7 +401,7 @@ Then, add the following as the last line in your file:
 importlib.import_module('q2_dwq2._transformers')
 ```
 
-This will load and run our `_transformers.py` file, ensuring that our transformer is registered after the `plugin` object has been instantiated and our type and formats have been registered.
+This will load and run the `_transformers.py` file, ensuring that our transformer is registered after the `plugin` object has been instantiated and our type and formats have been registered.
 
 ## Unit testing
 
@@ -403,7 +420,7 @@ I like to start with confirming that a few valid examples of my format pass vali
 It's also a good idea to confirm that your validation level is functioning as expected.
 
 Below is my test code, which lives in `q2-dwq2/q2_dwq2/tests/test_types_and_formats.py`.
-I added a few new test data files, which you can access from [my code on GitHub](add-artifact-class-commit).
+I added a few new test data files to support these tests, which you can access from [my code on GitHub](add-artifact-class-commit).
 
 ```python
 from qiime2.plugin import ValidationError
@@ -468,9 +485,10 @@ class SingleRecordDNAFASTAFormatTests(TestPluginBase):
 
 ### Testing the transformer
 
-Next, we'll test our transformers.
+Next, we'll test our transformer.
 Here, we should provide a few different valid inputs, and test that they are transformed to the expected output.
-Generally you should use the `transform_format` action in `qiime2.plugin.testing.TestPluginBase` to access and run the transformer (as opposed to importing the function directly from `_transformers.py`), which also tests that the transformer is registered with the plugin.
+Generally you should use the `transform_format` action in `qiime2.plugin.testing.TestPluginBase` to access and run the transformer (as opposed to importing the function directly from `_transformers.py`).
+This also tests that the transformer is registered with the plugin.
 
 The test code that I wrote for this is in `q2-dwq2/q2_dwq2/tests/test_transformers.py`, and follows here:
 
@@ -515,7 +533,7 @@ $ make test
 
 If you have failing tests, work through them to figure out what's wrong.
 If you get stuck, refer back to my code.
-At this point, you should have implemented everything in [the first of my commits associated with this section](add-artifact-class-commit).
+At this point, you should have implemented everything in [the first of my commits](add-artifact-class-commit)  associated with this section.
 
 ## Updating `nw-align` to use the new artifact class
 
@@ -527,7 +545,7 @@ As we continue to work through the tutorial, I'll point out places where the wor
 Now let's update our `nw-align` method to use the new artifact class that we defined.
 As discussed earlier, this will enable us to simplify the code and associated tests.
 Since we're looking at code changes here, rather than new code, the most convenient view you'll have is GitHub's diff of this commit against the previous.
-To see this, open the link to the [second of my commits associated with this section](add-artifact-class-commit).
+To see this, open the link to the [second of my commits](add-artifact-class-commit) associated with this section.
 
 The work that we're doing here is transitioning our use of the `FeatureData[Sequence]` artifact class for our new `SingleDNASequence` artifact class, and transitioning our use of the `DNAIterator` view inside `nw-align` to use `skbio.DNA` as our view.
 
@@ -545,11 +563,37 @@ Let's now update the code, and we'll know we're done when these tests pass.
 
 First, update the method itself, as I did in `q2-dwq2/q2_dwq2/_methods.py`.
 Here you're telling QIIME 2 to use a different view type inside this function, and then we're removing some of the clunky code that we no longer need.
+Here's my `nw_align` function after making these changes:
+
+```python
+def nw_align(seq1: DNA,
+             seq2: DNA,
+             gap_open_penalty: float = 5,
+             gap_extend_penalty: float = 2,
+             match_score: float = 1,
+             mismatch_score: float = -2) -> TabularMSA:
+    msa, _, _ = global_pairwise_align_nucleotide(
+        seq1=seq1, seq2=seq2, gap_open_penalty=gap_open_penalty,
+        gap_extend_penalty=gap_extend_penalty, match_score=match_score,
+        mismatch_score=mismatch_score
+    )
+
+    return msa
+```
 
 Then, update `plugin_setup.py` to associate our new artifact class with the sequence inputs.
+Here's what this looks like for me, after I make this change:
+
+```python
+plugin.methods.register_function(
+    function=nw_align,
+    inputs={'seq1': SingleDNASequence,
+            'seq2': SingleDNASequence},
+...
+```
 
 After making the changes that I made, all tests should pass when you run `make tests`.
-You should then run `qiime dev refresh-cache`, and then call help your plugin action.
+Once all tests are passing, run `qiime dev refresh-cache` and call help on your plugin's `nw-align` action.
 You should see the new types associated with the `seq1` and `seq2` inputs.
 Refer back to [where we tried out the nw-align action](trying-nw-align) for the first time.
 Using those same fasta files (or any others you'd like), adapt the commands in that section to import sequence data into artifacts of our new artifact class, and run `nw-align` on them.
