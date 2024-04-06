@@ -12,6 +12,10 @@ Archive
 Artifact
   A QIIME 2 {term}`Result` that contains data to operate on.
 
+Artifact class
+  A kind of {term}`Artifact` that can exist.
+  This is defined by a plugin developer by associating a {term}`semantic type` with a {term}`directory format` when registering an artifact class.
+
 Artifact API
   See {term}`Python 3 API`.
 
@@ -20,15 +24,20 @@ Deployment
   The collection of interfaces and plugins in a deployment can be defined by a {term}`distribution` of QIIME 2.
 
 Directory Format
-  A string that represents a particular layout of files and or directories as well as how their contents will be structured.
+  An object that is a subclass of `qiime2.plugin.DirectoryFormat`.
+  A Directory Format represents a particular layout of a directory that contains files and/or arbitrarily nested sub-directories, and defines how the contents must be structured.
 
 Distribution
   A collection of QIIME 2 plugins that are designed to be installed together.
   These are generally grouped by a theme. For example, the Amplicon Distribution provides a collection of plugins for analysis of microbiome amplicon data, while the Shotgun Distribution provides a collection of plugins for analysis of microbiome shotgun metagenomics data.
   When a distribution is installed, that particular installation of QIIME 2 is an example of a {term}`deployment`.
 
+File Format
+  An object which subclasses either `qiime2.plugin.TextFileFormat` or `qiime2.plugin.BinaryFileFormat`.
+  File formats define the particular format of a file, and define a process for validating the format.
+
 Format
-  A string that represents a particular file format.
+  See {term}`file format` and {term}`directory format`.
 
 Framework
   The engine of orchestration that enables QIIME 2 to function together as a cohesive unit.
@@ -95,7 +104,8 @@ Result
   A generic term for either a {term}`Visualization` or an {term}`Artifact`.
 
 Semantic Type
-  A {term}`type` that is used to classify {term}`artifacts<Artifact>` and how they can be used.
+  An identifier that is used to describe what some data is intended to represent, and when and where they can be used.
+  When associated with a {term}`directory format`, the combination defines an {term}`artifact class`.
   These types may be extended by {term}`plugins<Plugin>`.
 
 tl;dr

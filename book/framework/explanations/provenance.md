@@ -10,10 +10,10 @@ If that Result is saved as a `.qza` or `.qzv`, the captured provenance data pers
 [](provenance-goes-in-provenance) contains a detailed discussion of the file structure which holds provenance metadata.
 
 This is a **decentralized** approach to provenance capture: every QIIME 2 Result's provenance is packaged with the Result itself.
-This prevents disassociation of a Result with its provenance, for example when a simpler analysis outcome (e.g., a `.png` file containing a graph) is emailed to a colleague. 
+This prevents disassociation of a Result with its provenance, for example when a simpler analysis outcome (e.g., a `.png` file containing a graph) is emailed to a colleague.
 It also prevents accidental mis-association of a Result with the wrong provenance, or with inaccurate or outdated provenance records.
 For example, with *centralized approaches to provenance tracking*, like saving scripts or computational notebooks, those records may be updated.
-If a result was generated prior to a script update, and the result is inadvertantly not updated, a subsequent user or viewer of that result may have inaccurate information about how it was created. 
+If a result was generated prior to a script update, and the result is inadvertantly not updated, a subsequent user or viewer of that result may have inaccurate information about how it was created.
 In contrast, the provenance captured within a QIIME 2 Archive will always describe the way that Archive was actually created.
 
 QIIME 2's approach is also a form of **retrospective** provenance capture.
@@ -86,7 +86,7 @@ That directory contains:
 - `metadata.yaml` (see [](metadata-yaml))
 - `citations.bib`: All citations related to the run Action, in [bibtex format](https://www.bibtex.com/g/bibtex-format/).
   (This includes "passthrough" citations like those registered to transformers, regardless of the plugin where they are registered.)
-- `action/action.yaml`: A YAML description of the Action and its environment (i.e., the stuff we care most about). 
+- `action/action.yaml`: A YAML description of the Action and its environment (i.e., the stuff we care most about).
 - `action/metadata.tsv` or other data files (optional): Data captured to provide additional Action context.
 
 ### The `action.yaml` file
@@ -98,7 +98,7 @@ The `action.yaml` files are broken into three top-level sections, in this order:
 - `environment`: a description of the system and the Python environment where this action was executed
 
 The sample Visualization we're referring to can be viewed [here](https://view.qiime2.org/provenance/?src=https%3A%2F%2Fdocs.qiime2.org%2F2021.4%2Fdata%2Ftutorials%2Fmoving-pictures%2Fcore-metrics-results%2Funweighted_unifrac_emperor.qzv).
-That link will open directly to the *Provenance* tab where you can click on the bottom square in that provenance graph (not the circle within the square!) to cross-reference the information provided here. 
+That link will open directly to the *Provenance* tab where you can click on the bottom square in that provenance graph (not the circle within the square!) to cross-reference the information provided here.
 
 #### The `execution` block
 
@@ -174,7 +174,7 @@ action:
 - `parameters` lists registered parameter names, and the user-passed (or selected default) values.
 - `output-name` is the name assigned to this Action's output *at registration*, which can be useful when determining which of an Action's multiple outputs a file represents.
   (This does not capture the user-passed filename, because file names are interface specific and may not always be relevent - for example, when using the Python API, files may not exist for inputs at the time of action execution.)
-- `alias-of` is an optional field, present if the Action is the terminal result of a QIIME 2 {term}`Pipeline`. 
+- `alias-of` is an optional field, present if the Action is the terminal result of a QIIME 2 {term}`Pipeline`.
   This value is the UUID of the "inner" result which this pipeline result aliases.
 
 #### The `environment` block
@@ -239,7 +239,7 @@ The user sees only five of the fifteen captured Results, each of which they ran 
 Because the bottom two are pipelines, this view simply but completely represents the provenance of the Archive being viewed.
 
 This is possible because QIIME 2 captures redundant "terminal" pipeline outputs that alias the "real" pipeline outputs nested in provenance.
-These terminal outputs have the same {term}`Semantic Type` as the Results they alias, but capture provenance details at the scope of the Pipeline, rather than at the scope of the Method or Visualizer they alias.
+These terminal outputs are of the same {term}`artifact class` as the Results they alias, but capture provenance details at the scope of the Pipeline, rather than at the scope of the Method or Visualizer they alias.
 
 #### Pipeline provenance example
 

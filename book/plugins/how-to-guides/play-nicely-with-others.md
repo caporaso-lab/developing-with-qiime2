@@ -7,12 +7,12 @@ QIIME 2 {term}`plugins <Plugin>` or {term}`actions <Action>`.
 - {term}`Plugin` names are unique, and collisions are not tolerated by the framework.
   This means if you want to name your plugin ``dada2``, users will not be able to have your plugin **and** the [DADA2](https://github.com/qiime2/q2-dada2) plugin installed in the same {term}`deployment` at the same time.
 - {term}`Action` names are **not** globally unique, but rather are namespaced within a plugin's domain.
-- {term}`Semantic Types <Semantic Type>`, {term}`Formats <Format>`, and {term}`Transformers <Transformer>` are registered globally, like plugins, again, if you choose to use an existing name, this will prevent users from deploying both offending plugins concurrently.
+- {term}`Semantic types <Semantic Type>`, {term}`artifact classes <artifact class>`, {term}`formats <Format>`, and {term}`transformers <Transformer>` are registered globally, like plugins, again, if you choose to use an existing name, this will prevent users from deploying both offending plugins concurrently.
 
 There are a few strategies the QIIME 2 developers have employed to work within
 these limits:
 
-- Most {term}`types <Type>`, {term}`formats <Format>`, and {term}`transformers <Transformer>` are registered in a single {term}`plugin`: [q2-types](https://github.com/qiime2/q2-types).
+- Most {term}`semantic types <semantic type>`, {term}`artifact classes <artifact class>`, {term}`formats <Format>`, and {term}`transformers <Transformer>` are registered in a single {term}`plugin`: [q2-types](https://github.com/qiime2/q2-types).
   This prevents circular imports.
   For many 3rd-party plugin developers, this means most typical types and formats are available within a single import.
   If you're creating new types in your plugins, avoid re-using type names.

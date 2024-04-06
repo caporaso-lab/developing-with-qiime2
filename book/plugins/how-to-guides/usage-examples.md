@@ -50,7 +50,7 @@ This allows many drivers to avoid loading data unnecessarily.
 Parameter literals may be passed directly, and do not require factories.
 
 This example shows a factory function that returns a ``FeatureTable[Frequency]``.
-We use the Python 3 API to import a ``biom.Table`` with the appropriate Semantic Type.
+We use the Python 3 API to import a ``biom.Table`` of the appropriate artifact class.
 
 .. code-block:: python
 
@@ -151,7 +151,7 @@ Support for usage example testing is available via QIIME 2's `TestPluginBase.exe
 and the `results-and-assertions` exposed by the ``UsageVariable`` class
 and optionally implemented in its driver-specific subclasses.
 
-You can test your usage examples by making Semantic Type and file-contents assertions
+You can test your usage examples by making artifact class and file-contents assertions
 about the UsageVariables returned by ``use.action``.
 These may be run by any usage driver that cares about them,
 allowing both local smoke testing ("Can my examples be executed successfully?"),
