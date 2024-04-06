@@ -78,7 +78,8 @@ The semantic type system also helps users and developers better understand the i
 ## Artifact classes
 
 Most of the time, plugin developers are more concerned with {term}`artifact classes <artifact class>`, rather than semantic types and formats directly, though we only recently starting transitioning the language used in our documentation to reflect this.
-You may still see some outdated usage of this, especially in older video content - sorry for the confusion!
+You may still see some outdated usage, such as treating the terms *semantic type* and *artifact class* as synonyms, especially in older video content.
+Sorry for the confusion!
 
 An artifact class is a kind of QIIME 2 artifact that can exist, and is defined by the association of a semantic type with a format (e.g., this is done in our example plugin when we [create the `SingleDNASequence` artifact class](register-artifact-class)).
 Together, these indicate what an artifact is intended to represent, and how its data is stored internally.

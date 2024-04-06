@@ -207,7 +207,7 @@ Here's what each is:
  - `inputs`: This is a Python `dict` mapping the variable names of the {term}`inputs <Input>` to the plugin action to the artifact classes of the inputs.
    As mentioned above, QIIME 2 doesn't define an artifact class for a single DNA sequence, so we're going to use the type that is commonly used for defining collections of DNA sequences, and we'll just end up working with the first sequence in each input.
    The type we use here is `FeatureData[Sequence]`.
-   [A little bit later](plugin-tutorial-add-artifact-class) we'll come back to how you identify the artifact classes that should be assigned to your input, and how to define your own sematic types if there isn't already a relevant one.
+   [A little bit later](plugin-tutorial-add-artifact-class) we'll come back to how you identify the artifact classes that should be assigned to your input, and how to define your own artifact class if there isn't already a relevant one.
    {term}`Inputs <Input>` to QIIME 2 actions are data in the form of {term}`Artifacts <Artifact>`, and these are different than {term}`Parameters <Parameter>`.
    It is at this stage, when registering a function as an action, that this distinction is made.
    The artifact classes we're using here need to be imported from q2-types.

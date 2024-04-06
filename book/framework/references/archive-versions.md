@@ -85,7 +85,7 @@ V0 Archives do not capture provenance data. As a result, if a V0 artifact is an 
 Released across QIIME 2 versions [2017.9](https://github.com/qiime2/qiime2/releases/tag/2017.9.0) ([changelog](https://forum.qiime2.org/t/qiime-2-2017-9-release-is-now-live/1160)) and [2017.10](https://github.com/qiime2/qiime2/releases/tag/2017.10.0) ([changelog](https://forum.qiime2.org/t/qiime-2-2017-10-release-is-now-live/1626)), the directory structure of this format is identical to v1, but the `action.yaml` file has changed.
 
 In [commit `4389a0b`](https://github.com/qiime2/qiime2/commit/4389a0b4ec41151144188ea230c8c56c1940c368) the Version 2 `ArchiveFormat` adds an `output-name` key to the `action` section of `action.yaml` (unless the action type is `import`), assigning it the output name registered to the relevant action.
-Prior to this change, if one action returned multiple artifacts of the same {term}`semantic type`, it was not possible to differentiate between them using provenance alone.
+Prior to this change, if one action returned multiple artifacts of the same {term}`artifact class`, it was not possible to differentiate between them using provenance alone.
 
 In [commit `e072706`](https://github.com/qiime2/qiime2/commit/e07270659bd4089afdeef744868f8b7ac9c698a9), it adds provenance support for {term}`Pipelines <Pipeline>`, adding the `alias-of` key to the `action` section of `action.yaml`.
 

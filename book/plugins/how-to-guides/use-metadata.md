@@ -118,7 +118,7 @@ Cool!
 
 In most cases, if you want to output something that looks like metadata from a QIIME 2 action, you should [assign it an artifact class that has a transformer to `Metadata`](artifacts-as-metadata).
 However in some cases you may want to output actual metadata.
-In this case, you can create an output for your action with of artifact class `ImmutableMetadata`.
+In this case, you can create an output for your action of artifact class `ImmutableMetadata`.
 This will generate an artifact containing the metadata that your function provides as output.
 
 `ImmutableMetadata` artifacts can be [viewed as `Metadata`](artifacts-as-metadata), so they can be used anywhere that a typical metadata `.tsv` file can be provided as input in QIIME 2.
