@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Create the plugin from a template &#8212; Developing with QIIME 2</title>
+    <title>Create your plugin from a template &#8212; Developing with QIIME 2</title>
   
   
   
@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Add a first (real) method to the plugin" href="add-nw-align-method.html" />
+    <link rel="next" title="Add a first (real) method" href="add-nw-align-method.html" />
     <link rel="prev" title="Tutorial: A step-by-step guide to building your first QIIME 2 plugin" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -166,10 +166,11 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Create the plugin from a template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-nw-align-method.html">Add a first (real) method to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-alignment-visualizer.html">Add a first visualizer to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-usage-examples.html">Add usage examples to the plugin</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Create your plugin from a template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-nw-align-method.html">Add a first (real) method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-alignment-visualizer.html">Add a first visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-artifact-class.html">Add a new artifact class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-usage-examples.html">Add usage examples</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -189,7 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/actions.html">Types of QIIME 2 Actions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
 </ul>
 </li>
@@ -394,7 +395,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Create the plugin from a template</h1>
+    <h1>Create your plugin from a template</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -408,8 +409,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="create-the-plugin-from-a-template">
-<span id="plugin-from-template"></span><h1>Create the plugin from a template<a class="headerlink" href="#create-the-plugin-from-a-template" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="create-your-plugin-from-a-template">
+<span id="plugin-from-template"></span><h1>Create your plugin from a template<a class="headerlink" href="#create-your-plugin-from-a-template" title="Permalink to this heading">#</a></h1>
 <p>The easiest way to create a new QIIME 2 plugin is using our <a class="reference external" href="https://cookiecutter.readthedocs.io/en/stable/">Cookiecutter template</a>, which can be found at <a class="github reference external" href="https://github.com/caporaso-lab/cookiecutter-qiime2-plugin">caporaso-lab/cookiecutter-qiime2-plugin</a>.
 Here we’ll work through building your QIIME 2 plugin from this template.</p>
 <p>To start building your new plugin, first install a QIIME 2 development environment (see <a class="reference internal" href="../how-to-guides/set-up-development-environment.html#setup-dev-environment"><span class="std std-ref">Set up your development environment</span></a>). Then, activate your development environment.</p>
@@ -478,7 +479,7 @@ Don’t worry if it’s not clear what everything is yet - we’ll get to all of
 <p>Congratulations - you’ve created a working QIIME 2 plugin from a template!
 If you’d like to try the action out, you can call your <code class="docutils literal notranslate"><span class="pre">duplicate-table</span></code> action on any QIIME 2 <code class="docutils literal notranslate"><span class="pre">FeatureTable[Frequency]</span></code> artifact (e.g., you can download one from the <a class="reference external" href="https://docs.qiime2.org">QIIME 2 user documentation</a>).
 Load your duplicated table with <a class="reference external" href="https://view.qiime2.org">QIIME 2 View</a>, and poke through its Provenance to see how data provenance is recorded for your plugin.</p>
-<p>Next, we’ll <a class="reference internal" href="add-nw-align-method.html"><span class="doc std std-doc">Add a first (real) method to the plugin</span></a>.</p>
+<p>Next, we’ll <a class="reference internal" href="add-nw-align-method.html"><span class="doc std std-doc">Add a first (real) method</span></a>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You can see my code after following these steps by looking at <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/3465ea40b18ae15825411a5930cfd24016f5d872">the specific commit in my plugin repository on GitHub</a>.</p>
@@ -529,7 +530,7 @@ Load your duplicated table with <a class="reference external" href="https://view
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Add a first (real) method to the plugin</p>
+        <p class="prev-next-title">Add a first (real) method</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

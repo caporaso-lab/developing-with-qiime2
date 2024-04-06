@@ -166,10 +166,11 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Create the plugin from a template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) method to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-alignment-visualizer.html">Add a first visualizer to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-usage-examples.html">Add usage examples to the plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Create your plugin from a template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-alignment-visualizer.html">Add a first visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-artifact-class.html">Add a new artifact class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-usage-examples.html">Add usage examples</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">How-To Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
@@ -189,7 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/actions.html">Types of QIIME 2 Actions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
 </ul>
 </li>
@@ -437,8 +438,8 @@ They may also take collections of primitives as single parameters.</p>
 <section id="registering-an-action-that-takes-an-input-collection">
 <h2>Registering an Action that Takes an Input Collection<a class="headerlink" href="#registering-an-action-that-takes-an-input-collection" title="Permalink to this heading">#</a></h2>
 <p>Input or parameter collections can be in the form of lists or dictionaries.
-For inputs the type annotation for function registration is the QIIME 2 semantic type of the Artifacts expected.
-For parameters it is just the type of the parameter.</p>
+For inputs the type annotation for function registration is the QIIME 2 artifact class(es) of the Artifacts expected.
+For parameters it is the type of the parameter.</p>
 <p>An example of registering collection inputs and parameters is shown below.
 For a list input, the syntax is <code class="docutils literal notranslate"><span class="pre">&quot;List[SemanticType]&quot;</span></code> and for a dictionary it is <code class="docutils literal notranslate"><span class="pre">&quot;Collection[SemanticType]&quot;</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dummy_plugin</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
@@ -460,7 +461,7 @@ For a list input, the syntax is <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <p>In the actual function definition, the type annotation is the view type of the Artifacts and does NOT contain the collection type annotation.
-The fact that the annotations indicate the view type and not the semantic type is due to the fact that by the time we reach the actual method <code class="docutils literal notranslate"><span class="pre">int_list</span></code> will be a list of integers and not <code class="docutils literal notranslate"><span class="pre">SingleInt</span></code> Artifacts.</p>
+The fact that the annotations indicate the view type and not the artifact class is due to the fact that by the time we reach the actual method <code class="docutils literal notranslate"><span class="pre">int_list</span></code> will be a list of integers and not <code class="docutils literal notranslate"><span class="pre">SingleInt</span></code> Artifacts.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note type annotations are currently just int or bool,</span>
 <span class="c1"># not dict[int] or list[bool] as you might expect.</span>
 <span class="k">def</span> <span class="nf">example_function</span><span class="p">(</span><span class="n">int_list</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>

@@ -166,10 +166,11 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../plugins/intro.html">Plugin Development</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../plugins/tutorials/intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../plugins/tutorials/create-from-template.html">Create the plugin from a template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../plugins/tutorials/add-nw-align-method.html">Add a first (real) method to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../plugins/tutorials/add-alignment-visualizer.html">Add a first visualizer to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../plugins/tutorials/add-usage-examples.html">Add usage examples to the plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/tutorials/create-from-template.html">Create your plugin from a template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/tutorials/add-nw-align-method.html">Add a first (real) method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/tutorials/add-alignment-visualizer.html">Add a first visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/tutorials/add-artifact-class.html">Add a new artifact class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/tutorials/add-usage-examples.html">Add usage examples</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../plugins/how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -189,7 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../plugins/explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/explanations/actions.html">Types of QIIME 2 Actions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../plugins/explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/explanations/transformers.html">Transformers</a></li>
 </ul>
 </li>
@@ -419,18 +420,25 @@ Contains <em>at least</em> a root directory (named by <a class="reference intern
 </dd>
 <dt id="term-Artifact">Artifact<a class="headerlink" href="#term-Artifact" title="Permalink to this term">#</a></dt><dd><p>A QIIME 2 <a class="reference internal" href="#term-Result"><span class="xref std std-term">Result</span></a> that contains data to operate on.</p>
 </dd>
+<dt id="term-Artifact-class">Artifact class<a class="headerlink" href="#term-Artifact-class" title="Permalink to this term">#</a></dt><dd><p>A kind of <a class="reference internal" href="#term-Artifact"><span class="xref std std-term">Artifact</span></a> that can exist.
+This is defined by a plugin developer by associating a <a class="reference internal" href="#term-Semantic-Type"><span class="xref std std-term">semantic type</span></a> with a <a class="reference internal" href="#term-Directory-Format"><span class="xref std std-term">directory format</span></a> when registering an artifact class.</p>
+</dd>
 <dt id="term-Artifact-API">Artifact API<a class="headerlink" href="#term-Artifact-API" title="Permalink to this term">#</a></dt><dd><p>See <a class="reference internal" href="#term-Python-3-API"><span class="xref std std-term">Python 3 API</span></a>.</p>
 </dd>
 <dt id="term-Deployment">Deployment<a class="headerlink" href="#term-Deployment" title="Permalink to this term">#</a></dt><dd><p>An installation of QIIME 2 as well as zero-or-more <a class="reference internal" href="#term-Interface"><span class="xref std std-term">interfaces</span></a> and <a class="reference internal" href="#term-Plugin"><span class="xref std std-term">plugins</span></a>.
 The collection of interfaces and plugins in a deployment can be defined by a <a class="reference internal" href="#term-Distribution"><span class="xref std std-term">distribution</span></a> of QIIME 2.</p>
 </dd>
-<dt id="term-Directory-Format">Directory Format<a class="headerlink" href="#term-Directory-Format" title="Permalink to this term">#</a></dt><dd><p>A string that represents a particular layout of files and or directories as well as how their contents will be structured.</p>
+<dt id="term-Directory-Format">Directory Format<a class="headerlink" href="#term-Directory-Format" title="Permalink to this term">#</a></dt><dd><p>An object that is a subclass of <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.DirectoryFormat</span></code>.
+A Directory Format represents a particular layout of a directory that contains files and/or arbitrarily nested sub-directories, and defines how the contents must be structured.</p>
 </dd>
 <dt id="term-Distribution">Distribution<a class="headerlink" href="#term-Distribution" title="Permalink to this term">#</a></dt><dd><p>A collection of QIIME 2 plugins that are designed to be installed together.
 These are generally grouped by a theme. For example, the Amplicon Distribution provides a collection of plugins for analysis of microbiome amplicon data, while the Shotgun Distribution provides a collection of plugins for analysis of microbiome shotgun metagenomics data.
 When a distribution is installed, that particular installation of QIIME 2 is an example of a <a class="reference internal" href="#term-Deployment"><span class="xref std std-term">deployment</span></a>.</p>
 </dd>
-<dt id="term-Format">Format<a class="headerlink" href="#term-Format" title="Permalink to this term">#</a></dt><dd><p>A string that represents a particular file format.</p>
+<dt id="term-File-Format">File Format<a class="headerlink" href="#term-File-Format" title="Permalink to this term">#</a></dt><dd><p>An object which subclasses either <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.TextFileFormat</span></code> or <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.BinaryFileFormat</span></code>.
+File formats define the particular format of a file, and define a process for validating the format.</p>
+</dd>
+<dt id="term-Format">Format<a class="headerlink" href="#term-Format" title="Permalink to this term">#</a></dt><dd><p>See <a class="reference internal" href="#term-File-Format"><span class="xref std std-term">file format</span></a> and <a class="reference internal" href="#term-Directory-Format"><span class="xref std std-term">directory format</span></a>.</p>
 </dd>
 <dt id="term-Framework">Framework<a class="headerlink" href="#term-Framework" title="Permalink to this term">#</a></dt><dd><p>The engine of orchestration that enables QIIME 2 to function together as a cohesive unit.</p>
 </dd>
@@ -478,7 +486,8 @@ For additional detail, refer to <span id="id2">[<a class="reference internal" hr
 </dd>
 <dt id="term-Result">Result<a class="headerlink" href="#term-Result" title="Permalink to this term">#</a></dt><dd><p>A generic term for either a <a class="reference internal" href="#term-Visualization"><span class="xref std std-term">Visualization</span></a> or an <a class="reference internal" href="#term-Artifact"><span class="xref std std-term">Artifact</span></a>.</p>
 </dd>
-<dt id="term-Semantic-Type">Semantic Type<a class="headerlink" href="#term-Semantic-Type" title="Permalink to this term">#</a></dt><dd><p>A <a class="reference internal" href="#term-Type"><span class="xref std std-term">type</span></a> that is used to classify <a class="reference internal" href="#term-Artifact"><span class="xref std std-term">artifacts</span></a> and how they can be used.
+<dt id="term-Semantic-Type">Semantic Type<a class="headerlink" href="#term-Semantic-Type" title="Permalink to this term">#</a></dt><dd><p>An identifier that is used to describe what some data is intended to represent, and when and where they can be used.
+When associated with a <a class="reference internal" href="#term-Directory-Format"><span class="xref std std-term">directory format</span></a>, the combination defines an <a class="reference internal" href="#term-Artifact-class"><span class="xref std std-term">artifact class</span></a>.
 These types may be extended by <a class="reference internal" href="#term-Plugin"><span class="xref std std-term">plugins</span></a>.</p>
 </dd>
 <dt id="term-tl-dr">tl;dr<a class="headerlink" href="#term-tl-dr" title="Permalink to this term">#</a></dt><dd><p>“Too long; didn’t read.”
@@ -487,7 +496,7 @@ In other words, a quick summary of the content that follows.</p>
 <dt id="term-Transformer">Transformer<a class="headerlink" href="#term-Transformer" title="Permalink to this term">#</a></dt><dd><p>A function registered on the <a class="reference internal" href="#term-Framework"><span class="xref std std-term">framework</span></a> capable of converting data in one <a class="reference internal" href="#term-Format"><span class="xref std std-term">format</span></a> into data of another <a class="reference internal" href="#term-Format"><span class="xref std std-term">format</span></a>.</p>
 </dd>
 <dt id="term-Type">Type<a class="headerlink" href="#term-Type" title="Permalink to this term">#</a></dt><dd><p>A term that is used to represent several different ideas in QIIME 2, and which is therefore ambiguous when used on its own.
-More specific terms are <em>file type</em>, <em>semantic type</em>, and <em>data type</em>. See <a class="reference internal" href="../plugins/explanations/types-of-types.html#types-of-types"><span class="std std-ref">Semantic types, data types, and file formats</span></a> for more information.</p>
+More specific terms are <em>file type</em>, <em>semantic type</em>, and <em>data type</em>. See <a class="reference internal" href="../plugins/explanations/types-of-types.html#types-of-types"><span class="std std-ref">Semantic types, data types, file formats, and artifact classes</span></a> for more information.</p>
 </dd>
 <dt id="term-UUID">UUID<a class="headerlink" href="#term-UUID" title="Permalink to this term">#</a></dt><dd><p>Universally Unique IDentifier, in the context of QIIME 2, almost certainly refers to a <em>Version 4</em> UUID, which is a randomly generated ID.
 See this <a class="reference external" href="https://tools.ietf.org/html/rfc4122">RFC</a> or this <a class="reference external" href="https://en.wikipedia.org/wiki/Universally_unique_identifier">wikipedia entry</a> for details.</p>

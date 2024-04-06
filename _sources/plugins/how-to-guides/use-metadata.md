@@ -36,7 +36,7 @@ def my_viz(output_dir: str, md: qiime2.Metadata) -> None:
 
 ## Metadata Columns
 
-Plugin {term}`Actions <Action>` may also request one or more `MetadataColumns` (the `qiime2.metadata.MetadataColumn`, internally) to operate on, a good example of this is identifying which column of metadata contains barcodes, when using [q2-demux's `emp-single`](https://docs.qiime2.org/2018.4/plugins/available/demux/emp-single/) or [q2-cutadapt's `demux-paired`](https://docs.qiime2.org/2018.4/plugins/available/cutadapt/demux-paired/), for example. 
+Plugin {term}`Actions <Action>` may also request one or more `MetadataColumns` (the `qiime2.metadata.MetadataColumn`, internally) to operate on, a good example of this is identifying which column of metadata contains barcodes, when using [q2-demux's `emp-single`](https://docs.qiime2.org/2018.4/plugins/available/demux/emp-single/) or [q2-cutadapt's `demux-paired`](https://docs.qiime2.org/2018.4/plugins/available/cutadapt/demux-paired/), for example.
 
 Instances of `MetadataColumn` exist as one of two concrete classes: `NumericMetadataColumn` (`qiime2.metadata.NumericMetadataColumn`) and `CategoricalMetadataColumn` (`qiime2.metadata.CategoricalMetadataColumn`).
 
@@ -116,12 +116,12 @@ Cool!
 
 ## Generating metadata as output from visualizations
 
-In most cases, if you want to output something that looks like metadata from a QIIME 2 action, you should [assign it a semantic type that is viewable as `Metadata`](artifacts-as-metadata).
-However in some cases you may want to output actual metadata. 
-In this case, you can create an output for your action with the semantic type `ImmutableMetadata`.
-This will generate an artifact containing the metadata that your function provides as output.  
+In most cases, if you want to output something that looks like metadata from a QIIME 2 action, you should [assign it an artifact class that has a transformer to `Metadata`](artifacts-as-metadata).
+However in some cases you may want to output actual metadata.
+In this case, you can create an output for your action of artifact class `ImmutableMetadata`.
+This will generate an artifact containing the metadata that your function provides as output.
 
 `ImmutableMetadata` artifacts can be [viewed as `Metadata`](artifacts-as-metadata), so they can be used anywhere that a typical metadata `.tsv` file can be provided as input in QIIME 2.
 This includes q2-metadata's `tabulate` visualizer.
-Additionally, if you want to obtain a `.tsv` file representation of an `ImmutableMetadata` artifact, you can [export it](https://docs.qiime2.org/2024.2/tutorials/exporting/). 
+Additionally, if you want to obtain a `.tsv` file representation of an `ImmutableMetadata` artifact, you can [export it](https://docs.qiime2.org/2024.2/tutorials/exporting/).
 

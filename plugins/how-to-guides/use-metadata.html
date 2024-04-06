@@ -166,10 +166,11 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Create the plugin from a template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) method to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-alignment-visualizer.html">Add a first visualizer to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-usage-examples.html">Add usage examples to the plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Create your plugin from a template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-alignment-visualizer.html">Add a first visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-artifact-class.html">Add a new artifact class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-usage-examples.html">Add usage examples</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">How-To Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
@@ -189,7 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/actions.html">Types of QIIME 2 Actions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
 </ul>
 </li>
@@ -542,9 +543,9 @@ Cool!</p>
 </section>
 <section id="generating-metadata-as-output-from-visualizations">
 <h2>Generating metadata as output from visualizations<a class="headerlink" href="#generating-metadata-as-output-from-visualizations" title="Permalink to this heading">#</a></h2>
-<p>In most cases, if you want to output something that looks like metadata from a QIIME 2 action, you should <a class="reference internal" href="#artifacts-as-metadata"><span class="std std-ref">assign it a semantic type that is viewable as <code class="docutils literal notranslate"><span class="pre">Metadata</span></code></span></a>.
+<p>In most cases, if you want to output something that looks like metadata from a QIIME 2 action, you should <a class="reference internal" href="#artifacts-as-metadata"><span class="std std-ref">assign it an artifact class that has a transformer to <code class="docutils literal notranslate"><span class="pre">Metadata</span></code></span></a>.
 However in some cases you may want to output actual metadata.
-In this case, you can create an output for your action with the semantic type <code class="docutils literal notranslate"><span class="pre">ImmutableMetadata</span></code>.
+In this case, you can create an output for your action of artifact class <code class="docutils literal notranslate"><span class="pre">ImmutableMetadata</span></code>.
 This will generate an artifact containing the metadata that your function provides as output.</p>
 <p><code class="docutils literal notranslate"><span class="pre">ImmutableMetadata</span></code> artifacts can be <a class="reference internal" href="#artifacts-as-metadata"><span class="std std-ref">viewed as <code class="docutils literal notranslate"><span class="pre">Metadata</span></code></span></a>, so they can be used anywhere that a typical metadata <code class="docutils literal notranslate"><span class="pre">.tsv</span></code> file can be provided as input in QIIME 2.
 This includes q2-metadata’s <code class="docutils literal notranslate"><span class="pre">tabulate</span></code> visualizer.

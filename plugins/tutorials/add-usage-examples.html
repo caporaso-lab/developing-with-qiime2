@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Add usage examples to the plugin &#8212; Developing with QIIME 2</title>
+    <title>Add usage examples &#8212; Developing with QIIME 2</title>
   
   
   
@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="How-To Guides" href="../how-to-guides/intro.html" />
-    <link rel="prev" title="Add a first visualizer to the plugin" href="add-alignment-visualizer.html" />
+    <link rel="prev" title="Add a new artifact class" href="add-artifact-class.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -166,10 +166,11 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="create-from-template.html">Create the plugin from a template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-nw-align-method.html">Add a first (real) method to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-alignment-visualizer.html">Add a first visualizer to the plugin</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Add usage examples to the plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create-from-template.html">Create your plugin from a template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-nw-align-method.html">Add a first (real) method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-alignment-visualizer.html">Add a first visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-artifact-class.html">Add a new artifact class</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Add usage examples</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -189,7 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/actions.html">Types of QIIME 2 Actions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
 </ul>
 </li>
@@ -394,7 +395,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Add usage examples to the plugin</h1>
+    <h1>Add usage examples</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -408,8 +409,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="add-usage-examples-to-the-plugin">
-<span id="add-nw-align-usage"></span><h1>Add usage examples to the plugin<a class="headerlink" href="#add-usage-examples-to-the-plugin" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="add-usage-examples">
+<span id="add-nw-align-usage"></span><h1>Add usage examples<a class="headerlink" href="#add-usage-examples" title="Permalink to this heading">#</a></h1>
 <p>Your new functionality isn’t <em>really</em> done until you document it, so let’s do that now.
 This will ensure that users know how to use your code, and will give them something to try after they install your plugin to convince them that it’s working.
 I generally find that I’m the first person to benefit from my documentation, and in some cases I’m also the person who most frequently benefits from my documentation (e.g., if it’s code that I write for my own purposes, rather than something I intend to broadly disseminate).</p>
@@ -451,12 +452,12 @@ This is one way the framework supports our goal of meeting users where they are 
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="add-alignment-visualizer.html"
+       href="add-artifact-class.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Add a first visualizer to the plugin</p>
+        <p class="prev-next-title">Add a new artifact class</p>
       </div>
     </a>
     <a class="right-next"

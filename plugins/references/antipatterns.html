@@ -166,10 +166,11 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Create the plugin from a template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) method to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-alignment-visualizer.html">Add a first visualizer to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-usage-examples.html">Add usage examples to the plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Create your plugin from a template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-alignment-visualizer.html">Add a first visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-artifact-class.html">Add a new artifact class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-usage-examples.html">Add usage examples</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -189,7 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/actions.html">Types of QIIME 2 Actions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
 </ul>
 </li>
@@ -427,7 +428,7 @@ document.write(`
 <p>This section documents common anti-patterns that we observe in plugin development.
 Generally speaking, the things documented on this page lead to plugins that, for the most part, work.
 So why avoid them?</p>
-<p>The extra work of making your methods accessible through QIIME 2, including things like defining the semantic types of your inputs and outputs, pays off in that you get things like cross-interface support and <a class="reference external" href="https://doi.org/10.1371/journal.pcbi.1011676">Provenance Replay</a> for your methods for free.
+<p>The extra work of making your methods accessible through QIIME 2, including things like defining the artifact classes of your inputs and outputs, pays off in that you get things like cross-interface support and <a class="reference external" href="https://doi.org/10.1371/journal.pcbi.1011676">Provenance Replay</a> for your methods for free.
 You don’t have to test these things: we promise they’ll work (and if they don’t there is probably a bug somewhere that is our responsibility to fix - please do let us know).
 If you find yourself feeling like you need to apply one of these anti-patterns in your plugin, feel free to reach out through the <a class="reference external" href="https://forum.qiime2.org/c/dev-discussion">QIIME 2 Forum Developer Discussion</a>.
 We’ll help you figure out the QIIME-y way to achieve your goal.</p>
@@ -478,7 +479,7 @@ We’ll help you figure out the QIIME-y way to achieve your goal.</p>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>This approach circumvents the need to associate <code class="docutils literal notranslate"><span class="pre">an_input_filepath</span></code> and <code class="docutils literal notranslate"><span class="pre">an_output_filepath</span></code> with a semantic type (which may need to be defined, if it’s a new type).
+<p>This approach circumvents the need to associate <code class="docutils literal notranslate"><span class="pre">an_input_filepath</span></code> and <code class="docutils literal notranslate"><span class="pre">an_output_filepath</span></code> with an artifact class (which may need to be defined, if it’s a new type).
 This is convenient for the developer, and under some circumstances QIIME 2 will appear to work ok, but it’s problematic for at least a couple of reasons.</p>
 <p>First, some QIIME 2 interfaces (e.g., web-based interfaces, such as the QIIME 2 Galaxy interface) won’t work correctly.
 The user would have to type the values for <code class="docutils literal notranslate"><span class="pre">an_input_filepath</span></code> and <code class="docutils literal notranslate"><span class="pre">an_output_filepath</span></code> in text fields, such as <code class="docutils literal notranslate"><span class="pre">C:\Path\to\my\input.txt</span></code> or <code class="docutils literal notranslate"><span class="pre">/path/to/my/input.txt</span></code>, not for example select paths on their system through a file upload/download dialog box, as they would most likely expect when providing files to or receiving files from a web server through their browser.
@@ -492,7 +493,7 @@ As a result, the entries in provenance will only be meaningful to provenance con
 <p>All data that is provided as input to or generated as output from QIIME 2 <code class="docutils literal notranslate"><span class="pre">Action(s)</span></code> should be in the form of QIIME 2 Artifacts.
 This is essential for ensuring that workflows using your <code class="docutils literal notranslate"><span class="pre">Action(s)</span></code> will be fully reproducible, and that your plugin will be accessible to users with varying levels of computational expertise.
 These are two of the key benefits of making your methods accessible through QIIME 2 plugins, and are expectations of QIIME 2 users.
-The cost is going through the upfront work of associating inputs with semantic types and formats.</p>
+The cost is going through the upfront work of associating inputs with artifact classes.</p>
 </section>
 <section id="skipping-format-validation">
 <span id="antipattern-skipping-validation"></span><h2>Skipping format validation<a class="headerlink" href="#skipping-format-validation" title="Permalink to this heading">#</a></h2>
@@ -504,7 +505,7 @@ The cost is going through the upfront work of associating inputs with semantic t
         <span class="k">pass</span>
 </pre></div>
 </div>
-<p>This can lead to arbitrary input files being loaded into artifacts, even if they contain some errors or aren’t even remotely the right type of data to be associated with a semantic type.
+<p>This can lead to arbitrary input files being loaded into artifacts, even if they contain some errors or aren’t even remotely the right type of data to be associated with an artifact class.
 QIIME 2 actions that use an artifact created with this format will assume that validation has already been performed to avoid costly validation processed being applied multiple times to the same data.
 Sometimes this will work fine, but sometimes it will crash and burn in the hands of your users.</p>
 <p>If a user provides invalid data that passes through one of these validators, in the best case QIIME 2 will crash, and most likely with an obscure error message since the <code class="docutils literal notranslate"><span class="pre">Action(s)</span></code> using the data aren’t expecting errors in the data (since it has already gone through validation).

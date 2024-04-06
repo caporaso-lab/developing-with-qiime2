@@ -79,15 +79,15 @@ plugin.methods.register_function(
 
 The values being provided are:
 - `function`: The function to be registered as a method.
-- `inputs`: A dictionary indicating the parameter name and its `semantic type`, for each input `Artifact`.
-These semantic types differ from the data types that you provided in your `mypy`_ annotation of the input, as `semantic types` describe the data, where the data types indicate the structure of the data.
-(See [](types-of-types) for more detail on the difference between data types and semantic types.)
+- `inputs`: A dictionary indicating the parameter name and its `artifact class`, for each input `Artifact`.
+These artifact classes differ from the data types that you provided in your `mypy`_ annotation of the input, as artifact classes describe the data, where the data types indicate the structure of the data.
+(See [](types-of-types) for more detail on the difference between data types, semantic types, and artifact classes.)
 In the example above we’re indicating that the table parameter must be a `FeatureTable` of `Frequency` (i.e. counts), and that the `phylogeny` parameter must be a `Phylogeny` that is `Rooted`.
  Notice that the keys in inputs map directly to the parameter names in `q2_diversity.beta_phylogenetic`.
- - `parameters`: A dictionary indicating the parameter name and its semantic type, for each input Parameter.
+ - `parameters`: A dictionary indicating the parameter name and its type, for each input Parameter.
  These parameters are primitive values (i.e., non-`Artifacts`).
  In the example above, we’re indicating that the metric should be a string from a specific set (in this case, the set of known phylogenetic beta diversity metrics).
- - `outputs`: A list of tuples indicating each output name and its semantic type.
+ - `outputs`: A list of tuples indicating each output name and its artifact class.
  - `input_descriptions`: A dictionary containing input artifact names and their corresponding descriptions.
  This information is used by interfaces to instruct users how to use each specific input artifact.
  - `parameter_descriptions`: A dictionary containing parameter names and their corresponding descriptions.

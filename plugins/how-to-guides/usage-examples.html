@@ -166,10 +166,11 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Create the plugin from a template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) method to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-alignment-visualizer.html">Add a first visualizer to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-usage-examples.html">Add usage examples to the plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Create your plugin from a template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-alignment-visualizer.html">Add a first visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-artifact-class.html">Add a new artifact class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-usage-examples.html">Add usage examples</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">How-To Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
@@ -189,7 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/actions.html">Types of QIIME 2 Actions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
 </ul>
 </li>
@@ -467,7 +468,7 @@ Inputs and Metadata must be created by a factory function.
 This allows many drivers to avoid loading data unnecessarily.
 Parameter literals may be passed directly, and do not require factories.</p>
 <p>This example shows a factory function that returns a <code class="docutils literal notranslate"><span class="pre">FeatureTable[Frequency]</span></code>.
-We use the Python 3 API to import a <code class="docutils literal notranslate"><span class="pre">biom.Table</span></code> with the appropriate Semantic Type.</p>
+We use the Python 3 API to import a <code class="docutils literal notranslate"><span class="pre">biom.Table</span></code> of the appropriate artifact class.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># from q2-feature-table/examples.py</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">biom</span> <span class="kn">import</span> <span class="n">Table</span>
@@ -556,7 +557,7 @@ Great question!
 Support for usage example testing is available via QIIME 2’s <cite>TestPluginBase.execute_examples()</cite>
 and the <cite>results-and-assertions</cite> exposed by the <code class="docutils literal notranslate"><span class="pre">UsageVariable</span></code> class
 and optionally implemented in its driver-specific subclasses.</p>
-<p>You can test your usage examples by making Semantic Type and file-contents assertions
+<p>You can test your usage examples by making artifact class and file-contents assertions
 about the UsageVariables returned by <code class="docutils literal notranslate"><span class="pre">use.action</span></code>.
 These may be run by any usage driver that cares about them,
 allowing both local smoke testing (“Can my examples be executed successfully?”),

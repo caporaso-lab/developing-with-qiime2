@@ -166,10 +166,11 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Create the plugin from a template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) method to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-alignment-visualizer.html">Add a first visualizer to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-usage-examples.html">Add usage examples to the plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Create your plugin from a template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-alignment-visualizer.html">Add a first visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-artifact-class.html">Add a new artifact class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-usage-examples.html">Add usage examples</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">How-To Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
@@ -189,7 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/actions.html">Types of QIIME 2 Actions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
 </ul>
 </li>
@@ -491,15 +492,15 @@ This will likely be done in the file where the <code class="docutils literal not
 <p>The values being provided are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">function</span></code>: The function to be registered as a method.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">inputs</span></code>: A dictionary indicating the parameter name and its <code class="docutils literal notranslate"><span class="pre">semantic</span> <span class="pre">type</span></code>, for each input <code class="docutils literal notranslate"><span class="pre">Artifact</span></code>.
-These semantic types differ from the data types that you provided in your <code class="docutils literal notranslate"><span class="pre">mypy</span></code>_ annotation of the input, as <code class="docutils literal notranslate"><span class="pre">semantic</span> <span class="pre">types</span></code> describe the data, where the data types indicate the structure of the data.
-(See <a class="reference internal" href="../explanations/types-of-types.html#types-of-types"><span class="std std-ref">Semantic types, data types, and file formats</span></a> for more detail on the difference between data types and semantic types.)
+<li><p><code class="docutils literal notranslate"><span class="pre">inputs</span></code>: A dictionary indicating the parameter name and its <code class="docutils literal notranslate"><span class="pre">artifact</span> <span class="pre">class</span></code>, for each input <code class="docutils literal notranslate"><span class="pre">Artifact</span></code>.
+These artifact classes differ from the data types that you provided in your <code class="docutils literal notranslate"><span class="pre">mypy</span></code>_ annotation of the input, as artifact classes describe the data, where the data types indicate the structure of the data.
+(See <a class="reference internal" href="../explanations/types-of-types.html#types-of-types"><span class="std std-ref">Semantic types, data types, file formats, and artifact classes</span></a> for more detail on the difference between data types, semantic types, and artifact classes.)
 In the example above we’re indicating that the table parameter must be a <code class="docutils literal notranslate"><span class="pre">FeatureTable</span></code> of <code class="docutils literal notranslate"><span class="pre">Frequency</span></code> (i.e. counts), and that the <code class="docutils literal notranslate"><span class="pre">phylogeny</span></code> parameter must be a <code class="docutils literal notranslate"><span class="pre">Phylogeny</span></code> that is <code class="docutils literal notranslate"><span class="pre">Rooted</span></code>.
 Notice that the keys in inputs map directly to the parameter names in <code class="docutils literal notranslate"><span class="pre">q2_diversity.beta_phylogenetic</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">parameters</span></code>: A dictionary indicating the parameter name and its semantic type, for each input Parameter.
+<li><p><code class="docutils literal notranslate"><span class="pre">parameters</span></code>: A dictionary indicating the parameter name and its type, for each input Parameter.
 These parameters are primitive values (i.e., non-<code class="docutils literal notranslate"><span class="pre">Artifacts</span></code>).
 In the example above, we’re indicating that the metric should be a string from a specific set (in this case, the set of known phylogenetic beta diversity metrics).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">outputs</span></code>: A list of tuples indicating each output name and its semantic type.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">outputs</span></code>: A list of tuples indicating each output name and its artifact class.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">input_descriptions</span></code>: A dictionary containing input artifact names and their corresponding descriptions.
 This information is used by interfaces to instruct users how to use each specific input artifact.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">parameter_descriptions</span></code>: A dictionary containing parameter names and their corresponding descriptions.

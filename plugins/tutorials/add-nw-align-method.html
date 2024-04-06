@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Add a first (real) method to the plugin &#8212; Developing with QIIME 2</title>
+    <title>Add a first (real) method &#8212; Developing with QIIME 2</title>
   
   
   
@@ -67,8 +67,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Add a first visualizer to the plugin" href="add-alignment-visualizer.html" />
-    <link rel="prev" title="Create the plugin from a template" href="create-from-template.html" />
+    <link rel="next" title="Add a first visualizer" href="add-alignment-visualizer.html" />
+    <link rel="prev" title="Create your plugin from a template" href="create-from-template.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -166,10 +166,11 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="create-from-template.html">Create the plugin from a template</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Add a first (real) method to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-alignment-visualizer.html">Add a first visualizer to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-usage-examples.html">Add usage examples to the plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create-from-template.html">Create your plugin from a template</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Add a first (real) method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-alignment-visualizer.html">Add a first visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-artifact-class.html">Add a new artifact class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-usage-examples.html">Add usage examples</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -189,7 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/actions.html">Types of QIIME 2 Actions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
 </ul>
 </li>
@@ -396,7 +397,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Add a first (real) method to the plugin</h1>
+    <h1>Add a first (real) method</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -437,8 +438,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="add-a-first-real-method-to-the-plugin">
-<h1>Add a first (real) method to the plugin<a class="headerlink" href="#add-a-first-real-method-to-the-plugin" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="add-a-first-real-method">
+<h1>Add a first (real) method<a class="headerlink" href="#add-a-first-real-method" title="Permalink to this heading">#</a></h1>
 <p>At the most basic level, a QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">action</span></a> is simply an annotation of a Python function that describes in detail the inputs and outputs to that function.
 Here we’ll create a powerful action that illustrates this idea.</p>
 <p>The type of action that we’ll create is a <a class="reference internal" href="../../back-matter/glossary.html#term-Method"><span class="xref std std-term">method</span></a>, meaning that it will take zero or more QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact"><span class="xref std std-term">artifacts</span></a> as input, and it will generate one or more QIIME 2 artifacts as output.</p>
@@ -523,8 +524,8 @@ Some of these are built-in types (in this case, we are providing four <code clas
 The others, <code class="docutils literal notranslate"><span class="pre">DNAIterator</span></code> and <code class="docutils literal notranslate"><span class="pre">TabularMSA</span></code>, are defined in the q2-types QIIME 2 plugin and in scikit-bio, respectively.
 A <code class="docutils literal notranslate"><span class="pre">DNAIterator</span></code> is a Python object that enables iteration over a collection of zero or more <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> objects (which represent DNA sequences), and a <code class="docutils literal notranslate"><span class="pre">TabularMSA</span></code> object represents a <strong>m</strong>ultiple <strong>s</strong>equence <strong>a</strong>lignment.
 A little bit later we’ll come back to how you decide what type hints to provide here.</p>
-<p>The first couple of lines in this function are a little bit odd, and stem from the fact that (as of this writing) there isn’t an existing QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Semantic-Type"><span class="xref std std-term">semantic type</span></a> for individual DNA sequences, but rather only for collections of DNA sequences.
-We are therefore going to work-around this right now, and in a subsequent lesson we’ll define our own QIIME 2 semantic type to represent a single DNA sequence.
+<p id="suboptimal-initial-types">The first couple of lines in this function are a little bit odd, and stem from the fact that (as of this writing) there isn’t an existing QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact-class"><span class="xref std std-term">artifact class</span></a> for individual DNA sequences, but rather only for collections of DNA sequences.
+We are therefore going to work-around this right now, and in a subsequent lesson we’ll define our own QIIME 2 artifact class to represent a single DNA sequence.
 We need two sequences as input to pairwise sequence alignment (by definition), and we’ll take those as inputs through the <code class="docutils literal notranslate"><span class="pre">seq1</span></code> and <code class="docutils literal notranslate"><span class="pre">seq2</span></code> parameters.
 These will come in in <code class="docutils literal notranslate"><span class="pre">DNAIterator</span></code> objects, and our work-around is that we read the first sequence from each of these two input sequence collections by getting the <code class="docutils literal notranslate"><span class="pre">next()</span></code> item from each collection, one time each, and reassigning them to the variables <code class="docutils literal notranslate"><span class="pre">seq1</span></code> and <code class="docutils literal notranslate"><span class="pre">seq2</span></code>.</p>
 <p>Next, we call <code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code>, passing in all of our inputs.
@@ -620,13 +621,13 @@ Here’s what each is:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">function</span></code>: This is the Python function to be registered as a plugin action.
 We defined ours above as <code class="docutils literal notranslate"><span class="pre">nw_align</span></code>.
 If you add the import statement <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">q2_dwq2._methods</span> <span class="pre">import</span> <span class="pre">nw_align</span></code> to the top of this file, you can provide <code class="docutils literal notranslate"><span class="pre">nw_align</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">inputs</span></code>: This is a Python <code class="docutils literal notranslate"><span class="pre">dict</span></code> mapping the variable names of the <a class="reference internal" href="../../back-matter/glossary.html#term-Input"><span class="xref std std-term">inputs</span></a> to the plugin action to the semantic types of the inputs.
-As mentioned above, QIIME 2 doesn’t define a semantic type for a single DNA sequence, so we’re going to use the type that is commonly used for defining collections of DNA sequences, and we’ll just end up working with the first sequence in each input.
+<li><p><code class="docutils literal notranslate"><span class="pre">inputs</span></code>: This is a Python <code class="docutils literal notranslate"><span class="pre">dict</span></code> mapping the variable names of the <a class="reference internal" href="../../back-matter/glossary.html#term-Input"><span class="xref std std-term">inputs</span></a> to the plugin action to the artifact classes of the inputs.
+As mentioned above, QIIME 2 doesn’t define an artifact class for a single DNA sequence, so we’re going to use the type that is commonly used for defining collections of DNA sequences, and we’ll just end up working with the first sequence in each input.
 The type we use here is <code class="docutils literal notranslate"><span class="pre">FeatureData[Sequence]</span></code>.
-A little bit later we’ll come back to how you identify the semantic types that should be assigned to your input, and how to define your own sematic types if there isn’t already a relevant one.
+<a class="reference internal" href="add-artifact-class.html#plugin-tutorial-add-artifact-class"><span class="std std-ref">A little bit later</span></a> we’ll come back to how you identify the artifact classes that should be assigned to your input, and how to define your own artifact class if there isn’t already a relevant one.
 <a class="reference internal" href="../../back-matter/glossary.html#term-Input"><span class="xref std std-term">Inputs</span></a> to QIIME 2 actions are data in the form of <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact"><span class="xref std std-term">Artifacts</span></a>, and these are different than <a class="reference internal" href="../../back-matter/glossary.html#term-Parameter"><span class="xref std std-term">Parameters</span></a>.
 It is at this stage, when registering a function as an action, that this distinction is made.
-The semantic types we’re using here need to be imported from q2-types.
+The artifact classes we’re using here need to be imported from q2-types.
 To do this, add the line <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">q2_types.feature_data</span> <span class="pre">import</span> <span class="pre">FeatureData,</span> <span class="pre">Sequence</span></code> to the top of the file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">parameters</span></code>: This is a Python <code class="docutils literal notranslate"><span class="pre">dict</span></code> mapping the names of parameters to their <a class="reference internal" href="../../back-matter/glossary.html#term-Primitive-Type"><span class="xref std std-term">Primitive Type</span></a>.
 This information is used to validate input provided by users of your plugin, but more importantly to allow QIIME 2 interfaces to determine how this information should be collected from a user.
@@ -634,9 +635,9 @@ For example, in a graphical interface the value of a <code class="docutils liter
 Our four parameters are all <code class="docutils literal notranslate"><span class="pre">Floats</span></code>, and each has a <code class="docutils literal notranslate"><span class="pre">Range</span></code> that values must fall in.
 Import these primitive types for use here by adding the line <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">qiime2.plugin</span> <span class="pre">import</span> <span class="pre">Float,</span> <span class="pre">Range</span></code> to the top of the file.
 The <code class="docutils literal notranslate"><span class="pre">gap_open_penalty</span></code> parameter, for example, is defined here as taking a floating point value greater than 0.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">outputs</span></code>: This is a Python <code class="docutils literal notranslate"><span class="pre">dict</span></code> mapping the variable names of the <a class="reference internal" href="../../back-matter/glossary.html#term-Output"><span class="xref std std-term">outputs</span></a> from the plugin action to their semantic types.
+<li><p><code class="docutils literal notranslate"><span class="pre">outputs</span></code>: This is a Python <code class="docutils literal notranslate"><span class="pre">dict</span></code> mapping the variable names of the <a class="reference internal" href="../../back-matter/glossary.html#term-Output"><span class="xref std std-term">outputs</span></a> from the plugin action to their artifact classes.
 The type we use here is <code class="docutils literal notranslate"><span class="pre">FeatureData[AlignedSequence]</span></code>, representing a collection of aligned DNA sequences.
-A more appropriate type might represent a pair of aligned sequences specifically, rather than one or more aligned sequences which is what this semantic type implies, but again we’ll come back to that a later.
+A more appropriate type might represent a pair of aligned sequences specifically, rather than one or more aligned sequences which is what this artifact class implies, but again we’ll come back to that a later.
 We’ll need to import <code class="docutils literal notranslate"><span class="pre">AlignedSequence</span></code> here as well, which you can do by adding the line <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">q2_types.feature_data</span> <span class="pre">import</span> <span class="pre">AlignedSequence</span></code> to the top of the file (or adding <code class="docutils literal notranslate"><span class="pre">AlignedSequence</span></code> to the imports you already added from <code class="docutils literal notranslate"><span class="pre">q2_types.feature_data</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">input_descriptions</span></code>, <code class="docutils literal notranslate"><span class="pre">parameter_descriptions</span></code>, and <code class="docutils literal notranslate"><span class="pre">output_descriptions</span></code>: These are Python <code class="docutils literal notranslate"><span class="pre">dicts</span></code> that provide descriptions of each input, parameter, and output, respectively, for use in help text through different interfaces.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: A brief name for this action.
@@ -789,7 +790,7 @@ aligned_sequences : FeatureData[AlignedSequence]
 <section id="write-unit-tests">
 <h3>Write unit tests<a class="headerlink" href="#write-unit-tests" title="Permalink to this heading">#</a></h3>
 <p>Your code is <em>not ready for use</em> until you write unit tests, to ensure that it’s doing what you expect.
-We’ll write our unit tests for <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> in <code class="docutils literal notranslate"><span class="pre">q2_dwq2/tests/test_methods.py</span></code>.
+We’ll write unit tests for <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> in <code class="docutils literal notranslate"><span class="pre">q2_dwq2/tests/test_methods.py</span></code>.
 QIIME 2 provides a class, <code class="docutils literal notranslate"><span class="pre">TestPluginBase</span></code>, that facilitates unit testing plugins.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -1072,7 +1073,7 @@ q2_dwq2/tests/test_methods.py::NWAlignTests::test_simple2
 </section>
 </section>
 <section id="trying-the-new-action">
-<h2>Trying the new action<a class="headerlink" href="#trying-the-new-action" title="Permalink to this heading">#</a></h2>
+<span id="trying-nw-align"></span><h2>Trying the new action<a class="headerlink" href="#trying-the-new-action" title="Permalink to this heading">#</a></h2>
 <p>To run the new action, you’ll need two input files, each containing a DNA sequence to align.
 At this stage, your inputs need to be QIIME 2 artifacts.
 You should be able to do this with any <code class="docutils literal notranslate"><span class="pre">FeatureData[Sequence]</span></code> artifacts you have access to.
@@ -1151,7 +1152,7 @@ Don’t forget to write your unit tests!</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Create the plugin from a template</p>
+        <p class="prev-next-title">Create your plugin from a template</p>
       </div>
     </a>
     <a class="right-next"
@@ -1159,7 +1160,7 @@ Don’t forget to write your unit tests!</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Add a first visualizer to the plugin</p>
+        <p class="prev-next-title">Add a first visualizer</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

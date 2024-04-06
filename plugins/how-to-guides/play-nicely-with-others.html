@@ -166,10 +166,11 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Create the plugin from a template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) method to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-alignment-visualizer.html">Add a first visualizer to the plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-usage-examples.html">Add usage examples to the plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Create your plugin from a template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-alignment-visualizer.html">Add a first visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-artifact-class.html">Add a new artifact class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-usage-examples.html">Add usage examples</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">How-To Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
@@ -189,7 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/actions.html">Types of QIIME 2 Actions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, and file formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
 </ul>
 </li>
@@ -416,12 +417,12 @@ QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term
 <li><p><a class="reference internal" href="../../back-matter/glossary.html#term-Plugin"><span class="xref std std-term">Plugin</span></a> names are unique, and collisions are not tolerated by the framework.
 This means if you want to name your plugin <code class="docutils literal notranslate"><span class="pre">dada2</span></code>, users will not be able to have your plugin <strong>and</strong> the <a class="reference external" href="https://github.com/qiime2/q2-dada2">DADA2</a> plugin installed in the same <a class="reference internal" href="../../back-matter/glossary.html#term-Deployment"><span class="xref std std-term">deployment</span></a> at the same time.</p></li>
 <li><p><a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">Action</span></a> names are <strong>not</strong> globally unique, but rather are namespaced within a plugin’s domain.</p></li>
-<li><p><a class="reference internal" href="../../back-matter/glossary.html#term-Semantic-Type"><span class="xref std std-term">Semantic Types</span></a>, <a class="reference internal" href="../../back-matter/glossary.html#term-Format"><span class="xref std std-term">Formats</span></a>, and <a class="reference internal" href="../../back-matter/glossary.html#term-Transformer"><span class="xref std std-term">Transformers</span></a> are registered globally, like plugins, again, if you choose to use an existing name, this will prevent users from deploying both offending plugins concurrently.</p></li>
+<li><p><a class="reference internal" href="../../back-matter/glossary.html#term-Semantic-Type"><span class="xref std std-term">Semantic types</span></a>, <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact-class"><span class="xref std std-term">artifact classes</span></a>, <a class="reference internal" href="../../back-matter/glossary.html#term-Format"><span class="xref std std-term">formats</span></a>, and <a class="reference internal" href="../../back-matter/glossary.html#term-Transformer"><span class="xref std std-term">transformers</span></a> are registered globally, like plugins, again, if you choose to use an existing name, this will prevent users from deploying both offending plugins concurrently.</p></li>
 </ul>
 <p>There are a few strategies the QIIME 2 developers have employed to work within
 these limits:</p>
 <ul class="simple">
-<li><p>Most <a class="reference internal" href="../../back-matter/glossary.html#term-Type"><span class="xref std std-term">types</span></a>, <a class="reference internal" href="../../back-matter/glossary.html#term-Format"><span class="xref std std-term">formats</span></a>, and <a class="reference internal" href="../../back-matter/glossary.html#term-Transformer"><span class="xref std std-term">transformers</span></a> are registered in a single <a class="reference internal" href="../../back-matter/glossary.html#term-Plugin"><span class="xref std std-term">plugin</span></a>: <a class="reference external" href="https://github.com/qiime2/q2-types">q2-types</a>.
+<li><p>Most <a class="reference internal" href="../../back-matter/glossary.html#term-Semantic-Type"><span class="xref std std-term">semantic types</span></a>, <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact-class"><span class="xref std std-term">artifact classes</span></a>, <a class="reference internal" href="../../back-matter/glossary.html#term-Format"><span class="xref std std-term">formats</span></a>, and <a class="reference internal" href="../../back-matter/glossary.html#term-Transformer"><span class="xref std std-term">transformers</span></a> are registered in a single <a class="reference internal" href="../../back-matter/glossary.html#term-Plugin"><span class="xref std std-term">plugin</span></a>: <a class="reference external" href="https://github.com/qiime2/q2-types">q2-types</a>.
 This prevents circular imports.
 For many 3rd-party plugin developers, this means most typical types and formats are available within a single import.
 If you’re creating new types in your plugins, avoid re-using type names.

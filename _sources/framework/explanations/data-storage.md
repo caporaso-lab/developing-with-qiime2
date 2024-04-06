@@ -1,6 +1,12 @@
 (data-storage)=
 # How Data is Stored
 
+```{warning}
+Some of the discussion in this section uses *semantic type* as a synonym for {term}`artifact class`.
+While closely related, we're working on clarifying our language to distinguish these ideas.
+We haven't reviewed/updated this chapter for this yet.
+```
+
 In any software project, data needs to be stored (or persisted).
 The way that this is accomplished can impact every facet of the software's design.
 In order to better demonstrate *why* certain aspects of QIIME 2 exist as they are we will highlight what goals or constraints QIIME 2 has, and then demonstrate how QIIME 2 achieves each goal.
@@ -14,18 +20,18 @@ Data should be stored in a way that:
 - makes it possible to determine when data is or is not valid as input for a specific analysis
 - ease interoperability between tools
 - can be extended by plugins
-- and include details on its origin and history (provenance), facilitating trust and reproducibility. 
+- and include details on its origin and history (provenance), facilitating trust and reproducibility.
 
 These goals directly impact many of the design decisions made in QIIME 2.
 The solution described in this section seeks to address each of these goals.
-There are many other ways to solve these problems when one or more of these constraints are lifted, however QIIME 2 chooses these constraints because we believe they are *useful* to the scientist, will allow *composable* software to be developed and reused to advance the state of the art, and support [FAIR data principles](https://www.go-fair.org/fair-principles/). 
+There are many other ways to solve these problems when one or more of these constraints are lifted, however QIIME 2 chooses these constraints because we believe they are *useful* to the scientist, will allow *composable* software to be developed and reused to advance the state of the art, and support [FAIR data principles](https://www.go-fair.org/fair-principles/).
 
 ### Accessibility and Transferability
 QIIME 2 stores all data as a directory structure inside of a ZIP file.
 There is a {term}`payload` directory named `/data/` where data is stored in a common format. This permits additional *metadata* to be stored alongside the data (in non-`/data/` directories or files).
 
-A directory-based archive is used to store data in a way that is accessible. 
-When a common format exists for a data type (e.g., FASTA format for sequence data) it should be used to be as accessible as possible. 
+A directory-based archive is used to store data in a way that is accessible.
+When a common format exists for a data type (e.g., FASTA format for sequence data) it should be used to be as accessible as possible.
 When such a format does not exist, it should be stored in plain-text structure that is as self-descriptive as possible.
 The goals is that a person in 20 years might be able to glance at it, and roughly understand what the purpose of a given document is (assuming file-systems and text-based encodings still make sense in the future).
 
@@ -35,7 +41,7 @@ Alternatively a new format could be invented with new rules (though this would m
 For these reasons, QIIME 2 stores data as a directory structure.
 In particular data such as FASTA or newick will be considered the {term}`Payload` which is to be delivered to a tool.
 
-````{margin} 
+````{margin}
 ```{note}
 QIIME 2's `.qza` and `.qzv` files are ZIP files with a specific internal structure.
 You can open these with any standard unzip utility (e.g., WinZip, 7zip, `unzip`), even on systems that don't have QIIME 2 installed.
@@ -66,7 +72,7 @@ To accomplish this, we need data about the data, or *metadata* (in the general s
 If the {term}`payload` is placed in a *subdirectory* then we can store additional files which can contain this *metadata* without needed to worry about filename conflicts with the payload itself.
 Now QIIME 2 is able to record a type and anything else that may enable the computer (or user) to make a more informed decision about the use of a given piece of data.
 
-See [](types-explanation) to get more information on how types are used and defined in QIIME 2. 
+See [](types-explanation) to get more information on how types are used and defined in QIIME 2.
 
 ### Interoperability and Extension
 QIIME 2 stores a string called a {term}`Directory Format` in `metadata.yaml` which instructs the computer what the specific layout of `/data/` is.
@@ -89,10 +95,10 @@ See [](formats-explanation) to learn more about QIIME 2's formats and directory 
 ### Provenance Metadata
 
 Inside of each Archive, QIIME 2 stores metadata about how that archive was generated.
-We call this "provenance". 
+We call this "provenance".
 Notably, each Archive contains provenance information about *every* prior QIIME 2 {term}`Action` involved in its creation, from `import` to the most recent step in the analysis.
 
 This provenance information includes type and format information, system and environment details, the Actions performed and all parameters passed to them, and all registered citations.
 
-See [](provenance-explanation) to learn more about data provenance storage in QIIME 2. 
+See [](provenance-explanation) to learn more about data provenance storage in QIIME 2.
 

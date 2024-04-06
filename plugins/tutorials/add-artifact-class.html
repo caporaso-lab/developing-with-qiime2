@@ -1,0 +1,1117 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Add a new artifact class &#8212; Developing with QIIME 2</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/tutorials/add-artifact-class';</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Add usage examples" href="add-usage-examples.html" />
+    <link rel="prev" title="Add a first visualizer" href="add-alignment-visualizer.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/dwq2-light.png" class="logo__image only-light" alt="Developing with QIIME 2 - Home"/>
+    <script>document.write(`<img src="../../_static/dwq2-dark.png" class="logo__image only-dark" alt="Developing with QIIME 2 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins 🔌</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="create-from-template.html">Create your plugin from a template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-nw-align-method.html">Add a first (real) method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-alignment-visualizer.html">Add a first visualizer</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Add a new artifact class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-usage-examples.html">Add usage examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/register-a-plugin.html">Register a QIIME 2 plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/create-register-method.html">Create and register a Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/create-register-visualizer.html">Create and register a visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/create-register-pipeline.html">Create and register a pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/create-register-transformer.html">Creating and registering a Transformer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/play-nicely-with-others.html">How to play nicely with other plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/use-metadata.html">How to use Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/test-plugins.html">How to test QIIME 2 plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/usage-examples.html">Writing Usage Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/format-validation-levels.html">Defining different Format validation levels</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/actions.html">Types of QIIME 2 Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../references/antipatterns.html">Plugin development anti-patterns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/api.html">Plugin developer API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/metadata-api.html"><code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interfaces 🧩</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../interfaces/intro.html">Interface Development</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../interfaces/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../interfaces/references/api.html">Interface developer API reference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Framework 🌳</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../framework/intro.html">Framework Development</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/how-to-guides/intro.html">How-to guides</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/how-to-guides/parallel-configuration.html">Parallel configuration and usage in QIIME 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/how-to-guides/pipeline-resumption.html">Pipeline Resumption in QIIME 2</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/explanations/intro.html">Framework explanations</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/architecture.html">QIIME 2 architecture overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/data-storage.html">How Data is Stored</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/archives.html">Anatomy of an Archive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/types.html">Semantic Types, Primitives, and Visualizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/formats.html">File Formats and Directory Formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/provenance.html">Decentralized retrospective provenance tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/garbage-collection.html">Garbage Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/metaprogramming.html">Metaprogramming</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/references/archive-versions.html">Archive versions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation 📚</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../docs/intro.html">Docs Development</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/user-documentation.html">Contributing to the QIIME 2 user documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/developer-documentation.html">Contributing to <em>Developing with QIIME 2</em></a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Continuous Integration 🛠️</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ci/intro.html">Distribution Development</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter 🗂️</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../back-matter/intro.html">Back matter</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../back-matter/glossary.html">Glossary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../back-matter/bibliography.html">List of works cited</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../back-matter/genindex.html">Index</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/plugins/tutorials/add-artifact-class.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Add a new artifact class</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#artifact-classes">Artifact classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discovering-artifact-classes">Discovering artifact classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developing-a-new-artifact-class">Developing a new artifact class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-new-semantic-type">Defining a new semantic type</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-new-file-format">Defining a new file format</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-new-directory-format">Defining a new directory format</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-an-artifact-class">Registering an artifact class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-the-new-type-and-formats-publicly-importable">Making the new type and formats publicly importable</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-the-type-formats-and-artifact-class">Registering the type, formats, and artifact class</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-and-registering-a-transformer">Defining and registering a transformer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-testing">Unit testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-the-semantic-type-and-formats">Testing the semantic type and formats</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-the-transformer">Testing the transformer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-nw-align-to-use-the-new-artifact-class">Updating <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> to use the new artifact class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-optional-exercise">An optional exercise</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="add-a-new-artifact-class">
+<span id="plugin-tutorial-add-artifact-class"></span><h1>Add a new artifact class<a class="headerlink" href="#add-a-new-artifact-class" title="Permalink to this heading">#</a></h1>
+<p>Now that we’ve built a basic method and a basic visualizer, let’s step into another unique aspect of developing with QIIME 2: defining <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact-class"><span class="xref std std-term">artifact classes</span></a>.
+<em>Artifact classes</em> are closely related to terms you have probably already encountered in the QIIME 2 ecosystem: <a class="reference internal" href="../../back-matter/glossary.html#term-Semantic-Type"><span class="xref std std-term">semantic types</span></a>, <a class="reference internal" href="../../back-matter/glossary.html#term-Format"><span class="xref std std-term">formats</span></a>, and <a class="reference internal" href="../../back-matter/glossary.html#term-Transformer"><span class="xref std std-term">transformers</span></a>.
+For most of the new QIIME 2 developers who I’ve worked with, defining a new artifact class (and the associated semantic type, format(s), and transformer(s)) is the most obscure step.
+However it’s what gives QIIME 2 a lot of its power (for example, its ability to be accessed through different interfaces and to help users avoid analytic errors) and flexibility (for example, its ability to load the same artifact into different data types, depending on what you want to do with it).</p>
+<p><a class="reference internal" href="add-nw-align-method.html#suboptimal-initial-types"><span class="std std-ref">Recall that when we initially built our <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> method</span></a>, we used artifact classes that were suboptimal because there weren’t relevant existing ones.
+Two questions may arise here.
+First, as a plugin developer, how do you know what relevant artifact classes are available to you for use in development?
+And second, how do you add one or more new artifact classes if you need some that don’t exist?</p>
+<p>We’ll start here with a brief <em>explanation</em> to set the stage for the work we’ll do in this section of the tutorial.
+Then, we’ll address the first question with a very brief <em>how-to</em>, because if you don’t need to define a new semantic type, that’s ideal.
+And finally, the majority of this section of the tutorial will focus on creating a new artifact class for use in our plugin.</p>
+<div class="tip admonition" id="add-artifact-class-commit">
+<p class="admonition-title">tl;dr</p>
+<p>The complete code that I developed to define my new artifact class, including the corresponding semantic type, formats, and transformer, can be found <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/161c8a3a130393d24e5e538e9a622dfef51ead11">here</a>.
+The code that I developed to transition my <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> action to use my new artifact class can be found <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/b625b7f0b8194128c5d1c9a5892ce5bcd85ec81b">here</a>.</p>
+</div>
+<section id="artifact-classes">
+<h2>Artifact classes<a class="headerlink" href="#artifact-classes" title="Permalink to this heading">#</a></h2>
+<p>I’m going to begin by defining an <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact-class"><span class="xref std std-term">artifact class</span></a> as <strong>a kind of QIIME 2 artifact that can exist</strong>.
+A new artifact class can be registered by a plugin developer by associating a <a class="reference internal" href="../../back-matter/glossary.html#term-Semantic-Type"><span class="xref std std-term">semantic type</span></a> with a <a class="reference internal" href="../../back-matter/glossary.html#term-Format"><span class="xref std std-term">format</span></a>.
+Let’s briefly discuss both of those terms.</p>
+<p>Semantic types define the meaning of the data - i.e., what it represents.
+For example, QIIME 2 defines a <code class="docutils literal notranslate"><span class="pre">Phylogeny[Rooted]</span></code> artifact class, and the semantic type associated with the artifact class is <code class="docutils literal notranslate"><span class="pre">Phylogeny</span></code> (i.e., a phylogenetic tree) with a sub-semantic-type <code class="docutils literal notranslate"><span class="pre">Rooted</span></code> (i.e., implying that the phylogenetic tree contains a specified root node).
+Together, therefore, the <code class="docutils literal notranslate"><span class="pre">Phylogeny[Rooted]</span></code> artifact class can be described as a rooted phylogenetic tree.</p>
+<p>Formats describe how the data will be represented inside the artifact when it is serialized for storage (generally meaning written to file, in this context).
+Continuing with our phylogenetic tree example, multiple different file formats have been defined to represent a rooted phylogenetic tree, including newick and NEXUS, and this is typical for most types of information in bioinformatics (and other fields).
+Similarly, a single file format can be used to store semantically different information - for example, newick can also be used to store unrooted phylogenetic trees.</p>
+<p>This means that formats are inherently independent of semantic types: a semantic type doesn’t imply a specific format, and a format doesn’t imply a specific semantic type.
+When a new artifact class is registered by a developer, they associate a semantic type with a format.
+This enables QIIME 2 to know what an artifact class is intended to represent, and how it can be read from and written to disk.
+With this information, an artifact class can exist.</p>
+<p><a class="reference internal" href="../../back-matter/glossary.html#term-Transformer"><span class="xref std std-term">Transformers</span></a>, which we’ll come back to later, can be associated with formats and used to convert (transform) between formats, load formats in data types, and more.
+Among other things, transformers enable a given artifact class to update its format in new versions of QIIME 2, for example if a more efficient format becomes available, without end-users needing to know that anything changed.</p>
+</section>
+<section id="discovering-artifact-classes">
+<h2>Discovering artifact classes<a class="headerlink" href="#discovering-artifact-classes" title="Permalink to this heading">#</a></h2>
+<p>The main way that plugin developers become aware of the existing artifact classes that are relevant for their plugin is through familiarity from using QIIME 2.
+For example, if you’re planning to add a new method for feature table normalization, you may know that you start with the same feature table artifact class that is used by the <code class="docutils literal notranslate"><span class="pre">rarefy</span></code> action in the <code class="docutils literal notranslate"><span class="pre">q2-feature-table</span></code> plugin.
+That gives you a lead on the artifact class you’re going to use.</p>
+<p>On the other hand, if you’re searching to see what artifact classes are available, the best approach right now is to call <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">tools</span> <span class="pre">list-types</span></code>, which lists the artifact classes that are available.
+If you do this in your development environment, you should see something like the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>qiime<span class="w"> </span>tools<span class="w"> </span>list-types
+
+Bowtie2Index
+<span class="w">	</span>No<span class="w"> </span>description
+
+BrackenDB
+<span class="w">	</span>No<span class="w"> </span>description
+
+DistanceMatrix
+<span class="w">	</span>A<span class="w"> </span>symmetric<span class="w"> </span>matrix<span class="w"> </span>representing<span class="w"> </span>distances<span class="w"> </span>between<span class="w"> </span>entities.
+
+FeatureData<span class="o">[</span>AlignedProteinSequence<span class="o">]</span>
+<span class="w">	</span>Aligned<span class="w"> </span>protein<span class="w"> </span>sequences<span class="w"> </span>associated<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span><span class="nb">set</span><span class="w"> </span>of<span class="w"> </span>feature
+<span class="w">	</span>identifiers.<span class="w"> </span>Exactly<span class="w"> </span>one<span class="w"> </span>sequence<span class="w"> </span>is<span class="w"> </span>associated<span class="w"> </span>with<span class="w"> </span>each
+<span class="w">	</span>feature<span class="w"> </span>identfiier.
+
+FeatureData<span class="o">[</span>AlignedRNASequence<span class="o">]</span>
+<span class="w">	</span>Aligned<span class="w"> </span>RNA<span class="w"> </span>sequences<span class="w"> </span>associated<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span><span class="nb">set</span><span class="w"> </span>of<span class="w"> </span>feature
+<span class="w">	</span>identifiers.<span class="w"> </span>Exactly<span class="w"> </span>one<span class="w"> </span>sequence<span class="w"> </span>is<span class="w"> </span>associated<span class="w"> </span>with<span class="w"> </span>each
+<span class="w">	</span>feature<span class="w"> </span>identfiier.
+
+...
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As of this writing (April 2024) you’ll see many artifact classes that don’t have descriptions.
+The ability to add descriptions to artifact classes was added relatively recently, and we’re working through existing types to add descriptions.</p>
+</div>
+<p>Some of these are self-explanatory and some are a bit opaque.
+Take a minute to review this list to identify artifact classes that you’ve used before, and any others that might be relevant in your work.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A how-to article is <a class="reference external" href="https://github.com/caporaso-lab/developing-with-qiime2/issues/58">planned</a> that will provide additional detail on identifying an existing artifact class for use in your plugin.
+In the meantime, please feel free to <a class="reference external" href="https://forum.qiime2.org/c/dev-discussion/7">reach out on the forum</a> if you’re strugging to identify a relevant semantic type - we know this can be challenging, and we don’t mind helping.</p>
+</div>
+</section>
+<section id="developing-a-new-artifact-class">
+<h2>Developing a new artifact class<a class="headerlink" href="#developing-a-new-artifact-class" title="Permalink to this heading">#</a></h2>
+<p>Now that we have that background, lets get into it.</p>
+<section id="defining-a-new-semantic-type">
+<h3>Defining a new semantic type<a class="headerlink" href="#defining-a-new-semantic-type" title="Permalink to this heading">#</a></h3>
+<p>In this section we’re going to define a new artifact class called <code class="docutils literal notranslate"><span class="pre">SingleDNASequence</span></code>, which represents a single DNA sequence.
+Recall that previously we associated the <code class="docutils literal notranslate"><span class="pre">FeatureData[Sequence]</span></code> artifact class with our inputs to <code class="docutils literal notranslate"><span class="pre">nw-align</span></code>, but since this artifact class is intended to represent collections of sequences (rather than the single sequences that we use as input to <code class="docutils literal notranslate"><span class="pre">nw-align</span></code>) it was just a way to quickly get started.
+Defining <code class="docutils literal notranslate"><span class="pre">SingleDNASequence</span></code> will allow us to better represent the input to <code class="docutils literal notranslate"><span class="pre">nw-align</span></code>, and to reduce some unnecessary code that we wrote in our action.</p>
+<p>Start by creating a new file, <code class="docutils literal notranslate"><span class="pre">_types_and_formats.py</span></code> in your module’s top-level directory. For me, this file will be <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_types_and_formats.py</span></code>. Add the following code to that file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">SemanticType</span>
+
+<span class="n">SingleDNASequence</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s2">&quot;SingleDNASequence&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>That code defines a new semantic type, which can be referred to as <code class="docutils literal notranslate"><span class="pre">SingleDNASequence</span></code>.
+Defining new semantic types is the easier part of defining new artifact classes.</p>
+</section>
+<section id="defining-a-new-file-format">
+<h3>Defining a new file format<a class="headerlink" href="#defining-a-new-file-format" title="Permalink to this heading">#</a></h3>
+<p>The next thing we’ll do is define a file format that we’ll use with this semantic type to define our artifact class. We’ll call our file format <code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTAFormat</span></code>, implying that it is a fasta-formatted file for storing a single DNA sequence record.</p>
+<p>Our <code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTAFormat</span></code> will be a subclass of QIIME 2’s <code class="docutils literal notranslate"><span class="pre">TextFileFormat</span></code> class.
+The only requirement of our subclass is that it define a method called <code class="docutils literal notranslate"><span class="pre">_validate_</span></code>, and that method should take a validation <code class="docutils literal notranslate"><span class="pre">level</span></code> as input and not return any output.
+<code class="docutils literal notranslate"><span class="pre">level</span></code> will always be provided as either <code class="docutils literal notranslate"><span class="pre">max</span></code> (the default) or <code class="docutils literal notranslate"><span class="pre">min</span></code>.
+If a problem is discovered during validation, a <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.ValidationError</span></code> should be raised.
+If <code class="docutils literal notranslate"><span class="pre">_validate_</span></code> returns without raising a <code class="docutils literal notranslate"><span class="pre">ValidationError</span></code>, that indicates that validation has succeeded.</p>
+<p>It’s up to you as the format developer to define what happens in the <code class="docutils literal notranslate"><span class="pre">_validate_</span></code> function, and that can range from no validation whatsoever (i.e., just <code class="docutils literal notranslate"><span class="pre">pass</span></code> in the function body; we don’t recommend this and <a class="reference internal" href="../references/antipatterns.html#antipattern-skipping-validation"><span class="std std-ref">consider it a plugin development anti-pattern</span></a>), to extremely detailed validation.
+The <code class="docutils literal notranslate"><span class="pre">level</span></code> is used to define whether minimal or maximal validation should be performed.
+The trade-off is that maximal validation can take a long time, slowing down use of this file format (which will likely be percieved as your plugin being slow), but if written well can prevent against invalid data being packaged in this file format.
+Minimal validation on the other hand can be very quick, but may allow some errors to sneak through.
+You don’t have to do anything differently inside of <code class="docutils literal notranslate"><span class="pre">_validate_</span></code> based on whether a user requests minimal or maximal validation, but it’s a good idea to vary what is being done if maximal validation will be slow.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As a practical example of when minimal validation can be helpful, think of the case where large machine-generated fastq files are associated with a QIIME 2 format (e.g., during import).
+Validating each file in its entirety can take a very long time, and since the fastq files are machine generated, they’re (presumably) unlikely to contain errors because the developers of the code that wrote that fastq (presumably) tested that code well.</p>
+<p>The less you trust the creator of a file, the more important validation is. If your users are manually creating a file, that’s an important case for extensive validation.
+No offense to your users: creating files can be tedious, and tedious work is error prone when done by humans (we get bored and make mistakes).
+Computers on the other hand are great at it.
+So automate everything you can… but I digress.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>One feature to be aware of here, though we won’t use it right away, is that since you’re defining your format class, you can add additional methods or properties to it that will be convenient for you if/when you work directly with instances of the format in your actions.
+For example, if you wanted an easy way to get the identifier of the sequence in this object, you could add a <code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTAFormat.get_sequence_id()</span></code> method (for example), and then access that in the normal way when you have an instance of this class.</p>
+</div>
+<p>Add the following code to <code class="docutils literal notranslate"><span class="pre">_types_and_formats.py</span></code> (note that I’m building on my <code class="docutils literal notranslate"><span class="pre">import</span></code> statement from the previous code block here):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skbio</span> <span class="kn">import</span> <span class="n">DNA</span>
+<span class="kn">from</span> <span class="nn">skbio.io</span> <span class="kn">import</span> <span class="n">UnrecognizedFormatError</span>
+
+<span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">SemanticType</span><span class="p">,</span> <span class="n">TextFileFormat</span><span class="p">,</span> <span class="n">ValidationError</span>
+
+<span class="k">class</span> <span class="nc">SingleRecordDNAFASTAFormat</span><span class="p">(</span><span class="n">TextFileFormat</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">_confirm_single_record</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># DNA.read(..., validate = False) disables checking to ensure</span>
+                <span class="c1"># that all characters in the sequence are IUPAC DNA characters</span>
+                <span class="c1"># by scikit-bio.</span>
+                <span class="c1"># This will be validated independently by _validate_, with user</span>
+                <span class="c1"># control over how much of the sequence is read during</span>
+                <span class="c1"># validation, to manage the runtime of validation.</span>
+                <span class="n">_</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="n">seq_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">UnrecognizedFormatError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span>
+                    <span class="s2">&quot;At least one sequence record must be present, but none &quot;</span>
+                    <span class="s2">&quot;were found.&quot;</span>
+                <span class="p">)</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">_</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="n">seq_num</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="c1"># if there is no second record, a ValueError should be raised</span>
+                <span class="c1"># when we try to access the second record</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span>
+                    <span class="s2">&quot;At most one sequence record must be present, but more &quot;</span>
+                    <span class="s2">&quot;than one record was found.&quot;</span>
+                <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_confirm_acgt_only</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_chars</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+            <span class="n">seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="n">seq_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">validation_seq</span> <span class="o">=</span> <span class="n">seq</span><span class="p">[:</span><span class="n">n_chars</span><span class="p">]</span>
+            <span class="n">validation_seq_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">validation_seq</span><span class="p">)</span>
+            <span class="n">non_definite_chars_count</span> <span class="o">=</span> \
+                <span class="n">validation_seq_len</span> <span class="o">-</span> <span class="n">validation_seq</span><span class="o">.</span><span class="n">definites</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">non_definite_chars_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">non_definite_chars_count</span><span class="si">}</span><span class="s2"> non-ACGT characters detected &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;during validation of </span><span class="si">{</span><span class="n">validation_seq_len</span><span class="si">}</span><span class="s2"> positions.&quot;</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_validate_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+        <span class="n">validation_level_to_n_chars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_confirm_single_record</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_confirm_acgt_only</span><span class="p">(</span><span class="n">validation_level_to_n_chars</span><span class="p">[</span><span class="n">level</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Take a minute to read through this, starting with the <code class="docutils literal notranslate"><span class="pre">_validate_</span></code> function and following the function calls that are made inside of it.
+What is being done during validation?
+How is the validation level being used here?</p>
+</section>
+<section id="defining-a-new-directory-format">
+<h3>Defining a new directory format<a class="headerlink" href="#defining-a-new-directory-format" title="Permalink to this heading">#</a></h3>
+<p>In the previous sections we discussed that QIIME 2 uses file formats to describe how data is organized in artifacts for specific artifact classes.
+In a QIIME 2 artifact, the relevant data is stored in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory.
+For some artifact classes, including the one we’re building here, all of the relevant data is contained in a single file.
+However in other cases, there may be multiple files and/or subdirectories.
+Because we’re defining the contents of a directory when registering a new artifact class, we actually need to associate a <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.DirectoryFormat</span></code> with our new artifact class.</p>
+<p>For simple cases like ours, where there will only be a single file in that directory, QIIME 2 has a helper function, <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.model.SingleFileDirectoryFormat</span></code>, which we can use to create a directory format.
+Add the following code to <code class="docutils literal notranslate"><span class="pre">_types_and_formats.py</span></code> to define your directory format.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skbio</span> <span class="kn">import</span> <span class="n">DNA</span>
+<span class="kn">from</span> <span class="nn">skbio.io</span> <span class="kn">import</span> <span class="n">UnrecognizedFormatError</span>
+
+<span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">SemanticType</span><span class="p">,</span> <span class="n">TextFileFormat</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">ValidationError</span>
+
+<span class="n">SingleRecordDNAFASTADirectoryFormat</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">SingleFileDirectoryFormat</span><span class="p">(</span>
+    <span class="s1">&#39;SingleRecordDNAFASTADirectoryFormat&#39;</span><span class="p">,</span> <span class="s1">&#39;sequence.fasta&#39;</span><span class="p">,</span>
+    <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This code creates a new object, <code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTADirectoryFormat</span></code>.
+The parameters being provided in the call to <code class="docutils literal notranslate"><span class="pre">SingleFileDirectoryFormat</span></code> are the name of the directory format, what we’d like to call the single file in the directory format, and what format this file will be in.
+We’ll call the file in our directory format <code class="docutils literal notranslate"><span class="pre">sequence.fasta</span></code> (it can be anything, but making it descriptive helps), and it will be of the type we just defined, <code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTAFormat</span></code>.</p>
+<p>This completes the code you’ll need in <code class="docutils literal notranslate"><span class="pre">_types_and_formats.py</span></code>.
+Compare your code against <a class="reference internal" href="#add-artifact-class-commit"><span class="std std-ref">mine</span></a> to make sure it’s functionally identical.</p>
+</section>
+</section>
+<section id="registering-an-artifact-class">
+<h2>Registering an artifact class<a class="headerlink" href="#registering-an-artifact-class" title="Permalink to this heading">#</a></h2>
+<p>At this stage, we have defined our sematic type and the formats that we’ll associated with this semantic type.
+We’ll now move on to registering these, so we can use them.</p>
+<section id="making-the-new-type-and-formats-publicly-importable">
+<h3>Making the new type and formats publicly importable<a class="headerlink" href="#making-the-new-type-and-formats-publicly-importable" title="Permalink to this heading">#</a></h3>
+<p>Next, open the <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> in the top-level directory of your module.
+For me, this will be <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/__init__.py</span></code>.
+Add the following lines to the imports at the top of your file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">._types_and_formats</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SingleDNASequence</span><span class="p">,</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">,</span>
+    <span class="n">SingleRecordDNAFASTADirectoryFormat</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then add the following lines at the bottom of the file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;SingleDNASequence&quot;</span><span class="p">,</span> <span class="s2">&quot;SingleRecordDNAFASTAFormat&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SingleRecordDNAFASTADirectoryFormat&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This will allow you and others to import your semantic type and formats directly from the module without accessing files that are intended to be private (e.g., by calling <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">q2_dwq2</span> <span class="pre">import</span> <span class="pre">SingleDNASequence</span></code>).
+This gives you the freedom to reorganize files or file contents internally in your plugin without changing the public-facing API - even if you update the import statements in this file, anyone importing from your code (e.g., plugin developers who are building other plugins that depend on yours) shouldn’t need to change their code.</p>
+</section>
+<section id="registering-the-type-formats-and-artifact-class">
+<span id="register-artifact-class"></span><h3>Registering the type, formats, and artifact class<a class="headerlink" href="#registering-the-type-formats-and-artifact-class" title="Permalink to this heading">#</a></h3>
+<p>Next, we’ll edit our <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code> file to register our new type, our new formats, and our new artifact class.
+To do this, first we’ll import those three objects in <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">q2_dwq2</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SingleDNASequence</span><span class="p">,</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">,</span>
+    <span class="n">SingleRecordDNAFASTADirectoryFormat</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Notice that because of the additions we made in <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> we import these from our top-level module directly (not from <code class="docutils literal notranslate"><span class="pre">q2_dwq2._types_and_formats.py</span></code>, where they are defined).</p>
+<p>Next, we’ll call three methods on our <code class="docutils literal notranslate"><span class="pre">plugin</span></code> object as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Register semantic types</span>
+<span class="n">plugin</span><span class="o">.</span><span class="n">register_semantic_types</span><span class="p">(</span><span class="n">SingleDNASequence</span><span class="p">)</span>
+
+<span class="c1"># Register formats</span>
+<span class="n">plugin</span><span class="o">.</span><span class="n">register_formats</span><span class="p">(</span><span class="n">SingleRecordDNAFASTAFormat</span><span class="p">,</span>
+                        <span class="n">SingleRecordDNAFASTADirectoryFormat</span><span class="p">)</span>
+
+<span class="c1"># Define and register new ArtifactClass</span>
+<span class="n">plugin</span><span class="o">.</span><span class="n">register_artifact_class</span><span class="p">(</span><span class="n">SingleDNASequence</span><span class="p">,</span>
+                               <span class="n">SingleRecordDNAFASTADirectoryFormat</span><span class="p">,</span>
+                               <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A single DNA sequence.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The first two should be self-explanatory: we register the new semantic type and the new formats.
+Each of these calls takes <code class="docutils literal notranslate"><span class="pre">*args</span></code> as input, which means that you can provide all the types and formats that you want to register as arguments to these methods.
+Each method takes one or more arguments.</p>
+<p>The final method call in that block is the one we’ve been working toward - it’s where we associate our new semantic type with a directory format, and provide a description of what this artifact class is for users or other developers who may wish to use it.
+At this point, your plugin has defined a new artifact class and you should see it in the list of artifact classes if you run the following commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>qiime<span class="w"> </span>dev<span class="w"> </span>refresh-cache
+qiime<span class="w"> </span>tools<span class="w"> </span>list-types
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As mentioned earlier, when you add or update actions, types, or formats you’ll need to run <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dev</span> <span class="pre">refresh-cache</span></code> to see those modifications through <a class="reference internal" href="../../back-matter/glossary.html#term-q2cli"><span class="xref std std-term">q2cli</span></a>.</p>
+</div>
+</section>
+</section>
+<section id="defining-and-registering-a-transformer">
+<h2>Defining and registering a transformer<a class="headerlink" href="#defining-and-registering-a-transformer" title="Permalink to this heading">#</a></h2>
+<p>There are a couple of last things that we need to do before we’re ready to use our new artifact class.
+The first is define how an instance of our artifact class (e.g., an artifact stored in a <code class="docutils literal notranslate"><span class="pre">.qza</span></code> file) can be loaded in the form that we want to use it in inside of our action.</p>
+<p>In QIIME 2 jargon, we review to the different ways an artifact can be used inside of an action as different <strong>views of an artifact class</strong>.
+For example, if we want to recieve the fasta file directly, we can request to <em>view</em> the artifact as a <code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTAFormat</span></code>.
+Inside of our action, we could then open that and do whatever we need to with it.
+This approach of working with file formats or directory formats directly is common, for example, when processing raw sequence data such as collections of demutiplexed sequence reads.
+This might look like the following in our action definition:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># this is just an example - don&#39;t put this code in your plugin</span>
+<span class="k">def</span> <span class="nf">nw_align</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">,</span>
+             <span class="n">seq2</span><span class="p">:</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">,</span>
+             <span class="o">...</span>
+</pre></div>
+</div>
+<p>In our case, we want to load our sequences into <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> objects, as that’s what the <code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code> function that we’re calling takes as input.
+So, we need to transform our fasta-formatted file into an <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> object, and we do that with a <a class="reference internal" href="../../back-matter/glossary.html#term-Transformer"><span class="xref std std-term">transformer</span></a>.</p>
+<p>Create a new file, <code class="docutils literal notranslate"><span class="pre">_transformers.py</span></code>, in your top-level module directory.
+Mine is called <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_transformers.py</span></code>.
+Add the following code to that file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skbio</span> <span class="kn">import</span> <span class="n">DNA</span>
+
+<span class="kn">from</span> <span class="nn">q2_dwq2</span> <span class="kn">import</span> <span class="n">SingleRecordDNAFASTAFormat</span>
+
+<span class="kn">from</span> <span class="nn">.plugin_setup</span> <span class="kn">import</span> <span class="n">plugin</span>
+
+
+<span class="c1"># Define and register transformers</span>
+<span class="nd">@plugin</span><span class="o">.</span><span class="n">register_transformer</span>
+<span class="k">def</span> <span class="nf">_1</span><span class="p">(</span><span class="n">ff</span><span class="p">:</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DNA</span><span class="p">:</span>
+    <span class="c1"># by default, DNA.read will read the first sequence in the file</span>
+    <span class="k">with</span> <span class="n">ff</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">DNA</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">fh</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This code first imports the objects that we want to transform to (<code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code>) and from (<code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTAFormat</span></code>).
+We then import our <code class="docutils literal notranslate"><span class="pre">plugin</span></code> object from <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code>, which we’ll use to register our transformer.
+Finally, we define our transformer function and register it with our plugin using a function decorator.</p>
+<p>Your transformer function can be called anything you want, but by convention they receive arbitrary names.
+This is because the transformers are never called directly by users or developers, and because the function signature’s type hints unambiguously define what it does.
+Before we adopted this convention we had a lot of functions with names like <code class="docutils literal notranslate"><span class="pre">_transform_SingleRecordDNAFASTAFormat_to_DNA</span></code>, which was starting to feel silly and in some cases the names were ambiguous (but if you prefer that, there are no issues with naming your transformers that way).
+Internally, this function does whatever it needs to to convert (or transform) the input object to the output object.
+In our case, we’re opening the file format (<code class="docutils literal notranslate"><span class="pre">ff</span></code>) object provided as input, and reading the first (and only, in this case) sequence from it using <code class="docutils literal notranslate"><span class="pre">skbio.DNA.read</span></code>, and returning the result.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may have noticed that our artifact class stores data as defined in our  <code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTADirectoryFormat</span></code> class, but we’re working with it here in a <code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTAFormat</span></code> object.
+QIIME 2 automatically creates transformers from directory formats to file formats for single-file directory formats when they are created with <code class="docutils literal notranslate"><span class="pre">model.SingleFileDirectoryFormat</span></code>, as we did above.
+QIIME 2 also knows how to chain transformers, such that when we attempt to view an instance of our artifact class as <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code>, it will first transform from <code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTADirectoryFormat</span></code> to <code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTAFormat</span></code>, and then transform from <code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTAFormat</span></code> to <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code>.
+If you’re concerned that a chained transformation will be too slow, you can also define a transformer that skips the intermediate step.
+In this case, that might have a signature like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_2</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">SingleRecordDNAFASTADirectoryFormat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span>
+</pre></div>
+</div>
+<p>That won’t be needed here however.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you’d like to be able to view a <code class="docutils literal notranslate"><span class="pre">SingleDNASequence</span></code> artifact as another data type for use in your actions - for example, as a Python string (<code class="docutils literal notranslate"><span class="pre">str</span></code>) - you can define another transformer for it.
+For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_3</span><span class="p">(</span><span class="n">ff</span><span class="p">:</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_4</span><span class="p">(</span><span class="n">seq</span><span class="p">:</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</pre></div>
+</div>
+</div>
+<p>To make this transformer accessible to your plugin, there’s just one last thing to do, which is make sure that the code in this file runs when the <code class="docutils literal notranslate"><span class="pre">plugin</span></code> object is created.
+For this, we go back to <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code>.
+Add the following line to the imports at the top of that file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">importlib</span>
+</pre></div>
+</div>
+<p>Then, add the following as the last line in your file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;q2_dwq2._transformers&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will load and run the <code class="docutils literal notranslate"><span class="pre">_transformers.py</span></code> file, ensuring that our transformer is registered after the <code class="docutils literal notranslate"><span class="pre">plugin</span></code> object has been instantiated and our type and formats have been registered.</p>
+</section>
+<section id="unit-testing">
+<h2>Unit testing<a class="headerlink" href="#unit-testing" title="Permalink to this heading">#</a></h2>
+<p>As always, before we use this code, we’re going to test it.
+At a high-level, there are three things we need to test: the semantic type we defined, the formats we defined, and the transformer we defined.
+Let’s start with the type and formats.</p>
+<section id="testing-the-semantic-type-and-formats">
+<h3>Testing the semantic type and formats<a class="headerlink" href="#testing-the-semantic-type-and-formats" title="Permalink to this heading">#</a></h3>
+<p>As you probably noticed, there isn’t much to a semantic type - we’re essentially just defining a name that will be linked to an artifact class.
+We therefore just want to confirm that the type is registered with the plugin.
+<code class="docutils literal notranslate"><span class="pre">qiime2.plugin.testing.TestPluginBase</span></code> provides a method for this, <code class="docutils literal notranslate"><span class="pre">assertRegisteredSemanticType</span></code>.</p>
+<p>For our formats, most of the action is happening inside of the <code class="docutils literal notranslate"><span class="pre">_validate_</span></code> function, so that’s mostly what we’re testing.
+I like to start with confirming that a few valid examples of my format pass validation, and then provide invalid files that are invalid for different reasons to confirm that those files fail validation.
+It’s also a good idea to confirm that your validation level is functioning as expected.</p>
+<p>Below is my test code, which lives in <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/test_types_and_formats.py</span></code>.
+I added a few new test data files to support these tests, which you can access from <a class="reference internal" href="#add-artifact-class-commit"><span class="std std-ref">my code on GitHub</span></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">ValidationError</span>
+<span class="kn">from</span> <span class="nn">qiime2.plugin.testing</span> <span class="kn">import</span> <span class="n">TestPluginBase</span>
+
+<span class="kn">from</span> <span class="nn">q2_dwq2</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SingleDNASequence</span><span class="p">,</span> <span class="n">SingleRecordDNAFASTAFormat</span>
+<span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">SingleDNASequenceTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
+    <span class="n">package</span> <span class="o">=</span> <span class="s1">&#39;q2_dwq2.tests&#39;</span>
+
+    <span class="k">def</span> <span class="nf">test_semantic_type_registration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRegisteredSemanticType</span><span class="p">(</span><span class="n">SingleDNASequence</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">SingleRecordDNAFASTAFormatTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
+    <span class="n">package</span> <span class="o">=</span> <span class="s1">&#39;q2_dwq2.tests&#39;</span>
+
+    <span class="k">def</span> <span class="nf">test_simple1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;seq-1.fasta&#39;</span><span class="p">,</span> <span class="s1">&#39;seq-2.fasta&#39;</span><span class="p">,</span> <span class="s1">&#39;t-thermophilis-rrna.fasta&#39;</span><span class="p">]</span>
+        <span class="n">filepaths</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_data_path</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span> <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">fp</span> <span class="ow">in</span> <span class="n">filepaths</span><span class="p">:</span>
+            <span class="nb">format</span> <span class="o">=</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+            <span class="nb">format</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">test_invalid_default_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data_path</span><span class="p">(</span><span class="s1">&#39;bad-sequence-1.fasta&#39;</span><span class="p">)</span>
+        <span class="nb">format</span> <span class="o">=</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="n">ValidationError</span><span class="p">,</span>
+                               <span class="s2">&quot;4 non-ACGT characters.*171 positions.&quot;</span><span class="p">,</span>
+                               <span class="nb">format</span><span class="o">.</span><span class="n">validate</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_invalid_max_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data_path</span><span class="p">(</span><span class="s1">&#39;bad-sequence-1.fasta&#39;</span><span class="p">)</span>
+        <span class="nb">format</span> <span class="o">=</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="n">ValidationError</span><span class="p">,</span>
+                               <span class="s2">&quot;4 non-ACGT characters.*171 positions.&quot;</span><span class="p">,</span>
+                               <span class="nb">format</span><span class="o">.</span><span class="n">validate</span><span class="p">,</span>
+                               <span class="n">level</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_invalid_min_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data_path</span><span class="p">(</span><span class="s1">&#39;bad-sequence-1.fasta&#39;</span><span class="p">)</span>
+        <span class="nb">format</span> <span class="o">=</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="c1"># min validation is successful</span>
+        <span class="nb">format</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s1">&#39;min&#39;</span><span class="p">)</span>
+        <span class="c1"># but max validation raises an error</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="n">ValidationError</span><span class="p">,</span>
+                               <span class="s2">&quot;4 non-ACGT characters.*171 positions.&quot;</span><span class="p">,</span>
+                               <span class="nb">format</span><span class="o">.</span><span class="n">validate</span><span class="p">,</span>
+                               <span class="n">level</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="p">)</span>
+
+        <span class="n">fp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data_path</span><span class="p">(</span><span class="s1">&#39;bad-sequence-2.fasta&#39;</span><span class="p">)</span>
+        <span class="nb">format</span> <span class="o">=</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="n">ValidationError</span><span class="p">,</span>
+                               <span class="s2">&quot;4 non-ACGT characters.*50 positions.&quot;</span><span class="p">,</span>
+                               <span class="nb">format</span><span class="o">.</span><span class="n">validate</span><span class="p">,</span>
+                               <span class="n">level</span><span class="o">=</span><span class="s1">&#39;min&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="testing-the-transformer">
+<h3>Testing the transformer<a class="headerlink" href="#testing-the-transformer" title="Permalink to this heading">#</a></h3>
+<p>Next, we’ll test our transformer.
+Here, we should provide a few different valid inputs, and test that they are transformed to the expected output.
+Generally you should use the <code class="docutils literal notranslate"><span class="pre">transform_format</span></code> action in <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.testing.TestPluginBase</span></code> to access and run the transformer (as opposed to importing the function directly from <code class="docutils literal notranslate"><span class="pre">_transformers.py</span></code>).
+This also tests that the transformer is registered with the plugin.</p>
+<p>The test code that I wrote for this is in <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/test_transformers.py</span></code>, and follows here:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skbio</span> <span class="kn">import</span> <span class="n">DNA</span>
+
+<span class="kn">from</span> <span class="nn">qiime2.plugin.testing</span> <span class="kn">import</span> <span class="n">TestPluginBase</span>
+
+<span class="kn">from</span> <span class="nn">q2_dwq2</span> <span class="kn">import</span> <span class="n">SingleRecordDNAFASTAFormat</span>
+
+
+<span class="k">class</span> <span class="nc">SingleDNASequenceTransformerTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
+    <span class="n">package</span> <span class="o">=</span> <span class="s1">&#39;q2_dwq2.tests&#39;</span>
+
+    <span class="k">def</span> <span class="nf">test_single_record_fasta_to_DNA_simple1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">observed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform_format</span><span class="p">(</span>
+            <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">,</span> <span class="n">DNA</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;seq-1.fasta&#39;</span><span class="p">)</span>
+
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;ACCGGTGGAACCGGTAACACCCAC&#39;</span><span class="p">,</span>
+                       <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;example-sequence-1&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">})</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_single_record_fasta_to_DNA_simple2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">observed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform_format</span><span class="p">(</span>
+            <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">,</span> <span class="n">DNA</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;seq-2.fasta&#39;</span><span class="p">)</span>
+
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;ACCGGTAACCGGTTAACACCCAC&#39;</span><span class="p">,</span>
+                       <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;example-sequence-2&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">})</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Write your tests, and then run them with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code>.
+You should see something like the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span><span class="nb">test</span>
+...
+<span class="o">======</span><span class="w"> </span><span class="m">14</span><span class="w"> </span>passed,<span class="w"> </span><span class="m">23</span><span class="w"> </span>warnings<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span>.51s<span class="w"> </span><span class="o">======</span>
+</pre></div>
+</div>
+<p>If you have failing tests, work through them to figure out what’s wrong.
+If you get stuck, refer back to my code.
+At this point, you should have implemented everything in <a class="reference internal" href="#add-artifact-class-commit"><span class="std std-ref">the first of my commits</span></a>  associated with this section.</p>
+</section>
+</section>
+<section id="updating-nw-align-to-use-the-new-artifact-class">
+<h2>Updating <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> to use the new artifact class<a class="headerlink" href="#updating-nw-align-to-use-the-new-artifact-class" title="Permalink to this heading">#</a></h2>
+<p>Ok.
+That was a lot of work.
+But hopefully you can see that none of the coding is very hard, even if conceptually it’s a little challenging as you get started.
+As we continue to work through the tutorial, I’ll point out places where the work we did here provides powerful benefits for our plugin users and for us as plugin developers.</p>
+<p>Now let’s update our <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> method to use the new artifact class that we defined.
+As discussed earlier, this will enable us to simplify the code and associated tests.
+Since we’re looking at code changes here, rather than new code, the most convenient view you’ll have is GitHub’s diff of this commit against the previous.
+To see this, open the link to the <a class="reference internal" href="#add-artifact-class-commit"><span class="std std-ref">second of my commits</span></a> associated with this section.</p>
+<p>The work that we’re doing here is transitioning our use of the <code class="docutils literal notranslate"><span class="pre">FeatureData[Sequence]</span></code> artifact class for our new <code class="docutils literal notranslate"><span class="pre">SingleDNASequence</span></code> artifact class, and transitioning our use of the <code class="docutils literal notranslate"><span class="pre">DNAIterator</span></code> view inside <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> to use <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> as our view.</p>
+<p>Start by looking at the changes in <code class="docutils literal notranslate"><span class="pre">test_methods.py</span></code>, and adapt your code in the same way.
+Notice that in the second test case (<code class="docutils literal notranslate"><span class="pre">test_simple2</span></code>), we’re using <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.util.transform</span></code> to load files stored in our <code class="docutils literal notranslate"><span class="pre">tests/data</span></code> directory into <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> objects for use in the tests.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Pending <a class="reference external" href="https://github.com/qiime2/qiime2/issues/757">a fix for an oversight in <code class="docutils literal notranslate"><span class="pre">TestPluginBase</span></code></a>, it will be possible to use <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.testing.TestPluginBase.transform_format</span></code> for performing the fasta file to <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> transformation.
+This will enable tests of actions to use the same machinery used during testing of transformers.</p>
+</div>
+<p>If you run your unit tests now with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code>, you should get some test failures.
+That’s expected, as we updated the tests but haven’t yet updated the code.
+Let’s now update the code, and we’ll know we’re done when these tests pass.</p>
+<p>First, update the method itself, as I did in <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_methods.py</span></code>.
+Here you’re telling QIIME 2 to use a different view type inside this function, and then we’re removing some of the clunky code that we no longer need.
+Here’s my <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> function after making these changes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">nw_align</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="n">DNA</span><span class="p">,</span>
+             <span class="n">seq2</span><span class="p">:</span> <span class="n">DNA</span><span class="p">,</span>
+             <span class="n">gap_open_penalty</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+             <span class="n">gap_extend_penalty</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+             <span class="n">match_score</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+             <span class="n">mismatch_score</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TabularMSA</span><span class="p">:</span>
+    <span class="n">msa</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">global_pairwise_align_nucleotide</span><span class="p">(</span>
+        <span class="n">seq1</span><span class="o">=</span><span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="o">=</span><span class="n">seq2</span><span class="p">,</span> <span class="n">gap_open_penalty</span><span class="o">=</span><span class="n">gap_open_penalty</span><span class="p">,</span>
+        <span class="n">gap_extend_penalty</span><span class="o">=</span><span class="n">gap_extend_penalty</span><span class="p">,</span> <span class="n">match_score</span><span class="o">=</span><span class="n">match_score</span><span class="p">,</span>
+        <span class="n">mismatch_score</span><span class="o">=</span><span class="n">mismatch_score</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">msa</span>
+</pre></div>
+</div>
+<p>Then, update <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code> to associate our new artifact class with the sequence inputs.
+Here’s what this looks like for me, after I make this change:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plugin</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
+    <span class="n">function</span><span class="o">=</span><span class="n">nw_align</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;seq1&#39;</span><span class="p">:</span> <span class="n">SingleDNASequence</span><span class="p">,</span>
+            <span class="s1">&#39;seq2&#39;</span><span class="p">:</span> <span class="n">SingleDNASequence</span><span class="p">},</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>After making the changes that I made, all tests should pass when you run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">tests</span></code>.
+Once all tests are passing, run <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dev</span> <span class="pre">refresh-cache</span></code> and call help on your plugin’s <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> action.
+You should see the new types associated with the <code class="docutils literal notranslate"><span class="pre">seq1</span></code> and <code class="docutils literal notranslate"><span class="pre">seq2</span></code> inputs.
+Refer back to <a class="reference internal" href="add-nw-align-method.html#trying-nw-align"><span class="std std-ref">where we tried out the nw-align action</span></a> for the first time.
+Using those same fasta files (or any others you’d like), adapt the commands in that section to import sequence data into artifacts of our new artifact class, and run <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> on them.</p>
+</section>
+<section id="an-optional-exercise">
+<h2>An optional exercise<a class="headerlink" href="#an-optional-exercise" title="Permalink to this heading">#</a></h2>
+<p>Try making a new visualizer that will create a visual summary of a <code class="docutils literal notranslate"><span class="pre">SingleDNASequence</span></code> artifact class.
+Define a transformer to a view type other than <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code>, and use that in your visualizer.
+For example, does another library like BioPython provide an object with a convenient view that you could use here?
+(Note that you may need to install any other library that you’re using here in your development environment.)</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./plugins/tutorials"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="add-alignment-visualizer.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Add a first visualizer</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="add-usage-examples.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Add usage examples</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#artifact-classes">Artifact classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discovering-artifact-classes">Discovering artifact classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developing-a-new-artifact-class">Developing a new artifact class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-new-semantic-type">Defining a new semantic type</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-new-file-format">Defining a new file format</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-new-directory-format">Defining a new directory format</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-an-artifact-class">Registering an artifact class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-the-new-type-and-formats-publicly-importable">Making the new type and formats publicly importable</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-the-type-formats-and-artifact-class">Registering the type, formats, and artifact class</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-and-registering-a-transformer">Defining and registering a transformer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-testing">Unit testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-the-semantic-type-and-formats">Testing the semantic type and formats</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-the-transformer">Testing the transformer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-nw-align-to-use-the-new-artifact-class">Updating <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> to use the new artifact class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-optional-exercise">An optional exercise</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Greg Caporaso and Evan Bolyen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
