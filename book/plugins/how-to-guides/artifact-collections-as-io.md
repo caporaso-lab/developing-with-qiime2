@@ -7,8 +7,8 @@ They may also take collections of primitives as single parameters.
 ## Registering an Action that Takes an Input Collection
 
 Input or parameter collections can be in the form of lists or dictionaries.
-For inputs the type annotation for function registration is the QIIME 2 semantic type of the Artifacts expected.
-For parameters it is just the type of the parameter.
+For inputs the type annotation for function registration is the QIIME 2 artifact class(es) of the Artifacts expected.
+For parameters it is the type of the parameter.
 
 An example of registering collection inputs and parameters is shown below.
 For a list input, the syntax is `"List[SemanticType]"` and for a dictionary it is `"Collection[SemanticType]"`.
@@ -33,7 +33,7 @@ dummy_plugin.methods.register_function(
 ```
 
 In the actual function definition, the type annotation is the view type of the Artifacts and does NOT contain the collection type annotation.
-The fact that the annotations indicate the view type and not the semantic type is due to the fact that by the time we reach the actual method `int_list` will be a list of integers and not `SingleInt` Artifacts.
+The fact that the annotations indicate the view type and not the artifact class is due to the fact that by the time we reach the actual method `int_list` will be a list of integers and not `SingleInt` Artifacts.
 
 ```python
 # Note type annotations are currently just int or bool,

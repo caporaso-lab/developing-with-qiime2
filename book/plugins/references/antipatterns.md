@@ -7,7 +7,7 @@ This section documents common anti-patterns that we observe in plugin developmen
 Generally speaking, the things documented on this page lead to plugins that, for the most part, work.
 So why avoid them?
 
-The extra work of making your methods accessible through QIIME 2, including things like defining the semantic types of your inputs and outputs, pays off in that you get things like cross-interface support and [Provenance Replay](https://doi.org/10.1371/journal.pcbi.1011676) for your methods for free.
+The extra work of making your methods accessible through QIIME 2, including things like defining the artifact classes of your inputs and outputs, pays off in that you get things like cross-interface support and [Provenance Replay](https://doi.org/10.1371/journal.pcbi.1011676) for your methods for free.
 You don't have to test these things: we promise they'll work (and if they don't there is probably a bug somewhere that is our responsibility to fix - please do let us know).
 If you find yourself feeling like you need to apply one of these anti-patterns in your plugin, feel free to reach out through the {{ developer_discussion }}.
 We'll help you figure out the QIIME-y way to achieve your goal.
@@ -62,7 +62,7 @@ plugin.methods.register_function(
 )
 ```
 
-This approach circumvents the need to associate `an_input_filepath` and `an_output_filepath` with a semantic type (which may need to be defined, if it's a new type).
+This approach circumvents the need to associate `an_input_filepath` and `an_output_filepath` with an artifact class (which may need to be defined, if it's a new type).
 This is convenient for the developer, and under some circumstances QIIME 2 will appear to work ok, but it's problematic for at least a couple of reasons.
 
 First, some QIIME 2 interfaces (e.g., web-based interfaces, such as the QIIME 2 Galaxy interface) won't work correctly.
@@ -79,7 +79,7 @@ As a result, the entries in provenance will only be meaningful to provenance con
 All data that is provided as input to or generated as output from QIIME 2 `Action(s)` should be in the form of QIIME 2 Artifacts.
 This is essential for ensuring that workflows using your `Action(s)` will be fully reproducible, and that your plugin will be accessible to users with varying levels of computational expertise.
 These are two of the key benefits of making your methods accessible through QIIME 2 plugins, and are expectations of QIIME 2 users.
-The cost is going through the upfront work of associating inputs with semantic types and formats.
+The cost is going through the upfront work of associating inputs with artifact classes.
 
 (antipattern-skipping-validation)=
 ## Skipping format validation
@@ -94,7 +94,7 @@ class MyNewFormat(model.TextFileFormat):
         pass
 ```
 
-This can lead to arbitrary input files being loaded into artifacts, even if they contain some errors or aren't even remotely the right type of data to be associated with a semantic type.
+This can lead to arbitrary input files being loaded into artifacts, even if they contain some errors or aren't even remotely the right type of data to be associated with an artifact class.
 QIIME 2 actions that use an artifact created with this format will assume that validation has already been performed to avoid costly validation processed being applied multiple times to the same data.
 Sometimes this will work fine, but sometimes it will crash and burn in the hands of your users.
 

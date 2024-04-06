@@ -1,7 +1,13 @@
 (types-explanation)=
 # Semantic Types, Primitives, and Visualizations
 
-If you're unfamilar with the various ways that the word *type* is used in the context of QIIME 2, we recommend reading [](types-of-types) before this document. 
+```{warning}
+Some of the discussion in this section uses *semantic type* as a synonym for {term}`artifact class`.
+While closely related, we're working on clarifying our language to distinguish these ideas.
+We haven't reviewed/updated this chapter for this yet.
+```
+
+If you're unfamilar with the various ways that the word *type* is used in the context of QIIME 2, we recommend reading [](types-of-types) before this document.
 This document provides a deep dive into semantic types, primitives, and visualizations in QIIME 2: in other words, descriptors of the various inputs and/or outputs to QIIME 2 {term}`Actions <Action>`.
 
 ```{eval-rst}

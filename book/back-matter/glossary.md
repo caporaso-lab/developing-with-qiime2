@@ -14,7 +14,7 @@ Artifact
 
 Artifact class
   A kind of {term}`Artifact` that can exist.
-  This is defined by a plugin developer by associating a {term}`semantic type` with a {term}`format`.
+  This is defined by a plugin developer by associating a {term}`semantic type` with a {term}`directory format` when registering an artifact class.
 
 Artifact API
   See {term}`Python 3 API`.
@@ -104,7 +104,8 @@ Result
   A generic term for either a {term}`Visualization` or an {term}`Artifact`.
 
 Semantic Type
-  A {term}`type` that is used to classify {term}`artifacts<Artifact>` and how they can be used.
+  An identifier that is used to describe what some data is intended to represent, and when and where they can be used.
+  When associated with a {term}`directory format`, the combination defines an {term}`artifact class`.
   These types may be extended by {term}`plugins<Plugin>`.
 
 tl;dr

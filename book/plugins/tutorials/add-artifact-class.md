@@ -1,5 +1,5 @@
-(plugin-tutorial-add-type-format-transformer)=
-# Adding a new Artifact Class
+(plugin-tutorial-add-artifact-class)=
+# Adding a new artifact class
 
 Now that we've built a basic method and a basic visualizer, let's step into another unique aspect of developing with QIIME 2: defining {term}`artifact classes <artifact class>`.
 *Artifact classes* are closely related to terms you have probably already encountered in the QIIME 2 ecosystem: {term}`semantic types <semantic type>`, {term}`formats <format>`, and {term}`transformers <transformer>`.
@@ -91,7 +91,7 @@ A how-to article is [planned](https://github.com/caporaso-lab/developing-with-qi
 In the meantime, please feel free to [reach out on the forum](https://forum.qiime2.org/c/dev-discussion/7) if you're strugging to identify a relevant semantic type - we know this can be challenging, and we don't mind helping.
 ```
 
-## Developing a new Artifact Class
+## Developing a new artifact class
 
 Now that we have that background, lets get into it.
 
@@ -234,7 +234,7 @@ We'll call the file in our directory format `sequence.fasta` (it can be anything
 This completes the code you'll need in `_types_and_formats.py`.
 Compare your code against [mine](add-artifact-class-commit) to make sure it's functionally identical.
 
-## Registering an Artifact Class
+## Registering an artifact class
 
 At this stage, we have defined our sematic type and the formats that we'll associated with this semantic type.
 We'll now move on to registering these, so we can use them.
@@ -262,6 +262,7 @@ __all__ = [
 This will allow you and others to import your semantic type and formats directly from the module without accessing files that are intended to be private (e.g., by calling `from q2_dwq2 import SingleDNASequence`).
 This gives you the freedom to reorganize files or file contents internally in your plugin without changing the public-facing API - even if you update the import statements in this file, anyone importing from your code (e.g., plugin developers who are building other plugins that depend on yours) shouldn't need to change their code.
 
+(register-artifact-class)=
 ### Registering the type, formats, and artifact class
 
 Next, we'll edit our `plugin_setup.py` file to register our new type, our new formats, and our new artifact class.

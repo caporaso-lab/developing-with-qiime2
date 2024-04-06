@@ -1,8 +1,8 @@
 (formats-explanation)=
 # File Formats and Directory Formats
 
-{term}`Formats <Format>` in QIIME 2 are on-disk representations of {term}`semantic types <Semantic Type>`. 
-They are the stored in or read from the `data/` when reading and writing {term}`artifacts <Artifact>`.
+{term}`Formats <Format>` in QIIME 2 are on-disk representations of data.
+When associated with an {term}`artifact class`, they define how data are stored in or read from the `data/` directory of {term}`artifacts <Artifact>`.
 
 QIIME 2 doesn't have much of an opinion on how data should be represented or stored, so long as it *can* be represented or stored in an {term}`archive`.
 
@@ -27,9 +27,9 @@ Here we provide an example of a `TextFileFormat` definition, with a focus on the
 class IntSequenceFormat(TextFileFormat):
     """
     A sequence of integers stored on new lines in a file.
-    To make validation more interesting, values in the list can be any integer as long 
+    To make validation more interesting, values in the list can be any integer as long
     as that integer is not equal to the previous value plus 3
-    (i.e., `line[i] != (line[i-1]) + 3`). 
+    (i.e., `line[i] != (line[i-1]) + 3`).
     """
     def _validate_n_ints(self, n):
         with self.open() as fh:
@@ -128,7 +128,7 @@ class CasavaOneEightSingleLanePerSampleDirFmt(model.DirectoryFormat):
 ```
 
 ## Single File Directory Formats
-Currently QIIME 2 requires that all formats registered to a {term}`Semantic Type` be a directory format.
+Currently QIIME 2 requires that all formats registered to an {term}`artifact class` be a directory format.
 For those cases, there exists a factory for quickly constructing directory layouts that contain *only a single file*.
 This requirement might be removed in the future, but for now it is a necessary evil (and also isn't too much extra work for format developers).
 
@@ -140,6 +140,6 @@ DNASequencesDirectoryFormat = model.SingleFileDirectoryFormat(
 ## Associating Formats with a Type
 
 Formats on their own aren't of much use.
-It is only once they are registered with a {term}`Semantic Type` to define an *artifact class* that things become interesting. 
+It is only once they are associated with a {term}`semantic type` to define an *artifact class* that things become interesting.
 Artifact classes define the data that can be provided as input or generated as output by QIIME 2 `Actions`.
-An example of this can be seen in the [registration of the `SampleData[PairedEndSequencesWithQuality]` artifact class](https://github.com/qiime2/q2-types/blob/e25f9355958755343977e037bbe39110cfb56a63/q2_types/per_sample_sequences/_type.py#L66). 
+An example of this can be seen in the [registration of the `SampleData[PairedEndSequencesWithQuality]` artifact class](https://github.com/qiime2/q2-types/blob/e25f9355958755343977e037bbe39110cfb56a63/q2_types/per_sample_sequences/_type.py#L66).

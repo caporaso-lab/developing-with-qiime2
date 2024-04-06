@@ -16,7 +16,7 @@ This tutorial is a work-in-progress. 🚜
 This tutorial will walk step-by-step through building a first QIIME 2 plugin, and is intended to be read from beginning to end.
 
 The plugin you'll create will provide support for some of the most fundamental algorithms in bioinformatics, and will ultimately contain a mix of QIIME 2 {term}`methods <Method>`, {term}`visualizers <Visualizer>`, and {term}`pipelines <Pipeline>`.
-You'll learn to define {term}`formats <Format>`, {term}`transformers <Transformer>`, and new {term}`semantic types <Semantic Type>`.
+You'll learn to define new {term}`artifact classes <Artifact class>`, which let you expand QIIME 2 in new directions, and how artifact classes relate to {term}`formats <Format>`, {term}`transformers <Transformer>`, {term}`semantic types <Semantic Type>`.
 You'll add parallel computing support to a {term}`method` that is initially implemented without parallel support.
 You'll develop executable usage examples, so your users can learn how to apply your plugin, and you can receive automated notifications if changes you (or others) make to your code are backward incompatible, necessitating changes to the documentation.
 And, as with all QIIME 2 plugins, the plugin you build will record data provenance when it's used, support {term}`provenance replay <Provenance Replay>`, and will be immediately accessible through multiple interfaces including {term}`q2cli` and the {term}`Python 3 API`.

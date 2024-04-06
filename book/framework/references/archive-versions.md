@@ -14,14 +14,14 @@ All QIIME 2 Archives have:
 - a directory named with the Archive UUID, directly under the archive root at `/<UUID>/`, and
 - a file `/<UUID>/VERSION` within that directory, formatted as shown below.
 
-{numref}`format-agnostic-archive-structure` illustrates the Archive file system. 
+{numref}`format-agnostic-archive-structure` illustrates the Archive file system.
 
 ```{figure} ../images/format-agnostic-archive-structure.svg
 :name: format-agnostic-archive-structure
 Box and arrow diagram of the guaranteed components of an archive.
 ```
 
-The VERSION file format is described [above](archive-version-file). 
+The VERSION file format is described [above](archive-version-file).
 
 (archive-version-0)=
 ## Archive Version 0
@@ -30,7 +30,7 @@ Version 0 was the original QIIME 2 Archive format, and there aren't many V0 Arch
 V0 Archives were produced by alpha versions of the QIIME 2 framework, and were superseded in framework version 2.0.6 on 24 October 2016.
 
 - {term}`Result` data files are written in the directory `/<UUID>/data`
-- Result UUID, Semantic Type, and Format information are saved in `/<UUID>/metadata.yaml`.
+- Result UUID, semantic type, and format information are saved in `/<UUID>/metadata.yaml`.
 - The `ArchiveFormat` class in [`v0.py`](https://github.com/qiime2/qiime2/blob/master/qiime2/core/archive/format/v0.py) offers convenience methods for loading and parsing `metadata.yaml` files.
 
 {numref}`v0-archive-format` illustrates the format of a Version 0 Archive.
@@ -85,7 +85,7 @@ V0 Archives do not capture provenance data. As a result, if a V0 artifact is an 
 Released across QIIME 2 versions [2017.9](https://github.com/qiime2/qiime2/releases/tag/2017.9.0) ([changelog](https://forum.qiime2.org/t/qiime-2-2017-9-release-is-now-live/1160)) and [2017.10](https://github.com/qiime2/qiime2/releases/tag/2017.10.0) ([changelog](https://forum.qiime2.org/t/qiime-2-2017-10-release-is-now-live/1626)), the directory structure of this format is identical to v1, but the `action.yaml` file has changed.
 
 In [commit `4389a0b`](https://github.com/qiime2/qiime2/commit/4389a0b4ec41151144188ea230c8c56c1940c368) the Version 2 `ArchiveFormat` adds an `output-name` key to the `action` section of `action.yaml` (unless the action type is `import`), assigning it the output name registered to the relevant action.
-Prior to this change, if one action returned multiple artifacts of the same {term}`Semantic Type`, it was not possible to differentiate between them using provenance alone.
+Prior to this change, if one action returned multiple artifacts of the same {term}`semantic type`, it was not possible to differentiate between them using provenance alone.
 
 In [commit `e072706`](https://github.com/qiime2/qiime2/commit/e07270659bd4089afdeef744868f8b7ac9c698a9), it adds provenance support for {term}`Pipelines <Pipeline>`, adding the `alias-of` key to the `action` section of `action.yaml`.
 
@@ -168,7 +168,7 @@ A new, md5sum-formatted checksum file has been added at `/<root_UUID>/checksums.
 ae0d0e26da5b84a6c0722148789c51e0  provenance/artifacts/f6105891-2c00-4886-b733-6dada99d0c81/action/action.yaml
 ```
 
-{numref}`v5-archive-format` illustrates the V5 Archive. 
+{numref}`v5-archive-format` illustrates the V5 Archive.
 
 ```{figure} ../images/v5-archive-format.svg
 :name: v5-archive-format
@@ -176,7 +176,7 @@ Box and arrow diagram of a v5 archive.
 ```
 
 ## Archive Version 6
-Full documentation for [Archive Version 6 is pending](https://github.com/caporaso-lab/developing-with-qiime2/issues/32). 
+Full documentation for [Archive Version 6 is pending](https://github.com/caporaso-lab/developing-with-qiime2/issues/32).
 The source code can be found [here](https://github.com/qiime2/qiime2/blob/630696237166f60765f7bbe6e3c668ea0e1495d9/qiime2/core/archive/format/v6.py).
 
 ## Archive Version 7

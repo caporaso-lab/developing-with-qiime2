@@ -97,8 +97,8 @@ A `DNAIterator` is a Python object that enables iteration over a collection of z
 A little bit later we'll come back to how you decide what type hints to provide here.
 
 (suboptimal-initial-types)=
-The first couple of lines in this function are a little bit odd, and stem from the fact that (as of this writing) there isn't an existing QIIME 2 {term}`semantic type` for individual DNA sequences, but rather only for collections of DNA sequences.
-We are therefore going to work-around this right now, and in a subsequent lesson we'll define our own QIIME 2 semantic type to represent a single DNA sequence.
+The first couple of lines in this function are a little bit odd, and stem from the fact that (as of this writing) there isn't an existing QIIME 2 {term}`artifact class` for individual DNA sequences, but rather only for collections of DNA sequences.
+We are therefore going to work-around this right now, and in a subsequent lesson we'll define our own QIIME 2 artifact class to represent a single DNA sequence.
 We need two sequences as input to pairwise sequence alignment (by definition), and we'll take those as inputs through the `seq1` and `seq2` parameters.
 These will come in in `DNAIterator` objects, and our work-around is that we read the first sequence from each of these two input sequence collections by getting the `next()` item from each collection, one time each, and reassigning them to the variables `seq1` and `seq2`.
 
@@ -204,13 +204,13 @@ Here's what each is:
  - `function`: This is the Python function to be registered as a plugin action.
    We defined ours above as `nw_align`.
    If you add the import statement `from q2_dwq2._methods import nw_align` to the top of this file, you can provide `nw_align`.
- - `inputs`: This is a Python `dict` mapping the variable names of the {term}`inputs <Input>` to the plugin action to the semantic types of the inputs.
-   As mentioned above, QIIME 2 doesn't define a semantic type for a single DNA sequence, so we're going to use the type that is commonly used for defining collections of DNA sequences, and we'll just end up working with the first sequence in each input.
+ - `inputs`: This is a Python `dict` mapping the variable names of the {term}`inputs <Input>` to the plugin action to the artifact classes of the inputs.
+   As mentioned above, QIIME 2 doesn't define an artifact class for a single DNA sequence, so we're going to use the type that is commonly used for defining collections of DNA sequences, and we'll just end up working with the first sequence in each input.
    The type we use here is `FeatureData[Sequence]`.
-   A little bit later we'll come back to how you identify the semantic types that should be assigned to your input, and how to define your own sematic types if there isn't already a relevant one.
+   [A little bit later](plugin-tutorial-add-artifact-class) we'll come back to how you identify the artifact classes that should be assigned to your input, and how to define your own sematic types if there isn't already a relevant one.
    {term}`Inputs <Input>` to QIIME 2 actions are data in the form of {term}`Artifacts <Artifact>`, and these are different than {term}`Parameters <Parameter>`.
    It is at this stage, when registering a function as an action, that this distinction is made.
-   The semantic types we're using here need to be imported from q2-types.
+   The artifact classes we're using here need to be imported from q2-types.
    To do this, add the line `from q2_types.feature_data import FeatureData, Sequence` to the top of the file.
 - `parameters`: This is a Python `dict` mapping the names of parameters to their {term}`Primitive Type`.
   This information is used to validate input provided by users of your plugin, but more importantly to allow QIIME 2 interfaces to determine how this information should be collected from a user.
@@ -218,9 +218,9 @@ Here's what each is:
   Our four parameters are all `Floats`, and each has a `Range` that values must fall in.
   Import these primitive types for use here by adding the line `from qiime2.plugin import Float, Range` to the top of the file.
   The `gap_open_penalty` parameter, for example, is defined here as taking a floating point value greater than 0.
- - `outputs`: This is a Python `dict` mapping the variable names of the {term}`outputs <Output>` from the plugin action to their semantic types.
+ - `outputs`: This is a Python `dict` mapping the variable names of the {term}`outputs <Output>` from the plugin action to their artifact classes.
  The type we use here is `FeatureData[AlignedSequence]`, representing a collection of aligned DNA sequences.
- A more appropriate type might represent a pair of aligned sequences specifically, rather than one or more aligned sequences which is what this semantic type implies, but again we'll come back to that a later.
+ A more appropriate type might represent a pair of aligned sequences specifically, rather than one or more aligned sequences which is what this artifact class implies, but again we'll come back to that a later.
  We'll need to import `AlignedSequence` here as well, which you can do by adding the line `from q2_types.feature_data import AlignedSequence` to the top of the file (or adding `AlignedSequence` to the imports you already added from `q2_types.feature_data`).
  - `input_descriptions`, `parameter_descriptions`, and `output_descriptions`: These are Python `dicts` that provide descriptions of each input, parameter, and output, respectively, for use in help text through different interfaces.
  - `name`: A brief name for this action.
@@ -382,7 +382,7 @@ Take a minute to review both the command line and Python help text, and relate i
 ### Write unit tests
 
 Your code is *not ready for use* until you write unit tests, to ensure that it's doing what you expect.
-We'll write our unit tests for `nw_align` in `q2_dwq2/tests/test_methods.py`.
+We'll write unit tests for `nw_align` in `q2_dwq2/tests/test_methods.py`.
 QIIME 2 provides a class, `TestPluginBase`, that facilitates unit testing plugins.
 
 ```{warning}
@@ -549,7 +549,6 @@ If you initialized a git repository for this plugin when you started working on 
 git rm q2_dwq2/tests/data/table-1.biom
 ```
 ````
-
 
 After defining this test in your plugin, run the unit tests and confirm that you now have two passing tests.
 

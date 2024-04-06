@@ -1,16 +1,12 @@
 (types-of-types)=
-# Semantic types, data types, and file formats
+# Semantic types, data types, file formats, and artifact classes
 
 The term _type_ is overloaded with a few different concepts.
-The goal of this Explanation article is to disambiguate how it's used in QIIME 2.
+The goal of this *Explanation* article is to disambiguate how it's used in QIIME 2.
 To achieve this, we'll discuss two ways that it's commonly used, and then introduce a third way that it's used less frequently but which is important to QIIME 2.
-The three kinds of types that are used in QIIME 2 are **file types**, **data types**, and **semantic types**.
+This document will then conclude with a discussion of {term}`artifact classes <artifact class>`, which is the most relevant of these concepts for new plugin developers.
 
-````{margin}
-```{admonition} Video
-[This video](https://www.youtube.com/watch?v=PUsvtJgpNtE) on the QIIME 2 YouTube channel discusses semantic types.
-```
-````
+The three kinds of types that are used in QIIME 2, and which we'll start this explanation with, are **file types**, **data types**, and **semantic types**.
 
 ## File types (or formats) and data types (or objects)
 File types (or formats) refer to what you probably think of when you hear that phrase: the format of a file used to store some data.
@@ -56,7 +52,8 @@ Failing quietly is _much_ worse than failing loudly: it could waste many hours o
 ```
 
 QIIME 2 semantic types help with this, because they provide information on what the data in a QIIME 2 `.qza` file means without having to parse anything in the `data` directory.
-All QIIME 2 artifacts have a semantic type associated with them (it's one of the pieces of information stored in the `metadata.yaml` file), and QIIME 2 methods will describe what semantic types they take as input(s), and what semantic types they generate as output(s).
+All QIIME 2 artifacts are are associated with a semantic type that define what the data they contain means.
+
 
 ## Putting it together
 
@@ -65,16 +62,25 @@ It's possible that a given semantic type could be represented on disk by differe
 That's well exemplified by the many different formats that are used to store demultiplexed sequence and sequence quality data.
 For example, this may be in one a few variants of the fastq format, or in the fasta/qual format.
 Additionally, data from multiple samples may be contained in one single file or split into per-sample files.
-Regardless of which of these file formats the data is stored in, QIIME 2 will assign the same semantic type (in this case, `SampleData[SequencesWithQuality]`.
+Regardless of which of these file formats the data is stored in, the data has the same semantic meaning (in this case represented by the semantic type `SampleData[SequencesWithQuality]`.
 Similarly, the data type used in memory might differ depending on what operations are to be performed on the data, or based on the preference of the programmer.
 
 QIIME 2 uses the semantic type `FeatureTable[Frequency]` to represent the idea of a feature table that contains counts of features (e.g., bacterial genera) on a per sample basis.
 Many different actions can be applied to `FeatureTable[Frequency]` artifacts in QIIME 2.
 When a plugin developer defines a new action that takes a `FeatureTable[Frequency]` as input, they can choose whether to load the table into a `pandas.DataFrame` or `biom.Table` object, which are two different data types.
-Our example plugin `q2-dwq2` initially defines a action called `duplicate_table` which [takes a `FeatureTable[Frequency]` as input](https://github.com/caporaso-lab/q2-dwq2/blob/3465ea40b18ae15825411a5930cfd24016f5d872/q2_dwq2/plugin_setup.py#L28), and [generates the same semantic type as its output](https://github.com/caporaso-lab/q2-dwq2/blob/3465ea40b18ae15825411a5930cfd24016f5d872/q2_dwq2/plugin_setup.py#L30).
+Our example plugin `q2-dwq2` initially defines a action called `duplicate_table` which [takes a `FeatureTable[Frequency]` as input](https://github.com/caporaso-lab/q2-dwq2/blob/3465ea40b18ae15825411a5930cfd24016f5d872/q2_dwq2/plugin_setup.py#L28), and [generates the same as its output](https://github.com/caporaso-lab/q2-dwq2/blob/3465ea40b18ae15825411a5930cfd24016f5d872/q2_dwq2/plugin_setup.py#L30).
 The function registered to this action [declares that it will "view" the input `table` as a `pd.DataFrame`, and also return the output as a `pd.DataFrame`](https://github.com/caporaso-lab/q2-dwq2/blob/3465ea40b18ae15825411a5930cfd24016f5d872/q2_dwq2/_methods.py#L12).
-File types are associated with semantic types when [Artifact Classes are defined](https://github.com/qiime2/q2-types/blob/e25f9355958755343977e037bbe39110cfb56a63/q2_types/feature_table/_type.py#L42).
 
 Each kind of type discussed here represents different information about the data: how it's stored on disk (file type), how it's used by a function (its data type), and what it represents (its semantic type).
 The motivation for creating QIIME 2's semantic type system was to avoid issues that can arise from providing inappropriate data to actions.
 The semantic type system also helps users and developers better understand the intent of QIIME 2 actions by assigning meaning to the input and output, and allows for the discovery of new potentially relevant QIIME 2 actions.
+
+## Artifact classes
+
+Most of the time, plugin developers are more concerned with {term}`artifact classes <artifact class>`, rather than semantic types and formats directly, though we only recently starting transitioning the language used in our documentation to reflect this.
+You may still see some outdated usage of this, especially in older video content - sorry for the confusion!
+
+An artifact class is a kind of QIIME 2 artifact that can exist, and is defined by the association of a semantic type with a format (e.g., this is done in our example plugin when we [create the `SingleDNASequence` artifact class](register-artifact-class)).
+Together, these indicate what an artifact is intended to represent, and how its data is stored internally.
+You can see the artifact classes that your deployment of QIIME 2 is aware of by calling `qiime tools list-types`.
+Artifact classes (not semantic types) are associated with input and output from QIIME 2 actions.
