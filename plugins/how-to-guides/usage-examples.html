@@ -411,7 +411,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-usage-examples">Defining usage examples</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-usage-examples">Registering usage examples</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-usage-examples">Testing usage examples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basking-in-the-glow-of-success">Basking in the glow of success</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trying-it-out">Trying it out</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comments-can-provide-context">Comments can provide context</a></li>
 </ul>
             </nav>
@@ -429,17 +429,16 @@ document.write(`
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This document is not yet formatted for <em>Developing with QIIME 2</em>.
-Some links or references may not work.
+Some links or references may not work, and updaes are planned to the content.
 If you run into issues, please let us know <a class="reference external" href="https://github.com/caporaso-lab/developing-with-qiime2/issues/36">here</a>.</p>
 </div>
-<p>Congratulations! You built a plugin, and now you want people to use it.
-QIIME 2 enables you to write <em>usage examples</em> that give examples of how plugin actions can be run by your users.
+<p>QIIME 2 enables you to write <em>usage examples</em> that give examples of how plugin actions can be run by your users.
 It uses <a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_injection">dependency injection</a>
 to generate appropriate usage examples for any interface with a “usage driver”.
 You define and register each usage example once,
 giving it a parameter that accepts some usage driver.
 The interface that is running your usage examples will inject one or more of its drivers
-into your examples, rendering interface-appropriate results. Magic!</p>
+into your examples, rendering interface-appropriate results.</p>
 <p>The API is defined by <a class="reference external" href="https://github.com/qiime2/qiime2/blob/39ac17da01e22057ff38197eb23ad6cca48f4c2e/qiime2/sdk/usage.py#L687">the Usage class</a>.
 Individual usage drivers implement the underlying behavior of API functions according to their own needs.
 As a result, the ExecutionUsage driver will attempt to execute your usage examples,
@@ -456,7 +455,7 @@ and one which allows interface developers to write the usage drivers that make t
 <li><p><a class="reference internal" href="#defining-usage-examples">Defining usage examples</a></p></li>
 <li><p><a class="reference internal" href="#registering-usage-examples">Registering usage examples</a></p></li>
 <li><p><a class="reference internal" href="#testing-usage-examples">Testing usage examples</a></p></li>
-<li><p><a class="reference internal" href="#basking-in-the-glow-of-success">Basking in the glow of success</a></p></li>
+<li><p><a class="reference internal" href="#trying-it-out">Trying it out</a></p></li>
 <li><p><a class="reference internal" href="#comments-can-provide-context">Comments can provide context</a></p></li>
 </ul>
 <section id="data-factories-for-usage-examples">
@@ -514,8 +513,7 @@ You’ll have to use your imagination on the details.)</p>
 The action may or may not <em>actually</em> be invoked,
 depending on implementation details in the usage driver.
 Beyond ensuring that your example is correct and meaningful,
-you don’t have to worry about this.
-<code class="docutils literal notranslate"><span class="pre">use.action</span></code> to your heart’s content, and let the interfaces handle their own business.</p>
+you don’t have to worry about this.</p>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">UsageInputs</span></code> include both QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Input"><span class="xref std std-term">Inputs</span></a> <em>and</em> <a class="reference internal" href="../../back-matter/glossary.html#term-Parameter"><span class="xref std std-term">parameters</span></a>.
 Metadata must be initialized, but primitive parameters (and collections of parameters) may be passed directly.
 There are examples of this in the <a class="reference external" href="https://github.com/qiime2/qiime2/blob/39ac17da01e22057ff38197eb23ad6cca48f4c2e/qiime2/core/testing/examples.py#L178">identity_with_metadata_column_get_mdc</a>
@@ -604,8 +602,8 @@ but this hack is clunky, because it’s reaching beyond the intended use of this
 will probably result in cleaner and more maintainable tests
 than attempting to do the same using usage examples.</p>
 </section>
-<section id="basking-in-the-glow-of-success">
-<h2>Basking in the glow of success<a class="headerlink" href="#basking-in-the-glow-of-success" title="Permalink to this heading">#</a></h2>
+<section id="trying-it-out">
+<h2>Trying it out<a class="headerlink" href="#trying-it-out" title="Permalink to this heading">#</a></h2>
 <p>Now that you’ve created and registered a usage example
 and confirmed that it “works”, let’s see it in action!
 We’ll pretend that we just wrote the <code class="docutils literal notranslate"><span class="pre">q2-feature-table</span></code> usage examples above.</p>
@@ -648,8 +646,7 @@ qiime<span class="w"> </span>feature-table<span class="w"> </span>merge<span cla
 (e.g. ‘feature_table1.qza’, ‘basic’ and ‘three tables’, and ‘merged_table’)
 show up in our rendered example.
 Note also that <code class="docutils literal notranslate"><span class="pre">q2cli</span></code>’s usage driver was clever enough to format the commands for <code class="docutils literal notranslate"><span class="pre">q2cli</span></code>,
-including inferring that this action would produce a <code class="docutils literal notranslate"><span class="pre">.qza</span></code> file named <code class="docutils literal notranslate"><span class="pre">merged_table</span></code>.
-Snazzy!</p>
+including inferring that this action would produce a <code class="docutils literal notranslate"><span class="pre">.qza</span></code> file named <code class="docutils literal notranslate"><span class="pre">merged_table</span></code>.</p>
 <p>If we wanted to see what the Artifact API does with our examples,
 we would confirm that our conda environment included our code (as above).
 The cache is a q2cli thing, so we don’t need to refresh anything,
@@ -684,7 +681,7 @@ and we would render the examples manually.</p>
 </pre></div>
 </div>
 <p>The outcome here shows how we might run the <code class="docutils literal notranslate"><span class="pre">merge</span></code> command in the Artifact API,
-even including the correct import statement. WOOHOOO it works! you did a thing!</p>
+even including the correct import statement.</p>
 </section>
 <section id="comments-can-provide-context">
 <h2>Comments can provide context<a class="headerlink" href="#comments-can-provide-context" title="Permalink to this heading">#</a></h2>
@@ -761,7 +758,7 @@ The linked documentation provides worked examples.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-usage-examples">Defining usage examples</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-usage-examples">Registering usage examples</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-usage-examples">Testing usage examples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basking-in-the-glow-of-success">Basking in the glow of success</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trying-it-out">Trying it out</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comments-can-provide-context">Comments can provide context</a></li>
 </ul>
   </nav></div>

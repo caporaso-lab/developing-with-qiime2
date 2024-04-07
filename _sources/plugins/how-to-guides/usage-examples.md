@@ -3,20 +3,19 @@
 
 ```{warning}
 This document is not yet formatted for *Developing with QIIME 2*.
-Some links or references may not work.
+Some links or references may not work, and updaes are planned to the content.
 If you run into issues, please let us know [here](https://github.com/caporaso-lab/developing-with-qiime2/issues/36).
 ```
 
 ```{eval-rst}
 
-Congratulations! You built a plugin, and now you want people to use it.
 QIIME 2 enables you to write *usage examples* that give examples of how plugin actions can be run by your users.
 It uses `dependency injection <https://en.wikipedia.org/wiki/Dependency_injection>`__
 to generate appropriate usage examples for any interface with a "usage driver".
 You define and register each usage example once,
 giving it a parameter that accepts some usage driver.
 The interface that is running your usage examples will inject one or more of its drivers
-into your examples, rendering interface-appropriate results. Magic!
+into your examples, rendering interface-appropriate results.
 
 The API is defined by `the Usage class <https://github.com/qiime2/qiime2/blob/39ac17da01e22057ff38197eb23ad6cca48f4c2e/qiime2/sdk/usage.py#L687>`_.
 Individual usage drivers implement the underlying behavior of API functions according to their own needs.
@@ -36,7 +35,7 @@ and one which allows interface developers to write the usage drivers that make t
 * `Defining usage examples`_
 * `Registering usage examples`_
 * `Testing usage examples`_
-* `Basking in the glow of success`_
+* `Trying it out`_
 * `Comments can provide context`_
 
 Data factories for usage examples
@@ -102,7 +101,6 @@ The action may or may not *actually* be invoked,
 depending on implementation details in the usage driver.
 Beyond ensuring that your example is correct and meaningful,
 you don't have to worry about this.
-``use.action`` to your heart's content, and let the interfaces handle their own business.
 
 Note that ``UsageInputs`` include both QIIME 2 :term:`Inputs<input>` *and* :term:`parameters<parameter>`.
 Metadata must be initialized, but primitive parameters (and collections of parameters) may be passed directly.
@@ -207,8 +205,8 @@ Asserting correct behavior of QIIME 2 Actions or their underlying python functio
 will probably result in cleaner and more maintainable tests
 than attempting to do the same using usage examples.
 
-Basking in the glow of success
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Trying it out
+~~~~~~~~~~~~~
 Now that you've created and registered a usage example
 and confirmed that it "works", let's see it in action!
 We'll pretend that we just wrote the ``q2-feature-table`` usage examples above.
@@ -253,7 +251,6 @@ Note that the unique identifiers we created during example definition and regist
 show up in our rendered example.
 Note also that ``q2cli``'s usage driver was clever enough to format the commands for ``q2cli``,
 including inferring that this action would produce a ``.qza`` file named ``merged_table``.
-Snazzy!
 
 If we wanted to see what the Artifact API does with our examples,
 we would confirm that our conda environment included our code (as above).
@@ -293,7 +290,7 @@ Which renders the following:
     )
 
 The outcome here shows how we might run the ``merge`` command in the Artifact API,
-even including the correct import statement. WOOHOOO it works! you did a thing!
+even including the correct import statement.
 
 
 Comments can provide context
