@@ -90,6 +90,18 @@ For example, it allows some *usage drivers* to actually create these inputs (for
 
 **This document is incomplete from this point.**
 
+```python
+def nw_align_example_1(use):
+    seq1 = use.init_artifact('seq1', seq1_factory)
+    seq2 = use.init_artifact('seq2', seq2_factory)
+
+    msa, = use.action(
+        use.UsageAction(plugin_id='dwq2',
+                        action_id='nw_align'),
+        use.UsageInputs(seq1=seq1, seq2=seq2),
+        use.UsageOutputNames(aligned_sequences='msa'),
+    )
+```
 
 
 
