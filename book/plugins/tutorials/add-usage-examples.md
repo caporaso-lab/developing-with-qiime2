@@ -57,13 +57,13 @@ def seq2_factory():
     return _create_seq_artifact(seq)
 
 
-def _create_seq_artifact(seq):
+def _create_seq_artifact(seq: skbio.DNA):
     with tempfile.NamedTemporaryFile() as f:
-        # write our skbio.DNA object to file in fasta format (the default)
+        # write our skbio.DNA object to file in fasta format
         seq.write(f)
         # reset to the beginning of the file
         f.seek(0)
-        # instantiate our format object with the fasta
+        # instantiate our file format (ff) object with the fasta file
         ff = SingleRecordDNAFASTAFormat(f.name, mode='r')
         # return the sequence packaged in a "SingleDNASequence" qiime2.Artifact
         return qiime2.Artifact.import_data("SingleDNASequence", ff)
@@ -79,6 +79,7 @@ The factory functions I defined here are `seq1_factory` and `seq2_factory`.
 Each creates an `skbio.DNA` object, and then passes that to my helper function, `_create_seq_artifact`.
 
 `_create_seq_artifact` takes an `skbio.DNA` sequence object as input.
+(The type hint in the function definition isn't required, but I like to include it to remind myself how this function works when I come back to it in the future.)
 Internally, it creates a temporary file, writes the sequence to that file, and then creates `SingleRecordDNAFASTAFormat` object from that file.
 In the final step, we use `qiime2.Artifact.import_data`, which allows us to import data in a similar way as if we were calling `qiime tools import` through q2cli: we provide the input file and the artifact class that we want to import into, and we get QIIME 2 artifact back.
 That artifact is returned by the helper function, and in turn is returned by the factory function that called it.
