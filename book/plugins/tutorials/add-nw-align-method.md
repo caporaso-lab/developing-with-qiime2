@@ -51,7 +51,7 @@ Let's add this wrapper to our `q2-dwq2/q2_dwq2/_methods.py`.
 If yours are different, you'll need to adjust that relative file path accordingly.)
 The `_` at the beginning of `_methods.py` is convention that conveys that this is intended to be a private submodule: in other words, consummers of this code outside of the this Python package shouldn't access anything in this file directly.
 
-Since the `duplicate_table` method that was defined in this plugin was only intended to get us started, I am going to remove it now, replacing all of the content of that file with the following code:
+Since the `duplicate_table` method that was defined in this plugin was only intended to get us started, remove it now, replacing all of the content of that file with the following code:
 
 ```python
 # ----------------------------------------------------------------------------
@@ -100,7 +100,7 @@ A little bit later we'll come back to how you decide what type hints to provide 
 The first couple of lines in this function are a little bit odd, and stem from the fact that (as of this writing) there isn't an existing QIIME 2 {term}`artifact class` for individual DNA sequences, but rather only for collections of DNA sequences.
 We are therefore going to work-around this right now, and in a subsequent lesson we'll define our own QIIME 2 artifact class to represent a single DNA sequence.
 We need two sequences as input to pairwise sequence alignment (by definition), and we'll take those as inputs through the `seq1` and `seq2` parameters.
-These will come in in `DNAIterator` objects, and our work-around is that we read the first sequence from each of these two input sequence collections by getting the `next()` item from each collection, one time each, and reassigning them to the variables `seq1` and `seq2`.
+These will come in as `DNAIterator` objects, and our work-around is that we read the first sequence from each of these two input sequence collections by getting the `next()` item from each collection, one time each, and reassigning them to the variables `seq1` and `seq2`.
 
 Next, we call `skbio.alignment.global_pairwise_align_nucleotide`, passing in all of our inputs.
 `skbio.alignment.global_pairwise_align_nucleotide` returns three outputs.
@@ -157,7 +157,7 @@ This is how we'll reference this citation when we associate it with our action, 
 
 Now we have what we need to register our function as a plugin method.
 By convention, this is done in `q2-dwq2/q2_dwq2/plugin_setup.py`, and that's what we'll do here.
-I am chosing to remove the registration of the `duplicate_table` action, now that I'm adding one of my own, but whether or not you want to do that too is up to you.
+Start by removing the registration of the `duplicate_table` action, now that we removed the underlying function from the plugin.
 
 To register a function as a method, you'll use `plugin.methods.register_function`, where `plugin` is the `qiime2.plugin.Plugin` action that is instantiated in this file.
 Add the following code to your `q2-dwq2/q2_dwq2/plugin_setup.py` file, and then we'll work through it line by line.
@@ -409,7 +409,7 @@ That is functionality that you get for free when developing QIIME 2 plugins: the
 #### A first test of our plugin action
 
 The following is a first test of our `nw_align` method.
-I'm replacing the tests of `duplicate_table` that were already in this file, as I decided to remove that action from my plugin.
+Remove the tests of `duplicate_table` that in this file, since we removed that action from the plugin.
 
 ````{margin}
 ```{note}
@@ -536,7 +536,7 @@ Save the following text in a new file, `q2-dwq2/q2_dwq2/tests/data/seq-2.fasta`.
 ACCGGTAACCGGTTAACACCCAC
 ```
 
-While adding these files, I also removed `q2-dwq2/q2_dwq2/tests/data/table-1.biom`, which I'm not using any more since I removed the `duplicate_table` action and its tests, using the command:
+While adding these files, also remove `q2-dwq2/q2_dwq2/tests/data/table-1.biom`, which we're not using any more since we removed the `duplicate_table` action and its tests, using the command:
 
 ```shell
 rm q2_dwq2/tests/data/table-1.biom
