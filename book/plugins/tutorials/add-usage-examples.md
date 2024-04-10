@@ -19,7 +19,7 @@ In this section of the tutorial, we'll define a usage example for our `nw-align`
 (add-usage-example-commit)=
 ```{admonition} tl;dr
 :class: tip
-The full code that I developed for this section can be viewed [here](https://github.com/caporaso-lab/q2-dwq2/pull/7/commits/0cf4c9f0e5de4d8095f3fbc9c9fe84590f8cdb71).
+The full code that I developed for this section can be viewed [here](https://github.com/caporaso-lab/q2-dwq2/pull/7/commits/386ff28118d309043d01b8f8e0d7ebbba85cabf4).
 ```
 
 ## Defining a usage example for `nw-align`
@@ -35,7 +35,7 @@ This is done by creating a function that returns a QIIME 2 artifact that is used
 
 Start by creating a top-level file in your module called `_examples.py`.
 Mine will be called `q2-dwq2/q2_dwq2/_examples.py`.
-Add the following code, and then we'll work through it line-by-line.
+Add the following code, and then we'll work through it.
 
 ```python
 import tempfile
@@ -73,23 +73,30 @@ Our goal here is to define two "factory" functions - one for each of `nw-align`'
 These functions will be used when we define our usage example, and because of how usage example definitions work, these functions can't take any parameters as input.
 Because both of these functions will do similar work under the hood, I am also creating a helper function that creates a `SingleDNASequence` artifact from an `skbio.DNA` object.
 That lets me avoid duplicating code.
-(Ultimately, there is a simplification that you can make here by defining a new transformer, but I'm going to leave that as an advanced optional exercise for you at the end of this section.)
 
 The factory functions I defined here are `seq1_factory` and `seq2_factory`.
 Each creates an `skbio.DNA` object, and then passes that to my helper function, `_create_seq_artifact`.
 
 `_create_seq_artifact` takes an `skbio.DNA` sequence object as input.
-(The type hint in the function definition isn't required, but I like to include it to remind myself how this function works when I come back to it in the future.)
-Internally, it creates a temporary file, writes the sequence to that file, and then creates `SingleRecordDNAFASTAFormat` object from that file.
+(The type hint in the function definition isn't required, but I like to include it to remind myself how this function works when I come back to it in the future - it makes my code more self-documenting.)
+Internally, it creates a temporary file, writes the input sequence to that file, and then creates a `SingleRecordDNAFASTAFormat` object from that file.
 In the final step, we use `qiime2.Artifact.import_data`, which allows us to import data in a similar way as if we were calling `qiime tools import` through q2cli: we provide the input file and the artifact class that we want to import into, and we get QIIME 2 artifact back.
 That artifact is returned by the helper function, and in turn is returned by the factory function that called it.
 
 This may feel like a lot of work to define data to use in an example, but it provides a lot of flexibility in how the usage example you define can ultimately be used.
-For example, it allows some *usage drivers* to actually create these inputs (for example, a usage driver that is going to be used to test the examples), and for some usage drivers to not bother taking the time to create the inputs (for example, usage drivers that are writing commands in documentation).
+For example, it allows some *usage drivers* to actually create these inputs (for example, a usage driver that is going to be used to test the examples), and for some usage drivers to not bother taking the time to create the inputs (for example, usage drivers that are writing commands in help text but not actually executing them).
 
 ### Defining the usage example
 
-**This document is incomplete from this point.**
+Next, we define a usage example as a function that takes a `UsageDriver` subclass as input.
+We often call the input `use`, by convention, but you can call it anything.
+This function starts by initiating two sequence artifacts using the factory functions that we just defined.
+It then defines the relevant action call, which in our case will be to the `dwq2` plugin's `nw_align` action.
+It also assignes the input, and provides a name for the output.
+That's it for defining the actual usage example.
+This one is just using built-in default values, but you could addionally pass parameters to the action in this usage example, or a second usage example that you associated with the action.
+
+The following code in my `q2-dwq2/q2_dwq2/_examples.py` file defines the usage example:
 
 ```python
 def nw_align_example_1(use):
@@ -104,11 +111,36 @@ def nw_align_example_1(use):
     )
 ```
 
+### Registering the usage example
 
+Finally, we're ready to register the usage example.
+For this, we'll go back to the `plugin_setup.py` file.
 
+You should first import the new usage example function by adding the following line to your imports at the top of the file:
 
+```python
+from q2_dwq2._examples import nw_align_example_1
+```
+
+Then, in the call to `plugin.methods.register_function`, you should add an `examples` parameter, to which you can provide a dictionary mapping example names (these will be sometimes be displayed with the usage example) to usage example functions.
+To do this,
+
+```python
+plugin.methods.register_function(
+    function=nw_align,
+    ...
+    citations=[citations['Needleman1970']],
+    examples={'Align two DNA sequences.': nw_align_example_1}
+)
+```
+
+That should wrap up the definition and registration of this usage example.
 
 ## Displaying usage examples
+
+In this section we'll work through some user-facting commands that allow you or your users to view your usage examples.
+First, and most straight-forward (as of this writing) is to do this through q2cli.
+If you call your action with the `--help` parameter, you will now see the usage example at the bottom of the resulting help text.
 
 ### Command line interface
 
@@ -126,11 +158,18 @@ Examples:
     --o-aligned-sequences msa.qza
 ```
 
+Test this command out by having QIIME 2 write the example data we defined to file.
+You can do this using the following q2cli command.
+After generating the example data, run the usage example providing the example data as input.
+
 ```shell
 $ qiime dwq2 nw-align --example-data usage-example-data/
 ```
 
 ### Python 3 API
+
+As mentioned above, the abstract nature of our usage example definition enables it to be interpreted by different usage drivers, enabling the same example to be presented as it would be used through different interfaces.
+Open an `ipython` shell in your development environment, and try the following:
 
 ```python
 from qiime2.plugins import dwq2, ArtifactAPIUsage
@@ -143,7 +182,8 @@ for example in examples.values():
     print(use.render())
 ```
 
-Will display the following:
+This should display how to run this example through the Python 3 API.
+Try it out with the same example data that you generated above (you can use `qiime2.Artifact.load` to load the example files into QIIME 2 artifacts to be provided as input to this call to `nw_align`).
 
 ```python
 import qiime2.plugins.dwq2.actions as dwq2_actions
@@ -153,6 +193,39 @@ msa, = dwq2_actions.nw_align(
     seq2=seq2,
 )
 ```
+
+## Automated testing of all usage examples
+
+Finally, it's a good idea to have your usage examples run as part of your test suite, as a way to assess if any future changes you make to your code break the usage examples you defined.
+To do this, create a new test file in your `tests` directory.
+Mine is called `q2-dwq2/tests/test_examples.py`.
+Add the following code to that file:
+
+```python
+from qiime2.plugin.testing import TestPluginBase
+
+
+class UsageExampleTests(TestPluginBase):
+    package = 'q2_dwq2.tests'
+
+    def test_examples(self):
+        self.execute_examples()
+```
+
+Save the file, and run `make test`.
+That will now run this additional test, which uses `TestPluginBase.execute_examples` to discover and run all of the usage examples defined in the plugin.
+You should see output like the following:
+
+```shell
+$ make test
+...
+===== 15 passed, 25 warnings in 15.06s ======
+```
+
+This code tests that the usage examples ran successfully, but importantly it does not test that any output they produce aligns with expected output.
+It is possible to additionally check the output of these examples, but that doesn't replace the need for unit tests.
+Unit tests are more expressive and useful for testing your plugin's functionality, while automated usage example testing is a good way to assess the validity of your documentation.
+If you'd like to learn more about testing specific output that you get from running your usage examples, refer to [](how-to-write-usage-examples).
 
 ## Optional exercise
 
