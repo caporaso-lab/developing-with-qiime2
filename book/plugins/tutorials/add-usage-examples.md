@@ -3,7 +3,7 @@
 
 If you want others to use your new functionality, it isn't *really* done until you document how to use it.
 Let's do that now.
-This will ensure that users know how to use your code, and will give them something to try after they install your plugin to convince them that it's working.
+This will ensure that users know how to use your code, and it will give them something to try after they install your plugin to convince them that it's working.
 I generally find that I'm the first person to benefit from my documentation, and in some cases I'm also the person who most frequently benefits from my documentation (e.g., if it's code that I write for my own purposes, rather than something I intend to broadly disseminate).
 
 QIIME 2 provides a framework for defining *usage examples* for plugins.
@@ -90,11 +90,11 @@ For example, it allows some *usage drivers* to actually create these inputs (for
 
 Next, we define a usage example as a function that takes a `UsageDriver` subclass as input.
 We often call the input `use`, by convention, but you can call it anything.
-This function starts by initiating two sequence artifacts using the factory functions that we just defined.
+This function starts by instantiating two sequence artifacts using the factory functions that we just defined.
 It then defines the relevant action call, which in our case will be to the `dwq2` plugin's `nw_align` action.
-It also assignes the input, and provides a name for the output.
-That's it for defining the actual usage example.
-This one is just using built-in default values, but you could addionally pass parameters to the action in this usage example, or a second usage example that you associated with the action.
+It also assigns the inputs, and provides a name for the output.
+
+This usage example is using default parameter values, but you could addionally pass parameters to the action in this usage example, or add a second usage example that does that which you also associate with this action.
 
 The following code in my `q2-dwq2/q2_dwq2/_examples.py` file defines the usage example:
 
@@ -122,8 +122,9 @@ You should first import the new usage example function by adding the following l
 from q2_dwq2._examples import nw_align_example_1
 ```
 
-Then, in the call to `plugin.methods.register_function`, you should add an `examples` parameter, to which you can provide a dictionary mapping example names (these will be sometimes be displayed with the usage example) to usage example functions.
-To do this,
+Then, in the call to `plugin.methods.register_function`, you should add an `examples` parameter, to which you can provide a dictionary mapping example names to usage example functions.
+These names (i.e., dictionary keys) will be displayed with the usage example in some interfaces.
+To do this, adapt your call to `plugin.methods.register_function` as follows.
 
 ```python
 plugin.methods.register_function(
@@ -134,18 +135,18 @@ plugin.methods.register_function(
 )
 ```
 
-That should wrap up the definition and registration of this usage example.
+That completes the definition and registration of our `nw-align` usage example.
 
 ## Displaying usage examples
 
-In this section we'll work through some user-facting commands that allow you or your users to view your usage examples.
-First, and most straight-forward (as of this writing) is to do this through q2cli.
+In this section we'll work through some user-facing commands that allow you or your users to view your usage examples.
+First, and most straight-forward, is to do this through q2cli.
 If you call your action with the `--help` parameter, you will now see the usage example at the bottom of the resulting help text.
 
 ### Command line interface
 
 ```shell
-qiime dwq2 nw-align --help
+$ qiime dwq2 nw-align --help
 Usage: qiime dwq2 nw-align [OPTIONS]
 
 ...
@@ -158,13 +159,13 @@ Examples:
     --o-aligned-sequences msa.qza
 ```
 
-Test this command out by having QIIME 2 write the example data we defined to file.
-You can do this using the following q2cli command.
-After generating the example data, run the usage example providing the example data as input.
+You can test this command by having QIIME 2 write the example data we defined to file using the following q2cli command:
 
 ```shell
 $ qiime dwq2 nw-align --example-data usage-example-data/
 ```
+
+After generating the example data, run the usage example as described in the help text providing the example data as input and confirm that it works as expected.
 
 ### Python 3 API
 
@@ -194,7 +195,7 @@ msa, = dwq2_actions.nw_align(
 )
 ```
 
-## Automated testing of all usage examples
+## Automated testing of usage examples
 
 Finally, it's a good idea to have your usage examples run as part of your test suite, as a way to assess if any future changes you make to your code break the usage examples you defined.
 To do this, create a new test file in your `tests` directory.
@@ -218,14 +219,30 @@ You should see output like the following:
 
 ```shell
 $ make test
+
 ...
+
 ===== 15 passed, 25 warnings in 15.06s ======
 ```
 
 This code tests that the usage examples ran successfully, but importantly it does not test that any output they produce aligns with expected output.
 It is possible to additionally check the output of these examples, but that doesn't replace the need for unit tests.
-Unit tests are more expressive and useful for testing your plugin's functionality, while automated usage example testing is a good way to assess the validity of your documentation.
-If you'd like to learn more about testing specific output that you get from running your usage examples, refer to [](how-to-write-usage-examples).
+Unit tests tend to be more expressive and useful for testing your plugin's functionality, while automated usage example testing is a good way to assess the validity of your documentation.
+If you'd like to learn more about testing specific output that you get from running your usage examples, refer to the [](how-to-write-usage-examples) *How to* guide.
+
+## Writing tutorials
+
+Usage examples provide users with guidelines on the specific commands they can run to use your plugin, but they don't provide a lot of context.
+It's a good idea to also write tutorials that describe what your plugin is intended to do, how and why to use it, and how to interpret the results.
+Ideally the tutorial also provides a small data set that can be analysed quickly on a modestly powered laptop computer.
+I credit a lot of the popularity of QIIME 1 and QIIME 2 to its tutorials and to our support forums.
+
+Writing tutorials is out of scope of this document for now, though we may add a *How to* article in the future that discusses writing and automating testing of tutorials.
+As a general recommendation though, I highly recommend writing your tutorials using [Jupyter Book](https://jupyterbook.org), which is what *Developing with QIIME 2* is written with.
+It's very feature rich, easily deployed with GitHub Actions, and it makes it straight-forward to create nice looking documentation.
+[Diataxis](https://diataxis.fr/) is also great reading material on how your tutorials can be structured, and if you get excited about writing documentation (it's fun!) the [Write the Docs community](https://www.writethedocs.org/) is a group of like-minded folks.
+
+Happy documenting! 📝
 
 ## Optional exercise
 
