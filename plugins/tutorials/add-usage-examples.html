@@ -448,7 +448,7 @@ This is one way the framework supports our goal of meeting users where they are 
 <p>In this section of the tutorial, we’ll define a usage example for our <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> action.</p>
 <div class="tip admonition" id="add-usage-example-commit">
 <p class="admonition-title">tl;dr</p>
-<p>The full code that I developed for this section can be viewed <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/062f97f48fd3efd7af95b4bfa3ebc30006ee3628">here</a>.</p>
+<p>The full code that I developed for this section can be viewed <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/790c73536a7d0cbf6c4a3f07630c65a79c5d6077">here</a>.</p>
 </div>
 <section id="defining-a-usage-example-for-nw-align">
 <h2>Defining a usage example for <code class="docutils literal notranslate"><span class="pre">nw-align</span></code><a class="headerlink" href="#defining-a-usage-example-for-nw-align" title="Permalink to this heading">#</a></h2>
@@ -482,30 +482,33 @@ Add the following code, and then we’ll work through it.</p>
 
 
 <span class="k">def</span> <span class="nf">_create_seq_artifact</span><span class="p">(</span><span class="n">seq</span><span class="p">:</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">()</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="c1"># write our skbio.DNA object to file in fasta format</span>
-        <span class="n">seq</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-        <span class="c1"># reset to the beginning of the file</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="c1"># instantiate our file format (ff) object with the fasta file</span>
-        <span class="n">ff</span> <span class="o">=</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-        <span class="c1"># return the sequence packaged in a &quot;SingleDNASequence&quot; qiime2.Artifact</span>
-        <span class="k">return</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Artifact</span><span class="o">.</span><span class="n">import_data</span><span class="p">(</span><span class="s2">&quot;SingleDNASequence&quot;</span><span class="p">,</span> <span class="n">ff</span><span class="p">)</span>
+    <span class="n">ff</span> <span class="o">=</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">()</span>
+    <span class="n">seq</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ff</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Artifact</span><span class="o">.</span><span class="n">import_data</span><span class="p">(</span><span class="s2">&quot;SingleDNASequence&quot;</span><span class="p">,</span> <span class="n">ff</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Our goal here is to define two “factory” functions - one for each of <code class="docutils literal notranslate"><span class="pre">nw-align</span></code>’s <code class="docutils literal notranslate"><span class="pre">SingleDNASequence</span></code> inputs - that each return an artifact of class <code class="docutils literal notranslate"><span class="pre">SingleDNASequence</span></code>.
+<p>Our goal here is to define two “factory” functions - one for each of <code class="docutils literal notranslate"><span class="pre">nw-align</span></code>’s <code class="docutils literal notranslate"><span class="pre">SingleDNASequence</span></code> inputs - that each return an <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact-class"><span class="xref std std-term">artifact of class</span></a> <code class="docutils literal notranslate"><span class="pre">SingleDNASequence</span></code>.
 These functions will be used when we define our usage example, and because of how usage example definitions work, these functions can’t take any parameters as input.
 Because both of these functions will do similar work under the hood, I am also creating a helper function that creates a <code class="docutils literal notranslate"><span class="pre">SingleDNASequence</span></code> artifact from an <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> object.
 That lets me avoid duplicating code.</p>
 <p>The factory functions I defined here are <code class="docutils literal notranslate"><span class="pre">seq1_factory</span></code> and <code class="docutils literal notranslate"><span class="pre">seq2_factory</span></code>.
 Each creates an <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> object, and then passes that to my helper function, <code class="docutils literal notranslate"><span class="pre">_create_seq_artifact</span></code>.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The type hint in the <code class="docutils literal notranslate"><span class="pre">_create_seq_artifact</span></code> function definition isn’t required, but I like to include it to remind myself how this function works when I come back to it in the future.
+It makes my code more self-documenting.</p>
+</div>
+</aside>
 <p><code class="docutils literal notranslate"><span class="pre">_create_seq_artifact</span></code> takes an <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> sequence object as input.
-(The type hint in the function definition isn’t required, but I like to include it to remind myself how this function works when I come back to it in the future - it makes my code more self-documenting.)
-Internally, it creates a temporary file, writes the input sequence to that file, and then creates a <code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTAFormat</span></code> object from that file.
-In the final step, we use <code class="docutils literal notranslate"><span class="pre">qiime2.Artifact.import_data</span></code>, which allows us to import data in a similar way as if we were calling <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">tools</span> <span class="pre">import</span></code> through q2cli: we provide the input file and the artifact class that we want to import into, and we get QIIME 2 artifact back.
-That artifact is returned by the helper function, and in turn is returned by the factory function that called it.</p>
+Internally, it creates a <code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTAFormat</span></code> object which is assigned to the variable <code class="docutils literal notranslate"><span class="pre">ff</span></code> (for <em>file format</em>).
+Our sequence is written to <code class="docutils literal notranslate"><span class="pre">ff.path</span></code> (i.e., the file format’s <code class="docutils literal notranslate"><span class="pre">path</span></code> object, which we cast to a string) using <code class="docutils literal notranslate"><span class="pre">seq.write</span></code>.
+In the final step, we use <code class="docutils literal notranslate"><span class="pre">qiime2.Artifact.import_data</span></code>, which allows us to import data in a similar way as if we were calling <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">tools</span> <span class="pre">import</span></code> through q2cli (incidentally, <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">tools</span> <span class="pre">import</span></code> calls <code class="docutils literal notranslate"><span class="pre">qiime2.Artifact.import_data</span></code>, under the hood).
+We provide the artifact class that we want to import into, and the file format (<code class="docutils literal notranslate"><span class="pre">ff</span></code>) that we want to import from, and we get a QIIME 2 artifact back.
+That artifact is returned by the helper function, and in turn is returned by the factory function that called it. 🛠️</p>
 <p>This may feel like a lot of work to define data to use in an example, but it provides a lot of flexibility in how the usage example you define can ultimately be used.
-For example, it allows some <em>usage drivers</em> to actually create these inputs (for example, a usage driver that is going to be used to test the examples), and for some usage drivers to not bother taking the time to create the inputs (for example, usage drivers that are writing commands in help text but not actually executing them).</p>
+For example, it allows some <em>usage drivers</em> to actually create these inputs (for example, a usage driver that is going to be used to <a class="reference internal" href="#test-usage-examples"><span class="std std-ref">test the examples</span></a>), while another usage driver can just act as if they were created but not bother taking the time to actually create them (for example, usage drivers that are <a class="reference internal" href="#display-usage-example"><span class="std std-ref">displaying examples in command line help</span></a> text but not executing them).</p>
 </section>
 <section id="defining-the-usage-example">
 <h3>Defining the usage example<a class="headerlink" href="#defining-the-usage-example" title="Permalink to this heading">#</a></h3>
@@ -552,7 +555,7 @@ To do this, adapt your call to <code class="docutils literal notranslate"><span 
 </section>
 </section>
 <section id="displaying-usage-examples">
-<h2>Displaying usage examples<a class="headerlink" href="#displaying-usage-examples" title="Permalink to this heading">#</a></h2>
+<span id="display-usage-example"></span><h2>Displaying usage examples<a class="headerlink" href="#displaying-usage-examples" title="Permalink to this heading">#</a></h2>
 <p>In this section we’ll work through some user-facing commands that allow you or your users to view your usage examples.
 First, and most straight-forward, is to do this through q2cli.
 If you call your action with the <code class="docutils literal notranslate"><span class="pre">--help</span></code> parameter, you will now see the usage example at the bottom of the resulting help text.</p>
@@ -604,7 +607,7 @@ Try it out with the same example data that you generated above (you can use <cod
 </section>
 </section>
 <section id="automated-testing-of-usage-examples">
-<h2>Automated testing of usage examples<a class="headerlink" href="#automated-testing-of-usage-examples" title="Permalink to this heading">#</a></h2>
+<span id="test-usage-examples"></span><h2>Automated testing of usage examples<a class="headerlink" href="#automated-testing-of-usage-examples" title="Permalink to this heading">#</a></h2>
 <p>Finally, it’s a good idea to have your usage examples run as part of your test suite, as a way to assess if any future changes you make to your code break the usage examples you defined.
 To do this, create a new test file in your <code class="docutils literal notranslate"><span class="pre">tests</span></code> directory.
 Mine is called <code class="docutils literal notranslate"><span class="pre">q2-dwq2/tests/test_examples.py</span></code>.
