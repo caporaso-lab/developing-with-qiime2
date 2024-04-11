@@ -19,7 +19,7 @@ In this section of the tutorial, we'll define a usage example for our `nw-align`
 (add-usage-example-commit)=
 ```{admonition} tl;dr
 :class: tip
-The full code that I developed for this section can be viewed [here](https://github.com/caporaso-lab/q2-dwq2/pull/7/commits/386ff28118d309043d01b8f8e0d7ebbba85cabf4).
+The full code that I developed for this section can be viewed [here](https://github.com/caporaso-lab/q2-dwq2/commit/062f97f48fd3efd7af95b4bfa3ebc30006ee3628).
 ```
 
 ## Defining a usage example for `nw-align`
