@@ -19,7 +19,7 @@ In this section of the tutorial, we'll define a usage example for our `nw-align`
 (add-usage-example-commit)=
 ```{admonition} tl;dr
 :class: tip
-The full code that I developed for this section can be viewed [here](https://github.com/caporaso-lab/q2-dwq2/commit/062f97f48fd3efd7af95b4bfa3ebc30006ee3628).
+The full code that I developed for this section can be viewed [here](https://github.com/caporaso-lab/q2-dwq2/commit/790c73536a7d0cbf6c4a3f07630c65a79c5d6077).
 ```
 
 ## Defining a usage example for `nw-align`
@@ -58,18 +58,12 @@ def seq2_factory():
 
 
 def _create_seq_artifact(seq: skbio.DNA):
-    with tempfile.NamedTemporaryFile() as f:
-        # write our skbio.DNA object to file in fasta format
-        seq.write(f)
-        # reset to the beginning of the file
-        f.seek(0)
-        # instantiate our file format (ff) object with the fasta file
-        ff = SingleRecordDNAFASTAFormat(f.name, mode='r')
-        # return the sequence packaged in a "SingleDNASequence" qiime2.Artifact
-        return qiime2.Artifact.import_data("SingleDNASequence", ff)
+    ff = SingleRecordDNAFASTAFormat()
+    seq.write(str(ff.path))
+    return qiime2.Artifact.import_data("SingleDNASequence", ff)
 ```
 
-Our goal here is to define two "factory" functions - one for each of `nw-align`'s `SingleDNASequence` inputs - that each return an artifact of class `SingleDNASequence`.
+Our goal here is to define two "factory" functions - one for each of `nw-align`'s `SingleDNASequence` inputs - that each return an {term}`artifact of class <artifact class>` `SingleDNASequence`.
 These functions will be used when we define our usage example, and because of how usage example definitions work, these functions can't take any parameters as input.
 Because both of these functions will do similar work under the hood, I am also creating a helper function that creates a `SingleDNASequence` artifact from an `skbio.DNA` object.
 That lets me avoid duplicating code.
@@ -77,14 +71,22 @@ That lets me avoid duplicating code.
 The factory functions I defined here are `seq1_factory` and `seq2_factory`.
 Each creates an `skbio.DNA` object, and then passes that to my helper function, `_create_seq_artifact`.
 
+````{margin}
+```{tip}
+The type hint in the `_create_seq_artifact` function definition isn't required, but I like to include it to remind myself how this function works when I come back to it in the future.
+It makes my code more self-documenting.
+```
+````
+
 `_create_seq_artifact` takes an `skbio.DNA` sequence object as input.
-(The type hint in the function definition isn't required, but I like to include it to remind myself how this function works when I come back to it in the future - it makes my code more self-documenting.)
-Internally, it creates a temporary file, writes the input sequence to that file, and then creates a `SingleRecordDNAFASTAFormat` object from that file.
-In the final step, we use `qiime2.Artifact.import_data`, which allows us to import data in a similar way as if we were calling `qiime tools import` through q2cli: we provide the input file and the artifact class that we want to import into, and we get QIIME 2 artifact back.
-That artifact is returned by the helper function, and in turn is returned by the factory function that called it.
+Internally, it creates a `SingleRecordDNAFASTAFormat` object which is assigned to the variable `ff` (for *file format*).
+Our sequence is written to `ff.path` (i.e., the file format's `path` object, which we cast to a string) using `seq.write`.
+In the final step, we use `qiime2.Artifact.import_data`, which allows us to import data in a similar way as if we were calling `qiime tools import` through q2cli (incidentally, `qiime tools import` calls `qiime2.Artifact.import_data`, under the hood).
+We provide the artifact class that we want to import into, and the file format (`ff`) that we want to import from, and we get a QIIME 2 artifact back.
+That artifact is returned by the helper function, and in turn is returned by the factory function that called it. 🛠️
 
 This may feel like a lot of work to define data to use in an example, but it provides a lot of flexibility in how the usage example you define can ultimately be used.
-For example, it allows some *usage drivers* to actually create these inputs (for example, a usage driver that is going to be used to test the examples), and for some usage drivers to not bother taking the time to create the inputs (for example, usage drivers that are writing commands in help text but not actually executing them).
+For example, it allows some *usage drivers* to actually create these inputs (for example, a usage driver that is going to be used to [test the examples](test-usage-examples)), while another usage driver can just act as if they were created but not bother taking the time to actually create them (for example, usage drivers that are [displaying examples in command line help](display-usage-example) text but not executing them).
 
 ### Defining the usage example
 
@@ -137,6 +139,7 @@ plugin.methods.register_function(
 
 That completes the definition and registration of our `nw-align` usage example.
 
+(display-usage-example)=
 ## Displaying usage examples
 
 In this section we'll work through some user-facing commands that allow you or your users to view your usage examples.
@@ -195,6 +198,7 @@ msa, = dwq2_actions.nw_align(
 )
 ```
 
+(test-usage-examples)=
 ## Automated testing of usage examples
 
 Finally, it's a good idea to have your usage examples run as part of your test suite, as a way to assess if any future changes you make to your code break the usage examples you defined.
