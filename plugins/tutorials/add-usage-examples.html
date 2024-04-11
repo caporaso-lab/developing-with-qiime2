@@ -384,7 +384,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -400,6 +402,27 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-usage-example-for-nw-align">Defining a usage example for <code class="docutils literal notranslate"><span class="pre">nw-align</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-input-data-for-your-usage-example">Define input data for your usage example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-usage-example">Defining the usage example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-the-usage-example">Registering the usage example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#displaying-usage-examples">Displaying usage examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line-interface">Command line interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-3-api">Python 3 API</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automated-testing-of-usage-examples">Automated testing of usage examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-tutorials">Writing tutorials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-exercise">Optional exercise</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -411,14 +434,233 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="add-usage-examples">
 <span id="add-nw-align-usage"></span><h1>Add usage examples<a class="headerlink" href="#add-usage-examples" title="Permalink to this heading">#</a></h1>
-<p>Your new functionality isn’t <em>really</em> done until you document it, so let’s do that now.
-This will ensure that users know how to use your code, and will give them something to try after they install your plugin to convince them that it’s working.
+<p>If you want others to use your new functionality, it isn’t <em>really</em> done until you document how to use it.
+Let’s do that now.
+This will ensure that users know how to use your code, and it will give them something to try after they install your plugin to convince them that it’s working.
 I generally find that I’m the first person to benefit from my documentation, and in some cases I’m also the person who most frequently benefits from my documentation (e.g., if it’s code that I write for my own purposes, rather than something I intend to broadly disseminate).</p>
-<p>QIIME 2 provides a framework for defining <code class="docutils literal notranslate"><span class="pre">UsageExamples</span></code> for plugins.
-These are defined abstractly, and the QIIME 2 framework knows how to translate those abstract definitions into usage examples for different interfaces (the <a class="reference internal" href="../../back-matter/glossary.html#term-Python-3-API"><span class="xref std std-term">Python 3 API</span></a>, <a class="reference internal" href="../../back-matter/glossary.html#term-q2cli"><span class="xref std std-term">q2cli</span></a>, and <a class="reference internal" href="../../back-matter/glossary.html#term-Galaxy"><span class="xref std std-term">Galaxy</span></a>, as of this writing).
-So, by writing a single usage example, your documentatation is targeted toward users with different levels of computational expertise.
+<p>QIIME 2 provides a framework for defining <em>usage examples</em> for plugins.
+Usage examples are defined abstractly, rather than based on a specific QIIME 2 interface, and QIIME 2 interfaces can define <em>usage drivers</em> that know how to translate those abstract definitions into instructions for their application through a specific interface.
+For example, the framework contains a usage driver for the <a class="reference internal" href="../../back-matter/glossary.html#term-Python-3-API"><span class="xref std std-term">Python 3 API</span></a>, and therefore can turn abstract usage examples into a series of Python 3 commands.
+<a class="reference internal" href="../../back-matter/glossary.html#term-q2cli"><span class="xref std std-term">q2cli</span></a> contains a usage driver that translates abstract usage examples into a series of shell commands.
+And <a class="reference external" href="https://github.com/qiime2/q2galaxy">q2galaxy</a> contains a usage driver that turns examples into text-based instructions for running them through <a class="reference internal" href="../../back-matter/glossary.html#term-Galaxy"><span class="xref std std-term">Galaxy</span></a>.
+So, by writing a single usage example, your documentatation is targeted toward users with different levels of computational expertise, and as new interfaces become available you don’t need to update your usage examples for users to be able to work with your examples through them.
 This is one way the framework supports our goal of meeting users where they are in terms of their computational experience, and it’s one of the big benefits that you as a plugin developer gets by developing with QIIME 2.</p>
-<p><strong>This section is incomplete.</strong></p>
+<p>In this section of the tutorial, we’ll define a usage example for our <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> action.</p>
+<div class="tip admonition" id="add-usage-example-commit">
+<p class="admonition-title">tl;dr</p>
+<p>The full code that I developed for this section can be viewed <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/062f97f48fd3efd7af95b4bfa3ebc30006ee3628">here</a>.</p>
+</div>
+<section id="defining-a-usage-example-for-nw-align">
+<h2>Defining a usage example for <code class="docutils literal notranslate"><span class="pre">nw-align</span></code><a class="headerlink" href="#defining-a-usage-example-for-nw-align" title="Permalink to this heading">#</a></h2>
+<p>Usage examples work on actual data that you define when you create the usage example.
+This allows users to run your usage examples, explore the input and output, and confirm that things work as expected before they try your plugin on their own data.
+This also allows you to have your usage examples automatically tested every time your run your test code, which lets you make and honor a commitment to your users that the documentation you provide will work, because you can automatically run all of the usage examples you define with a single command after every change you make so you’ll be the first to know if anything is broken.</p>
+<p>So let’s start by defining data for use by our <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> usage example.
+This is done by creating a function that returns a QIIME 2 artifact that is used as an input in the example.</p>
+<section id="define-input-data-for-your-usage-example">
+<h3>Define input data for your usage example<a class="headerlink" href="#define-input-data-for-your-usage-example" title="Permalink to this heading">#</a></h3>
+<p>Start by creating a top-level file in your module called <code class="docutils literal notranslate"><span class="pre">_examples.py</span></code>.
+Mine will be called <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_examples.py</span></code>.
+Add the following code, and then we’ll work through it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tempfile</span>
+
+<span class="kn">import</span> <span class="nn">skbio</span>
+
+<span class="kn">import</span> <span class="nn">qiime2</span>
+
+<span class="kn">from</span> <span class="nn">q2_dwq2</span> <span class="kn">import</span> <span class="n">SingleRecordDNAFASTAFormat</span>
+
+
+<span class="k">def</span> <span class="nf">seq1_factory</span><span class="p">():</span>
+    <span class="n">seq</span> <span class="o">=</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">(</span><span class="s2">&quot;AACCGGTTGGCCAA&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;seq1&quot;</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">_create_seq_artifact</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">seq2_factory</span><span class="p">():</span>
+    <span class="n">seq</span> <span class="o">=</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">(</span><span class="s2">&quot;AACCGCTGGCGAA&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;seq2&quot;</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">_create_seq_artifact</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_create_seq_artifact</span><span class="p">(</span><span class="n">seq</span><span class="p">:</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">()</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c1"># write our skbio.DNA object to file in fasta format</span>
+        <span class="n">seq</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="c1"># reset to the beginning of the file</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># instantiate our file format (ff) object with the fasta file</span>
+        <span class="n">ff</span> <span class="o">=</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="c1"># return the sequence packaged in a &quot;SingleDNASequence&quot; qiime2.Artifact</span>
+        <span class="k">return</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Artifact</span><span class="o">.</span><span class="n">import_data</span><span class="p">(</span><span class="s2">&quot;SingleDNASequence&quot;</span><span class="p">,</span> <span class="n">ff</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Our goal here is to define two “factory” functions - one for each of <code class="docutils literal notranslate"><span class="pre">nw-align</span></code>’s <code class="docutils literal notranslate"><span class="pre">SingleDNASequence</span></code> inputs - that each return an artifact of class <code class="docutils literal notranslate"><span class="pre">SingleDNASequence</span></code>.
+These functions will be used when we define our usage example, and because of how usage example definitions work, these functions can’t take any parameters as input.
+Because both of these functions will do similar work under the hood, I am also creating a helper function that creates a <code class="docutils literal notranslate"><span class="pre">SingleDNASequence</span></code> artifact from an <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> object.
+That lets me avoid duplicating code.</p>
+<p>The factory functions I defined here are <code class="docutils literal notranslate"><span class="pre">seq1_factory</span></code> and <code class="docutils literal notranslate"><span class="pre">seq2_factory</span></code>.
+Each creates an <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> object, and then passes that to my helper function, <code class="docutils literal notranslate"><span class="pre">_create_seq_artifact</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">_create_seq_artifact</span></code> takes an <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> sequence object as input.
+(The type hint in the function definition isn’t required, but I like to include it to remind myself how this function works when I come back to it in the future - it makes my code more self-documenting.)
+Internally, it creates a temporary file, writes the input sequence to that file, and then creates a <code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTAFormat</span></code> object from that file.
+In the final step, we use <code class="docutils literal notranslate"><span class="pre">qiime2.Artifact.import_data</span></code>, which allows us to import data in a similar way as if we were calling <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">tools</span> <span class="pre">import</span></code> through q2cli: we provide the input file and the artifact class that we want to import into, and we get QIIME 2 artifact back.
+That artifact is returned by the helper function, and in turn is returned by the factory function that called it.</p>
+<p>This may feel like a lot of work to define data to use in an example, but it provides a lot of flexibility in how the usage example you define can ultimately be used.
+For example, it allows some <em>usage drivers</em> to actually create these inputs (for example, a usage driver that is going to be used to test the examples), and for some usage drivers to not bother taking the time to create the inputs (for example, usage drivers that are writing commands in help text but not actually executing them).</p>
+</section>
+<section id="defining-the-usage-example">
+<h3>Defining the usage example<a class="headerlink" href="#defining-the-usage-example" title="Permalink to this heading">#</a></h3>
+<p>Next, we define a usage example as a function that takes a <code class="docutils literal notranslate"><span class="pre">UsageDriver</span></code> subclass as input.
+We often call the input <code class="docutils literal notranslate"><span class="pre">use</span></code>, by convention, but you can call it anything.
+This function starts by instantiating two sequence artifacts using the factory functions that we just defined.
+It then defines the relevant action call, which in our case will be to the <code class="docutils literal notranslate"><span class="pre">dwq2</span></code> plugin’s <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> action.
+It also assigns the inputs, and provides a name for the output.</p>
+<p>This usage example is using default parameter values, but you could addionally pass parameters to the action in this usage example, or add a second usage example that does that which you also associate with this action.</p>
+<p>The following code in my <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_examples.py</span></code> file defines the usage example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">nw_align_example_1</span><span class="p">(</span><span class="n">use</span><span class="p">):</span>
+    <span class="n">seq1</span> <span class="o">=</span> <span class="n">use</span><span class="o">.</span><span class="n">init_artifact</span><span class="p">(</span><span class="s1">&#39;seq1&#39;</span><span class="p">,</span> <span class="n">seq1_factory</span><span class="p">)</span>
+    <span class="n">seq2</span> <span class="o">=</span> <span class="n">use</span><span class="o">.</span><span class="n">init_artifact</span><span class="p">(</span><span class="s1">&#39;seq2&#39;</span><span class="p">,</span> <span class="n">seq2_factory</span><span class="p">)</span>
+
+    <span class="n">msa</span><span class="p">,</span> <span class="o">=</span> <span class="n">use</span><span class="o">.</span><span class="n">action</span><span class="p">(</span>
+        <span class="n">use</span><span class="o">.</span><span class="n">UsageAction</span><span class="p">(</span><span class="n">plugin_id</span><span class="o">=</span><span class="s1">&#39;dwq2&#39;</span><span class="p">,</span>
+                        <span class="n">action_id</span><span class="o">=</span><span class="s1">&#39;nw_align&#39;</span><span class="p">),</span>
+        <span class="n">use</span><span class="o">.</span><span class="n">UsageInputs</span><span class="p">(</span><span class="n">seq1</span><span class="o">=</span><span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="o">=</span><span class="n">seq2</span><span class="p">),</span>
+        <span class="n">use</span><span class="o">.</span><span class="n">UsageOutputNames</span><span class="p">(</span><span class="n">aligned_sequences</span><span class="o">=</span><span class="s1">&#39;msa&#39;</span><span class="p">),</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="registering-the-usage-example">
+<h3>Registering the usage example<a class="headerlink" href="#registering-the-usage-example" title="Permalink to this heading">#</a></h3>
+<p>Finally, we’re ready to register the usage example.
+For this, we’ll go back to the <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code> file.</p>
+<p>You should first import the new usage example function by adding the following line to your imports at the top of the file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">q2_dwq2._examples</span> <span class="kn">import</span> <span class="n">nw_align_example_1</span>
+</pre></div>
+</div>
+<p>Then, in the call to <code class="docutils literal notranslate"><span class="pre">plugin.methods.register_function</span></code>, you should add an <code class="docutils literal notranslate"><span class="pre">examples</span></code> parameter, to which you can provide a dictionary mapping example names to usage example functions.
+These names (i.e., dictionary keys) will be displayed with the usage example in some interfaces.
+To do this, adapt your call to <code class="docutils literal notranslate"><span class="pre">plugin.methods.register_function</span></code> as follows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plugin</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
+    <span class="n">function</span><span class="o">=</span><span class="n">nw_align</span><span class="p">,</span>
+    <span class="o">...</span>
+    <span class="n">citations</span><span class="o">=</span><span class="p">[</span><span class="n">citations</span><span class="p">[</span><span class="s1">&#39;Needleman1970&#39;</span><span class="p">]],</span>
+    <span class="n">examples</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Align two DNA sequences.&#39;</span><span class="p">:</span> <span class="n">nw_align_example_1</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>That completes the definition and registration of our <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> usage example.</p>
+</section>
+</section>
+<section id="displaying-usage-examples">
+<h2>Displaying usage examples<a class="headerlink" href="#displaying-usage-examples" title="Permalink to this heading">#</a></h2>
+<p>In this section we’ll work through some user-facing commands that allow you or your users to view your usage examples.
+First, and most straight-forward, is to do this through q2cli.
+If you call your action with the <code class="docutils literal notranslate"><span class="pre">--help</span></code> parameter, you will now see the usage example at the bottom of the resulting help text.</p>
+<section id="command-line-interface">
+<h3>Command line interface<a class="headerlink" href="#command-line-interface" title="Permalink to this heading">#</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>qiime<span class="w"> </span>dwq2<span class="w"> </span>nw-align<span class="w"> </span>--help
+Usage:<span class="w"> </span>qiime<span class="w"> </span>dwq2<span class="w"> </span>nw-align<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+
+...
+
+Examples:
+<span class="w">  </span><span class="c1"># ### example: Align two DNA sequences.</span>
+<span class="w">  </span>qiime<span class="w"> </span>dwq2<span class="w"> </span>nw-align<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--i-seq1<span class="w"> </span>seq1.qza<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--i-seq2<span class="w"> </span>seq2.qza<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--o-aligned-sequences<span class="w"> </span>msa.qza
+</pre></div>
+</div>
+<p>You can test this command by having QIIME 2 write the example data we defined to file using the following q2cli command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>qiime<span class="w"> </span>dwq2<span class="w"> </span>nw-align<span class="w"> </span>--example-data<span class="w"> </span>usage-example-data/
+</pre></div>
+</div>
+<p>After generating the example data, run the usage example as described in the help text providing the example data as input and confirm that it works as expected.</p>
+</section>
+<section id="python-3-api">
+<h3>Python 3 API<a class="headerlink" href="#python-3-api" title="Permalink to this heading">#</a></h3>
+<p>As mentioned above, the abstract nature of our usage example definition enables it to be interpreted by different usage drivers, enabling the same example to be presented as it would be used through different interfaces.
+Open an <code class="docutils literal notranslate"><span class="pre">ipython</span></code> shell in your development environment, and try the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiime2.plugins</span> <span class="kn">import</span> <span class="n">dwq2</span><span class="p">,</span> <span class="n">ArtifactAPIUsage</span>
+
+<span class="n">examples</span> <span class="o">=</span> <span class="n">dwq2</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">nw_align</span><span class="o">.</span><span class="n">examples</span>
+
+<span class="k">for</span> <span class="n">example</span> <span class="ow">in</span> <span class="n">examples</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">use</span> <span class="o">=</span> <span class="n">ArtifactAPIUsage</span><span class="p">()</span>
+    <span class="n">example</span><span class="p">(</span><span class="n">use</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">use</span><span class="o">.</span><span class="n">render</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>This should display how to run this example through the Python 3 API.
+Try it out with the same example data that you generated above (you can use <code class="docutils literal notranslate"><span class="pre">qiime2.Artifact.load</span></code> to load the example files into QIIME 2 artifacts to be provided as input to this call to <code class="docutils literal notranslate"><span class="pre">nw_align</span></code>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qiime2.plugins.dwq2.actions</span> <span class="k">as</span> <span class="nn">dwq2_actions</span>
+
+<span class="n">msa</span><span class="p">,</span> <span class="o">=</span> <span class="n">dwq2_actions</span><span class="o">.</span><span class="n">nw_align</span><span class="p">(</span>
+    <span class="n">seq1</span><span class="o">=</span><span class="n">seq1</span><span class="p">,</span>
+    <span class="n">seq2</span><span class="o">=</span><span class="n">seq2</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="automated-testing-of-usage-examples">
+<h2>Automated testing of usage examples<a class="headerlink" href="#automated-testing-of-usage-examples" title="Permalink to this heading">#</a></h2>
+<p>Finally, it’s a good idea to have your usage examples run as part of your test suite, as a way to assess if any future changes you make to your code break the usage examples you defined.
+To do this, create a new test file in your <code class="docutils literal notranslate"><span class="pre">tests</span></code> directory.
+Mine is called <code class="docutils literal notranslate"><span class="pre">q2-dwq2/tests/test_examples.py</span></code>.
+Add the following code to that file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiime2.plugin.testing</span> <span class="kn">import</span> <span class="n">TestPluginBase</span>
+
+
+<span class="k">class</span> <span class="nc">UsageExampleTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
+    <span class="n">package</span> <span class="o">=</span> <span class="s1">&#39;q2_dwq2.tests&#39;</span>
+
+    <span class="k">def</span> <span class="nf">test_examples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute_examples</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Save the file, and run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code>.
+That will now run this additional test, which uses <code class="docutils literal notranslate"><span class="pre">TestPluginBase.execute_examples</span></code> to discover and run all of the usage examples defined in the plugin.
+You should see output like the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span><span class="nb">test</span>
+
+...
+
+<span class="o">=====</span><span class="w"> </span><span class="m">15</span><span class="w"> </span>passed,<span class="w"> </span><span class="m">25</span><span class="w"> </span>warnings<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">15</span>.06s<span class="w"> </span><span class="o">======</span>
+</pre></div>
+</div>
+<p>This code tests that the usage examples ran successfully, but importantly it does not test that any output they produce aligns with expected output.
+It is possible to additionally check the output of these examples, but that doesn’t replace the need for unit tests.
+Unit tests tend to be more expressive and useful for testing your plugin’s functionality, while automated usage example testing is a good way to assess the validity of your documentation.
+If you’d like to learn more about testing specific output that you get from running your usage examples, refer to the <a class="reference internal" href="../how-to-guides/usage-examples.html#how-to-write-usage-examples"><span class="std std-ref">Writing Usage Examples</span></a> <em>How to</em> guide.</p>
+</section>
+<section id="writing-tutorials">
+<h2>Writing tutorials<a class="headerlink" href="#writing-tutorials" title="Permalink to this heading">#</a></h2>
+<p>Usage examples provide users with guidelines on the specific commands they can run to use your plugin, but they don’t provide a lot of context.
+It’s a good idea to also write tutorials that describe what your plugin is intended to do, how and why to use it, and how to interpret the results.
+Ideally the tutorial also provides a small data set that can be analysed quickly on a modestly powered laptop computer.
+I credit a lot of the popularity of QIIME 1 and QIIME 2 to its tutorials and to our support forums.</p>
+<p>Writing tutorials is out of scope of this document for now, though we may add a <em>How to</em> article in the future that discusses writing and automating testing of tutorials.
+As a general recommendation though, I highly recommend writing your tutorials using <a class="reference external" href="https://jupyterbook.org">Jupyter Book</a>, which is what <em>Developing with QIIME 2</em> is written with.
+It’s very feature rich, easily deployed with GitHub Actions, and it makes it straight-forward to create nice looking documentation.
+<a class="reference external" href="https://diataxis.fr/">Diataxis</a> is also great reading material on how your tutorials can be structured, and if you get excited about writing documentation (it’s fun!) the <a class="reference external" href="https://www.writethedocs.org/">Write the Docs community</a> is a group of like-minded folks.</p>
+<p>Happy documenting! 📝</p>
+</section>
+<section id="optional-exercise">
+<h2>Optional exercise<a class="headerlink" href="#optional-exercise" title="Permalink to this heading">#</a></h2>
+<p>Add a usage example for your <code class="docutils literal notranslate"><span class="pre">summarize</span></code> visualizer.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Need some hints?<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">For your example data, you can use the output generated by the <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> usage example that we created here.
+If you export that artifact, you can find the data in the format you’ll need to create it in your factory function.
+You can also find the artifact class that you’ll need to use in your <code class="docutils literal notranslate"><span class="pre">qiime2.Artifact.import_data</span></code> call using the <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">tools</span> <span class="pre">peek</span></code> command.</p>
+</div>
+</details></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -475,6 +717,33 @@ This is one way the framework supports our goal of meeting users where they are 
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-usage-example-for-nw-align">Defining a usage example for <code class="docutils literal notranslate"><span class="pre">nw-align</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-input-data-for-your-usage-example">Define input data for your usage example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-usage-example">Defining the usage example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-the-usage-example">Registering the usage example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#displaying-usage-examples">Displaying usage examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line-interface">Command line interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-3-api">Python 3 API</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automated-testing-of-usage-examples">Automated testing of usage examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-tutorials">Writing tutorials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-exercise">Optional exercise</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

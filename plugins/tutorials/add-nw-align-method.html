@@ -483,7 +483,7 @@ Let’s add this wrapper to our <code class="docutils literal notranslate"><span
 (Remember that my package name is <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code>, and my module name is <code class="docutils literal notranslate"><span class="pre">q2_dwq2</span></code>.
 If yours are different, you’ll need to adjust that relative file path accordingly.)
 The <code class="docutils literal notranslate"><span class="pre">_</span></code> at the beginning of <code class="docutils literal notranslate"><span class="pre">_methods.py</span></code> is convention that conveys that this is intended to be a private submodule: in other words, consummers of this code outside of the this Python package shouldn’t access anything in this file directly.</p>
-<p>Since the <code class="docutils literal notranslate"><span class="pre">duplicate_table</span></code> method that was defined in this plugin was only intended to get us started, I am going to remove it now, replacing all of the content of that file with the following code:</p>
+<p>Since the <code class="docutils literal notranslate"><span class="pre">duplicate_table</span></code> method that was defined in this plugin was only intended to get us started, remove it now, replacing all of the content of that file with the following code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ----------------------------------------------------------------------------</span>
 <span class="c1"># Copyright (c) 2024, Greg Caporaso.</span>
 <span class="c1">#</span>
@@ -527,7 +527,7 @@ A little bit later we’ll come back to how you decide what type hints to provid
 <p id="suboptimal-initial-types">The first couple of lines in this function are a little bit odd, and stem from the fact that (as of this writing) there isn’t an existing QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact-class"><span class="xref std std-term">artifact class</span></a> for individual DNA sequences, but rather only for collections of DNA sequences.
 We are therefore going to work-around this right now, and in a subsequent lesson we’ll define our own QIIME 2 artifact class to represent a single DNA sequence.
 We need two sequences as input to pairwise sequence alignment (by definition), and we’ll take those as inputs through the <code class="docutils literal notranslate"><span class="pre">seq1</span></code> and <code class="docutils literal notranslate"><span class="pre">seq2</span></code> parameters.
-These will come in in <code class="docutils literal notranslate"><span class="pre">DNAIterator</span></code> objects, and our work-around is that we read the first sequence from each of these two input sequence collections by getting the <code class="docutils literal notranslate"><span class="pre">next()</span></code> item from each collection, one time each, and reassigning them to the variables <code class="docutils literal notranslate"><span class="pre">seq1</span></code> and <code class="docutils literal notranslate"><span class="pre">seq2</span></code>.</p>
+These will come in as <code class="docutils literal notranslate"><span class="pre">DNAIterator</span></code> objects, and our work-around is that we read the first sequence from each of these two input sequence collections by getting the <code class="docutils literal notranslate"><span class="pre">next()</span></code> item from each collection, one time each, and reassigning them to the variables <code class="docutils literal notranslate"><span class="pre">seq1</span></code> and <code class="docutils literal notranslate"><span class="pre">seq2</span></code>.</p>
 <p>Next, we call <code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code>, passing in all of our inputs.
 <code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code> returns three outputs.
 For now, we’re only going to concern ourselves with the first: the multiple sequence alignment, which we’ll store in a varriable called <code class="docutils literal notranslate"><span class="pre">msa</span></code>.
@@ -576,7 +576,7 @@ This is how we’ll reference this citation when we associate it with our action
 <h4>Register the action in <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code><a class="headerlink" href="#register-the-action-in-plugin-setup-py" title="Permalink to this heading">#</a></h4>
 <p>Now we have what we need to register our function as a plugin method.
 By convention, this is done in <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/plugin_setup.py</span></code>, and that’s what we’ll do here.
-I am chosing to remove the registration of the <code class="docutils literal notranslate"><span class="pre">duplicate_table</span></code> action, now that I’m adding one of my own, but whether or not you want to do that too is up to you.</p>
+Start by removing the registration of the <code class="docutils literal notranslate"><span class="pre">duplicate_table</span></code> action, now that we removed the underlying function from the plugin.</p>
 <p>To register a function as a method, you’ll use <code class="docutils literal notranslate"><span class="pre">plugin.methods.register_function</span></code>, where <code class="docutils literal notranslate"><span class="pre">plugin</span></code> is the <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.Plugin</span></code> action that is instantiated in this file.
 Add the following code to your <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/plugin_setup.py</span></code> file, and then we’ll work through it line by line.
 Note that this won’t work yet - we still need to add some <code class="docutils literal notranslate"><span class="pre">import</span></code> statements to the top of the file, but we’ll add those as we work through the code where the imported functionality is used.</p>
@@ -813,7 +813,7 @@ That is functionality that you get for free when developing QIIME 2 plugins: the
 <section id="a-first-test-of-our-plugin-action">
 <h4>A first test of our plugin action<a class="headerlink" href="#a-first-test-of-our-plugin-action" title="Permalink to this heading">#</a></h4>
 <p>The following is a first test of our <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> method.
-I’m replacing the tests of <code class="docutils literal notranslate"><span class="pre">duplicate_table</span></code> that were already in this file, as I decided to remove that action from my plugin.</p>
+Remove the tests of <code class="docutils literal notranslate"><span class="pre">duplicate_table</span></code> that in this file, since we removed that action from the plugin.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <div class="admonition note">
@@ -925,7 +925,7 @@ After loading the files and transforming them, the test looks identical to the p
 <span class="n">ACCGGTAACCGGTTAACACCCAC</span>
 </pre></div>
 </div>
-<p>While adding these files, I also removed <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/data/table-1.biom</span></code>, which I’m not using any more since I removed the <code class="docutils literal notranslate"><span class="pre">duplicate_table</span></code> action and its tests, using the command:</p>
+<p>While adding these files, also remove <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/data/table-1.biom</span></code>, which we’re not using any more since we removed the <code class="docutils literal notranslate"><span class="pre">duplicate_table</span></code> action and its tests, using the command:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>q2_dwq2/tests/data/table-1.biom
 </pre></div>
 </div>
