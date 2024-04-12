@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="How-To Guides" href="../how-to-guides/intro.html" />
+    <link rel="next" title="Add a second transformer" href="add-2nd-transformer.html" />
     <link rel="prev" title="Add a new artifact class" href="add-artifact-class.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,6 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="add-alignment-visualizer.html">Add a first visualizer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-artifact-class.html">Add a new artifact class</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Add usage examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-2nd-transformer.html">Add a second transformer</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -501,7 +502,7 @@ Each creates an <code class="docutils literal notranslate"><span class="pre">skb
 It makes my code more self-documenting.</p>
 </div>
 </aside>
-<p><code class="docutils literal notranslate"><span class="pre">_create_seq_artifact</span></code> takes an <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> sequence object as input.
+<p id="create-seq-artifact-helper-function"><code class="docutils literal notranslate"><span class="pre">_create_seq_artifact</span></code> takes an <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> sequence object as input.
 Internally, it creates a <code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTAFormat</span></code> object which is assigned to the variable <code class="docutils literal notranslate"><span class="pre">ff</span></code> (for <em>file format</em>).
 Our sequence is written to <code class="docutils literal notranslate"><span class="pre">ff.path</span></code> (i.e., the file format’s <code class="docutils literal notranslate"><span class="pre">path</span></code> object, which we cast to a string) using <code class="docutils literal notranslate"><span class="pre">seq.write</span></code>.
 In the final step, we use <code class="docutils literal notranslate"><span class="pre">qiime2.Artifact.import_data</span></code>, which allows us to import data in a similar way as if we were calling <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">tools</span> <span class="pre">import</span></code> through q2cli (incidentally, <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">tools</span> <span class="pre">import</span></code> calls <code class="docutils literal notranslate"><span class="pre">qiime2.Artifact.import_data</span></code>, under the hood).
@@ -706,11 +707,11 @@ You can also find the artifact class that you’ll need to use in your <code cla
       </div>
     </a>
     <a class="right-next"
-       href="../how-to-guides/intro.html"
+       href="add-2nd-transformer.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">How-To Guides</p>
+        <p class="prev-next-title">Add a second transformer</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

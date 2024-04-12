@@ -78,6 +78,7 @@ It makes my code more self-documenting.
 ```
 ````
 
+(_create_seq_artifact_helper_function)=
 `_create_seq_artifact` takes an `skbio.DNA` sequence object as input.
 Internally, it creates a `SingleRecordDNAFASTAFormat` object which is assigned to the variable `ff` (for *file format*).
 Our sequence is written to `ff.path` (i.e., the file format's `path` object, which we cast to a string) using `seq.write`.
