@@ -16,6 +16,7 @@ parts:
             - file: plugins/tutorials/add-alignment-visualizer
             - file: plugins/tutorials/add-artifact-class
             - file: plugins/tutorials/add-usage-examples
+            - file: plugins/tutorials/add-2nd-transformer
         - file: plugins/how-to-guides/intro
           sections:
             - file: plugins/how-to-guides/set-up-development-environment
