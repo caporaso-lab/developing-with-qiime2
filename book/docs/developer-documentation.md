@@ -1,9 +1,11 @@
 (contributing-to-dwq2)=
-# Contributing to *Developing with QIIME 2*
+# Developer documentation
 
-*Developing with QIIME 2* is a book being authored by [Greg Caporaso](https://github.com/gregcaporaso) and [Evan Bolyen](https://github.com/ebolyen). 
-At the moment, while we're still laying the groundwork, we're not accepting content contributions.
-If you have suggestions or feedback though, we'd love to hear them: please feel free to post to [the project's issue tracker](https://github.com/caporaso-lab/developing-with-qiime2/issues).
+*Developing with QIIME 2* is being authored by [Greg Caporaso](https://github.com/gregcaporaso) and [Evan Bolyen](https://github.com/ebolyen).
 
-Ultimately, we expect to begin accepting contributions from others. 
-When we get to that point, we will acknowledge any contributions in an *Acknowledgements* section of *Developing with QIIME 2*. 
+This book will be replacing the content at https://dev.qiime2.org shortly.
+
+Contributions from others are welcomed and acknowledged via the project's [GitHub contributors page](https://github.com/caporaso-lab/developing-with-qiime2/graphs/contributors) in [](acknowledgements).
+At the moment, while we're still laying the groundwork, we're accepting only [specific contributions](https://github.com/caporaso-lab/developing-with-qiime2/labels/help%20wanted).
+
+If you have suggestions or feedback [we'd love to hear from you](https://github.com/caporaso-lab/developing-with-qiime2/issues).

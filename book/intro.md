@@ -2,7 +2,8 @@
 
 **Your guide for writing, testing, and distributing QIIME 2 plugins, interfaces, and documentation.**
 
-```{note}
+```{admonition} Development status of this content
+:class: note
 *Developing with QIIME 2* remains in [very active development](https://github.com/caporaso-lab/developing-with-qiime2/commits/main/) between March and April of 2024.
 It should be getting more complete by the day. 🚀
 
@@ -48,9 +49,18 @@ Chapters are generally broken up into *Sections*.
 For example, the [](plugin-tutorial-intro) chapter works through building a new QIIME 2 plugin from scratch.
 It does this in a series of sections that focus on different plugin components.
 
+(acknowledgements)=
+## Acknowledgements
+[The authors](contributing-to-dwq2) would like to thank [those who have contributed](https://github.com/caporaso-lab/developing-with-qiime2/graphs/contributors) to the writing of *Developing with QIIME 2*.
+
+The template plugin used in [](plugin-tutorial-intro) was derived from [@misialq's plugin template](https://github.com/bokulich-lab/q2-plugin-template).
+
 ## Getting Help
 For the most up-to-date information on how to get help with QIIME 2, as a user or developer, see [here](https://github.com/qiime2/.github/blob/main/SUPPORT.md).
 
 ## Contributing
 To get information on contributing to *Developing with QIIME 2*, see [](contributing-to-dwq2).
 
+## License
+
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/caporaso-lab/developing-with-qiime2/">Developing with QIIME 2</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://cap-lab.bio">Greg Caporaso and Evan Bolyen</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0.<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1" alt=""></a></p>
