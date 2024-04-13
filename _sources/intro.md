@@ -1,27 +1,35 @@
-# Developing with QIIME 2
+# *Developing with QIIME 2*
 
-Your guide for writing, testing, and distributing QIIME 2 plugins, interfaces, and documentation.
+**Your guide for writing, testing, and distributing QIIME 2 plugins, interfaces, and documentation.**
 
-```{note}
-*Developing with QIIME 2* remains in very active development between March and April of 2024.
+```{admonition} Development status of this content
+:class: note
+*Developing with QIIME 2* remains in [very active development](https://github.com/caporaso-lab/developing-with-qiime2/commits/main/) between March and April of 2024.
 It should be getting more complete by the day. 🚀
 
 As of 13 March 2024, most of the content from the [old QIIME 2 Developer Documentation](https://dev.qiime2.org) has been transitioned to *Developing with QIIME 2*.
-This book will be moving over to https://dev.qiime2.org shortly.
+This book will be replacing the content at https://dev.qiime2.org shortly, and URLs are subject to change.
 
-The [](plugin-tutorial-intro) section is where the focus is at the moment, and it'll stay there for the near future, though all of the [](plugins/intro.md) sections have useful and up-to-date content in them.
-You'll also find content in [](framework-explanations) and various other sections throughout, but those are currently less thorough and generally need some updates.
+The [](plugin-tutorial-intro) chapter is where the focus is at the moment, and it'll stay there for the near future, though all of the [](plugins/intro.md) chapters have useful and up-to-date content in them.
+You'll also find content in [](framework-explanations) and various other chapters throughout, but those are currently less thorough and generally need some updates.
 Please [let us know](https://github.com/caporaso-lab/developing-with-qiime2/issues) if you find anything that is inaccurate or outdated.
 ```
 
-## About
-The content in this book is organized under the [Diátaxis](https://diataxis.fr/) framework {cite}`diataxis`.
-This means that you can expect Tutorials, How-To-Guides, Explainations, and References which each serve a different goal for the reader.
+**D**eveloping **w**ith **Q**IIME **2** (DWQ2) is split into multiple *Parts* covering topics in QIIME 2 development, including [](plugin-intro), [](interface-intro), and [](documentation-intro).
+You do not need to read all of these parts to develop with QIIME 2.
+If you are interested in creating plugins, then the only part you need to concern yourself with is [](plugin-intro).
+Similarly, if you want to build an interface, you only need [](interface-intro).
+Other parts, such as [](framework-intro) and [](ci-intro), are currently targeted primarily for the development team in the [Caporaso Lab](https://cap-lab.bio).
+[](documentation-intro) is slated for a full re-write as we [adapt our approach to user documentation](users-docs-refactor).
+
+The content in each part of this book is organized under the [Diátaxis](https://diataxis.fr/) framework {cite}`diataxis`.
+This means that you can expect *Chapters* containing *Tutorials*, *How-To-Guides*, *Explanations*, and *References* in each part.
+Each serves a different goal for the reader:
 
 ```{list-table}
 :header-rows: 1
 
-* - Type
+* - Chapter
   - Purpose
 
 * - Tutorial
@@ -37,11 +45,15 @@ This means that you can expect Tutorials, How-To-Guides, Explainations, and Refe
   - Provide specific **information** (e.g., an API reference).
 ```
 
-## Contents
-This book is split into multiple parts covering topics in QIIME 2 development including [plugin development](plugin-intro), [interface development](interface-intro), and [documentation development](documentation-intro).
-You do not need to master all of these sections to develop with QIIME 2.
-For example, if you are interested in creating plugins, then the only section you need to concern yourself with is the [plugin development](plugin-intro) section.
-Other topics, such as [framework development](framework-intro) and [distribution development](ci-intro), are advanced topics that are primarily targeted for the development team in the [Caporaso Lab](https://cap-lab.bio).
+Chapters are generally broken up into *Sections*.
+For example, the [](plugin-tutorial-intro) chapter works through building a new QIIME 2 plugin from scratch.
+It does this in a series of sections that focus on different plugin components.
+
+(acknowledgements)=
+## Acknowledgements
+[The authors](contributing-to-dwq2) would like to thank [those who have contributed](https://github.com/caporaso-lab/developing-with-qiime2/graphs/contributors) to the writing of *Developing with QIIME 2*.
+
+The template plugin used in [](plugin-tutorial-intro) was derived from [@misialq's plugin template](https://github.com/bokulich-lab/q2-plugin-template).
 
 ## Getting Help
 For the most up-to-date information on how to get help with QIIME 2, as a user or developer, see [here](https://github.com/qiime2/.github/blob/main/SUPPORT.md).
@@ -49,3 +61,6 @@ For the most up-to-date information on how to get help with QIIME 2, as a user o
 ## Contributing
 To get information on contributing to *Developing with QIIME 2*, see [](contributing-to-dwq2).
 
+## License
+
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/caporaso-lab/developing-with-qiime2/">Developing with QIIME 2</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://cap-lab.bio">Greg Caporaso and Evan Bolyen</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0.<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1" alt=""></a></p>

@@ -171,6 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="plugins/tutorials/add-artifact-class.html">Add a new artifact class</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plugins/tutorials/add-usage-examples.html">Add usage examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plugins/tutorials/add-2nd-transformer.html">Add a second transformer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugins/tutorials/conclusion.html">Conclusion</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="plugins/how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -242,8 +243,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation 📚</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="docs/intro.html">Docs Development</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/user-documentation.html">Contributing to the QIIME 2 user documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/developer-documentation.html">Contributing to <em>Developing with QIIME 2</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/user-documentation.html">User documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/developer-documentation.html">Developer documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -407,10 +408,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about">About</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents">Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help">Getting Help</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing">Contributing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
 </ul>
             </nav>
         </div>
@@ -423,25 +424,30 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="developing-with-qiime-2">
-<h1>Developing with QIIME 2<a class="headerlink" href="#developing-with-qiime-2" title="Permalink to this heading">#</a></h1>
-<p>Your guide for writing, testing, and distributing QIIME 2 plugins, interfaces, and documentation.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><em>Developing with QIIME 2</em> remains in very active development between March and April of 2024.
+<h1><em>Developing with QIIME 2</em><a class="headerlink" href="#developing-with-qiime-2" title="Permalink to this heading">#</a></h1>
+<p><strong>Your guide for writing, testing, and distributing QIIME 2 plugins, interfaces, and documentation.</strong></p>
+<div class="note admonition">
+<p class="admonition-title">Development status of this content</p>
+<p><em>Developing with QIIME 2</em> remains in <a class="reference external" href="https://github.com/caporaso-lab/developing-with-qiime2/commits/main/">very active development</a> between March and April of 2024.
 It should be getting more complete by the day. 🚀</p>
 <p>As of 13 March 2024, most of the content from the <a class="reference external" href="https://dev.qiime2.org">old QIIME 2 Developer Documentation</a> has been transitioned to <em>Developing with QIIME 2</em>.
-This book will be moving over to <a class="reference external" href="https://dev.qiime2.org">https://dev.qiime2.org</a> shortly.</p>
-<p>The <a class="reference internal" href="plugins/tutorials/intro.html#plugin-tutorial-intro"><span class="std std-ref">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</span></a> section is where the focus is at the moment, and it’ll stay there for the near future, though all of the <a class="reference internal" href="plugins/intro.html"><span class="doc std std-doc">Plugin Development</span></a> sections have useful and up-to-date content in them.
-You’ll also find content in <a class="reference internal" href="framework/explanations/intro.html#framework-explanations"><span class="std std-ref">Framework explanations</span></a> and various other sections throughout, but those are currently less thorough and generally need some updates.
+This book will be replacing the content at <a class="reference external" href="https://dev.qiime2.org">https://dev.qiime2.org</a> shortly, and URLs are subject to change.</p>
+<p>The <a class="reference internal" href="plugins/tutorials/intro.html#plugin-tutorial-intro"><span class="std std-ref">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</span></a> chapter is where the focus is at the moment, and it’ll stay there for the near future, though all of the <a class="reference internal" href="plugins/intro.html"><span class="doc std std-doc">Plugin Development</span></a> chapters have useful and up-to-date content in them.
+You’ll also find content in <a class="reference internal" href="framework/explanations/intro.html#framework-explanations"><span class="std std-ref">Framework explanations</span></a> and various other chapters throughout, but those are currently less thorough and generally need some updates.
 Please <a class="reference external" href="https://github.com/caporaso-lab/developing-with-qiime2/issues">let us know</a> if you find anything that is inaccurate or outdated.</p>
 </div>
-<section id="about">
-<h2>About<a class="headerlink" href="#about" title="Permalink to this heading">#</a></h2>
-<p>The content in this book is organized under the <a class="reference external" href="https://diataxis.fr/">Diátaxis</a> framework <span id="id1">[<a class="reference internal" href="back-matter/bibliography.html#id3" title="Daniele Procida. Diátaxis documentation framework. URL: https://diataxis.fr/.">1</a>]</span>.
-This means that you can expect Tutorials, How-To-Guides, Explainations, and References which each serve a different goal for the reader.</p>
+<p><strong>D</strong>eveloping <strong>w</strong>ith <strong>Q</strong>IIME <strong>2</strong> (DWQ2) is split into multiple <em>Parts</em> covering topics in QIIME 2 development, including <a class="reference internal" href="plugins/intro.html#plugin-intro"><span class="std std-ref">Plugin Development</span></a>, <a class="reference internal" href="interfaces/intro.html#interface-intro"><span class="std std-ref">Interface Development</span></a>, and <a class="reference internal" href="docs/intro.html#documentation-intro"><span class="std std-ref">Docs Development</span></a>.
+You do not need to read all of these parts to develop with QIIME 2.
+If you are interested in creating plugins, then the only part you need to concern yourself with is <a class="reference internal" href="plugins/intro.html#plugin-intro"><span class="std std-ref">Plugin Development</span></a>.
+Similarly, if you want to build an interface, you only need <a class="reference internal" href="interfaces/intro.html#interface-intro"><span class="std std-ref">Interface Development</span></a>.
+Other parts, such as <a class="reference internal" href="framework/intro.html#framework-intro"><span class="std std-ref">Framework Development</span></a> and <a class="reference internal" href="ci/intro.html#ci-intro"><span class="std std-ref">Distribution Development</span></a>, are currently targeted primarily for the development team in the <a class="reference external" href="https://cap-lab.bio">Caporaso Lab</a>.
+<a class="reference internal" href="docs/intro.html#documentation-intro"><span class="std std-ref">Docs Development</span></a> is slated for a full re-write as we <a class="reference internal" href="docs/user-documentation.html#users-docs-refactor"><span class="std std-ref">adapt our approach to user documentation</span></a>.</p>
+<p>The content in each part of this book is organized under the <a class="reference external" href="https://diataxis.fr/">Diátaxis</a> framework <span id="id1">[<a class="reference internal" href="back-matter/bibliography.html#id3" title="Daniele Procida. Diátaxis documentation framework. URL: https://diataxis.fr/.">1</a>]</span>.
+This means that you can expect <em>Chapters</em> containing <em>Tutorials</em>, <em>How-To-Guides</em>, <em>Explanations</em>, and <em>References</em> in each part.
+Each serves a different goal for the reader:</p>
 <table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Type</p></th>
+<tr class="row-odd"><th class="head"><p>Chapter</p></th>
 <th class="head"><p>Purpose</p></th>
 </tr>
 </thead>
@@ -460,13 +466,13 @@ This means that you can expect Tutorials, How-To-Guides, Explainations, and Refe
 </tr>
 </tbody>
 </table>
-</section>
-<section id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading">#</a></h2>
-<p>This book is split into multiple parts covering topics in QIIME 2 development including <a class="reference internal" href="plugins/intro.html#plugin-intro"><span class="std std-ref">plugin development</span></a>, <a class="reference internal" href="interfaces/intro.html#interface-intro"><span class="std std-ref">interface development</span></a>, and <a class="reference internal" href="docs/intro.html#documentation-intro"><span class="std std-ref">documentation development</span></a>.
-You do not need to master all of these sections to develop with QIIME 2.
-For example, if you are interested in creating plugins, then the only section you need to concern yourself with is the <a class="reference internal" href="plugins/intro.html#plugin-intro"><span class="std std-ref">plugin development</span></a> section.
-Other topics, such as <a class="reference internal" href="framework/intro.html#framework-intro"><span class="std std-ref">framework development</span></a> and <a class="reference internal" href="ci/intro.html#ci-intro"><span class="std std-ref">distribution development</span></a>, are advanced topics that are primarily targeted for the development team in the <a class="reference external" href="https://cap-lab.bio">Caporaso Lab</a>.</p>
+<p>Chapters are generally broken up into <em>Sections</em>.
+For example, the <a class="reference internal" href="plugins/tutorials/intro.html#plugin-tutorial-intro"><span class="std std-ref">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</span></a> chapter works through building a new QIIME 2 plugin from scratch.
+It does this in a series of sections that focus on different plugin components.</p>
+<section id="acknowledgements">
+<span id="id2"></span><h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this heading">#</a></h2>
+<p><a class="reference internal" href="docs/developer-documentation.html#contributing-to-dwq2"><span class="std std-ref">The authors</span></a> would like to thank <a class="reference external" href="https://github.com/caporaso-lab/developing-with-qiime2/graphs/contributors">those who have contributed</a> to the writing of <em>Developing with QIIME 2</em>.</p>
+<p>The template plugin used in <a class="reference internal" href="plugins/tutorials/intro.html#plugin-tutorial-intro"><span class="std std-ref">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</span></a> was derived from <a class="reference external" href="https://github.com/bokulich-lab/q2-plugin-template">&#64;misialq’s plugin template</a>.</p>
 </section>
 <section id="getting-help">
 <h2>Getting Help<a class="headerlink" href="#getting-help" title="Permalink to this heading">#</a></h2>
@@ -474,8 +480,11 @@ Other topics, such as <a class="reference internal" href="framework/intro.html#f
 </section>
 <section id="contributing">
 <h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this heading">#</a></h2>
-<p>To get information on contributing to <em>Developing with QIIME 2</em>, see <a class="reference internal" href="docs/developer-documentation.html#contributing-to-dwq2"><span class="std std-ref">Contributing to Developing with QIIME 2</span></a>.</p>
+<p>To get information on contributing to <em>Developing with QIIME 2</em>, see <a class="reference internal" href="docs/developer-documentation.html#contributing-to-dwq2"><span class="std std-ref">Developer documentation</span></a>.</p>
 </section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this heading">#</a></h2>
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/caporaso-lab/developing-with-qiime2/">Developing with QIIME 2</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://cap-lab.bio">Greg Caporaso and Evan Bolyen</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0.<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1" alt=""></a></p></section>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
@@ -544,10 +553,10 @@ Other topics, such as <a class="reference internal" href="framework/intro.html#f
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about">About</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents">Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help">Getting Help</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing">Contributing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
 </ul>
   </nav></div>
 

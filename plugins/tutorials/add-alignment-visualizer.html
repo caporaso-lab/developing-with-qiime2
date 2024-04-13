@@ -172,6 +172,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="add-artifact-class.html">Add a new artifact class</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-usage-examples.html">Add usage examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-2nd-transformer.html">Add a second transformer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conclusion.html">Conclusion</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -243,8 +244,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation 📚</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../docs/intro.html">Docs Development</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../docs/user-documentation.html">Contributing to the QIIME 2 user documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../docs/developer-documentation.html">Contributing to <em>Developing with QIIME 2</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/user-documentation.html">User documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/developer-documentation.html">Developer documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -425,7 +426,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="add-a-first-visualizer">
 <h1>Add a first visualizer<a class="headerlink" href="#add-a-first-visualizer" title="Permalink to this heading">#</a></h1>
-<p>In the last chapter we created a first method for our plugin which performed pairwise alignment of DNA sequences.
+<p>In the last section we created a first method for our plugin which performed pairwise alignment of DNA sequences.
 We were able to run this to generate an alignment, but we didn’t have any way to visualize the result without exporting it from QIIME 2.
 In this lesson we’ll address that by adding a simple <a class="reference internal" href="../../back-matter/glossary.html#term-Visualizer"><span class="xref std std-term">Visualizer</span></a> to our plugin which takes a <code class="docutils literal notranslate"><span class="pre">TabularMSA</span></code> artifact as input (which is what our previous action generated as output), and generates a <code class="docutils literal notranslate"><span class="pre">Visualization</span></code> that we can review using <a class="reference external" href="https://view.qiime2.org">QIIME 2 View</a>.</p>
 <div class="tip admonition" id="add-alignment-visualizer-commit">
@@ -447,7 +448,7 @@ As long as content can be packaged as HTML content and doesn’t require a serve
 Luckily, scikit-bio’s <code class="docutils literal notranslate"><span class="pre">TabularMSA</span></code> object has a built-in function for creating a text-based human-readable alignment summary through its <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> function.
 We’ll use that here, even though the representation it creates is a little crude and it is only a summary rather than a display of the full alignment.
 (Since our goal here is just to write a vizualizer — not actually enable exploration of alignments — this will suffice for our purposes.
-I’ll leave it as an exercise to you at the end of this chapter to expand on this visualization.)</p>
+I’ll leave it as an exercise to you at the end of this section to expand on this visualization.)</p>
 <p>Start by creating a new file, <code class="docutils literal notranslate"><span class="pre">_visualizers.py</span></code> in your module’s top-level directory. For me, this file will be <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_visualizers.py</span></code>. Add the following code to that file.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span>
 

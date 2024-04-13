@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="How-To Guides" href="../how-to-guides/intro.html" />
+    <link rel="next" title="Conclusion" href="conclusion.html" />
     <link rel="prev" title="Add usage examples" href="add-usage-examples.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -172,6 +172,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="add-artifact-class.html">Add a new artifact class</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-usage-examples.html">Add usage examples</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Add a second transformer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conclusion.html">Conclusion</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -243,8 +244,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation 📚</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../docs/intro.html">Docs Development</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../docs/user-documentation.html">Contributing to the QIIME 2 user documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../docs/developer-documentation.html">Contributing to <em>Developing with QIIME 2</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/user-documentation.html">User documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/developer-documentation.html">Developer documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -423,7 +424,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="add-a-second-transformer">
 <span id="plugin-tutorial-add-2nd-transformer"></span><h1>Add a second transformer<a class="headerlink" href="#add-a-second-transformer" title="Permalink to this heading">#</a></h1>
-<p>A couple of chapters back (in <a class="reference internal" href="add-artifact-class.html#plugin-tutorial-add-artifact-class"><span class="std std-ref">Add a new artifact class</span></a>), I noted that adding transformers was an obscure step for a lot of new plugin developers.
+<p>A couple of sections back (in <a class="reference internal" href="add-artifact-class.html#plugin-tutorial-add-artifact-class"><span class="std std-ref">Add a new artifact class</span></a>), I noted that adding transformers was an obscure step for a lot of new plugin developers.
 Let’s circle back to that now with the goal of developing a better understanding of the role of transformers in QIIME 2, and also to simplify the code for generating usage examples that we just wrote.</p>
 <p>Take a minute to review the helper function we defined in our <code class="docutils literal notranslate"><span class="pre">_examples.py</span></code> file, and try to describe in a sentence or two what that code is doing.
 Here it is again, for reference:</p>
@@ -443,10 +444,10 @@ Here’s my description of what this is doing, but come up with your own before 
 <p class="sd-card-text">This code is transforming (or converting) an <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> object into a <code class="docutils literal notranslate"><span class="pre">q2_dwq2.SingleRecordDNAFASTAFormat</span></code> object, and then importing that format into a QIIME 2 artifact.</p>
 </div>
 </details><p>Transformers in QIIME 2 are designed to handle converstions between objects behind the scenes, so that users don’t ever have to think about this, and developers can think about it as infrequently as possible.
-In this chapter, we’ll do a small refactor of the code we wrote in the previous chapter.</p>
+In this section, we’ll do a small refactor of the code we wrote in the previous section.</p>
 <div class="admonition-tl-dr admonition">
 <p class="admonition-title">tl;dr</p>
-<p>The code that I wrote for this chapter can be found <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/93a3098b4e18796e8c33cd35088bf2a3623eed20">here</a>.</p>
+<p>The code that I wrote for this section can be found <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/93a3098b4e18796e8c33cd35088bf2a3623eed20">here</a>.</p>
 </div>
 <section id="define-a-transformer-from-skbio-dna-to-q2-dwq2-singlerecorddnafastaformat">
 <h2>Define a transformer from <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> to <code class="docutils literal notranslate"><span class="pre">q2_dwq2.SingleRecordDNAFASTAFormat</span></code><a class="headerlink" href="#define-a-transformer-from-skbio-dna-to-q2-dwq2-singlerecorddnafastaformat" title="Permalink to this heading">#</a></h2>
@@ -552,11 +553,11 @@ Run <code class="docutils literal notranslate"><span class="pre">make</span> <sp
       </div>
     </a>
     <a class="right-next"
-       href="../how-to-guides/intro.html"
+       href="conclusion.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">How-To Guides</p>
+        <p class="prev-next-title">Conclusion</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
