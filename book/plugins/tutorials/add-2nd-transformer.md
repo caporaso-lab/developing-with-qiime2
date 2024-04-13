@@ -1,7 +1,7 @@
 (plugin-tutorial-add-2nd-transformer)=
 # Add a second transformer
 
-A couple of chapters back (in [](plugin-tutorial-add-artifact-class)), I noted that adding transformers was an obscure step for a lot of new plugin developers.
+A couple of sections back (in [](plugin-tutorial-add-artifact-class)), I noted that adding transformers was an obscure step for a lot of new plugin developers.
 Let's circle back to that now with the goal of developing a better understanding of the role of transformers in QIIME 2, and also to simplify the code for generating usage examples that we just wrote.
 
 Take a minute to review the helper function we defined in our `_examples.py` file, and try to describe in a sentence or two what that code is doing.
@@ -20,10 +20,10 @@ This code is transforming (or converting) an `skbio.DNA` object into a `q2_dwq2.
 ```
 
 Transformers in QIIME 2 are designed to handle converstions between objects behind the scenes, so that users don't ever have to think about this, and developers can think about it as infrequently as possible.
-In this chapter, we'll do a small refactor of the code we wrote in the previous chapter.
+In this section, we'll do a small refactor of the code we wrote in the previous section.
 
 ```{admonition} tl;dr
-The code that I wrote for this chapter can be found [here](https://github.com/caporaso-lab/q2-dwq2/commit/93a3098b4e18796e8c33cd35088bf2a3623eed20).
+The code that I wrote for this section can be found [here](https://github.com/caporaso-lab/q2-dwq2/commit/93a3098b4e18796e8c33cd35088bf2a3623eed20).
 ```
 
 ## Define a transformer from `skbio.DNA` to `q2_dwq2.SingleRecordDNAFASTAFormat`

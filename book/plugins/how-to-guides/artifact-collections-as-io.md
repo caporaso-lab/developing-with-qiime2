@@ -130,7 +130,7 @@ If it needs a list but you gave it a dict, it will strip the keys and make a lis
 ### The `ResultCollection` object
 
 ```{note}
-The following content will be moved to the *References* section as API documentation.
+The following content will be moved to the *Reference* chapter as API documentation.
 ```
 
 QIIME 2 outputs collections in the form of `ResultCollection` objects.

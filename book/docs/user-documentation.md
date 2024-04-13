@@ -40,6 +40,7 @@ The above command will launch a web server on your computer. Open http://localho
 
 When you're ready, submit a pull request in the usual way.
 
+(users-docs-refactor)=
 ## Plans for refactoring of user documentation
 
 We are moving from a single source of documentation (the current content at https://docs.qiime2.org) to resources for **cross-distribution QIIME 2 documentation**, **within-distribution QIIME 2 reference material**, and **data set specific usage documentation**.

@@ -4,7 +4,7 @@
 ```{warning}
 Some of the discussion in this section uses *semantic type* as a synonym for {term}`artifact class`.
 While closely related, we're working on clarifying our language to distinguish these ideas.
-We haven't reviewed/updated this chapter for this yet.
+We haven't reviewed/updated this section for this yet.
 ```
 
 In any software project, data needs to be stored (or persisted).

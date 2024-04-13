@@ -1,6 +1,6 @@
 # Add a first visualizer
 
-In the last chapter we created a first method for our plugin which performed pairwise alignment of DNA sequences.
+In the last section we created a first method for our plugin which performed pairwise alignment of DNA sequences.
 We were able to run this to generate an alignment, but we didn't have any way to visualize the result without exporting it from QIIME 2.
 In this lesson we'll address that by adding a simple {term}`Visualizer` to our plugin which takes a `TabularMSA` artifact as input (which is what our previous action generated as output), and generates a `Visualization` that we can review using [QIIME 2 View](https://view.qiime2.org).
 
@@ -27,7 +27,7 @@ Our task in writing this visualizer is to create some sort of useful, human-read
 Luckily, scikit-bio's `TabularMSA` object has a built-in function for creating a text-based human-readable alignment summary through its `__repr__` function.
 We'll use that here, even though the representation it creates is a little crude and it is only a summary rather than a display of the full alignment.
 (Since our goal here is just to write a vizualizer --- not actually enable exploration of alignments --- this will suffice for our purposes.
-I'll leave it as an exercise to you at the end of this chapter to expand on this visualization.)
+I'll leave it as an exercise to you at the end of this section to expand on this visualization.)
 
 Start by creating a new file, `_visualizers.py` in your module's top-level directory. For me, this file will be `q2-dwq2/q2_dwq2/_visualizers.py`. Add the following code to that file.
 
