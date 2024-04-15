@@ -2,6 +2,11 @@
 
 **Your guide for writing, testing, and distributing QIIME 2 plugins, interfaces, and documentation.**
 
+```{admonition} Setting up your development environment
+:class: tip, dropdown
+If you just want to find instructions for creating your QIIME 2 development environment, see [](setup-dev-environment).
+```
+
 ```{admonition} Development status of this content
 :class: note
 *Developing with QIIME 2* remains in [very active development](https://github.com/caporaso-lab/developing-with-qiime2/commits/main/) between March and April of 2024.
