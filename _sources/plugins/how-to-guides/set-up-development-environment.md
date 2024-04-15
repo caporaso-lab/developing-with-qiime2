@@ -158,30 +158,30 @@ conda config --env --set subdir osx-64
 ````
 `````
 
-### Shotgun distribution
+### Metagenome distribution
 
 `````{tab-set}
 ````{tab-item} macOS
 ```bash
-wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-shotgun-macos-latest-conda.yml
-conda env create -n q2dev-shotgun --file qiime2-shotgun-macos-latest-conda.yml
-rm qiime2-shotgun-macos-latest-conda.yml
+wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-macos-latest-conda.yml
+conda env create -n q2dev-metagenome --file qiime2-metagenome-macos-latest-conda.yml
+rm qiime2-metagenome-macos-latest-conda.yml
 ```
 ````
 
 ````{tab-item} Linux
 ```bash
-wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-shotgun-ubuntu-latest-conda.yml
-conda env create -n q2dev-shotgun --file qiime2-shotgun-ubuntu-latest-conda.yml
-rm qiime2-shotgun-ubuntu-latest-conda.yml
+wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-ubuntu-latest-conda.yml
+conda env create -n q2dev-metagenome --file qiime2-metagenome-ubuntu-latest-conda.yml
+rm qiime2-metagenome-ubuntu-latest-conda.yml
 ```
 ````
 
 ````{tab-item} macOS (Apple Silicon)
 ```bash
-wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-shotgun-macos-latest-conda.yml
-CONDA_SUBDIR=osx-64 conda env create -n q2dev-shotgun --file qiime2-shotgun-macos-latest-conda.yml
-rm qiime2-shotgun-macos-latest-conda.yml
+wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-macos-latest-conda.yml
+CONDA_SUBDIR=osx-64 conda env create -n q2dev-metagenome --file qiime2-metagenome-macos-latest-conda.yml
+rm qiime2-metagenome-macos-latest-conda.yml
 conda config --env --set subdir osx-64
 ```
 ````
