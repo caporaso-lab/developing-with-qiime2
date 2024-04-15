@@ -12,8 +12,8 @@ If you just want to find instructions for creating your QIIME 2 development envi
 *Developing with QIIME 2* remains in [very active development](https://github.com/caporaso-lab/developing-with-qiime2/commits/main/) between March and April of 2024.
 It should be getting more complete by the day. 🚀
 
-As of 13 March 2024, most of the content from the [old QIIME 2 Developer Documentation](https://dev.qiime2.org) has been transitioned to *Developing with QIIME 2*.
-This book will be replacing the content at https://dev.qiime2.org shortly, and URLs are subject to change.
+As of 13 March 2024, most of the content from the [old QIIME 2 Developer Documentation](https://dev.qiime2.org/2024.2/) has been transitioned to *Developing with QIIME 2*.
+This book will migrate to https://dev.qiime2.org shortly - until that time, URLs may not be stable.
 
 The [](plugin-tutorial-intro) chapter is where the focus is at the moment, and it'll stay there for the near future, though all of the [](plugins/intro.md) chapters have useful and up-to-date content in them.
 You'll also find content in [](framework-explanations) and various other chapters throughout, but those are currently less thorough and generally need some updates.
