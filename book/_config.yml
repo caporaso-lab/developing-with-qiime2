@@ -32,7 +32,7 @@ bibtex_bibfiles:
   - _static/references.bib
 
 repository:
-  url: https://develop.qiime2.org/
+  url: https://github.com/caporaso-lab/developing-with-qiime2
   path_to_book: book
   branch: main
 
