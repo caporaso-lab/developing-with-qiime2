@@ -5,5 +5,5 @@ channels:
 - conda-forge
 - defaults
 dependencies:
-  - jupyter-book
+  - jupyter-book=0.15.1
   - qiime2-tiny
