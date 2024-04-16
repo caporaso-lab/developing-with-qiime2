@@ -1,5 +1,5 @@
 (plugin-tutorial-add-artifact-class)=
-# Add a new artifact class
+# Add a new Artifact Class
 
 Now that we've built a basic method and a basic visualizer, let's step into another unique aspect of developing with QIIME 2: defining {term}`artifact classes <artifact class>`.
 *Artifact classes* are closely related to terms you have probably already encountered in the QIIME 2 ecosystem: {term}`semantic types <semantic type>`, {term}`formats <format>`, and {term}`transformers <transformer>`.
