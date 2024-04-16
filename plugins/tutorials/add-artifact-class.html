@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Add a new artifact class &#8212; Developing with QIIME 2</title>
+    <title>Add a new Artifact Class &#8212; Developing with QIIME 2</title>
   
   
   
@@ -67,8 +67,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Add usage examples" href="add-usage-examples.html" />
-    <link rel="prev" title="Add a first visualizer" href="add-alignment-visualizer.html" />
+    <link rel="next" title="Add a Usage Example" href="add-usage-examples.html" />
+    <link rel="prev" title="Add a first Visualizer" href="add-alignment-visualizer.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -167,11 +167,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="create-from-template.html">Create your plugin from a template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-nw-align-method.html">Add a first (real) method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-alignment-visualizer.html">Add a first visualizer</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Add a new artifact class</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-usage-examples.html">Add usage examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-nw-align-method.html">Add a first (real) Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-alignment-visualizer.html">Add a first Visualizer</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Add a new Artifact Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-usage-examples.html">Add a Usage Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-2nd-transformer.html">Add a second transformer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-pipeline.html">Add a first Pipeline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conclusion.html">Conclusion</a></li>
 </ul>
 </li>
@@ -399,7 +400,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Add a new artifact class</h1>
+    <h1>Add a new Artifact Class</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -442,7 +443,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="add-a-new-artifact-class">
-<span id="plugin-tutorial-add-artifact-class"></span><h1>Add a new artifact class<a class="headerlink" href="#add-a-new-artifact-class" title="Permalink to this heading">#</a></h1>
+<span id="plugin-tutorial-add-artifact-class"></span><h1>Add a new Artifact Class<a class="headerlink" href="#add-a-new-artifact-class" title="Permalink to this heading">#</a></h1>
 <p>Now that we’ve built a basic method and a basic visualizer, let’s step into another unique aspect of developing with QIIME 2: defining <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact-class"><span class="xref std std-term">artifact classes</span></a>.
 <em>Artifact classes</em> are closely related to terms you have probably already encountered in the QIIME 2 ecosystem: <a class="reference internal" href="../../back-matter/glossary.html#term-Semantic-Type"><span class="xref std std-term">semantic types</span></a>, <a class="reference internal" href="../../back-matter/glossary.html#term-Format"><span class="xref std std-term">formats</span></a>, and <a class="reference internal" href="../../back-matter/glossary.html#term-Transformer"><span class="xref std std-term">transformers</span></a>.
 For most of the new QIIME 2 developers who I’ve worked with, defining a new artifact class (and the associated semantic type, format(s), and transformer(s)) is the most obscure step.
@@ -1014,7 +1015,7 @@ For example, does another library like BioPython provide an object with a conven
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Add a first visualizer</p>
+        <p class="prev-next-title">Add a first Visualizer</p>
       </div>
     </a>
     <a class="right-next"
@@ -1022,7 +1023,7 @@ For example, does another library like BioPython provide an object with a conven
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Add usage examples</p>
+        <p class="prev-next-title">Add a Usage Example</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

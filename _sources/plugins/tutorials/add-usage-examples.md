@@ -1,5 +1,5 @@
 (add-nw-align-usage)=
-# Add usage examples
+# Add a Usage Example
 
 If you want others to use your new functionality, it isn't *really* done until you document how to use it.
 Let's do that now.

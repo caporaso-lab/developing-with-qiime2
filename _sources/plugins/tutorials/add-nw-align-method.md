@@ -1,6 +1,6 @@
-# Add a first (real) method
+# Add a first (real) Method
 
-At the most basic level, a QIIME 2 {term}`action` is simply an annotation of a Python function that describes in detail the inputs and outputs to that function.
+At the most basic level, a QIIME 2 {term}`Action` is simply an annotation of a Python function that describes in detail the inputs and outputs to that function.
 Here we'll create a powerful action that illustrates this idea.
 
 The type of action that we'll create is a {term}`method`, meaning that it will take zero or more QIIME 2 {term}`artifacts <Artifact>` as input, and it will generate one or more QIIME 2 artifacts as output.

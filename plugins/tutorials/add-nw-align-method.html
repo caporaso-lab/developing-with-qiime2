@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Add a first (real) method &#8212; Developing with QIIME 2</title>
+    <title>Add a first (real) Method &#8212; Developing with QIIME 2</title>
   
   
   
@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Add a first visualizer" href="add-alignment-visualizer.html" />
+    <link rel="next" title="Add a first Visualizer" href="add-alignment-visualizer.html" />
     <link rel="prev" title="Create your plugin from a template" href="create-from-template.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -167,11 +167,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="create-from-template.html">Create your plugin from a template</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Add a first (real) method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-alignment-visualizer.html">Add a first visualizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-artifact-class.html">Add a new artifact class</a></li>
-<li class="toctree-l3"><a class="reference internal" href="add-usage-examples.html">Add usage examples</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Add a first (real) Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-alignment-visualizer.html">Add a first Visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-artifact-class.html">Add a new Artifact Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-usage-examples.html">Add a Usage Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-2nd-transformer.html">Add a second transformer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-pipeline.html">Add a first Pipeline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conclusion.html">Conclusion</a></li>
 </ul>
 </li>
@@ -399,7 +400,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Add a first (real) method</h1>
+    <h1>Add a first (real) Method</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -441,8 +442,8 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="add-a-first-real-method">
-<h1>Add a first (real) method<a class="headerlink" href="#add-a-first-real-method" title="Permalink to this heading">#</a></h1>
-<p>At the most basic level, a QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">action</span></a> is simply an annotation of a Python function that describes in detail the inputs and outputs to that function.
+<h1>Add a first (real) Method<a class="headerlink" href="#add-a-first-real-method" title="Permalink to this heading">#</a></h1>
+<p>At the most basic level, a QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">Action</span></a> is simply an annotation of a Python function that describes in detail the inputs and outputs to that function.
 Here we’ll create a powerful action that illustrates this idea.</p>
 <p>The type of action that we’ll create is a <a class="reference internal" href="../../back-matter/glossary.html#term-Method"><span class="xref std std-term">method</span></a>, meaning that it will take zero or more QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact"><span class="xref std std-term">artifacts</span></a> as input, and it will generate one or more QIIME 2 artifacts as output.</p>
 <div class="tip admonition" id="add-nw-align-method-commit">
@@ -1162,7 +1163,7 @@ Don’t forget to write your unit tests!</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Add a first visualizer</p>
+        <p class="prev-next-title">Add a first Visualizer</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
