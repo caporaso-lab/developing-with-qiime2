@@ -17,6 +17,7 @@ parts:
             - file: plugins/tutorials/add-artifact-class
             - file: plugins/tutorials/add-usage-examples
             - file: plugins/tutorials/add-2nd-transformer
+            - file: plugins/tutorials/add-pipeline
             - file: plugins/tutorials/conclusion
         - file: plugins/how-to-guides/intro
           sections:

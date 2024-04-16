@@ -1,4 +1,4 @@
-# Add a first visualizer
+# Add a first Visualizer
 
 In the last section we created a first method for our plugin which performed pairwise alignment of DNA sequences.
 We were able to run this to generate an alignment, but we didn't have any way to visualize the result without exporting it from QIIME 2.
