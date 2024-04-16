@@ -260,7 +260,7 @@ Usage: qiime dwq2 [OPTIONS] COMMAND [ARGS]...
   Description: A prototype of a demonstration plugin for use by readers of
   *Developing with QIIME 2* (DWQ2).
 
-  Plugin website: https://cap-lab.bio/developing-with-qiime2/
+  Plugin website: https://develop.qiime2.org/
 
   Getting user support: Please post to the QIIME 2 forum for help with this
   plugin: https://forum.qiime2.org
