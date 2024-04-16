@@ -32,7 +32,7 @@ bibtex_bibfiles:
   - _static/references.bib
 
 repository:
-  url: https://cap-lab.bio/developing-with-qiime2/
+  url: https://develop.qiime2.org/
   path_to_book: book
   branch: main
 
