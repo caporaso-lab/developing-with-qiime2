@@ -10,7 +10,7 @@ build:
       - "jupyter-book config sphinx book/"
 
 conda:
-  environment: https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-ubuntu-latest-conda.yml
+  environment: environment.yml
 
 sphinx:
   builder: html
