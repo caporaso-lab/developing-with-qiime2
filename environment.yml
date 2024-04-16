@@ -1,8 +1,8 @@
 name: developing-with-qiime2
 channels:
 - https://packages.qiime2.org/qiime2/2024.5/tiny/passed
-- bioconda
 - conda-forge
+- bioconda
 - defaults
 dependencies:
   - jupyter-book=0.15.1
