@@ -1,0 +1,5 @@
+name: developing-with-qiime2
+channels:
+  - conda-forge
+dependencies:
+  - jupyter-book
