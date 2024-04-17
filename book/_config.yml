@@ -20,6 +20,7 @@ sphinx:
       logo:
         image_light: _static/dwq2-light.png
         image_dark: _static/dwq2-dark.png
+      show_navbar_depth: 2
 
 execute:
   execute_notebooks: force
