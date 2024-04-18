@@ -1,5 +1,5 @@
 (framework-explanations)=
-# Framework explanations
+# Explanations
 
 ```{tableofcontents}
 ```

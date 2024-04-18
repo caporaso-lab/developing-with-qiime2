@@ -1,4 +1,4 @@
-# How-to guides
+# How-To Guides
 
 ```{tableofcontents}
 ```
