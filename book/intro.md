@@ -14,9 +14,9 @@ It should be getting more complete by the day. 🚀
 
 The canonical URL for this project is now https://develop.qiime2.org.
 
-The "old developer documentation", which was previously hosted at `https://dev.qiime2.org` is now deprecated.
+The "old developer documentation", which was previously hosted at `https://dev.qiime2.org`, is now deprecated.
 All content that is still relevant has been ported from that documentation to *Developing with QIIME 2*.
-If you do want to access that archival content, you can find it in the [project's GitHub repository](https://github.com/qiime2/dev-docs).
+If you want to access that archival content, you can find it in the [project's GitHub repository](https://github.com/qiime2/dev-docs).
 
 The [](plugin-tutorial-intro) chapter is where the focus is for the near future, though all of the [](plugins/intro.md) chapters have useful and up-to-date content in them.
 You'll also find content in [](framework-explanations) and various other chapters throughout, but those are currently less thorough and generally need some updates.
@@ -44,7 +44,7 @@ Each serves a different goal for the reader:
   - Provides a guided exploration of a topic for **learning**.
 
 * - How To Guide
-  - Provides step-by-step instructions on how to accomplish specific **goals**.
+  - Provides step-by-step instructions on how to **accomplish specific goals**.
 
 * - Explanation
   - Provides a discussion intended to aid in **understanding** a specific topic.
