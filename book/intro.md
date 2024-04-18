@@ -40,16 +40,16 @@ Each serves a different goal for the reader:
 * - Chapter
   - Purpose
 
-* - Tutorial
-  - Provides a guided exploration of a topic for **learning**.
+* - Tutorials
+  - Provide a guided exploration of a topic for **learning**.
 
-* - How To Guide
-  - Provides step-by-step instructions on how to **accomplish specific goals**.
+* - How To Guides
+  - Provide step-by-step instructions on how to **accomplish specific goals**.
 
-* - Explanation
-  - Provides a discussion intended to aid in **understanding** a specific topic.
+* - Explanations
+  - Provide a discussion intended to aid in **understanding** a specific topic.
 
-* - Reference
+* - References
   - Provide specific **information** (e.g., an API reference).
 ```
 
