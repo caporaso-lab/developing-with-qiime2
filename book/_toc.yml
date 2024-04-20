@@ -36,6 +36,7 @@ parts:
         - file: plugins/explanations/intro
           sections:
             - file: plugins/explanations/actions
+            - file: plugins/explanations/package-structure
             - file: plugins/explanations/types-of-types
             - file: plugins/explanations/transformers
         - file: plugins/references/intro

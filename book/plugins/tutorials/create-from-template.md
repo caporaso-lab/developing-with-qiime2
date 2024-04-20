@@ -24,6 +24,11 @@ The plugin I'm going to create will be called `q2-dwq2` (for *Developing with QI
 
 After the plugin has been created, change into the top-level directory for the plugin.
 For me, that's `q2-dwq2/`.
+
+```{note}
+If you'd like to learn more about the files that were created in this process, you can refer to [](plugin-package-explanation).
+```
+
 Run the following command to install your plugin in developer mode:
 
 ```shell
