@@ -193,6 +193,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/actions.html">Types of QIIME 2 Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/package-structure.html">The structure of QIIME 2 plugin packages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
 </ul>
@@ -429,8 +430,12 @@ Here we’ll work through building your QIIME 2 plugin from this template.</p>
 Fill this information in as it’s requested, or accept the default values - either is fine.
 The plugin I’m going to create will be called <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code> (for <em>Developing with QIIME 2</em>). You can call your plugin <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code>, or whatever you prefer.</p>
 <p>After the plugin has been created, change into the top-level directory for the plugin.
-For me, that’s <code class="docutils literal notranslate"><span class="pre">q2-dwq2/</span></code>.
-Run the following command to install your plugin in developer mode:</p>
+For me, that’s <code class="docutils literal notranslate"><span class="pre">q2-dwq2/</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you’d like to learn more about the files that were created in this process, you can refer to <a class="reference internal" href="../explanations/package-structure.html#plugin-package-explanation"><span class="std std-ref">The structure of QIIME 2 plugin packages</span></a>.</p>
+</div>
+<p>Run the following command to install your plugin in developer mode:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>dev
 </pre></div>
 </div>

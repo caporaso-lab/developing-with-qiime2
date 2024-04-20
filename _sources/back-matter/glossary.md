@@ -19,6 +19,11 @@ Artifact class
 Artifact API
   See {term}`Python 3 API`.
 
+Conda metapackage
+  > A metapackage is a package  with no  files,  only  metadata.
+  > They are typically used to collect several packages together into a single package via dependencies.
+  > ([source](https://docs.conda.io/projects/conda-build/en/stable/resources/commands/conda-metapackage.html))
+
 Deployment
   An installation of QIIME 2 as well as zero-or-more {term}`interfaces <Interface>` and {term}`plugins <Plugin>`.
   The collection of interfaces and plugins in a deployment can be defined by a {term}`distribution` of QIIME 2.
@@ -28,8 +33,8 @@ Directory Format
   A Directory Format represents a particular layout of a directory that contains files and/or arbitrarily nested sub-directories, and defines how the contents must be structured.
 
 Distribution
-  A collection of QIIME 2 plugins that are designed to be installed together.
-  These are generally grouped by a theme. For example, the Amplicon Distribution provides a collection of plugins for analysis of microbiome amplicon data, while the Shotgun Distribution provides a collection of plugins for analysis of microbiome shotgun metagenomics data.
+  A collection of QIIME 2 plugins that are installed together through a single {term}`conda metapackage`.
+  These are generally grouped by a theme. For example, the *amplicon distribution* provides a collection of plugins for analysis of microbiome amplicon data, while the *metagenome distribution* provides a collection of plugins for analysis of microbiome shotgun metagenomics data.
   When a distribution is installed, that particular installation of QIIME 2 is an example of a {term}`deployment`.
 
 File Format
@@ -49,7 +54,8 @@ Identifier
   A unique value that denotes an individual sample or feature.
 
 Identity
-  Distinguishes a piece of data. QIIME 2 does not consider a rename (like UNIX ``mv``) to change identity, however re-running a command, would change identity.
+  Distinguishes a piece of data.
+  QIIME 2 does not consider a rename (like UNIX ``mv``) to change identity, however re-running a command, would change identity.
 
 Input
   Data provided to an {term}`action`. Can be an {term}`artifact` or {term}`metadata`.

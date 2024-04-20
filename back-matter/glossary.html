@@ -193,6 +193,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../plugins/explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/explanations/actions.html">Types of QIIME 2 Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/explanations/package-structure.html">The structure of QIIME 2 plugin packages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/explanations/transformers.html">Transformers</a></li>
 </ul>
@@ -414,7 +415,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="glossary">
 <h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this heading">#</a></h1>
-<dl class="simple glossary">
+<dl class="glossary">
 <dt id="term-Action">Action<a class="headerlink" href="#term-Action" title="Permalink to this term">#</a></dt><dd><p>A generic term to describe a concrete <a class="reference internal" href="#term-Method"><span class="xref std std-term">method</span></a>, <a class="reference internal" href="#term-Visualizer"><span class="xref std std-term">visualizer</span></a>, or <a class="reference internal" href="#term-Pipeline"><span class="xref std std-term">pipeline</span></a>.
 Actions accept parameters and/or files (<a class="reference internal" href="#term-Artifact"><span class="xref std std-term">artifacts</span></a> or <a class="reference internal" href="#term-Metadata"><span class="xref std std-term">metadata</span></a>) as input, and generate some kind of output.</p>
 </dd>
@@ -428,14 +429,20 @@ This is defined by a plugin developer by associating a <a class="reference inter
 </dd>
 <dt id="term-Artifact-API">Artifact API<a class="headerlink" href="#term-Artifact-API" title="Permalink to this term">#</a></dt><dd><p>See <a class="reference internal" href="#term-Python-3-API"><span class="xref std std-term">Python 3 API</span></a>.</p>
 </dd>
+<dt id="term-Conda-metapackage">Conda metapackage<a class="headerlink" href="#term-Conda-metapackage" title="Permalink to this term">#</a></dt><dd><blockquote>
+<div><p>A metapackage is a package  with no  files,  only  metadata.
+They are typically used to collect several packages together into a single package via dependencies.
+(<a class="reference external" href="https://docs.conda.io/projects/conda-build/en/stable/resources/commands/conda-metapackage.html">source</a>)</p>
+</div></blockquote>
+</dd>
 <dt id="term-Deployment">Deployment<a class="headerlink" href="#term-Deployment" title="Permalink to this term">#</a></dt><dd><p>An installation of QIIME 2 as well as zero-or-more <a class="reference internal" href="#term-Interface"><span class="xref std std-term">interfaces</span></a> and <a class="reference internal" href="#term-Plugin"><span class="xref std std-term">plugins</span></a>.
 The collection of interfaces and plugins in a deployment can be defined by a <a class="reference internal" href="#term-Distribution"><span class="xref std std-term">distribution</span></a> of QIIME 2.</p>
 </dd>
 <dt id="term-Directory-Format">Directory Format<a class="headerlink" href="#term-Directory-Format" title="Permalink to this term">#</a></dt><dd><p>An object that is a subclass of <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.DirectoryFormat</span></code>.
 A Directory Format represents a particular layout of a directory that contains files and/or arbitrarily nested sub-directories, and defines how the contents must be structured.</p>
 </dd>
-<dt id="term-Distribution">Distribution<a class="headerlink" href="#term-Distribution" title="Permalink to this term">#</a></dt><dd><p>A collection of QIIME 2 plugins that are designed to be installed together.
-These are generally grouped by a theme. For example, the Amplicon Distribution provides a collection of plugins for analysis of microbiome amplicon data, while the Shotgun Distribution provides a collection of plugins for analysis of microbiome shotgun metagenomics data.
+<dt id="term-Distribution">Distribution<a class="headerlink" href="#term-Distribution" title="Permalink to this term">#</a></dt><dd><p>A collection of QIIME 2 plugins that are installed together through a single <a class="reference internal" href="#term-Conda-metapackage"><span class="xref std std-term">conda metapackage</span></a>.
+These are generally grouped by a theme. For example, the <em>amplicon distribution</em> provides a collection of plugins for analysis of microbiome amplicon data, while the <em>metagenome distribution</em> provides a collection of plugins for analysis of microbiome shotgun metagenomics data.
 When a distribution is installed, that particular installation of QIIME 2 is an example of a <a class="reference internal" href="#term-Deployment"><span class="xref std std-term">deployment</span></a>.</p>
 </dd>
 <dt id="term-File-Format">File Format<a class="headerlink" href="#term-File-Format" title="Permalink to this term">#</a></dt><dd><p>An object which subclasses either <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.TextFileFormat</span></code> or <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.BinaryFileFormat</span></code>.
@@ -449,7 +456,8 @@ File formats define the particular format of a file, and define a process for va
 </dd>
 <dt id="term-Identifier">Identifier<a class="headerlink" href="#term-Identifier" title="Permalink to this term">#</a></dt><dd><p>A unique value that denotes an individual sample or feature.</p>
 </dd>
-<dt id="term-Identity">Identity<a class="headerlink" href="#term-Identity" title="Permalink to this term">#</a></dt><dd><p>Distinguishes a piece of data. QIIME 2 does not consider a rename (like UNIX <code class="docutils literal notranslate"><span class="pre">mv</span></code>) to change identity, however re-running a command, would change identity.</p>
+<dt id="term-Identity">Identity<a class="headerlink" href="#term-Identity" title="Permalink to this term">#</a></dt><dd><p>Distinguishes a piece of data.
+QIIME 2 does not consider a rename (like UNIX <code class="docutils literal notranslate"><span class="pre">mv</span></code>) to change identity, however re-running a command, would change identity.</p>
 </dd>
 <dt id="term-Input">Input<a class="headerlink" href="#term-Input" title="Permalink to this term">#</a></dt><dd><p>Data provided to an <a class="reference internal" href="#term-Action"><span class="xref std std-term">action</span></a>. Can be an <a class="reference internal" href="#term-Artifact"><span class="xref std std-term">artifact</span></a> or <a class="reference internal" href="#term-Metadata"><span class="xref std std-term">metadata</span></a>.</p>
 </dd>
