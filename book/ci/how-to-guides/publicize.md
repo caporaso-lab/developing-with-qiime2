@@ -11,9 +11,9 @@ Please [feel free to reach out](https://github.com/caporaso-lab/developing-with-
 ## Help others understand how your tool will help them
 
 Everyone is busy.
-While a lot of us would love to spend time experimenting with cool things people are making, ultimately we don't have time and we tend to only invest time in discovering and learning the things that are going to advance *our* priorities.
+While a lot of us would love to spend time experimenting with cool things people are making, ultimately we don't have time and we tend to only invest time in discovering and learning the things that are *very obviously going to advance our priorities*.
 When you're marketing your tool to someone, start by making it clear how it can advance their priorities.
-This is about them, not you.
+This is primarily about them and their goals - not you and your goals.
 You're selling, and you're hoping they're buying.
 
 Ideally, show them - don't tell them - how your tool will advance their priorities.
@@ -22,6 +22,7 @@ If they're interested, get on the same page regarding publication expectations -
 Then do it, and help them honestly interpret the results.
 If your tool doesn't show anything new, don't try to oversell it or they won't trust you next time.
 Regardless of how it works, learn from the process and use it to improve your tool and your approach.
+As your tool helps others with their work, their [word-of-mouth](https://en.wikipedia.org/wiki/Word-of-mouth_marketing) and their publications will market your work.
 
 ## QIIME 2 Library
 We are currently (23 April 2024) working on a simplified set of tools for sharing your plugins with the QIIME 2 community, and this will ultimately replace the [QIIME 2 Library](https://library.qiime2.org).
