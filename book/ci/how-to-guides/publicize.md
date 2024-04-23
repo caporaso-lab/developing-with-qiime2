@@ -1,9 +1,9 @@
 (ci-how-to-publicize)=
 # Publicize your QIIME 2 tools
 
-```{warning}
-This document is in early development.
-If you have suggestions on ideas to include, please [feel free to reach out](https://github.com/caporaso-lab/developing-with-qiime2/issues).
+```{note}
+If you have suggestions on additional ways to publicize QIIME 2 plugins, we're interested!
+Please [feel free to reach out](https://github.com/caporaso-lab/developing-with-qiime2/issues).
 ```
 
 ## QIIME 2 Library
@@ -19,14 +19,20 @@ For example, you could include information on the project's website, a brief tut
 
 ## Post a pre-print
 
-Pre-prints are a citable way to get software annoucements out while peer review is in process.
-And, as you probably know, peer review can take *ages*. 🐌
-However, software annoucement papers are not accepted by many pre-print servers, unfortunately.
+Pre-prints are a citable way to get software announcement articles out while peer review is in process.
+As you probably know, peer review can take *ages* and software moves quickly, so we find that it's worth it to publish software announcement pre-prints.
+However, software annoucement papers are unfortunately not accepted by many pre-print servers.
+Here are some exceptions to that, based on our experiences.
 
 [arXiv](https://arxiv.org/) is a pre-print server that does [seem to](https://arxiv.org/abs/2305.11198) accept software announcement pre-prints (e.g, see their [Quantitiative Biology](https://arxiv.org/archive/q-bio) category).
 
 F1000 is another option that [we've had luck with](https://f1000research.com/articles/9-657).
 It's not technically a pre-print server, but a peer-review journal that publishes your article online once you submit it, and then publishes the peer-reviews and iterations of the paper.
+
+From my (Greg's) perspective, where you publish a pre-print isn't all that important, though more popular pre-print servers can presumably help with visibility of your work.
+The most important thing is that you're getting a DOI that you can use to reference your article, and ideally that you can update the pre-print when you update the manuscript.
+Just confirm that your target journal for the peer-reviewed version of your publication doesn't restrict you from sharing the article on pre-print servers.
+Most don't, but if it doubt it doesn't hurt to check.
 
 
 

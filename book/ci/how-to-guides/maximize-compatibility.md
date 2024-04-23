@@ -1,5 +1,5 @@
 (ci-how-to-maximize-compatibility)=
-# Maximizing compatibility between your plugin(s) and existing QIIME 2 distribution(s)
+# Maximize compatibility between your plugin(s) and existing QIIME 2 distribution(s)
 
 You can build your QIIME 2 tools in your own way.
 Your new tool doesn't need to live in the [QIIME 2 GitHub organization](https://github.com/qiime2) or be part of one of the QIIME 2 distributions developed and maintained in the [Caporaso Lab](https://cap-lab.bio).

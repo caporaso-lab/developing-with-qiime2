@@ -9,4 +9,5 @@ We encourage you to build your own tools if you would like to introduce new func
 As of this writing (23 April 2024) we are redesigning our approach to supporting sharing of QIIME 2 tools (see [](ci-how-to-publicize)).
 As our support for this improves, this part ([](ci-intro)) of *Developing with QIIME 2* is where you'll find information to help you get started.
 
-
+```{tableofcontents}
+```

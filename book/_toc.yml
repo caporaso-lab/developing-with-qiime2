@@ -86,10 +86,14 @@ parts:
     chapters:
       - file: ci/intro
         sections:
-        - file: ci/tutorials/distribute-on-gh
-        - file: ci/how-to-guides/support-your-users
-        - file: ci/how-to-guides/publicize
-        - file: ci/how-to-guides/maximize-compatibility
+        - file: ci/tutorials/intro
+          sections:
+          - file: ci/tutorials/distribute-on-gh
+        - file: ci/how-to-guides/intro
+          sections:
+          - file: ci/how-to-guides/support-your-users
+          - file: ci/how-to-guides/publicize
+          - file: ci/how-to-guides/maximize-compatibility
 
   - caption: "Back Matter 🗂️"
     chapters:

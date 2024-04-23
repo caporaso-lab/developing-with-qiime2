@@ -1,5 +1,5 @@
 (ci-how-to-support-your-users)=
-# Providing technical support for your users
+# Provide technical support for your users
 
 You are free to have your users request help on the [QIIME 2 Forum](https://forum.qiime2.org) for your QIIME 2-based tools, and we encourage this as it helps to centralize knowledge around the QIIME 2 ecosystem, but you are of course also free to direct users to your email, GitHub issue tracker, or another resource for technical support.
 
