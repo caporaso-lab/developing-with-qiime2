@@ -85,6 +85,11 @@ parts:
   - caption: "Continuous Integration 🛠️"
     chapters:
       - file: ci/intro
+        sections:
+        - file: ci/tutorials/distribute-on-gh
+        - file: ci/how-to-guides/support-your-users
+        - file: ci/how-to-guides/publicize
+        - file: ci/how-to-guides/maximize-compatibility
 
   - caption: "Back Matter 🗂️"
     chapters:
