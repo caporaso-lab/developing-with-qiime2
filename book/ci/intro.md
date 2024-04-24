@@ -12,7 +12,7 @@ Customized QIIME 2 distributions can also be created and shared by anyone.
 
 As of this writing (23 April 2024) we are redesigning our approach to helping you share and promote your QIIME 2-based tools.
 [](share-on-github) provides an example of how you can currently share your tools with users, and we are actively working to expand that functionality to make it more useful for developers and users.
-We also discuss more general ideas on sharing QIIME 2-based tools in [](ci-how-to-publicize)).
+We also discuss more general ideas on sharing QIIME 2-based tools in [](ci-how-to-publicize).
 
 As our support in this area improves, this Part of *Developing with QIIME 2* will be expanded to describe new functionality.
 

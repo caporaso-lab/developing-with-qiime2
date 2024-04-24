@@ -18,8 +18,8 @@ You're selling, and you're hoping they're buying.
 
 Ideally, show them - don't tell them - how your tool will advance their priorities.
 For example, reach out and ask people if you can run your software on their data to try to help them generate some new insights.
-If they're interested, get on the same page regarding publication expectations: is this something you could publish on now, or could you co-author work that they're preparing?
-If you're on the same page, do it, see what you see, and help them interpret the findings.
+If they're interested, get on the same page regarding publication expectations: if you discover something new, could you publish on it now, or could you co-author work that they're preparing?
+If you're on the same page, analyze their data, see what you see, and help them interpret the findings.
 If you find something cool, you're off to the races.
 If not, don't oversell your results - it can backfire.
 Regardless of how it works, learn from the process and use it to improve your tool and your marketing approach.
@@ -40,17 +40,16 @@ For example, you could include information on the project's website, a brief tut
 ## Post a pre-print
 
 Pre-prints are a citable way to get software announcement articles out while peer review is in process.
-As you probably know, peer review can take *ages* and software moves quickly, so we find that it's worth it to publish software announcement pre-prints.
-However, software annoucement papers are unfortunately not accepted by many pre-print servers.
+As you probably know, peer review can take *ages* and software changes quickly, so we find that it's worth it to publish software announcement pre-prints that we can immediately begin citing.
+
+That said, software announcement papers are unfortunately not accepted by many pre-print servers.
 Here are some exceptions to that, based on our experiences.
-
-[arXiv](https://arxiv.org/) is a pre-print server that does [seem to](https://arxiv.org/abs/2305.11198) accept software announcement pre-prints (e.g, see their [Quantitiative Biology](https://arxiv.org/archive/q-bio) category).
-
-F1000 is another option that [we've had luck with](https://f1000research.com/articles/9-657).
-It's not technically a pre-print server, but a peer-review journal that publishes your article online once you submit it, and then publishes the peer-reviews and iterations of the paper.
+- [arXiv](https://arxiv.org/) is a pre-print server that does [seem to](https://arxiv.org/abs/2305.11198) accept software announcement pre-prints (e.g, see their [Quantitative Biology](https://arxiv.org/archive/q-bio) category).
+- F1000 is another option that [we've had luck with](https://f1000research.com/articles/9-657).
+It's not technically a pre-print server, but rather a peer-review journal that publishes your article online once you submit it, and then publishes the peer-reviews, your responses, and the iterations of the paper.
 
 From my (Greg's) perspective, where you publish a pre-print isn't all that important, though more popular pre-print servers can presumably help with visibility of your work.
-The most important thing is that you're getting a DOI that you can use to reference your article, and ideally that you can update the pre-print when you update the manuscript.
+The most important thing is that you're getting a [DOI](https://en.wikipedia.org/wiki/Digital_object_identifier) that you can use to uniquely reference your article, and ideally that you can update the pre-print when you update the manuscript.
 Just confirm that your target journal for the peer-reviewed version of your publication doesn't restrict you from sharing the article on pre-print servers.
 Most don't, but if it doubt it doesn't hurt to check.
 

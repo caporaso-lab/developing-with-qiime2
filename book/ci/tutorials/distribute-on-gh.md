@@ -5,11 +5,11 @@ GitHub is a straight-forward way to share your QIIME 2 plugin.
 This tutorial will walk you through creating a QIIME 2 plugin from template, and then sharing it with installation instructions on GitHub.
 
 This tutorial assumes that you have `git` and the [GitHub command line interface](https://cli.github.com/) installed on your computer.
-If you don't have these installed, do that now using [the GitHub command line interface instructions](https://github.com/cli/cli#installation), which should install `git` if you don't already have it installed.
+If you don't have these installed, do that now using the GitHub command line interface [installation instructions](https://github.com/cli/cli#installation), which should install `git` if you don't already have it installed.
 
 ```{note}
 All of the steps illustrated here that use the GitHub command line interface can also be performed through the typical GitHub web interface.
-The GitHub command line interface is used here as it's easier to document and test the instructions.
+The GitHub command line interface is used here as it's easier to document and test the instructions (and it's pretty darn cool).
 ```
 
 ## Template your plugin
@@ -61,7 +61,7 @@ If you don't know how to answer to a specific question, the default is generally
 
 After this process completes, you will have a new GitHub repository.
 If you navigate to that repository in your web browser you should see that the tests are currently running (or recently completed).
-If those tests pass, follow the instructions in the README.md on your repository to test installation of your plugin on your computer.
+If those tests pass, follow the instructions in the `README.md` on your repository to test installation of your plugin on your computer.
 If that works, you should be ready to share those instructions with others.
 
 ## Expanding on the install instructions
@@ -69,5 +69,9 @@ If that works, you should be ready to share those instructions with others.
 You'll almost certainly need to expand upon the install instructions for your plugin as you develop it.
 We recommend doing what you can in the `Makefile` in your repository, so that the command `make install` continues to be the mechanism by which your plugin should be installed.
 That can include anything that works for your plugin for installation, including `conda install` commands, `pip install` commands, or anything else.
-Be sure to update the README.md if you introduce any new constraints (e.g., that your plugin can only be installed on Linux) - it's fine to do that, but you should let your users know so they don't get grumpy about your plugin.
+Be sure to update the `README.md` if you introduce any new constraints (e.g., that your plugin can only be installed on Linux) - it's fine to do that, but you should let your users know so they don't get grumpy about your plugin.
+
+Users should now be able to install and use your plugin if they're pointed at the `README.md` file.
+The next steps are helping prospective users discover your plugin, and providing support for your users.
+We have some suggestions on those topics and others in this Part's [](ci-how-to-intro).
 

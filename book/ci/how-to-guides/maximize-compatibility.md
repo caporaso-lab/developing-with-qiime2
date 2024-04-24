@@ -8,13 +8,14 @@ If you want your QIIME 2 plugin(s) or other tools to work with existing QIIME 2 
 To do this, you can observe the {term}`artifact classes <Artifact class>` that are used in the target distribution(s), and make your functionality compatible with those.
 Avoid defining new artifact classes when you can reuse existing ones, to maximize compatibility and interoperability (as well as reducing your own software development time!).
 A complete list of artifact classes and formats available in a deployment of QIIME 2 can be accessed with the `qiime tools list-types` and `qiime tools list-formats` commands.
+(Some are missing documentation - we'd [love your help addressing that](https://github.com/caporaso-lab/developing-with-qiime2/issues/97).)
 If you do need to create new artifact classes, you can add these in your own plugin(s).
 
 The Caporaso Lab is not taking on new responsibility for distributing plugins right now (i.e., integrating them in the distributions they develop and maintain), but we are curently (23 April 2024) developing new mechanisms for helping you share your plugin or other tools (see [](ci-how-to-publicize)) that will ultimately replace the [QIIME 2 Library](https://library.qiime2.org).
 
 You can consider the existing distributions to be foundations that you can build on, or you can create and distribute your own conda metapackages.
 Some guidance on each of these approaches:
-   - Your install instructions can indicate that a user should install whichever distribution you depend on (e.g., `tiny`, `amplicon`, or `metagenome`) and then illustrate how to install your plugin(s) in that environment however it makes sense (e.g., `conda` or `pip`).
+   - Your install instructions can indicate that a user should install whichever distribution you depend on (e.g., `tiny`, `amplicon`, or `metagenome`) and then illustrate how to install your plugin(s) in that environment however it makes sense (e.g., `conda` or `pip`). Complete install instructions are drafted for you in the `README.md` of plugins that you build using our template (see [](plugin-from-template)).
    - Alternatively, you can compose and share your own distribution of plugins (e.g., building from the `tiny` distribution) that captures the set of functionality you’d like to share.
 
 Either of these approaches is totally fine.
