@@ -253,11 +253,23 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Continuous Integration 🛠️</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../ci/intro.html">Distribution Development</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ci/intro.html">Distribution Development</a><input checked class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ci/tutorials/intro.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ci/tutorials/distribute-on-gh.html">Distributing plugins on GitHub</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ci/how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ci/how-to-guides/support-your-users.html">Provide technical support for your users</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ci/how-to-guides/publicize.html">Publicize your QIIME 2 tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ci/how-to-guides/maximize-compatibility.html">Maximize compatibility between your plugin(s) and existing QIIME 2 distribution(s)</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter 🗂️</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../back-matter/intro.html">Back matter</a><input checked class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../back-matter/intro.html">Back matter</a><input checked class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../back-matter/glossary.html">Glossary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../back-matter/bibliography.html">List of works cited</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../back-matter/genindex.html">Index</a></li>
@@ -422,7 +434,17 @@ Here we’ll work through building your QIIME 2 plugin from this template.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>cookiecutter
 </pre></div>
 </div>
-<p>Then, use <code class="docutils literal notranslate"><span class="pre">cookiecutter</span></code> to create your plugin from the template using the following command:</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Optionally initialize a git repository during plugin templating</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">git</span></code> is installed in your environment, at the end of the templating process, a new git repository will be initialized and a first commit will be made.
+This facilitates managing your plugin in version control, and is especially good practice if you are templating a plugin that you ultimately plan to distribute to others.</p>
+<p>You can check if you have git installed by running <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">--version</span></code>.
+If you get a response with a version number (something like <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">version</span> <span class="pre">2.44.0</span></code>), git is installed and a new local repository will be initialized.
+If you get a response suggesting that <code class="docutils literal notranslate"><span class="pre">git</span></code> is not installed, you can just continue and not have cookiecutter create a git repository for you, or you can install <a class="reference external" href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">git</a> and then continue.</p>
+<p>The git repository that is created will be a local git repository, meaning that it only exists on your computer and won’t be shared through a site like GitHub.
+If you’d like to learn how to share your plugins, see <a class="reference internal" href="../../ci/tutorials/distribute-on-gh.html#share-on-github"><span class="std std-ref">Distributing plugins on GitHub</span></a>.</p>
+</div>
+<p>Finally, use <code class="docutils literal notranslate"><span class="pre">cookiecutter</span></code> to create your plugin from the template using the following command:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cookiecutter<span class="w"> </span>gh:caporaso-lab/cookiecutter-qiime2-plugin
 </pre></div>
 </div>
@@ -431,10 +453,6 @@ Fill this information in as it’s requested, or accept the default values - eit
 The plugin I’m going to create will be called <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code> (for <em>Developing with QIIME 2</em>). You can call your plugin <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code>, or whatever you prefer.</p>
 <p>After the plugin has been created, change into the top-level directory for the plugin.
 For me, that’s <code class="docutils literal notranslate"><span class="pre">q2-dwq2/</span></code>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you’d like to learn more about the files that were created in this process, you can refer to <a class="reference internal" href="../explanations/package-structure.html#plugin-package-explanation"><span class="std std-ref">The structure of QIIME 2 plugin packages</span></a>.</p>
-</div>
 <p>Run the following command to install your plugin in developer mode:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>dev
 </pre></div>
@@ -482,8 +500,12 @@ Miscellaneous:
 </div>
 <p>After you’ve confirmed that both of the above commands worked as expected, you’re ready to start working on this plugin.
 Open the top-level plugin directory in your text editor of choice (I recommend <a class="reference external" href="https://code.visualstudio.com/">VS Code</a>, if you don’t already have one that you’re comfortable with).
-Poke through all of the files to familiarize yourself with the structure of your plugin’s Python package.
-Don’t worry if it’s not clear what everything is yet - we’ll get to all of that.</p>
+Poke through all of the files to familiarize yourself with the structure of your plugin’s Python package.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you’d like to learn more about the files that were created in this process, you can refer to <a class="reference internal" href="../explanations/package-structure.html#plugin-package-explanation"><span class="std std-ref">The structure of QIIME 2 plugin packages</span></a>.
+You don’t need to know what all of these files are to continue the tutorial though, so you can also come back to that later.</p>
+</div>
 <p>Congratulations - you’ve created a working QIIME 2 plugin from a template!
 If you’d like to try the action out, you can call your <code class="docutils literal notranslate"><span class="pre">duplicate-table</span></code> action on any QIIME 2 <code class="docutils literal notranslate"><span class="pre">FeatureTable[Frequency]</span></code> artifact (e.g., you can download one from the <a class="reference external" href="https://docs.qiime2.org">QIIME 2 user documentation</a>).
 Load your duplicated table with <a class="reference external" href="https://view.qiime2.org">QIIME 2 View</a>, and poke through its Provenance to see how data provenance is recorded for your plugin.</p>

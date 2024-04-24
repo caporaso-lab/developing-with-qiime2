@@ -12,7 +12,20 @@ Next, install cookiecutter in your QIIME 2 development environment using the fol
 pip install cookiecutter
 ```
 
-Then, use `cookiecutter` to create your plugin from the template using the following command:
+```{admonition} Optionally initialize a git repository during plugin templating
+:class: dropdown
+If `git` is installed in your environment, at the end of the templating process, a new git repository will be initialized and a first commit will be made.
+This facilitates managing your plugin in version control, and is especially good practice if you are templating a plugin that you ultimately plan to distribute to others.
+
+You can check if you have git installed by running `git --version`.
+If you get a response with a version number (something like `git version 2.44.0`), git is installed and a new local repository will be initialized.
+If you get a response suggesting that `git` is not installed, you can just continue and not have cookiecutter create a git repository for you, or you can install [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and then continue.
+
+The git repository that is created will be a local git repository, meaning that it only exists on your computer and won't be shared through a site like GitHub.
+If you'd like to learn how to share your plugins, see [](share-on-github).
+```
+
+Finally, use `cookiecutter` to create your plugin from the template using the following command:
 
 ```shell
 cookiecutter gh:caporaso-lab/cookiecutter-qiime2-plugin
@@ -24,10 +37,6 @@ The plugin I'm going to create will be called `q2-dwq2` (for *Developing with QI
 
 After the plugin has been created, change into the top-level directory for the plugin.
 For me, that's `q2-dwq2/`.
-
-```{note}
-If you'd like to learn more about the files that were created in this process, you can refer to [](plugin-package-explanation).
-```
 
 Run the following command to install your plugin in developer mode:
 
@@ -93,7 +102,11 @@ Miscellaneous:
 After you've confirmed that both of the above commands worked as expected, you're ready to start working on this plugin.
 Open the top-level plugin directory in your text editor of choice (I recommend [VS Code](https://code.visualstudio.com/), if you don't already have one that you're comfortable with).
 Poke through all of the files to familiarize yourself with the structure of your plugin's Python package.
-Don't worry if it's not clear what everything is yet - we'll get to all of that.
+
+```{note}
+If you'd like to learn more about the files that were created in this process, you can refer to [](plugin-package-explanation).
+You don't need to know what all of these files are to continue the tutorial though, so you can also come back to that later.
+```
 
 Congratulations - you've created a working QIIME 2 plugin from a template!
 If you'd like to try the action out, you can call your `duplicate-table` action on any QIIME 2 `FeatureTable[Frequency]` artifact (e.g., you can download one from the [QIIME 2 user documentation](https://docs.qiime2.org)).

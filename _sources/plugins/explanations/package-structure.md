@@ -46,6 +46,7 @@ q2-dwq2
 └── versioneer.py
 ```
 
+(plugin-package-explanation-top-level-directory)=
 ## `q2-dwq2`
 
 `q2-dwq2` is the top-level directory containing all of the files in the Python package.
