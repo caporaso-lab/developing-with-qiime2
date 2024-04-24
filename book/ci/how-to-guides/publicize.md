@@ -4,29 +4,31 @@
 If you want others to use your QIIME 2 tools, you have to market them.
 Ultimately that's your responsibility - **you** built it, **you** know it, **you're** proud of it, so **you need to promote it**.
 
-Here are some ideas on how to market your tools so that others will discover and use them.
-If you have suggestions on additional ways to publicize QIIME 2 plugins or other tools, we're interested!
-Please [feel free to reach out](https://github.com/caporaso-lab/developing-with-qiime2/issues).
+Here are some ideas on how to market your tools.
+If you have suggestions on additional ways, we're interested!
+Please feel free to reach out.
 
 ## Help others understand how your tool will help them
 
 Everyone is busy.
-While a lot of us would love to spend time experimenting with cool things people are making, ultimately we don't have time and we tend to only invest time in discovering and learning the things that are *very obviously going to advance our priorities*.
+While a lot of us would love to spend time finding and experimenting with cool things that other people are making, ultimately we don't have time and we tend to only invest time in discovering and truly learning the things that are *very obviously going to advance our priorities*.
 When you're marketing your tool to someone, start by making it clear how it can advance their priorities.
-This is primarily about them and their goals - not you and your goals.
+This is about them and their goals - not you and your goals.
 You're selling, and you're hoping they're buying.
 
 Ideally, show them - don't tell them - how your tool will advance their priorities.
-For example, reach out and ask people if you can run your software on their data to generate some new insights.
-If they're interested, get on the same page regarding publication expectations - is this something you could publish on now, or could you co-author work that they're preparing?
-Then do it, and help them honestly interpret the results.
-If your tool doesn't show anything new, don't try to oversell it or they won't trust you next time.
-Regardless of how it works, learn from the process and use it to improve your tool and your approach.
+For example, reach out and ask people if you can run your software on their data to try to help them generate some new insights.
+If they're interested, get on the same page regarding publication expectations: is this something you could publish on now, or could you co-author work that they're preparing?
+If you're on the same page, do it, see what you see, and help them interpret the findings.
+If you find something cool, you're off to the races.
+If not, don't oversell your results - it can backfire.
+Regardless of how it works, learn from the process and use it to improve your tool and your marketing approach.
 As your tool helps others with their work, their [word-of-mouth](https://en.wikipedia.org/wiki/Word-of-mouth_marketing) and their publications will market your work.
 
 ## QIIME 2 Library
 We are currently (23 April 2024) working on a simplified set of tools for sharing your plugins with the QIIME 2 community, and this will ultimately replace the [QIIME 2 Library](https://library.qiime2.org).
-Our end goal is to help you provide users with information such as the compatibility of your plugins with the current {term}`distributions <Distribution>`, where to find documentation and technical support, how to cite your plugin, and more.
+Our end goals are to help you get your software discovered by the large QIIME 2 user community, and to help you make it clear how your tools can be installed, used, and cited.
+It will also enable users to make informed choices about which plugins they want to use by helping them understand if plugins are under active development, if and to what extent they are unit tested, and if they're well-supported by the developers.
 We expect incremental progress on this over the next year.
 
 ## Community Contributions on the QIIME 2 Forum
