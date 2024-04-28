@@ -104,7 +104,7 @@ A `qiime2.sdk.Context` object will always be the first parameter that is passed 
 
 One other difference to notice here is that we are not using type hints (such as `seq1: skbio.DNA`) when we define the function that we'll register to our Pipeline.
 That's because the functions that we register to Pipelines, unlike those that we register to Methods and Visualizers, take Artifacts as inputs.
-This is because, internally, they call registered {term}`Actions <Action>`, not the functions that are registered to those Actions, and all Actions in QIIME 2 take their inputs as Artifacts.
+This is because internally they call registered {term}`Actions <Action>`, not the functions that are registered to those Actions, and all Actions in QIIME 2 take their inputs as Artifacts.
 It's not until `seq1` (for example) is passed in to the function registered to our `nw_align` Action (`q2_dwq2._methods.nw_align`) that it is transformed to the `skbio.DNA` object that that function takes as input.
 
 The first thing we're doing in our `align_and_summarize` function is getting those actions that we'll use.
@@ -123,7 +123,8 @@ Finally, we return our Artifact and our Visualizer in a tuple.
 ## Register the Pipeline
 
 Pipeline registration is similar to Methods or Visualizer registration, except that the method used for registration is `plugin.pipelines.register_function`.
-Because our Pipeline shares many of its inputs with our `nw_align` Method, when we register the `Pipeline` there is another opportunity for duplicated information.
+Because our Pipeline shares many of its inputs with our `nw_align` Method, when we register the `Pipeline` there is another opportunity for duplicated information to make its way into our plugin and violate DRY.
+
 Here's the final Pipeline registration code that I ended up with in my `plugin_setup.py` file, after defining some new variables in that file:
 
 ```python
@@ -144,7 +145,7 @@ plugin.pipelines.register_function(
               align_and_summarize_example_1}
 ```
 
-As a **required exercise**, after adding this code to your `plugin_setup.py` file, define the variables used in this code block in such a way that it addresses the DRY principle discussed above.
+As a **required exercise** after adding this code to your `plugin_setup.py` file, define the variables used in this code block in such a way that it addresses the DRY violation mentioned above.
 If you get stuck, refer to [the code that I added for this section](add-pipeline-commit).
 
 After you're done, you should be able to refresh your cache (`qiime dev refresh-cache`), and then call `--help` on your plugin to see your new `Pipeline` in the list.
@@ -152,8 +153,8 @@ Try it out using the `SingleDNASequence` Artifacts that you previously passed to
 
 ## Add tests and documentation
 
-We're of course not done with our new action until we write the tests for it, and then we write the documentation.
-In both cases, this build off work that we previously did when we defined our Method and Visualizer.
+We're of course not done with our new action until we write its tests and documentation.
+In both cases, this builds off work that we previously did when we defined our Method and Visualizer.
 
 As another **required exercise**, add a unit test and a usage example for this Pipeline.
 Refer to [the code that I added for this section](add-pipeline-commit) if you need a hint.
@@ -169,15 +170,12 @@ $ make test
 ## An optional exercise
 
 In an earlier optional exercise, you may have added a Method for Smith-Waterman alignment, built on the `skbio.alignment.local_pairwise_align_nucleotide`.
-Adapt your new Pipeline so that it gives the user the option of running global or local alignment.
+Adapt your new Pipeline so that it gives the user the option of running global (Needleman-Wunsch) or local (Smith-Waterman) alignment.
 
 ```{admonition} Hint
 :class: tip
 You'll likely define a new parameter in your action that toggles whether global or local pairwise alignment is used.
-The {term}`Primitive Type` associated with that parameter during your Pipeline registration will likely be `Str % Choices`, where `Str` and `Choices` are imported from `qiime2.plugin`.
+The {term}`Primitive Type` associated with that parameter during your Pipeline registration can be `Str % Choices`, where `Str` and `Choices` are imported from `qiime2.plugin`.
 You can find examples of how this is used in the `plugin_setup.py` file of the [`q2-diversity`](https://github.com/qiime2/q2-diversity) plugin.
 Use this as an opportunity to refer to other plugins as learning examples.
 ```
-
-
-**Some earlier text on this topic can be found in the *How-to* guide, [](howto-create-register-pipeline).**
