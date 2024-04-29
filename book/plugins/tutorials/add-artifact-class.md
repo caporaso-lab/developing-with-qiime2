@@ -101,7 +101,9 @@ In this section we're going to define a new artifact class called `SingleDNASequ
 Recall that previously we associated the `FeatureData[Sequence]` artifact class with our inputs to `nw-align`, but since this artifact class is intended to represent collections of sequences (rather than the single sequences that we use as input to `nw-align`) it was just a way to quickly get started.
 Defining `SingleDNASequence` will allow us to better represent the input to `nw-align`, and to reduce some unnecessary code that we wrote in our action.
 
-Start by creating a new file, `_types_and_formats.py` in your module's top-level directory. For me, this file will be `q2-dwq2/q2_dwq2/_types_and_formats.py`. Add the following code to that file.
+Start by creating a new file, `_types_and_formats.py` in your module's top-level directory.
+For me, this file will be `q2-dwq2/q2_dwq2/_types_and_formats.py`.
+Add the following code to that file.
 
 ```python
 from qiime2.plugin import SemanticType

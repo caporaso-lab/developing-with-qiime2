@@ -2,8 +2,8 @@
 
 ```{glossary}
 Action
-  A generic term to describe a concrete {term}`method`, {term}`visualizer`, or {term}`pipeline`.
-  Actions accept parameters and/or files ({term}`artifacts <Artifact>` or {term}`metadata`) as input, and generate some kind of output.
+  A generic term to describe a {term}`Method`, {term}`Visualizer`, or {term}`Pipeline`.
+  Actions accept parameters and/or {term}`Artifacts <Artifact>` and/or {term}`Metadata`) as input, and generate one or more {term}`Results <Result>` as output.
 
 Archive
   The directory structure of a QIIME 2 {term}`Result`.
