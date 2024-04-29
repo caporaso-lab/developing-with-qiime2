@@ -400,7 +400,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -416,6 +418,18 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-the-nw-align-action-to-avoid-duplicating-information">Update the <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> action to avoid duplicating information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-pipelines-py-and-add-a-pipeline">Create <code class="docutils literal notranslate"><span class="pre">_pipelines.py</span></code> and add a Pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#register-the-pipeline">Register the Pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-tests-and-documentation">Add tests and documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-optional-exercise">An optional exercise</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -430,14 +444,158 @@ document.write(`
 <p>In this chapter we’ll add our first <a class="reference internal" href="../../back-matter/glossary.html#term-Pipeline"><span class="xref std std-term">Pipeline</span></a> to our plugin.
 Pipelines allow developers to define workflows composed of Methods and Visualizers, defined in the same plugin or others, that can be run as a single step.
 Like <a class="reference internal" href="../../back-matter/glossary.html#term-Method"><span class="xref std std-term">Methods</span></a> and <a class="reference internal" href="../../back-matter/glossary.html#term-Visualizer"><span class="xref std std-term">Visualizers</span></a>, Pipelines take zero or more <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact"><span class="xref std std-term">Artifacts</span></a> as input.
-However unlike Methods, which exclusively produce one or more Artifacts as output, or Visualizers, which exclusively produce one or more <a class="reference internal" href="../../back-matter/glossary.html#term-Visualization"><span class="xref std std-term">Visualizations</span></a> as output, Pipelines create one or more Artifacts <em>and</em> one or more Visualizations as output.
+However unlike Methods, which exclusively produce one or more Artifacts as output, or Visualizers, which exclusively produce one or more <a class="reference internal" href="../../back-matter/glossary.html#term-Visualization"><span class="xref std std-term">Visualizations</span></a> as output, Pipelines create one or more Artifacts <em>and/or</em> Visualizations as output.
 Pipelines are also where QIIME 2’s formal support for parallel computing comes into play, so are important for supporting workflows that are computationally expensive.</p>
 <p>In this chapter, we’ll develop our first simple Pipeline which will chain the <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> and <code class="docutils literal notranslate"><span class="pre">summarize-alignment</span></code> <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">Actions</span></a> that we previously wrote together in a new action that produces the alignment and the alignment summary from one command call.
 This will illustrate how to use Pipelines to simplify common workflows for your users.
 In subsequent chapters, we’ll explore developing Pipelines that provide parallel computing support across diverse high-performance computing resource configurations.</p>
-<p><strong>This chapter is currently incomplete.</strong>
-<strong>The code that we’ll develop is available <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/pull/11/files">here</a>, while the text is in development.</strong>
-<strong>Some earlier text on this topic can be found in the <em>How-to</em> guide, <a class="reference internal" href="../how-to-guides/create-register-pipeline.html#howto-create-register-pipeline"><span class="std std-ref">Create and register a pipeline</span></a>.</strong></p>
+<div class="tip admonition" id="add-pipeline-commit">
+<p class="admonition-title">tl;dr</p>
+<p><strong>The complete code that I developed for this section is available <a class="reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/1e601c41b86d98b22f4e16685e868f1c5710f3bf">here</a>.</strong></p>
+</div>
+<section id="update-the-nw-align-action-to-avoid-duplicating-information">
+<h2>Update the <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> action to avoid duplicating information<a class="headerlink" href="#update-the-nw-align-action-to-avoid-duplicating-information" title="Permalink to this heading">#</a></h2>
+<p>The first thing we’re going to do in preparation for building this Pipeline is create an object to store the default parameter settings for our <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> function.
+While not technically required, we’ll use those same default settings again in our Pipeline, so we do this to adhere to the <strong>D</strong>on’t <strong>R</strong>epeat <strong>Y</strong>ourself (<strong>DRY</strong>) principle of software engineering.
+This is stated in <span id="id1">Thomas and Hunt [<a class="reference internal" href="../../back-matter/bibliography.html#id7" title="David Thomas and Andrew Hunt. The Pragmatic Programmer: your journey to mastery, 20th Anniversary Edition. Addison-Wesley Professional, September 2019.">4</a>]</span> as <em>Every piece of knowledge must have a single, unambiguous, authoritative representation within a system</em>, and the authors go on to say that this is <em>one of the most important tools in the Pragmatic Programmer’s tool box</em>.</p>
+<p>The reasoning behind DRY, using our code as an example, is that if default parameter settings for our pairwise alignment functionality are defined in two different places, and we want to change those settings, it’s very easy to for us or someone else maintaining this code in the future to erroneously make the change in only one of the two places where they are defined.
+This would result in different output when calling <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> directly versus through our new Pipeline, which would be unexpected behavior that most people would rightly consider to be a bug.</p>
+<p>We’ll address this by putting the default parameter settings in a <code class="docutils literal notranslate"><span class="pre">dict</span></code>.
+We can then look up the values in that <code class="docutils literal notranslate"><span class="pre">dict</span></code> anywhere we need them, so they only need to be defined that one time.
+To achieve this, update the <code class="docutils literal notranslate"><span class="pre">_methods.py</span></code> file, to look like the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skbio.alignment</span> <span class="kn">import</span> <span class="n">global_pairwise_align_nucleotide</span><span class="p">,</span> <span class="n">TabularMSA</span>
+<span class="kn">from</span> <span class="nn">skbio</span> <span class="kn">import</span> <span class="n">DNA</span>
+
+<span class="n">_nw_align_defaults</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;gap_open_penalty&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s1">&#39;gap_extend_penalty&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;match_score&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;mismatch_score&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">2</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">nw_align</span><span class="p">(</span>
+        <span class="n">seq1</span><span class="p">:</span> <span class="n">DNA</span><span class="p">,</span>
+        <span class="n">seq2</span><span class="p">:</span> <span class="n">DNA</span><span class="p">,</span>
+        <span class="n">gap_open_penalty</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">_nw_align_defaults</span><span class="p">[</span><span class="s1">&#39;gap_open_penalty&#39;</span><span class="p">],</span>
+        <span class="n">gap_extend_penalty</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">_nw_align_defaults</span><span class="p">[</span><span class="s1">&#39;gap_extend_penalty&#39;</span><span class="p">],</span>
+        <span class="n">match_score</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">_nw_align_defaults</span><span class="p">[</span><span class="s1">&#39;match_score&#39;</span><span class="p">],</span>
+        <span class="n">mismatch_score</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">_nw_align_defaults</span><span class="p">[</span><span class="s1">&#39;mismatch_score&#39;</span><span class="p">])</span> \
+        <span class="o">-&gt;</span> <span class="n">TabularMSA</span><span class="p">:</span>
+    <span class="n">msa</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">global_pairwise_align_nucleotide</span><span class="p">(</span>
+        <span class="n">seq1</span><span class="o">=</span><span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="o">=</span><span class="n">seq2</span><span class="p">,</span> <span class="n">gap_open_penalty</span><span class="o">=</span><span class="n">gap_open_penalty</span><span class="p">,</span>
+        <span class="n">gap_extend_penalty</span><span class="o">=</span><span class="n">gap_extend_penalty</span><span class="p">,</span> <span class="n">match_score</span><span class="o">=</span><span class="n">match_score</span><span class="p">,</span>
+        <span class="n">mismatch_score</span><span class="o">=</span><span class="n">mismatch_score</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">msa</span>
+</pre></div>
+</div>
+<p>This implementation is functionally identical to what we had before, but it now allows us to import the <code class="docutils literal notranslate"><span class="pre">_nw_align_defaults</span></code> dictionary and use it elsewhere.</p>
+</section>
+<section id="create-pipelines-py-and-add-a-pipeline">
+<h2>Create <code class="docutils literal notranslate"><span class="pre">_pipelines.py</span></code> and add a Pipeline<a class="headerlink" href="#create-pipelines-py-and-add-a-pipeline" title="Permalink to this heading">#</a></h2>
+<p>Next, let’s define the function that we’ll register to our Pipeline.
+Start by creating a new file, <code class="docutils literal notranslate"><span class="pre">_pipelines.py</span></code> in your module’s top-level directory.
+For me, this file will be <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_pipelines.py</span></code>.
+Add the following code to that file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">._methods</span> <span class="kn">import</span> <span class="n">_nw_align_defaults</span>
+
+
+<span class="k">def</span> <span class="nf">align_and_summarize</span><span class="p">(</span>
+        <span class="n">ctx</span><span class="p">,</span> <span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">,</span>
+        <span class="n">gap_open_penalty</span><span class="o">=</span><span class="n">_nw_align_defaults</span><span class="p">[</span><span class="s1">&#39;gap_open_penalty&#39;</span><span class="p">],</span>
+        <span class="n">gap_extend_penalty</span><span class="o">=</span><span class="n">_nw_align_defaults</span><span class="p">[</span><span class="s1">&#39;gap_extend_penalty&#39;</span><span class="p">],</span>
+        <span class="n">match_score</span><span class="o">=</span><span class="n">_nw_align_defaults</span><span class="p">[</span><span class="s1">&#39;match_score&#39;</span><span class="p">],</span>
+        <span class="n">mismatch_score</span><span class="o">=</span><span class="n">_nw_align_defaults</span><span class="p">[</span><span class="s1">&#39;mismatch_score&#39;</span><span class="p">]):</span>
+    <span class="n">nw_align_action</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get_action</span><span class="p">(</span><span class="s1">&#39;dwq2&#39;</span><span class="p">,</span> <span class="s1">&#39;nw_align&#39;</span><span class="p">)</span>
+    <span class="n">summarize_alignment_action</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get_action</span><span class="p">(</span><span class="s1">&#39;dwq2&#39;</span><span class="p">,</span> <span class="s1">&#39;summarize_alignment&#39;</span><span class="p">)</span>
+
+    <span class="n">msa</span><span class="p">,</span> <span class="o">=</span> <span class="n">nw_align_action</span><span class="p">(</span>
+                    <span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">,</span> <span class="n">gap_open_penalty</span><span class="o">=</span><span class="n">gap_open_penalty</span><span class="p">,</span>
+                    <span class="n">gap_extend_penalty</span><span class="o">=</span><span class="n">gap_extend_penalty</span><span class="p">,</span>
+                    <span class="n">match_score</span><span class="o">=</span><span class="n">match_score</span><span class="p">,</span> <span class="n">mismatch_score</span><span class="o">=</span><span class="n">mismatch_score</span><span class="p">)</span>
+    <span class="n">msa_summary</span><span class="p">,</span> <span class="o">=</span> <span class="n">summarize_alignment_action</span><span class="p">(</span><span class="n">msa</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">msa</span><span class="p">,</span> <span class="n">msa_summary</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you compare this function signature to that of our <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> function, you’ll notice they look very similar.
+This function, <code class="docutils literal notranslate"><span class="pre">align_and_summarize</span></code>, takes all of the same inputs and parameters as <code class="docutils literal notranslate"><span class="pre">nw_align</span></code>, which allows users the same control over how that functionality works as if they had called <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> directly.
+You don’t need to expose these parameters - in some cases you may design a Pipeline that implies a certain parameter choice - but in our case our goal is to make this Pipeline an alternative to calling <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> and <code class="docutils literal notranslate"><span class="pre">summarize_alignment</span></code> back-to-back.</p>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">align_and_summarize</span></code> accesses the default parameter settings in the same way that <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> does, using the <code class="docutils literal notranslate"><span class="pre">_nw_align_defaults</span></code> dictionary that we created above.
+So, if we decide at some point that we want to update one of these defaults - maybe we want to set the default <code class="docutils literal notranslate"><span class="pre">gap_open_penalty</span></code> to <code class="docutils literal notranslate"><span class="pre">4</span></code> instead of <code class="docutils literal notranslate"><span class="pre">5</span></code>, we would update that in one place (<code class="docutils literal notranslate"><span class="pre">_nw_align_defaults</span></code>) and it will change the defaults in the two actions that use that information.
+That’s DRY in action.</p>
+<p>The one new parameter here with respect to <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> is <code class="docutils literal notranslate"><span class="pre">ctx</span></code>, which is an instance of a <code class="docutils literal notranslate"><span class="pre">qiime2.sdk.Context</span></code> object.
+As a plugin developer, you’ll never create one of these objects directly, but your Pipelines may use the <code class="docutils literal notranslate"><span class="pre">get_action</span></code> and <code class="docutils literal notranslate"><span class="pre">make_artifact</span></code> APIs that they provide.
+A <code class="docutils literal notranslate"><span class="pre">qiime2.sdk.Context</span></code> object will always be the first parameter that is passed to functions that are registered as <code class="docutils literal notranslate"><span class="pre">Pipelines</span></code>, and by convention this parameter is called <code class="docutils literal notranslate"><span class="pre">ctx</span></code>.</p>
+<p>One other difference to notice here is that we are not using type hints (such as <code class="docutils literal notranslate"><span class="pre">seq1:</span> <span class="pre">skbio.DNA</span></code>) when we define the function that we’ll register to our Pipeline.
+That’s because the functions that we register to Pipelines, unlike those that we register to Methods and Visualizers, take Artifacts as inputs.
+This is because internally they call registered <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">Actions</span></a>, not the functions that are registered to those Actions, and all Actions in QIIME 2 take their inputs as Artifacts.
+It’s not until <code class="docutils literal notranslate"><span class="pre">seq1</span></code> (for example) is passed in to the function registered to our <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> Action (<code class="docutils literal notranslate"><span class="pre">q2_dwq2._methods.nw_align</span></code>) that it is transformed to the <code class="docutils literal notranslate"><span class="pre">skbio.DNA</span></code> object that that function takes as input.</p>
+<p>The first thing we’re doing in our <code class="docutils literal notranslate"><span class="pre">align_and_summarize</span></code> function is getting those actions that we’ll use.
+These are retrieved using <code class="docutils literal notranslate"><span class="pre">ctx.get_action</span></code>, which takes a plugin name and an action name as input and returns a function that we can call.
+I’m assigning these to variables that end in <code class="docutils literal notranslate"><span class="pre">_action</span></code> to indicate that these are registered QIIME 2 Actions, not the underlying functions that are registered to those Actions.
+The plugin referred to in a call to <code class="docutils literal notranslate"><span class="pre">ctx.get_action</span></code> can either be the plugin you’re working on (as in our case here), or any other plugin that your plugin has as a dependency.
+The action name can be any Method or Visualizer in that plugin.
+Here we’re retrieving the two actions that we want to run in our Pipeline, <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> and <code class="docutils literal notranslate"><span class="pre">summarize_alignment</span></code>, and assigning those to the variables <code class="docutils literal notranslate"><span class="pre">nw_align_action</span></code> and <code class="docutils literal notranslate"><span class="pre">summarize_alignment_action</span></code>.</p>
+<p>We then call each of these functions, providing the output of <code class="docutils literal notranslate"><span class="pre">nw_align_action</span></code> (an <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact-class"><span class="xref std std-term">artifact of class</span></a> <code class="docutils literal notranslate"><span class="pre">FeatureData[AlignedSequence]</span></code>) as the input to <code class="docutils literal notranslate"><span class="pre">summarize_alignment_action</span></code>.
+<code class="docutils literal notranslate"><span class="pre">summarize_alignment_action</span></code> then returns a <a class="reference internal" href="../../back-matter/glossary.html#term-Visualization"><span class="xref std std-term">Visualization</span></a> as output.
+Each of our <code class="docutils literal notranslate"><span class="pre">*_action</span></code> functions return a tuple, which is why the variables that we assign the results into are followed by commas (as in <code class="docutils literal notranslate"><span class="pre">msa,</span> <span class="pre">=</span> <span class="pre">nw_align</span></code>).</p>
+<p>Finally, we return our Artifact and our Visualizer in a tuple.</p>
+</section>
+<section id="register-the-pipeline">
+<h2>Register the Pipeline<a class="headerlink" href="#register-the-pipeline" title="Permalink to this heading">#</a></h2>
+<p>Pipeline registration is similar to Methods or Visualizer registration, except that the method used for registration is <code class="docutils literal notranslate"><span class="pre">plugin.pipelines.register_function</span></code>.
+Because our Pipeline shares many of its inputs with our <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> Method, when we register the <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> there is another opportunity for duplicated information to make its way into our plugin and violate DRY.</p>
+<p>Here’s the final Pipeline registration code that I ended up with in my <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code> file, after defining some new variables in that file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plugin</span><span class="o">.</span><span class="n">pipelines</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
+    <span class="n">function</span><span class="o">=</span><span class="n">align_and_summarize</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="n">_align_and_summarize_inputs</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="n">_align_and_summarize_parameters</span><span class="p">,</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="n">_align_and_summarize_outputs</span><span class="p">,</span>
+    <span class="n">input_descriptions</span><span class="o">=</span><span class="n">_align_and_summarize_input_descriptions</span><span class="p">,</span>
+    <span class="n">parameter_descriptions</span><span class="o">=</span><span class="n">_align_and_summarize_parameter_descriptions</span><span class="p">,</span>
+    <span class="n">output_descriptions</span><span class="o">=</span><span class="n">_align_and_summarize_output_descriptions</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Pairwise global alignment and summarization.&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Perform global pairwise sequence alignment using a slow &quot;</span>
+                 <span class="s2">&quot;Needleman-Wunsch (NW) implementation, and generate a &quot;</span>
+                 <span class="s2">&quot;visual summary of the alignment.&quot;</span><span class="p">),</span>
+    <span class="n">citations</span><span class="o">=</span><span class="n">_align_and_summarize_output_citations</span><span class="p">,</span>
+    <span class="n">examples</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Align two sequences and summarize the alignment.&#39;</span><span class="p">:</span>
+              <span class="n">align_and_summarize_example_1</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>As a <strong>required exercise</strong> after adding this code to your <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code> file, define the variables used in this code block in such a way that it addresses the DRY violation mentioned above.
+If you get stuck, refer to <a class="reference internal" href="#add-pipeline-commit"><span class="std std-ref">the code that I added for this section</span></a>.</p>
+<p>After you’re done, you should be able to refresh your cache (<code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dev</span> <span class="pre">refresh-cache</span></code>), and then call <code class="docutils literal notranslate"><span class="pre">--help</span></code> on your plugin to see your new <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> in the list.
+Try it out using the <code class="docutils literal notranslate"><span class="pre">SingleDNASequence</span></code> Artifacts that you previously passed to the <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> action.</p>
+</section>
+<section id="add-tests-and-documentation">
+<h2>Add tests and documentation<a class="headerlink" href="#add-tests-and-documentation" title="Permalink to this heading">#</a></h2>
+<p>We’re of course not done with our new action until we write its tests and documentation.
+In both cases, this builds off work that we previously did when we defined our Method and Visualizer.</p>
+<p>As another <strong>required exercise</strong>, add a unit test and a usage example for this Pipeline.
+Refer to <a class="reference internal" href="#add-pipeline-commit"><span class="std std-ref">the code that I added for this section</span></a> if you need a hint.</p>
+<p>When you’re done, you should be able to run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> and see output like the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span><span class="nb">test</span>
+...
+<span class="o">=====</span><span class="w"> </span><span class="m">18</span><span class="w"> </span>passed,<span class="w"> </span><span class="m">29</span><span class="w"> </span>warnings<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">4</span>.66s<span class="w"> </span><span class="o">=====</span>
+</pre></div>
+</div>
+</section>
+<section id="an-optional-exercise">
+<h2>An optional exercise<a class="headerlink" href="#an-optional-exercise" title="Permalink to this heading">#</a></h2>
+<p>In an earlier optional exercise, you may have added a Method for Smith-Waterman alignment, built on the <code class="docutils literal notranslate"><span class="pre">skbio.alignment.local_pairwise_align_nucleotide</span></code>.
+Adapt your new Pipeline so that it gives the user the option of running global (Needleman-Wunsch) or local (Smith-Waterman) alignment.</p>
+<div class="tip admonition">
+<p class="admonition-title">Hint</p>
+<p>You’ll likely define a new parameter in your action that toggles whether global or local pairwise alignment is used.
+The <a class="reference internal" href="../../back-matter/glossary.html#term-Primitive-Type"><span class="xref std std-term">Primitive Type</span></a> associated with that parameter during your Pipeline registration can be <code class="docutils literal notranslate"><span class="pre">Str</span> <span class="pre">%</span> <span class="pre">Choices</span></code>, where <code class="docutils literal notranslate"><span class="pre">Str</span></code> and <code class="docutils literal notranslate"><span class="pre">Choices</span></code> are imported from <code class="docutils literal notranslate"><span class="pre">qiime2.plugin</span></code>.
+You can find examples of how this is used in the <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code> file of the <a class="reference external" href="https://github.com/qiime2/q2-diversity"><code class="docutils literal notranslate"><span class="pre">q2-diversity</span></code></a> plugin.
+Use this as an opportunity to refer to other plugins as learning examples.</p>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -494,6 +652,24 @@ In subsequent chapters, we’ll explore developing Pipelines that provide parall
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-the-nw-align-action-to-avoid-duplicating-information">Update the <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> action to avoid duplicating information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-pipelines-py-and-add-a-pipeline">Create <code class="docutils literal notranslate"><span class="pre">_pipelines.py</span></code> and add a Pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#register-the-pipeline">Register the Pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-tests-and-documentation">Add tests and documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-optional-exercise">An optional exercise</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
