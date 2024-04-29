@@ -14,7 +14,7 @@ In subsequent chapters, we'll explore developing Pipelines that provide parallel
 ```{admonition} tl;dr
 :class: tip
 
-**The complete code that I developed for this section is available [here](https://github.com/caporaso-lab/q2-dwq2/pull/11/files).**
+**The complete code that I developed for this section is available [here](https://github.com/caporaso-lab/q2-dwq2/commit/1e601c41b86d98b22f4e16685e868f1c5710f3bf).**
 ```
 
 ## Update the `nw_align` action to avoid duplicating information
