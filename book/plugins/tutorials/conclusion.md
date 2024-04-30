@@ -8,7 +8,7 @@ You can see a list of content planned for the plugin tutorial on our issue track
 A good next step is to create your own plugin.
 The easiest way to do that is to go back to the first section of the tutorial, [](plugin-from-template), and create your new plugin from the cookiecutter template.
 Start working on adding your methods and visualizers, and don't forget your unit tests and usage examples!
-Come join the [Developer Discussion](https://forum.qiime2.org/c/dev-discussion) on the QIIME 2 Forum if you need help, have feedback on this tutorial, or have more general feedback on developing QIIME 2 plugins.
+Come join the {{ developer_discussion }} if you need help, have feedback on this tutorial, or have more general feedback on developing QIIME 2 plugins.
 
 Thanks for reading and for your interest in QIIME 2!
 Happy coding!

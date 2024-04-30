@@ -23,7 +23,7 @@ Transformers in QIIME 2 are designed to handle converstions between objects behi
 In this section, we'll do a small refactor of the code we wrote in the previous section.
 
 ```{admonition} tl;dr
-The code that I wrote for this section can be found [here](https://github.com/caporaso-lab/q2-dwq2/commit/93a3098b4e18796e8c33cd35088bf2a3623eed20).
+The code that I wrote for this section can be found here: {{ dwq2_add_2nd_transformer_commit_url }}.
 ```
 
 ## Define a transformer from `skbio.DNA` to `q2_dwq2.SingleRecordDNAFASTAFormat`

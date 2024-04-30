@@ -8,7 +8,7 @@ The type of action that we'll create is a {term}`method`, meaning that it will t
 (add-nw-align-method-commit)=
 ```{admonition} tl;dr
 :class: tip
-The complete code that I developed to add this action to my plugin can be found [here](https://github.com/caporaso-lab/q2-dwq2/commit/e54d7438d409453093cbcb4f2c06c100784afbe8).
+The complete code that I developed to add this action to my plugin can be found here: {{ dwq2_first_real_method_commit_url }}.
 
 ({term}`What does "tl;dr" mean? <tl;dr>`)
 ```

@@ -20,7 +20,7 @@ In subsequent sections of the tutorial, we'll explore developing Pipelines that 
 ```{admonition} tl;dr
 :class: tip
 
-The complete code that I developed for this section is available [here](https://github.com/caporaso-lab/q2-dwq2/commit/1e601c41b86d98b22f4e16685e868f1c5710f3bf).
+The complete code that I developed for this section is available here: {{ dwq2_add_pipeline_commit_url }}.
 ```
 
 ```{note}
