@@ -567,19 +567,21 @@ Because our Pipeline shares many of its inputs with our <code class="docutils li
 <p>Here’s the final Pipeline registration code that I ended up with in my <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code> file, after defining some new variables in that file:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plugin</span><span class="o">.</span><span class="n">pipelines</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
     <span class="n">function</span><span class="o">=</span><span class="n">align_and_summarize</span><span class="p">,</span>
-    <span class="n">inputs</span><span class="o">=</span><span class="n">_align_and_summarize_inputs</span><span class="p">,</span>
-    <span class="n">parameters</span><span class="o">=</span><span class="n">_align_and_summarize_parameters</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="n">_nw_align_inputs</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="n">_nw_align_parameters</span><span class="p">,</span>
     <span class="n">outputs</span><span class="o">=</span><span class="n">_align_and_summarize_outputs</span><span class="p">,</span>
-    <span class="n">input_descriptions</span><span class="o">=</span><span class="n">_align_and_summarize_input_descriptions</span><span class="p">,</span>
-    <span class="n">parameter_descriptions</span><span class="o">=</span><span class="n">_align_and_summarize_parameter_descriptions</span><span class="p">,</span>
+    <span class="n">input_descriptions</span><span class="o">=</span><span class="n">_nw_align_input_descriptions</span><span class="p">,</span>
+    <span class="n">parameter_descriptions</span><span class="o">=</span><span class="n">_nw_align_parameter_descriptions</span><span class="p">,</span>
     <span class="n">output_descriptions</span><span class="o">=</span><span class="n">_align_and_summarize_output_descriptions</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Pairwise global alignment and summarization.&quot;</span><span class="p">,</span>
     <span class="n">description</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Perform global pairwise sequence alignment using a slow &quot;</span>
                  <span class="s2">&quot;Needleman-Wunsch (NW) implementation, and generate a &quot;</span>
                  <span class="s2">&quot;visual summary of the alignment.&quot;</span><span class="p">),</span>
-    <span class="n">citations</span><span class="o">=</span><span class="n">_align_and_summarize_output_citations</span><span class="p">,</span>
-    <span class="n">examples</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Align two sequences and summarize the alignment.&#39;</span><span class="p">:</span>
-              <span class="n">align_and_summarize_example_1</span><span class="p">}</span>
+    <span class="c1"># Only citations new to this Pipeline need to be defined. Citations for</span>
+    <span class="c1"># the Actions called from the Pipeline are automatically included.</span>
+    <span class="n">citations</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">examples</span><span class="o">=</span><span class="p">{}</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <p>As a <strong>required exercise</strong> after adding this code to your <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code> file, define the variables used in this code block in such a way that it avoids the DRY violation mentioned above.

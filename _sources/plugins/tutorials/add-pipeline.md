@@ -145,19 +145,21 @@ Here's the final Pipeline registration code that I ended up with in my `plugin_s
 ```python
 plugin.pipelines.register_function(
     function=align_and_summarize,
-    inputs=_align_and_summarize_inputs,
-    parameters=_align_and_summarize_parameters,
+    inputs=_nw_align_inputs,
+    parameters=_nw_align_parameters,
     outputs=_align_and_summarize_outputs,
-    input_descriptions=_align_and_summarize_input_descriptions,
-    parameter_descriptions=_align_and_summarize_parameter_descriptions,
+    input_descriptions=_nw_align_input_descriptions,
+    parameter_descriptions=_nw_align_parameter_descriptions,
     output_descriptions=_align_and_summarize_output_descriptions,
     name="Pairwise global alignment and summarization.",
     description=("Perform global pairwise sequence alignment using a slow "
                  "Needleman-Wunsch (NW) implementation, and generate a "
                  "visual summary of the alignment."),
-    citations=_align_and_summarize_output_citations,
-    examples={'Align two sequences and summarize the alignment.':
-              align_and_summarize_example_1}
+    # Only citations new to this Pipeline need to be defined. Citations for
+    # the Actions called from the Pipeline are automatically included.
+    citations=[],
+    examples={}
+)
 ```
 
 As a **required exercise** after adding this code to your `plugin_setup.py` file, define the variables used in this code block in such a way that it avoids the DRY violation mentioned above.
