@@ -37,6 +37,11 @@ Distribution
   These are generally grouped by a theme. For example, the *amplicon distribution* provides a collection of plugins for analysis of microbiome amplicon data, while the *metagenome distribution* provides a collection of plugins for analysis of microbiome shotgun metagenomics data.
   When a distribution is installed, that particular installation of QIIME 2 is an example of a {term}`deployment`.
 
+DRY
+  An acronym of *Don't Repeat Yourself*, and a critical principle of software engineering.
+  For more information on DRY and software engineering in general, see {cite:t}`pragprog20`.
+
+
 File Format
   An object which subclasses either `qiime2.plugin.TextFileFormat` or `qiime2.plugin.BinaryFileFormat`.
   File formats define the particular format of a file, and define a process for validating the format.
@@ -88,6 +93,10 @@ Pipeline
 
 Plugin
   A discrete module that registers some form of additional functionality with the {term}`framework`, including new {term}`methods <Method>`, {term}`visualizers <Visualizer>`, {term}`formats <Format>`, or {term}`transformers <Transformer>`.
+
+Plugin Manager
+  An instance of the `qiime2.sdk.PluginManager` object.
+  This object provides access to all plugins, actions, artifact classes, and transformers that are registered to all plugins in a given {term}`deployment`, and are therefore central to the functioning of interfaces.
 
 Primitive Type
   A {term}`type` that is used to communicate parameters to an {term}`interface`.  These are predefined by the {term}`framework` and cannot be extended.
