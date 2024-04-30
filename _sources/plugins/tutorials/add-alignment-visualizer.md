@@ -7,7 +7,7 @@ In this lesson we'll address that by adding a simple {term}`Visualizer` to our p
 (add-alignment-visualizer-commit)=
 ```{admonition} tl;dr
 :class: tip
-The complete code that I developed to add this visualizer to my plugin can be found [here](https://github.com/caporaso-lab/q2-dwq2/commit/1e802ea841ef40a40cfcdf53fca124061fcfccad).
+The complete code that I developed to add this visualizer to my plugin can be found here: {{ dwq2_first_visualizer_commit_url }}.
 ```
 
 ## Write the visualizer function

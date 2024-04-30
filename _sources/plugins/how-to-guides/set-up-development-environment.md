@@ -8,7 +8,7 @@ The development environment you create will be suitable for creating new or cont
 QIIME 2 support for Windows is restricted to Windows Subsystem for Linux (WSL).
 The QIIME 2 development team doesn't have much experience developing QIIME 2 in the context of Windows.
 If you're comfortable with creating development environments with WSL, we expect that it should work just fine.
-If you expect that you might need help setting up your development environment, we'll be able to provide better assitance if you're developing on a Linux or macOS system.
+If you expect that you might need help setting up your development environment, we'll be able to provide better assistance if you're developing on a Linux or macOS system.
 ```
 
 ## Install Prerequisites
