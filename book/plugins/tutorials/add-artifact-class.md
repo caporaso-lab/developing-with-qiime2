@@ -18,8 +18,8 @@ And finally, the majority of this section of the tutorial will focus on creating
 (add-artifact-class-commit)=
 ```{admonition} tl;dr
 :class: tip
-The complete code that I developed to define my new artifact class, including the corresponding semantic type, formats, and transformer, can be found [here](https://github.com/caporaso-lab/q2-dwq2/commit/161c8a3a130393d24e5e538e9a622dfef51ead11).
-The code that I developed to transition my `nw-align` action to use my new artifact class can be found [here](https://github.com/caporaso-lab/q2-dwq2/commit/b625b7f0b8194128c5d1c9a5892ce5bcd85ec81b).
+The complete code that I developed to define my new artifact class, including the corresponding semantic type, formats, and transformer, can be found here: {{ dwq2_add_artifact_class_commit_1_url }}.
+The code that I developed to transition my `nw-align` action to use my new artifact class can be found here: {{ dwq2_add_artifact_class_commit_2_url }}.
 ```
 
 ## Artifact classes
@@ -88,7 +88,7 @@ Take a minute to review this list to identify artifact classes that you've used 
 
 ```{note}
 A how-to article is [planned](https://github.com/caporaso-lab/developing-with-qiime2/issues/58) that will provide additional detail on identifying an existing artifact class for use in your plugin.
-In the meantime, please feel free to [reach out on the forum](https://forum.qiime2.org/c/dev-discussion/7) if you're strugging to identify a relevant semantic type - we know this can be challenging, and we don't mind helping.
+In the meantime, please feel free to reach out through the {{ developer_discussion }} if you're struggling to identify a relevant semantic type - we know this can be challenging, and we don't mind helping.
 ```
 
 ## Developing a new artifact class
