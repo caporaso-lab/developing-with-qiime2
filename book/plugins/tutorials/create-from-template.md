@@ -99,4 +99,5 @@ If you're already comfortable with QIIME 2 plugin development, you're all set to
 
 ```{tip}
 You can see my code after following these steps by looking at the specific commit in my plugin repository on GitHub: {{ dwq2_cookiecutter_build_commit_url }}.
+My code may look a little different than yours as I may have been using an older version of the template plugin than you used - everything in the tutorial will still work the same though.
 ```
