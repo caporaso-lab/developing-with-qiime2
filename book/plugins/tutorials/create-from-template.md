@@ -59,7 +59,8 @@ For me, that's `q2-dwq2/`.
 In that directory, you'll find a file called `README.md`, which has a section on it containing *Installation instructions*.
 Follow all of the installation instructions, and then follow the instructions in that file for testing and using your new plugin.
 
-After completing all of those steps, you now have a QIIME 2 deployment on your computer that contains includes your new plugin in it, and when you requested help text on your plugin (e.g., `qiime dwq2 --help`), you should have seen some of the information you provided when creating the plugin.
+After completing all of those steps, you now have a QIIME 2 {term}`deployment` on your computer that includes your new plugin in it.
+When you requested help text on your plugin (e.g., `qiime dwq2 --help`), you should have seen some of the information you provided when creating the plugin.
 
 The template plugin includes a simple (and silly) action called `duplicate-table`, along with associated unit tests.
 This provides an example action and example unit tests.
@@ -89,15 +90,12 @@ Miscellaneous:
   --help                  Show this message and exit.
 ```
 
-After you've confirmed that the commands in the README.md file work, and that the above command worked as expected, you're ready to start working on this plugin.
-Open the top-level plugin directory in your text editor of choice (I recommend [VS Code](https://code.visualstudio.com/), if you don't already have one that you're comfortable with).
-Poke through all of the files to familiarize yourself with the structure of your plugin's Python package.
-
-Congratulations - you've created a working QIIME 2 plugin from a template!
 If you'd like to try the action out, you can call your `duplicate-table` action on any QIIME 2 `FeatureTable[Frequency]` artifact (e.g., you can download one from the [QIIME 2 user documentation](https://docs.qiime2.org)).
 Load your duplicated table with [QIIME 2 View](https://view.qiime2.org), and poke through its Provenance to see how data provenance is recorded for your plugin.
 
-Next, we'll [](add-nw-align-method).
+Congratulations - you've created a working QIIME 2 plugin from a template!
+If you'd like to learn QIIME 2 plugin development, in the next step of the tutorial we'll [](add-nw-align-method).
+If you're already comfortable with QIIME 2 plugin development, you're all set to make this plugin your own.
 
 ```{tip}
 You can see my code after following these steps by looking at the specific commit in my plugin repository on GitHub: {{ dwq2_cookiecutter_build_commit_url }}.
