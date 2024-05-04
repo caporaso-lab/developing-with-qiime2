@@ -490,12 +490,17 @@ If that works, you should be ready to share those instructions with others.</p>
 </section>
 <section id="expanding-on-the-install-instructions">
 <h2>Expanding on the install instructions<a class="headerlink" href="#expanding-on-the-install-instructions" title="Permalink to this heading">#</a></h2>
-<p>You’ll almost certainly need to expand upon the install instructions for your plugin as you develop it.
-We recommend doing what you can in the <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> in your repository, so that the command <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code> continues to be the mechanism by which your plugin should be installed.
-That can include anything that works for your plugin for installation, including <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span></code> commands, <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> commands, or anything else.
-Be sure to update the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> if you introduce any new constraints (e.g., that your plugin can only be installed on Linux) - it’s fine to do that, but you should let your users know so they don’t get grumpy about your plugin.</p>
 <p>Users should now be able to install and use your plugin if they’re pointed at the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file.
-The next steps are helping prospective users discover your plugin, and providing support for your users.
+The templated <em>Installation instructions</em> in the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file are intended to be a starting point, and they mention that as a note to readers.
+You’ll almost certainly want to update the install instructions for your plugin as you develop it.</p>
+<p>Here are some tips related to updating the installation instructions for your plugin:</p>
+<ul class="simple">
+<li><p>If your plugin requires additional dependencies that can be installed with either conda or pip, you can add those in the environment yaml file that was templated in the <code class="docutils literal notranslate"><span class="pre">environments/</span></code> directory.</p></li>
+<li><p>We recommend doing what you can in the <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> in your repository, so that the command <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code> continues to be the mechanism by which your plugin should be installed.</p></li>
+<li><p>Be sure to update the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> if you introduce any new constraints (e.g., that your plugin can only be installed on Linux).
+It’s fine to do that, but you should let your users know so they don’t get grumpy about your plugin.</p></li>
+</ul>
+<p>If you’re ready to start getting users, the next steps are helping prospective users discover your plugin, and supporting them as they learn to use it.
 We have some suggestions on those topics and others in this Part’s <a class="reference internal" href="../how-to-guides/intro.html#ci-how-to-intro"><span class="std std-ref">How-To Guides</span></a>.</p>
 </section>
 </section>
