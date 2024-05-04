@@ -66,12 +66,16 @@ If that works, you should be ready to share those instructions with others.
 
 ## Expanding on the install instructions
 
-You'll almost certainly need to expand upon the install instructions for your plugin as you develop it.
-We recommend doing what you can in the `Makefile` in your repository, so that the command `make install` continues to be the mechanism by which your plugin should be installed.
-That can include anything that works for your plugin for installation, including `conda install` commands, `pip install` commands, or anything else.
-Be sure to update the `README.md` if you introduce any new constraints (e.g., that your plugin can only be installed on Linux) - it's fine to do that, but you should let your users know so they don't get grumpy about your plugin.
-
 Users should now be able to install and use your plugin if they're pointed at the `README.md` file.
-The next steps are helping prospective users discover your plugin, and providing support for your users.
+The templated *Installation instructions* in the `README.md` file are intended to be a starting point, and they mention that as a note to readers.
+You'll almost certainly want to update the install instructions for your plugin as you develop it.
+
+Here are some tips related to updating the installation instructions for your plugin:
+- If your plugin requires additional dependencies that can be installed with either conda or pip, you can add those in the environment yaml file that was templated in the `environments/` directory.
+- We recommend doing what you can in the `Makefile` in your repository, so that the command `make install` continues to be the mechanism by which your plugin should be installed.
+- Be sure to update the `README.md` if you introduce any new constraints (e.g., that your plugin can only be installed on Linux).
+  It's fine to do that, but you should let your users know so they don't get grumpy about your plugin.
+
+If you're ready to start getting users, the next steps are helping prospective users discover your plugin, and supporting them as they learn to use it.
 We have some suggestions on those topics and others in this Part's [](ci-how-to-intro).
 
