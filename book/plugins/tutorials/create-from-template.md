@@ -44,7 +44,7 @@ During the plugin templating process, you'll be prompted for information on your
 For the questions about the *Target distribution* and whether you're *targeting the stable or latest development QIIME 2 release*, use the default values unless you have a specific reason not to; these are the last two questions, as of this writing in May 2024.
 For all of the other questions, feel free to customize your plugin by providing whatever values you'd like.
 
-The plugin I'm going to create will be called `q2-dwq2` (for *Developing with QIIME 2*). You can call your plugin `q2-dwq2`, or whatever you prefer.
+The plugin I'm going to create will be called `q2-dwq2` (for *Developing with QIIME 2*).
 After you've answered all of the questions, your plugin should have been successfully created and be ready to be installed and used.
 
 ```{note}
@@ -56,17 +56,18 @@ You don't need to know what all of these files are to continue the tutorial thou
 
 After the plugin has been created, change into the top-level directory for the plugin.
 For me, that's `q2-dwq2/`.
-In that directory, you'll find a file called `README.md`, which has a section on it containing *Installation instructions*.
+In that directory, you'll find a file called `README.md`, which has a section in it containing *Installation instructions*.
 Follow all of the installation instructions, and then follow the instructions in that file for testing and using your new plugin.
 
-After completing all of those steps, you now have a QIIME 2 {term}`deployment` on your computer that includes your new plugin in it.
+After completing all of those steps, you now have a QIIME 2 {term}`deployment` on your computer that includes your new plugin.
 When you requested help text on your plugin (e.g., `qiime dwq2 --help`), you should have seen some of the information you provided when creating the plugin.
 
 The template plugin includes a simple (and silly) action called `duplicate-table`, along with associated unit tests.
 This provides an example action and example unit tests.
-You'll ultimately want to delete this action, but for now let's use this action to make sure everything is working as expected.
+You'll ultimately want to delete this action, but for now let's use it to make sure everything is working as expected.
 
-Call your plugin's `duplicate-table` action with the `--help` parameter (e.g., `qiime dwq2 duplicate-table --help`), you should see text that looks like the following:
+Call your plugin's `duplicate-table` action with the `--help` parameter (e.g., `qiime dwq2 duplicate-table --help`).
+You should see text that looks like the following:
 
 ```shell
 Usage: qiime dwq2 duplicate-table [OPTIONS]
@@ -96,6 +97,7 @@ Load your duplicated table with [QIIME 2 View](https://view.qiime2.org), and pok
 Congratulations - you've created a working QIIME 2 plugin from a template!
 If you'd like to learn QIIME 2 plugin development, in the next step of the tutorial we'll [](add-nw-align-method).
 If you're already comfortable with QIIME 2 plugin development, you're all set to make this plugin your own.
+In either case, if you'd like to host your plugin in a GitHub repository, you can refer to [](share-on-github).
 
 ```{tip}
 You can see my code after following these steps by looking at the specific commit in my plugin repository on GitHub: {{ dwq2_cookiecutter_build_commit_url }}.
