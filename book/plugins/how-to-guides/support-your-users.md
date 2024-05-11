@@ -1,4 +1,4 @@
-(ci-how-to-support-your-users)=
+(plugin-how-to-support-your-users)=
 # Provide technical support for your users
 
 You are free to have your users request help on the [QIIME 2 Forum](https://forum.qiime2.org) for your QIIME 2-based tools.
