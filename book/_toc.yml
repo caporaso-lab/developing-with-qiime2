@@ -22,6 +22,10 @@ parts:
         - file: plugins/how-to-guides/intro
           sections:
             - file: plugins/how-to-guides/set-up-development-environment
+            - file: plugins/how-to-guides/distribute-on-gh
+            - file: plugins/how-to-guides/support-your-users
+            - file: plugins/how-to-guides/maximize-compatibility
+            - file: plugins/how-to-guides/publicize
             - file: plugins/how-to-guides/register-a-plugin
             - file: plugins/how-to-guides/create-register-method
             - file: plugins/how-to-guides/create-register-visualizer
@@ -32,7 +36,7 @@ parts:
             - file: plugins/how-to-guides/use-metadata
             - file: plugins/how-to-guides/test-plugins
             - file: plugins/how-to-guides/usage-examples
-            - file: plugins/how-to-guides/format-validation-levels.md
+            - file: plugins/how-to-guides/format-validation-levels
         - file: plugins/explanations/intro
           sections:
             - file: plugins/explanations/actions
@@ -85,15 +89,6 @@ parts:
   - caption: "Continuous Integration 🛠️"
     chapters:
       - file: ci/intro
-        sections:
-        - file: ci/tutorials/intro
-          sections:
-          - file: ci/tutorials/distribute-on-gh
-        - file: ci/how-to-guides/intro
-          sections:
-          - file: ci/how-to-guides/support-your-users
-          - file: ci/how-to-guides/publicize
-          - file: ci/how-to-guides/maximize-compatibility
 
   - caption: "Back Matter 🗂️"
     chapters:

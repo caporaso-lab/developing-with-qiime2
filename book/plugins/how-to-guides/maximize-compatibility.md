@@ -1,4 +1,4 @@
-(ci-how-to-maximize-compatibility)=
+(plugin-how-to-maximize-compatibility)=
 # Maximize compatibility between your plugin(s) and existing QIIME 2 distribution(s)
 
 You can build your QIIME 2 tools in your own way.
@@ -11,7 +11,7 @@ A complete list of artifact classes and formats available in a deployment of QII
 (Some are missing documentation - we'd [love your help addressing that](https://github.com/caporaso-lab/developing-with-qiime2/issues/97).)
 If you do need to create new artifact classes, you can add these in your own plugin(s).
 
-The Caporaso Lab is not taking on new responsibility for distributing plugins right now (i.e., integrating them in the distributions they develop and maintain), but we are curently (23 April 2024) developing new mechanisms for helping you share your plugin or other tools (see [](ci-how-to-publicize)) that will ultimately replace the [QIIME 2 Library](https://library.qiime2.org).
+The Caporaso Lab is not taking on new responsibility for distributing plugins right now (i.e., integrating them in the distributions they develop and maintain), but we are currently (23 April 2024) developing new mechanisms for helping you share your plugin or other tools (see [](plugin-how-to-publicize)) that will ultimately replace the [QIIME 2 Library](https://library.qiime2.org).
 
 You can consider the existing distributions to be foundations that you can build on, or you can create and distribute your own conda metapackages.
 Some guidance on each of these approaches:
