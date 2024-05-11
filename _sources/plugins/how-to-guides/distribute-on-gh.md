@@ -1,5 +1,5 @@
 (share-on-github)=
-# Distributing plugins on GitHub
+# Distribute plugins on GitHub
 
 GitHub is a straight-forward way to share your QIIME 2 plugin.
 This tutorial will walk you through creating a QIIME 2 plugin from template, and then sharing it with installation instructions on GitHub.
@@ -76,6 +76,5 @@ Here are some tips related to updating the installation instructions for your pl
 - Be sure to update the `README.md` if you introduce any new constraints (e.g., that your plugin can only be installed on Linux).
   It's fine to do that, but you should let your users know so they don't get grumpy about your plugin.
 
-If you're ready to start getting users, the next steps are helping prospective users discover your plugin, and supporting them as they learn to use it.
-We have some suggestions on those topics and others in this Part's [](ci-how-to-intro).
+If you're ready to start getting users, the next steps are [helping prospective users discover your plugin](plugin-how-to-publicize), and [supporting them as they use it](plugin-how-to-support-your-users).
 

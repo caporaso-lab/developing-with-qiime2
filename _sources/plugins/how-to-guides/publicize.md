@@ -1,7 +1,7 @@
-(ci-how-to-publicize)=
-# Publicize your QIIME 2 tools
+(plugin-how-to-publicize)=
+# Publicize your QIIME 2 plugins (or other QIIME 2-based tools)
 
-If you want others to use your QIIME 2 tools, you have to market them.
+If you want others to use your QIIME 2-based tools, such as plugins, you have to market them.
 Ultimately that's your responsibility - **you** built it, **you** know it, **you're** proud of it, so **you need to promote it**.
 
 Here are some ideas on how to market your tools.
