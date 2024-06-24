@@ -6,7 +6,7 @@ exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints"]
 sphinx:
   extra_extensions:
     - sphinx.ext.autodoc
-    - sphinx.ext.viewcode
+    - sphinx.ext.autosummary
     - sphinx.ext.napoleon
     - sphinx.ext.doctest
     - sphinx.ext.intersphinx
@@ -14,13 +14,42 @@ sphinx:
     - sphinx.ext.mathjax
     - sphinx.ext.githubpages
     - sphinxcontrib.bibtex
+  local_extensions:
+    linkcode: './sphinx_ext/'
   config:
-    add_module_names: False
     html_theme_options:
       logo:
         image_light: _static/dwq2-light.png
         image_dark: _static/dwq2-dark.png
       show_navbar_depth: 2
+
+    # Don't include the prompt (or outputs) in the copied text
+    copybutton_prompt_text: '>>> |\.\.\. '
+    copybutton_prompt_is_regexp: true
+
+    # Usually this is helpful
+    # Use .. currentmodule:: as needed to defer the noise
+    add_module_names: True
+    # Combine class and __init__ for the most part
+    # This allows the class docstring to exist independently if its important
+    # to exclude the __init__ method without inventing an __init__ method
+    # for every class otherwise.
+    autoclass_content: both
+    # Don't put the typehints in the class signature, it gets too messy
+    # instead embed them in the params section
+    autodoc_typehints: description
+    # Don't create a params section if it wasn't already defined
+    # This is helpful when :class-doc-from: is used to exclude init
+    autodoc_typehints_description_target: documented
+    # We order things the way they are on purpose usually
+    autodoc_member_order: bysource
+    # We only use autosummary for it's slick tables, and it's easy enough to
+    # allow generate on a case-by-case basis. But since the documentation is
+    # largely prose-oriented, the automated approach doesn't work well
+    autosummary_generate: False
+
+    intersphinx_mapping:
+      python: ['https://docs.python.org/3.9', null]
 
 execute:
   execute_notebooks: force
