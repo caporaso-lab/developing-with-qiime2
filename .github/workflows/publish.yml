@@ -20,16 +20,10 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: Get latest QIIME 2 Environment
-      shell: bash
-      run: |
-        wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-ubuntu-latest-conda.yml
-
-
     - uses: conda-incubator/setup-miniconda@v2
       with:
         activate-environment: qiime2
-        environment-file: qiime2-tiny-ubuntu-latest-conda.yml
+        environment-file: environment.yml
         auto-activate-base: false
 
     - name: Install dependencies
