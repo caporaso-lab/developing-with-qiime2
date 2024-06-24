@@ -14,8 +14,7 @@ sphinx:
     - sphinx.ext.mathjax
     - sphinx.ext.githubpages
     - sphinxcontrib.bibtex
-  local_extensions:
-    linkcode: './sphinx_ext/'
+    - q2doc.linkcode
   config:
     html_theme_options:
       logo:
