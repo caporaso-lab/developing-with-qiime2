@@ -55,6 +55,13 @@ html[data-theme="light"] {
 }
 
 
-dl.py {
+dl[class]:not(.option-list, .field-list, .footnote, .glossary, .simple) {
     margin-bottom: 3rem;
+}
+
+dl[class]:not(.option-list, .field-list, .footnote, .glossary, .simple) > dd {
+  border-left: 1px solid var(--pst-color-border);;
+  padding-left: 1.7rem;
+  margin-left: 0.25rem;
+  margin-bottom: 3rem;
 }
