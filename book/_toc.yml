@@ -46,7 +46,16 @@ parts:
         - file: plugins/references/intro
           sections:
             - file: plugins/references/antipatterns
-            - file: plugins/references/api
+            - file: plugins/references/api/intro
+              sections:
+                - file: plugins/references/api/plugin
+                - file: plugins/references/api/formats
+                - file: plugins/references/api/types
+                - file: plugins/references/api/citations
+                - file: plugins/references/api/testing
+                - file: plugins/references/api/utils
+                - file: plugins/references/api/context
+                - file: plugins/references/api/usage
             - file: plugins/references/metadata-api
 
   - caption: "Interfaces 🧩"

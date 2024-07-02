@@ -1,5 +1,5 @@
 (metadata-api)=
-# `qiime2.Metadata` API
+# User Metadata API
 
 This documents the `qiime2.Metadata` API.
 This may be used by QIIME 2 plugin developers or users of the QIIME 2 Python 3 API.
@@ -7,19 +7,25 @@ This may be used by QIIME 2 plugin developers or users of the QIIME 2 Python 3 A
 ## The `qiime.Metadata` class
 
 ```{eval-rst}
-.. autofunction:: qiime2.metadata.Metadata
+.. autoclass:: qiime2.Metadata
+   :members:
 ```
 
 ## Metadata columns
 
 ```{eval-rst}
-.. autofunction:: qiime2.metadata.MetadataColumn
-.. autofunction:: qiime2.metadata.NumericMetadataColumn
-.. autofunction:: qiime2.metadata.CategoricalMetadataColumn
+.. autoclass:: qiime2.MetadataColumn
+   :members:
+
+.. autoclass:: qiime2.NumericMetadataColumn
+   :members:
+
+.. autoclass:: qiime2.CategoricalMetadataColumn
+   :members:
 ```
 
 ## Exceptions
 
 ```{eval-rst}
-.. autofunction:: qiime2.metadata.MetadataFileError
+.. autoclass:: qiime2.metadata.MetadataFileError
 ```
