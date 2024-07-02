@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Semantic Types, Primitives, and Visualizations &#8212; Developing with QIIME 2</title>
   
@@ -15,56 +14,52 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e63dcbb0" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=ccdb6887"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'framework/explanations/types';</script>
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="File Formats and Directory Formats" href="formats.html" />
@@ -78,28 +73,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -121,12 +111,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -142,6 +140,8 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
 
+  
+    
   
 
 <a class="navbar-brand logo" href="../../intro.html">
@@ -160,12 +160,23 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins 🔌</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../plugins/intro.html">Plugin Development</a><input checked class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../plugins/tutorials/intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../plugins/intro.html">Plugin Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../plugins/tutorials/intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/tutorials/create-from-template.html">Create your plugin from a template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/tutorials/add-nw-align-method.html">Add a first (real) Method</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/tutorials/add-alignment-visualizer.html">Add a first Visualizer</a></li>
@@ -175,8 +186,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/tutorials/add-pipeline.html">Add a first Pipeline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/tutorials/conclusion.html">Conclusion</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../plugins/how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../plugins/how-to-guides/intro.html">How-To Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/distribute-on-gh.html">Distribute plugins on GitHub</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/support-your-users.html">Provide technical support for your users</a></li>
@@ -194,42 +205,42 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/usage-examples.html">Writing Usage Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/format-validation-levels.html">Defining different Format validation levels</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../plugins/explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../plugins/explanations/intro.html">Explanations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/explanations/actions.html">Types of QIIME 2 Actions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/explanations/package-structure.html">The structure of QIIME 2 plugin packages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/explanations/transformers.html">Transformers</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../plugins/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../plugins/references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/references/antipatterns.html">Plugin development anti-patterns</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/references/api.html">Plugin developer API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/references/metadata-api.html"><code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> API</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
-</li>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Interfaces 🧩</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../interfaces/intro.html">Interface Development</a><input checked class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../interfaces/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../interfaces/intro.html">Interface Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../interfaces/references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../interfaces/references/api.html">Interface developer API reference</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
-</li>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Framework 🌳</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Framework Development</a><input checked class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Framework Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/parallel-configuration.html">Parallel configuration and usage in QIIME 2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/pipeline-resumption.html">Pipeline Resumption in QIIME 2</a></li>
 </ul>
-</li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Explanations</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Explanations</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="architecture.html">QIIME 2 architecture overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-storage.html">How Data is Stored</a></li>
 <li class="toctree-l3"><a class="reference internal" href="archives.html">Anatomy of an Archive</a></li>
@@ -239,21 +250,21 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="garbage-collection.html">Garbage Collection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="metaprogramming.html">Metaprogramming</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../references/archive-versions.html">Archive versions</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
-</li>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation 📚</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../docs/intro.html">Docs Development</a><input checked class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../docs/intro.html">Docs Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../docs/user-documentation.html">User documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../docs/developer-documentation.html">Developer documentation</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Continuous Integration 🛠️</span></p>
 <ul class="nav bd-sidenav">
@@ -261,12 +272,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter 🗂️</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../back-matter/intro.html">Back matter</a><input checked class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../back-matter/intro.html">Back matter</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../back-matter/glossary.html">Glossary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../back-matter/bibliography.html">List of works cited</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../back-matter/genindex.html">Index</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
     </div>
@@ -282,7 +293,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -291,14 +302,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -376,10 +387,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
@@ -387,14 +398,14 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -440,10 +451,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="semantic-types-primitives-and-visualizations">
-<span id="types-explanation"></span><h1>Semantic Types, Primitives, and Visualizations<a class="headerlink" href="#semantic-types-primitives-and-visualizations" title="Permalink to this heading">#</a></h1>
+<span id="types-explanation"></span><h1>Semantic Types, Primitives, and Visualizations<a class="headerlink" href="#semantic-types-primitives-and-visualizations" title="Link to this heading">#</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Some of the discussion in this section uses <em>semantic type</em> as a synonym for <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact-class"><span class="xref std std-term">artifact class</span></a>.
@@ -453,7 +464,7 @@ We haven’t reviewed/updated this section for this yet.</p>
 <p>If you’re unfamilar with the various ways that the word <em>type</em> is used in the context of QIIME 2, we recommend reading <a class="reference internal" href="../../plugins/explanations/types-of-types.html#types-of-types"><span class="std std-ref">Semantic types, data types, file formats, and artifact classes</span></a> before this document.
 This document provides a deep dive into semantic types, primitives, and visualizations in QIIME 2: in other words, descriptors of the various inputs and/or outputs to QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">Actions</span></a>.</p>
 <section id="an-analogy">
-<h2>An Analogy<a class="headerlink" href="#an-analogy" title="Permalink to this heading">#</a></h2>
+<h2>An Analogy<a class="headerlink" href="#an-analogy" title="Link to this heading">#</a></h2>
 <p>Suppose we were interested in modeling a system in which there were <em>hands</em>,
 <em>utensils</em> and <em>tasks</em>. We are trying to determine which <em>utensils</em> can be used
 to complete which <em>tasks</em>. Here <em>utensils</em> are like QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact"><span class="xref std std-term">artifacts</span></a> and <em>tasks</em> are QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Action"><span class="xref std std-term">actions</span></a>.
@@ -485,17 +496,17 @@ A type system should abstract away details that the computer <em>needs</em> but 
 A good type system should be a compromise between the fuzzy (and indistinct) world of language that people understand, and robust formal systems that computers can use.</p>
 </section>
 <section id="defining-a-type">
-<h2>Defining a Type<a class="headerlink" href="#defining-a-type" title="Permalink to this heading">#</a></h2>
+<h2>Defining a Type<a class="headerlink" href="#defining-a-type" title="Link to this heading">#</a></h2>
 <p>In QIIME 2 there are 3 <em>kinds</em> of types, all of which use the same underlying grammar.
 Only one of these kinds can be extended, the <a class="reference internal" href="../../back-matter/glossary.html#term-Semantic-Type"><span class="xref std std-term">Semantic Type</span></a>.
 The other two, <a class="reference internal" href="../../back-matter/glossary.html#term-Primitive-Type"><span class="xref std std-term">Primitive Type</span></a> and <a class="reference internal" href="../../back-matter/glossary.html#term-Visualization"><span class="xref std std-term">Visualization</span></a>, are built into the framework.</p>
 <p>Semantic types are the only kind that can be extended, so let’s start there with our example from before.</p>
 <p>To create a type, we use the <a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.SemanticType" title="qiime2.plugin.SemanticType"><code class="xref py py-func docutils literal notranslate"><span class="pre">SemanticType</span></code></a> factory:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Pencil</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Pencil&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Pencil</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Pencil&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>That’s it! Let’s define some more:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Pen</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Pen&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Pen</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Pen&#39;</span><span class="p">)</span>
 <span class="n">Fork</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Fork&#39;</span><span class="p">)</span>
 <span class="n">Spoon</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Spoon&#39;</span><span class="p">)</span>
 <span class="n">Chalk</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Chalk&#39;</span><span class="p">)</span>
@@ -503,7 +514,7 @@ The other two, <a class="reference internal" href="../../back-matter/glossary.ht
 </div>
 <p>To let QIIME 2 know that these new types exist, we’ll need to register them on
 our <a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Plugin" title="qiime2.plugin.Plugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">plugin</span> <span class="pre">object</span></code></a> with <code class="xref py py-func docutils literal notranslate"><span class="pre">register_semantic_types</span></code>:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">plugin</span><span class="o">.</span><span class="n">register_semantic_types</span><span class="p">(</span><span class="n">Pencil</span><span class="p">,</span> <span class="n">Pen</span><span class="p">,</span> <span class="n">Fork</span><span class="p">,</span> <span class="n">Spoon</span><span class="p">,</span> <span class="n">Chalk</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plugin</span><span class="o">.</span><span class="n">register_semantic_types</span><span class="p">(</span><span class="n">Pencil</span><span class="p">,</span> <span class="n">Pen</span><span class="p">,</span> <span class="n">Fork</span><span class="p">,</span> <span class="n">Spoon</span><span class="p">,</span> <span class="n">Chalk</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now QIIME 2 is aware of these types and we can use them.</p>
@@ -512,7 +523,7 @@ hard to keep them all straight. To make it easier for us to talk about them, we
 can try to group similar types together. Looking at our type, we seem to have
 two broad categories so far, writing and dining utensils. Let’s define some
 <em>composite types</em> to group them:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Dining</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Dining&#39;</span><span class="p">,</span> <span class="n">field_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;utensil&#39;</span><span class="p">],</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Dining</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Dining&#39;</span><span class="p">,</span> <span class="n">field_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;utensil&#39;</span><span class="p">],</span>
                       <span class="n">field_members</span><span class="o">=</span><span class="p">{</span> <span class="s1">&#39;utensil&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">Fork</span><span class="p">,</span> <span class="n">Spoon</span><span class="p">)</span> <span class="p">})</span>
 
 <span class="n">Writing</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Writing&#39;</span><span class="p">,</span> <span class="n">field_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;implement&#39;</span><span class="p">],</span>
@@ -520,11 +531,11 @@ two broad categories so far, writing and dining utensils. Let’s define some
 </pre></div>
 </div>
 <p>And of course we should register these as well:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">plugin</span><span class="o">.</span><span class="n">register_semantic_types</span><span class="p">(</span><span class="n">Dining</span><span class="p">,</span> <span class="n">Writing</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plugin</span><span class="o">.</span><span class="n">register_semantic_types</span><span class="p">(</span><span class="n">Dining</span><span class="p">,</span> <span class="n">Writing</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Before explaining what the new parameters are, let’s use these and circle back:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Writing</span><span class="p">[</span><span class="n">Pen</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Writing</span><span class="p">[</span><span class="n">Pen</span><span class="p">]</span>
 <span class="n">Writing</span><span class="p">[</span><span class="n">Pencil</span><span class="p">]</span>
 <span class="n">Writing</span><span class="p">[</span><span class="n">Chalk</span><span class="p">]</span>
 
@@ -535,7 +546,7 @@ two broad categories so far, writing and dining utensils. Let’s define some
 <p>Since we don’t have many types, this may look a little silly,
 but now we can talk about dining and writing utensils as broad groups.
 What happens if we try to mix these? Let’s make some <em>dining chalk</em> (gross!):</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Dining</span><span class="p">[</span><span class="n">Chalk</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Dining</span><span class="p">[</span><span class="n">Chalk</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>It produces the following exception:</p>
@@ -549,13 +560,13 @@ TypeError: Chalk is not a variant of Dining.field[&#39;utensil&#39;].
 </pre></div>
 </div>
 <p>It appears chalk is off the menu. Let’s go back over the definition for <code class="docutils literal notranslate"><span class="pre">Dining</span></code>:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Dining</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Dining&#39;</span><span class="p">,</span> <span class="n">field_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;utensil&#39;</span><span class="p">],</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Dining</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Dining&#39;</span><span class="p">,</span> <span class="n">field_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;utensil&#39;</span><span class="p">],</span>
                       <span class="n">field_members</span><span class="o">=</span><span class="p">{</span> <span class="s1">&#39;utensil&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">Fork</span><span class="p">,</span> <span class="n">Spoon</span><span class="p">)</span> <span class="p">})</span>
 </pre></div>
 </div>
 <p>Unlike the simpler types, this adds <code class="docutils literal notranslate"><span class="pre">field_names</span></code> and <code class="docutils literal notranslate"><span class="pre">field_members</span></code>,
 if we were to look at <code class="docutils literal notranslate"><span class="pre">Dining</span></code> on its own:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">Dining</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">Dining</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We see:</p>
@@ -570,13 +581,13 @@ are two permitted <em>variants</em>: <code class="docutils literal notranslate">
 <code class="docutils literal notranslate"><span class="pre">Dining[Chalk]</span></code> didn’t work so well, <code class="docutils literal notranslate"><span class="pre">Chalk</span></code> isn’t a variant of <code class="docutils literal notranslate"><span class="pre">Dining</span></code>’s field <code class="docutils literal notranslate"><span class="pre">utensil</span></code>.</p>
 </section>
 <section id="extending-a-type">
-<h2>Extending a Type<a class="headerlink" href="#extending-a-type" title="Permalink to this heading">#</a></h2>
+<h2>Extending a Type<a class="headerlink" href="#extending-a-type" title="Link to this heading">#</a></h2>
 <p>Suppose we were satisfied with the above vocabulary of utensils. So much so,
 we considered ourselves to have described all of the utensils we would ever need.
 Obviously that isn’t going to be true, so there should be a way for other plugins to define new types,
 while still being able to organize them into our existing hierarchy of labels.</p>
 <p>A <em>seperate plugin</em> could then define something like this:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Knife</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Knife&#39;</span><span class="p">,</span> <span class="n">variant_of</span><span class="o">=</span><span class="p">[</span><span class="n">Dining</span><span class="o">.</span><span class="n">field</span><span class="p">[</span><span class="s1">&#39;utensil&#39;</span><span class="p">]])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Knife</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Knife&#39;</span><span class="p">,</span> <span class="n">variant_of</span><span class="o">=</span><span class="p">[</span><span class="n">Dining</span><span class="o">.</span><span class="n">field</span><span class="p">[</span><span class="s1">&#39;utensil&#39;</span><span class="p">]])</span>
 </pre></div>
 </div>
 <p>Breaking this down, it is similar to some of the earlier invocations of the
@@ -588,7 +599,7 @@ suggested that in addition to forks and spoons, there are knives.</p>
 Let’s create a category for kitchen utensils. A knife has already been defined, but you wouldn’t
 cook with a steak knife, and you wouldn’t eat with a chef’s knife, so there’s more we can add to the
 knife’s story:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Kitchen</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Kitchen&#39;</span><span class="p">,</span> <span class="n">field_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;utensil&#39;</span><span class="p">],</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Kitchen</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Kitchen&#39;</span><span class="p">,</span> <span class="n">field_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;utensil&#39;</span><span class="p">],</span>
                        <span class="n">field_members</span><span class="o">=</span><span class="p">{</span> <span class="s1">&#39;utensil&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">Knife</span><span class="p">]</span> <span class="p">})</span>
 
 <span class="n">Spatula</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s1">&#39;Spatula&#39;</span><span class="p">,</span> <span class="n">variant_of</span><span class="o">=</span><span class="p">[</span><span class="n">Kitchen</span><span class="o">.</span><span class="n">field</span><span class="p">[</span><span class="s1">&#39;utensil&#39;</span><span class="p">]])</span>
@@ -600,7 +611,7 @@ knife’s story:</p>
 It also adds <code class="docutils literal notranslate"><span class="pre">Spatula</span></code> to <code class="docutils literal notranslate"><span class="pre">Kitchen</span></code> and adds <code class="docutils literal notranslate"><span class="pre">PastryBag</span></code> to both <code class="docutils literal notranslate"><span class="pre">Kitchen</span></code> <em>and</em> <code class="docutils literal notranslate"><span class="pre">Writing</span></code>.
 In case you don’t know what a pastry bag is (like me), it’s how you would write “Happy Birthday” on a cake.
 Just as not all knives are the same, not all pastry bags are well suited to writing (some are better for making decorative frosting-flowers).</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Dining</span><span class="p">[</span><span class="n">Knife</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Dining</span><span class="p">[</span><span class="n">Knife</span><span class="p">]</span>
 <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span><span class="p">]</span>
 <span class="n">Kitchen</span><span class="p">[</span><span class="n">Spatula</span><span class="p">]</span>
 <span class="n">Kitchen</span><span class="p">[</span><span class="n">PastryBag</span><span class="p">]</span>
@@ -608,12 +619,12 @@ Just as not all knives are the same, not all pastry bags are well suited to writ
 </pre></div>
 </div>
 <p>We should <code class="xref py py-func docutils literal notranslate"><span class="pre">register</span> <span class="pre">these</span></code> before we forget:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">other_plugin</span><span class="o">.</span><span class="n">register_semantic_types</span><span class="p">(</span><span class="n">Knife</span><span class="p">,</span> <span class="n">Kitchen</span><span class="p">,</span> <span class="n">Spatula</span><span class="p">,</span> <span class="n">PastryBag</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">other_plugin</span><span class="o">.</span><span class="n">register_semantic_types</span><span class="p">(</span><span class="n">Knife</span><span class="p">,</span> <span class="n">Kitchen</span><span class="p">,</span> <span class="n">Spatula</span><span class="p">,</span> <span class="n">PastryBag</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="primitive-types">
-<h2>Primitive Types<a class="headerlink" href="#primitive-types" title="Permalink to this heading">#</a></h2>
+<h2>Primitive Types<a class="headerlink" href="#primitive-types" title="Link to this heading">#</a></h2>
 <p>Primitive types are the other main kind of type you’ll use in QIIME 2.
 These closely match their associated data types making them simple to work with, but they also have a few
 extra tricks up their sleeves to make it possible to automatically generate rich user <a class="reference internal" href="../../back-matter/glossary.html#term-Interface"><span class="xref std std-term">interfaces</span></a>.
@@ -645,7 +656,7 @@ which has the following column types (for the <code class="docutils literal notr
 </li>
 </ul>
 <p>From these we can construct simple expressions like:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Int</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Int</span>
 <span class="n">List</span><span class="p">[</span><span class="n">Int</span><span class="p">]</span>
 <span class="n">Set</span><span class="p">[</span><span class="n">Str</span><span class="p">]</span>
 <span class="n">Metadata</span>
@@ -654,7 +665,7 @@ which has the following column types (for the <code class="docutils literal notr
 </div>
 <p>Of course, just writing down a type isn’t necessarily useful unless we can <em>use</em> it for something.
 Let’s do that now:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># These are true:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># These are true:</span>
 <span class="k">assert</span>      <span class="mi">1</span> <span class="ow">in</span> <span class="n">Int</span>
 <span class="c1"># These are not:</span>
 <span class="k">assert</span> <span class="ow">not</span>  <span class="s2">&quot;banana&quot;</span> <span class="ow">in</span> <span class="n">Int</span>
@@ -680,15 +691,15 @@ Let’s do that now:</p>
 valid strings, or a real number bounded from zero to one. To express these ideas we need a little bit more.</p>
 </section>
 <section id="refining-a-type">
-<h2>Refining a Type<a class="headerlink" href="#refining-a-type" title="Permalink to this heading">#</a></h2>
+<h2>Refining a Type<a class="headerlink" href="#refining-a-type" title="Link to this heading">#</a></h2>
 <p>A <em>refinement type</em> is a type that possesses a <em>predicate</em> which further constrains the domain of a type.
 Thats a formal definition anyway. The important piece is the <em>predicate</em>, which is a boolean “function” describing whether a given instance is <em>in</em> the domain, or <em>out</em> of the domain. This means we can <em>refine</em> the type to suite our needs.</p>
 <p>Suppose we were a graphical interface. A common UI element is a dropdown list containing
 predetermined choices. We can express that with a primitive type!</p>
 <section id="choices">
-<h3>Choices<a class="headerlink" href="#choices" title="Permalink to this heading">#</a></h3>
+<h3>Choices<a class="headerlink" href="#choices" title="Link to this heading">#</a></h3>
 <p>Let’s see an example of this, using the <a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Choices" title="qiime2.plugin.Choices"><code class="xref py py-data docutils literal notranslate"><span class="pre">Choices</span></code></a> predicate:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># These are Python objects, so we can assign to variables:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># These are Python objects, so we can assign to variables:</span>
 <span class="n">dropdown</span> <span class="o">=</span> <span class="n">Str</span> <span class="o">%</span> <span class="n">Choices</span><span class="p">({</span><span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;pear&#39;</span><span class="p">})</span>
 
 <span class="k">assert</span>      <span class="s1">&#39;banana&#39;</span> <span class="ow">in</span> <span class="n">dropdown</span>
@@ -702,7 +713,7 @@ You can read it as “string modulo choices” in your head if you like. It almo
 a dropdown list containing “banana”, “apple”, and “pear”.</p>
 <p>Let’s try something harder, suppose we wanted to describe some checkboxes, where the choices
 can be selected at most once, but multiple different choices are allowed:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">checkboxes</span> <span class="o">=</span> <span class="n">Set</span><span class="p">[</span><span class="n">Str</span> <span class="o">%</span> <span class="n">Choices</span><span class="p">({</span><span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;pear&#39;</span><span class="p">})]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">checkboxes</span> <span class="o">=</span> <span class="n">Set</span><span class="p">[</span><span class="n">Str</span> <span class="o">%</span> <span class="n">Choices</span><span class="p">({</span><span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;pear&#39;</span><span class="p">})]</span>
 
 <span class="k">assert</span>      <span class="p">{</span><span class="s1">&#39;banana&#39;</span><span class="p">}</span> <span class="ow">in</span> <span class="n">checkboxes</span>
 <span class="k">assert</span>      <span class="p">{</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">}</span> <span class="ow">in</span> <span class="n">checkboxes</span>
@@ -724,7 +735,7 @@ The plugin developer does not need to worry about the representation.</p>
 <p>An easy way to transfer (or dispatch on) a type is to use the <code class="docutils literal notranslate"><span class="pre">.to_ast()</span></code> method which will
 provide a JSON structure describing the type in a machine-friendly representation.</p>
 <p>For example:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">checkboxes</span><span class="o">.</span><span class="n">to_ast</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 </pre></div>
@@ -755,9 +766,9 @@ provide a JSON structure describing the type in a machine-friendly representatio
 </div>
 </section>
 <section id="range">
-<h3>Range<a class="headerlink" href="#range" title="Permalink to this heading">#</a></h3>
+<h3>Range<a class="headerlink" href="#range" title="Link to this heading">#</a></h3>
 <p>Another predicate we can use is <a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Range" title="qiime2.plugin.Range"><code class="xref py py-data docutils literal notranslate"><span class="pre">Range</span></code></a>:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">proportion</span> <span class="o">=</span> <span class="n">Float</span> <span class="o">%</span> <span class="n">Range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inclusive_end</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">proportion</span> <span class="o">=</span> <span class="n">Float</span> <span class="o">%</span> <span class="n">Range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inclusive_end</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">assert</span>      <span class="mi">0</span> <span class="ow">in</span> <span class="n">proportion</span>
 <span class="k">assert</span>      <span class="mf">0.5</span> <span class="ow">in</span> <span class="n">proportion</span>
@@ -771,12 +782,12 @@ provide a JSON structure describing the type in a machine-friendly representatio
 can nest these kinds of expressions inside of <a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Int" title="qiime2.plugin.Int"><code class="xref py py-data docutils literal notranslate"><span class="pre">Set</span></code></a> and <a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Int" title="qiime2.plugin.Int"><code class="xref py py-data docutils literal notranslate"><span class="pre">List</span></code></a>.</p>
 </section>
 <section id="semantic-properties">
-<h3>Semantic Properties<a class="headerlink" href="#semantic-properties" title="Permalink to this heading">#</a></h3>
+<h3>Semantic Properties<a class="headerlink" href="#semantic-properties" title="Link to this heading">#</a></h3>
 <p>Leaving behind the primitive types and returning the the semantic types, there is a final
 trick we can use to constrain the semantics of a type. It is to use the <a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Properties" title="qiime2.plugin.Properties"><code class="xref py py-func docutils literal notranslate"><span class="pre">Properties</span></code></a> predicate. This predicate can only be attached to semantic types, so we usually call them
 semantic properties of the type.</p>
 <p>Thinking back to our example involving utensiles, there was a type named:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Suppose we were a plugin that specialized in cutting things, with actions such as filleting fish, paring fruit, etc. To other plugins, the distinction between different kinds of cutlery might be uninteresting. To us, however, <em>cutting things is what we do</em>. We wouldn’t fillet a fish without a fillet knife. The nomenclature discussed so far lacks that granularity.</p>
@@ -785,13 +796,13 @@ category <code class="docutils literal notranslate"><span class="pre">Cutlery[{k
 Building consensus can be slow, though, and you are still interested in inter-operating with other plugins
 (even if they don’t understand why anyone would need more than one kind of knife).</p>
 <p>To fix this, you can add a property:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">(</span><span class="s1">&#39;fillet&#39;</span><span class="p">)]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">(</span><span class="s1">&#39;fillet&#39;</span><span class="p">)]</span>
 </pre></div>
 </div>
 <p>What this means is that you’ve created a new <em>subtype</em> of <code class="docutils literal notranslate"><span class="pre">Knife</span></code> using the label “fillet”.
 There aren’t any rules for recognizing a fillet knife, so its something that has to be explicitly attached (but that is the case with all semantic types).</p>
 <p>There can additionally be more than one property on a type:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;fillet&#39;</span><span class="p">,</span> <span class="s1">&#39;sharp&#39;</span><span class="p">])]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;fillet&#39;</span><span class="p">,</span> <span class="s1">&#39;sharp&#39;</span><span class="p">])]</span>
 <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;paring&#39;</span><span class="p">],</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sharp&#39;</span><span class="p">])]</span>
 </pre></div>
 </div>
@@ -800,14 +811,14 @@ To illustrate how these are used, we need to talk more about <em>subtyping</em>.
 </section>
 </section>
 <section id="semantic-subtyping">
-<h2>Semantic Subtyping<a class="headerlink" href="#semantic-subtyping" title="Permalink to this heading">#</a></h2>
+<h2>Semantic Subtyping<a class="headerlink" href="#semantic-subtyping" title="Link to this heading">#</a></h2>
 <p>A subtype is some type that is <em>substitutable</em> for another. Here’s another way to think
 about it: the domain of the subtype exists <em>entirely within</em> the domain of the supertype.
 Anywhere you could use a supertype, a subtype will suffice.</p>
 <p>There are two ways to create this relation: with a semantic property (described above), or with a <em>union operator</em>: <code class="docutils literal notranslate"><span class="pre">|</span></code>. In order to use a subtyping relation, we also need
 an operator to test the relation, for that we can use <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code> and <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code> (which matches the Python <code class="docutils literal notranslate"><span class="pre">set</span></code> API).</p>
 <p>Let’s try it out:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span>      <span class="n">Spoon</span> <span class="o">&lt;=</span> <span class="n">Spoon</span>  <span class="c1"># is spoon a subtype of spoon?</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span>      <span class="n">Spoon</span> <span class="o">&lt;=</span> <span class="n">Spoon</span>  <span class="c1"># is spoon a subtype of spoon?</span>
 <span class="k">assert</span>      <span class="n">Spoon</span> <span class="o">&gt;=</span> <span class="n">Spoon</span>  <span class="c1"># is spoon a supertype of spoon?</span>
 <span class="k">assert</span> <span class="ow">not</span>  <span class="n">Fork</span> <span class="o">&lt;=</span> <span class="n">Spoon</span>   <span class="c1"># is fork a subtype of spoon?</span>
 <span class="k">assert</span> <span class="ow">not</span>  <span class="n">Fork</span> <span class="o">&gt;=</span> <span class="n">Spoon</span>   <span class="c1"># is fork a supertype of spoon?</span>
@@ -816,9 +827,9 @@ an operator to test the relation, for that we can use <code class="docutils lite
 <p>Here we have the makings of equality and inequality.
 We see that any instance of a <code class="docutils literal notranslate"><span class="pre">Spoon</span></code> can be substituted wherever a <code class="docutils literal notranslate"><span class="pre">Spoon</span></code> is required (which is obvious enough), and we also see that a <code class="docutils literal notranslate"><span class="pre">Fork</span></code> will not do, when a <code class="docutils literal notranslate"><span class="pre">Spoon</span></code> is needed (soup comes to mind).</p>
 <section id="unions">
-<h3>Unions<a class="headerlink" href="#unions" title="Permalink to this heading">#</a></h3>
+<h3>Unions<a class="headerlink" href="#unions" title="Link to this heading">#</a></h3>
 <p>Of course, this subtyping relationship isn’t very interesting, let’s use the union operator to <em>construct a supertype</em>:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span>      <span class="n">Spoon</span> <span class="o">&lt;=</span> <span class="n">Spoon</span> <span class="o">|</span> <span class="n">Fork</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span>      <span class="n">Spoon</span> <span class="o">&lt;=</span> <span class="n">Spoon</span> <span class="o">|</span> <span class="n">Fork</span>
 <span class="k">assert</span>      <span class="n">Fork</span> <span class="o">&lt;=</span> <span class="n">Spoon</span> <span class="o">|</span> <span class="n">Fork</span>
 <span class="c1"># The relationship has direction:</span>
 <span class="k">assert</span> <span class="ow">not</span>  <span class="n">Spoon</span> <span class="o">&gt;=</span> <span class="n">Spoon</span> <span class="o">|</span> <span class="n">Fork</span>
@@ -830,7 +841,7 @@ We see that any instance of a <code class="docutils literal notranslate"><span c
 </div>
 <p>Using this mechanism we can define actions that accept a broad range of types, while still being specific about which types are known to work. Also instead of using <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&lt;=</span> <span class="pre">B</span> <span class="pre">&lt;=</span> <span class="pre">A</span></code> to test equality, we can use <code class="docutils literal notranslate"><span class="pre">.equals</span></code> (the operator is reserved for hash-equality).</p>
 <p>We can also evaluate more sophisticated expressions:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="ow">not</span>  <span class="n">Dining</span><span class="p">[</span><span class="n">Knife</span><span class="p">]</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="ow">not</span>  <span class="n">Dining</span><span class="p">[</span><span class="n">Knife</span><span class="p">]</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span><span class="p">])</span>
 <span class="k">assert</span>      <span class="n">Dining</span><span class="p">[</span><span class="n">Knife</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span><span class="p">]</span> <span class="o">|</span> <span class="n">Dining</span><span class="p">[</span><span class="n">Knife</span><span class="p">]</span>
 <span class="c1"># Union types also have subtyping relations:</span>
 <span class="k">assert</span>      <span class="n">Writing</span><span class="p">[</span><span class="n">Pencil</span><span class="p">]</span> <span class="o">|</span> <span class="n">Writing</span><span class="p">[</span><span class="n">Pen</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">Writing</span><span class="p">[</span><span class="n">Pencil</span><span class="p">]</span> <span class="o">|</span> <span class="n">Writing</span><span class="p">[</span><span class="n">Pen</span><span class="p">]</span> <span class="o">|</span> <span class="n">Writing</span><span class="p">[</span><span class="n">Chalk</span><span class="p">]</span>
@@ -840,25 +851,25 @@ We see that any instance of a <code class="docutils literal notranslate"><span c
 </div>
 <p>In QIIME 2, subtyping and equality are <em>extensional</em>, meaning that the order and form do not matter, only the meaning.</p>
 <p>In other words, these expressions are the same:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span>  <span class="p">(</span><span class="n">Writing</span><span class="p">[</span><span class="n">Pencil</span><span class="p">]</span> <span class="o">|</span> <span class="n">Writing</span><span class="p">[</span><span class="n">Pen</span><span class="p">])</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">Writing</span><span class="p">[</span><span class="n">Pen</span> <span class="o">|</span> <span class="n">Pencil</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span>  <span class="p">(</span><span class="n">Writing</span><span class="p">[</span><span class="n">Pencil</span><span class="p">]</span> <span class="o">|</span> <span class="n">Writing</span><span class="p">[</span><span class="n">Pen</span><span class="p">])</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">Writing</span><span class="p">[</span><span class="n">Pen</span> <span class="o">|</span> <span class="n">Pencil</span><span class="p">])</span>
 <span class="k">assert</span>  <span class="n">Writing</span><span class="p">[</span><span class="n">Pencil</span> <span class="o">|</span> <span class="n">Pen</span><span class="p">]</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">Writing</span><span class="p">[</span><span class="n">Pen</span> <span class="o">|</span> <span class="n">Pencil</span><span class="p">])</span>
 </pre></div>
 </div>
 </section>
 <section id="properties">
-<h3>Properties<a class="headerlink" href="#properties" title="Permalink to this heading">#</a></h3>
+<h3>Properties<a class="headerlink" href="#properties" title="Link to this heading">#</a></h3>
 <p>Let us return now to the other way of constructing a subtyping relation, the <a class="reference internal" href="../../plugins/references/api.html#qiime2.plugin.Properties" title="qiime2.plugin.Properties"><code class="xref py py-class docutils literal notranslate"><span class="pre">semantic</span> <span class="pre">property</span></code></a>. We had the following definitions which we’ll assign to a variable, since they are lengthy:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">sharp_fillet</span> <span class="o">=</span> <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;fillet&#39;</span><span class="p">,</span> <span class="s1">&#39;sharp&#39;</span><span class="p">])]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sharp_fillet</span> <span class="o">=</span> <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;fillet&#39;</span><span class="p">,</span> <span class="s1">&#39;sharp&#39;</span><span class="p">])]</span>
 <span class="n">dull_paring</span>  <span class="o">=</span> <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;paring&#39;</span><span class="p">],</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sharp&#39;</span><span class="p">])]</span>
 </pre></div>
 </div>
 <p>How should these relate to a plain <code class="docutils literal notranslate"><span class="pre">Kitchen[Knife]</span></code>? Well, because we’ve added information about the knife, we’ve <em>refined</em> the domain, and so we have a <em>subtype</em>. In other words, our fancy knifes can be used wherever a normal knife can be used. The way to think about this is we haven’t created something new, paring knives and fillet knives were always in the set of <code class="docutils literal notranslate"><span class="pre">Kitchen[Knife]</span></code>, but until we added the property we were unable to distinguish them.</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span>  <span class="n">sharp_fillet</span> <span class="o">&lt;=</span> <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span>  <span class="n">sharp_fillet</span> <span class="o">&lt;=</span> <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span><span class="p">]</span>
 <span class="k">assert</span>  <span class="n">dull_paring</span>  <span class="o">&lt;=</span> <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Additionally, the combination is still a smaller domain than the domain of all kitchen knives:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span>  <span class="n">sharp_fillet</span> <span class="o">|</span> <span class="n">dull_paring</span> <span class="o">&lt;=</span> <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span>  <span class="n">sharp_fillet</span> <span class="o">|</span> <span class="n">dull_paring</span> <span class="o">&lt;=</span> <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>What is most important is that an action that needs something specific can avoid receiving an over-general type. For example, consider this action:</p>
@@ -868,19 +879,19 @@ We see that any instance of a <code class="docutils literal notranslate"><span c
 </div>
 <p>This rather intuitively swaps the property of not-being sharp for the property of being sharp.
 We can see how the subtyping relation allows the action to enforce this:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span>      <span class="n">dull_paring</span>  <span class="o">&lt;=</span> <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sharp&#39;</span><span class="p">])]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span>      <span class="n">dull_paring</span>  <span class="o">&lt;=</span> <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sharp&#39;</span><span class="p">])]</span>
 <span class="k">assert</span> <span class="ow">not</span>  <span class="n">sharp_fillet</span> <span class="o">&lt;=</span> <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sharp&#39;</span><span class="p">])]</span>
 </pre></div>
 </div>
 <p>One consequence of this is that an unadorned type like <code class="docutils literal notranslate"><span class="pre">Kitchen[Knife]</span></code> is not known to be either sharp or dull (remember it is actually supertype of both of these).</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Can&#39;t substitute any-old knife for a dull one, some of them are sharp.</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Can&#39;t substitute any-old knife for a dull one, some of them are sharp.</span>
 <span class="k">assert</span> <span class="ow">not</span>  <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">Kitchen</span><span class="p">[</span><span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sharp&#39;</span><span class="p">])]</span>
 </pre></div>
 </div>
 <p>As a matter of practice, it would probably be easier for everyone if “sharpen knife” were to just re-sharpen the already-sharp knife.</p>
 </section>
 <section id="intersections">
-<h3>Intersections<a class="headerlink" href="#intersections" title="Permalink to this heading">#</a></h3>
+<h3>Intersections<a class="headerlink" href="#intersections" title="Link to this heading">#</a></h3>
 <p>There is another kind of type known as the intersection type. Currently QIIME 2 implements this only in a very limited way.
 The idea is that you might have an instance that is simultanously many different types. For example, a <em>spork</em> is both a fork and a spoon (and good at neither).</p>
 <p>Nonetheless, someday you might write something like this:</p>
@@ -901,7 +912,7 @@ First, this syntax would be a convenient way to describe <em>compound artifacts<
 </pre></div>
 </div>
 <p>It also means that this is true:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span>  <span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">([</span><span class="s1">&#39;fillet&#39;</span><span class="p">,</span> <span class="s1">&#39;sharp&#39;</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">([</span><span class="s1">&#39;fillet&#39;</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">Knife</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span>  <span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">([</span><span class="s1">&#39;fillet&#39;</span><span class="p">,</span> <span class="s1">&#39;sharp&#39;</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">Knife</span> <span class="o">%</span> <span class="n">Properties</span><span class="p">([</span><span class="s1">&#39;fillet&#39;</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">Knife</span>
 </pre></div>
 </div>
 <p>The more information we add, the more specific our knife (and the smaller our domain).</p>
@@ -936,7 +947,7 @@ First, this syntax would be a convenient way to describe <em>compound artifacts<
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -965,6 +976,7 @@ First, this syntax would be a convenient way to describe <em>compound artifacts<
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1036,8 +1048,8 @@ By Greg Caporaso and Evan Bolyen
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

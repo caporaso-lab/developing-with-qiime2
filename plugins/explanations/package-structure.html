@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>The structure of QIIME 2 plugin packages &#8212; Developing with QIIME 2</title>
   
@@ -15,56 +14,52 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e63dcbb0" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=ccdb6887"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/explanations/package-structure';</script>
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Semantic types, data types, file formats, and artifact classes" href="types-of-types.html" />
@@ -78,28 +73,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -121,12 +111,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -142,6 +140,8 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
 
+  
+    
   
 
 <a class="navbar-brand logo" href="../../intro.html">
@@ -160,12 +160,23 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins 🔌</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Create your plugin from a template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) Method</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/add-alignment-visualizer.html">Add a first Visualizer</a></li>
@@ -175,8 +186,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/add-pipeline.html">Add a first Pipeline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/conclusion.html">Conclusion</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/distribute-on-gh.html">Distribute plugins on GitHub</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/support-your-users.html">Provide technical support for your users</a></li>
@@ -194,42 +205,42 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/usage-examples.html">Writing Usage Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/format-validation-levels.html">Defining different Format validation levels</a></li>
 </ul>
-</li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Explanations</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Explanations</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="actions.html">Types of QIIME 2 Actions</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">The structure of QIIME 2 plugin packages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="transformers.html">Transformers</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../references/antipatterns.html">Plugin development anti-patterns</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../references/api.html">Plugin developer API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../references/metadata-api.html"><code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> API</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
-</li>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Interfaces 🧩</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../interfaces/intro.html">Interface Development</a><input checked class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../interfaces/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../interfaces/intro.html">Interface Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../interfaces/references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../interfaces/references/api.html">Interface developer API reference</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
-</li>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Framework 🌳</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../framework/intro.html">Framework Development</a><input checked class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../framework/intro.html">Framework Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/how-to-guides/intro.html">How-To Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/how-to-guides/parallel-configuration.html">Parallel configuration and usage in QIIME 2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/how-to-guides/pipeline-resumption.html">Pipeline Resumption in QIIME 2</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/explanations/intro.html">Explanations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/architecture.html">QIIME 2 architecture overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/data-storage.html">How Data is Stored</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/archives.html">Anatomy of an Archive</a></li>
@@ -239,21 +250,21 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/garbage-collection.html">Garbage Collection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/metaprogramming.html">Metaprogramming</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/references/archive-versions.html">Archive versions</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
-</li>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation 📚</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../docs/intro.html">Docs Development</a><input checked class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../docs/intro.html">Docs Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../docs/user-documentation.html">User documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../docs/developer-documentation.html">Developer documentation</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Continuous Integration 🛠️</span></p>
 <ul class="nav bd-sidenav">
@@ -261,12 +272,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter 🗂️</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../back-matter/intro.html">Back matter</a><input checked class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../back-matter/intro.html">Back matter</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../back-matter/glossary.html">Glossary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../back-matter/bibliography.html">List of works cited</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../back-matter/genindex.html">Index</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
     </div>
@@ -282,7 +293,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -291,14 +302,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -376,10 +387,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
@@ -387,14 +398,14 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -452,10 +463,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="the-structure-of-qiime-2-plugin-packages">
-<span id="plugin-package-explanation"></span><h1>The structure of QIIME 2 plugin packages<a class="headerlink" href="#the-structure-of-qiime-2-plugin-packages" title="Permalink to this heading">#</a></h1>
+<span id="plugin-package-explanation"></span><h1>The structure of QIIME 2 plugin packages<a class="headerlink" href="#the-structure-of-qiime-2-plugin-packages" title="Link to this heading">#</a></h1>
 <p>QIIME 2 doesn’t put restrictions on how you structure the Python package that contains your plugin, but there are some conventions that experienced developers follow.
 This <em>Explanation</em> article will discuss these conventions in the context of the plugin developed in <a class="reference internal" href="../tutorials/intro.html#plugin-tutorial-intro"><span class="std std-ref">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</span></a>.
 Specifically, we’ll look at the initial commit in that repository.</p>
@@ -500,17 +511,17 @@ q2-dwq2
 </pre></div>
 </div>
 <section id="q2-dwq2">
-<span id="plugin-package-explanation-top-level-directory"></span><h2><code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code><a class="headerlink" href="#q2-dwq2" title="Permalink to this heading">#</a></h2>
+<span id="plugin-package-explanation-top-level-directory"></span><h2><code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code><a class="headerlink" href="#q2-dwq2" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code> is the top-level directory containing all of the files in the Python package.</p>
 <section id="q2-dwq2-git">
-<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/.git</span></code><a class="headerlink" href="#q2-dwq2-git" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/.git</span></code><a class="headerlink" href="#q2-dwq2-git" title="Link to this heading">#</a></h3>
 <p>I am maintaining my plugin code using <a class="reference external" href="https://git-scm.com/book/en/v2">git</a> for version control, and the <code class="docutils literal notranslate"><span class="pre">.git</span></code> directory contains all of the information for managing the <code class="docutils literal notranslate"><span class="pre">.git</span></code> repository.
 There are many files in there, and going through them is out-of-scope for this book, but poke through that directory if you’re interested.
 Nothing magical is happening with git repositories: the files in this directory are used by git clients to do all of the cool stuff that git does for us.
 Don’t ever edit files in this directory directly.</p>
 </section>
 <section id="q2-dwq2-github">
-<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/.github</span></code><a class="headerlink" href="#q2-dwq2-github" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/.github</span></code><a class="headerlink" href="#q2-dwq2-github" title="Link to this heading">#</a></h3>
 <p>This directory contains information used by GitHub, and is here because I maintain my git repository for this plugin on GitHub.
 GitHub will use some files in this directory in special ways if they exist (see <a class="reference external" href="https://stackoverflow.com/a/61301254">here</a>).
 In my case, this directory contains a single GitHub Action file, <code class="docutils literal notranslate"><span class="pre">.github/workflows/ci.yml</span></code>, that was added when the repository was built from the cookiecutter template.
@@ -519,49 +530,49 @@ To learn more about GitHub Actions, see <a class="reference external" href="http
 An additional resource that may help is <a class="reference external" href="https://hutchdatascience.org/GitHub_Automation_for_Scientists/">GitHub Automation for Scientists</a>.</p>
 </section>
 <section id="q2-dwq2-gitignore">
-<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/.gitignore</span></code><a class="headerlink" href="#q2-dwq2-gitignore" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/.gitignore</span></code><a class="headerlink" href="#q2-dwq2-gitignore" title="Link to this heading">#</a></h3>
 <p>A file used by git that specifies filename patterns that should be ignored by git (and therefore not included in revision control).
 This helps keep your repository neat and clean by excluding things like temporary files created by text editors or operating systems.
 There are lots of examples that you can use or build from <a class="reference external" href="https://github.com/github/gitignore">here</a>.</p>
 </section>
 <section id="q2-dwq2-license">
-<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/LICENSE</span></code><a class="headerlink" href="#q2-dwq2-license" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/LICENSE</span></code><a class="headerlink" href="#q2-dwq2-license" title="Link to this heading">#</a></h3>
 <p>File containing the software’s license.
 Naming the file this way, and storing it in the top-level directory, enables it to be recognized easily by users or systems (such as GitHub).</p>
 </section>
 <section id="q2-dwq2-manifest-in">
-<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/MANIFEST.in</span></code><a class="headerlink" href="#q2-dwq2-manifest-in" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/MANIFEST.in</span></code><a class="headerlink" href="#q2-dwq2-manifest-in" title="Link to this heading">#</a></h3>
 <p>Used by <code class="docutils literal notranslate"><span class="pre">setuptools</span></code>, along with <code class="docutils literal notranslate"><span class="pre">setupy.py</span></code> and <code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code>, to explicitly define files that should or shouldn’t be included in the Python package.</p>
 </section>
 <section id="q2-dwq2-makefile">
-<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/Makefile</span></code><a class="headerlink" href="#q2-dwq2-makefile" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/Makefile</span></code><a class="headerlink" href="#q2-dwq2-makefile" title="Link to this heading">#</a></h3>
 <p><a class="reference external" href="https://www.gnu.org/software/make/"><code class="docutils literal notranslate"><span class="pre">make</span></code></a> instructions for building the Python module, running its tests, and more.
 When you run a command like <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> or <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">dev</span></code>, you are applying instructions defined in this file.
 <code class="docutils literal notranslate"><span class="pre">make</span></code> is a powerful tool, to put it lightly, and it has been around since pre-historic times (i.e., 1976).</p>
 </section>
 <section id="q2-dwq2-readme-md">
-<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/README.md</span></code><a class="headerlink" href="#q2-dwq2-readme-md" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/README.md</span></code><a class="headerlink" href="#q2-dwq2-readme-md" title="Link to this heading">#</a></h3>
 <p>The project’s readme file.
 This is often when someone interested in your Python package will first look for information.
 If you manage your project on GitHub, this will be displayed on the repositories front page.</p>
 </section>
 <section id="q2-dwq2-ci">
-<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/ci</span></code><a class="headerlink" href="#q2-dwq2-ci" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/ci</span></code><a class="headerlink" href="#q2-dwq2-ci" title="Link to this heading">#</a></h3>
 <p>This directory contains information used by the Continuous Integration system, which is used by the GitHub Action workflow referenced in <code class="docutils literal notranslate"><span class="pre">.github/workflows/ci.yml</span></code>.
 The one file contained here in this case, <code class="docutils literal notranslate"><span class="pre">ci/recipe/meta.yaml</span></code>, provides instructions for how this plugin can be built and tested.</p>
 </section>
 <section id="q2-dwq2-q2-dwq2">
-<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2" title="Link to this heading">#</a></h3>
 <p>The top-level module directory.
 This is where all of files relevant to the use of this code with <code class="docutils literal notranslate"><span class="pre">Python</span></code> are stored.
 All files not included in this directory can be considered metadata about the Python module.</p>
 <section id="q2-dwq2-q2-dwq2-init-py">
-<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/__init__.py</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-init-py" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/__init__.py</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-init-py" title="Link to this heading">#</a></h4>
 <p>A special file whose existance (even if the file is empty) specifies that this directory is a Python module.
 This will often contain <code class="docutils literal notranslate"><span class="pre">import</span></code> statements that the developer wants to propagate up to be module-level imports, enabling statements like <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">qiime2</span> <span class="pre">import</span> <span class="pre">Artifact</span></code>.</p>
 </section>
 <section id="q2-dwq2-q2-dwq2-methods-py">
-<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_methods.py</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-methods-py" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_methods.py</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-methods-py" title="Link to this heading">#</a></h4>
 <p>This is not a required file, but in this plugin it’s used to store code for functions that will ultimately be registered as <a class="reference internal" href="../../back-matter/glossary.html#term-Method"><span class="xref std std-term">Methods</span></a>.
 As a plugin grows, it may make sense to consider reorganization such as creating a <code class="docutils literal notranslate"><span class="pre">_methods</span></code> directory that contains files with code for each individual Method.</p>
 <p>By convention in Python, files, functions, or objects (or anything else) whose name starts with an <code class="docutils literal notranslate"><span class="pre">_</span></code> should be treated as private.
@@ -569,46 +580,46 @@ In other words, outside of this specific code base, anything named with a leadin
 This leaves the developer free to make interface changes (such as renaming the <code class="docutils literal notranslate"><span class="pre">_methods.py</span></code>) file without breaking other people’s code.</p>
 </section>
 <section id="q2-dwq2-q2-dwq2-version-py">
-<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_version.py</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-version-py" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_version.py</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-version-py" title="Link to this heading">#</a></h4>
 <p>This is a file created by <a class="reference external" href="https://github.com/python-versioneer/python-versioneer">The Versioneer</a> to assist with creating versions of software from information in the <code class="docutils literal notranslate"><span class="pre">.git</span></code> directory, if it exists.
 You shouldn’t ever edit this file directly.</p>
 </section>
 <section id="q2-dwq2-q2-dwq2-citations-bib">
-<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/citations.bib</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-citations-bib" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/citations.bib</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-citations-bib" title="Link to this heading">#</a></h4>
 <p>This file stores any citations that QIIME 2 will reference for this plugin in <a class="reference external" href="https://www.bibtex.org/">BibTeX</a> format.
 The relative filepath is specified when the Plugin object is initialized, so can be called whatever you’d like.</p>
 </section>
 <section id="q2-dwq2-q2-dwq2-plugin-setup-py">
-<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/plugin_setup.py</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-plugin-setup-py" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/plugin_setup.py</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-plugin-setup-py" title="Link to this heading">#</a></h4>
 <p>By convention, this file is where the QIIME 2 <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> object is instantiated and where actions and other information are registered to the plugin.
 Again, this file can be called anything and live in other places, but it’s pretty standard across plugins at this stage so it’s a good idea to just adopt this naming convention in your plugin.
 (For example, the first thing I typically do when someone sends me their plugin for feedback is read their <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code> file.)</p>
 </section>
 <section id="q2-dwq2-q2-dwq2-tests">
-<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-tests" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-tests" title="Link to this heading">#</a></h4>
 <p>This directory contains all unit tests for functionality in the plugin.
 Any associated test data files are generally nested under this directory.</p>
 <section id="q2-dwq2-q2-dwq2-tests-init-py">
-<h5><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/__init__.py</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-tests-init-py" title="Permalink to this heading">#</a></h5>
+<h5><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/__init__.py</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-tests-init-py" title="Link to this heading">#</a></h5>
 <p>The file initializing <code class="docutils literal notranslate"><span class="pre">q2_dwq2/tests</span></code> as a submodule in this Python package.</p>
 </section>
 <section id="q2-dwq2-q2-dwq2-tests-data">
-<h5><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/data</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-tests-data" title="Permalink to this heading">#</a></h5>
+<h5><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/data</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-tests-data" title="Link to this heading">#</a></h5>
 <p>A directory containing any data files that are used in tests.</p>
 </section>
 <section id="q2-dwq2-q2-dwq2-tests-test-methods-py">
-<h5><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/test_methods.py</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-tests-test-methods-py" title="Permalink to this heading">#</a></h5>
+<h5><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/test_methods.py</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-tests-test-methods-py" title="Link to this heading">#</a></h5>
 <p>The file containing unit tests of the functionality in the module’s <code class="docutils literal notranslate"><span class="pre">_methods.py</span></code>
 By convention, the naming of test files roughly parallels the naming of the files they are testing.</p>
 </section>
 </section>
 <section id="q2-dwq2-q2-dwq2-setup-cfg">
-<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/setup.cfg</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-setup-cfg" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/setup.cfg</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-setup-cfg" title="Link to this heading">#</a></h4>
 <p>A file containing general configuration information related to the Python module.
 For example, there is information in here that helps <a class="reference external" href="https://github.com/python-versioneer/python-versioneer">The Versioneer</a> find the inforamtion that it needs to create version numbers.</p>
 </section>
 <section id="q2-dwq2-q2-dwq2-setup-py">
-<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/setup.py</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-setup-py" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/setup.py</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-setup-py" title="Link to this heading">#</a></h4>
 <p>A special file for the Python pacakge that sets up the Python module.
 An important component in this file for QIIME 2 is that the <code class="docutils literal notranslate"><span class="pre">qiime2.plugins</span></code> entry point is defined:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span>
@@ -624,7 +635,7 @@ In this case, one plugin is registered (<code class="docutils literal notranslat
 If you prefer to not follow the naming convention described above with respect to <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code>, this is where you can let the <code class="docutils literal notranslate"><span class="pre">PluginManager</span></code> know where it should be looking for your plugin(s).</p>
 </section>
 <section id="q2-dwq2-q2-dwq2-versioneer-py">
-<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/versioneer.py</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-versioneer-py" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/versioneer.py</span></code><a class="headerlink" href="#q2-dwq2-q2-dwq2-versioneer-py" title="Link to this heading">#</a></h4>
 <p>Another file created by <a class="reference external" href="https://github.com/python-versioneer/python-versioneer">The Versioneer</a> to assist with creating versions of software from information in the <code class="docutils literal notranslate"><span class="pre">.git</span></code> directory, if it exists.</p>
 </section>
 </section>
@@ -658,7 +669,7 @@ If you prefer to not follow the naming convention described above with respect t
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -687,6 +698,7 @@ If you prefer to not follow the naming convention described above with respect t
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -770,8 +782,8 @@ By Greg Caporaso and Evan Bolyen
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

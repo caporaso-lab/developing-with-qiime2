@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Plugin developer API &#8212; Developing with QIIME 2</title>
   
@@ -15,56 +14,52 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e63dcbb0" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=ccdb6887"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/references/api';</script>
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="qiime2.Metadata API" href="metadata-api.html" />
@@ -78,28 +73,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -121,12 +111,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -142,6 +140,8 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
 
+  
+    
   
 
 <a class="navbar-brand logo" href="../../intro.html">
@@ -160,12 +160,23 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins 🔌</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Create your plugin from a template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) Method</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/add-alignment-visualizer.html">Add a first Visualizer</a></li>
@@ -175,8 +186,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/add-pipeline.html">Add a first Pipeline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/conclusion.html">Conclusion</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/distribute-on-gh.html">Distribute plugins on GitHub</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/support-your-users.html">Provide technical support for your users</a></li>
@@ -194,42 +205,42 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/usage-examples.html">Writing Usage Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/format-validation-levels.html">Defining different Format validation levels</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/actions.html">Types of QIIME 2 Actions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/package-structure.html">The structure of QIIME 2 plugin packages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
 </ul>
-</li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">References</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">References</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="antipatterns.html">Plugin development anti-patterns</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Plugin developer API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="metadata-api.html"><code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> API</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
-</li>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Interfaces 🧩</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../interfaces/intro.html">Interface Development</a><input checked class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../interfaces/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../interfaces/intro.html">Interface Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../interfaces/references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../interfaces/references/api.html">Interface developer API reference</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
-</li>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Framework 🌳</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../framework/intro.html">Framework Development</a><input checked class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../framework/intro.html">Framework Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/how-to-guides/intro.html">How-To Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/how-to-guides/parallel-configuration.html">Parallel configuration and usage in QIIME 2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/how-to-guides/pipeline-resumption.html">Pipeline Resumption in QIIME 2</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/explanations/intro.html">Explanations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/architecture.html">QIIME 2 architecture overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/data-storage.html">How Data is Stored</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/archives.html">Anatomy of an Archive</a></li>
@@ -239,21 +250,21 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/garbage-collection.html">Garbage Collection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/metaprogramming.html">Metaprogramming</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/references/archive-versions.html">Archive versions</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
-</li>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation 📚</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../docs/intro.html">Docs Development</a><input checked class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../docs/intro.html">Docs Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../docs/user-documentation.html">User documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../docs/developer-documentation.html">Developer documentation</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Continuous Integration 🛠️</span></p>
 <ul class="nav bd-sidenav">
@@ -261,12 +272,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter 🗂️</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../back-matter/intro.html">Back matter</a><input checked class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../back-matter/intro.html">Back matter</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../back-matter/glossary.html">Glossary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../back-matter/bibliography.html">List of works cited</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../back-matter/genindex.html">Index</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
     </div>
@@ -282,7 +293,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -291,14 +302,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -376,10 +387,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
@@ -387,14 +398,14 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -416,21 +427,84 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plugin-development-api">Plugin development API</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-plugin-object">The <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> object</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formats">Formats</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-plugin-object">The <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> object</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Plugin"><code class="docutils literal notranslate"><span class="pre">Plugin()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formats">Formats</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.TextFileFormat"><code class="docutils literal notranslate"><span class="pre">TextFileFormat()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.BinaryFileFormat"><code class="docutils literal notranslate"><span class="pre">BinaryFileFormat()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.DirectoryFormat"><code class="docutils literal notranslate"><span class="pre">DirectoryFormat()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#action-input-and-output"><code class="docutils literal notranslate"><span class="pre">Action</span></code> input and output</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sematic-types">Sematic types</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#primitives-and-modifiers">Primitives and modifiers</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">Metadata</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#support-functions">Support functions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sematic-types">Sematic types</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.SemanticType"><code class="docutils literal notranslate"><span class="pre">SemanticType()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Properties"><code class="docutils literal notranslate"><span class="pre">Properties()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">Citations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utility-functions">Utility functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#primitives-and-modifiers">Primitives and modifiers</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Visualization"><code class="docutils literal notranslate"><span class="pre">Visualization()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Set"><code class="docutils literal notranslate"><span class="pre">Set()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.List"><code class="docutils literal notranslate"><span class="pre">List()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Collection"><code class="docutils literal notranslate"><span class="pre">Collection()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Bool"><code class="docutils literal notranslate"><span class="pre">Bool()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Int"><code class="docutils literal notranslate"><span class="pre">Int()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Float"><code class="docutils literal notranslate"><span class="pre">Float()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Range"><code class="docutils literal notranslate"><span class="pre">Range()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Start"><code class="docutils literal notranslate"><span class="pre">Start()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.End"><code class="docutils literal notranslate"><span class="pre">End()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Str"><code class="docutils literal notranslate"><span class="pre">Str()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Choices"><code class="docutils literal notranslate"><span class="pre">Choices()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Jobs"><code class="docutils literal notranslate"><span class="pre">Jobs()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Threads"><code class="docutils literal notranslate"><span class="pre">Threads()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qiime2.plugin.testing">Plugin testing API</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">Metadata</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Metadata"><code class="docutils literal notranslate"><span class="pre">Metadata()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.MetadataColumn"><code class="docutils literal notranslate"><span class="pre">MetadataColumn()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Categorical"><code class="docutils literal notranslate"><span class="pre">Categorical()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Numeric"><code class="docutils literal notranslate"><span class="pre">Numeric()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#support-functions">Support functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.TypeMap"><code class="docutils literal notranslate"><span class="pre">TypeMap()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.TypeMatch"><code class="docutils literal notranslate"><span class="pre">TypeMatch()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">Citations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Citations"><code class="docutils literal notranslate"><span class="pre">Citations()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.CitationRecord"><code class="docutils literal notranslate"><span class="pre">CitationRecord()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utility-functions">Utility functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.get_available_cores"><code class="docutils literal notranslate"><span class="pre">get_available_cores()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.ValidationError"><code class="docutils literal notranslate"><span class="pre">ValidationError()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qiime2.plugin.testing">Plugin testing API</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase"><code class="docutils literal notranslate"><span class="pre">TestPluginBase</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.package"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.package</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.test_dir_prefix"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.test_dir_prefix</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.setUp"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.setUp()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.tearDown"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.tearDown()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.get_data_path"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.get_data_path()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.get_transformer"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.get_transformer()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.assertRegisteredSemanticType"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.assertRegisteredSemanticType()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.assertSemanticTypeRegisteredToFormat"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.assertSemanticTypeRegisteredToFormat()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.transform_format"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.transform_format()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.assert_no_nans_in_tables"><code class="docutils literal notranslate"><span class="pre">assert_no_nans_in_tables()</span></code></a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -440,59 +514,59 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="plugin-developer-api">
-<span id="id1"></span><h1>Plugin developer API<a class="headerlink" href="#plugin-developer-api" title="Permalink to this heading">#</a></h1>
+<span id="id1"></span><h1>Plugin developer API<a class="headerlink" href="#plugin-developer-api" title="Link to this heading">#</a></h1>
 <p>When developing a QIIME 2 plugin, you will use APIs defined in the <code class="docutils literal notranslate"><span class="pre">qiime2.plugin</span></code> submodule.</p>
 <section id="plugin-development-api">
-<h2>Plugin development API<a class="headerlink" href="#plugin-development-api" title="Permalink to this heading">#</a></h2>
+<h2>Plugin development API<a class="headerlink" href="#plugin-development-api" title="Link to this heading">#</a></h2>
 <section id="the-plugin-object">
-<span id="plugin-api-docs"></span><h3>The <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> object<a class="headerlink" href="#the-plugin-object" title="Permalink to this heading">#</a></h3>
+<span id="plugin-api-docs"></span><h3>The <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> object<a class="headerlink" href="#the-plugin-object" title="Link to this heading">#</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Plugin">
-<span class="sig-name descname"><span class="pre">Plugin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">website</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">citation_text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_support_text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">citations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/plugin/plugin.html#Plugin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Plugin" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Plugin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">website</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">citation_text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_support_text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">citations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/plugin/plugin.py#L41"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Plugin" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
 <section id="formats">
-<h3>Formats<a class="headerlink" href="#formats" title="Permalink to this heading">#</a></h3>
+<h3>Formats<a class="headerlink" href="#formats" title="Link to this heading">#</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.TextFileFormat">
-<span class="sig-name descname"><span class="pre">TextFileFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'w'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/plugin/model/file_format.html#TextFileFormat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.TextFileFormat" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">TextFileFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'w'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/plugin/model/file_format.py#L64"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.TextFileFormat" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.BinaryFileFormat">
-<span class="sig-name descname"><span class="pre">BinaryFileFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'w'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/plugin/model/file_format.html#BinaryFileFormat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.BinaryFileFormat" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">BinaryFileFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'w'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/plugin/model/file_format.py#L72"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.BinaryFileFormat" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.DirectoryFormat">
-<span class="sig-name descname"><span class="pre">DirectoryFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'w'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/plugin/model/directory_format.html#DirectoryFormat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.DirectoryFormat" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">DirectoryFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'w'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/plugin/model/directory_format.py#L167"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.DirectoryFormat" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
 <section id="action-input-and-output">
-<h3><code class="docutils literal notranslate"><span class="pre">Action</span></code> input and output<a class="headerlink" href="#action-input-and-output" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">Action</span></code> input and output<a class="headerlink" href="#action-input-and-output" title="Link to this heading">#</a></h3>
 <section id="sematic-types">
-<h4>Sematic types<a class="headerlink" href="#sematic-types" title="Permalink to this heading">#</a></h4>
+<h4>Sematic types<a class="headerlink" href="#sematic-types" title="Link to this heading">#</a></h4>
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.SemanticType">
-<span class="sig-name descname"><span class="pre">SemanticType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_members</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variant_of</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/core/type/semantic.html#SemanticType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.SemanticType" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">SemanticType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_members</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variant_of</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/core/type/semantic.py#L42"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.SemanticType" title="Link to this definition">#</a></dt>
 <dd><p>Create a new semantic type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) – The name of the semantic type: this should match the variable to which
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The name of the semantic type: this should match the variable to which
 the semantic type is assigned.</p></li>
-<li><p><strong>field_names</strong> (<em>str</em><em>, </em><em>iterable of str</em><em>, </em><em>optional</em>) – Name(s) of the fields where member types can be placed. This makes
+<li><p><strong>field_names</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>iterable</em><em> of </em><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – Name(s) of the fields where member types can be placed. This makes
 the type a composite type, meaning that fields must be provided to
 produce realized semantic types. These names will define ad-hoc
 variant types accessible as <cite>name</cite>.field[<cite>field_names</cite> member].</p></li>
 <li><p><strong>field_members</strong> (<em>mapping</em><em>, </em><em>optional</em>) – A mapping of strings in <cite>field_names</cite> to one or more semantic types
 which are known to be members of the field (the variant type).</p></li>
-<li><p><strong>variant_of</strong> (<em>VariantField</em><em>, </em><em>iterable of VariantField</em><em>, </em><em>optional</em>) – Define the semantic type to be a member of one or more variant types
+<li><p><strong>variant_of</strong> (<em>VariantField</em><em>, </em><em>iterable</em><em> of </em><em>VariantField</em><em>, </em><em>optional</em>) – Define the semantic type to be a member of one or more variant types
 allowing it to be placed in the respective fields defined by those
 variant types.</p></li>
 </ul>
@@ -509,145 +583,145 @@ returned by this factory will cause <cite>is_semantic_type</cite> to return True
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Properties">
-<span class="sig-name descname"><span class="pre">Properties</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/core/type/semantic.html#Properties"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Properties" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Properties</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/core/type/semantic.py#L241"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Properties" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
 <section id="primitives-and-modifiers">
-<h4>Primitives and modifiers<a class="headerlink" href="#primitives-and-modifiers" title="Permalink to this heading">#</a></h4>
+<h4>Primitives and modifiers<a class="headerlink" href="#primitives-and-modifiers" title="Link to this heading">#</a></h4>
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Visualization">
-<span class="sig-name descname"><span class="pre">Visualization</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Visualization" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Visualization</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Visualization" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Set">
-<span class="sig-name descname"><span class="pre">Set</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Set" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Set</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Set" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.List">
-<span class="sig-name descname"><span class="pre">List</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.List" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">List</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.List" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Collection">
-<span class="sig-name descname"><span class="pre">Collection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Collection" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Collection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Collection" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Bool">
-<span class="sig-name descname"><span class="pre">Bool</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Bool" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Bool</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Bool" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Int">
-<span class="sig-name descname"><span class="pre">Int</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Int" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Int</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Int" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Float">
-<span class="sig-name descname"><span class="pre">Float</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Float" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Float</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Float" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Range">
-<span class="sig-name descname"><span class="pre">Range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/core/type/primitive.html#Range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Range" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/core/type/primitive.py#L31"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Range" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Start">
-<span class="sig-name descname"><span class="pre">Start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/core/type/primitive.html#Start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Start" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/core/type/primitive.py#L196"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Start" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.End">
-<span class="sig-name descname"><span class="pre">End</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/core/type/primitive.html#End"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.End" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">End</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/core/type/primitive.py#L200"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.End" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Str">
-<span class="sig-name descname"><span class="pre">Str</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Str" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Str</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Str" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Choices">
-<span class="sig-name descname"><span class="pre">Choices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/core/type/primitive.html#Choices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Choices" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Choices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/core/type/primitive.py#L204"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Choices" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Jobs">
-<span class="sig-name descname"><span class="pre">Jobs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Jobs" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Jobs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Jobs" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Threads">
-<span class="sig-name descname"><span class="pre">Threads</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Threads" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Threads</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Threads" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
 <section id="metadata">
-<h4>Metadata<a class="headerlink" href="#metadata" title="Permalink to this heading">#</a></h4>
+<h4>Metadata<a class="headerlink" href="#metadata" title="Link to this heading">#</a></h4>
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Metadata">
-<span class="sig-name descname"><span class="pre">Metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Metadata" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Metadata" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.MetadataColumn">
-<span class="sig-name descname"><span class="pre">MetadataColumn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.MetadataColumn" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">MetadataColumn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.MetadataColumn" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Categorical">
-<span class="sig-name descname"><span class="pre">Categorical</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Categorical" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Categorical</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Categorical" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Numeric">
-<span class="sig-name descname"><span class="pre">Numeric</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Numeric" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Numeric</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.Numeric" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
 <section id="support-functions">
-<h4>Support functions<a class="headerlink" href="#support-functions" title="Permalink to this heading">#</a></h4>
+<h4>Support functions<a class="headerlink" href="#support-functions" title="Link to this heading">#</a></h4>
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.TypeMap">
-<span class="sig-name descname"><span class="pre">TypeMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/core/type/meta.html#TypeMap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.TypeMap" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">TypeMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/core/type/meta.py#L92"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.TypeMap" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.TypeMatch">
-<span class="sig-name descname"><span class="pre">TypeMatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">listing</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/core/type/meta.html#TypeMatch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.TypeMatch" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">TypeMatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">listing</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/core/type/meta.py#L165"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.TypeMatch" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
 </section>
 <section id="citations">
-<h3>Citations<a class="headerlink" href="#citations" title="Permalink to this heading">#</a></h3>
+<h3>Citations<a class="headerlink" href="#citations" title="Link to this heading">#</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Citations">
-<span class="sig-name descname"><span class="pre">Citations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/core/cite.html#Citations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Citations" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Citations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/core/cite.py#L18"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Citations" title="Link to this definition">#</a></dt>
 <dd><p>Dictionary that remembers insertion order</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.CitationRecord">
-<span class="sig-name descname"><span class="pre">CitationRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qiime2.plugin.CitationRecord" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">CitationRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/core/cite.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.CitationRecord" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
 <section id="utility-functions">
-<h3>Utility functions<a class="headerlink" href="#utility-functions" title="Permalink to this heading">#</a></h3>
+<h3>Utility functions<a class="headerlink" href="#utility-functions" title="Link to this heading">#</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.get_available_cores">
-<span class="sig-name descname"><span class="pre">get_available_cores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_less</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/plugin/util.html#get_available_cores"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.get_available_cores" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">get_available_cores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_less</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/plugin/util.py#L24"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.get_available_cores" title="Link to this definition">#</a></dt>
 <dd><p>Finds the number of currently available (logical) cores. Useful for plugins
 that need to convert a 0 to a concrete number of cores when 0 is not
 supported by the underlying/called software.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>n_less</strong> (<em>int</em>) – The number of cores less than the total number available to request.
+<dd class="field-odd"><p><strong>n_less</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The number of cores less than the total number available to request.
 For example <a href="#id1"><span class="problematic" id="id2">`</span></a>get_available_cores(n_less=2) with 10 available cores
 will return 8.</p>
 </dd>
@@ -655,107 +729,95 @@ will return 8.</p>
 <dd class="field-even"><p>The number of cores to be requested.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.9/library/functions.html#int" title="(in Python v3.9)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 </section>
 <section id="exceptions">
-<h3>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this heading">#</a></h3>
+<h3>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading">#</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.ValidationError">
-<span class="sig-name descname"><span class="pre">ValidationError</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/core/exceptions.html#ValidationError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.ValidationError" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">ValidationError</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/core/exceptions.py#L10"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.ValidationError" title="Link to this definition">#</a></dt>
 <dd><p>Common base class for all non-exit exceptions.</p>
 </dd></dl>
 
 </section>
 </section>
 <section id="module-qiime2.plugin.testing">
-<span id="plugin-testing-api"></span><h2>Plugin testing API<a class="headerlink" href="#module-qiime2.plugin.testing" title="Permalink to this heading">#</a></h2>
+<span id="plugin-testing-api"></span><h2>Plugin testing API<a class="headerlink" href="#module-qiime2.plugin.testing" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TestPluginBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/plugin/testing.html#TestPluginBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.testing.</span></span><span class="sig-name descname"><span class="pre">TestPluginBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/plugin/testing.py#L24"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase" title="Link to this definition">#</a></dt>
 <dd><p>Test harness for simplifying testing QIIME 2 plugins.</p>
 <p><code class="docutils literal notranslate"><span class="pre">TestPluginBase</span></code> extends <code class="docutils literal notranslate"><span class="pre">unittest.TestCase</span></code>, with a few extra helpers
 and assertions.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.package">
-<span class="sig-name descname"><span class="pre">package</span></span><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.package" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">package</span></span><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.package" title="Link to this definition">#</a></dt>
 <dd><p>The name of the plugin package to be tested.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.test_dir_prefix">
-<span class="sig-name descname"><span class="pre">test_dir_prefix</span></span><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.test_dir_prefix" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">test_dir_prefix</span></span><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.test_dir_prefix" title="Link to this definition">#</a></dt>
 <dd><p>The prefix for the temporary testing dir created by the harness.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
+<p>Create an instance of the class that will use the named test
+method when executed. Raises a ValueError if the instance does
+not have a method with the specified name.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.assertRegisteredSemanticType">
-<span class="sig-name descname"><span class="pre">assertRegisteredSemanticType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">semantic_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/plugin/testing.html#TestPluginBase.assertRegisteredSemanticType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.assertRegisteredSemanticType" title="Permalink to this definition">#</a></dt>
-<dd><p>Test assertion for ensuring a plugin’s semantic type is registered.</p>
-<p>Fails if the semantic type requested is not found in the Plugin
-Manager.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>semantic_type</strong> (<em>A Semantic Type</em>) – The <a class="reference internal" href="../../back-matter/glossary.html#term-Semantic-Type"><span class="xref std std-term">Semantic Type</span></a> to test the presence of.</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/plugin/testing.py#L42"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.setUp" title="Link to this definition">#</a></dt>
+<dd><p>Test runner setup hook.</p>
+<p>If overriding this hook in a test, call <code class="docutils literal notranslate"><span class="pre">__super__</span></code> to invoke this
+method in the overridden hook, otherwise the harness might not work
+as expected.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.assertSemanticTypeRegisteredToFormat">
-<span class="sig-name descname"><span class="pre">assertSemanticTypeRegisteredToFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">semantic_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp_format</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/plugin/testing.html#TestPluginBase.assertSemanticTypeRegisteredToFormat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.assertSemanticTypeRegisteredToFormat" title="Permalink to this definition">#</a></dt>
-<dd><dl class="simple">
-<dt>Test assertion for ensuring a semantic type is registered to a</dt><dd><p>format.</p>
-</dd>
-</dl>
-<p>Fails if the semantic type requested is not registered to the format
-specified with <code class="docutils literal notranslate"><span class="pre">exp_format</span></code>. Also fails if the semantic type isn’t
-registered to <strong>any</strong> format.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>semantic_type</strong> (<em>A Semantic Type</em>) – The <a class="reference internal" href="../../back-matter/glossary.html#term-Semantic-Type"><span class="xref std std-term">Semantic Type</span></a> to check for.</p></li>
-<li><p><strong>exp_format</strong> (<em>A Format</em>) – The <a class="reference internal" href="../../back-matter/glossary.html#term-Format"><span class="xref std std-term">Format</span></a> to check that the Semantic Type is registed on.</p></li>
-</ul>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.tearDown">
+<span class="sig-name descname"><span class="pre">tearDown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/plugin/testing.py#L73"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.tearDown" title="Link to this definition">#</a></dt>
+<dd><p>Test runner teardown hook.</p>
+<p>If overriding this hook in a test, call <code class="docutils literal notranslate"><span class="pre">__super__</span></code> to invoke this
+method in the overridden hook, otherwise the harness might not work
+as expected.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.get_data_path">
-<span class="sig-name descname"><span class="pre">get_data_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/plugin/testing.html#TestPluginBase.get_data_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.get_data_path" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_data_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/plugin/testing.py#L84"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.get_data_path" title="Link to this definition">#</a></dt>
 <dd><p>Convenience method for getting a data asset while testing.</p>
 <p>Test data stored in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> dir local to the running test
 can be accessed via this method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – The name of the file to look up.</p>
+<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The name of the file to look up.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>filepath</strong> – The materialized filepath to the requested test data.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.get_transformer">
-<span class="sig-name descname"><span class="pre">get_transformer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/plugin/testing.html#TestPluginBase.get_transformer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.get_transformer" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_transformer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_type</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/plugin/testing.py#L105"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.get_transformer" title="Link to this definition">#</a></dt>
 <dd><p>Convenience method for getting a registered transformer.</p>
 <p>This helper deliberately side-steps the framework’s validation
 machinery, so that it is possible for plugin developers to test
@@ -777,26 +839,41 @@ failing conditions.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.setUp">
-<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/plugin/testing.html#TestPluginBase.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.setUp" title="Permalink to this definition">#</a></dt>
-<dd><p>Test runner setup hook.</p>
-<p>If overriding this hook in a test, call <code class="docutils literal notranslate"><span class="pre">__super__</span></code> to invoke this
-method in the overridden hook, otherwise the harness might not work
-as expected.</p>
+<dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.assertRegisteredSemanticType">
+<span class="sig-name descname"><span class="pre">assertRegisteredSemanticType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">semantic_type</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/plugin/testing.py#L135"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.assertRegisteredSemanticType" title="Link to this definition">#</a></dt>
+<dd><p>Test assertion for ensuring a plugin’s semantic type is registered.</p>
+<p>Fails if the semantic type requested is not found in the Plugin
+Manager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>semantic_type</strong> (<em>A Semantic Type</em>) – The <a class="reference internal" href="../../back-matter/glossary.html#term-Semantic-Type"><span class="xref std std-term">Semantic Type</span></a> to test the presence of.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.tearDown">
-<span class="sig-name descname"><span class="pre">tearDown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/plugin/testing.html#TestPluginBase.tearDown"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.tearDown" title="Permalink to this definition">#</a></dt>
-<dd><p>Test runner teardown hook.</p>
-<p>If overriding this hook in a test, call <code class="docutils literal notranslate"><span class="pre">__super__</span></code> to invoke this
-method in the overridden hook, otherwise the harness might not work
-as expected.</p>
+<dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.assertSemanticTypeRegisteredToFormat">
+<span class="sig-name descname"><span class="pre">assertSemanticTypeRegisteredToFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">semantic_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp_format</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/plugin/testing.py#L157"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.assertSemanticTypeRegisteredToFormat" title="Link to this definition">#</a></dt>
+<dd><dl class="simple">
+<dt>Test assertion for ensuring a semantic type is registered to a</dt><dd><p>format.</p>
+</dd>
+</dl>
+<p>Fails if the semantic type requested is not registered to the format
+specified with <code class="docutils literal notranslate"><span class="pre">exp_format</span></code>. Also fails if the semantic type isn’t
+registered to <strong>any</strong> format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>semantic_type</strong> (<em>A Semantic Type</em>) – The <a class="reference internal" href="../../back-matter/glossary.html#term-Semantic-Type"><span class="xref std std-term">Semantic Type</span></a> to check for.</p></li>
+<li><p><strong>exp_format</strong> (<em>A Format</em>) – The <a class="reference internal" href="../../back-matter/glossary.html#term-Format"><span class="xref std std-term">Format</span></a> to check that the Semantic Type is registed on.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.transform_format">
-<span class="sig-name descname"><span class="pre">transform_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filenames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/plugin/testing.html#TestPluginBase.transform_format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.transform_format" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">transform_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filenames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/plugin/testing.py#L189"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.transform_format" title="Link to this definition">#</a></dt>
 <dd><p>Helper utility for loading data and transforming it.</p>
 <p>Combines several other utilities in this class, will load files from
 <code class="docutils literal notranslate"><span class="pre">data/</span></code>, as <code class="docutils literal notranslate"><span class="pre">source_format</span></code>, then transform to the <code class="docutils literal notranslate"><span class="pre">target</span></code> view.</p>
@@ -808,10 +885,10 @@ failing conditions.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source_format</strong> (<em>A Format</em>) – The <a class="reference internal" href="../../back-matter/glossary.html#term-Format"><span class="xref std std-term">Format</span></a> to load the data as.</p></li>
 <li><p><strong>target</strong> (<em>A View Type</em>) – The <a class="reference internal" href="../../back-matter/glossary.html#term-View"><span class="xref std std-term">View Type</span></a> to transform the data to.</p></li>
-<li><p><strong>filename</strong> (<em>str</em>) – The name of the file to load from <code class="docutils literal notranslate"><span class="pre">data</span></code>. Use this for formats
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The name of the file to load from <code class="docutils literal notranslate"><span class="pre">data</span></code>. Use this for formats
 that use a single file in their format definition. Mutually
 exclusive with the <code class="docutils literal notranslate"><span class="pre">filenames</span></code> parameter.</p></li>
-<li><p><strong>filenames</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The names of the files to load from <code class="docutils literal notranslate"><span class="pre">data</span></code>. Use this for formats
+<li><p><strong>filenames</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – The names of the files to load from <code class="docutils literal notranslate"><span class="pre">data</span></code>. Use this for formats
 that use multiple files in their format definition. Mutually
 exclusive with the <code class="docutils literal notranslate"><span class="pre">filename</span></code> parameter.</p></li>
 </ul>
@@ -830,7 +907,7 @@ exclusive with the <code class="docutils literal notranslate"><span class="pre">
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.assert_no_nans_in_tables">
-<span class="sig-name descname"><span class="pre">assert_no_nans_in_tables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fh</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/qiime2/plugin/testing.html#assert_no_nans_in_tables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.assert_no_nans_in_tables" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.testing.</span></span><span class="sig-name descname"><span class="pre">assert_no_nans_in_tables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fh</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.5.0/qiime2/plugin/testing.py#L266"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.assert_no_nans_in_tables" title="Link to this definition">#</a></dt>
 <dd><p>Checks for NaNs present in any of the tables in the indicated file then
 resets to the head of the file.</p>
 </dd></dl>
@@ -865,7 +942,7 @@ resets to the head of the file.</p>
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -895,6 +972,7 @@ resets to the head of the file.</p>
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
@@ -902,21 +980,84 @@ resets to the head of the file.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plugin-development-api">Plugin development API</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-plugin-object">The <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> object</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formats">Formats</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-plugin-object">The <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> object</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Plugin"><code class="docutils literal notranslate"><span class="pre">Plugin()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formats">Formats</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.TextFileFormat"><code class="docutils literal notranslate"><span class="pre">TextFileFormat()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.BinaryFileFormat"><code class="docutils literal notranslate"><span class="pre">BinaryFileFormat()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.DirectoryFormat"><code class="docutils literal notranslate"><span class="pre">DirectoryFormat()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#action-input-and-output"><code class="docutils literal notranslate"><span class="pre">Action</span></code> input and output</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sematic-types">Sematic types</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#primitives-and-modifiers">Primitives and modifiers</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">Metadata</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#support-functions">Support functions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sematic-types">Sematic types</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.SemanticType"><code class="docutils literal notranslate"><span class="pre">SemanticType()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Properties"><code class="docutils literal notranslate"><span class="pre">Properties()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">Citations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utility-functions">Utility functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#primitives-and-modifiers">Primitives and modifiers</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Visualization"><code class="docutils literal notranslate"><span class="pre">Visualization()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Set"><code class="docutils literal notranslate"><span class="pre">Set()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.List"><code class="docutils literal notranslate"><span class="pre">List()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Collection"><code class="docutils literal notranslate"><span class="pre">Collection()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Bool"><code class="docutils literal notranslate"><span class="pre">Bool()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Int"><code class="docutils literal notranslate"><span class="pre">Int()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Float"><code class="docutils literal notranslate"><span class="pre">Float()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Range"><code class="docutils literal notranslate"><span class="pre">Range()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Start"><code class="docutils literal notranslate"><span class="pre">Start()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.End"><code class="docutils literal notranslate"><span class="pre">End()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Str"><code class="docutils literal notranslate"><span class="pre">Str()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Choices"><code class="docutils literal notranslate"><span class="pre">Choices()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Jobs"><code class="docutils literal notranslate"><span class="pre">Jobs()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Threads"><code class="docutils literal notranslate"><span class="pre">Threads()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qiime2.plugin.testing">Plugin testing API</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">Metadata</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Metadata"><code class="docutils literal notranslate"><span class="pre">Metadata()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.MetadataColumn"><code class="docutils literal notranslate"><span class="pre">MetadataColumn()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Categorical"><code class="docutils literal notranslate"><span class="pre">Categorical()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Numeric"><code class="docutils literal notranslate"><span class="pre">Numeric()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#support-functions">Support functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.TypeMap"><code class="docutils literal notranslate"><span class="pre">TypeMap()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.TypeMatch"><code class="docutils literal notranslate"><span class="pre">TypeMatch()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">Citations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.Citations"><code class="docutils literal notranslate"><span class="pre">Citations()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.CitationRecord"><code class="docutils literal notranslate"><span class="pre">CitationRecord()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utility-functions">Utility functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.get_available_cores"><code class="docutils literal notranslate"><span class="pre">get_available_cores()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.ValidationError"><code class="docutils literal notranslate"><span class="pre">ValidationError()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qiime2.plugin.testing">Plugin testing API</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase"><code class="docutils literal notranslate"><span class="pre">TestPluginBase</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.package"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.package</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.test_dir_prefix"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.test_dir_prefix</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.setUp"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.setUp()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.tearDown"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.tearDown()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.get_data_path"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.get_data_path()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.get_transformer"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.get_transformer()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.assertRegisteredSemanticType"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.assertRegisteredSemanticType()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.assertSemanticTypeRegisteredToFormat"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.assertSemanticTypeRegisteredToFormat()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.TestPluginBase.transform_format"><code class="docutils literal notranslate"><span class="pre">TestPluginBase.transform_format()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.plugin.testing.assert_no_nans_in_tables"><code class="docutils literal notranslate"><span class="pre">assert_no_nans_in_tables()</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
@@ -965,8 +1106,8 @@ By Greg Caporaso and Evan Bolyen
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

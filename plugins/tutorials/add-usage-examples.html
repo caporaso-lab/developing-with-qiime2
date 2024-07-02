@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Add a Usage Example &#8212; Developing with QIIME 2</title>
   
@@ -15,56 +14,52 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e63dcbb0" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=ccdb6887"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/tutorials/add-usage-examples';</script>
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Add a second transformer" href="add-2nd-transformer.html" />
@@ -78,28 +73,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -121,12 +111,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -142,6 +140,8 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
 
+  
+    
   
 
 <a class="navbar-brand logo" href="../../intro.html">
@@ -160,12 +160,23 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins 🔌</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><input checked class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="create-from-template.html">Create your plugin from a template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-nw-align-method.html">Add a first (real) Method</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-alignment-visualizer.html">Add a first Visualizer</a></li>
@@ -175,8 +186,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="add-pipeline.html">Add a first Pipeline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conclusion.html">Conclusion</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../how-to-guides/intro.html">How-To Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/distribute-on-gh.html">Distribute plugins on GitHub</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/support-your-users.html">Provide technical support for your users</a></li>
@@ -194,42 +205,42 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/usage-examples.html">Writing Usage Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/format-validation-levels.html">Defining different Format validation levels</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/actions.html">Types of QIIME 2 Actions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/package-structure.html">The structure of QIIME 2 plugin packages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../references/antipatterns.html">Plugin development anti-patterns</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../references/api.html">Plugin developer API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../references/metadata-api.html"><code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> API</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
-</li>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Interfaces 🧩</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../interfaces/intro.html">Interface Development</a><input checked class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../interfaces/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../interfaces/intro.html">Interface Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../interfaces/references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../interfaces/references/api.html">Interface developer API reference</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
-</li>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Framework 🌳</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../framework/intro.html">Framework Development</a><input checked class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/how-to-guides/intro.html">How-To Guides</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../framework/intro.html">Framework Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/how-to-guides/intro.html">How-To Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/how-to-guides/parallel-configuration.html">Parallel configuration and usage in QIIME 2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/how-to-guides/pipeline-resumption.html">Pipeline Resumption in QIIME 2</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/explanations/intro.html">Explanations</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/explanations/intro.html">Explanations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/architecture.html">QIIME 2 architecture overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/data-storage.html">How Data is Stored</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/archives.html">Anatomy of an Archive</a></li>
@@ -239,21 +250,21 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/garbage-collection.html">Garbage Collection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/metaprogramming.html">Metaprogramming</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/references/intro.html">References</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/references/archive-versions.html">Archive versions</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
-</li>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation 📚</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../docs/intro.html">Docs Development</a><input checked class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../docs/intro.html">Docs Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../docs/user-documentation.html">User documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../docs/developer-documentation.html">Developer documentation</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Continuous Integration 🛠️</span></p>
 <ul class="nav bd-sidenav">
@@ -261,12 +272,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter 🗂️</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../back-matter/intro.html">Back matter</a><input checked class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../back-matter/intro.html">Back matter</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../back-matter/glossary.html">Glossary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../back-matter/bibliography.html">List of works cited</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../back-matter/genindex.html">Index</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
     </div>
@@ -282,7 +293,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -291,14 +302,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -376,10 +387,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
@@ -387,14 +398,14 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -438,10 +449,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="add-a-usage-example">
-<span id="add-nw-align-usage"></span><h1>Add a Usage Example<a class="headerlink" href="#add-a-usage-example" title="Permalink to this heading">#</a></h1>
+<span id="add-nw-align-usage"></span><h1>Add a Usage Example<a class="headerlink" href="#add-a-usage-example" title="Link to this heading">#</a></h1>
 <p>If you want others to use your new functionality, it isn’t <em>really</em> done until you document how to use it.
 Let’s do that now.
 This will ensure that users know how to use your code, and it will give them something to try after they install your plugin to convince them that it’s working.
@@ -459,14 +470,14 @@ This is one way the framework supports our goal of meeting users where they are 
 <p>The full code that I developed for this section can be viewed here: <a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/790c73536a7d0cbf6c4a3f07630c65a79c5d6077">caporaso-lab/q2-dwq2</a>.</p>
 </div>
 <section id="defining-a-usage-example-for-nw-align">
-<h2>Defining a usage example for <code class="docutils literal notranslate"><span class="pre">nw-align</span></code><a class="headerlink" href="#defining-a-usage-example-for-nw-align" title="Permalink to this heading">#</a></h2>
+<h2>Defining a usage example for <code class="docutils literal notranslate"><span class="pre">nw-align</span></code><a class="headerlink" href="#defining-a-usage-example-for-nw-align" title="Link to this heading">#</a></h2>
 <p>Usage examples work on actual data that you define when you create the usage example.
 This allows users to run your usage examples, explore the input and output, and confirm that things work as expected before they try your plugin on their own data.
 This also allows you to have your usage examples automatically tested every time your run your test code, which lets you make and honor a commitment to your users that the documentation you provide will work, because you can automatically run all of the usage examples you define with a single command after every change you make so you’ll be the first to know if anything is broken.</p>
 <p>So let’s start by defining data for use by our <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> usage example.
 This is done by creating a function that returns a QIIME 2 artifact that is used as an input in the example.</p>
 <section id="define-input-data-for-your-usage-example">
-<h3>Define input data for your usage example<a class="headerlink" href="#define-input-data-for-your-usage-example" title="Permalink to this heading">#</a></h3>
+<h3>Define input data for your usage example<a class="headerlink" href="#define-input-data-for-your-usage-example" title="Link to this heading">#</a></h3>
 <p>Start by creating a top-level file in your module called <code class="docutils literal notranslate"><span class="pre">_examples.py</span></code>.
 Mine will be called <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_examples.py</span></code>.
 Add the following code, and then we’ll work through it.</p>
@@ -519,7 +530,7 @@ That artifact is returned by the helper function, and in turn is returned by the
 For example, it allows some <em>usage drivers</em> to actually create these inputs (for example, a usage driver that is going to be used to <a class="reference internal" href="#test-usage-examples"><span class="std std-ref">test the examples</span></a>), while another usage driver can just act as if they were created but not bother taking the time to actually create them (for example, usage drivers that are <a class="reference internal" href="#display-usage-example"><span class="std std-ref">displaying examples in command line help</span></a> text but not executing them).</p>
 </section>
 <section id="defining-the-usage-example">
-<h3>Defining the usage example<a class="headerlink" href="#defining-the-usage-example" title="Permalink to this heading">#</a></h3>
+<h3>Defining the usage example<a class="headerlink" href="#defining-the-usage-example" title="Link to this heading">#</a></h3>
 <p>Next, we define a usage example as a function that takes a <code class="docutils literal notranslate"><span class="pre">UsageDriver</span></code> subclass as input.
 We often call the input <code class="docutils literal notranslate"><span class="pre">use</span></code>, by convention, but you can call it anything.
 This function starts by instantiating two sequence artifacts using the factory functions that we just defined.
@@ -541,7 +552,7 @@ It also assigns the inputs, and provides a name for the output.</p>
 </div>
 </section>
 <section id="registering-the-usage-example">
-<h3>Registering the usage example<a class="headerlink" href="#registering-the-usage-example" title="Permalink to this heading">#</a></h3>
+<h3>Registering the usage example<a class="headerlink" href="#registering-the-usage-example" title="Link to this heading">#</a></h3>
 <p>Finally, we’re ready to register the usage example.
 For this, we’ll go back to the <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code> file.</p>
 <p>You should first import the new usage example function by adding the following line to your imports at the top of the file:</p>
@@ -563,12 +574,12 @@ To do this, adapt your call to <code class="docutils literal notranslate"><span 
 </section>
 </section>
 <section id="displaying-usage-examples">
-<span id="display-usage-example"></span><h2>Displaying usage examples<a class="headerlink" href="#displaying-usage-examples" title="Permalink to this heading">#</a></h2>
+<span id="display-usage-example"></span><h2>Displaying usage examples<a class="headerlink" href="#displaying-usage-examples" title="Link to this heading">#</a></h2>
 <p>In this section we’ll work through some user-facing commands that allow you or your users to view your usage examples.
 First, and most straight-forward, is to do this through q2cli.
 If you call your action with the <code class="docutils literal notranslate"><span class="pre">--help</span></code> parameter, you will now see the usage example at the bottom of the resulting help text.</p>
 <section id="command-line-interface">
-<h3>Command line interface<a class="headerlink" href="#command-line-interface" title="Permalink to this heading">#</a></h3>
+<h3>Command line interface<a class="headerlink" href="#command-line-interface" title="Link to this heading">#</a></h3>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>qiime<span class="w"> </span>dwq2<span class="w"> </span>nw-align<span class="w"> </span>--help
 Usage:<span class="w"> </span>qiime<span class="w"> </span>dwq2<span class="w"> </span>nw-align<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
 
@@ -589,7 +600,7 @@ Examples:
 <p>After generating the example data, run the usage example as described in the help text providing the example data as input and confirm that it works as expected.</p>
 </section>
 <section id="python-3-api">
-<h3>Python 3 API<a class="headerlink" href="#python-3-api" title="Permalink to this heading">#</a></h3>
+<h3>Python 3 API<a class="headerlink" href="#python-3-api" title="Link to this heading">#</a></h3>
 <p>As mentioned above, the abstract nature of our usage example definition enables it to be interpreted by different usage drivers, enabling the same example to be presented as it would be used through different interfaces.
 Open an <code class="docutils literal notranslate"><span class="pre">ipython</span></code> shell in your development environment, and try the following:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiime2.plugins</span> <span class="kn">import</span> <span class="n">dwq2</span><span class="p">,</span> <span class="n">ArtifactAPIUsage</span>
@@ -615,7 +626,7 @@ Try it out with the same example data that you generated above (you can use <cod
 </section>
 </section>
 <section id="automated-testing-of-usage-examples">
-<span id="test-usage-examples"></span><h2>Automated testing of usage examples<a class="headerlink" href="#automated-testing-of-usage-examples" title="Permalink to this heading">#</a></h2>
+<span id="test-usage-examples"></span><h2>Automated testing of usage examples<a class="headerlink" href="#automated-testing-of-usage-examples" title="Link to this heading">#</a></h2>
 <p>Finally, it’s a good idea to have your usage examples run as part of your test suite, as a way to assess if any future changes you make to your code break the usage examples you defined.
 To do this, create a new test file in your <code class="docutils literal notranslate"><span class="pre">tests</span></code> directory.
 Mine is called <code class="docutils literal notranslate"><span class="pre">q2-dwq2/tests/test_examples.py</span></code>.
@@ -646,7 +657,7 @@ Unit tests tend to be more expressive and useful for testing your plugin’s fun
 If you’d like to learn more about testing specific output that you get from running your usage examples, refer to the <a class="reference internal" href="../how-to-guides/usage-examples.html#how-to-write-usage-examples"><span class="std std-ref">Writing Usage Examples</span></a> <em>How to</em> guide.</p>
 </section>
 <section id="writing-tutorials">
-<h2>Writing tutorials<a class="headerlink" href="#writing-tutorials" title="Permalink to this heading">#</a></h2>
+<h2>Writing tutorials<a class="headerlink" href="#writing-tutorials" title="Link to this heading">#</a></h2>
 <p>Usage examples provide users with guidelines on the specific commands they can run to use your plugin, but they don’t provide a lot of context.
 It’s a good idea to also write tutorials that describe what your plugin is intended to do, how and why to use it, and how to interpret the results.
 Ideally the tutorial also provides a small data set that can be analysed quickly on a modestly powered laptop computer.
@@ -658,15 +669,11 @@ It’s very feature rich, easily deployed with GitHub Actions, and it makes it s
 <p>Happy documenting! 📝</p>
 </section>
 <section id="optional-exercise">
-<h2>Optional exercise<a class="headerlink" href="#optional-exercise" title="Permalink to this heading">#</a></h2>
+<h2>Optional exercise<a class="headerlink" href="#optional-exercise" title="Link to this heading">#</a></h2>
 <p>Add a usage example for your <code class="docutils literal notranslate"><span class="pre">summarize</span></code> visualizer.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-Need some hints?<div class="sd-summary-down docutils">
-<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="sd-summary-up docutils">
-<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="sd-summary-content sd-card-body docutils">
+<span class="sd-summary-text">Need some hints?</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">For your example data, you can use the output generated by the <code class="docutils literal notranslate"><span class="pre">nw-align</span></code> usage example that we created here.
 If you export that artifact, you can find the data in the format you’ll need to create it in your factory function.
 You can also find the artifact class that you’ll need to use in your <code class="docutils literal notranslate"><span class="pre">qiime2.Artifact.import_data</span></code> call using the <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">tools</span> <span class="pre">peek</span></code> command.</p>
@@ -701,7 +708,7 @@ You can also find the artifact class that you’ll need to use in your <code cla
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -730,6 +737,7 @@ You can also find the artifact class that you’ll need to use in your <code cla
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -799,8 +807,8 @@ By Greg Caporaso and Evan Bolyen
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
