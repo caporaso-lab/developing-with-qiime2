@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Plugin Development API &#8212; Developing with QIIME 2</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=d05ccb96" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=ccdb6887"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/references/api/intro';</script>
+    <link rel="icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Plugin &amp; Registration" href="plugin.html" />
+    <link rel="prev" title="Plugin development anti-patterns" href="../antipatterns.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/dwq2-light.png" class="logo__image only-light" alt="Developing with QIIME 2 - Home"/>
+    <script>document.write(`<img src="../../../_static/dwq2-dark.png" class="logo__image only-dark" alt="Developing with QIIME 2 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins 🔌</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../intro.html">Plugin Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../tutorials/intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/create-from-template.html">Create your plugin from a template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/add-nw-align-method.html">Add a first (real) Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/add-alignment-visualizer.html">Add a first Visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/add-artifact-class.html">Add a new Artifact Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/add-usage-examples.html">Add a Usage Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/add-2nd-transformer.html">Add a second transformer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/add-pipeline.html">Add a first Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/conclusion.html">Conclusion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../how-to-guides/intro.html">How-To Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/distribute-on-gh.html">Distribute plugins on GitHub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/support-your-users.html">Provide technical support for your users</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/maximize-compatibility.html">Maximize compatibility between your plugin(s) and existing QIIME 2 distribution(s)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/publicize.html">Publicize your QIIME 2 plugins (or other QIIME 2-based tools)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/register-a-plugin.html">Register a QIIME 2 plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/create-register-method.html">Create and register a Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/create-register-visualizer.html">Create and register a visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/create-register-pipeline.html">Create and register a pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/create-register-transformer.html">Creating and registering a Transformer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/play-nicely-with-others.html">How to play nicely with other plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/use-metadata.html">How to use Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/test-plugins.html">How to test QIIME 2 plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/usage-examples.html">Writing Usage Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/format-validation-levels.html">Defining different Format validation levels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../explanations/intro.html">Explanations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../explanations/actions.html">Types of QIIME 2 Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../explanations/package-structure.html">The structure of QIIME 2 plugin packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../explanations/transformers.html">Transformers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../intro.html">References</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../antipatterns.html">Plugin development anti-patterns</a></li>
+<li class="toctree-l3 current active has-children"><a class="current reference internal" href="#">Plugin Development API</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="plugin.html">Plugin &amp; Registration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="formats.html">Formats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="types.html">Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="citations.html">Citations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html">Utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="context.html">Pipeline Context Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="usage.html">Usage Examples</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../metadata-api.html">User Metadata API</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interfaces 🧩</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../interfaces/intro.html">Interface Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../interfaces/references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../interfaces/references/api.html">Interface developer API reference</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Framework 🌳</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../framework/intro.html">Framework Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../framework/how-to-guides/intro.html">How-To Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../framework/how-to-guides/parallel-configuration.html">Parallel configuration and usage in QIIME 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../framework/how-to-guides/pipeline-resumption.html">Pipeline Resumption in QIIME 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../framework/explanations/intro.html">Explanations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../framework/explanations/architecture.html">QIIME 2 architecture overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../framework/explanations/data-storage.html">How Data is Stored</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../framework/explanations/archives.html">Anatomy of an Archive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../framework/explanations/types.html">Semantic Types, Primitives, and Visualizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../framework/explanations/formats.html">File Formats and Directory Formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../framework/explanations/provenance.html">Decentralized retrospective provenance tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../framework/explanations/garbage-collection.html">Garbage Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../framework/explanations/metaprogramming.html">Metaprogramming</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../framework/references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../framework/references/archive-versions.html">Archive versions</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation 📚</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../docs/intro.html">Docs Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/user-documentation.html">User documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/developer-documentation.html">Developer documentation</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Continuous Integration 🛠️</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../ci/intro.html">Distribution Development</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter 🗂️</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../back-matter/intro.html">Back matter</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../back-matter/glossary.html">Glossary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../back-matter/bibliography.html">List of works cited</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../back-matter/genindex.html">Index</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/plugins/references/api/intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Plugin Development API</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#individual-topics">Individual Topics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plugin-api-list">Plugin API List</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-objects">Additional Objects</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="plugin-development-api">
+<span id="plugin-developer-api"></span><h1>Plugin Development API<a class="headerlink" href="#plugin-development-api" title="Link to this heading">#</a></h1>
+<p>This section details the public API for plugin development.
+Broadly speaking, everything that is necessary to build a QIIME 2 plugin is
+available in <code class="docutils literal notranslate"><span class="pre">qiime2.plugin</span></code> or <code class="docutils literal notranslate"><span class="pre">qiime2.metadata</span></code>.</p>
+<section id="individual-topics">
+<h2>Individual Topics<a class="headerlink" href="#individual-topics" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="plugin.html">Plugin &amp; Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formats.html">Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citations.html">Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="context.html">Pipeline Context Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Examples</a></li>
+</ul>
+</div>
+</section>
+<section id="plugin-api-list">
+<h2>Plugin API List<a class="headerlink" href="#plugin-api-list" title="Link to this heading">#</a></h2>
+<p class="rubric">Plugin Object</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="plugin.html#qiime2.plugin.Plugin" title="qiime2.plugin.Plugin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Plugin</span></code></a></p></td>
+<td><p>A QIIME 2 Plugin.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Registration</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="plugin.html#qiime2.plugin.plugin.PluginMethods.register_function" title="qiime2.plugin.plugin.PluginMethods.register_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plugin.PluginMethods.register_function</span></code></a></p></td>
+<td><p>Register a method to the associated plugin.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="plugin.html#qiime2.plugin.plugin.PluginVisualizers.register_function" title="qiime2.plugin.plugin.PluginVisualizers.register_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plugin.PluginVisualizers.register_function</span></code></a></p></td>
+<td><p>Register a visualizer to the associated plugin.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="plugin.html#qiime2.plugin.plugin.PluginPipelines.register_function" title="qiime2.plugin.plugin.PluginPipelines.register_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plugin.PluginPipelines.register_function</span></code></a></p></td>
+<td><p>Register a pipeline to the associated plugin.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="plugin.html#qiime2.plugin.Plugin.register_validator" title="qiime2.plugin.Plugin.register_validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Plugin.register_validator</span></code></a></p></td>
+<td><p><strong>Decorator</strong> which registers a validator</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="plugin.html#qiime2.plugin.Plugin.register_transformer" title="qiime2.plugin.Plugin.register_transformer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Plugin.register_transformer</span></code></a></p></td>
+<td><p><strong>Decorator</strong> which registers a transformer to convert data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="plugin.html#qiime2.plugin.Plugin.register_formats" title="qiime2.plugin.Plugin.register_formats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Plugin.register_formats</span></code></a></p></td>
+<td><p>Register file formats to the plugin</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="plugin.html#qiime2.plugin.Plugin.register_views" title="qiime2.plugin.Plugin.register_views"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Plugin.register_views</span></code></a></p></td>
+<td><p>Register arbitrary views (Python classes or formats) to the plugin</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="plugin.html#qiime2.plugin.Plugin.register_semantic_types" title="qiime2.plugin.Plugin.register_semantic_types"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Plugin.register_semantic_types</span></code></a></p></td>
+<td><p>Register semantic type fragments to the plugin</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="plugin.html#qiime2.plugin.Plugin.register_semantic_type_to_format" title="qiime2.plugin.Plugin.register_semantic_type_to_format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Plugin.register_semantic_type_to_format</span></code></a></p></td>
+<td><p>Connect a semantic type expression to a format.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="plugin.html#qiime2.plugin.Plugin.register_artifact_class" title="qiime2.plugin.Plugin.register_artifact_class"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Plugin.register_artifact_class</span></code></a></p></td>
+<td><p>Register an artifact class which defines an Artifact</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Formats</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="formats.html#qiime2.plugin.TextFileFormat" title="qiime2.plugin.TextFileFormat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.TextFileFormat</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="formats.html#qiime2.plugin.BinaryFileFormat" title="qiime2.plugin.BinaryFileFormat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.BinaryFileFormat</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="formats.html#qiime2.plugin.DirectoryFormat" title="qiime2.plugin.DirectoryFormat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.DirectoryFormat</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="formats.html#qiime2.plugin.SingleFileDirectoryFormat" title="qiime2.plugin.SingleFileDirectoryFormat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.SingleFileDirectoryFormat</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="formats.html#qiime2.plugin.ValidationError" title="qiime2.plugin.ValidationError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.ValidationError</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Types</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="types.html#qiime2.plugin.SemanticType" title="qiime2.plugin.SemanticType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.SemanticType</span></code></a></p></td>
+<td><p>Create a new semantic type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="types.html#qiime2.plugin.Properties" title="qiime2.plugin.Properties"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Properties</span></code></a></p></td>
+<td><p>A one or more semantic properties to add to an existing type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="types.html#qiime2.plugin.Visualization" title="qiime2.plugin.Visualization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Visualization</span></code></a></p></td>
+<td><p>The type of a QIIME 2 Visualization.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="types.html#qiime2.plugin.Bool" title="qiime2.plugin.Bool"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Bool</span></code></a></p></td>
+<td><p>A boolean value (<code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">False</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="types.html#qiime2.plugin.Str" title="qiime2.plugin.Str"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Str</span></code></a></p></td>
+<td><p>A string of Unicode characters (i.e. text).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="types.html#qiime2.plugin.Int" title="qiime2.plugin.Int"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Int</span></code></a></p></td>
+<td><p>An integer without any particular bounds.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="types.html#qiime2.plugin.Float" title="qiime2.plugin.Float"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Float</span></code></a></p></td>
+<td><p>A 64 bit floating point number.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="types.html#qiime2.plugin.Threads" title="qiime2.plugin.Threads"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Threads</span></code></a></p></td>
+<td><p>The number of logical threads to use (OS threads/CPUs/Cores).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="types.html#qiime2.plugin.Jobs" title="qiime2.plugin.Jobs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Jobs</span></code></a></p></td>
+<td><p>The number of jobs to submit as an integer that is greater than zero (exclusive).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="types.html#qiime2.plugin.Choices" title="qiime2.plugin.Choices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Choices</span></code></a></p></td>
+<td><p>A predicate which defines a set of allowable values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="types.html#qiime2.plugin.Range" title="qiime2.plugin.Range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Range</span></code></a></p></td>
+<td><p>A predicate which defines a contiguous range of allowable values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="types.html#qiime2.plugin.Start" title="qiime2.plugin.Start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Start</span></code></a></p></td>
+<td><p>Shorthand to generate a <a class="reference internal" href="types.html#qiime2.plugin.Range" title="qiime2.plugin.Range"><code class="xref py py-class docutils literal notranslate"><span class="pre">Range</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="types.html#qiime2.plugin.End" title="qiime2.plugin.End"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.End</span></code></a></p></td>
+<td><p>Shorthand to generate a <a class="reference internal" href="types.html#qiime2.plugin.Range" title="qiime2.plugin.Range"><code class="xref py py-class docutils literal notranslate"><span class="pre">Range</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="types.html#qiime2.plugin.Metadata" title="qiime2.plugin.Metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Metadata</span></code></a></p></td>
+<td><p>Tabular metadata where unique identifiers can be associated with columns.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="types.html#qiime2.plugin.MetadataColumn" title="qiime2.plugin.MetadataColumn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.MetadataColumn</span></code></a></p></td>
+<td><p>A column of a <a class="reference internal" href="../metadata-api.html#qiime2.Metadata" title="qiime2.Metadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="types.html#qiime2.plugin.Categorical" title="qiime2.plugin.Categorical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Categorical</span></code></a></p></td>
+<td><p>The categorical variant for <a class="reference internal" href="types.html#qiime2.plugin.MetadataColumn" title="qiime2.plugin.MetadataColumn"><code class="xref py py-data docutils literal notranslate"><span class="pre">MetadataColumn</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="types.html#qiime2.plugin.Numeric" title="qiime2.plugin.Numeric"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Numeric</span></code></a></p></td>
+<td><p>The Numeric variant for <a class="reference internal" href="types.html#qiime2.plugin.MetadataColumn" title="qiime2.plugin.MetadataColumn"><code class="xref py py-data docutils literal notranslate"><span class="pre">MetadataColumn</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="types.html#qiime2.plugin.Set" title="qiime2.plugin.Set"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Set</span></code></a></p></td>
+<td><p><strong>Deprecated</strong> - use List or Collection instead</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="types.html#qiime2.plugin.List" title="qiime2.plugin.List"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.List</span></code></a></p></td>
+<td><p>An alias for a <a class="reference internal" href="types.html#qiime2.plugin.Collection" title="qiime2.plugin.Collection"><code class="xref py py-data docutils literal notranslate"><span class="pre">Collection</span></code></a> with numeric auto-incrementing keys.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="types.html#qiime2.plugin.Collection" title="qiime2.plugin.Collection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Collection</span></code></a></p></td>
+<td><p>An ordered set of key-value pairs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="types.html#qiime2.plugin.TypeMap" title="qiime2.plugin.TypeMap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.TypeMap</span></code></a></p></td>
+<td><p>A table of input types which match to output types.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="types.html#qiime2.plugin.TypeMatch" title="qiime2.plugin.TypeMatch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.TypeMatch</span></code></a></p></td>
+<td><p>A trivial <a class="reference internal" href="types.html#qiime2.plugin.TypeMap" title="qiime2.plugin.TypeMap"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeMap</span></code></a> such that every entry maps to itself.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Citations</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="citations.html#qiime2.plugin.Citations" title="qiime2.plugin.Citations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.Citations</span></code></a></p></td>
+<td><p>A simple subclass of <a class="reference external" href="https://docs.python.org/3.9/library/collections.html#collections.OrderedDict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.OrderedDict</span></code></a> but iterates over values instead of keys by default.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="citations.html#qiime2.plugin.CitationRecord" title="qiime2.plugin.CitationRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.CitationRecord</span></code></a></p></td>
+<td><p>A <a class="reference external" href="https://docs.python.org/3.9/library/collections.html#collections.namedtuple" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">collections.namedtuple()</span></code></a> of bibtex entry type and entry fields.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Testing</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="testing.html#qiime2.plugin.testing.TestPluginBase" title="qiime2.plugin.testing.TestPluginBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.testing.TestPluginBase</span></code></a></p></td>
+<td><p>Test harness for simplifying testing QIIME 2 plugins.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="testing.html#qiime2.plugin.testing.assert_no_nans_in_tables" title="qiime2.plugin.testing.assert_no_nans_in_tables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.testing.assert_no_nans_in_tables</span></code></a></p></td>
+<td><p>Checks for NaNs present in any of the tables in the indicated file then resets to the head of the file.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Utilities</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="utils.html#qiime2.util.duplicate" title="qiime2.util.duplicate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.util.duplicate</span></code></a></p></td>
+<td><p>Alternative to <a class="reference external" href="https://docs.python.org/3.9/library/shutil.html#shutil.copyfile" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">shutil.copyfile()</span></code></a> this will use <a class="reference external" href="https://docs.python.org/3.9/library/os.html#os.link" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.link()</span></code></a> when possible.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="utils.html#qiime2.util.redirected_stdio" title="qiime2.util.redirected_stdio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.util.redirected_stdio</span></code></a></p></td>
+<td><p>A context manager to redirect stdio to a new file (if provided).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="utils.html#qiime2.plugin.util.transform" title="qiime2.plugin.util.transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.util.transform</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="utils.html#qiime2.plugin.util.get_available_cores" title="qiime2.plugin.util.get_available_cores"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.plugin.util.get_available_cores</span></code></a></p></td>
+<td><p>Finds the number of currently available (logical) cores.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="additional-objects">
+<h2>Additional Objects<a class="headerlink" href="#additional-objects" title="Link to this heading">#</a></h2>
+<p>These objects are not part of the <code class="docutils literal notranslate"><span class="pre">qiime2.plugin</span></code> module, but are commonly used
+by plugins (and users).</p>
+<p class="rubric">Metadata</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../metadata-api.html#qiime2.Metadata" title="qiime2.Metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code></a></p></td>
+<td><p>Store metadata associated with identifiers in a study.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../metadata-api.html#qiime2.MetadataColumn" title="qiime2.MetadataColumn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.MetadataColumn</span></code></a></p></td>
+<td><p>Abstract base class representing a single metadata column.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../metadata-api.html#qiime2.NumericMetadataColumn" title="qiime2.NumericMetadataColumn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.NumericMetadataColumn</span></code></a></p></td>
+<td><p>A single metadata column containing numeric data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../metadata-api.html#qiime2.CategoricalMetadataColumn" title="qiime2.CategoricalMetadataColumn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qiime2.CategoricalMetadataColumn</span></code></a></p></td>
+<td><p>A single metadata column containing categorical data.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Pipeline Context Object (ctx)</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="context.html#qiime2.sdk.Context.get_action" title="qiime2.sdk.Context.get_action"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Context.get_action</span></code></a>(plugin, action)</p></td>
+<td><p>Return a function matching the callable API of an action.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="context.html#qiime2.sdk.Context.make_artifact" title="qiime2.sdk.Context.make_artifact"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Context.make_artifact</span></code></a>(type, view[, view_type])</p></td>
+<td><p>Return a new artifact from a given view.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Usage Examples</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.init_artifact" title="qiime2.sdk.usage.Usage.init_artifact"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.init_artifact</span></code></a></p></td>
+<td><p>Communicate that an artifact will be needed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.init_artifact_from_url" title="qiime2.sdk.usage.Usage.init_artifact_from_url"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.init_artifact_from_url</span></code></a></p></td>
+<td><p>Obtain an artifact from a url.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.init_artifact_collection" title="qiime2.sdk.usage.Usage.init_artifact_collection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.init_artifact_collection</span></code></a></p></td>
+<td><p>Communicate that a result collection containing artifacts will be needed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.init_metadata" title="qiime2.sdk.usage.Usage.init_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.init_metadata</span></code></a></p></td>
+<td><p>Communicate that metadata will be needed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.init_metadata_from_url" title="qiime2.sdk.usage.Usage.init_metadata_from_url"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.init_metadata_from_url</span></code></a></p></td>
+<td><p>Obtain metadata from a url.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.init_format" title="qiime2.sdk.usage.Usage.init_format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.init_format</span></code></a></p></td>
+<td><p>Communicate that a file/directory format will be needed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.import_from_format" title="qiime2.sdk.usage.Usage.import_from_format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.import_from_format</span></code></a></p></td>
+<td><p>Communicate that an import should be done.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.construct_artifact_collection" title="qiime2.sdk.usage.Usage.construct_artifact_collection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.construct_artifact_collection</span></code></a></p></td>
+<td><p>Return a UsageVariable of type artifact_collection given a list or dict of its members.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.get_artifact_collection_member" title="qiime2.sdk.usage.Usage.get_artifact_collection_member"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.get_artifact_collection_member</span></code></a></p></td>
+<td><p>Accesses and returns a member of a ResultCollection as a UsageVariable.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.get_metadata_column" title="qiime2.sdk.usage.Usage.get_metadata_column"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.get_metadata_column</span></code></a></p></td>
+<td><p>Communicate that a column should be retrieved.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.view_as_metadata" title="qiime2.sdk.usage.Usage.view_as_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.view_as_metadata</span></code></a></p></td>
+<td><p>Communicate that an artifact should be views as metadata.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.merge_metadata" title="qiime2.sdk.usage.Usage.merge_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.merge_metadata</span></code></a></p></td>
+<td><p>Communicate that these metadata should be merged.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.comment" title="qiime2.sdk.usage.Usage.comment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.comment</span></code></a></p></td>
+<td><p>Communicate that a comment should be made.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.help" title="qiime2.sdk.usage.Usage.help"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.help</span></code></a></p></td>
+<td><p>Communicate that help text should be displayed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.peek" title="qiime2.sdk.usage.Usage.peek"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.peek</span></code></a></p></td>
+<td><p>Communicate that an artifact should be peeked at.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.action" title="qiime2.sdk.usage.Usage.action"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.action</span></code></a></p></td>
+<td><p>Communicate that some action should be performed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.UsageAction" title="qiime2.sdk.usage.Usage.UsageAction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.UsageAction</span></code></a></p></td>
+<td><p>An object which represents a deferred lookup for a QIIME 2 action.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.UsageInputs" title="qiime2.sdk.usage.Usage.UsageInputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.UsageInputs</span></code></a></p></td>
+<td><p>A dict-like mapping of parameters to arguments for invoking an action.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.Usage.UsageOutputNames" title="qiime2.sdk.usage.Usage.UsageOutputNames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Usage.UsageOutputNames</span></code></a></p></td>
+<td><p>A dict-like mapping of action outputs to desired names.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.UsageOutputs" title="qiime2.sdk.usage.UsageOutputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UsageOutputs</span></code></a></p></td>
+<td><p>A vanity class over <a class="reference internal" href="../../../interfaces/references/api.html#qiime2.sdk.Results" title="qiime2.sdk.Results"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiime2.sdk.Results</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.UsageVariable" title="qiime2.sdk.usage.UsageVariable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UsageVariable</span></code></a></p></td>
+<td><p>A variable which represents some QIIME 2 generate-able value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.UsageVariable.assert_has_line_matching" title="qiime2.sdk.usage.UsageVariable.assert_has_line_matching"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UsageVariable.assert_has_line_matching</span></code></a></p></td>
+<td><p>Communicate that the result of this variable should match a regex.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="usage.html#qiime2.sdk.usage.UsageVariable.assert_output_type" title="qiime2.sdk.usage.UsageVariable.assert_output_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UsageVariable.assert_output_type</span></code></a></p></td>
+<td><p>Communicate that this variable should have a given semantic type.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./plugins/references/api"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../antipatterns.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Plugin development anti-patterns</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="plugin.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Plugin &amp; Registration</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#individual-topics">Individual Topics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plugin-api-list">Plugin API List</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-objects">Additional Objects</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Greg Caporaso and Evan Bolyen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

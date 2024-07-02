@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>qiime2.Metadata API &#8212; Developing with QIIME 2</title>
+    <title>User Metadata API &#8212; Developing with QIIME 2</title>
   
   
   
@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e63dcbb0" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=d05ccb96" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Interface Development" href="../../interfaces/intro.html" />
-    <link rel="prev" title="Plugin developer API" href="api.html" />
+    <link rel="prev" title="Usage Examples" href="api/usage.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -215,8 +215,18 @@
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">References</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="antipatterns.html">Plugin development anti-patterns</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html">Plugin developer API</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> API</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="api/intro.html">Plugin Development API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/plugin.html">Plugin &amp; Registration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/formats.html">Formats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/types.html">Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/citations.html">Citations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/testing.html">Testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/utils.html">Utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/context.html">Pipeline Context Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/usage.html">Usage Examples</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">User Metadata API</a></li>
 </ul>
 </details></li>
 </ul>
@@ -416,7 +426,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>qiime2.Metadata API</h1>
+    <h1>User Metadata API</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -427,17 +437,40 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-qiime-metadata-class">The <code class="docutils literal notranslate"><span class="pre">qiime.Metadata</span></code> class</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.metadata.Metadata"><code class="docutils literal notranslate"><span class="pre">Metadata()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata"><code class="docutils literal notranslate"><span class="pre">Metadata</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.load"><code class="docutils literal notranslate"><span class="pre">Metadata.load()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.columns"><code class="docutils literal notranslate"><span class="pre">Metadata.columns</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.column_count"><code class="docutils literal notranslate"><span class="pre">Metadata.column_count</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.to_dataframe"><code class="docutils literal notranslate"><span class="pre">Metadata.to_dataframe()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.get_column"><code class="docutils literal notranslate"><span class="pre">Metadata.get_column()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.get_ids"><code class="docutils literal notranslate"><span class="pre">Metadata.get_ids()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.merge"><code class="docutils literal notranslate"><span class="pre">Metadata.merge()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.filter_ids"><code class="docutils literal notranslate"><span class="pre">Metadata.filter_ids()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.filter_columns"><code class="docutils literal notranslate"><span class="pre">Metadata.filter_columns()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-columns">Metadata columns</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.metadata.MetadataColumn"><code class="docutils literal notranslate"><span class="pre">MetadataColumn()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.metadata.NumericMetadataColumn"><code class="docutils literal notranslate"><span class="pre">NumericMetadataColumn()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.metadata.CategoricalMetadataColumn"><code class="docutils literal notranslate"><span class="pre">CategoricalMetadataColumn()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn"><code class="docutils literal notranslate"><span class="pre">MetadataColumn</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.name"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.name</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.missing_scheme"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.missing_scheme</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.to_series"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.to_series()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.to_dataframe"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.to_dataframe()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.get_missing"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.get_missing()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.get_value"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.get_value()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.has_missing_values"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.has_missing_values()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.drop_missing_values"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.drop_missing_values()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.get_ids"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.get_ids()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.filter_ids"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.filter_ids()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.NumericMetadataColumn"><code class="docutils literal notranslate"><span class="pre">NumericMetadataColumn</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.CategoricalMetadataColumn"><code class="docutils literal notranslate"><span class="pre">CategoricalMetadataColumn</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.metadata.MetadataFileError"><code class="docutils literal notranslate"><span class="pre">MetadataFileError()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.metadata.MetadataFileError"><code class="docutils literal notranslate"><span class="pre">MetadataFileError</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -451,15 +484,15 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="qiime2-metadata-api">
-<span id="metadata-api"></span><h1><code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> API<a class="headerlink" href="#qiime2-metadata-api" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="user-metadata-api">
+<span id="metadata-api"></span><h1>User Metadata API<a class="headerlink" href="#user-metadata-api" title="Link to this heading">#</a></h1>
 <p>This documents the <code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> API.
 This may be used by QIIME 2 plugin developers or users of the QIIME 2 Python 3 API.</p>
 <section id="the-qiime-metadata-class">
 <h2>The <code class="docutils literal notranslate"><span class="pre">qiime.Metadata</span></code> class<a class="headerlink" href="#the-qiime-metadata-class" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="qiime2.metadata.Metadata">
-<span class="sig-prename descclassname"><span class="pre">qiime2.metadata.</span></span><span class="sig-name descname"><span class="pre">Metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_missing_schemes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/dev/qiime2/metadata/metadata.py#L264"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.metadata.Metadata" title="Link to this definition">#</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="qiime2.Metadata">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.</span></span><span class="sig-name descname"><span class="pre">Metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_missing_schemes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L264"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata" title="Link to this definition">#</a></dt>
 <dd><p>Store metadata associated with identifiers in a study.</p>
 <p>Metadata is tabular in nature, mapping study identifiers (e.g. sample or
 feature IDs) to columns of metadata associated with each ID.</p>
@@ -535,14 +568,263 @@ or in <cite>column_missing_schemes</cite>.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="qiime2.Metadata.load">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_missing_schemes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L352"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.load" title="Link to this definition">#</a></dt>
+<dd><p>Load a TSV metadata file.</p>
+<p>The TSV metadata file format is described at <a class="reference external" href="https://docs.qiime2.org">https://docs.qiime2.org</a> in
+the Metadata Tutorial.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to TSV metadata file to be loaded.</p></li>
+<li><p><strong>column_types</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a><em>, </em><em>optional</em>) – Override metadata column types specified or inferred in the file.
+This is a dict mapping column names (str) to column types (str).
+Valid column types are ‘categorical’ and ‘numeric’. Column names
+may be omitted from this dict to use the column types read from the
+file.</p></li>
+<li><p><strong>column_missing_schemes</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a><em>, </em><em>optional</em>) – Override the metadata column handling for missing values described
+in the file. This is a dict mapping column names (str) to
+missing-value schemes (str).  Valid values are ‘blank’,
+‘no-missing’, and ‘INSDC:missing’. Column names may be omitted.</p></li>
+<li><p><strong>default_missing_scheme</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – The missing scheme to use when none has been provided in the file
+or in <cite>column_missing_schemes</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Metadata object loaded from <cite>filepath</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiime2.Metadata" title="qiime2.Metadata">Metadata</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#qiime2.metadata.MetadataFileError" title="qiime2.metadata.MetadataFileError"><strong>MetadataFileError</strong></a> – If the metadata file is invalid in any way (e.g. doesn’t meet the
+    file format’s requirements).</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="qiime2.Metadata.columns">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">columns</span></span><a class="headerlink" href="#qiime2.Metadata.columns" title="Link to this definition">#</a></dt>
+<dd><p>Ordered mapping of column names to ColumnProperties.</p>
+<p>The mapping that is returned is read-only. This property is also
+read-only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Ordered mapping of column names to ColumnProperties.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.9/library/types.html#types.MappingProxyType" title="(in Python v3.9)">types.MappingProxyType</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="qiime2.Metadata.column_count">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">column_count</span></span><a class="headerlink" href="#qiime2.Metadata.column_count" title="Link to this definition">#</a></dt>
+<dd><p>Number of metadata columns.</p>
+<p>This property is read-only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Number of metadata columns.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.9/library/functions.html#int" title="(in Python v3.9)">int</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Zero metadata columns are allowed.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">id_count</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qiime2.Metadata.to_dataframe">
+<span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encode_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L582"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.to_dataframe" title="Link to this definition">#</a></dt>
+<dd><p>Create a pandas dataframe from the metadata.</p>
+<p>The dataframe’s index name (<code class="docutils literal notranslate"><span class="pre">Index.name</span></code>) will match this metadata
+object’s <code class="docutils literal notranslate"><span class="pre">id_header</span></code>, and the index will contain this metadata
+object’s IDs. The dataframe’s column names will match the column names
+in this metadata. Categorical columns will be stored as
+<code class="docutils literal notranslate"><span class="pre">dtype=object</span></code> (containing strings), and numeric columns will be
+stored as <code class="docutils literal notranslate"><span class="pre">dtype=float</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>encode_missing</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to convert missing values (NaNs) back into their original
+vocabulary (strings) if a missing scheme was used.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dataframe constructed from the metadata.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qiime2.Metadata.get_column">
+<span class="sig-name descname"><span class="pre">get_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L617"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.get_column" title="Link to this definition">#</a></dt>
+<dd><p>Retrieve metadata column based on column name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the metadata column to retrieve.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Requested metadata column (<code class="docutils literal notranslate"><span class="pre">CategoricalMetadataColumn</span></code> or
+<code class="docutils literal notranslate"><span class="pre">NumericMetadataColumn</span></code>).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiime2.MetadataColumn" title="qiime2.MetadataColumn">MetadataColumn</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#qiime2.Metadata.get_ids" title="qiime2.Metadata.get_ids"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_ids</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qiime2.Metadata.get_ids">
+<span class="sig-name descname"><span class="pre">get_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">where</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L646"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.get_ids" title="Link to this definition">#</a></dt>
+<dd><p>Retrieve IDs matching search criteria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>where</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – SQLite WHERE clause specifying criteria IDs must meet to be
+included in the results. All IDs are included by default.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>IDs matching search criteria specified in <cite>where</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#set" title="(in Python v3.9)">set</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ids</span></code>, <a class="reference internal" href="#qiime2.Metadata.filter_ids" title="qiime2.Metadata.filter_ids"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_ids</span></code></a>, <a class="reference internal" href="#qiime2.Metadata.get_column" title="qiime2.Metadata.get_column"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_column</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>The ID header (<code class="docutils literal notranslate"><span class="pre">Metadata.id_header</span></code>) may be used in the <cite>where</cite>
+clause to query the table’s ID column.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qiime2.Metadata.merge">
+<span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">others</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L723"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.merge" title="Link to this definition">#</a></dt>
+<dd><p>Merge this <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> object with other <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> objects.</p>
+<p>Returns a new <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> object containing the merged contents of
+this <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> object and <cite>others</cite>. The merge is not in-place and
+will always return a <strong>new</strong> merged <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> object.</p>
+<p>The merge will include only those IDs that are shared across <strong>all</strong>
+<code class="docutils literal notranslate"><span class="pre">Metadata</span></code> objects being merged (i.e. the merge is an <em>inner join</em>).</p>
+<p>Each metadata column being merged must have a unique name; merging
+metadata with overlapping column names will result in an error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>others</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#tuple" title="(in Python v3.9)"><em>tuple</em></a>) – One or more <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> objects to merge with this <code class="docutils literal notranslate"><span class="pre">Metadata</span></code>
+object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>New object containing merged metadata. The merged IDs will be in
+the same relative order as the IDs in this <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> object
+after performing the inner join. The merged column order will match
+the column order of <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> objects being merged from left to
+right.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiime2.Metadata" title="qiime2.Metadata">Metadata</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.9/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If zero <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> objects are provided in <cite>others</cite> (there is
+    nothing to merge in this case).</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The merged <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> object will always have its <code class="docutils literal notranslate"><span class="pre">id_header</span></code>
+property set to <code class="docutils literal notranslate"><span class="pre">'id'</span></code>, regardless of the <code class="docutils literal notranslate"><span class="pre">id_header</span></code> values on the
+<code class="docutils literal notranslate"><span class="pre">Metadata</span></code> objects being merged.</p>
+<p>The merged <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> object tracks all source artifacts that it was
+built from to preserve provenance (i.e. the <code class="docutils literal notranslate"><span class="pre">.artifacts</span></code> property
+on all <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> objects is merged).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qiime2.Metadata.filter_ids">
+<span class="sig-name descname"><span class="pre">filter_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ids_to_keep</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L804"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.filter_ids" title="Link to this definition">#</a></dt>
+<dd><p>Filter metadata by IDs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ids_to_keep</strong> (<em>iterable</em><em> of </em><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – IDs that should be retained in the filtered <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> object. If
+any IDs in <cite>ids_to_keep</cite> are not contained in this <code class="docutils literal notranslate"><span class="pre">Metadata</span></code>
+object, a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> will be raised. The filtered <code class="docutils literal notranslate"><span class="pre">Metadata</span></code>
+object will retain the same relative ordering of IDs in this
+<code class="docutils literal notranslate"><span class="pre">Metadata</span></code> object. Thus, the ordering of IDs in <cite>ids_to_keep</cite>
+does not determine the ordering of IDs in the filtered <code class="docutils literal notranslate"><span class="pre">Metadata</span></code>
+object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The metadata filtered by IDs.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiime2.Metadata" title="qiime2.Metadata">Metadata</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#qiime2.Metadata.get_ids" title="qiime2.Metadata.get_ids"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_ids</span></code></a>, <a class="reference internal" href="#qiime2.Metadata.filter_columns" title="qiime2.Metadata.filter_columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_columns</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qiime2.Metadata.filter_columns">
+<span class="sig-name descname"><span class="pre">filter_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_all_unique</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_zero_variance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_all_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L835"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.filter_columns" title="Link to this definition">#</a></dt>
+<dd><p>Filter metadata by columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column_type</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – If supplied, will retain only columns of this type. The currently
+supported column types are ‘numeric’ and ‘categorical’.</p></li>
+<li><p><strong>drop_all_unique</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, columns that contain a unique value for every ID will
+be dropped. Missing data (<code class="docutils literal notranslate"><span class="pre">np.nan</span></code>) are ignored when determining
+unique values. If a column consists solely of missing data, it will
+be dropped.</p></li>
+<li><p><strong>drop_zero_variance</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, columns that contain the same value for every ID will
+be dropped. Missing data (<code class="docutils literal notranslate"><span class="pre">np.nan</span></code>) are ignored when determining
+variance. If a column consists solely of missing data, it will be
+dropped.</p></li>
+<li><p><strong>drop_all_missing</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, columns that have a missing value (<code class="docutils literal notranslate"><span class="pre">np.nan</span></code>) for
+every ID will be dropped.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The metadata filtered by columns.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiime2.Metadata" title="qiime2.Metadata">Metadata</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#qiime2.Metadata.filter_ids" title="qiime2.Metadata.filter_ids"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_ids</span></code></a></p>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 </section>
 <section id="metadata-columns">
 <h2>Metadata columns<a class="headerlink" href="#metadata-columns" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="qiime2.metadata.MetadataColumn">
-<span class="sig-prename descclassname"><span class="pre">qiime2.metadata.</span></span><span class="sig-name descname"><span class="pre">MetadataColumn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/dev/qiime2/metadata/metadata.py#L909"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.metadata.MetadataColumn" title="Link to this definition">#</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="qiime2.MetadataColumn">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.</span></span><span class="sig-name descname"><span class="pre">MetadataColumn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L909"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn" title="Link to this definition">#</a></dt>
 <dd><p>Abstract base class representing a single metadata column.</p>
 <p>Concrete subclasses represent specific metadata column types, e.g.
 <code class="docutils literal notranslate"><span class="pre">CategoricalMetadataColumn</span></code> and <code class="docutils literal notranslate"><span class="pre">NumericMetadataColumn</span></code>.</p>
@@ -562,20 +844,213 @@ to NaN. The default treatment is to take no action.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="qiime2.MetadataColumn.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#qiime2.MetadataColumn.name" title="Link to this definition">#</a></dt>
+<dd><p>Metadata column name.</p>
+<p>This property is read-only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Metadata column name.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="qiime2.metadata.NumericMetadataColumn">
-<span class="sig-prename descclassname"><span class="pre">qiime2.metadata.</span></span><span class="sig-name descname"><span class="pre">NumericMetadataColumn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/dev/qiime2/metadata/metadata.py#L1295"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.metadata.NumericMetadataColumn" title="Link to this definition">#</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="qiime2.MetadataColumn.missing_scheme">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">missing_scheme</span></span><a class="headerlink" href="#qiime2.MetadataColumn.missing_scheme" title="Link to this definition">#</a></dt>
+<dd><p>The vocabulary used to encode missing values</p>
+<p>This property is read-only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>“blank”, “no-missing”, or “INSDC:missing”</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qiime2.MetadataColumn.to_series">
+<span class="sig-name descname"><span class="pre">to_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encode_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1072"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.to_series" title="Link to this definition">#</a></dt>
+<dd><p>Create a pandas series from the metadata column.</p>
+<p>The series index name (<code class="docutils literal notranslate"><span class="pre">Index.name</span></code>) will match this metadata
+column’s <code class="docutils literal notranslate"><span class="pre">id_header</span></code>, and the index will contain this metadata
+column’s IDs. The series name will match this metadata column’s name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>encode_missing</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to convert missing values (NaNs) back into their original
+vocabulary (strings) if a missing scheme was used.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Series constructed from the metadata column.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.Series</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#qiime2.MetadataColumn.to_dataframe" title="qiime2.MetadataColumn.to_dataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dataframe</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qiime2.MetadataColumn.to_dataframe">
+<span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encode_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1103"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.to_dataframe" title="Link to this definition">#</a></dt>
+<dd><p>Create a pandas dataframe from the metadata column.</p>
+<p>The dataframe will contain exactly one column. The dataframe’s index
+name (<code class="docutils literal notranslate"><span class="pre">Index.name</span></code>) will match this metadata column’s <code class="docutils literal notranslate"><span class="pre">id_header</span></code>,
+and the index will contain this metadata column’s IDs. The dataframe’s
+column name will match this metadata column’s name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>encode_missing</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to convert missing values (NaNs) back into their original
+vocabulary (strings) if a missing scheme was used.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dataframe constructed from the metadata column.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#qiime2.MetadataColumn.to_series" title="qiime2.MetadataColumn.to_series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_series</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qiime2.MetadataColumn.get_missing">
+<span class="sig-name descname"><span class="pre">get_missing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1129"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.get_missing" title="Link to this definition">#</a></dt>
+<dd><p>Return a series containing only missing values (with an index).</p>
+<p>If the column was constructed with a missing scheme, then the values
+of the series will be the original terms instead of NaN.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qiime2.MetadataColumn.get_value">
+<span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1138"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.get_value" title="Link to this definition">#</a></dt>
+<dd><p>Retrieve metadata column value associated with an ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – ID corresponding to the metadata column value to retrieve.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Value associated with the provided <cite>id</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.9/library/functions.html#object" title="(in Python v3.9)">object</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qiime2.MetadataColumn.has_missing_values">
+<span class="sig-name descname"><span class="pre">has_missing_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1156"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.has_missing_values" title="Link to this definition">#</a></dt>
+<dd><p>Determine if the metadata column has one or more missing values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the metadata column has one or more missing values
+(<code class="docutils literal notranslate"><span class="pre">np.nan</span></code>), <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#qiime2.MetadataColumn.drop_missing_values" title="qiime2.MetadataColumn.drop_missing_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drop_missing_values</span></code></a>, <a class="reference internal" href="#qiime2.MetadataColumn.get_ids" title="qiime2.MetadataColumn.get_ids"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_ids</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qiime2.MetadataColumn.drop_missing_values">
+<span class="sig-name descname"><span class="pre">drop_missing_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1173"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.drop_missing_values" title="Link to this definition">#</a></dt>
+<dd><p>Filter out missing values from the metadata column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Metadata column with missing values removed.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#qiime2.MetadataColumn" title="qiime2.MetadataColumn">MetadataColumn</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#qiime2.MetadataColumn.has_missing_values" title="qiime2.MetadataColumn.has_missing_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_missing_values</span></code></a>, <a class="reference internal" href="#qiime2.MetadataColumn.get_ids" title="qiime2.MetadataColumn.get_ids"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_ids</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qiime2.MetadataColumn.get_ids">
+<span class="sig-name descname"><span class="pre">get_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">where_values_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1191"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.get_ids" title="Link to this definition">#</a></dt>
+<dd><p>Retrieve IDs matching search criteria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>where_values_missing</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, only return IDs that are associated with missing
+values (<code class="docutils literal notranslate"><span class="pre">np.nan</span></code>). If <code class="docutils literal notranslate"><span class="pre">False</span></code> (the default), return all IDs in
+the metadata column.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>IDs matching search criteria.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#set" title="(in Python v3.9)">set</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ids</span></code>, <a class="reference internal" href="#qiime2.MetadataColumn.filter_ids" title="qiime2.MetadataColumn.filter_ids"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_ids</span></code></a>, <a class="reference internal" href="#qiime2.MetadataColumn.has_missing_values" title="qiime2.MetadataColumn.has_missing_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_missing_values</span></code></a>, <a class="reference internal" href="#qiime2.MetadataColumn.drop_missing_values" title="qiime2.MetadataColumn.drop_missing_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drop_missing_values</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qiime2.MetadataColumn.filter_ids">
+<span class="sig-name descname"><span class="pre">filter_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ids_to_keep</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1220"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.filter_ids" title="Link to this definition">#</a></dt>
+<dd><p>Filter metadata column by IDs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ids_to_keep</strong> (<em>iterable</em><em> of </em><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – IDs that should be retained in the filtered <code class="docutils literal notranslate"><span class="pre">MetadataColumn</span></code>
+object. If any IDs in <cite>ids_to_keep</cite> are not contained in this
+<code class="docutils literal notranslate"><span class="pre">MetadataColumn</span></code> object, a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> will be raised. The
+filtered <code class="docutils literal notranslate"><span class="pre">MetadataColumn</span></code> object will retain the same relative
+ordering of IDs in this <code class="docutils literal notranslate"><span class="pre">MetadataColumn</span></code> object. Thus, the
+ordering of IDs in <cite>ids_to_keep</cite> does not determine the ordering of
+IDs in the filtered <code class="docutils literal notranslate"><span class="pre">MetadataColumn</span></code> object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The metadata column filtered by IDs.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#qiime2.MetadataColumn" title="qiime2.MetadataColumn">MetadataColumn</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#qiime2.MetadataColumn.get_ids" title="qiime2.MetadataColumn.get_ids"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_ids</span></code></a></p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qiime2.NumericMetadataColumn">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.</span></span><span class="sig-name descname"><span class="pre">NumericMetadataColumn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1295"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.NumericMetadataColumn" title="Link to this definition">#</a></dt>
 <dd><p>A single metadata column containing numeric data.</p>
 <p>See the <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> class docstring for details about <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> and
 <code class="docutils literal notranslate"><span class="pre">MetadataColumn</span></code> objects, including a description of column types and
 supported data formats.</p>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="qiime2.metadata.CategoricalMetadataColumn">
-<span class="sig-prename descclassname"><span class="pre">qiime2.metadata.</span></span><span class="sig-name descname"><span class="pre">CategoricalMetadataColumn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/dev/qiime2/metadata/metadata.py#L1251"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.metadata.CategoricalMetadataColumn" title="Link to this definition">#</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="qiime2.CategoricalMetadataColumn">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.</span></span><span class="sig-name descname"><span class="pre">CategoricalMetadataColumn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1251"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.CategoricalMetadataColumn" title="Link to this definition">#</a></dt>
 <dd><p>A single metadata column containing categorical data.</p>
 <p>See the <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> class docstring for details about <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> and
 <code class="docutils literal notranslate"><span class="pre">MetadataColumn</span></code> objects, including a description of column types and
@@ -585,11 +1060,10 @@ supported data formats.</p>
 </section>
 <section id="exceptions">
 <h2>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading">#</a></h2>
-<dl class="py function">
+<dl class="py class">
 <dt class="sig sig-object py" id="qiime2.metadata.MetadataFileError">
-<span class="sig-prename descclassname"><span class="pre">qiime2.metadata.</span></span><span class="sig-name descname"><span class="pre">MetadataFileError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/dev/qiime2/metadata/io.py#L23"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.metadata.MetadataFileError" title="Link to this definition">#</a></dt>
-<dd><p>Common base class for all non-exit exceptions.</p>
-</dd></dl>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.metadata.</span></span><span class="sig-name descname"><span class="pre">MetadataFileError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/io.py#L23"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.metadata.MetadataFileError" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
 
 </section>
 </section>
@@ -625,12 +1099,12 @@ supported data formats.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="api.html"
+       href="api/usage.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Plugin developer API</p>
+        <p class="prev-next-title">Usage Examples</p>
       </div>
     </a>
     <a class="right-next"
@@ -659,17 +1133,40 @@ supported data formats.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-qiime-metadata-class">The <code class="docutils literal notranslate"><span class="pre">qiime.Metadata</span></code> class</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.metadata.Metadata"><code class="docutils literal notranslate"><span class="pre">Metadata()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata"><code class="docutils literal notranslate"><span class="pre">Metadata</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.load"><code class="docutils literal notranslate"><span class="pre">Metadata.load()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.columns"><code class="docutils literal notranslate"><span class="pre">Metadata.columns</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.column_count"><code class="docutils literal notranslate"><span class="pre">Metadata.column_count</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.to_dataframe"><code class="docutils literal notranslate"><span class="pre">Metadata.to_dataframe()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.get_column"><code class="docutils literal notranslate"><span class="pre">Metadata.get_column()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.get_ids"><code class="docutils literal notranslate"><span class="pre">Metadata.get_ids()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.merge"><code class="docutils literal notranslate"><span class="pre">Metadata.merge()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.filter_ids"><code class="docutils literal notranslate"><span class="pre">Metadata.filter_ids()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.Metadata.filter_columns"><code class="docutils literal notranslate"><span class="pre">Metadata.filter_columns()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-columns">Metadata columns</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.metadata.MetadataColumn"><code class="docutils literal notranslate"><span class="pre">MetadataColumn()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.metadata.NumericMetadataColumn"><code class="docutils literal notranslate"><span class="pre">NumericMetadataColumn()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.metadata.CategoricalMetadataColumn"><code class="docutils literal notranslate"><span class="pre">CategoricalMetadataColumn()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn"><code class="docutils literal notranslate"><span class="pre">MetadataColumn</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.name"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.name</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.missing_scheme"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.missing_scheme</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.to_series"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.to_series()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.to_dataframe"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.to_dataframe()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.get_missing"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.get_missing()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.get_value"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.get_value()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.has_missing_values"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.has_missing_values()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.drop_missing_values"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.drop_missing_values()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.get_ids"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.get_ids()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.MetadataColumn.filter_ids"><code class="docutils literal notranslate"><span class="pre">MetadataColumn.filter_ids()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.NumericMetadataColumn"><code class="docutils literal notranslate"><span class="pre">NumericMetadataColumn</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.CategoricalMetadataColumn"><code class="docutils literal notranslate"><span class="pre">CategoricalMetadataColumn</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exceptions">Exceptions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.metadata.MetadataFileError"><code class="docutils literal notranslate"><span class="pre">MetadataFileError()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime2.metadata.MetadataFileError"><code class="docutils literal notranslate"><span class="pre">MetadataFileError</span></code></a></li>
 </ul>
 </li>
 </ul>

@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e63dcbb0" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=d05ccb96" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -214,8 +214,18 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="plugins/references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="plugins/references/antipatterns.html">Plugin development anti-patterns</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugins/references/api.html">Plugin developer API</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugins/references/metadata-api.html"><code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> API</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="plugins/references/api/intro.html">Plugin Development API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="plugins/references/api/plugin.html">Plugin &amp; Registration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plugins/references/api/formats.html">Formats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plugins/references/api/types.html">Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plugins/references/api/citations.html">Citations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plugins/references/api/testing.html">Testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plugins/references/api/utils.html">Utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plugins/references/api/context.html">Pipeline Context Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plugins/references/api/usage.html">Usage Examples</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="plugins/references/metadata-api.html">User Metadata API</a></li>
 </ul>
 </details></li>
 </ul>
@@ -383,13 +393,15 @@ document.write(`
 <h1 id="index">Index</h1>
 
 <div class="genindex-jumpbox">
- <a href="#A"><strong>A</strong></a>
+ <a href="#_"><strong>_</strong></a>
+ | <a href="#A"><strong>A</strong></a>
  | <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
  | <a href="#I"><strong>I</strong></a>
  | <a href="#J"><strong>J</strong></a>
  | <a href="#L"><strong>L</strong></a>
@@ -405,12 +417,22 @@ document.write(`
  | <a href="#V"><strong>V</strong></a>
  
 </div>
+<h2 id="_">_</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="plugins/references/api/citations.html#qiime2.plugin.Citations.__iter__">__iter__() (qiime2.plugin.Citations method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="back-matter/glossary.html#term-Action"><strong>Action</strong></a>
 </li>
       <li><a href="interfaces/references/api.html#qiime2.sdk.Action">Action() (in module qiime2.sdk)</a>
+</li>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.action">action() (qiime2.sdk.usage.Usage method)</a>
 </li>
       <li><a href="back-matter/glossary.html#term-Archive"><strong>Archive</strong></a>
 </li>
@@ -424,11 +446,15 @@ document.write(`
 </li>
       <li><a href="interfaces/references/api.html#qiime2.sdk.Artifact">Artifact() (in module qiime2.sdk)</a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.testing.assert_no_nans_in_tables">assert_no_nans_in_tables() (in module qiime2.plugin.testing)</a>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.UsageVariable.assert_has_line_matching">assert_has_line_matching() (qiime2.sdk.usage.UsageVariable method)</a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.testing.TestPluginBase.assertRegisteredSemanticType">assertRegisteredSemanticType() (qiime2.plugin.testing.TestPluginBase method)</a>
+      <li><a href="plugins/references/api/testing.html#qiime2.plugin.testing.assert_no_nans_in_tables">assert_no_nans_in_tables() (in module qiime2.plugin.testing)</a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.testing.TestPluginBase.assertSemanticTypeRegisteredToFormat">assertSemanticTypeRegisteredToFormat() (qiime2.plugin.testing.TestPluginBase method)</a>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.UsageVariable.assert_output_type">assert_output_type() (qiime2.sdk.usage.UsageVariable method)</a>
+</li>
+      <li><a href="plugins/references/api/testing.html#qiime2.plugin.testing.TestPluginBase.assertRegisteredSemanticType">assertRegisteredSemanticType() (qiime2.plugin.testing.TestPluginBase method)</a>
+</li>
+      <li><a href="plugins/references/api/testing.html#qiime2.plugin.testing.TestPluginBase.assertSemanticTypeRegisteredToFormat">assertSemanticTypeRegisteredToFormat() (qiime2.plugin.testing.TestPluginBase method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -436,11 +462,11 @@ document.write(`
 <h2 id="B">B</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/api.html#qiime2.plugin.BinaryFileFormat">BinaryFileFormat() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/formats.html#qiime2.plugin.BinaryFileFormat">BinaryFileFormat (class in qiime2.plugin)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/api.html#qiime2.plugin.Bool">Bool() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.Bool">Bool (in module qiime2.plugin)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -448,27 +474,29 @@ document.write(`
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/api.html#qiime2.plugin.Categorical">Categorical() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.Categorical">Categorical (in module qiime2.plugin)</a>
 </li>
-      <li><a href="plugins/references/metadata-api.html#qiime2.metadata.CategoricalMetadataColumn">CategoricalMetadataColumn() (in module qiime2.metadata)</a>
+      <li><a href="plugins/references/metadata-api.html#qiime2.CategoricalMetadataColumn">CategoricalMetadataColumn (class in qiime2)</a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.Choices">Choices() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.Choices">Choices (class in qiime2.plugin)</a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.CitationRecord">CitationRecord() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/citations.html#qiime2.plugin.CitationRecord">CitationRecord (class in qiime2.plugin)</a>
+</li>
+      <li><a href="plugins/references/api/citations.html#qiime2.plugin.Citations">Citations (class in qiime2.plugin)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/api.html#qiime2.plugin.Citations">Citations() (in module qiime2.plugin)</a>
-
-      <ul>
-        <li><a href="interfaces/references/api.html#qiime2.sdk.Citations">(in module qiime2.sdk)</a>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.Collection">Collection (in module qiime2.plugin)</a>
 </li>
-      </ul></li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.Collection">Collection() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/metadata-api.html#qiime2.Metadata.column_count">column_count (qiime2.Metadata property)</a>
+</li>
+      <li><a href="plugins/references/metadata-api.html#qiime2.Metadata.columns">columns (qiime2.Metadata property)</a>
+</li>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.comment">comment() (qiime2.sdk.usage.Usage method)</a>
 </li>
       <li><a href="back-matter/glossary.html#term-Conda-metapackage"><strong>Conda metapackage</strong></a>
 </li>
-      <li><a href="interfaces/references/api.html#qiime2.sdk.Context">Context() (in module qiime2.sdk)</a>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.construct_artifact_collection">construct_artifact_collection() (qiime2.sdk.usage.Usage method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -480,13 +508,17 @@ document.write(`
 </li>
       <li><a href="back-matter/glossary.html#term-Directory-Format"><strong>Directory Format</strong></a>
 </li>
+      <li><a href="plugins/references/api/formats.html#qiime2.plugin.DirectoryFormat">DirectoryFormat (class in qiime2.plugin)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/api.html#qiime2.plugin.DirectoryFormat">DirectoryFormat() (in module qiime2.plugin)</a>
-</li>
       <li><a href="back-matter/glossary.html#term-Distribution"><strong>Distribution</strong></a>
 </li>
+      <li><a href="plugins/references/metadata-api.html#qiime2.MetadataColumn.drop_missing_values">drop_missing_values() (qiime2.MetadataColumn method)</a>
+</li>
       <li><a href="back-matter/glossary.html#term-DRY"><strong>DRY</strong></a>
+</li>
+      <li><a href="plugins/references/api/utils.html#qiime2.util.duplicate">duplicate() (in module qiime2.util)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -494,7 +526,11 @@ document.write(`
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/api.html#qiime2.plugin.End">End() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.End">End() (in module qiime2.plugin)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="plugins/references/api/testing.html#qiime2.plugin.testing.TestPluginBase.execute_examples">execute_examples() (qiime2.plugin.testing.TestPluginBase method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -504,10 +540,18 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="back-matter/glossary.html#term-File-Format"><strong>File Format</strong></a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.Float">Float() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/metadata-api.html#qiime2.Metadata.filter_columns">filter_columns() (qiime2.Metadata method)</a>
 </li>
+      <li><a href="plugins/references/metadata-api.html#qiime2.Metadata.filter_ids">filter_ids() (qiime2.Metadata method)</a>
+
+      <ul>
+        <li><a href="plugins/references/metadata-api.html#qiime2.MetadataColumn.filter_ids">(qiime2.MetadataColumn method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.Float">Float (in module qiime2.plugin)</a>
+</li>
       <li><a href="back-matter/glossary.html#term-Format"><strong>Format</strong></a>
 </li>
       <li><a href="back-matter/glossary.html#term-Framework"><strong>Framework</strong></a>
@@ -520,13 +564,43 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="back-matter/glossary.html#term-Galaxy"><strong>Galaxy</strong></a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.get_available_cores">get_available_cores() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/context.html#qiime2.sdk.Context.get_action">get_action() (qiime2.sdk.Context method)</a>
+</li>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.get_artifact_collection_member">get_artifact_collection_member() (qiime2.sdk.usage.Usage method)</a>
+</li>
+      <li><a href="plugins/references/api/utils.html#qiime2.plugin.util.get_available_cores">get_available_cores() (in module qiime2.plugin.util)</a>
+</li>
+      <li><a href="plugins/references/metadata-api.html#qiime2.Metadata.get_column">get_column() (qiime2.Metadata method)</a>
+</li>
+      <li><a href="plugins/references/api/testing.html#qiime2.plugin.testing.TestPluginBase.get_data_path">get_data_path() (qiime2.plugin.testing.TestPluginBase method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/api.html#qiime2.plugin.testing.TestPluginBase.get_data_path">get_data_path() (qiime2.plugin.testing.TestPluginBase method)</a>
+      <li><a href="plugins/references/metadata-api.html#qiime2.Metadata.get_ids">get_ids() (qiime2.Metadata method)</a>
+
+      <ul>
+        <li><a href="plugins/references/metadata-api.html#qiime2.MetadataColumn.get_ids">(qiime2.MetadataColumn method)</a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.testing.TestPluginBase.get_transformer">get_transformer() (qiime2.plugin.testing.TestPluginBase method)</a>
+      </ul></li>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.get_metadata_column">get_metadata_column() (qiime2.sdk.usage.Usage method)</a>
+</li>
+      <li><a href="plugins/references/metadata-api.html#qiime2.MetadataColumn.get_missing">get_missing() (qiime2.MetadataColumn method)</a>
+</li>
+      <li><a href="plugins/references/api/testing.html#qiime2.plugin.testing.TestPluginBase.get_transformer">get_transformer() (qiime2.plugin.testing.TestPluginBase method)</a>
+</li>
+      <li><a href="plugins/references/metadata-api.html#qiime2.MetadataColumn.get_value">get_value() (qiime2.MetadataColumn method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="plugins/references/metadata-api.html#qiime2.MetadataColumn.has_missing_values">has_missing_values() (qiime2.MetadataColumn method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.help">help() (qiime2.sdk.usage.Usage method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -540,11 +614,25 @@ document.write(`
 </li>
       <li><a href="interfaces/references/api.html#qiime2.sdk.ImplementationError">ImplementationError() (in module qiime2.sdk)</a>
 </li>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.import_from_format">import_from_format() (qiime2.sdk.usage.Usage method)</a>
+</li>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.init_artifact">init_artifact() (qiime2.sdk.usage.Usage method)</a>
+</li>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.init_artifact_collection">init_artifact_collection() (qiime2.sdk.usage.Usage method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.init_artifact_from_url">init_artifact_from_url() (qiime2.sdk.usage.Usage method)</a>
+</li>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.init_format">init_format() (qiime2.sdk.usage.Usage method)</a>
+</li>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.init_metadata">init_metadata() (qiime2.sdk.usage.Usage method)</a>
+</li>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.init_metadata_from_url">init_metadata_from_url() (qiime2.sdk.usage.Usage method)</a>
+</li>
       <li><a href="back-matter/glossary.html#term-Input"><strong>Input</strong></a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.Int">Int() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.Int">Int (in module qiime2.plugin)</a>
 </li>
       <li><a href="back-matter/glossary.html#term-Interface"><strong>Interface</strong></a>
 </li>
@@ -554,7 +642,7 @@ document.write(`
 <h2 id="J">J</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/api.html#qiime2.plugin.Jobs">Jobs() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.Jobs">Jobs (in module qiime2.plugin)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -562,54 +650,65 @@ document.write(`
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/api.html#qiime2.plugin.List">List() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.List">List (in module qiime2.plugin)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="plugins/references/metadata-api.html#qiime2.Metadata.load">load() (qiime2.Metadata class method)</a>
+
+      <ul>
+        <li><a href="plugins/references/api/citations.html#qiime2.plugin.Citations.load">(qiime2.plugin.Citations class method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="plugins/references/api/context.html#qiime2.sdk.Context.make_artifact">make_artifact() (qiime2.sdk.Context method)</a>
+</li>
+      <li><a href="plugins/references/metadata-api.html#qiime2.Metadata.merge">merge() (qiime2.Metadata method)</a>
+</li>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.merge_metadata">merge_metadata() (qiime2.sdk.usage.Usage method)</a>
+</li>
       <li><a href="back-matter/glossary.html#term-Metadata"><strong>Metadata</strong></a>
-</li>
-      <li><a href="plugins/references/metadata-api.html#qiime2.metadata.Metadata">Metadata() (in module qiime2.metadata)</a>
 
       <ul>
-        <li><a href="plugins/references/api.html#qiime2.plugin.Metadata">(in module qiime2.plugin)</a>
+        <li><a href="plugins/references/metadata-api.html#qiime2.Metadata">(class in qiime2)</a>
 </li>
-      </ul></li>
-      <li><a href="plugins/references/metadata-api.html#qiime2.metadata.MetadataColumn">MetadataColumn() (in module qiime2.metadata)</a>
-
-      <ul>
-        <li><a href="plugins/references/api.html#qiime2.plugin.MetadataColumn">(in module qiime2.plugin)</a>
+        <li><a href="plugins/references/api/types.html#qiime2.plugin.Metadata">(in module qiime2.plugin)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/metadata-api.html#qiime2.metadata.MetadataFileError">MetadataFileError() (in module qiime2.metadata)</a>
+      <li><a href="plugins/references/metadata-api.html#qiime2.MetadataColumn">MetadataColumn (class in qiime2)</a>
+
+      <ul>
+        <li><a href="plugins/references/api/types.html#qiime2.plugin.MetadataColumn">(in module qiime2.plugin)</a>
+</li>
+      </ul></li>
+      <li><a href="plugins/references/metadata-api.html#qiime2.metadata.MetadataFileError">MetadataFileError (class in qiime2.metadata)</a>
 </li>
       <li><a href="back-matter/glossary.html#term-Method"><strong>Method</strong></a>
 </li>
       <li><a href="interfaces/references/api.html#qiime2.sdk.Method">Method() (in module qiime2.sdk)</a>
 </li>
-      <li>
-    module
-
-      <ul>
-        <li><a href="plugins/references/api.html#module-qiime2.plugin.testing">qiime2.plugin.testing</a>
+      <li><a href="plugins/references/metadata-api.html#qiime2.MetadataColumn.missing_scheme">missing_scheme (qiime2.MetadataColumn property)</a>
 </li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/api.html#qiime2.plugin.Numeric">Numeric() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/metadata-api.html#qiime2.MetadataColumn.name">name (qiime2.MetadataColumn property)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/metadata-api.html#qiime2.metadata.NumericMetadataColumn">NumericMetadataColumn() (in module qiime2.metadata)</a>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.Numeric">Numeric (in module qiime2.plugin)</a>
+</li>
+      <li><a href="plugins/references/metadata-api.html#qiime2.NumericMetadataColumn">NumericMetadataColumn (class in qiime2)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -625,7 +724,7 @@ document.write(`
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/api.html#qiime2.plugin.testing.TestPluginBase.package">package (qiime2.plugin.testing.TestPluginBase attribute)</a>
+      <li><a href="plugins/references/api/testing.html#qiime2.plugin.testing.TestPluginBase.package">package (qiime2.plugin.testing.TestPluginBase attribute)</a>
 </li>
       <li><a href="back-matter/glossary.html#term-Pairwise-sequence-alignment"><strong>Pairwise sequence alignment</strong></a>
 </li>
@@ -637,23 +736,33 @@ document.write(`
 </li>
       <li><a href="back-matter/glossary.html#term-Payload"><strong>Payload</strong></a>
 </li>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.peek">peek() (qiime2.sdk.usage.Usage method)</a>
+</li>
       <li><a href="back-matter/glossary.html#term-Pipeline"><strong>Pipeline</strong></a>
 </li>
       <li><a href="interfaces/references/api.html#qiime2.sdk.Pipeline">Pipeline() (in module qiime2.sdk)</a>
 </li>
+      <li><a href="back-matter/glossary.html#term-Plugin"><strong>Plugin</strong></a>
+
+      <ul>
+        <li><a href="plugins/references/api/plugin.html#qiime2.plugin.Plugin">(class in qiime2.plugin)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="back-matter/glossary.html#term-Plugin"><strong>Plugin</strong></a>
-</li>
       <li><a href="back-matter/glossary.html#term-Plugin-Manager"><strong>Plugin Manager</strong></a>
-</li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.Plugin">Plugin() (in module qiime2.plugin)</a>
 </li>
       <li><a href="interfaces/references/api.html#qiime2.sdk.PluginManager">PluginManager() (in module qiime2.sdk)</a>
 </li>
+      <li><a href="plugins/references/api/plugin.html#qiime2.plugin.plugin.PluginMethods">PluginMethods (class in qiime2.plugin.plugin)</a>
+</li>
+      <li><a href="plugins/references/api/plugin.html#qiime2.plugin.plugin.PluginPipelines">PluginPipelines (class in qiime2.plugin.plugin)</a>
+</li>
+      <li><a href="plugins/references/api/plugin.html#qiime2.plugin.plugin.PluginVisualizers">PluginVisualizers (class in qiime2.plugin.plugin)</a>
+</li>
       <li><a href="back-matter/glossary.html#term-Primitive-Type"><strong>Primitive Type</strong></a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.Properties">Properties() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.Properties">Properties (class in qiime2.plugin)</a>
 </li>
       <li><a href="back-matter/glossary.html#term-Provenance"><strong>Provenance</strong></a>
 </li>
@@ -670,26 +779,41 @@ document.write(`
       <li><a href="back-matter/glossary.html#term-q2cli"><strong>q2cli</strong></a>
 </li>
   </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    qiime2.plugin.testing
-
-      <ul>
-        <li><a href="plugins/references/api.html#module-qiime2.plugin.testing">module</a>
-</li>
-      </ul></li>
-  </ul></td>
 </tr></table>
 
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/api.html#qiime2.plugin.Range">Range() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.Range">Range (class in qiime2.plugin)</a>
 </li>
-      <li><a href="back-matter/glossary.html#term-Result"><strong>Result</strong></a>
+      <li><a href="plugins/references/api/utils.html#qiime2.util.redirected_stdio">redirected_stdio() (in module qiime2.util)</a>
+</li>
+      <li><a href="plugins/references/api/plugin.html#qiime2.plugin.Plugin.register_artifact_class">register_artifact_class() (qiime2.plugin.Plugin method)</a>
+</li>
+      <li><a href="plugins/references/api/plugin.html#qiime2.plugin.Plugin.register_formats">register_formats() (qiime2.plugin.Plugin method)</a>
+</li>
+      <li><a href="plugins/references/api/plugin.html#qiime2.plugin.plugin.PluginMethods.register_function">register_function() (qiime2.plugin.plugin.PluginMethods method)</a>
+
+      <ul>
+        <li><a href="plugins/references/api/plugin.html#qiime2.plugin.plugin.PluginPipelines.register_function">(qiime2.plugin.plugin.PluginPipelines method)</a>
+</li>
+        <li><a href="plugins/references/api/plugin.html#qiime2.plugin.plugin.PluginVisualizers.register_function">(qiime2.plugin.plugin.PluginVisualizers method)</a>
+</li>
+      </ul></li>
+      <li><a href="plugins/references/api/plugin.html#qiime2.plugin.Plugin.register_semantic_type_to_format">register_semantic_type_to_format() (qiime2.plugin.Plugin method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="plugins/references/api/plugin.html#qiime2.plugin.Plugin.register_semantic_types">register_semantic_types() (qiime2.plugin.Plugin method)</a>
+</li>
+      <li><a href="plugins/references/api/plugin.html#qiime2.plugin.Plugin.register_transformer">register_transformer() (qiime2.plugin.Plugin method)</a>
+</li>
+      <li><a href="plugins/references/api/plugin.html#qiime2.plugin.Plugin.register_validator">register_validator() (qiime2.plugin.Plugin method)</a>
+</li>
+      <li><a href="plugins/references/api/plugin.html#qiime2.plugin.Plugin.register_views">register_views() (qiime2.plugin.Plugin method)</a>
+</li>
+      <li><a href="back-matter/glossary.html#term-Result"><strong>Result</strong></a>
+</li>
       <li><a href="interfaces/references/api.html#qiime2.sdk.Result">Result() (in module qiime2.sdk)</a>
 </li>
       <li><a href="interfaces/references/api.html#qiime2.sdk.ResultCollection">ResultCollection() (in module qiime2.sdk)</a>
@@ -702,19 +826,23 @@ document.write(`
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="plugins/references/api/citations.html#qiime2.plugin.Citations.save">save() (qiime2.plugin.Citations method)</a>
+</li>
       <li><a href="back-matter/glossary.html#term-Semantic-Type"><strong>Semantic Type</strong></a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.SemanticType">SemanticType() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.SemanticType">SemanticType() (in module qiime2.plugin)</a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.Set">Set() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.Set">Set (in module qiime2.plugin)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/api.html#qiime2.plugin.testing.TestPluginBase.setUp">setUp() (qiime2.plugin.testing.TestPluginBase method)</a>
+      <li><a href="plugins/references/api/testing.html#qiime2.plugin.testing.TestPluginBase.setUp">setUp() (qiime2.plugin.testing.TestPluginBase method)</a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.Start">Start() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/formats.html#qiime2.plugin.SingleFileDirectoryFormat">SingleFileDirectoryFormat() (in module qiime2.plugin)</a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.Str">Str() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.Start">Start() (in module qiime2.plugin)</a>
+</li>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.Str">Str (in module qiime2.plugin)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -722,15 +850,15 @@ document.write(`
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/api.html#qiime2.plugin.testing.TestPluginBase.tearDown">tearDown() (qiime2.plugin.testing.TestPluginBase method)</a>
+      <li><a href="plugins/references/api/testing.html#qiime2.plugin.testing.TestPluginBase.tearDown">tearDown() (qiime2.plugin.testing.TestPluginBase method)</a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.testing.TestPluginBase.test_dir_prefix">test_dir_prefix (qiime2.plugin.testing.TestPluginBase attribute)</a>
+      <li><a href="plugins/references/api/testing.html#qiime2.plugin.testing.TestPluginBase.test_dir_prefix">test_dir_prefix (qiime2.plugin.testing.TestPluginBase attribute)</a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.testing.TestPluginBase">TestPluginBase (class in qiime2.plugin.testing)</a>
+      <li><a href="plugins/references/api/testing.html#qiime2.plugin.testing.TestPluginBase">TestPluginBase (class in qiime2.plugin.testing)</a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.TextFileFormat">TextFileFormat() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/formats.html#qiime2.plugin.TextFileFormat">TextFileFormat (class in qiime2.plugin)</a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.Threads">Threads() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.Threads">Threads (in module qiime2.plugin)</a>
 </li>
       <li>
     tl
@@ -739,9 +867,19 @@ document.write(`
         <li><a href="back-matter/glossary.html#term-tl-dr"><strong>dr</strong></a>
 </li>
       </ul></li>
+      <li><a href="plugins/references/metadata-api.html#qiime2.Metadata.to_dataframe">to_dataframe() (qiime2.Metadata method)</a>
+
+      <ul>
+        <li><a href="plugins/references/metadata-api.html#qiime2.MetadataColumn.to_dataframe">(qiime2.MetadataColumn method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/api.html#qiime2.plugin.testing.TestPluginBase.transform_format">transform_format() (qiime2.plugin.testing.TestPluginBase method)</a>
+      <li><a href="plugins/references/metadata-api.html#qiime2.MetadataColumn.to_series">to_series() (qiime2.MetadataColumn method)</a>
+</li>
+      <li><a href="plugins/references/api/utils.html#qiime2.plugin.util.transform">transform() (in module qiime2.plugin.util)</a>
+</li>
+      <li><a href="plugins/references/api/testing.html#qiime2.plugin.testing.TestPluginBase.transform_format">transform_format() (qiime2.plugin.testing.TestPluginBase method)</a>
 </li>
       <li><a href="back-matter/glossary.html#term-Transformer"><strong>Transformer</strong></a>
 </li>
@@ -749,9 +887,9 @@ document.write(`
 </li>
       <li><a href="interfaces/references/api.html#qiime2.sdk.type_from_ast">type_from_ast() (in module qiime2.sdk)</a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.TypeMap">TypeMap() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.TypeMap">TypeMap (class in qiime2.plugin)</a>
 </li>
-      <li><a href="plugins/references/api.html#qiime2.plugin.TypeMatch">TypeMatch() (in module qiime2.plugin)</a>
+      <li><a href="plugins/references/api/types.html#qiime2.plugin.TypeMatch">TypeMatch (class in qiime2.plugin)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -761,8 +899,30 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="interfaces/references/api.html#qiime2.sdk.UninitializedPluginManagerError">UninitializedPluginManagerError() (in module qiime2.sdk)</a>
 </li>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.UsageAction">UsageAction (class in qiime2.sdk.usage)</a>
+
+      <ul>
+        <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.UsageAction">(qiime2.sdk.usage.Usage attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.UsageInputs">UsageInputs (class in qiime2.sdk.usage)</a>
+
+      <ul>
+        <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.UsageInputs">(qiime2.sdk.usage.Usage attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.UsageOutputNames">UsageOutputNames (class in qiime2.sdk.usage)</a>
+
+      <ul>
+        <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.UsageOutputNames">(qiime2.sdk.usage.Usage attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.UsageOutputs">UsageOutputs (class in qiime2.sdk.usage)</a>
+</li>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.UsageVariable">UsageVariable (class in qiime2.sdk.usage)</a>
+</li>
       <li><a href="back-matter/glossary.html#term-UUID"><strong>UUID</strong></a>
 </li>
   </ul></td>
@@ -771,28 +931,26 @@ document.write(`
 <h2 id="V">V</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/api.html#qiime2.plugin.ValidationError">ValidationError() (in module qiime2.plugin)</a>
-
-      <ul>
-        <li><a href="interfaces/references/api.html#qiime2.sdk.ValidationError">(in module qiime2.sdk)</a>
+      <li><a href="plugins/references/api/formats.html#qiime2.plugin.ValidationError">ValidationError (class in qiime2.plugin)</a>
 </li>
-      </ul></li>
+      <li><a href="interfaces/references/api.html#qiime2.sdk.ValidationError">ValidationError() (in module qiime2.sdk)</a>
+</li>
       <li><a href="back-matter/glossary.html#term-View"><strong>View</strong></a>
+</li>
+      <li><a href="plugins/references/api/usage.html#qiime2.sdk.usage.Usage.view_as_metadata">view_as_metadata() (qiime2.sdk.usage.Usage method)</a>
 </li>
       <li><a href="back-matter/glossary.html#term-Visualization"><strong>Visualization</strong></a>
 
       <ul>
+        <li><a href="plugins/references/api/types.html#qiime2.plugin.Visualization">(in module qiime2.plugin)</a>
+</li>
         <li><a href="back-matter/glossary.html#term-Visualization-Type"><strong>(Type)</strong></a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="plugins/references/api.html#qiime2.plugin.Visualization">Visualization() (in module qiime2.plugin)</a>
-
-      <ul>
-        <li><a href="interfaces/references/api.html#qiime2.sdk.Visualization">(in module qiime2.sdk)</a>
+      <li><a href="interfaces/references/api.html#qiime2.sdk.Visualization">Visualization() (in module qiime2.sdk)</a>
 </li>
-      </ul></li>
       <li><a href="back-matter/glossary.html#term-Visualizer"><strong>Visualizer</strong></a>
 </li>
       <li><a href="interfaces/references/api.html#qiime2.sdk.Visualizer">Visualizer() (in module qiime2.sdk)</a>

@@ -28,7 +28,6 @@ When developing a QIIME 2 interface, you will use APIs defined in the `qiime2.sd
 .. autofunction:: qiime2.sdk.Method
 .. autofunction:: qiime2.sdk.Visualizer
 .. autofunction:: qiime2.sdk.Pipeline
-.. autofunction:: qiime2.sdk.Context
 ```
 
 ### Utility functions
@@ -39,11 +38,6 @@ When developing a QIIME 2 interface, you will use APIs defined in the `qiime2.sd
 .. autofunction:: qiime2.sdk.type_from_ast
 ```
 
-### Citations
-
-```{eval-rst}
-.. autofunction:: qiime2.sdk.Citations
-```
 
 ### Exceptions
 
