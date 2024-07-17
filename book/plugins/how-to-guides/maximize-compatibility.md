@@ -133,6 +133,44 @@ Note that you may want to utilize a different branch location for your environme
 
 If you are working on a unique plugin that is not compatible with one of our existing distributions (amplicon, metagenome) that has a few specific q2 plugin dependencies, you'll utilize a similar approach to install option 1 - just with a more customized environment file. As a reminder, while this approach is fairly straightforward to implement, we don't recommend this (if at all possible) because this will be more difficult for us to assist with and help users to troubleshoot. As long as you are aware of these limitations and wish to proceed in this way, please follow the steps below.
 
+You'll follow the same steps above for creating an `environment-files/` directory and for the naming structure of your environment file, but the contents of your environment file(s) will look a bit different. We'll explore an example plugin below that requires q2-feature-table and q2-composition.
+
+```
+channels:
+- https://packages.qiime2.org/qiime2/2024.5/tiny/passed
+- https://packages.qiime2.org/qiime2/2024.5/amplicon/passed
+- conda-forge
+- bioconda
+- defaults
+dependencies:
+  - qiime2-tiny
+  - q2-feature-table
+  - q2-composition
+  - pip
+  - pip:
+    - q2_myplugin@git+https://github.com/myplugin-org/q2-myplugin.git@release-2024.5
+```
+
+In this example, the plugin being developed requires q2-feature-table and q2-composition but is not compatible with the entire amplicon distribution. In order for this plugin to still work with a basic QIIME 2 environment, the tiny distribution must be included in addition to the two QIIME 2 plugin dependencies. The tiny distribution's metapackage will be installed from the first channel that includes tiny, and because the two plugin dependencies are a part of the amplicon distribution, this is why the second conda channel provided is from amplicon.
+
+As a general rule, this will be the structure of your customized environment files:
+```
+channels:
+- https://packages.qiime2.org/qiime2/20XX.REL/tiny/passed
+- https://packages.qiime2.org/qiime2/20XX.REL/<q2-plugin-deps-distro>/passed
+- conda-forge
+- bioconda
+- defaults
+dependencies:
+  - qiime2-tiny
+  - <q2-plugin-dep-1>
+  - pip
+  - pip:
+    - q2_myplugin@git+https://github.com/myplugin-org/q2-myplugin.git@release-2024.5
+```
+
+With <q2-plugin-deps-distro> corresponding to the distribution where the QIIME 2 dependencies for your plugin live, and <q2-plugin-dep-1> being the QIIME 2 dependenc(ies) needed. Note that if you have plugin dependencies spanning multiple distributions, you'll need to include each distribution's channel in your environment file.
+
 The weekly development builds of the QIIME 2 distributions can help you make sure your code stays current with the distribution(s) you are targeting as you can automate your testing against them.
 [](setup-dev-environment) will help you install the most recent successful development metapackage build (again, usually weekly, but sometimes the builds fail and take time to debug).
 
