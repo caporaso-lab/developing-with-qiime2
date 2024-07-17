@@ -36,7 +36,7 @@ environment-files/
 Within this directory, you'll create environment file(s) for current and/or past installable versions of your plugin. You can name them something like:
 
 ```
-20XX.REL-<your-plugin-name>-seed-environment.yml
+20XX.REL-<your-plugin-name>-environment.yml
 ```
 
 The contents of your environment file should look something like this:
@@ -49,6 +49,7 @@ channels:
 - defaults
 dependencies:
   - qiime2-<target-distribution>
+  - pip
   - pip:
     - <q2_my_plugin>@git+https://github.com/<your-github-org>/<q2-my-plugin>.git@<target-branch>
 ```
@@ -63,14 +64,74 @@ With the following terms defined:
 
 Using the above guidelines, you can include the following example installation instructions for your users on your Github README page:
 ```
-conda env create -n q2-my-plugin-env -f https://raw.githubusercontent.com/<your-github-org>/<q2-my-plugin>/<env-file-branch>/environment-files/20XX.REL-<your-plugin-name>-seed-environment.yml
+conda env create -n q2-my-plugin-env -f https://raw.githubusercontent.com/<your-github-org>/<q2-my-plugin>/<env-file-branch>/environment-files/20XX.REL-<your-plugin-name>-environment.yml
 ```
 
 With <env-file-branch> being defined as the branch of your plugin's github repository where the environment files are located (we recommend the main branch for this, just to keep things simple).
 
+This method also provides an easy way for users to update their environment any time you create a new release for your plugin on Github. Using different branches on your repository as release locations, you can create a new environment file for each release with your plugin's install location reflecting the new target (i.e. release) branch.
+
+As an example, your branch structure could look like the following:
+
+```
+release-2024.5
+release-2024.10
+```
+Which would result in the following environment files (with amplicon as the target distribution):
+
+2024.5
+- Environment file name:
+`2024.5-q2-myplugin-environment.yml`
+
+- Contents:
+```
+channels:
+- https://packages.qiime2.org/qiime2/2024.5/amplicon/passed
+- conda-forge
+- bioconda
+- defaults
+dependencies:
+  - qiime2-amplicon
+  - pip
+  - pip:
+    - q2_myplugin@git+https://github.com/myplugin-org/q2-myplugin.git@release-2024.5
+```
+
+2024.10
+- Environment file name:
+`2024.10-q2-myplugin-environment.yml`
+
+- Contents:
+```
+channels:
+- https://packages.qiime2.org/qiime2/2024.10/amplicon/passed
+- conda-forge
+- bioconda
+- defaults
+dependencies:
+  - qiime2-amplicon
+  - pip
+  - pip:
+    - q2_myplugin@git+https://github.com/myplugin-org/q2-myplugin.git@release-2024.10
+```
+
+Users' initial install command would look like this:
+
+```
+conda env create -n q2-myplugin -f https://raw.githubusercontent.com/myplugin-org/q2-myplugin/main/environment-files/2024.5-myplugin-environment.yml
+```
+
+With the next release file looking identical aside from the branch name and target release (2024.10), users would then run the following command to update their existing 2024.5 environment:
+
+```
+conda env update -n q2-myplugin -f https://raw.githubusercontent.com/myplugin-org/q2-myplugin/main/environment-files/2024.10-myplugin-environment.yml
+```
+
+Note that you may want to utilize a different branch location for your environment files than for each of your package releases (i.e. main branch on the repo vs. a specific release branch). This will allow for all of your environment files to live in a singular location, for ease of reference.
+
 2. Installing your plugin using the Tiny Distribution and any custom required plugins (not recommended)
 
-TODO
+If you are working on a unique plugin that is not compatible with one of our existing distributions (amplicon, metagenome) that has a few specific q2 plugin dependencies, you'll utilize a similar approach to install option 1 - just with a more customized environment file. As a reminder, while this approach is fairly straightforward to implement, we don't recommend this (if at all possible) because this will be more difficult for us to assist with and help users to troubleshoot. As long as you are aware of these limitations and wish to proceed in this way, please follow the steps below.
 
 The weekly development builds of the QIIME 2 distributions can help you make sure your code stays current with the distribution(s) you are targeting as you can automate your testing against them.
 [](setup-dev-environment) will help you install the most recent successful development metapackage build (again, usually weekly, but sometimes the builds fail and take time to debug).
