@@ -37,7 +37,7 @@ environment-files/
 Within this directory, you'll create environment file(s) for current and/or past installable versions of your plugin. You can name them something like:
 
 ```
-20XX.REL-<your-plugin-name>-environment.yml
+20XX.REL-<module-name>-environment.yml
 ```
 
 The contents of your environment file should look something like this:
@@ -52,20 +52,20 @@ dependencies:
   - qiime2-<target-distribution>
   - pip
   - pip:
-    - <q2_my_plugin>@git+https://github.com/<your-github-org>/<q2-my-plugin>.git@<target-branch>
+    - <module_name>@git+https://github.com/<your-github-org>/<module-name>.git@<target-branch>
 ```
 
 With the following terms defined:
 - 20XX.REL epoch corresponding to the QIIME 2 release version that your plugin is compatible with
 - <target-distribution> being the distribution your plugin should be utilized with (i.e. amplicon, metagenome)
-- <q2_my_plugin> being the name of your plugin
+- <module_name> being the name of your plugin
 - <your-github-org> either being the github organization your plugin is hosted under, or your personal github account name
-- <q2-my-plugin> being the name for your plugin on github
+- <module-name> being the name for your plugin on github
 - <target-branch> being the relevant branch that users should be utilizing to install your plugin
 
 Using the above guidelines, you can include the following example installation instructions for your users on your Github README page:
 ```
-conda env create -n q2-my-plugin-env -f https://raw.githubusercontent.com/<your-github-org>/<q2-my-plugin>/<env-file-branch>/environment-files/20XX.REL-<your-plugin-name>-environment.yml
+conda env create -n my-plugin-env -f https://raw.githubusercontent.com/<your-github-org>/<module-name>/<env-file-branch>/environment-files/20XX.REL-<module-name>-environment.yml
 ```
 
 With <env-file-branch> being defined as the branch of your plugin's github repository where the environment files are located (we recommend the main branch for this, just to keep things simple).
@@ -83,7 +83,7 @@ Which would result in the following environment files (with amplicon as the targ
 
 2024.5
 - Environment file name:
-`2024.5-q2-my-plugin-environment.yml`
+`2024.5-my-plugin-environment.yml`
 
 - Contents:
 ```
@@ -96,12 +96,12 @@ dependencies:
   - qiime2-amplicon
   - pip
   - pip:
-    - q2_myplugin@git+https://github.com/myplugin-org/q2-myplugin.git@release-2024.5
+    - my_plugin@git+https://github.com/my-plugin-org/my-plugin.git@release-2024.5
 ```
 
 2024.10
 - Environment file name:
-`2024.10-q2-myplugin-environment.yml`
+`2024.10-my-plugin-environment.yml`
 
 - Contents:
 ```
@@ -114,19 +114,19 @@ dependencies:
   - qiime2-amplicon
   - pip
   - pip:
-    - q2_myplugin@git+https://github.com/myplugin-org/q2-myplugin.git@release-2024.10
+    - my_plugin@git+https://github.com/my-plugin-org/my-plugin.git@release-2024.10
 ```
 
 Users' initial install command would look like this:
 
 ```
-conda env create -n q2-myplugin -f https://raw.githubusercontent.com/myplugin-org/q2-myplugin/main/environment-files/2024.5-myplugin-environment.yml
+conda env create -n my-plugin -f https://raw.githubusercontent.com/my-plugin-org/my-plugin/main/environment-files/2024.5-my-plugin-environment.yml
 ```
 
 With the next release file looking identical aside from the branch name and target release (2024.10), users would then run the following command to update their existing 2024.5 environment:
 
 ```
-conda env update -n q2-myplugin -f https://raw.githubusercontent.com/myplugin-org/q2-myplugin/main/environment-files/2024.10-myplugin-environment.yml
+conda env update -n my-plugin -f https://raw.githubusercontent.com/my-plugin-org/my-plugin/main/environment-files/2024.10-my-plugin-environment.yml
 ```
 
 Note that you may want to utilize a different branch location for your environment files than for each of your package releases (i.e. main branch on the repo vs. a specific release branch).
@@ -154,7 +154,7 @@ dependencies:
   - q2-composition
   - pip
   - pip:
-    - q2_myplugin@git+https://github.com/myplugin-org/q2-myplugin.git@release-2024.5
+    - my_plugin@git+https://github.com/my-plugin-org/my-plugin.git@release-2024.5
 ```
 
 In this example, the plugin being developed requires q2-feature-table and q2-composition but is not compatible with the entire amplicon distribution.
@@ -165,19 +165,19 @@ As a general rule, this will be the structure of your customized environment fil
 ```
 channels:
 - https://packages.qiime2.org/qiime2/20XX.REL/tiny/passed
-- https://packages.qiime2.org/qiime2/20XX.REL/<q2-plugin-deps-distro>/passed
+- https://packages.qiime2.org/qiime2/20XX.REL/<my-plugin-deps-distro>/passed
 - conda-forge
 - bioconda
 - defaults
 dependencies:
   - qiime2-tiny
-  - <q2-plugin-dep-1>
+  - <my-plugin-dep-1>
   - pip
   - pip:
-    - q2_myplugin@git+https://github.com/myplugin-org/q2-myplugin.git@release-2024.5
+    - my_plugin@git+https://github.com/my-plugin-org/my-plugin.git@release-2024.5
 ```
 
-With <q2-plugin-deps-distro> corresponding to the distribution where the QIIME 2 dependencies for your plugin live, and <q2-plugin-dep-1> being the QIIME 2 dependenc(ies) needed.
+With <my-plugin-deps-distro> corresponding to the distribution where the QIIME 2 dependencies for your plugin live, and <my-plugin-dep-1> being the QIIME 2 dependenc(ies) needed.
 Note that if you have plugin dependencies spanning multiple distributions, you'll need to include each distribution's channel in your environment file.
 
 The weekly development builds of the QIIME 2 distributions can help you make sure your code stays current with the distribution(s) you are targeting as you can automate your testing against them.
