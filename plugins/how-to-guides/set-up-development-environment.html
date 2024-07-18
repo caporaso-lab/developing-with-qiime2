@@ -476,9 +476,8 @@ If you expect that you might need help setting up your development environment, 
 <h2>Install Prerequisites<a class="headerlink" href="#install-prerequisites" title="Link to this heading">#</a></h2>
 <p><a class="reference external" href="https://conda.io/miniconda.html">Miniconda</a> provides the <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment and package manager, and is currently the only supported way to install QIIME 2.
 Follow the instructions for downloading and installing Miniconda.</p>
-<p>After installing Miniconda and opening a new terminal, make sure you’re running the latest version of <code class="docutils literal notranslate"><span class="pre">conda</span></code> (and get a copy of <code class="docutils literal notranslate"><span class="pre">wget</span></code>, while you’re at it):</p>
+<p>After installing Miniconda and opening a new terminal, make sure you’re running the latest version of <code class="docutils literal notranslate"><span class="pre">conda</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>update<span class="w"> </span>conda
-conda<span class="w"> </span>install<span class="w"> </span>wget
 </pre></div>
 </div>
 </section>
@@ -487,33 +486,27 @@ conda<span class="w"> </span>install<span class="w"> </span>wget
 <p>The QIIME 2 “Tiny Distribution” is a minimal set of QIIME 2 functionality for building and using plugins through the QIIME 2 command line, and is intended for use by developers who want a minimal QIIME 2 environment to work in.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We recommend starting your development with the “Tiny Distribution”, unless you specifically need plugins that are installed in other QIIME 2 distributions, such as the “Amplicon” or “Shotgun” distributions, in which case see <a class="reference internal" href="#other-distros"><span class="std std-ref">Installing other QIIME 2 distributions</span></a>.</p>
+<p>We recommend starting your development with the “Tiny Distribution”, unless you specifically need plugins that are installed in other QIIME 2 distributions, such as the “Amplicon” or “Metagenome” distributions, in which case see <a class="reference internal" href="#other-distros"><span class="std std-ref">Installing other QIIME 2 distributions</span></a>.</p>
 </div>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-0">
 macOS</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
-conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-tiny<span class="w"> </span>--file<span class="w"> </span>qiime2-tiny-macos-latest-conda.yml
-rm<span class="w"> </span>qiime2-tiny-macos-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-tiny<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-1">
 Linux</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-ubuntu-latest-conda.yml
-conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-tiny<span class="w"> </span>--file<span class="w"> </span>qiime2-tiny-ubuntu-latest-conda.yml
-rm<span class="w"> </span>qiime2-tiny-ubuntu-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-tiny<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-ubuntu-latest-conda.yml
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-2">
 macOS (Apple Silicon)</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
-<span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-tiny<span class="w"> </span>--file<span class="w"> </span>qiime2-tiny-macos-latest-conda.yml
-rm<span class="w"> </span>qiime2-tiny-macos-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-tiny<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
 conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w"> </span>--set<span class="w"> </span>subdir<span class="w"> </span>osx-64
 </pre></div>
 </div>
@@ -590,27 +583,21 @@ make<span class="w"> </span><span class="nb">test</span>
 <input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-3">
 macOS</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
-conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-amplicon<span class="w"> </span>--file<span class="w"> </span>qiime2-amplicon-macos-latest-conda.yml
-rm<span class="w"> </span>qiime2-amplicon-macos-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-amplicon<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-4" name="sd-tab-set-1" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-4">
 Linux</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-ubuntu-latest-conda.yml
-conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-amplicon<span class="w"> </span>--file<span class="w"> </span>qiime2-amplicon-ubuntu-latest-conda.yml
-rm<span class="w"> </span>qiime2-amplicon-ubuntu-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-amplicon<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-ubuntu-latest-conda.yml
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-5" name="sd-tab-set-1" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-5">
 macOS (Apple Silicon)</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
-<span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-amplicon<span class="w"> </span>--file<span class="w"> </span>qiime2-amplicon-macos-latest-conda.yml
-rm<span class="w"> </span>qiime2-amplicon-macos-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-amplicon<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
 conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w"> </span>--set<span class="w"> </span>subdir<span class="w"> </span>osx-64
 </pre></div>
 </div>
@@ -623,27 +610,21 @@ conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w">
 <input checked="checked" id="sd-tab-item-6" name="sd-tab-set-2" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-6">
 macOS</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-macos-latest-conda.yml
-conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-metagenome<span class="w"> </span>--file<span class="w"> </span>qiime2-metagenome-macos-latest-conda.yml
-rm<span class="w"> </span>qiime2-metagenome-macos-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-metagenome<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-macos-latest-conda.yml
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-7" name="sd-tab-set-2" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-7">
 Linux</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-ubuntu-latest-conda.yml
-conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-metagenome<span class="w"> </span>--file<span class="w"> </span>qiime2-metagenome-ubuntu-latest-conda.yml
-rm<span class="w"> </span>qiime2-metagenome-ubuntu-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-metagenome<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-ubuntu-latest-conda.yml
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-8" name="sd-tab-set-2" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-8">
 macOS (Apple Silicon)</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-macos-latest-conda.yml
-<span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-metagenome<span class="w"> </span>--file<span class="w"> </span>qiime2-metagenome-macos-latest-conda.yml
-rm<span class="w"> </span>qiime2-metagenome-macos-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-metagenome<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-macos-latest-conda.yml
 conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w"> </span>--set<span class="w"> </span>subdir<span class="w"> </span>osx-64
 </pre></div>
 </div>

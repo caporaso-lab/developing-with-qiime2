@@ -16,11 +16,10 @@ If you expect that you might need help setting up your development environment, 
 {{ miniconda_url }} provides the ``conda`` environment and package manager, and is currently the only supported way to install QIIME 2.
 Follow the instructions for downloading and installing Miniconda.
 
-After installing Miniconda and opening a new terminal, make sure you're running the latest version of ``conda`` (and get a copy of ``wget``, while you're at it):
+After installing Miniconda and opening a new terminal, make sure you're running the latest version of ``conda``:
 
 ```bash
 conda update conda
-conda install wget
 ```
 
 ## Install the latest development version of the QIIME 2 "Tiny Distribution"
@@ -28,31 +27,25 @@ conda install wget
 The QIIME 2 "Tiny Distribution" is a minimal set of QIIME 2 functionality for building and using plugins through the QIIME 2 command line, and is intended for use by developers who want a minimal QIIME 2 environment to work in.
 
 ```{note}
-We recommend starting your development with the "Tiny Distribution", unless you specifically need plugins that are installed in other QIIME 2 distributions, such as the "Amplicon" or "Shotgun" distributions, in which case see [](other-distros).
+We recommend starting your development with the "Tiny Distribution", unless you specifically need plugins that are installed in other QIIME 2 distributions, such as the "Amplicon" or "Metagenome" distributions, in which case see [](other-distros).
 ```
 
 `````{tab-set}
 ````{tab-item} macOS
 ```bash
-wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
-conda env create -n q2dev-tiny --file qiime2-tiny-macos-latest-conda.yml
-rm qiime2-tiny-macos-latest-conda.yml
+conda env create -n q2dev-tiny --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
 ```
 ````
 
 ````{tab-item} Linux
 ```bash
-wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-ubuntu-latest-conda.yml
-conda env create -n q2dev-tiny --file qiime2-tiny-ubuntu-latest-conda.yml
-rm qiime2-tiny-ubuntu-latest-conda.yml
+conda env create -n q2dev-tiny --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-ubuntu-latest-conda.yml
 ```
 ````
 
 ````{tab-item} macOS (Apple Silicon)
 ```bash
-wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
-CONDA_SUBDIR=osx-64 conda env create -n q2dev-tiny --file qiime2-tiny-macos-latest-conda.yml
-rm qiime2-tiny-macos-latest-conda.yml
+CONDA_SUBDIR=osx-64 conda env create -n q2dev-tiny --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
 conda config --env --set subdir osx-64
 ```
 ````
@@ -134,25 +127,19 @@ If you install a distribution other than the "Tiny Distribution", be sure that t
 `````{tab-set}
 ````{tab-item} macOS
 ```bash
-wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
-conda env create -n q2dev-amplicon --file qiime2-amplicon-macos-latest-conda.yml
-rm qiime2-amplicon-macos-latest-conda.yml
+conda env create -n q2dev-amplicon --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
 ```
 ````
 
 ````{tab-item} Linux
 ```bash
-wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-ubuntu-latest-conda.yml
-conda env create -n q2dev-amplicon --file qiime2-amplicon-ubuntu-latest-conda.yml
-rm qiime2-amplicon-ubuntu-latest-conda.yml
+conda env create -n q2dev-amplicon --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-ubuntu-latest-conda.yml
 ```
 ````
 
 ````{tab-item} macOS (Apple Silicon)
 ```bash
-wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
-CONDA_SUBDIR=osx-64 conda env create -n q2dev-amplicon --file qiime2-amplicon-macos-latest-conda.yml
-rm qiime2-amplicon-macos-latest-conda.yml
+CONDA_SUBDIR=osx-64 conda env create -n q2dev-amplicon --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
 conda config --env --set subdir osx-64
 ```
 ````
@@ -163,27 +150,20 @@ conda config --env --set subdir osx-64
 `````{tab-set}
 ````{tab-item} macOS
 ```bash
-wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-macos-latest-conda.yml
-conda env create -n q2dev-metagenome --file qiime2-metagenome-macos-latest-conda.yml
-rm qiime2-metagenome-macos-latest-conda.yml
+conda env create -n q2dev-metagenome --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-macos-latest-conda.yml
 ```
 ````
 
 ````{tab-item} Linux
 ```bash
-wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-ubuntu-latest-conda.yml
-conda env create -n q2dev-metagenome --file qiime2-metagenome-ubuntu-latest-conda.yml
-rm qiime2-metagenome-ubuntu-latest-conda.yml
+conda env create -n q2dev-metagenome --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-ubuntu-latest-conda.yml
 ```
 ````
 
 ````{tab-item} macOS (Apple Silicon)
 ```bash
-wget https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-macos-latest-conda.yml
-CONDA_SUBDIR=osx-64 conda env create -n q2dev-metagenome --file qiime2-metagenome-macos-latest-conda.yml
-rm qiime2-metagenome-macos-latest-conda.yml
+CONDA_SUBDIR=osx-64 conda env create -n q2dev-metagenome --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-macos-latest-conda.yml
 conda config --env --set subdir osx-64
 ```
 ````
 `````
-
