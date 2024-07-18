@@ -81,7 +81,7 @@ Which would result in the following environment files (with amplicon as the targ
 
 2024.5
 - Environment file name:
-`2024.5-q2-myplugin-environment.yml`
+`2024.5-q2-my-plugin-environment.yml`
 
 - Contents:
 ```
