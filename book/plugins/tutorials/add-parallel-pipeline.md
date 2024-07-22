@@ -40,4 +40,43 @@ Review the code added in {{ dwq2_add_parallel_pipeline_commit_1_url }} and add i
 
 ## Add parallel computing support to `search_and_summarize`
 
-...
+QIIME 2's formal support for parallel computing makes use of [Parsl](https://parsl-project.org/), and enables developers to create parallel `Pipelines` that can run on compute resources ranging from multi-core laptops to multi-node high performance computer clusters.
+Parallel `Pipelines` follow the *split-apply-combine* strategy.
+In the *split* stage, input data is divided into smaller data sets, generally of the same type as the input.
+Then, in the *apply* stage, the intended operation of the `Pipeline` is applied to each of the smaller data sets in parallel.
+Finally, in the *combine* stage, the results of each *apply* operation are integrated to yield the final result of the operation as a single data set, generally of the same types as the output of each *apply* operation.
+
+In the context of our new `search_and_summarize` Pipeline, this can work as follows.
+In the *split* stage, the reference sequences can be divided into roughly equal sized chunks of sequences, such that each reference sequence appears in only one chunk.
+In the *apply* stage, the query sequences and each chunk of reference sequences can be provided as the input to the `local_alignment_search` method, resulting in a tabular output of search results for the query sequences against the provided chunk of reference sequences.
+Finally, in the *combine* stage, each of the tabular outputs are joined, and the resulting table is sorted and filtered to the top `n` hits per query.
+This enables the slow step in this workflow - the `local_alignment_search` work - to be run in parallel on different processors.
+
+Parsl takes care of all of the hard work of sending the *apply* jobs out to different processors and monitoring them to see when they're all done.
+Our work on the plugin development side, after we've already defined the *apply* operation (`local_alignment_search`, in this example), is to define the actions that will perform the *split* and *combine* operations.
+These operations will be new QIIME 2 `Methods`.
+
+### Defining a *split* method
+
+The *split*, *apply*, and *combine* actions are all QIIME 2 Methods, like any others.
+Our *split* method will build on a function that takes sequences as input, along with a variable defining the number of sequences that should go in each chunk, and it will result a dictionary mapping an arbitrary chunk identifier to a chunk of sequences.
+This can look like the following:
+
+```python
+def chunk_sequences(seqs: DNAIterator,
+                    chunk_size: int = 5) -> DNAIterator:
+    result = {i : DNAIterator(chunk)
+              for i, chunk in enumerate(_batched(seqs, chunk_size))}
+
+    return result
+```
+
+Here, the input DNAIterator is passed to a function, `_batched`, which yields subsets of the input iterator each with `chunk_size` sequences.
+(If the number of input sequences isn't a multiple of `chunk_size`, the final iterator in `result` will have fewer than `chunk_size` sequences.)
+The [`_batched` function](https://docs.python.org/3/library/itertools.html#itertools.batched) does the heavy lifting here.
+Referring to the `_methods.py` file in {{ dwq2_add_parallel_pipeline_commit_2_url }}, add the `chunked_sequences` and `_batched`_ functions to your `_methods.py` file.
+This is also a good time to write unit tests for your `chunked_sequences` function.
+I recommend designing and implementing them yourself, but you can also refer to the tests that I wrote in `test_methods.py`.
+
+
+**This section is still a work in progress.**
