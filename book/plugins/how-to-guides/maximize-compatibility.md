@@ -183,6 +183,32 @@ Note that if you have plugin dependencies spanning multiple distributions, you'l
 The weekly development builds of the QIIME 2 distributions can help you make sure your code stays current with the distribution(s) you are targeting as you can automate your testing against them.
 [](setup-dev-environment) will help you install the most recent successful development metapackage build (again, usually weekly, but sometimes the builds fail and take time to debug).
 
+There are a couple of things that we recommend implementing to help you ensure that your plugin remains compatible within the QIIME 2 ecosystem:
+
+1. Continuous Integration (CI) to regularly test your plugin within the type of QIIME 2 environment where it should be used (i.e. Amplicon, Metagenome, Tiny plus custom selections).
+
+- To implement this, you'll need to create a Github Action (GHA) that will be triggered each time you make a commit to your repository (either through a PR or a direct commit to one of your remote branches).
+Github Actions can be a bit confusing to set up, so we'd recommend familiarizing yourself with [this guide](TODO - link from NCI ? CZI ? folks) before setting up your own.
+Once you've read through this (and hopefully played around with a few of the toy examples provided therein), you can start to put together your own.
+You can rip off a lot of the functionality found within the GHAs we've created for CI on our different distributions.
+Take a look at [lib-ci-dev](https://github.com/qiime2/distributions/blob/dev/.github/workflows/lib-ci-dev.yaml) for our configuration to run the unit tests for each of our QIIME 2 plugins every time a commit is made to any plugin's repository.
+The main difference between this GHA and yours is the environment your plugin's unit tests should be run under.
+Your plugin's unit tests should be run under the environment you've created specifically for this plugin - that will either be one of our supported distributions with your plugin stacked on top, or the tiny distribution and any other plugins that are dependencies of yours.
+
+[TODO] - add example setup here
+
+2. Perform (automated) weekly builds of your plugin to keep your package up to date and expose any dependency conflicts that may arise.
+
+Keeping your package up to date with all of the downstream dependencies can feel like a lot of work and hassle, and sometimes it inevitably can be - software is always changing, and the more dependencies your plugin has, the more likely it is to fall out of sync with at least one of them.
+The best way we've found for dealing with this is by running weekly (e.g. regularly scheduled) builds for each of our distributions that will do the following:
+- Re-build each package in the distribution, based on the latest changes present on the main branch.
+- Create an environment that houses all of these packages (along with their downstream dependencies) to ensure that this environment can be solved by conda and that it can be installed successfully (ideally on both OSX and Linux operating systems).
+- Run each plugin's unit tests within this environment to ensure that everyone's functionality plays nicely together.
+
+Here's how you'll set up a simplified version of our process above to re-build your plugin on a regular basis and ensure that it remains compatible with the environment you've created:
+
+[TODO] - add example setup here
+
 You can request feedback on your plugin as a whole from more experienced QIIME 2 developers by reaching out through the {{ developer_discussion }}.
 However, be cognizant of the fact that doing code review takes a long time to do well: you should only request this when you feel like you have a final draft of the plugin that you'd like to release, and expect that the reviewer may point out that there is a bunch more work that should be done before you release.
 Please have others who you work closely with -- ideally experienced software developers, and even more ideally experienced QIIME 2 plugin developers -- review it first.
