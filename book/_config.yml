@@ -93,5 +93,5 @@ parse:
     dwq2_add_pipeline_commit_url: "{{dwq2_gh_commit_url.format(dwq2_add_pipeline_commit)}}"
     dwq2_add_parallel_pipeline_commit_1: "a45f6fb85315843078c0777326031dbce9564802"
     dwq2_add_parallel_pipeline_commit_1_url: "{{dwq2_gh_commit_url.format(dwq2_add_parallel_pipeline_commit_1)}}"
-    dwq2_add_parallel_pipeline_commit_2: "7978a82beb1fcc2a06c7f520f86451504ff0bb29"
+    dwq2_add_parallel_pipeline_commit_2: "6bdfa11b758e15fc896f7a15793c3534210c423f"
     dwq2_add_parallel_pipeline_commit_2_url: "{{dwq2_gh_commit_url.format(dwq2_add_parallel_pipeline_commit_2)}}"
