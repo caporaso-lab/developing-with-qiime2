@@ -187,15 +187,15 @@ There are a couple of things that we recommend implementing to help you ensure t
 
 1. Continuous Integration (CI) to regularly test your plugin within the type of QIIME 2 environment where it should be used (i.e. Amplicon, Metagenome, Tiny plus custom selections).
 
-- To implement this, you'll need to create a Github Action (GHA) that will be triggered each time you make a commit to your repository (either through a PR or a direct commit to one of your remote branches).
-Github Actions can be a bit confusing to set up, so we'd recommend familiarizing yourself with [this guide](TODO - link from NCI ? CZI ? folks) before setting up your own.
+- To implement this, you'll need to create a Github Action (GHA) that will be triggered each time you make a commit to your repository - either through a pull request (PR) or a direct commit to one of your remote branches.
+Github Actions can be a bit confusing to set up, so we'd recommend familiarizing yourself with [this GHA guide](https://hutchdatascience.org/GitHub_Automation_for_Scientists) before setting up your own.
 Once you've read through this (and hopefully played around with a few of the toy examples provided therein), you can start to put together your own.
-You can rip off a lot of the functionality found within the GHAs we've created for CI on our different distributions.
-Take a look at [lib-ci-dev](https://github.com/qiime2/distributions/blob/dev/.github/workflows/lib-ci-dev.yaml) for our configuration to run the unit tests for each of our QIIME 2 plugins every time a commit is made to any plugin's repository.
-The main difference between this GHA and yours is the environment your plugin's unit tests should be run under.
-Your plugin's unit tests should be run under the environment you've created specifically for this plugin - that will either be one of our supported distributions with your plugin stacked on top, or the tiny distribution and any other plugins that are dependencies of yours.
+The main structure of your GHA for the purpose of CI will be:
+  - Install the environment file you've created for user installation (i.e. 20XX.REL-your-plugin-environment.yml)
+  - Activate the environment
+  - Run all of your unit tests via `pytest`
 
-[TODO] - add example setup here
+[TODO] - add example setup here (from vizard implementation)
 
 2. Perform (automated) weekly builds of your plugin to keep your package up to date and expose any dependency conflicts that may arise.
 
