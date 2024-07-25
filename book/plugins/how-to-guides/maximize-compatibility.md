@@ -185,27 +185,44 @@ The weekly development builds of the QIIME 2 distributions can help you make sur
 
 There are a couple of things that we recommend implementing to help you ensure that your plugin remains compatible within the QIIME 2 ecosystem:
 
-1. Continuous Integration (CI) to regularly test your plugin within the type of QIIME 2 environment where it should be used (i.e. Amplicon, Metagenome, Tiny plus custom selections).
+1. Continuous Integration (CI) to regularly run your plugin's unit tests within the type of QIIME 2 environment where it should be used (i.e. Amplicon, Metagenome, Tiny plus custom selections).
 
-- To implement this, you'll need to create a Github Action (GHA) that will be triggered each time you make a commit to your repository - either through a pull request (PR) or a direct commit to one of your remote branches.
-Github Actions can be a bit confusing to set up, so we'd recommend familiarizing yourself with [this GHA guide](https://hutchdatascience.org/GitHub_Automation_for_Scientists) before setting up your own.
-Once you've read through this (and hopefully played around with a few of the toy examples provided therein), you can start to put together your own.
-The main structure of your GHA for the purpose of CI will be:
-  - Install the environment file you've created for user installation (i.e. 20XX.REL-your-plugin-environment.yml)
-  - Activate the environment
-  - Run all of your unit tests via `pytest`
+To implement this, you'll need to create a Github Action (GHA) that will be triggered each time you make a commit to your repository - either through a pull request (PR) or a direct commit to one of your remote branches.
+Github Actions can be a bit confusing to set up, so we'd recommend familiarizing yourself with [this GHA guide](https://hutchdatascience.org/GitHub_Automation_for_Scientists) before moving forward.
+Once you've read through this (and hopefully played around with a few of the toy examples provided therein), you can start to put one together based on a re-usable workflow we've created for community plugins.
 
-[TODO] - add example setup here (from vizard implementation)
+Here is what the basic structure of your action will look like:
+```
+name: ci-my-plugin
+on:
+  pull_request:
+    branches: ["<target>"]
+  push:
+    branches: ["<target>"]
+jobs:
+  ci:
+    uses: qiime2/distributions/.github/workflows/lib-community-ci.yaml@dev
+    with:
+      github-repo: q2-my-plugin
+      env-file-name: 20XX.REL-my-plugin-environment.yml
+```
+With the following terms defined:
+- <target> being the branch where this action should be run.
+This will typically be your main branch (i.e. 'main') unless you have a special branching structure setup on your Github repository.
+- `github-repo` being the repository name of your plugin on Github.
+- `env-file-name` being the name of your target environment file for the current release cycle (full filename including .yml extension).
+
+This Github Action file will live under `.github/workflows/` and you can use the same name as your Github Action for the filename (i.e. `ci-my-plugin.yml`).
+Note that the extension will also be `.yml` (same as your environment file(s)).
 
 2. Perform (automated) weekly builds of your plugin to keep your package up to date and expose any dependency conflicts that may arise.
 
 Keeping your package up to date with all of the downstream dependencies can feel like a lot of work and hassle, and sometimes it inevitably can be - software is always changing, and the more dependencies your plugin has, the more likely it is to fall out of sync with at least one of them.
-The best way we've found for dealing with this is by running weekly (e.g. regularly scheduled) builds for each of our distributions that will do the following:
-- Re-build each package in the distribution, based on the latest changes present on the main branch.
-- Create an environment that houses all of these packages (along with their downstream dependencies) to ensure that this environment can be solved by conda and that it can be installed successfully (ideally on both OSX and Linux operating systems).
-- Run each plugin's unit tests within this environment to ensure that everyone's functionality plays nicely together.
+In addition to running your unit tests for each commit and/or pull request you submit to your plugin's repository, we recommend implementing regularly scheduled testing of your plugin against the latest changes to the environment it should be used under (i.e. Amplicon, etc).
+The process for this will be very similar to the Github action discussed above for regular testing - with the main difference being that your plugin's environment will be installed with the latest developmental changes within the relevant distribution, rather than a release version.
+We suggest having these tests run on a weekly basis to make sure you have ample time between QIIME 2 releases to fix any dependency conflicts or issues from code changes that may arise.
 
-Here's how you'll set up a simplified version of our process above to re-build your plugin on a regular basis and ensure that it remains compatible with the environment you've created:
+Here's how you'll set up these scheduled tests against your target distribution's development environment:
 
 [TODO] - add example setup here
 
