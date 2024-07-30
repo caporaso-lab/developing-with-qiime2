@@ -44,7 +44,7 @@ The contents of your environment file should look something like this:
 
 ```
 channels:
-- https://packages.qiime2.org/qiime2/20XX.REL/<target-distribution>/passed
+- https://packages.qiime2.org/qiime2/20XX.REL/<target-distribution>/released
 - conda-forge
 - bioconda
 - defaults
@@ -88,7 +88,7 @@ Which would result in the following environment files (with amplicon as the targ
 - Contents:
 ```
 channels:
-- https://packages.qiime2.org/qiime2/2024.5/amplicon/passed
+- https://packages.qiime2.org/qiime2/2024.5/amplicon/released
 - conda-forge
 - bioconda
 - defaults
@@ -106,7 +106,7 @@ dependencies:
 - Contents:
 ```
 channels:
-- https://packages.qiime2.org/qiime2/2024.10/amplicon/passed
+- https://packages.qiime2.org/qiime2/2024.10/amplicon/released
 - conda-forge
 - bioconda
 - defaults
@@ -143,8 +143,8 @@ We'll explore an example plugin below that requires q2-feature-table and q2-comp
 
 ```
 channels:
-- https://packages.qiime2.org/qiime2/2024.5/tiny/passed
-- https://packages.qiime2.org/qiime2/2024.5/amplicon/passed
+- https://packages.qiime2.org/qiime2/2024.5/tiny/released
+- https://packages.qiime2.org/qiime2/2024.5/amplicon/released
 - conda-forge
 - bioconda
 - defaults
@@ -164,8 +164,8 @@ The tiny distribution's metapackage will be installed from the first channel tha
 As a general rule, this will be the structure of your customized environment files:
 ```
 channels:
-- https://packages.qiime2.org/qiime2/20XX.REL/tiny/passed
-- https://packages.qiime2.org/qiime2/20XX.REL/<my-plugin-deps-distro>/passed
+- https://packages.qiime2.org/qiime2/20XX.REL/tiny/released
+- https://packages.qiime2.org/qiime2/20XX.REL/<my-plugin-deps-distro>/released
 - conda-forge
 - bioconda
 - defaults
@@ -222,9 +222,52 @@ In addition to running your unit tests for each commit and/or pull request you s
 The process for this will be very similar to the Github action discussed above for regular testing - with the main difference being that your plugin's environment will be installed with the latest developmental changes within the relevant distribution, rather than a release version.
 We suggest having these tests run on a weekly basis to make sure you have ample time between QIIME 2 releases to fix any dependency conflicts or issues from code changes that may arise.
 
-Here's how you'll set up these scheduled tests against your target distribution's development environment:
+Here's the basic structure of the GHA you'll create to initiate these scheduled tests against your target distribution's development environment:
+```
+name: cron-my-plugin
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: 0 0 * * SUN
+jobs:
+  ci:
+    uses: qiime2/distributions/.github/workflows/lib-community-ci.yaml@dev
+    with:
+      github-repo: q2-my-plugin
+      env-file-name: 20XX.DEV-my-plugin-environment.yml
+```
+You'll notice that this action is very similar to the one you created earlier for your continuous integration testing. The main differences are as follows:
 
-[TODO] - add example setup here
+  1. The trigger for this action (i.e. `on:`) is different than our `ci-my-plugin.yml` action in that it's not triggered by a pull request or commit.
+  In this example, it's either triggered manually (`workflow_dispatch`) or based on a schedule (`cron`).
+  You can utilize the manual trigger under your repository's `actions` tab if you'd like to re-run these scheduled tests sooner than the next scheduled occurrence (if you're troubleshooting a test failure or upstream dependency issue).
+  You can adjust the schedule to any frequency you'd prefer, but we recommend weekly testing to ensure you catch anything that may have fallen out of sync well in advance of the upcoming release.
+  More information on the formatting for cron scheduling can be found [here](https://www.ibm.com/docs/en/db2/11.5?topic=task-unix-cron-format).
+
+  2. The environment file that's targeted for this action is different than what's used in your continuous integration testing (`20XX.DEV` vs `20XX.REL`).
+  The idea here is that your continuous integration testing is targeting the released version of your QIIME 2 environment, while these scheduled tests are targeting the current development environment.
+  In order to support this, you'll need to create a new 'development' environment file with each QIIME 2 release, with the following specifications:
+```
+channels:
+- https://packages.qiime2.org/qiime2/20XX.DEV/<target-distribution>/passed
+- conda-forge
+- bioconda
+- defaults
+dependencies:
+  - qiime2-<target-distribution>
+  - pip
+  - pip:
+    - my_plugin@git+https://github.com/my-plugin-org/my-plugin.git@<dev-branch>
+```
+With the following terms defined:
+- `20XX.DEV` being the n+1 QIIME 2 release (i.e. the upcoming release).
+These will always fall on the first Wednesday of April and October, so you can plan accordingly.
+As an example, if the most current release was 2024.10, your 20XX.DEV version would be 2025.4.
+- <target-distribution> being (as defined earlier) the distribution your environment should be based on (i.e. Amplicon, Metagenome, Tiny).
+- <dev-branch> being the main branch you're using for current development of your plugin.
+This might commonly be the `main` branch on your Github repository, or something else (if you have a special branching structure set up) - but the main takeaway here is this is the location of your active development (i.e. latest features, bug fixes, improvements, etc).
+
+You're welcome to set up any additional actions that you feel will be beneficial to your plugin and general development workflow - but the actions outlined above are what we recommend having in order to maintain an active and healthy plugin within the QIIME 2 ecosystem.
 
 You can request feedback on your plugin as a whole from more experienced QIIME 2 developers by reaching out through the {{ developer_discussion }}.
 However, be cognizant of the fact that doing code review takes a long time to do well: you should only request this when you feel like you have a final draft of the plugin that you'd like to release, and expect that the reviewer may point out that there is a bunch more work that should be done before you release.
