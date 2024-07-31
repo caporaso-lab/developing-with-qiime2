@@ -263,6 +263,7 @@ With the following terms defined:
 - `20XX.DEV` being the n+1 QIIME 2 release (i.e. the upcoming release).
 These will always fall on the first Wednesday of April and October, so you can plan accordingly.
 As an example, if the most current release was 2024.10, your 20XX.DEV version would be 2025.4.
+  - Note that you will need to adjust the environment file versions within your two Github Actions with each new release (i.e. `ci-my-plugin` always needs to be targeting the current QIIME 2 release and `cron-my-plugin` always needs to be targeting the n+1 QIIME 2 release).
 - <target-distribution> being (as defined earlier) the distribution your environment should be based on (i.e. Amplicon, Metagenome, Tiny).
 - <dev-branch> being the main branch you're using for current development of your plugin.
 This might commonly be the `main` branch on your Github repository, or something else (if you have a special branching structure set up) - but the main takeaway here is this is the location of your active development (i.e. latest features, bug fixes, improvements, etc).
