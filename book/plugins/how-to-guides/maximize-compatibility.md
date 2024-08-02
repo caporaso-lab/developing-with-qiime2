@@ -54,7 +54,7 @@ dependencies:
 With the following terms defined:
 - 20XX.REL epoch corresponding to the QIIME 2 release version that your plugin is compatible with
 - <target-distribution> being the distribution your plugin should be utilized with (i.e. amplicon, metagenome)
-- <module_name> being the name of your plugin
+- `<module_name>` being the name of your plugin
 - <your-github-org> either being the github organization your plugin is hosted under, or your personal github account name
 - <module-name> being the name for your plugin on github
 - <target-branch> being the relevant branch that users should be utilizing to install your plugin
