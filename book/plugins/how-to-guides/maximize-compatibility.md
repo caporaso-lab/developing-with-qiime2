@@ -34,11 +34,7 @@ In the top-level directory of your plugin, create the following directory:
 environment-files/
 ```
 
-Within this directory, you'll create environment file(s) for current and/or past installable versions of your plugin. You can name them something like:
-
-```
-20XX.REL-<module-name>-environment.yml
-```
+Within this directory, you'll create environment file(s) for current and/or past installable versions of your plugin. You can name them with a pattern like `YYYY.MM-<module-name>-environment.yml` (for example, `2024.05-q2-dwq2-environment.yml`).
 
 The contents of your environment file should look something like this:
 
