@@ -131,7 +131,7 @@ This will allow for all of your environment files to live in a singular location
 2. Installing your plugin using the Tiny Distribution and any custom required plugins (avoid if possible)
 
 If you are working on a unique plugin that is not compatible with one of our existing distributions (amplicon, metagenome) that has a few specific q2 plugin dependencies, you'll utilize a similar approach to install option 1 - just with a more customized environment file.
-As a reminder, while this approach is fairly straightforward to implement, we don't recommend this (if at all possible) because this will be more difficult for us to assist with and help users to troubleshoot.
+As a reminder, while this approach is fairly straightforward to implement, we don't recommend this if the option presented above is possible for your plugin, because this will be more difficult for us to assist with and help users to troubleshoot.
 As long as you are aware of these limitations and wish to proceed in this way, please follow the steps below.
 
 You'll follow the same steps above for creating an `environment-files/` directory and for the naming structure of your environment file, but the contents of your environment file(s) will look a bit different.
