@@ -24,7 +24,7 @@ While the latter provides you with more flexibility in your environment construc
 
 With the above information in mind, below are examples of how we recommend constructing installation instructions for users for both of the discussed pathways.
 
-1. Installing your plugin on top of an existing QIIME 2 Distribution (recommended)
+## Installing your plugin on top of an existing QIIME 2 Distribution (recommended)
 
 The easiest way to instruct users to install your plugin in the context of an existing QIIME 2 Distribution is to create an environment file that they will use to install the relevant distribution along with the correct version of your plugin, all while using a single command.
 
