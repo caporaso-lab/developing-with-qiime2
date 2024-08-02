@@ -56,15 +56,15 @@ With the following terms defined:
 - `<target-distribution>` being the distribution your plugin should be utilized with (i.e. amplicon, metagenome)
 - `<module_name>` being the name of your plugin
 - `<your-github-org>` either being the github organization your plugin is hosted under, or your personal github account name
-- <module-name> being the name for your plugin on github
-- <target-branch> being the relevant branch that users should be utilizing to install your plugin
+- `<module-name>` being the name for your plugin on github
+- `<target-branch>` being the relevant branch that users should be utilizing to install your plugin
 
 Using the above guidelines, you can include the following example installation instructions for your users on your Github README page:
 ```
 conda env create -n my-plugin-env -f https://raw.githubusercontent.com/<your-github-org>/<module-name>/<env-file-branch>/environment-files/20XX.REL-<module-name>-environment.yml
 ```
 
-With <env-file-branch> being defined as the branch of your plugin's github repository where the environment files are located (we recommend the main branch for this, just to keep things simple).
+With `<env-file-branch>` being defined as the branch of your plugin's github repository where the environment files are located (we recommend the main branch for this, just to keep things simple).
 
 This method also provides an easy way for users to update their environment any time you create a new release for your plugin on Github.
 Using different branches on your repository as release locations, you can create a new environment file for each release with your plugin's install location reflecting the new target (i.e. release) branch.
@@ -173,7 +173,7 @@ dependencies:
     - my_plugin@git+https://github.com/my-plugin-org/my-plugin.git@release-2024.5
 ```
 
-With <my-plugin-deps-distro> corresponding to the distribution where the QIIME 2 dependencies for your plugin live, and <my-plugin-dep-1> being the QIIME 2 dependenc(ies) needed.
+With `<my-plugin-deps-distro>` corresponding to the distribution where the QIIME 2 dependencies for your plugin live, and `<my-plugin-dep-1>` being the QIIME 2 dependenc(ies) needed.
 Note that if you have plugin dependencies spanning multiple distributions, you'll need to include each distribution's channel in your environment file.
 
 The weekly development builds of the QIIME 2 distributions can help you make sure your code stays current with the distribution(s) you are targeting as you can automate your testing against them.
@@ -203,7 +203,7 @@ jobs:
       env-file-name: 20XX.REL-my-plugin-environment.yml
 ```
 With the following terms defined:
-- <target> being the branch where this action should be run.
+- `<target>` being the branch where this action should be run.
 This will typically be your main branch (i.e. 'main') unless you have a special branching structure setup on your Github repository.
 - `github-repo` being the repository name of your plugin on Github.
 - `env-file-name` being the name of your target environment file for the current release cycle (full filename including .yml extension).
@@ -260,8 +260,8 @@ With the following terms defined:
 These will always fall on the first Wednesday of April and October, so you can plan accordingly.
 As an example, if the most current release was 2024.10, your 20XX.DEV version would be 2025.4.
   - Note that you will need to adjust the environment file versions within your two Github Actions with each new release (i.e. `ci-my-plugin` always needs to be targeting the current QIIME 2 release and `cron-my-plugin` always needs to be targeting the n+1 QIIME 2 release).
-- <target-distribution> being (as defined earlier) the distribution your environment should be based on (i.e. Amplicon, Metagenome, Tiny).
-- <dev-branch> being the main branch you're using for current development of your plugin.
+- `<target-distribution>` being (as defined earlier) the distribution your environment should be based on (i.e. Amplicon, Metagenome, Tiny).
+- `<dev-branch>` being the main branch you're using for current development of your plugin.
 This might commonly be the `main` branch on your Github repository, or something else (if you have a special branching structure set up) - but the main takeaway here is this is the location of your active development (i.e. latest features, bug fixes, improvements, etc).
 
 You're welcome to set up any additional actions that you feel will be beneficial to your plugin and general development workflow - but the actions outlined above are what we recommend having in order to maintain an active and healthy plugin within the QIIME 2 ecosystem.
