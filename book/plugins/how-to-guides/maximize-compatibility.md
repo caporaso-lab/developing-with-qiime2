@@ -77,11 +77,9 @@ release-2024.10
 ```
 Which would result in the following environment files (with amplicon as the target distribution):
 
-2024.5
+**2024.5**
 - Environment file name:
 `2024.5-my-plugin-environment.yml`
-
-- Contents:
 ```
 channels:
 - https://packages.qiime2.org/qiime2/2024.5/amplicon/released
@@ -95,11 +93,9 @@ dependencies:
     - my_plugin@git+https://github.com/my-plugin-org/my-plugin.git@release-2024.5
 ```
 
-2024.10
+**2024.10**
 - Environment file name:
 `2024.10-my-plugin-environment.yml`
-
-- Contents:
 ```
 channels:
 - https://packages.qiime2.org/qiime2/2024.10/amplicon/released
@@ -119,7 +115,7 @@ Users' initial install command would look like this:
 conda env create -n my-plugin -f https://raw.githubusercontent.com/my-plugin-org/my-plugin/main/environment-files/2024.5-my-plugin-environment.yml
 ```
 
-With the next release file looking identical aside from the branch name and target release (2024.10), users would then run the following command to update their existing 2024.5 environment:
+With the next release file looking identical (aside from the branch name and target release being 2024.10). Users would then run the following command to update their existing 2024.5 environment:
 
 ```
 conda env update -n my-plugin -f https://raw.githubusercontent.com/my-plugin-org/my-plugin/main/environment-files/2024.10-my-plugin-environment.yml
@@ -128,7 +124,7 @@ conda env update -n my-plugin -f https://raw.githubusercontent.com/my-plugin-org
 Note that you may want to utilize a different branch location for your environment files than for each of your package releases (i.e. main branch on the repo vs. a specific release branch).
 This will allow for all of your environment files to live in a singular location, for ease of reference.
 
-2. Installing your plugin using the Tiny Distribution and any custom required plugins (avoid if possible)
+## Installing your plugin using the Tiny Distribution and any custom required plugins (avoid if possible)
 
 If you are working on a unique plugin that is not compatible with one of our existing distributions (amplicon, metagenome) that has a few specific q2 plugin dependencies, you'll utilize a similar approach to install option 1 - just with a more customized environment file.
 As a reminder, while this approach is fairly straightforward to implement, we don't recommend this if the option presented above is possible for your plugin, because this will be more difficult for us to assist with and help users to troubleshoot.
@@ -176,12 +172,14 @@ dependencies:
 With `<my-plugin-deps-distro>` corresponding to the distribution where the QIIME 2 dependencies for your plugin live, and `<my-plugin-dep-1>` being the QIIME 2 dependenc(ies) needed.
 Note that if you have plugin dependencies spanning multiple distributions, you'll need to include each distribution's channel in your environment file.
 
+## Automated Testing using Continuous Integration (CI) and Github Actions (GHA)
+
 The weekly development builds of the QIIME 2 distributions can help you make sure your code stays current with the distribution(s) you are targeting as you can automate your testing against them.
 [](setup-dev-environment) will help you install the most recent successful development metapackage build (again, usually weekly, but sometimes the builds fail and take time to debug).
 
-There are a couple of things that we recommend implementing to help you ensure that your plugin remains compatible within the QIIME 2 ecosystem:
+There are a couple of things that we recommend implementing to help you ensure that your plugin remains compatible within the QIIME 2 ecosystem (discussed below).
 
-1. Continuous Integration (CI) to regularly run your plugin's unit tests within the type of QIIME 2 environment where it should be used (i.e. Amplicon, Metagenome, Tiny plus custom selections).
+### Continuous Integration (CI) to regularly run your plugin's unit tests within the type of QIIME 2 environment where it should be used (i.e. Amplicon, Metagenome, Tiny plus custom selections).
 
 To implement this, you'll need to create a Github Action (GHA) that will be triggered each time you make a commit to your repository - either through a pull request (PR) or a direct commit to one of your remote branches.
 Github Actions can be a bit confusing to set up, so we'd recommend familiarizing yourself with [this GHA guide](https://hutchdatascience.org/GitHub_Automation_for_Scientists) before moving forward.
@@ -211,10 +209,12 @@ This will typically be your main branch (i.e. 'main') unless you have a special 
 This Github Action file will live under `.github/workflows/` and you can use the same name as your Github Action for the filename (i.e. `ci-my-plugin.yml`).
 Note that the extension will also be `.yml` (same as your environment file(s)).
 
-2. Perform (automated) weekly builds of your plugin to keep your package up to date and expose any dependency conflicts that may arise.
+### Perform (automated) weekly builds of your plugin to keep your package up to date and expose any dependency conflicts that may arise.
 
 Keeping your package up to date with all of the downstream dependencies can feel like a lot of work and hassle, and sometimes it inevitably can be - software is always changing, and the more dependencies your plugin has, the more likely it is to fall out of sync with at least one of them.
+
 In addition to running your unit tests for each commit and/or pull request you submit to your plugin's repository, we recommend implementing regularly scheduled testing of your plugin against the latest changes to the environment it should be used under (i.e. Amplicon, etc).
+
 The process for this will be very similar to the Github action discussed above for regular testing - with the main difference being that your plugin's environment will be installed with the latest developmental changes within the relevant distribution, rather than a release version.
 We suggest having these tests run on a weekly basis to make sure you have ample time between QIIME 2 releases to fix any dependency conflicts or issues from code changes that may arise.
 
@@ -234,13 +234,13 @@ jobs:
 ```
 You'll notice that this action is very similar to the one you created earlier for your continuous integration testing. The main differences are as follows:
 
-  1. The trigger for this action (i.e. `on:`) is different than our `ci-my-plugin.yml` action in that it's not triggered by a pull request or commit.
+  - The trigger for this action (i.e. `on:`) is different than our `ci-my-plugin.yml` action in that it's not triggered by a pull request or commit.
   In this example, it's either triggered manually (`workflow_dispatch`) or based on a schedule (`cron`).
   You can utilize the manual trigger under your repository's `actions` tab if you'd like to re-run these scheduled tests sooner than the next scheduled occurrence (if you're troubleshooting a test failure or upstream dependency issue).
   You can adjust the schedule to any frequency you'd prefer, but we recommend weekly testing to ensure you catch anything that may have fallen out of sync well in advance of the upcoming release.
   More information on the formatting for cron scheduling can be found [here](https://www.ibm.com/docs/en/db2/11.5?topic=task-unix-cron-format).
 
-  2. The environment file that's targeted for this action is different than what's used in your continuous integration testing (`20XX.DEV` vs `20XX.REL`).
+  - The environment file that's targeted for this action is different than what's used in your continuous integration testing (`20XX.DEV` vs `20XX.REL`).
   The idea here is that your continuous integration testing is targeting the released version of your QIIME 2 environment, while these scheduled tests are targeting the current development environment.
   In order to support this, you'll need to create a new 'development' environment file with each QIIME 2 release, with the following specifications:
 ```
@@ -265,6 +265,8 @@ As an example, if the most current release was 2024.10, your 20XX.DEV version wo
 This might commonly be the `main` branch on your Github repository, or something else (if you have a special branching structure set up) - but the main takeaway here is this is the location of your active development (i.e. latest features, bug fixes, improvements, etc).
 
 You're welcome to set up any additional actions that you feel will be beneficial to your plugin and general development workflow - but the actions outlined above are what we recommend having in order to maintain an active and healthy plugin within the QIIME 2 ecosystem.
+
+## Getting Feedback on your Plugin
 
 You can request feedback on your plugin as a whole from more experienced QIIME 2 developers by reaching out through the {{ developer_discussion }}.
 However, be cognizant of the fact that doing code review takes a long time to do well: you should only request this when you feel like you have a final draft of the plugin that you'd like to release, and expect that the reviewer may point out that there is a bunch more work that should be done before you release.
