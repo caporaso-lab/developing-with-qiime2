@@ -128,7 +128,7 @@ conda env update -n my-plugin -f https://raw.githubusercontent.com/my-plugin-org
 Note that you may want to utilize a different branch location for your environment files than for each of your package releases (i.e. main branch on the repo vs. a specific release branch).
 This will allow for all of your environment files to live in a singular location, for ease of reference.
 
-2. Installing your plugin using the Tiny Distribution and any custom required plugins (not recommended)
+2. Installing your plugin using the Tiny Distribution and any custom required plugins (avoid if possible)
 
 If you are working on a unique plugin that is not compatible with one of our existing distributions (amplicon, metagenome) that has a few specific q2 plugin dependencies, you'll utilize a similar approach to install option 1 - just with a more customized environment file.
 As a reminder, while this approach is fairly straightforward to implement, we don't recommend this (if at all possible) because this will be more difficult for us to assist with and help users to troubleshoot.
