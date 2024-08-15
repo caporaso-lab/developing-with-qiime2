@@ -72,4 +72,4 @@ target/
 .vscode
 
 #Jupyter book
-book/_build
+_build
