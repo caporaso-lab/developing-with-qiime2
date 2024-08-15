@@ -26,6 +26,8 @@ parts:
             - file: plugins/how-to-guides/distribute-on-gh
             - file: plugins/how-to-guides/support-your-users
             - file: plugins/how-to-guides/maximize-compatibility
+            - file: plugins/how-to-guides/facilitate-installation
+            - file: plugins/how-to-guides/automate-testing
             - file: plugins/how-to-guides/publicize
             - file: plugins/how-to-guides/register-a-plugin
             - file: plugins/how-to-guides/create-register-method
