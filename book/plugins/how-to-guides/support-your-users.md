@@ -2,7 +2,14 @@
 # Provide technical support for your users
 
 You are free to have your users request help on the [QIIME 2 Forum](https://forum.qiime2.org) for your QIIME 2-based tools.
+This will generally take place under the [*Community Plugin Support*](https://forum.qiime2.org/c/community-plugin-support/24) category.
 We encourage this as it helps to centralize knowledge around the QIIME 2 ecosystem, but you are of course also free to direct users to your email, GitHub issue tracker, or another resource for technical support.
+
+```{note}
+Within the next few months (as of 16 August 2024) we plan to begin offer sub-categories under the [*Community Plugin Support*](https://forum.qiime2.org/c/community-plugin-support/24) category where plugin developers can run their own mini-forum focused around their plugin.
+We are developing eligibility criteria that will likely be focused around developer-responsiveness, automated plugin testing benchmarks, and existence of tested plugin documentation.
+More on this soon.
+```
 
 If you choose to support your users through the QIIME 2 Forum you should monitor the forum to answer questions from your users.
 You can search the [Discourse community forum](https://meta.discourse.org/) for information on configuring your notifications - there are lots of options for this.
