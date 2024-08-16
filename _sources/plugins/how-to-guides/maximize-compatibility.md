@@ -11,18 +11,20 @@ A complete list of artifact classes and formats available in a deployment of QII
 (Some are missing documentation - we'd [love your help addressing that](https://github.com/caporaso-lab/developing-with-qiime2/issues/97).)
 If you do need to create new artifact classes, you can add these in your own plugin(s).
 
-The Caporaso Lab is not taking on new responsibility for distributing plugins right now (i.e., integrating them in the distributions they develop and maintain), but we are currently (23 April 2024) developing new mechanisms for helping you share your plugin or other tools (see [](plugin-how-to-publicize)) that will ultimately replace the [QIIME 2 Library](https://library.qiime2.org).
+The Caporaso Lab is not taking on new responsibility for distributing plugins right now (i.e., integrating them in the distributions they develop and maintain), but is currently (15 August 2024) developing new mechanisms for helping you share your plugin or other tools (see [](plugin-how-to-publicize)) that will ultimately replace the [QIIME 2 Library](https://library.qiime2.org).
 
 You can consider the existing distributions to be foundations that you can build on, or you can create and distribute your own conda metapackages.
 Some guidance on each of these approaches:
    - Your install instructions can indicate that a user should install whichever distribution you depend on (e.g., `tiny`, `amplicon`, or `metagenome`) and then illustrate how to install your plugin(s) in that environment however it makes sense (e.g., `conda` or `pip`). Complete install instructions are drafted for you in the `README.md` of plugins that you build using our template (see [](plugin-from-template)).
    - Alternatively, you can compose and share your own distribution of plugins (e.g., building from the `tiny` distribution) that captures the set of functionality you’d like to share.
 
-Either of these approaches is totally fine.
-The former is an easier starting point.
+Either of these approaches is totally fine, with the following caveats.
+The former is an easier starting point, and will allow us to provide more troubleshooting assistance for any installation issues that users may encounter.
+While the latter provides you with more flexibility in your environment construction, our assistance with any install issues or environment conflicts that users may run into will be more limited (and will ultimately be your responsibility to troubleshoot and resolve).
 
-The weekly development builds of the QIIME 2 distributions can help you make sure your code stays current with the distribution(s) you are targeting as you can automate your testing against them.
-[](setup-dev-environment) will help you install the most recent successful development metapackage build (again, usually weekly, but sometimes the builds fail and take time to debug).
+With the above information in mind, refer to [](facilitating-installation) for instructions on how to support either of these approaches.
+
+## Getting Feedback on your Plugin
 
 You can request feedback on your plugin as a whole from more experienced QIIME 2 developers by reaching out through the {{ developer_discussion }}.
 However, be cognizant of the fact that doing code review takes a long time to do well: you should only request this when you feel like you have a final draft of the plugin that you'd like to release, and expect that the reviewer may point out that there is a bunch more work that should be done before you release.

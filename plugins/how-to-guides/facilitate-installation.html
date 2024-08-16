@@ -1,0 +1,745 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Facilitating installation of your plugin for users &#8212; Developing with QIIME 2</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=d05ccb96" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=ccdb6887"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/how-to-guides/facilitate-installation';</script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Automate testing of your plugin" href="automate-testing.html" />
+    <link rel="prev" title="Maximize compatibility between your plugin(s) and existing QIIME 2 distribution(s)" href="maximize-compatibility.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/dwq2-light.png" class="logo__image only-light" alt="Developing with QIIME 2 - Home"/>
+    <script>document.write(`<img src="../../_static/dwq2-dark.png" class="logo__image only-dark" alt="Developing with QIIME 2 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins 🔌</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../tutorials/intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/create-from-template.html">Create your plugin from a template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-nw-align-method.html">Add a first (real) Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-alignment-visualizer.html">Add a first Visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-artifact-class.html">Add a new Artifact Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-usage-examples.html">Add a Usage Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-2nd-transformer.html">Add a second transformer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-pipeline.html">Add a first Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/add-parallel-pipeline.html">Add a Pipeline with parallel computing support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/conclusion.html">Conclusion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">How-To Guides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="set-up-development-environment.html">Set up your development environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="distribute-on-gh.html">Distribute plugins on GitHub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="support-your-users.html">Provide technical support for your users</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maximize-compatibility.html">Maximize compatibility between your plugin(s) and existing QIIME 2 distribution(s)</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Facilitating installation of your plugin for users</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automate-testing.html">Automate testing of your plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="publicize.html">Publicize your QIIME 2 plugins (or other QIIME 2-based tools)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="register-a-plugin.html">Register a QIIME 2 plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create-register-method.html">Create and register a Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create-register-visualizer.html">Create and register a visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create-register-pipeline.html">Create and register a pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create-register-transformer.html">Creating and registering a Transformer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="play-nicely-with-others.html">How to play nicely with other plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="use-metadata.html">How to use Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test-plugins.html">How to test QIIME 2 plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage-examples.html">Writing Usage Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="format-validation-levels.html">Defining different Format validation levels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/actions.html">Types of QIIME 2 Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/package-structure.html">The structure of QIIME 2 plugin packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/types-of-types.html">Semantic types, data types, file formats, and artifact classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/transformers.html">Transformers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../references/antipatterns.html">Plugin development anti-patterns</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../references/api/intro.html">Plugin Development API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../references/api/plugin.html">Plugin &amp; Registration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../references/api/formats.html">Formats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../references/api/types.html">Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../references/api/citations.html">Citations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../references/api/testing.html">Testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../references/api/utils.html">Utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../references/api/context.html">Pipeline Context Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../references/api/usage.html">Usage Examples</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../references/metadata-api.html">User Metadata API</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interfaces 🧩</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../interfaces/intro.html">Interface Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../interfaces/references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../interfaces/references/api.html">Interface developer API reference</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Framework 🌳</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../framework/intro.html">Framework Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/how-to-guides/intro.html">How-To Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/how-to-guides/parallel-configuration.html">Parallel configuration and usage in QIIME 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/how-to-guides/pipeline-resumption.html">Pipeline Resumption in QIIME 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/explanations/intro.html">Explanations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/architecture.html">QIIME 2 architecture overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/data-storage.html">How Data is Stored</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/archives.html">Anatomy of an Archive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/types.html">Semantic Types, Primitives, and Visualizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/formats.html">File Formats and Directory Formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/provenance.html">Decentralized retrospective provenance tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/garbage-collection.html">Garbage Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/metaprogramming.html">Metaprogramming</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../framework/references/archive-versions.html">Archive versions</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation 📚</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../docs/intro.html">Docs Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/user-documentation.html">User documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/developer-documentation.html">Developer documentation</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Continuous Integration 🛠️</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ci/intro.html">Distribution Development</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter 🗂️</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../back-matter/intro.html">Back matter</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../back-matter/glossary.html">Glossary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../back-matter/bibliography.html">List of works cited</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../back-matter/genindex.html">Index</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/plugins/how-to-guides/facilitate-installation.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Facilitating installation of your plugin for users</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-your-plugin-on-top-of-an-existing-qiime-2-distribution-recommended">Installing your plugin on top of an existing QIIME 2 Distribution (recommended)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-your-plugin-using-the-tiny-distribution-and-any-custom-required-plugins">Installing your plugin using the Tiny Distribution and any custom required plugins</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="facilitating-installation-of-your-plugin-for-users">
+<span id="facilitating-installation"></span><h1>Facilitating installation of your plugin for users<a class="headerlink" href="#facilitating-installation-of-your-plugin-for-users" title="Link to this heading">#</a></h1>
+<section id="installing-your-plugin-on-top-of-an-existing-qiime-2-distribution-recommended">
+<span id="install-in-existing-distro"></span><h2>Installing your plugin on top of an existing QIIME 2 Distribution (recommended)<a class="headerlink" href="#installing-your-plugin-on-top-of-an-existing-qiime-2-distribution-recommended" title="Link to this heading">#</a></h2>
+<p>The easiest way to instruct users to install your plugin in the context of an existing QIIME 2 Distribution is to create a conda environment file that they can use to install a specific distribution of QIIME 2 including your plugin, all while using a single command.</p>
+<p>In the top-level directory of your plugin, create the following directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">environment</span><span class="o">-</span><span class="n">files</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>Within this directory, create environment file(s) for current and/or past installable versions of your plugin.
+You can name them with a pattern like <code class="docutils literal notranslate"><span class="pre">&lt;target-epoch&gt;-&lt;package-name&gt;-environment.yml</span></code> (for example, <code class="docutils literal notranslate"><span class="pre">2024.05-q2-dwq2-environment.yml</span></code>).</p>
+<p>The contents of your environment file should look something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">channels</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">packages</span><span class="o">.</span><span class="n">qiime2</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">qiime2</span><span class="o">/&lt;</span><span class="n">target</span><span class="o">-</span><span class="n">epoch</span><span class="o">&gt;/&lt;</span><span class="n">target</span><span class="o">-</span><span class="n">distribution</span><span class="o">&gt;/</span><span class="n">released</span>
+<span class="o">-</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+<span class="o">-</span> <span class="n">bioconda</span>
+<span class="n">dependencies</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">qiime2</span><span class="o">-&lt;</span><span class="n">target</span><span class="o">-</span><span class="n">distribution</span><span class="o">&gt;</span>
+  <span class="o">-</span> <span class="n">pip</span>
+  <span class="o">-</span> <span class="n">pip</span><span class="p">:</span>
+    <span class="o">-</span> <span class="o">&lt;</span><span class="n">package</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="nd">@git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">owner</span><span class="o">&gt;/&lt;</span><span class="n">repository</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;.</span><span class="n">git</span><span class="o">@&lt;</span><span class="n">target</span><span class="o">-</span><span class="n">branch</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>With the following terms defined:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;target-epoch&gt;</span></code>: the QIIME 2 epoch that your plugin should be installed under (e.g., <code class="docutils literal notranslate"><span class="pre">2024.5</span></code> or <code class="docutils literal notranslate"><span class="pre">2024.10</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;target-distribution&gt;</span></code>: the QIIME 2 distribution that your plugin should be installed under (e.g., <code class="docutils literal notranslate"><span class="pre">amplicon</span></code>, or <code class="docutils literal notranslate"><span class="pre">metagenome</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;package-name&gt;</span></code>: your plugin’s package name (e.g., <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;owner&gt;</span></code>: the github organization your plugin is hosted under, or your personal github account name</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;repository-name&gt;</span></code>: the name of your plugin repository on GitHub (this often will be the same as your plugin’s package name, e.g., <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;target-branch&gt;</span></code> (optional): the relevant branch that users should be utilizing to install your plugin - if not specified, this will default to your repository’s <em>Default branch</em> (e.g., <code class="docutils literal notranslate"><span class="pre">main</span></code>). If you don’t include this, you should leave off the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> symbol following <code class="docutils literal notranslate"><span class="pre">.git</span></code></p></li>
+</ul>
+<p>Using the above guidelines, you can provide the following install instructions for your users:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> \
+ <span class="o">-</span><span class="n">n</span> <span class="o">&lt;</span><span class="n">target</span><span class="o">-</span><span class="n">epoch</span><span class="o">&gt;-&lt;</span><span class="n">package</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span> \
+ <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">owner</span><span class="o">&gt;/&lt;</span><span class="n">repository</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;/&lt;</span><span class="n">target</span><span class="o">-</span><span class="n">branch</span><span class="o">&gt;/</span><span class="n">environment</span><span class="o">-</span><span class="n">files</span><span class="o">/&lt;</span><span class="n">target</span><span class="o">-</span><span class="n">epoch</span><span class="o">&gt;-&lt;</span><span class="n">package</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;-</span><span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+<p>Again, you’ll fill in the values enclosed in the <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> brackets.
+As above, <code class="docutils literal notranslate"><span class="pre">&lt;target-branch&gt;</span></code> is the branch that your users should install, but in this case it is required.
+(Often this will be <code class="docutils literal notranslate"><span class="pre">main</span></code>.)</p>
+<p>This method also provides a familiar way for users to install new versions of your plugin.
+By maintaining release branches on your repository, you can create a new environment file for each release that targets the corresponding release branch.</p>
+<p>As an example, your branch structure could look like the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">release</span><span class="o">-</span><span class="mf">2024.5</span> <span class="c1"># the 2024.5 release of your plugin</span>
+<span class="n">release</span><span class="o">-</span><span class="mf">2024.10</span> <span class="c1"># the 2024.10 release of your plugin</span>
+<span class="n">main</span> <span class="c1"># your main branch, usually what would be installed for a &quot;development&quot; installation</span>
+</pre></div>
+</div>
+<p>You could then have environment files and install instructions for these different branches that look like the following (in this example, <code class="docutils literal notranslate"><span class="pre">amplicon</span></code> is the target distribution):</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+release-2024.5</label><div class="sd-tab-content docutils">
+<p>Environment file: <code class="docutils literal notranslate"><span class="pre">2024.5-q2-dwq2-environment.yml</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">channels</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">packages</span><span class="o">.</span><span class="n">qiime2</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">qiime2</span><span class="o">/</span><span class="mf">2024.5</span><span class="o">/</span><span class="n">amplicon</span><span class="o">/</span><span class="n">released</span>
+<span class="o">-</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+<span class="o">-</span> <span class="n">bioconda</span>
+<span class="n">dependencies</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">qiime2</span><span class="o">-</span><span class="n">amplicon</span>
+  <span class="o">-</span> <span class="n">pip</span>
+  <span class="o">-</span> <span class="n">pip</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span><span class="nd">@git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">caporaso</span><span class="o">-</span><span class="n">lab</span><span class="o">/</span><span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span><span class="o">.</span><span class="n">git</span><span class="nd">@release</span><span class="o">-</span><span class="mf">2024.5</span>
+</pre></div>
+</div>
+<p>Install instructions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> \
+ <span class="o">-</span><span class="n">n</span> <span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span> \
+ <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">caporaso</span><span class="o">-</span><span class="n">lab</span><span class="o">/</span><span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span><span class="o">.</span><span class="n">git</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">environment</span><span class="o">-</span><span class="n">files</span><span class="o">/</span><span class="mf">2024.5</span><span class="o">-</span><span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span><span class="o">-</span><span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+release-2024.10</label><div class="sd-tab-content docutils">
+<p>Environment file: <code class="docutils literal notranslate"><span class="pre">2024.10-q2-dwq2-environment.yml</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">channels</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">packages</span><span class="o">.</span><span class="n">qiime2</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">qiime2</span><span class="o">/</span><span class="mf">2024.10</span><span class="o">/</span><span class="n">amplicon</span><span class="o">/</span><span class="n">released</span>
+<span class="o">-</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+<span class="o">-</span> <span class="n">bioconda</span>
+<span class="n">dependencies</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">qiime2</span><span class="o">-</span><span class="n">amplicon</span>
+  <span class="o">-</span> <span class="n">pip</span>
+  <span class="o">-</span> <span class="n">pip</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span><span class="nd">@git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">caporaso</span><span class="o">-</span><span class="n">lab</span><span class="o">/</span><span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span><span class="o">.</span><span class="n">git</span><span class="nd">@release</span><span class="o">-</span><span class="mf">2024.10</span>
+</pre></div>
+</div>
+<p>Install instructions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> \
+ <span class="o">-</span><span class="n">n</span> <span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span> \
+ <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">caporaso</span><span class="o">-</span><span class="n">lab</span><span class="o">/</span><span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span><span class="o">.</span><span class="n">git</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">environment</span><span class="o">-</span><span class="n">files</span><span class="o">/</span><span class="mf">2024.10</span><span class="o">-</span><span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span><span class="o">-</span><span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+main (development)</label><div class="sd-tab-content docutils">
+<p>Environment file: <code class="docutils literal notranslate"><span class="pre">development-q2-dwq2-environment.yml</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">channels</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">packages</span><span class="o">.</span><span class="n">qiime2</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">qiime2</span><span class="o">/</span><span class="mf">2024.10</span><span class="o">/</span><span class="n">amplicon</span><span class="o">/</span><span class="n">released</span>
+<span class="o">-</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+<span class="o">-</span> <span class="n">bioconda</span>
+<span class="n">dependencies</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">qiime2</span><span class="o">-</span><span class="n">amplicon</span>
+  <span class="o">-</span> <span class="n">pip</span>
+  <span class="o">-</span> <span class="n">pip</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span><span class="nd">@git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">caporaso</span><span class="o">-</span><span class="n">lab</span><span class="o">/</span><span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>Install instructions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> \
+ <span class="o">-</span><span class="n">n</span> <span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span> \
+ <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">caporaso</span><span class="o">-</span><span class="n">lab</span><span class="o">/</span><span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span><span class="o">.</span><span class="n">git</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">environment</span><span class="o">-</span><span class="n">files</span><span class="o">/</span><span class="n">development</span><span class="o">-</span><span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span><span class="o">-</span><span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the above examples, the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch location houses all of the environment files, regardless of which release they’re associated with.
+This is reflected by each <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span></code> command referring to a URL like <code class="docutils literal notranslate"><span class="pre">https://raw.githubusercontent.com/.../main/environment-files/...</span></code>.
+We recommend having all of your environment files available on a single branch, which makes finding and referencing them easier.</p>
+</section>
+<section id="installing-your-plugin-using-the-tiny-distribution-and-any-custom-required-plugins">
+<h2>Installing your plugin using the Tiny Distribution and any custom required plugins<a class="headerlink" href="#installing-your-plugin-using-the-tiny-distribution-and-any-custom-required-plugins" title="Link to this heading">#</a></h2>
+<p>If you are working on a plugin that is not compatible with one of our existing distributions but depends on some plugins in those distributions, you can utilize a similar approach to that outlined <a class="reference internal" href="#install-in-existing-distro"><span class="std std-ref">above</span></a> but with a more customized environment file.
+As a reminder, while this approach is fairly straightforward to implement, <strong>we don’t recommend this if the option presented above is possible for your plugin</strong> as this will be more difficult for us to assist you with and for you to help your users troubleshoot.
+As long as you are aware of these limitations and wish to proceed in this way, you can follow the steps below.</p>
+<p>Start by following the same suggestions presented above for creating an <code class="docutils literal notranslate"><span class="pre">environment-files/</span></code> directory and naming your environment file.
+We’ll put some different content in the environment file(s) this time.</p>
+<p>As an example, the contents of an environment file for a plugin that depends on the <code class="docutils literal notranslate"><span class="pre">q2-feature-table</span></code> and <code class="docutils literal notranslate"><span class="pre">q2-composition</span></code> plugins would look something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">channels</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">packages</span><span class="o">.</span><span class="n">qiime2</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">qiime2</span><span class="o">/</span><span class="mf">2024.5</span><span class="o">/</span><span class="n">tiny</span><span class="o">/</span><span class="n">released</span>
+<span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">packages</span><span class="o">.</span><span class="n">qiime2</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">qiime2</span><span class="o">/</span><span class="mf">2024.5</span><span class="o">/</span><span class="n">amplicon</span><span class="o">/</span><span class="n">released</span>
+<span class="o">-</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+<span class="o">-</span> <span class="n">bioconda</span>
+<span class="n">dependencies</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">qiime2</span><span class="o">-</span><span class="n">tiny</span>
+  <span class="o">-</span> <span class="n">q2</span><span class="o">-</span><span class="n">feature</span><span class="o">-</span><span class="n">table</span>
+  <span class="o">-</span> <span class="n">q2</span><span class="o">-</span><span class="n">composition</span>
+  <span class="o">-</span> <span class="n">pip</span>
+  <span class="o">-</span> <span class="n">pip</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span><span class="nd">@git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">caporaso</span><span class="o">-</span><span class="n">lab</span><span class="o">/</span><span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span><span class="o">.</span><span class="n">git</span><span class="nd">@release</span><span class="o">-</span><span class="mf">2024.5</span>
+</pre></div>
+</div>
+<p>In this example, the plugin being developed (<code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code>) requires <code class="docutils literal notranslate"><span class="pre">q2-feature-table</span></code> and <code class="docutils literal notranslate"><span class="pre">q2-composition</span></code>, but we’re assuming that it’s not compatible with the entire amplicon distribution.
+Because this plugin still requires a basic QIIME 2 environment, the <code class="docutils literal notranslate"><span class="pre">qiime2-tiny</span></code> distribution will be installed from the first channel listed.
+The <code class="docutils literal notranslate"><span class="pre">q2-feature-table</span></code> and <code class="docutils literal notranslate"><span class="pre">q2-composition</span></code> dependencies are not part of the <code class="docutils literal notranslate"><span class="pre">qiime2-tiny</span></code> distribution however, but are a part of the amplicon distribution.
+Therefore the second channel listed is the <code class="docutils literal notranslate"><span class="pre">amplicon</span></code> channel.
+We then list the dependencies as <code class="docutils literal notranslate"><span class="pre">qiime2-tiny</span></code> (the <code class="docutils literal notranslate"><span class="pre">tiny</span></code> distribution) and then the two additional plugins.
+Those are all followed by the installation of the <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code> plugin, as in the previous example.</p>
+<p>Generally, your customized environment files will be structured as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">channels</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">packages</span><span class="o">.</span><span class="n">qiime2</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">qiime2</span><span class="o">/&lt;</span><span class="n">target</span><span class="o">-</span><span class="n">epoch</span><span class="o">&gt;/</span><span class="n">tiny</span><span class="o">/</span><span class="n">released</span>
+<span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">packages</span><span class="o">.</span><span class="n">qiime2</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">qiime2</span><span class="o">/&lt;</span><span class="n">target</span><span class="o">-</span><span class="n">epoch</span><span class="o">&gt;/&lt;</span><span class="n">target</span><span class="o">-</span><span class="n">distribution</span><span class="o">&gt;/</span><span class="n">released</span>
+<span class="o">-</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+<span class="o">-</span> <span class="n">bioconda</span>
+<span class="n">dependencies</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">qiime2</span><span class="o">-</span><span class="n">tiny</span>
+  <span class="o">-</span> <span class="o">&lt;</span><span class="n">other</span><span class="o">-</span><span class="n">plugin</span><span class="o">-</span><span class="n">dependency</span><span class="o">-</span><span class="mi">1</span><span class="o">&gt;</span>
+  <span class="o">-</span> <span class="o">&lt;</span><span class="n">other</span><span class="o">-</span><span class="n">plugin</span><span class="o">-</span><span class="n">dependency</span><span class="o">-</span><span class="mi">2</span><span class="o">&gt;</span>
+  <span class="o">-</span> <span class="n">pip</span>
+  <span class="o">-</span> <span class="n">pip</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span><span class="nd">@git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">caporaso</span><span class="o">-</span><span class="n">lab</span><span class="o">/</span><span class="n">q2</span><span class="o">-</span><span class="n">dwq2</span><span class="o">.</span><span class="n">git</span><span class="o">@&lt;</span><span class="n">target</span><span class="o">-</span><span class="n">branch</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>In this case, <code class="docutils literal notranslate"><span class="pre">&lt;other-plugin-dependency-1&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;other-plugin-dependency-2&gt;</span></code> are plugins that are distributed through <code class="docutils literal notranslate"><span class="pre">&lt;target-distribution&gt;</span></code>.
+Note that if you have plugin dependencies that span multiple distributions, you’ll need to include each distribution’s channel in your environment file.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./plugins/how-to-guides"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="maximize-compatibility.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Maximize compatibility between your plugin(s) and existing QIIME 2 distribution(s)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="automate-testing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Automate testing of your plugin</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-your-plugin-on-top-of-an-existing-qiime-2-distribution-recommended">Installing your plugin on top of an existing QIIME 2 Distribution (recommended)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-your-plugin-using-the-tiny-distribution-and-any-custom-required-plugins">Installing your plugin using the Tiny Distribution and any custom required plugins</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Greg Caporaso and Evan Bolyen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

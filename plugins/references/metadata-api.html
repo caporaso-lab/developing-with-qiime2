@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=d05ccb96" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -193,6 +193,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/distribute-on-gh.html">Distribute plugins on GitHub</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/support-your-users.html">Provide technical support for your users</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/maximize-compatibility.html">Maximize compatibility between your plugin(s) and existing QIIME 2 distribution(s)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/facilitate-installation.html">Facilitating installation of your plugin for users</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/automate-testing.html">Automate testing of your plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/publicize.html">Publicize your QIIME 2 plugins (or other QIIME 2-based tools)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/register-a-plugin.html">Register a QIIME 2 plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/create-register-method.html">Create and register a Method</a></li>
@@ -493,7 +495,7 @@ This may be used by QIIME 2 plugin developers or users of the QIIME 2 Python 3 A
 <h2>The <code class="docutils literal notranslate"><span class="pre">qiime.Metadata</span></code> class<a class="headerlink" href="#the-qiime-metadata-class" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.Metadata">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.</span></span><span class="sig-name descname"><span class="pre">Metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_missing_schemes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L264"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.</span></span><span class="sig-name descname"><span class="pre">Metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_missing_schemes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L264"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata" title="Link to this definition">#</a></dt>
 <dd><p>Store metadata associated with identifiers in a study.</p>
 <p>Metadata is tabular in nature, mapping study identifiers (e.g. sample or
 feature IDs) to columns of metadata associated with each ID.</p>
@@ -571,7 +573,7 @@ or in <cite>column_missing_schemes</cite>.</p></li>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.Metadata.load">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_missing_schemes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L352"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.load" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_missing_schemes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L352"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.load" title="Link to this definition">#</a></dt>
 <dd><p>Load a TSV metadata file.</p>
 <p>The TSV metadata file format is described at <a class="reference external" href="https://docs.qiime2.org">https://docs.qiime2.org</a> in
 the Metadata Tutorial.</p>
@@ -648,7 +650,7 @@ read-only.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.Metadata.to_dataframe">
-<span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encode_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L582"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.to_dataframe" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encode_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L582"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.to_dataframe" title="Link to this definition">#</a></dt>
 <dd><p>Create a pandas dataframe from the metadata.</p>
 <p>The dataframe’s index name (<code class="docutils literal notranslate"><span class="pre">Index.name</span></code>) will match this metadata
 object’s <code class="docutils literal notranslate"><span class="pre">id_header</span></code>, and the index will contain this metadata
@@ -672,7 +674,7 @@ vocabulary (strings) if a missing scheme was used.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.Metadata.get_column">
-<span class="sig-name descname"><span class="pre">get_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L617"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.get_column" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L617"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.get_column" title="Link to this definition">#</a></dt>
 <dd><p>Retrieve metadata column based on column name.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -694,7 +696,7 @@ vocabulary (strings) if a missing scheme was used.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.Metadata.get_ids">
-<span class="sig-name descname"><span class="pre">get_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">where</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L646"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.get_ids" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">where</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L646"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.get_ids" title="Link to this definition">#</a></dt>
 <dd><p>Retrieve IDs matching search criteria.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -719,7 +721,7 @@ clause to query the table’s ID column.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.Metadata.merge">
-<span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">others</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L723"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.merge" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">others</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L723"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.merge" title="Link to this definition">#</a></dt>
 <dd><p>Merge this <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> object with other <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> objects.</p>
 <p>Returns a new <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> object containing the merged contents of
 this <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> object and <cite>others</cite>. The merge is not in-place and
@@ -759,7 +761,7 @@ on all <code class="docutils literal notranslate"><span class="pre">Metadata</sp
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.Metadata.filter_ids">
-<span class="sig-name descname"><span class="pre">filter_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ids_to_keep</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L804"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.filter_ids" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">filter_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ids_to_keep</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L804"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.filter_ids" title="Link to this definition">#</a></dt>
 <dd><p>Filter metadata by IDs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -786,7 +788,7 @@ object.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.Metadata.filter_columns">
-<span class="sig-name descname"><span class="pre">filter_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_all_unique</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_zero_variance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_all_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L835"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.filter_columns" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">filter_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_all_unique</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_zero_variance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_all_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L835"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.Metadata.filter_columns" title="Link to this definition">#</a></dt>
 <dd><p>Filter metadata by columns.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -825,7 +827,7 @@ every ID will be dropped.</p></li>
 <h2>Metadata columns<a class="headerlink" href="#metadata-columns" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.MetadataColumn">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.</span></span><span class="sig-name descname"><span class="pre">MetadataColumn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L909"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.</span></span><span class="sig-name descname"><span class="pre">MetadataColumn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L909"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn" title="Link to this definition">#</a></dt>
 <dd><p>Abstract base class representing a single metadata column.</p>
 <p>Concrete subclasses represent specific metadata column types, e.g.
 <code class="docutils literal notranslate"><span class="pre">CategoricalMetadataColumn</span></code> and <code class="docutils literal notranslate"><span class="pre">NumericMetadataColumn</span></code>.</p>
@@ -877,7 +879,7 @@ to NaN. The default treatment is to take no action.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.MetadataColumn.to_series">
-<span class="sig-name descname"><span class="pre">to_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encode_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1072"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.to_series" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">to_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encode_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L1072"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.to_series" title="Link to this definition">#</a></dt>
 <dd><p>Create a pandas series from the metadata column.</p>
 <p>The series index name (<code class="docutils literal notranslate"><span class="pre">Index.name</span></code>) will match this metadata
 column’s <code class="docutils literal notranslate"><span class="pre">id_header</span></code>, and the index will contain this metadata
@@ -902,7 +904,7 @@ vocabulary (strings) if a missing scheme was used.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.MetadataColumn.to_dataframe">
-<span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encode_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1103"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.to_dataframe" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encode_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L1103"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.to_dataframe" title="Link to this definition">#</a></dt>
 <dd><p>Create a pandas dataframe from the metadata column.</p>
 <p>The dataframe will contain exactly one column. The dataframe’s index
 name (<code class="docutils literal notranslate"><span class="pre">Index.name</span></code>) will match this metadata column’s <code class="docutils literal notranslate"><span class="pre">id_header</span></code>,
@@ -928,7 +930,7 @@ vocabulary (strings) if a missing scheme was used.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.MetadataColumn.get_missing">
-<span class="sig-name descname"><span class="pre">get_missing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1129"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.get_missing" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_missing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L1129"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.get_missing" title="Link to this definition">#</a></dt>
 <dd><p>Return a series containing only missing values (with an index).</p>
 <p>If the column was constructed with a missing scheme, then the values
 of the series will be the original terms instead of NaN.</p>
@@ -936,7 +938,7 @@ of the series will be the original terms instead of NaN.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.MetadataColumn.get_value">
-<span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1138"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.get_value" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L1138"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.get_value" title="Link to this definition">#</a></dt>
 <dd><p>Retrieve metadata column value associated with an ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -953,7 +955,7 @@ of the series will be the original terms instead of NaN.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.MetadataColumn.has_missing_values">
-<span class="sig-name descname"><span class="pre">has_missing_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1156"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.has_missing_values" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">has_missing_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L1156"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.has_missing_values" title="Link to this definition">#</a></dt>
 <dd><p>Determine if the metadata column has one or more missing values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -972,7 +974,7 @@ of the series will be the original terms instead of NaN.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.MetadataColumn.drop_missing_values">
-<span class="sig-name descname"><span class="pre">drop_missing_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1173"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.drop_missing_values" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">drop_missing_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L1173"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.drop_missing_values" title="Link to this definition">#</a></dt>
 <dd><p>Filter out missing values from the metadata column.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -990,7 +992,7 @@ of the series will be the original terms instead of NaN.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.MetadataColumn.get_ids">
-<span class="sig-name descname"><span class="pre">get_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">where_values_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1191"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.get_ids" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">where_values_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L1191"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.get_ids" title="Link to this definition">#</a></dt>
 <dd><p>Retrieve IDs matching search criteria.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1013,7 +1015,7 @@ the metadata column.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.MetadataColumn.filter_ids">
-<span class="sig-name descname"><span class="pre">filter_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ids_to_keep</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1220"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.filter_ids" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">filter_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ids_to_keep</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L1220"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.MetadataColumn.filter_ids" title="Link to this definition">#</a></dt>
 <dd><p>Filter metadata column by IDs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1042,7 +1044,7 @@ IDs in the filtered <code class="docutils literal notranslate"><span class="pre"
 
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.NumericMetadataColumn">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.</span></span><span class="sig-name descname"><span class="pre">NumericMetadataColumn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1295"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.NumericMetadataColumn" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.</span></span><span class="sig-name descname"><span class="pre">NumericMetadataColumn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L1295"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.NumericMetadataColumn" title="Link to this definition">#</a></dt>
 <dd><p>A single metadata column containing numeric data.</p>
 <p>See the <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> class docstring for details about <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> and
 <code class="docutils literal notranslate"><span class="pre">MetadataColumn</span></code> objects, including a description of column types and
@@ -1051,7 +1053,7 @@ supported data formats.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.CategoricalMetadataColumn">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.</span></span><span class="sig-name descname"><span class="pre">CategoricalMetadataColumn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/metadata.py#L1251"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.CategoricalMetadataColumn" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.</span></span><span class="sig-name descname"><span class="pre">CategoricalMetadataColumn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_scheme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blank'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/metadata.py#L1251"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.CategoricalMetadataColumn" title="Link to this definition">#</a></dt>
 <dd><p>A single metadata column containing categorical data.</p>
 <p>See the <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> class docstring for details about <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> and
 <code class="docutils literal notranslate"><span class="pre">MetadataColumn</span></code> objects, including a description of column types and
@@ -1063,7 +1065,7 @@ supported data formats.</p>
 <h2>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.metadata.MetadataFileError">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.metadata.</span></span><span class="sig-name descname"><span class="pre">MetadataFileError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/metadata/io.py#L23"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.metadata.MetadataFileError" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.metadata.</span></span><span class="sig-name descname"><span class="pre">MetadataFileError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/metadata/io.py#L23"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.metadata.MetadataFileError" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>

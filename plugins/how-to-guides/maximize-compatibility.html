@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=d05ccb96" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -62,7 +62,7 @@
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Publicize your QIIME 2 plugins (or other QIIME 2-based tools)" href="publicize.html" />
+    <link rel="next" title="Facilitating installation of your plugin for users" href="facilitate-installation.html" />
     <link rel="prev" title="Provide technical support for your users" href="support-your-users.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -193,6 +193,8 @@
 <li class="toctree-l3"><a class="reference internal" href="distribute-on-gh.html">Distribute plugins on GitHub</a></li>
 <li class="toctree-l3"><a class="reference internal" href="support-your-users.html">Provide technical support for your users</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Maximize compatibility between your plugin(s) and existing QIIME 2 distribution(s)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="facilitate-installation.html">Facilitating installation of your plugin for users</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automate-testing.html">Automate testing of your plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="publicize.html">Publicize your QIIME 2 plugins (or other QIIME 2-based tools)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="register-a-plugin.html">Register a QIIME 2 plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="create-register-method.html">Create and register a Method</a></li>
@@ -414,7 +416,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -430,6 +434,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-feedback-on-your-plugin">Getting Feedback on your Plugin</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -449,21 +461,24 @@ Avoid defining new artifact classes when you can reuse existing ones, to maximiz
 A complete list of artifact classes and formats available in a deployment of QIIME 2 can be accessed with the <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">tools</span> <span class="pre">list-types</span></code> and <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">tools</span> <span class="pre">list-formats</span></code> commands.
 (Some are missing documentation - we’d <a class="reference external" href="https://github.com/caporaso-lab/developing-with-qiime2/issues/97">love your help addressing that</a>.)
 If you do need to create new artifact classes, you can add these in your own plugin(s).</p>
-<p>The Caporaso Lab is not taking on new responsibility for distributing plugins right now (i.e., integrating them in the distributions they develop and maintain), but we are currently (23 April 2024) developing new mechanisms for helping you share your plugin or other tools (see <a class="reference internal" href="publicize.html#plugin-how-to-publicize"><span class="std std-ref">Publicize your QIIME 2 plugins (or other QIIME 2-based tools)</span></a>) that will ultimately replace the <a class="reference external" href="https://library.qiime2.org">QIIME 2 Library</a>.</p>
+<p>The Caporaso Lab is not taking on new responsibility for distributing plugins right now (i.e., integrating them in the distributions they develop and maintain), but is currently (15 August 2024) developing new mechanisms for helping you share your plugin or other tools (see <a class="reference internal" href="publicize.html#plugin-how-to-publicize"><span class="std std-ref">Publicize your QIIME 2 plugins (or other QIIME 2-based tools)</span></a>) that will ultimately replace the <a class="reference external" href="https://library.qiime2.org">QIIME 2 Library</a>.</p>
 <p>You can consider the existing distributions to be foundations that you can build on, or you can create and distribute your own conda metapackages.
 Some guidance on each of these approaches:</p>
 <ul class="simple">
 <li><p>Your install instructions can indicate that a user should install whichever distribution you depend on (e.g., <code class="docutils literal notranslate"><span class="pre">tiny</span></code>, <code class="docutils literal notranslate"><span class="pre">amplicon</span></code>, or <code class="docutils literal notranslate"><span class="pre">metagenome</span></code>) and then illustrate how to install your plugin(s) in that environment however it makes sense (e.g., <code class="docutils literal notranslate"><span class="pre">conda</span></code> or <code class="docutils literal notranslate"><span class="pre">pip</span></code>). Complete install instructions are drafted for you in the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> of plugins that you build using our template (see <a class="reference internal" href="../tutorials/create-from-template.html#plugin-from-template"><span class="std std-ref">Create your plugin from a template</span></a>).</p></li>
 <li><p>Alternatively, you can compose and share your own distribution of plugins (e.g., building from the <code class="docutils literal notranslate"><span class="pre">tiny</span></code> distribution) that captures the set of functionality you’d like to share.</p></li>
 </ul>
-<p>Either of these approaches is totally fine.
-The former is an easier starting point.</p>
-<p>The weekly development builds of the QIIME 2 distributions can help you make sure your code stays current with the distribution(s) you are targeting as you can automate your testing against them.
-<a class="reference internal" href="set-up-development-environment.html#setup-dev-environment"><span class="std std-ref">Set up your development environment</span></a> will help you install the most recent successful development metapackage build (again, usually weekly, but sometimes the builds fail and take time to debug).</p>
+<p>Either of these approaches is totally fine, with the following caveats.
+The former is an easier starting point, and will allow us to provide more troubleshooting assistance for any installation issues that users may encounter.
+While the latter provides you with more flexibility in your environment construction, our assistance with any install issues or environment conflicts that users may run into will be more limited (and will ultimately be your responsibility to troubleshoot and resolve).</p>
+<p>With the above information in mind, refer to <a class="reference internal" href="facilitate-installation.html#facilitating-installation"><span class="std std-ref">Facilitating installation of your plugin for users</span></a> for instructions on how to support either of these approaches.</p>
+<section id="getting-feedback-on-your-plugin">
+<h2>Getting Feedback on your Plugin<a class="headerlink" href="#getting-feedback-on-your-plugin" title="Link to this heading">#</a></h2>
 <p>You can request feedback on your plugin as a whole from more experienced QIIME 2 developers by reaching out through the <a class="reference external" href="https://forum.qiime2.org/c/dev-discussion">QIIME 2 Forum Developer Discussion</a>.
 However, be cognizant of the fact that doing code review takes a long time to do well: you should only request this when you feel like you have a final draft of the plugin that you’d like to release, and expect that the reviewer may point out that there is a bunch more work that should be done before you release.
 Please have others who you work closely with – ideally experienced software developers, and even more ideally experienced QIIME 2 plugin developers – review it first.
 If you have questions along the way, you can ask those whenever - just be sure to review <em><a class="reference external" href="https://develop.qiime2.org/">Developing with QIIME 2</a></em> and search the forum in case your question has already been answered previously.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -506,11 +521,11 @@ If you have questions along the way, you can ask those whenever - just be sure t
       </div>
     </a>
     <a class="right-next"
-       href="publicize.html"
+       href="facilitate-installation.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Publicize your QIIME 2 plugins (or other QIIME 2-based tools)</p>
+        <p class="prev-next-title">Facilitating installation of your plugin for users</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -520,6 +535,21 @@ If you have questions along the way, you can ask those whenever - just be sure t
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-feedback-on-your-plugin">Getting Feedback on your Plugin</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

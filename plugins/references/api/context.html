@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=d05ccb96" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -193,6 +193,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/distribute-on-gh.html">Distribute plugins on GitHub</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/support-your-users.html">Provide technical support for your users</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/maximize-compatibility.html">Maximize compatibility between your plugin(s) and existing QIIME 2 distribution(s)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/facilitate-installation.html">Facilitating installation of your plugin for users</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/automate-testing.html">Automate testing of your plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/publicize.html">Publicize your QIIME 2 plugins (or other QIIME 2-based tools)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/register-a-plugin.html">Register a QIIME 2 plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../how-to-guides/create-register-method.html">Create and register a Method</a></li>
@@ -456,7 +458,7 @@ document.write(`
 Plugins may use these methods to invoke other registered actions or create artifacts.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.sdk.Context.get_action">
-<span class="sig-prename descclassname"><span class="pre">Context.</span></span><span class="sig-name descname"><span class="pre">get_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plugin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/sdk/context.py#L43"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.sdk.Context.get_action" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Context.</span></span><span class="sig-name descname"><span class="pre">get_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plugin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/sdk/context.py#L43"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.sdk.Context.get_action" title="Link to this definition">#</a></dt>
 <dd><p>Return a function matching the callable API of an action.
 This function is aware of the pipeline context and manages its own
 cleanup as appropriate.</p>
@@ -466,7 +468,7 @@ cleanup as appropriate.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.sdk.Context.make_artifact">
-<span class="sig-prename descclassname"><span class="pre">Context.</span></span><span class="sig-name descname"><span class="pre">make_artifact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/9cb45d5/qiime2/sdk/context.py#L166"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.sdk.Context.make_artifact" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Context.</span></span><span class="sig-name descname"><span class="pre">make_artifact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/sdk/context.py#L166"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.sdk.Context.make_artifact" title="Link to this definition">#</a></dt>
 <dd><p>Return a new artifact from a given view.</p>
 <p>This artifact is automatically tracked and cleaned by the pipeline
 context.</p>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>How to test QIIME 2 plugins &#8212; Developing with QIIME 2</title>
+    <title>Automate testing of your plugin &#8212; Developing with QIIME 2</title>
   
   
   
@@ -58,12 +58,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/how-to-guides/test-plugins';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/how-to-guides/automate-testing';</script>
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Writing Usage Examples" href="usage-examples.html" />
-    <link rel="prev" title="How to use Metadata" href="use-metadata.html" />
+    <link rel="next" title="Publicize your QIIME 2 plugins (or other QIIME 2-based tools)" href="publicize.html" />
+    <link rel="prev" title="Facilitating installation of your plugin for users" href="facilitate-installation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -194,7 +194,7 @@
 <li class="toctree-l3"><a class="reference internal" href="support-your-users.html">Provide technical support for your users</a></li>
 <li class="toctree-l3"><a class="reference internal" href="maximize-compatibility.html">Maximize compatibility between your plugin(s) and existing QIIME 2 distribution(s)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="facilitate-installation.html">Facilitating installation of your plugin for users</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automate-testing.html">Automate testing of your plugin</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Automate testing of your plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="publicize.html">Publicize your QIIME 2 plugins (or other QIIME 2-based tools)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="register-a-plugin.html">Register a QIIME 2 plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="create-register-method.html">Create and register a Method</a></li>
@@ -204,7 +204,7 @@
 <li class="toctree-l3"><a class="reference internal" href="artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="play-nicely-with-others.html">How to play nicely with other plugins</a></li>
 <li class="toctree-l3"><a class="reference internal" href="use-metadata.html">How to use Metadata</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">How to test QIIME 2 plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test-plugins.html">How to test QIIME 2 plugins</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage-examples.html">Writing Usage Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="format-validation-levels.html">Defining different Format validation levels</a></li>
 </ul>
@@ -345,7 +345,7 @@
       
       
       
-      <li><a href="../../_sources/plugins/how-to-guides/test-plugins.md" target="_blank"
+      <li><a href="../../_sources/plugins/how-to-guides/automate-testing.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -429,7 +429,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>How to test QIIME 2 plugins</h1>
+    <h1>Automate testing of your plugin</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -439,7 +439,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automated-testing-using-continuous-integration-ci-and-github-actions-gha">Automated Testing using Continuous Integration (CI) and Github Actions (GHA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-continuous-integration-ci-testing">Configure Continuous Integration (CI) testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-weekly-automated-testing">Configure weekly automated testing</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -451,22 +455,110 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="how-to-test-qiime-2-plugins">
-<span id="how-to-test-plugins"></span><h1>How to test QIIME 2 plugins<a class="headerlink" href="#how-to-test-qiime-2-plugins" title="Link to this heading">#</a></h1>
-<p>This document is a placeholder at the moment.</p>
-<p>Briefly, QIIME 2 provides a test harness to simplify a few of the more repetitive parts of testing.
-This is the <code class="docutils literal notranslate"><span class="pre">TestPluginBase</span></code> class (<code class="docutils literal notranslate"><span class="pre">qiime2.plugin.testing.TestPluginBase</span></code>).</p>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
-<p>Pending full documentation, here are some references where you can see how aspects of QIIME 2 plugins can be tested:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="automate-testing-of-your-plugin">
+<span id="automate-testing"></span><h1>Automate testing of your plugin<a class="headerlink" href="#automate-testing-of-your-plugin" title="Link to this heading">#</a></h1>
+<p>Automating testing of your plugin is a good way to ensure that you are alerted to issues with your plugin before your users discover them.
+This How-to guide provides instructions on automating testing of your plugin using GitHub Actions, and assumes that have configured installation of your plugin as described in <a class="reference internal" href="facilitate-installation.html#facilitating-installation"><span class="std std-ref">Facilitating installation of your plugin for users</span></a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You will need to adjust the environment file versions in the two Github Actions described below with each new QIIME 2 release.
+These are specified as <code class="docutils literal notranslate"><span class="pre">ci-&lt;repository-name&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">cron-&lt;repository-name&gt;</span></code> in the text below.
+We plan to develop functionality as part of the QIIME 2 Library that will help to automate this process for plugin developers, but as of now (16 August 2024) this process is manual.</p>
+</div>
+<section id="automated-testing-using-continuous-integration-ci-and-github-actions-gha">
+<h2>Automated Testing using Continuous Integration (CI) and Github Actions (GHA)<a class="headerlink" href="#automated-testing-using-continuous-integration-ci-and-github-actions-gha" title="Link to this heading">#</a></h2>
+<p>The weekly development builds of the QIIME 2 distributions can help you make sure your code stays current with the distribution(s) you are targeting as you can automate your testing against them.
+<a class="reference internal" href="set-up-development-environment.html#setup-dev-environment"><span class="std std-ref">Set up your development environment</span></a> will help you install the most recent successful development metapackage build (again, usually weekly, but sometimes the builds fail and take time to debug).</p>
+<p>There are a couple of things that we recommend implementing to help you ensure that your plugin remains compatible within the QIIME 2 ecosystem (discussed below).</p>
+<section id="configure-continuous-integration-ci-testing">
+<h3>Configure Continuous Integration (CI) testing<a class="headerlink" href="#configure-continuous-integration-ci-testing" title="Link to this heading">#</a></h3>
+<p>Continuous Integration testing is designed to regularly install and run your plugin’s unit tests in the targeted QIIME 2 distributions or your custom distribution.</p>
+<p>To implement this, you’ll need to create a Github Action (GHA) that will be triggered each time you make a commit to your repository - either through a pull request (PR) or a direct commit to one of your remote branches.
+Github Actions can be a bit confusing to set up.
+We recommend the online course, <a class="reference external" href="https://hutchdatascience.org/GitHub_Automation_for_Scientists"><em>GitHub Automation for Scientists</em></a>, developed by the <a class="reference external" href="https://www.itcrtraining.org/">ITCR Training Network</a>, before moving forward.
+Once you’ve read through this (and hopefully played around with a few of the toy examples provided therein), you can start to put together a CI workflow based the examples provided here.</p>
+<p>Here is what the basic structure of your GHA will look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="p">:</span> <span class="n">ci</span><span class="o">-&lt;</span><span class="n">repository</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+<span class="n">on</span><span class="p">:</span>
+  <span class="n">pull_request</span><span class="p">:</span>
+    <span class="n">branches</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;&lt;target-branch&gt;&quot;</span><span class="p">]</span>
+  <span class="n">push</span><span class="p">:</span>
+    <span class="n">branches</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;&lt;target-branch&gt;&quot;</span><span class="p">]</span>
+<span class="n">jobs</span><span class="p">:</span>
+  <span class="n">ci</span><span class="p">:</span>
+    <span class="n">uses</span><span class="p">:</span> <span class="n">qiime2</span><span class="o">/</span><span class="n">distributions</span><span class="o">/.</span><span class="n">github</span><span class="o">/</span><span class="n">workflows</span><span class="o">/</span><span class="n">lib</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="n">ci</span><span class="o">.</span><span class="n">yaml</span><span class="nd">@dev</span>
+    <span class="k">with</span><span class="p">:</span>
+      <span class="n">github</span><span class="o">-</span><span class="n">repo</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">repository</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+      <span class="n">env</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">name</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">target</span><span class="o">-</span><span class="n">epoch</span><span class="o">&gt;-&lt;</span><span class="n">package</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;-</span><span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+<p>With the bracketed terms defined as:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/qiime2/q2-types/blob/master/q2_types/feature_data/tests/test_format.py">Formats</a></p></li>
-<li><p><a class="reference external" href="https://github.com/qiime2/q2-types/blob/master/q2_types/feature_data/tests/test_type.py">Semantic Types</a></p></li>
-<li><p><a class="reference external" href="https://github.com/qiime2/q2-types/blob/master/q2_types/feature_data/tests/test_transformer.py">Transformers</a></p></li>
-<li><p><a class="reference external" href="https://github.com/qiime2/q2-vsearch/blob/master/q2_vsearch/tests/test_plugin_setup.py">Plugin registration</a> - note that testing of plugin registration doesn’t require the use of the <code class="docutils literal notranslate"><span class="pre">TestPluginBase</span></code> class.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;target-branch&gt;</span></code>: the branch that should be used when running the GHA
+This will typically be your <code class="docutils literal notranslate"><span class="pre">main</span></code> branch, but may differ if you’ve customized the branch structure of your repository.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;repository-name&gt;</span></code>: the name of your repository on GitHub</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;target-epoch&gt;-&lt;package-name&gt;-environment.yml</span></code>: the name of your environment file. If you haven’t created this yet, refer back to <a class="reference internal" href="facilitate-installation.html#facilitating-installation"><span class="std std-ref">Facilitating installation of your plugin for users</span></a> before continuing.</p></li>
 </ul>
-<p>You can see an example of all of these in one place <a class="reference external" href="https://github.com/gregcaporaso/q2-sapienns/tree/07d9686224de41075990b5af705f41d44f48b249/q2_sapienns/tests">in the q2-sapienns test suite</a>.
-You can learn about the q2-sapienns plugin <a class="reference external" href="https://github.com/gregcaporaso/q2-sapienns/blob/main/README.md">here</a>.</p>
+<p>Your GHA file will be stored under under <code class="docutils literal notranslate"><span class="pre">.github/workflows/</span></code> in your repository, and you can use the same name as your Github Action for the filename (e.g., <code class="docutils literal notranslate"><span class="pre">ci-&lt;repository-name&gt;.yml</span></code>).
+Note that the extension will also be <code class="docutils literal notranslate"><span class="pre">.yml</span></code> (same as your environment file(s)).</p>
+<p>After creating this file and pushing it to the main branch of your repository, this GHA should run anytime there is a commit to <code class="docutils literal notranslate"><span class="pre">&lt;target-branch&gt;</span></code> or a pull request against <code class="docutils literal notranslate"><span class="pre">&lt;target-branch&gt;</span></code>.</p>
+</section>
+<section id="configure-weekly-automated-testing">
+<h3>Configure weekly automated testing<a class="headerlink" href="#configure-weekly-automated-testing" title="Link to this heading">#</a></h3>
+<p>Keeping your package up to date with all of the downstream dependencies can feel like a lot of work and hassle, and it can be.
+Unfortunately, software is never “done”, and that’s important to understand if you’re distributing software for the community to use.
+It’s going to require maintenance because software is always changing, and the more dependencies your plugin has, the more likely it is that updates to one of your dependencies will necessitate changes to your plugin (e.g., due to an API change in the dependency).
+Performing automated weekly test builds of your plugin will help you keep your package up to date and alert you as issues arise so you can discover them and address them on your own schedule, before it becomes a problem for your users.</p>
+<p>In addition to running your unit tests for each commit and/or pull request against your plugin’s <code class="docutils literal notranslate"><span class="pre">&lt;target-branch&gt;</span></code>, we recommend implementing regularly scheduled testing of your plugin against the development environments for the QIIME 2 distributions and/or plugins that it relies on.</p>
+<p>The process for this will be very similar to the GHA discussed above.
+The main differences are that your plugin’s environment will be configured with the latest development version of the relevant distribution(s), rather than a specified release version, and that the GHA will be triggered at specific times rather than based on specific events (commits or pull requests).
+We suggest having these tests run on a weekly basis to make sure you have ample time between QIIME 2 releases to fix any dependency conflicts or issues from code changes that may arise.</p>
+<p>Here’s the basic structure of the GHA you’ll create to initiate these scheduled tests against your target distribution’s development environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="p">:</span> <span class="n">cron</span><span class="o">-&lt;</span><span class="n">repository</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+<span class="n">on</span><span class="p">:</span>
+  <span class="n">workflow_dispatch</span><span class="p">:</span> <span class="p">{}</span>
+  <span class="n">schedule</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">cron</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">*</span> <span class="o">*</span> <span class="n">SUN</span>
+<span class="n">jobs</span><span class="p">:</span>
+  <span class="n">ci</span><span class="p">:</span>
+    <span class="n">uses</span><span class="p">:</span> <span class="n">qiime2</span><span class="o">/</span><span class="n">distributions</span><span class="o">/.</span><span class="n">github</span><span class="o">/</span><span class="n">workflows</span><span class="o">/</span><span class="n">lib</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="n">ci</span><span class="o">.</span><span class="n">yaml</span><span class="nd">@dev</span>
+    <span class="k">with</span><span class="p">:</span>
+      <span class="n">github</span><span class="o">-</span><span class="n">repo</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">repository</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+      <span class="n">env</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">name</span><span class="p">:</span> <span class="n">development</span><span class="o">-&lt;</span><span class="n">repository</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;-</span><span class="n">environment</span><span class="o">.</span><span class="n">yml</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Relative to the GHA example above, the differences are:</p>
+<ul class="simple">
+<li><p>The trigger for this action (i.e., <code class="docutils literal notranslate"><span class="pre">on</span></code>) is either manual (<code class="docutils literal notranslate"><span class="pre">workflow_dispatch</span></code>) or a schedule (<code class="docutils literal notranslate"><span class="pre">cron</span></code>) (previously it was commits and pull requests).
+You can utilize the manual trigger under your repository’s <code class="docutils literal notranslate"><span class="pre">actions</span></code> tab if you’d like to re-run these scheduled tests sooner than the next scheduled occurrence (if you’re troubleshooting a test failure or upstream dependency issue).
+You can adjust the schedule to any frequency you’d prefer, but we recommend weekly testing to ensure you catch anything that may have fallen out of sync well in advance of the upcoming release.
+More information on the formatting for cron scheduling can be found <a class="reference external" href="https://www.ibm.com/docs/en/db2/11.5?topic=task-unix-cron-format">here</a>.</p></li>
+<li><p>The environment file that is targeted by this action is different than what’s used in your CI testing (<code class="docutils literal notranslate"><span class="pre">development</span></code> vs <code class="docutils literal notranslate"><span class="pre">&lt;target-epoch&gt;</span></code>).
+The idea here is that your CI testing is targeting official release versions of your QIIME 2 environment, while these scheduled tests are targeting the current development environment.
+In order to support this, you’ll need to create a new ‘development’ environment file with each QIIME 2 release that looks like the following:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">channels</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">packages</span><span class="o">.</span><span class="n">qiime2</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">qiime2</span><span class="o">/&lt;</span><span class="nb">next</span><span class="o">-</span><span class="n">epoch</span><span class="o">&gt;/&lt;</span><span class="n">target</span><span class="o">-</span><span class="n">distribution</span><span class="o">&gt;/</span><span class="n">passed</span>
+<span class="o">-</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+<span class="o">-</span> <span class="n">bioconda</span>
+<span class="n">dependencies</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">qiime2</span><span class="o">-&lt;</span><span class="n">target</span><span class="o">-</span><span class="n">distribution</span><span class="o">&gt;</span>
+  <span class="o">-</span> <span class="n">pip</span>
+  <span class="o">-</span> <span class="n">pip</span><span class="p">:</span>
+    <span class="o">-</span> <span class="o">&lt;</span><span class="n">repository</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="nd">@git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">owner</span><span class="o">&gt;/&lt;</span><span class="n">repository</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;.</span><span class="n">git</span><span class="o">@&lt;</span><span class="n">target</span><span class="o">-</span><span class="n">branch</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>With the bracketed terms defined as:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;next-epoch&gt;</span></code>: the next QIIME 2 release epoch.
+QIIME 2 releases are scheduled for the first Wednesday of April and October, so this value is always predictable.
+For example, if the most recent release was 2024.10, your <code class="docutils literal notranslate"><span class="pre">&lt;next-epoch&gt;</span></code> would be 2025.4.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;target-distribution&gt;</span></code>: the QIIME 2 distribution that your plugin should be installed under (e.g., <code class="docutils literal notranslate"><span class="pre">amplicon</span></code>, or <code class="docutils literal notranslate"><span class="pre">metagenome</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;target-branch&gt;</span></code> (optional): the branch of your repository that testing will be performed against. If not specified, this will default to your repository’s <em>Default branch</em> (e.g., <code class="docutils literal notranslate"><span class="pre">main</span></code>). If you don’t include this, you should leave off the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> symbol following <code class="docutils literal notranslate"><span class="pre">.git</span></code>.</p></li>
+</ul>
+<p>You can set up any additional GHAs on your repository that you feel will be beneficial to your plugin and general development workflow.
+The actions outlined here are what the QIIME 2 developers recommend having to maintain an active and usable plugin.</p>
+</section>
 </section>
 </section>
 
@@ -501,20 +593,20 @@ You can learn about the q2-sapienns plugin <a class="reference external" href="h
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="use-metadata.html"
+       href="facilitate-installation.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">How to use Metadata</p>
+        <p class="prev-next-title">Facilitating installation of your plugin for users</p>
       </div>
     </a>
     <a class="right-next"
-       href="usage-examples.html"
+       href="publicize.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Writing Usage Examples</p>
+        <p class="prev-next-title">Publicize your QIIME 2 plugins (or other QIIME 2-based tools)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -534,7 +626,11 @@ You can learn about the q2-sapienns plugin <a class="reference external" href="h
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automated-testing-using-continuous-integration-ci-and-github-actions-gha">Automated Testing using Continuous Integration (CI) and Github Actions (GHA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-continuous-integration-ci-testing">Configure Continuous Integration (CI) testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-weekly-automated-testing">Configure weekly automated testing</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
