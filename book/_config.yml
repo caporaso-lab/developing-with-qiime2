@@ -14,6 +14,7 @@ sphinx:
     - sphinx.ext.mathjax
     - sphinx.ext.githubpages
     - sphinxcontrib.bibtex
+    - sphinxcontrib.mermaid
     - q2doc.linkcode
   config:
     html_theme_options:
