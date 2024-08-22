@@ -8,6 +8,8 @@ This will enable your users to utilize multi-processor computers or multi-node h
 :class: tip
 
 The complete code that I wrote to add the second `Pipeline` to my plugin can be found here: {{ dwq2_add_parallel_pipeline_commit_1_url }}. The code that I developed to add parallel computing support to the new `Pipeline` can be found here: {{ dwq2_add_parallel_pipeline_commit_2_url }}.
+I also included a usage example at the end which you can use to compare the performance of serial and parallel runs of the new Pipeline here: {{ dwq2_add_parallel_pipeline_commit_3_url }}.
+That third commit does increase the runtime of the unit tests considerably (from about 30 seconds to about 6 minutes, on the computer that I'm developing on).
 ```
 
 ## Add a local alignment search `Pipeline`
@@ -218,20 +220,32 @@ These operations can be more complex in some cases (at some point, I'll [add an 
 ### Update `search-and-summarize` to use *split* and *combine* Methods
 
 We're now ready to update `search-and-summarize` to run in parallel.
-To do this, first we'll load the new Actions we just defined into variables inside of our Pipeline by adding the following lines:
+
+First, we'll add the `split_size` parameter to `search_and_summarize`, so we can pass it through to `split_sequences`.
 
 ```python
+def search_and_summarize(
+    ...
+    split_size=_split_seqs_defaults['split_size'],
+    ...
+```
+
+Then, inside the function, we'll get the new Actions we just defined:
+
+```python
+...
 split_action = ctx.get_action('dwq2', 'split_sequences')
 combine_action = ctx.get_action('dwq2', 'combine_las_reports')
+...
 ```
 
-Then, we apply the *split* action to our input sequences:
+Then, we'll apply the *split* action to our input sequences:
 
 ```python
-query_splits, = split_action(query_seqs)
+query_splits, = split_action(query_seqs, split_size=split_size)
 ```
 
-Next, the interesting bit happens.
+And next, the interesting bit happens.
 We start by defining a list (`las_results`) to collect our local alignment search results for each split of the query sequences.
 Then we iterate over the splits, *applying* the local alignment search method to each split, and appending the results in the `las_results` list that we just created.
 
@@ -239,7 +253,7 @@ Then we iterate over the splits, *applying* the local alignment search method to
 las_results = []
 for q in query_splits.values():
     las_result, = las_action(
-        q, reference_seqs, n=0, gap_open_penalty=gap_open_penalty,
+        q, reference_seqs, n=n, gap_open_penalty=gap_open_penalty,
         gap_extend_penalty=gap_extend_penalty, match_score=match_score,
         mismatch_score=mismatch_score)
     las_results.append(las_result)
@@ -248,19 +262,24 @@ for q in query_splits.values():
 Finally we *combine* all of the individual results, and from this point everything proceeds as it did before we added parallel support.
 
 ```python
-las_results, = combine_action(las_results, n=n)
+las_results, = combine_action(las_results)
 ```
 
 Under the hood is where the magic happens here.
-Because we're iterating over a collection of QIIME 2 Artifacts (the `for` loop above) in a QIIME 2 `Pipeline`, each `las_result` object is a proxy for a real QIIME 2 artifact and the jobs to create them are distributed as indicated in the user's [QIIME 2 parallel configuration](parallel-configuration).
+Because we're iterating over a collection of QIIME 2 Artifacts (the `for` loop above) in a QIIME 2 `Pipeline`, each `las_result` object is a proxy for a real QIIME 2 artifact.
+The jobs to create them are distributed as indicated in the user's [QIIME 2 parallel configuration](parallel-configuration).
 The code continues executing as if these were real Artifacts, not proxy Artifacts, until something is needed from them.
-At that point, the code will block and wait for the proxy Artifacts to become real.
+At that point, the code will block (i.e., wait) until the proxy Artifacts become real Artifacts, and then continue processing.
 
-One other thing that you get for free here is *pipeline resumption*.
-If your *Pipeline* is interrupted mid-run (for example, because the jobs ran out of alloted time or memory on the shared compute cluster they're running on), users can restart the job and all `Results` that were already computed will be recycled and not need to be computed again.
-This can save your users a lot of time and frustration.
+```{admonition} Pipeline resumption ♻️
+:class: tip
 
-No changes are needed in the registration of the `search_and_summarize` Pipeline in `plugin_setup.py`.
+A cool feature that you get for free here is *pipeline resumption*.
+If your Pipeline is interrupted mid-run (for example, because the jobs ran out of alloted time or memory on the shared compute cluster they're running on), users can restart the job and all `Results` that were already computed will be recycled and not need to be computed again.
+This can save your users a lot of time and frustration, and reduce unnecessary utilization of compute resources and the energy used to power that computation.
+```
+
+The last steps before this is ready to use are to update the parameters to `search_and_summarize` in `plugin_setup.py`, and to add a test of the parallel execution of the Pipeline. Make the necessary changes to `plugin_setup.py`, and then we'll add a new unit test.
 
 ### Testing the parallel Pipeline
 
@@ -269,12 +288,12 @@ Specifically, we'll reuse most of our test of the serial functionality and confi
 
 There are a lot of changes in the `test_pipelines.py` file in the commit associated with this section, but most of them are just refactoring the code to reuse the input Artifacts and expected test results.
 First, I added a `setUp` method to the `SearchAndSummarizeTests`.
-`setUp` is a special method that runs before each individual test function, so it's very useful for setting up information that you'd like to re-use across tests.
-In this new function, the first thing we do is call `super().setUp()`, which calls the `setUp` function on the base class (`TestPluginBase` in this case), if it exists.
-This ensures that all upstream configuration is still happening.
+`setUp` is a special method that runs before each individual test function, so it's useful for sharing information across tests.
+In this new function, the first thing I do is call `super().setUp()`, which calls the `setUp` function on the base class (`TestPluginBase` in this case), if one exists.
+This ensures that any upstream configuration is still happening.
 Then, I moved the code from `test_simple1` that accessed the `Pipeline` and created the input `Artifacts` to this function and set all of these as attributes on the `SearchAndSummarizeTests` class.
-Now I can access test as `self...` within the other methods in this class.
-After all of these changes, my `class` starts as follows:
+Now I can access these via the `self` variable in the methods of this class.
+After all of these changes, my `class` definition starts as follows:
 
 ```python
 class SearchAndSummarizeTests(TestPluginBase):
@@ -375,7 +394,42 @@ def test_simple1_parallel(self):
 
 After making all of the changes described here to your `_pipelines.py` and `test_pipelines.py` files, run the test suite with `make test`.
 If all tests pass, you should be good to go.
-If not, compare your code to mine ({{ dwq2_add_parallel_pipeline_commit_2_url }}) to see if something is different.
+If not, compare your code to mine ({{ dwq2_add_parallel_pipeline_commit_2_url }}) to see what's different.
+
+## Compare the serial versus parallel run times of the `search-and-summarize`
+
+Now that we've added parallel computing support to our `search-and-summarize` Pipeline, we can try it out to see how it impacts run time.
+To do this, we need a data set that is big enough that the benefits of parallelization outweigh the overhead associated with parallelization.
+For example, the splitting of the query sequences and the combining of the search result tables each take some time - if our input data is tiny, that time might be longer than the time to just compute the results serially, so running the code in parallel wouldn't result in a noticeable decrease in runtime (the parallel runtime might even be larger than the serial runtime).
+
+In a third commit associated with this section ({{ dwq2_add_parallel_pipeline_commit_3_url }}), I added a usage example to our new Pipeline that uses a larger data set.
+Note that integrating this usage example does considerably increase the runtime of the unit tests.
+I suggest trying it out as-is, but after experimenting with it you can feel free to reduce the number of query (to 2, for example) and reference sequences (to 3, for example) to reduce the runtime, or just keep it as-is - it's up to you.
+
+Refer to this commit to integrate the usage example into your code.
+Then, run the usage example as is to get a feel for its serial run time.
+After that, call the usage example again providing the `--parallel` parameter to get a feel for its parallel run time.
+
+When I do this, I observe the following run times associated with the data provenance of this step:
+
+
+::::{grid}
+:gutter: 2
+
+:::{grid-item-card} Serial! 🐌
+```{image} ../../_static/search-and-summarize-serial.png
+```
+:::
+
+:::{grid-item-card} Parallel! 🏃
+```{image} ../../_static/search-and-summarize-parallel.png
+```
+:::
+
+::::
+
+
+
 
 
 
