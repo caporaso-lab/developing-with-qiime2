@@ -468,7 +468,7 @@ document.write(`
 <span id="testing-api-docs"></span><h1>Testing<a class="headerlink" href="#testing" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.testing.</span></span><span class="sig-name descname"><span class="pre">TestPluginBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/plugin/testing.py#L40"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.testing.</span></span><span class="sig-name descname"><span class="pre">TestPluginBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2c4c7d2/qiime2/plugin/testing.py#L40"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase" title="Link to this definition">#</a></dt>
 <dd><p>Test harness for simplifying testing QIIME 2 plugins.</p>
 <p><code class="docutils literal notranslate"><span class="pre">TestPluginBase</span></code> extends <code class="docutils literal notranslate"><span class="pre">unittest.TestCase</span></code>, with a few extra helpers
 and assertions.</p>
@@ -501,7 +501,7 @@ method when executed. Raises a ValueError if the instance does
 not have a method with the specified name.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.setUp">
-<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/plugin/testing.py#L61"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.setUp" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2c4c7d2/qiime2/plugin/testing.py#L61"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.setUp" title="Link to this definition">#</a></dt>
 <dd><p>Test runner setup hook.</p>
 <p>If overriding this hook in a test, call <code class="docutils literal notranslate"><span class="pre">__super__</span></code> to invoke this
 method in the overridden hook, otherwise the harness might not work
@@ -510,7 +510,7 @@ as expected.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.tearDown">
-<span class="sig-name descname"><span class="pre">tearDown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/plugin/testing.py#L92"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.tearDown" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">tearDown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2c4c7d2/qiime2/plugin/testing.py#L92"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.tearDown" title="Link to this definition">#</a></dt>
 <dd><p>Test runner teardown hook.</p>
 <p>If overriding this hook in a test, call <code class="docutils literal notranslate"><span class="pre">__super__</span></code> to invoke this
 method in the overridden hook, otherwise the harness might not work
@@ -519,7 +519,7 @@ as expected.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.get_data_path">
-<span class="sig-name descname"><span class="pre">get_data_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/plugin/testing.py#L103"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.get_data_path" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_data_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2c4c7d2/qiime2/plugin/testing.py#L103"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.get_data_path" title="Link to this definition">#</a></dt>
 <dd><p>Convenience method for getting a data asset while testing.</p>
 <p>Test data stored in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> dir local to the running test
 can be accessed via this method.</p>
@@ -538,7 +538,7 @@ can be accessed via this method.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.get_transformer">
-<span class="sig-name descname"><span class="pre">get_transformer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_type</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/plugin/testing.py#L124"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.get_transformer" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_transformer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_type</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2c4c7d2/qiime2/plugin/testing.py#L124"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.get_transformer" title="Link to this definition">#</a></dt>
 <dd><p>Convenience method for getting a registered transformer.</p>
 <p>This helper deliberately side-steps the framework’s validation
 machinery, so that it is possible for plugin developers to test
@@ -561,7 +561,7 @@ failing conditions.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.assertRegisteredSemanticType">
-<span class="sig-name descname"><span class="pre">assertRegisteredSemanticType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">semantic_type</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/plugin/testing.py#L154"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.assertRegisteredSemanticType" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">assertRegisteredSemanticType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">semantic_type</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2c4c7d2/qiime2/plugin/testing.py#L154"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.assertRegisteredSemanticType" title="Link to this definition">#</a></dt>
 <dd><p>Test assertion for ensuring a plugin’s semantic type is registered.</p>
 <p>Fails if the semantic type requested is not found in the Plugin
 Manager.</p>
@@ -574,7 +574,7 @@ Manager.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.assertSemanticTypeRegisteredToFormat">
-<span class="sig-name descname"><span class="pre">assertSemanticTypeRegisteredToFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">semantic_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp_format</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/plugin/testing.py#L176"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.assertSemanticTypeRegisteredToFormat" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">assertSemanticTypeRegisteredToFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">semantic_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp_format</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2c4c7d2/qiime2/plugin/testing.py#L176"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.assertSemanticTypeRegisteredToFormat" title="Link to this definition">#</a></dt>
 <dd><p>Test assertion for ensuring a semantic type is registered to a
 format.</p>
 <p>Fails if the semantic type requested is not registered to the format
@@ -592,7 +592,7 @@ registered to <strong>any</strong> format.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.transform_format">
-<span class="sig-name descname"><span class="pre">transform_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filenames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/plugin/testing.py#L208"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.transform_format" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">transform_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filenames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2c4c7d2/qiime2/plugin/testing.py#L208"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.transform_format" title="Link to this definition">#</a></dt>
 <dd><p>Helper utility for loading data and transforming it.</p>
 <p>Combines several other utilities in this class, will load files from
 <code class="docutils literal notranslate"><span class="pre">data/</span></code>, as <code class="docutils literal notranslate"><span class="pre">source_format</span></code>, then transform to the <code class="docutils literal notranslate"><span class="pre">target</span></code> view.</p>
@@ -624,7 +624,7 @@ exclusive with the <code class="docutils literal notranslate"><span class="pre">
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.execute_examples">
-<span class="sig-name descname"><span class="pre">execute_examples</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/plugin/testing.py#L273"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.execute_examples" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">execute_examples</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2c4c7d2/qiime2/plugin/testing.py#L273"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.execute_examples" title="Link to this definition">#</a></dt>
 <dd><p>Runs all usage examples defined in the plugin.</p>
 </dd></dl>
 
@@ -632,7 +632,7 @@ exclusive with the <code class="docutils literal notranslate"><span class="pre">
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.assert_no_nans_in_tables">
-<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.testing.</span></span><span class="sig-name descname"><span class="pre">assert_no_nans_in_tables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fh</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/7dc2ddb/qiime2/plugin/testing.py#L286"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.assert_no_nans_in_tables" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.testing.</span></span><span class="sig-name descname"><span class="pre">assert_no_nans_in_tables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fh</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2c4c7d2/qiime2/plugin/testing.py#L286"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.assert_no_nans_in_tables" title="Link to this definition">#</a></dt>
 <dd><p>Checks for NaNs present in any of the tables in the indicated file then
 resets to the head of the file.</p>
 </dd></dl>

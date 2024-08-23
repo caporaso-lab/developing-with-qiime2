@@ -23,6 +23,7 @@ Transformers in QIIME 2 are designed to handle converstions between objects behi
 In this section, we'll do a small refactor of the code we wrote in the previous section.
 
 ```{admonition} tl;dr
+:class: tip
 The code that I wrote for this section can be found here: {{ dwq2_add_2nd_transformer_commit_url }}.
 ```
 

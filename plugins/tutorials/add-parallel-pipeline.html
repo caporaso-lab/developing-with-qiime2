@@ -58,6 +58,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/tutorials/add-parallel-pipeline';</script>
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -416,7 +418,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -432,6 +436,23 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-a-local-alignment-search-pipeline">Add a local alignment search <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-parallel-computing-support-to-search-and-summarize">Add parallel computing support to <code class="docutils literal notranslate"><span class="pre">search_and_summarize</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-split-method">Defining a <em>split</em> Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-split-sequences">Registering <code class="docutils literal notranslate"><span class="pre">split_sequences</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-and-registering-a-combine-method">Defining and registering a <em>combine</em> method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-search-and-summarize-to-use-split-and-combine-methods">Update <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> to use <em>split</em> and <em>combine</em> Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-the-parallel-pipeline">Testing the parallel Pipeline</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-the-serial-versus-parallel-run-times-of-the-search-and-summarize">Compare the serial versus parallel run times of the <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code></a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -445,12 +466,381 @@ document.write(`
 <h1>Add a Pipeline with parallel computing support<a class="headerlink" href="#add-a-pipeline-with-parallel-computing-support" title="Link to this heading">#</a></h1>
 <p>In this chapter we’ll add a second <a class="reference internal" href="../../back-matter/glossary.html#term-Pipeline"><span class="xref std std-term">Pipeline</span></a> to our plugin, and then we’ll add parallel computing support to that <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code>.
 This will enable your users to utilize multi-processor computers or multi-node high performance computing infrastructure (e.g., computer clusters) to analyze their data.</p>
-<div class="note admonition" id="add-parallel-pipeline-commits">
+<div class="tip admonition" id="add-parallel-pipeline-commits">
 <p class="admonition-title">tl;dr</p>
-<p>The text for this chapter is not yet written, but the code has been added to q2-dwq2 in two commits.</p>
-<p>The first commit (<a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/a45f6fb85315843078c0777326031dbce9564802">caporaso-lab/q2-dwq2</a>) adds a new <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> to our plugin, and the second commit (<a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/7978a82beb1fcc2a06c7f520f86451504ff0bb29">caporaso-lab/q2-dwq2</a>) adds parallel support to that <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code>.</p>
-<p>The write-up for this section of the tutorial is in progress, as of 10 July 2024, and is coming soon.</p>
+<ol class="arabic simple">
+<li><p>The complete code that I wrote to add the second <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> to my plugin can be found here: <a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/d0d5f38ca6d2e8cdc647660db8d1923b048f8e1e">caporaso-lab/q2-dwq2</a>.</p></li>
+<li><p>The code that I developed to add parallel computing support to the new <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> can be found here: <a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/4ed7e01a6da9a10e7ddf1956877cf494740e35cd">caporaso-lab/q2-dwq2</a>.</p></li>
+<li><p>Finally, I added a usage example that can be used to compare the performance of serial and parallel runs of the new Pipeline here: <a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/590263ee9bb8c48df09fe62c0e966acfa99f9aff">caporaso-lab/q2-dwq2</a>.
+Because the third commit includes (a small amount) of real data, as opposed to the toy-sized data we’ve been using in unit tests, it increases the runtime of the test suite considerably (from about 30 seconds to about 6 minutes, on the M3 MacBook Pro that that I’m developing on).</p></li>
+</ol>
 </div>
+<section id="add-a-local-alignment-search-pipeline">
+<h2>Add a local alignment search <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code><a class="headerlink" href="#add-a-local-alignment-search-pipeline" title="Link to this heading">#</a></h2>
+<p>The first goal of this section is to define a new <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> that performs a local alignment search and then tabulates those results for the user to view.
+This is effectively the same goal as the ubiquitous bioinformatics tool, BLAST <span id="id1">[<a class="reference internal" href="../../back-matter/bibliography.html#id8" title="S F Altschul, W Gish, W Miller, E W Myers, and D J Lipman. Basic local alignment search tool. J. Mol. Biol., 215(3):403–410, October 1990.">5</a>]</span>.
+The underlying theory, and the implementation that we’ll use here, are presented in the <em>Sequence Homology Searching</em> chapter of <a class="reference external" href="https://readIAB.org">An Introduction to Applied Bioinformatics</a> <span id="id2">[<a class="reference internal" href="../../back-matter/bibliography.html#id5" title="J Gregory Caporaso. An introduction to applied bioinformatics, 2nd edition. 2021. URL: https://readiab.org.">3</a>]</span>.</p>
+<p>Briefly, given one or more <em>query sequences</em> and one or more <em>reference sequences</em>, a local alignment search uses pairwise sequence alignment to identify the most similar reference sequence for each query sequence.
+In our implementation, as in the BLAST implementation, we’ll allow a query sequence to match a subsequence of a reference sequence (this is useful, for example, if the query sequence represents a fragment of gene, and the reference sequences represent full-length genes).
+To achieve this, the underlying alignment algorithm that we’ll use is Smith-Waterman local pairwise alignment <span id="id3">[<a class="reference internal" href="../../back-matter/bibliography.html#id9" title="T F Smith and M S Waterman. Identification of common molecular subsequences. J. Mol. Biol., 147(1):195–197, March 1981.">6</a>]</span>, which is presented in the <em>Pairwise Sequence Alignment</em> chapter of <a class="reference external" href="https://readIAB.org">An Introduction to Applied Bioinformatics</a>.</p>
+<p>The output for a typical local alignment search is a table of the results.
+Depending on what the user requests, this can describe simply the best match in the database for each query (often defined as the reference sequence which obtains the highest scoring pairwise alignment with the query sequence), or a reverse sorted list of the matches, such that for each query sequence the <code class="docutils literal notranslate"><span class="pre">n</span></code> best matches are presented in order from best to worst.
+Depending on the implementation, some additional information may be provided about each alignment including the percent similarity between the aligned query and reference sequence, the length of the alignment, and the score of the alignment.</p>
+<p>To add a local alignment search <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> to our plugin, we’re going to add one new <code class="docutils literal notranslate"><span class="pre">Method</span></code> and one new <code class="docutils literal notranslate"><span class="pre">Visualizer</span></code>.
+The method will be called <code class="docutils literal notranslate"><span class="pre">local_alignment_search</span></code>, and it will take one or more query sequences and one or more reference sequences as inputs, and it will accept several parameters used to control the behavior of the alignment algorithm and the result tabulation.
+As an output, it will generate a tabulation of the search results, grouped by query id and sorted in descending order of alignment score.
+This table will be an Artifact of a new class, <code class="docutils literal notranslate"><span class="pre">LocalAlignmentSearchResults</span></code>, such that these results could be used by another action (e.g., one that associates metadata with the query sequences, such as taxonomic origin or gene function, based on metadata associated with their best matching reference sequences).
+This means that we’ll also create a new format, some new transformers, and a new artifact class in support of the new functionality.</p>
+<p>The new visualizer, <code class="docutils literal notranslate"><span class="pre">tabulate_las_results</span></code> (where <code class="docutils literal notranslate"><span class="pre">las</span></code> is an abbreviation of <em>local alignment search</em>) will take a <code class="docutils literal notranslate"><span class="pre">LocalAlignmentSearchResults</span></code> artifact as input and will produce a user-friendly view of it.</p>
+<p>Finally, the new pipeline, <code class="docutils literal notranslate"><span class="pre">search_and_summarize</span></code>, will link <code class="docutils literal notranslate"><span class="pre">local_alignment_search</span></code> and <code class="docutils literal notranslate"><span class="pre">tabulate_las_results</span></code> together, returning both the <code class="docutils literal notranslate"><span class="pre">LocalAlignmentSearchResults</span></code> data artifact and the human-readable visualization.</p>
+<p>Since you’ve already done all of this type of work before for other functionality in your plugin, we won’t go through this in detail.
+Use this as an opportunity to read and interpret QIIME 2 plugin code.
+Review the code added in <a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/d0d5f38ca6d2e8cdc647660db8d1923b048f8e1e">caporaso-lab/q2-dwq2</a> and add it to your plugin.</p>
+</section>
+<section id="add-parallel-computing-support-to-search-and-summarize">
+<h2>Add parallel computing support to <code class="docutils literal notranslate"><span class="pre">search_and_summarize</span></code><a class="headerlink" href="#add-parallel-computing-support-to-search-and-summarize" title="Link to this heading">#</a></h2>
+<p>QIIME 2’s formal support for parallel computing makes use of <a class="reference external" href="https://parsl-project.org/">Parsl</a>, and enables developers to create parallel <code class="docutils literal notranslate"><span class="pre">Pipelines</span></code> that can run on compute resources ranging from multi-core laptops to multi-node high performance computer clusters.
+Parallel <code class="docutils literal notranslate"><span class="pre">Pipelines</span></code> follow the <em>split-apply-combine</em> strategy.
+In the <em>split</em> stage, input data is divided into smaller data sets, generally of the same type as the input.
+Then, in the <em>apply</em> stage, the intended operation of the <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> is applied to each of the smaller data sets in parallel.
+Finally, in the <em>combine</em> stage, the results of each <em>apply</em> operation are integrated to yield the final result of the operation as a single data set, generally of the same type as the output of each <em>apply</em> operation.</p>
+<p>In the context of <code class="docutils literal notranslate"><span class="pre">search_and_summarize</span></code>, this can work as follows (see <a class="reference internal" href="#split-apply-combine-flowchart"><span class="std std-ref">the flow chart for a visual summary</span></a>).
+In the <em>split</em> stage, the query sequences can be divided into roughly equal sized splits of sequences, such that each query sequence appears in only one split.
+In the <em>apply</em> stage, the reference sequences and each split of query sequences can be provided as the input in parallel calls to the <code class="docutils literal notranslate"><span class="pre">local_alignment_search</span></code> method.
+Each parallel call will result in a tabular output of search results for its split of the query sequences against the full set of reference sequences.
+This has the effect of reducing the number of query sequences that are searched against the reference in a given call to <code class="docutils literal notranslate"><span class="pre">local_alignment_search</span></code>.
+Finally, in the <em>combine</em> stage, each of the tabular outputs are joined, and the resulting table is sorted and filtered to the top <code class="docutils literal notranslate"><span class="pre">n</span></code> hits per query.
+This enables the slow step in this workflow - <code class="docutils literal notranslate"><span class="pre">local_alignment_search</span></code> - to be run in parallel on different processors.</p>
+<p>Parsl takes care of all of the work of sending each <em>apply</em> job out to different processors and monitoring them to see when they’re all done.
+Our work on the plugin development side, after we’ve already defined the <em>apply</em> operation (<code class="docutils literal notranslate"><span class="pre">local_alignment_search</span></code>, in this example), is to define the actions that will perform the <em>split</em> and <em>combine</em> operations.
+These operations will be new QIIME 2 <code class="docutils literal notranslate"><span class="pre">Methods</span></code>.</p>
+<div class="dropdown admonition" id="split-apply-combine-flowchart">
+<p class="admonition-title"><em>split-apply-combine</em> flowchart for search and summarize</p>
+<div class="mermaid">
+            flowchart TD
+  A[&quot;query: FeatureData[Sequence]&quot;] ----&gt; B{&quot;split-sequences&quot;}
+
+
+  B -- split 0 --&gt; C[&quot;FeatureData[Sequence]&quot;]
+  B -- split 1 --&gt; D[&quot;FeatureData[Sequence]&quot;]
+  B -- split 2 --&gt; E[&quot;FeatureData[Sequence]&quot;]
+  B -- split 3 --&gt; F[&quot;FeatureData[Sequence]&quot;]
+
+
+  subgraph &quot;Collection[FeatureData[Sequence]]&quot;
+  C
+  D
+  E
+  F
+  end
+
+
+  C ----&gt; G{&quot;local-alignment-search\n(apply step)&quot;}
+  D ----&gt; H{&quot;local-alignment-search\n(apply step)&quot;}
+  E ----&gt; I{&quot;local-alignment-search\n(apply step)&quot;}
+  F ----&gt; J{&quot;local-alignment-search\n(apply step)&quot;}
+
+  G ----&gt; K[&quot;LocalAlignmentSearchResults&quot;]
+  H ----&gt; L[&quot;LocalAlignmentSearchResults&quot;]
+  I ----&gt; M[&quot;LocalAlignmentSearchResults&quot;]
+  J ----&gt; N[&quot;LocalAlignmentSearchResults&quot;]
+
+  subgraph &quot;Collection[LocalAlignmentSearchResults]&quot;
+  K
+  L
+  M
+  N
+  end
+
+  K ----&gt; O{&quot;combine-las-results&quot;}
+  L ----&gt; O
+  M ----&gt; O
+  N ----&gt; O
+
+  O ----&gt; P[&quot;LocalAlignmentSearchResults&quot;]
+
+  P ----&gt; Q{&quot;tabulate-las-results&quot;}
+
+  Q ----&gt; R(((&quot;Visualization&quot;)))
+
+  S[&quot;reference: FeatureData[Sequence]&quot;] -.-&gt; G
+  S -.-&gt; H
+  S -.-&gt; I
+  S -.-&gt; J
+
+subgraph Key
+  T[&quot;Artifact&quot;]
+  U{&quot;Action&quot;}
+  V(((&quot;Visualization&quot;)))
+end
+        </div></div>
+<section id="defining-a-split-method">
+<h3>Defining a <em>split</em> Method<a class="headerlink" href="#defining-a-split-method" title="Link to this heading">#</a></h3>
+<p>The <em>split</em>, <em>apply</em>, and <em>combine</em> actions are all QIIME 2 Methods, like any others.
+Our <em>split</em> method will build on a function that takes sequences as input, along with a variable defining the number of sequences that should go in each split, and it will result a dictionary mapping an arbitrary split identifier to a split of sequences.
+This can look like the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Store the default values for `split_sequences` in a dict, so we can</span>
+<span class="c1"># reference them in multiple places.</span>
+<span class="n">_split_seqs_defaults</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;split_size&#39;</span><span class="p">:</span> <span class="mi">5</span>
+<span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">split_sequences</span><span class="p">(</span>
+        <span class="n">seqs</span><span class="p">:</span> <span class="n">DNAIterator</span><span class="p">,</span>
+        <span class="n">split_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">_split_seqs_defaults</span><span class="p">[</span><span class="s1">&#39;split_size&#39;</span><span class="p">])</span> \
+        <span class="o">-&gt;</span> <span class="n">DNAIterator</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span> <span class="p">:</span> <span class="n">DNAIterator</span><span class="p">(</span><span class="n">split</span><span class="p">)</span>
+              <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">split</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">_batched</span><span class="p">(</span><span class="n">seqs</span><span class="p">,</span> <span class="n">split_size</span><span class="p">))}</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>Here, the input DNAIterator is passed to a function, <code class="docutils literal notranslate"><span class="pre">_batched</span></code>, which yields subsets of the input iterator each with <code class="docutils literal notranslate"><span class="pre">split_size</span></code> sequences.
+(If the number of input sequences isn’t a multiple of <code class="docutils literal notranslate"><span class="pre">split_size</span></code>, the last iterator in <code class="docutils literal notranslate"><span class="pre">result</span></code> will have fewer than <code class="docutils literal notranslate"><span class="pre">split_size</span></code> sequences.)
+The <a class="reference external" href="https://docs.python.org/3/library/itertools.html#itertools.batched"><code class="docutils literal notranslate"><span class="pre">_batched</span></code> function</a> does most of the work of splitting up the sequences here.
+Referring to the <code class="docutils literal notranslate"><span class="pre">_methods.py</span></code> file in <a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/4ed7e01a6da9a10e7ddf1956877cf494740e35cd">caporaso-lab/q2-dwq2</a>, add the <code class="docutils literal notranslate"><span class="pre">split_sequences</span></code> and <code class="docutils literal notranslate"><span class="pre">_batched</span></code> functions to your <code class="docutils literal notranslate"><span class="pre">_methods.py</span></code> file.
+This is also a good time to write unit tests for your <code class="docutils literal notranslate"><span class="pre">split_sequences</span></code> function.
+I recommend designing and implementing the unit tests yourself, but you can also refer to the tests that I wrote in <code class="docutils literal notranslate"><span class="pre">test_methods.py</span></code>.</p>
+<div class="dropdown tip admonition">
+<p class="admonition-title">Should our sequence splitter take the size of each split or the number of splits to create as input?</p>
+<p>Defining how the splits should be created is a design decision that the developer must consider.</p>
+<p>If having the user provide the number of sequences that should go into each split (as we are here), they will need to know the length of <code class="docutils literal notranslate"><span class="pre">seqs</span></code> to make the best decision for the computer where they will run the job.
+For example, if they have 16 processors available to them, it might make the most sense to have around 15 splits, so they’ll need to know the number of sequences they’re providing as input and divide that by 15 (rounding fractional values up to the next whole number).</p>
+<p>If instead, we have the user define how many splits they want (e.g., by providing a <code class="docutils literal notranslate"><span class="pre">num_splits</span></code> value), the computer will need to know how many sequences to put in each split, so it will need to know the length of <code class="docutils literal notranslate"><span class="pre">seqs</span></code> to make a good decision.
+That will require either taking two passes through <code class="docutils literal notranslate"><span class="pre">seqs</span></code> - first to find out how many sequences there are, and second to do the actual splitting - or reading the entirety of <code class="docutils literal notranslate"><span class="pre">seqs</span></code> into memory (e.g., calling <code class="docutils literal notranslate"><span class="pre">list(seqs)</span></code>).
+The first of these two options can be slow if <code class="docutils literal notranslate"><span class="pre">seqs</span></code> is long, and the second can be problematic if the size of <code class="docutils literal notranslate"><span class="pre">seqs</span></code> is larger than the amount of available RAM.</p>
+<p>The best option may be to let the user choose between these two approaches by either providing <code class="docutils literal notranslate"><span class="pre">split_size</span></code> or <code class="docutils literal notranslate"><span class="pre">num_splits</span></code>. If providing <code class="docutils literal notranslate"><span class="pre">num_splits</span></code> will be problematic due to runtime or required memory, they can opt to figure out the <code class="docutils literal notranslate"><span class="pre">split_size</span></code> themselves and provide it.</p>
+<p>For the sake of this example I’m going with the simplest option of just requiring the user to provide the <code class="docutils literal notranslate"><span class="pre">split_size</span></code>.
+As an exercise after completing this section, implement the alternative approach of allowing the user to either provide the <code class="docutils literal notranslate"><span class="pre">split_size</span></code> or <code class="docutils literal notranslate"><span class="pre">num_splits</span></code>.</p>
+</div>
+</section>
+<section id="registering-split-sequences">
+<h3>Registering <code class="docutils literal notranslate"><span class="pre">split_sequences</span></code><a class="headerlink" href="#registering-split-sequences" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">split_sequences</span></code> will be used in our <code class="docutils literal notranslate"><span class="pre">search_and_summarize</span></code> Pipeline, and we therefore need to register it as a new Action on our plugin.
+This is done in the typical way, and at this point you’re probably getting fairly comfortable with this.</p>
+<p>The one thing that is needed here, but which we haven’t encountered yet in other Actions, is allowing for an arbitrary number of outputs: the individual splits of sequences.
+The combination of the number of sequences in an input and the user-specified <code class="docutils literal notranslate"><span class="pre">split_size</span></code> will define how many outputs will be generated by a call to this action, so it’s not possible for us to determine this when registering the action.
+We therefore define our output type as a <code class="docutils literal notranslate"><span class="pre">Collection</span></code> of <code class="docutils literal notranslate"><span class="pre">FeatureData[Sequence]</span></code> artifacts, which we annotate as <code class="docutils literal notranslate"><span class="pre">Collection[FeatureData[Sequence]]</span></code> in the <code class="docutils literal notranslate"><span class="pre">outputs</span></code> dictionary.
+To achieve this, import <code class="docutils literal notranslate"><span class="pre">Collections</span></code> from <code class="docutils literal notranslate"><span class="pre">qiime2.plugin</span></code> at the top of your <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code> file.
+In your call to <code class="docutils literal notranslate"><span class="pre">plugin.methods.register_function</span></code>, you can then pass:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">outputs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;splits&#39;</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="n">FeatureData</span><span class="p">[</span><span class="n">Sequence</span><span class="p">]]}</span>
+</pre></div>
+</div>
+<p>Using that tip to handle the generation of an arbitrary number of outputs, refer to the other actions that you’ve registered, and start implementing the registration step without referring to the code in <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code>.
+Once you’ve done that and have it working, take a look at my call to <code class="docutils literal notranslate"><span class="pre">plugin.methods.register_function</span></code> in the <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code> file of <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code> to see if you missed anything that I included (I added the code in this commit: <a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/4ed7e01a6da9a10e7ddf1956877cf494740e35cd">caporaso-lab/q2-dwq2</a>).</p>
+</section>
+<section id="defining-and-registering-a-combine-method">
+<h3>Defining and registering a <em>combine</em> method<a class="headerlink" href="#defining-and-registering-a-combine-method" title="Link to this heading">#</a></h3>
+<p>Our <em>combine</em> method is effectively performing the opposite operation relative to our <em>split</em> method.
+In this case, we need a method that takes multiple <code class="docutils literal notranslate"><span class="pre">LocalAlignmentSearchResults</span></code> Artifacts as input, and returns them in a single, combined <code class="docutils literal notranslate"><span class="pre">LocalAlignmentSearchResults</span></code> Artifact.
+Let’s create a new <code class="docutils literal notranslate"><span class="pre">combine_las_reports</span></code> function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">combine_las_reports</span><span class="p">(</span><span class="n">reports</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">reports</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">results</span>
+</pre></div>
+</div>
+<p>In this function, <code class="docutils literal notranslate"><span class="pre">reports</span></code>, which is a dict of one or more pandas <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>, are combined using the <code class="docutils literal notranslate"><span class="pre">pandas.concat</span></code> function, which concatenates <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code> in the order in which they’re received.
+The resulting object is a single <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, which we’ll return from this function.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Something you might notice when looking at this function’s signature is that the <a class="reference internal" href="../../back-matter/glossary.html#term-View"><span class="xref std std-term">view</span></a> type for the collection of local alignment search reports (the <code class="docutils literal notranslate"><span class="pre">reports</span></code> variable) is <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>, not a collection of <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code> as you might expect.
+QIIME 2 doesn’t differentiate between single inputs and collections of inputs in the type annotations of functions to be registered as Actions.
+This was also apparent above, when <code class="docutils literal notranslate"><span class="pre">split_sequences</span></code> was annotated as returning a <code class="docutils literal notranslate"><span class="pre">DNAIterator</span></code>, which will always be a Python dictionary where <code class="docutils literal notranslate"><span class="pre">DNAIterator</span></code> objects are the values.
+This is just something to be aware of.</p>
+</div>
+<p>The last remaining things to do before we parallelize <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> is to write unit tests of <code class="docutils literal notranslate"><span class="pre">combine_las_reports</span></code>, and register a <code class="docutils literal notranslate"><span class="pre">combine-las-reports</span></code> Method in the plugin.
+Complete these steps as an exercise now, and then refer to my code (<a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/4ed7e01a6da9a10e7ddf1956877cf494740e35cd">caporaso-lab/q2-dwq2</a>) to check your work.</p>
+<p>One thing that I hope is evident from this section is that <em>split</em> and <em>combine</em> functions tend to be pretty simple.
+These operations can be more complex in some cases (at some point, I’ll <a class="reference external" href="https://github.com/caporaso-lab/developing-with-qiime2/issues/69">add an example</a> of that), but often they’re very simple.</p>
+</section>
+<section id="update-search-and-summarize-to-use-split-and-combine-methods">
+<h3>Update <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> to use <em>split</em> and <em>combine</em> Methods<a class="headerlink" href="#update-search-and-summarize-to-use-split-and-combine-methods" title="Link to this heading">#</a></h3>
+<p>We’re now ready to update <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> to run in parallel.</p>
+<p>First, we’ll add the <code class="docutils literal notranslate"><span class="pre">split_size</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">search_and_summarize</span></code>, so we can pass it through to <code class="docutils literal notranslate"><span class="pre">split_sequences</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">search_and_summarize</span><span class="p">(</span>
+    <span class="o">...</span>
+    <span class="n">split_size</span><span class="o">=</span><span class="n">_split_seqs_defaults</span><span class="p">[</span><span class="s1">&#39;split_size&#39;</span><span class="p">],</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Then, inside the function, we’ll get the new Actions we just defined:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="n">split_action</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get_action</span><span class="p">(</span><span class="s1">&#39;dwq2&#39;</span><span class="p">,</span> <span class="s1">&#39;split_sequences&#39;</span><span class="p">)</span>
+<span class="n">combine_action</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get_action</span><span class="p">(</span><span class="s1">&#39;dwq2&#39;</span><span class="p">,</span> <span class="s1">&#39;combine_las_reports&#39;</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Then, we’ll apply the <em>split</em> action to our input sequences:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">query_splits</span><span class="p">,</span> <span class="o">=</span> <span class="n">split_action</span><span class="p">(</span><span class="n">query_seqs</span><span class="p">,</span> <span class="n">split_size</span><span class="o">=</span><span class="n">split_size</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And next, the interesting bit happens.
+We start by defining a list (<code class="docutils literal notranslate"><span class="pre">las_results</span></code>) to collect our local alignment search results for each split of the query sequences.
+Then we iterate over the splits, <em>applying</em> the local alignment search method to each split, and appending the results in the <code class="docutils literal notranslate"><span class="pre">las_results</span></code> list that we just created.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">las_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">query_splits</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">las_result</span><span class="p">,</span> <span class="o">=</span> <span class="n">las_action</span><span class="p">(</span>
+        <span class="n">q</span><span class="p">,</span> <span class="n">reference_seqs</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">gap_open_penalty</span><span class="o">=</span><span class="n">gap_open_penalty</span><span class="p">,</span>
+        <span class="n">gap_extend_penalty</span><span class="o">=</span><span class="n">gap_extend_penalty</span><span class="p">,</span> <span class="n">match_score</span><span class="o">=</span><span class="n">match_score</span><span class="p">,</span>
+        <span class="n">mismatch_score</span><span class="o">=</span><span class="n">mismatch_score</span><span class="p">)</span>
+    <span class="n">las_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">las_result</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally we <em>combine</em> all of the individual results, and from this point everything proceeds as it did before we added parallel support.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">las_results</span><span class="p">,</span> <span class="o">=</span> <span class="n">combine_action</span><span class="p">(</span><span class="n">las_results</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Under the hood is where the magic happens here.
+Because we’re iterating over a collection of QIIME 2 Artifacts (the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop above) in a QIIME 2 <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code>, each <code class="docutils literal notranslate"><span class="pre">las_result</span></code> object is a proxy for a real QIIME 2 artifact.
+The jobs to create them are distributed as indicated in the user’s <a class="reference internal" href="../../framework/how-to-guides/parallel-configuration.html#parallel-configuration"><span class="std std-ref">QIIME 2 parallel configuration</span></a>.
+The code continues executing as if these were real Artifacts, not proxy Artifacts, until something is needed from them.
+At that point, the code will block (i.e., wait) until the proxy Artifacts become real Artifacts, and then continue processing.</p>
+<div class="tip admonition">
+<p class="admonition-title">Pipeline resumption ♻️</p>
+<p>A cool feature that you get for free here is <em>pipeline resumption</em>.
+If your Pipeline is interrupted mid-run (for example, because the jobs ran out of alloted time or memory on the shared compute cluster they’re running on), users can restart the job and all <code class="docutils literal notranslate"><span class="pre">Results</span></code> that were already computed will be recycled and not need to be computed again.
+This can save your users a lot of time and frustration, and reduce unnecessary utilization of compute resources and the energy used to power that computation.</p>
+</div>
+<p>The last steps before this is ready to use are to update the parameters to <code class="docutils literal notranslate"><span class="pre">search_and_summarize</span></code> in <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code>, and to add a test of the parallel execution of the Pipeline. Make the necessary changes to <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code>, and then we’ll add a new unit test.</p>
+</section>
+<section id="testing-the-parallel-pipeline">
+<h3>Testing the parallel Pipeline<a class="headerlink" href="#testing-the-parallel-pipeline" title="Link to this heading">#</a></h3>
+<p>To test that the parallel functionality works as expected, we’ll make some adaptations to our test of the Pipeline.
+Specifically, we’ll reuse most of our test of the serial functionality and confirm that when the tests are run in parallel they still work as expected.</p>
+<p>There are a lot of changes in the <code class="docutils literal notranslate"><span class="pre">test_pipelines.py</span></code> file in the commit associated with this section, but most of them are just refactoring the code to reuse the input Artifacts and expected test results.
+First, I added a <code class="docutils literal notranslate"><span class="pre">setUp</span></code> method to the <code class="docutils literal notranslate"><span class="pre">SearchAndSummarizeTests</span></code>.
+<code class="docutils literal notranslate"><span class="pre">setUp</span></code> is a special method that runs before each individual test function, so it’s useful for sharing information across tests.
+In this new function, the first thing I do is call <code class="docutils literal notranslate"><span class="pre">super().setUp()</span></code>, which calls the <code class="docutils literal notranslate"><span class="pre">setUp</span></code> function on the base class (<code class="docutils literal notranslate"><span class="pre">TestPluginBase</span></code> in this case), if one exists.
+This ensures that any upstream configuration is still happening.
+Then, I moved the code from <code class="docutils literal notranslate"><span class="pre">test_simple1</span></code> that accessed the <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> and created the input <code class="docutils literal notranslate"><span class="pre">Artifacts</span></code> to this function and set all of these as attributes on the <code class="docutils literal notranslate"><span class="pre">SearchAndSummarizeTests</span></code> class.
+Now I can access these via the <code class="docutils literal notranslate"><span class="pre">self</span></code> variable in the methods of this class.
+After all of these changes, my <code class="docutils literal notranslate"><span class="pre">class</span></code> definition starts as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SearchAndSummarizeTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
+    <span class="n">package</span> <span class="o">=</span> <span class="s1">&#39;q2_dwq2.tests&#39;</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">setUp</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_and_summarize_pipeline</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">plugin</span><span class="o">.</span><span class="n">pipelines</span><span class="p">[</span><span class="s1">&#39;search_and_summarize&#39;</span><span class="p">]</span>
+        <span class="n">query_sequences</span> <span class="o">=</span> <span class="p">[</span><span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;ACACTCTCCACCCATTTGCT&#39;</span><span class="p">,</span>
+                                     <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;q1&#39;</span><span class="p">}),</span>
+                           <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;ACACTCACCACCCAATTGCT&#39;</span><span class="p">,</span>
+                                     <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;q2&#39;</span><span class="p">})]</span>
+        <span class="n">query_sequences</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">(</span><span class="n">query_sequences</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">query_sequences_art</span> <span class="o">=</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Artifact</span><span class="o">.</span><span class="n">import_data</span><span class="p">(</span>
+            <span class="s2">&quot;FeatureData[Sequence]&quot;</span><span class="p">,</span> <span class="n">query_sequences</span><span class="p">,</span> <span class="n">view_type</span><span class="o">=</span><span class="n">DNAIterator</span>
+        <span class="p">)</span>
+        <span class="n">reference_sequences</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;ACACTCACCACCCAATTGCT&#39;</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;r1&#39;</span><span class="p">}),</span>  <span class="c1"># == q2</span>
+            <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;ACACTCTCCACCCATTTGCT&#39;</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;r2&#39;</span><span class="p">}),</span>  <span class="c1"># == q1</span>
+            <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;ACACTCTCCAGCCATTTGCT&#39;</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;r3&#39;</span><span class="p">}),</span>
+        <span class="p">]</span>
+        <span class="n">reference_sequences</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">(</span><span class="n">reference_sequences</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reference_sequences_art</span> <span class="o">=</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Artifact</span><span class="o">.</span><span class="n">import_data</span><span class="p">(</span>
+            <span class="s2">&quot;FeatureData[Sequence]&quot;</span><span class="p">,</span> <span class="n">reference_sequences</span><span class="p">,</span> <span class="n">view_type</span><span class="o">=</span><span class="n">DNAIterator</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+<p>The next thing I did was define a helper function that compares the observed results to the expected results.
+Like the creation of the Artifacts above, this code was also moved from <code class="docutils literal notranslate"><span class="pre">test_simple1</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">_test_simple1_helper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observed_hits</span><span class="p">,</span> <span class="n">observed_viz</span><span class="p">):</span>
+        <span class="n">expected_hits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+          <span class="p">[</span><span class="s1">&#39;q1&#39;</span><span class="p">,</span> <span class="s1">&#39;r2&#39;</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">40.</span><span class="p">,</span> <span class="s1">&#39;ACACTCTCCACCCATTTGCT&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;ACACTCTCCACCCATTTGCT&#39;</span><span class="p">],</span>
+          <span class="p">[</span><span class="s1">&#39;q1&#39;</span><span class="p">,</span> <span class="s1">&#39;r3&#39;</span><span class="p">,</span> <span class="mf">95.</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">35.</span><span class="p">,</span> <span class="s1">&#39;ACACTCTCCACCCATTTGCT&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;ACACTCTCCAGCCATTTGCT&#39;</span><span class="p">],</span>
+          <span class="p">[</span><span class="s1">&#39;q1&#39;</span><span class="p">,</span> <span class="s1">&#39;r1&#39;</span><span class="p">,</span> <span class="mf">90.</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">30.</span><span class="p">,</span> <span class="s1">&#39;ACACTCTCCACCCATTTGCT&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;ACACTCACCACCCAATTGCT&#39;</span><span class="p">],</span>
+          <span class="p">[</span><span class="s1">&#39;q2&#39;</span><span class="p">,</span> <span class="s1">&#39;r1&#39;</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">40.</span><span class="p">,</span> <span class="s1">&#39;ACACTCACCACCCAATTGCT&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;ACACTCACCACCCAATTGCT&#39;</span><span class="p">],</span>
+          <span class="p">[</span><span class="s1">&#39;q2&#39;</span><span class="p">,</span> <span class="s1">&#39;r2&#39;</span><span class="p">,</span> <span class="mf">90.</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">30.</span><span class="p">,</span> <span class="s1">&#39;ACACTCACCACCCAATTGCT&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;ACACTCTCCACCCATTTGCT&#39;</span><span class="p">],</span>
+          <span class="p">[</span><span class="s1">&#39;q2&#39;</span><span class="p">,</span> <span class="s1">&#39;r3&#39;</span><span class="p">,</span> <span class="mf">85.</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">25.</span><span class="p">,</span> <span class="s1">&#39;ACACTCACCACCCAATTGCT&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;ACACTCTCCAGCCATTTGCT&#39;</span><span class="p">]],</span>
+         <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;query id&#39;</span><span class="p">,</span> <span class="s1">&#39;reference id&#39;</span><span class="p">,</span> <span class="s1">&#39;percent similarity&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;alignment length&#39;</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">,</span> <span class="s1">&#39;aligned query&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;aligned reference&#39;</span><span class="p">])</span>
+        <span class="n">expected_hits</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;query id&#39;</span><span class="p">,</span> <span class="s1">&#39;reference id&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">pdt</span><span class="o">.</span><span class="n">assert_frame_equal</span><span class="p">(</span><span class="n">observed_hits</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">),</span> <span class="n">expected_hits</span><span class="p">)</span>
+
+        <span class="c1"># observed_viz is a qiime2.Visualization.</span>
+        <span class="c1"># access its index.html file for testing.</span>
+        <span class="n">index_fp</span> <span class="o">=</span> <span class="n">observed_viz</span><span class="o">.</span><span class="n">get_index_paths</span><span class="p">(</span><span class="n">relative</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;html&#39;</span><span class="p">]</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">index_fp</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+            <span class="n">observed_index</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;q1&#39;</span><span class="p">,</span> <span class="n">observed_index</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;q2&#39;</span><span class="p">,</span> <span class="n">observed_index</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;r1&#39;</span><span class="p">,</span> <span class="n">observed_index</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;r2&#39;</span><span class="p">,</span> <span class="n">observed_index</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;ACACTCACCACCCAATTGCT&#39;</span><span class="p">,</span> <span class="n">observed_index</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;ACACTCTCCACCCATTTGCT&#39;</span><span class="p">,</span> <span class="n">observed_index</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then, I modified the name of <code class="docutils literal notranslate"><span class="pre">test_simple1</span></code> to <code class="docutils literal notranslate"><span class="pre">test_simple1_serial</span></code>, and adapted it to use the pipeline and artifact attributes, and to call <code class="docutils literal notranslate"><span class="pre">_test_simple1_helper</span></code> to compare the observed and expected results.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_simple1_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+    <span class="n">observed_hits</span><span class="p">,</span> <span class="n">observed_viz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_and_summarize_pipeline</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">query_sequences_art</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference_sequences_art</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_test_simple1_helper</span><span class="p">(</span><span class="n">observed_hits</span><span class="p">,</span> <span class="n">observed_viz</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, I defined a new test function <code class="docutils literal notranslate"><span class="pre">test_simple1_parallel</span></code>, which calls the same Pipeline with the same inputs, and compares the observed output to the expected output in the same way as <code class="docutils literal notranslate"><span class="pre">test_simple1_serial</span></code>.
+The only difference is that in this test <code class="docutils literal notranslate"><span class="pre">search_and_summarize</span></code> is running in parallel instead of serially.
+This is achieved by using the <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">ParallelConfig()</span></code> context manager, and calling the Pipeline using its <code class="docutils literal notranslate"><span class="pre">.parallel</span></code> method.</p>
+<p>Add the following import to the top of your <code class="docutils literal notranslate"><span class="pre">test_pipeline.py</span></code> file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiime2.sdk.parallel_config</span> <span class="kn">import</span> <span class="n">ParallelConfig</span>
+</pre></div>
+</div>
+<p>Then add the following test function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_simple1_parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">ParallelConfig</span><span class="p">():</span>
+        <span class="n">observed_hits</span><span class="p">,</span> <span class="n">observed_viz</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">search_and_summarize_pipeline</span><span class="o">.</span><span class="n">parallel</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">query_sequences_art</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference_sequences_art</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_test_simple1_helper</span><span class="p">(</span><span class="n">observed_hits</span><span class="p">,</span> <span class="n">observed_viz</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After making all of the changes described here to your <code class="docutils literal notranslate"><span class="pre">_pipelines.py</span></code> and <code class="docutils literal notranslate"><span class="pre">test_pipelines.py</span></code> files, run the test suite with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code>.
+If all tests pass, you should be good to go.
+If not, compare your code to mine (<a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/4ed7e01a6da9a10e7ddf1956877cf494740e35cd">caporaso-lab/q2-dwq2</a>) to see what’s different.</p>
+</section>
+</section>
+<section id="compare-the-serial-versus-parallel-run-times-of-the-search-and-summarize">
+<span id="serial-parallel-runtime"></span><h2>Compare the serial versus parallel run times of the <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code><a class="headerlink" href="#compare-the-serial-versus-parallel-run-times-of-the-search-and-summarize" title="Link to this heading">#</a></h2>
+<p>Now that we’ve added parallel computing support to our <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> Pipeline, we can try it out to see how it impacts run time.
+To do this, we need a data set that is big enough that the benefits of parallelization outweigh the overhead associated with parallelization.
+For example, the splitting of the query sequences and the combining of the search result tables each take some time - if our input data is tiny, that time might be longer than the time to just compute the results serially, so running the code in parallel wouldn’t result in a noticeable decrease in runtime (the parallel runtime might even be larger than the serial runtime).</p>
+<p>In a third commit associated with this section (<a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/590263ee9bb8c48df09fe62c0e966acfa99f9aff">caporaso-lab/q2-dwq2</a>), I added a usage example to our new Pipeline that uses a larger data set.
+Note that integrating this usage example does considerably increase the runtime of the unit tests.
+I suggest trying it out as-is, but after experimenting with it you can feel free to reduce the number of query (to 2, for example) and reference sequences (to 3, for example) to reduce the runtime, or just keep it as-is - it’s up to you.</p>
+<p>Refer to this commit to integrate the usage example into your code.
+Then, run the usage example as is to get a feel for its serial run time.
+After that, call the usage example again providing the <code class="docutils literal notranslate"><span class="pre">--parallel</span></code> parameter to get a feel for its parallel run time.</p>
+<p>When I do this, I observe the following run times associated with the data provenance of this step:</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-g-2 sd-g-xs-2 sd-g-sm-2 sd-g-md-2 sd-g-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Serial! 🐌</div>
+<img alt="../../_images/search-and-summarize-serial.png" src="../../_images/search-and-summarize-serial.png" />
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Parallel! 🏃</div>
+<img alt="../../_images/search-and-summarize-parallel.png" src="../../_images/search-and-summarize-parallel.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -507,6 +897,30 @@ This will enable your users to utilize multi-processor computers or multi-node h
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-a-local-alignment-search-pipeline">Add a local alignment search <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-parallel-computing-support-to-search-and-summarize">Add parallel computing support to <code class="docutils literal notranslate"><span class="pre">search_and_summarize</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-split-method">Defining a <em>split</em> Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-split-sequences">Registering <code class="docutils literal notranslate"><span class="pre">split_sequences</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-and-registering-a-combine-method">Defining and registering a <em>combine</em> method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-search-and-summarize-to-use-split-and-combine-methods">Update <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> to use <em>split</em> and <em>combine</em> Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-the-parallel-pipeline">Testing the parallel Pipeline</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-the-serial-versus-parallel-run-times-of-the-search-and-summarize">Compare the serial versus parallel run times of the <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
