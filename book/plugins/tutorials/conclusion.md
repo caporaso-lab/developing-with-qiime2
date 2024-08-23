@@ -2,7 +2,7 @@
 # Conclusion
 
 That's the end of the QIIME 2 plugin development tutorial, for now.
-As of this writing (13 April 2024), this tutorial is still in development, and new content is planned.
+As of this writing (22 August 2024), this tutorial is still in development, and new content is planned.
 You can see a list of content planned for the plugin tutorial on our issue tracker [here](https://github.com/caporaso-lab/developing-with-qiime2/issues?q=is%3Aissue+is%3Aopen+label%3Aplugins+label%3Atutorial), and more general content planned for the *Plugins* part of *Developing with QIIME 2* [here](https://github.com/caporaso-lab/developing-with-qiime2/issues?q=is%3Aissue+is%3Aopen+label%3Aplugins).
 
 A good next step is to create your own plugin.

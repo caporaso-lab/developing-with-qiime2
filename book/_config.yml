@@ -14,6 +14,7 @@ sphinx:
     - sphinx.ext.mathjax
     - sphinx.ext.githubpages
     - sphinxcontrib.bibtex
+    - sphinxcontrib.mermaid
     - q2doc.linkcode
   config:
     html_theme_options:
@@ -91,7 +92,9 @@ parse:
     dwq2_add_2nd_transformer_commit_url: "{{dwq2_gh_commit_url.format(dwq2_add_2nd_transformer_commit)}}"
     dwq2_add_pipeline_commit: "1e601c41b86d98b22f4e16685e868f1c5710f3bf"
     dwq2_add_pipeline_commit_url: "{{dwq2_gh_commit_url.format(dwq2_add_pipeline_commit)}}"
-    dwq2_add_parallel_pipeline_commit_1: "a45f6fb85315843078c0777326031dbce9564802"
+    dwq2_add_parallel_pipeline_commit_1: "d0d5f38ca6d2e8cdc647660db8d1923b048f8e1e"
     dwq2_add_parallel_pipeline_commit_1_url: "{{dwq2_gh_commit_url.format(dwq2_add_parallel_pipeline_commit_1)}}"
-    dwq2_add_parallel_pipeline_commit_2: "7978a82beb1fcc2a06c7f520f86451504ff0bb29"
+    dwq2_add_parallel_pipeline_commit_2: "4ed7e01a6da9a10e7ddf1956877cf494740e35cd"
     dwq2_add_parallel_pipeline_commit_2_url: "{{dwq2_gh_commit_url.format(dwq2_add_parallel_pipeline_commit_2)}}"
+    dwq2_add_parallel_pipeline_commit_3: "590263ee9bb8c48df09fe62c0e966acfa99f9aff"
+    dwq2_add_parallel_pipeline_commit_3_url: "{{dwq2_gh_commit_url.format(dwq2_add_parallel_pipeline_commit_3)}}"
