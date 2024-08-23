@@ -209,6 +209,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/test-plugins.html">How to test QIIME 2 plugins</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/usage-examples.html">Writing Usage Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../how-to-guides/format-validation-levels.html">Defining different Format validation levels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how-to-guides/handle-exceptions-in-parallel-pipelines.html">Handling exceptions in parallel Pipelines</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -463,7 +464,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="add-a-pipeline-with-parallel-computing-support">
-<h1>Add a Pipeline with parallel computing support<a class="headerlink" href="#add-a-pipeline-with-parallel-computing-support" title="Link to this heading">#</a></h1>
+<span id="plugin-tutorial-parallel-pipeline"></span><h1>Add a Pipeline with parallel computing support<a class="headerlink" href="#add-a-pipeline-with-parallel-computing-support" title="Link to this heading">#</a></h1>
 <p>In this chapter we’ll add a second <a class="reference internal" href="../../back-matter/glossary.html#term-Pipeline"><span class="xref std std-term">Pipeline</span></a> to our plugin, and then we’ll add parallel computing support to that <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code>.
 This will enable your users to utilize multi-processor computers or multi-node high performance computing infrastructure (e.g., computer clusters) to analyze their data.</p>
 <div class="tip admonition" id="add-parallel-pipeline-commits">

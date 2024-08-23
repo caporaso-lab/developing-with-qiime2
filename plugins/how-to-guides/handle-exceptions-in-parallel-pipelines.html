@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Create and register a visualizer &#8212; Developing with QIIME 2</title>
+    <title>Handling exceptions in parallel Pipelines &#8212; Developing with QIIME 2</title>
   
   
   
@@ -58,12 +58,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/how-to-guides/create-register-visualizer';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/how-to-guides/handle-exceptions-in-parallel-pipelines';</script>
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Create and register a pipeline" href="create-register-pipeline.html" />
-    <link rel="prev" title="Create and register a Method" href="create-register-method.html" />
+    <link rel="next" title="Explanations" href="../explanations/intro.html" />
+    <link rel="prev" title="Defining different Format validation levels" href="format-validation-levels.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -198,7 +198,7 @@
 <li class="toctree-l3"><a class="reference internal" href="publicize.html">Publicize your QIIME 2 plugins (or other QIIME 2-based tools)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="register-a-plugin.html">Register a QIIME 2 plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="create-register-method.html">Create and register a Method</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Create and register a visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create-register-visualizer.html">Create and register a visualizer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="create-register-pipeline.html">Create and register a pipeline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="create-register-transformer.html">Creating and registering a Transformer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="artifact-collections-as-io.html">Use Artifact Collections as Action inputs or outputs</a></li>
@@ -207,7 +207,7 @@
 <li class="toctree-l3"><a class="reference internal" href="test-plugins.html">How to test QIIME 2 plugins</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage-examples.html">Writing Usage Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="format-validation-levels.html">Defining different Format validation levels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="handle-exceptions-in-parallel-pipelines.html">Handling exceptions in parallel Pipelines</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Handling exceptions in parallel Pipelines</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -346,7 +346,7 @@
       
       
       
-      <li><a href="../../_sources/plugins/how-to-guides/create-register-visualizer.md" target="_blank"
+      <li><a href="../../_sources/plugins/how-to-guides/handle-exceptions-in-parallel-pipelines.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -417,9 +417,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -430,20 +428,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Create and register a visualizer</h1>
+    <h1>Handling exceptions in parallel Pipelines</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-function-to-register-as-a-visualizer">Create a function to register as a Visualizer</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#register-the-visualizer">Register the Visualizer</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -453,57 +442,31 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="create-and-register-a-visualizer">
-<span id="howto-create-register-visualizer"></span><h1>Create and register a visualizer<a class="headerlink" href="#create-and-register-a-visualizer" title="Link to this heading">#</a></h1>
-<p>A <code class="docutils literal notranslate"><span class="pre">Visualizer</span></code> accepts some combination of QIIME 2 <code class="docutils literal notranslate"><span class="pre">Artifacts</span></code> and parameters as input, and produces exactly one <code class="docutils literal notranslate"><span class="pre">Visualization</span></code> as output.
-Visualizations are visual representations of analytical results (e.g., plots, statistical results, summary tables) and by definition cannot be used as input to other QIIME 2 methods or visualizers.
-Thus, visualizers can only produce terminal output in a QIIME 2 analysis.</p>
-<section id="create-a-function-to-register-as-a-visualizer">
-<h2>Create a function to register as a Visualizer<a class="headerlink" href="#create-a-function-to-register-as-a-visualizer" title="Link to this heading">#</a></h2>
-<p>Defining a function that can be registered as a <code class="docutils literal notranslate"><span class="pre">Visualizer</span></code> is very similar to defining one that can be registered as a <code class="docutils literal notranslate"><span class="pre">Method</span></code> with a few additional requirements.</p>
-<p>First, the first parameter to this function must be <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>.
-This parameter should be annotated with type <code class="docutils literal notranslate"><span class="pre">str</span></code>.</p>
-<p>Next, at least one <code class="docutils literal notranslate"><span class="pre">index.*</span></code> file must be written to <code class="docutils literal notranslate"><span class="pre">output_dir</span></code> by the function.
-This index file will provide the starting point for your users to explore the <code class="docutils literal notranslate"><span class="pre">Visualization</span></code> object that is generated by the <code class="docutils literal notranslate"><span class="pre">Visualizer</span></code>.
-Index files with different extensions can be created by the function (e.g., <code class="docutils literal notranslate"><span class="pre">index.html</span></code>, <code class="docutils literal notranslate"><span class="pre">index.tsv</span></code>, <code class="docutils literal notranslate"><span class="pre">index.png</span></code>), but at least one must be created.
-You can write whatever files you want to <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>, including tables, graphics, and textual descriptions of the results, but you should expect that your users will want to find those files through your index file(s).
-If your function does create many different files, an <code class="docutils literal notranslate"><span class="pre">index.html</span></code> containing links to those files is likely to be helpful.</p>
-<p>Finally, the function cannot return anything, and its return type should be annotated as <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
-<p><a class="reference external" href="https://github.com/qiime2/q2-diversity/blob/99a0ccaaec14838b95845dbfe57f874d092b65c7/q2_diversity/_alpha/_visualizer.py#L31"><code class="docutils literal notranslate"><span class="pre">q2_diversity.alpha_group_significance</span></code></a> is an example of a function that can be registered as a <code class="docutils literal notranslate"><span class="pre">Visualizer</span></code>.
-In addition to its <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>, it takes alpha diversity results in a <code class="docutils literal notranslate"><span class="pre">pandas.Series</span></code> and sample metadata in a <code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> object and creates several different files (figures and tables) that are linked and/or presented in an <code class="docutils literal notranslate"><span class="pre">index.html</span></code> file.
-The signature of this function is:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">alpha_group_significance</span><span class="p">(</span><span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                             <span class="n">alpha_diversity</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
-                             <span class="n">metadata</span><span class="p">:</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Metadata</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+  <section class="tex2jax_ignore mathjax_ignore" id="handling-exceptions-in-parallel-pipelines">
+<h1>Handling exceptions in parallel Pipelines<a class="headerlink" href="#handling-exceptions-in-parallel-pipelines" title="Link to this heading">#</a></h1>
+<p>In developing parallel computing support in QIIME 2, we tried to minimize the edits that are required to existing Pipelines to enable them to run in parallel.
+In the code we developed in the <a class="reference internal" href="../tutorials/add-parallel-pipeline.html#plugin-tutorial-parallel-pipeline"><span class="std std-ref">plugin tutorial</span></a>, for example, the modifications we made were primarily to support the splitting and combining steps - we didn’t add anything to explicitly integrate parallel computing.
+There is one minor exception to this though.</p>
+<p>If you have code that looks like the following in a Pipeline that you want to run in parallel:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">result1</span><span class="p">,</span> <span class="n">result2</span> <span class="o">=</span> <span class="n">some_action</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">SomeException</span><span class="p">:</span>
+    <span class="n">do</span><span class="o">.</span><span class="n">something</span><span class="p">()</span>
 </pre></div>
 </div>
-</section>
-<section id="register-the-visualizer">
-<h2>Register the Visualizer<a class="headerlink" href="#register-the-visualizer" title="Link to this heading">#</a></h2>
-<p>Registering <code class="docutils literal notranslate"><span class="pre">Visualizers</span></code> is the same as registering <code class="docutils literal notranslate"><span class="pre">Methods</span></code>, with two exceptions.</p>
-<p>First, you call <code class="docutils literal notranslate"><span class="pre">plugin.visualizers.register_function</span></code> to register a <code class="docutils literal notranslate"><span class="pre">Visualizer</span></code>.</p>
-<p>Next, you do not provide <code class="docutils literal notranslate"><span class="pre">outputs</span></code> or <code class="docutils literal notranslate"><span class="pre">output_descriptions</span></code> when making this call, as <code class="docutils literal notranslate"><span class="pre">Visualizers</span></code>, by definition, only return a single visualization.
-Since the visualization output path is a required parameter, you do not include this in an <code class="docutils literal notranslate"><span class="pre">outputs</span></code> list (it would be the same for every <code class="docutils literal notranslate"><span class="pre">Visualizer</span></code> that was ever registered, so it is added automatically).</p>
-<p>Registering <code class="docutils literal notranslate"><span class="pre">q2_diversity.alpha_group_significance</span></code> as a <code class="docutils literal notranslate"><span class="pre">Visualizer</span></code> looks like the following (find the original source <a class="reference external" href="https://github.com/qiime2/q2-diversity/blob/99a0ccaaec14838b95845dbfe57f874d092b65c7/q2_diversity/plugin_setup.py#L648">here</a>):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plugin</span><span class="o">.</span><span class="n">visualizers</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
-    <span class="n">function</span><span class="o">=</span><span class="n">q2_diversity</span><span class="o">.</span><span class="n">alpha_group_significance</span><span class="p">,</span>
-    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha_diversity&#39;</span><span class="p">:</span> <span class="n">SampleData</span><span class="p">[</span><span class="n">AlphaDiversity</span><span class="p">]},</span>
-    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="n">Metadata</span><span class="p">},</span>
-    <span class="n">input_descriptions</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;alpha_diversity&#39;</span><span class="p">:</span> <span class="s1">&#39;Vector of alpha diversity values by sample.&#39;</span>
-    <span class="p">},</span>
-    <span class="n">parameter_descriptions</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="s1">&#39;The sample metadata.&#39;</span>
-    <span class="p">},</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Alpha diversity comparisons&#39;</span><span class="p">,</span>
-    <span class="n">description</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Visually and statistically compare groups of alpha diversity&quot;</span>
-                <span class="s2">&quot; values.&quot;</span><span class="p">),</span>
-    <span class="n">citations</span><span class="o">=</span><span class="p">[</span><span class="n">citations</span><span class="p">[</span><span class="s1">&#39;kruskal1952use&#39;</span><span class="p">]]</span>
-<span class="p">)</span>
+<p>You must call <code class="docutils literal notranslate"><span class="pre">_result()</span></code> on the return value from <code class="docutils literal notranslate"><span class="pre">some_action</span></code> in the try/except block:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">some_action</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">result1</span><span class="p">,</span> <span class="n">result2</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">_result</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">SomeException</span><span class="p">:</span>
+    <span class="n">do</span><span class="o">.</span><span class="n">something</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>See the text describing <a class="reference internal" href="create-register-method.html#howto-register-method"><span class="std std-ref">registering methods</span></a> for a description of these values.</p>
-</section>
+<p>If you do not do this, a parallel run of your Pipeline will most likely crash if <code class="docutils literal notranslate"><span class="pre">SomeException</span></code> is raised.</p>
+<p>The reason for this is that when the Pipeline is run in parallel, the return value from <code class="docutils literal notranslate"><span class="pre">some_action</span></code> will be a <a class="reference external" href="https://parsl.readthedocs.io/en/stable/userguide/futures.html">Future</a> that will eventually resolve into your actual results when the parallel processes complete.
+Calling <code class="docutils literal notranslate"><span class="pre">._result()</span></code> blocks the main thread and waits for results before proceeding from the try/except block.</p>
+<p>If you do not call <code class="docutils literal notranslate"><span class="pre">_result()</span></code> in the try block, the Future will most likely resolve into results after the main Python thread has exited the try/except block.
+This will lead to the exception not being caught, because it is now actually being raised outside of the try/except.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -537,20 +500,20 @@ Since the visualization output path is a required parameter, you do not include 
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="create-register-method.html"
+       href="format-validation-levels.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Create and register a Method</p>
+        <p class="prev-next-title">Defining different Format validation levels</p>
       </div>
     </a>
     <a class="right-next"
-       href="create-register-pipeline.html"
+       href="../explanations/intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Create and register a pipeline</p>
+        <p class="prev-next-title">Explanations</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -560,22 +523,6 @@ Since the visualization output path is a required parameter, you do not include 
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-function-to-register-as-a-visualizer">Create a function to register as a Visualizer</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#register-the-visualizer">Register the Visualizer</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

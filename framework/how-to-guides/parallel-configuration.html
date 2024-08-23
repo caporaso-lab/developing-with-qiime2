@@ -207,6 +207,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/test-plugins.html">How to test QIIME 2 plugins</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/usage-examples.html">Writing Usage Examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/format-validation-levels.html">Defining different Format validation levels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/handle-exceptions-in-parallel-pipelines.html">Handling exceptions in parallel Pipelines</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../plugins/explanations/intro.html">Explanations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -703,33 +704,6 @@ If no config is provided your default config will be used (found using the same 
     <span class="c1"># Make sure to call _result inside of the context manager</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="n">_result</span><span class="p">()</span>
 </pre></div>
-</div>
-<div class="warning admonition">
-<p class="admonition-title">Note for parallel Pipeline developers</p>
-<p>If you have something like this in a pipeline:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="n">result1</span><span class="p">,</span> <span class="n">result2</span> <span class="o">=</span> <span class="n">some_action</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-<span class="k">except</span> <span class="n">SomeException</span><span class="p">:</span>
-    <span class="n">do</span><span class="o">.</span><span class="n">something</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>You must call <code class="docutils literal notranslate"><span class="pre">_result()</span></code> on the return value from <code class="docutils literal notranslate"><span class="pre">some_action</span></code> in the try/except block.
-This is necessary to allow users to run your pipeline in parallel.
-If you do not do this, and a user attempts to run your pipeline in parallel, it will most likely fail.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="n">some_action</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-    <span class="n">result1</span><span class="p">,</span> <span class="n">result2</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">_result</span><span class="p">()</span>
-<span class="k">except</span> <span class="n">SomeException</span><span class="p">:</span>
-    <span class="n">do</span><span class="o">.</span><span class="n">something</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>The reason this needs to be done is a bit technical.
-Basically, if the pipeline is being executed in parallel, the return value from the action will be a future that will eventually resolve into your results when the parallel thread returns.
-Calling <code class="docutils literal notranslate"><span class="pre">._result()</span></code> blocks the main thread and waits for results before proceeding.</p>
-<p>If you do not call <code class="docutils literal notranslate"><span class="pre">_result()</span></code> in the try/except, the future will most likely resolve into results after the main Python thread has exited the try/except block.
-This will lead to the exception not being caught because it is now actually being raised outside of the try/except.</p>
-<p>This is a bit confusing, as parallelism often is.
-We tried hard to ensure that developers wouldn’t need to change anything about their pipelines to parallelize them, but we did need to make this one concession.</p>
 </div>
 </section>
 </section>

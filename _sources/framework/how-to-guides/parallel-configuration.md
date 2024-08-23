@@ -3,7 +3,7 @@
 
 ```{note}
 This is more of an advanced user or system administrator usage document.
-[This is slated to move](https://github.com/caporaso-lab/developing-with-qiime2/issues/29) to the new general-purpose user documentation. 
+[This is slated to move](https://github.com/caporaso-lab/developing-with-qiime2/issues/29) to the new general-purpose user documentation.
 ```
 
 QIIME 2 supports parallelization of pipelines through [Parsl](https://parsl.readthedocs.io/en/stable/1-parsl-introduction.html>).
@@ -68,7 +68,7 @@ The [Parsl documentation](https://parsl.readthedocs.io/en/stable/) provides full
 Briefly, we create a [`ThreadPoolExecutor`](https://parsl.readthedocs.io/en/stable/stubs/parsl.executors.ThreadPoolExecutor.html?highlight=Threadpoolexecutor) that parallelizes jobs across multiple threads in a process.
 We also create a [`HighThroughputExecutor`](https://parsl.readthedocs.io/en/stable/stubs/parsl.executors.HighThroughputExecutor.html?highlight=HighThroughputExecutor) that parallelizes jobs across multiple processes.
 
-```{note} 
+```{note}
 Your config MUST contain an executor with the label default.
 This is the executor that QIIME 2 will dispatch your jobs to if you do not specify an executor to use.
 The default executor in the default config is the ThreadPoolExecutor meaning that unless you specify otherwise all jobs that use the default config will run on the ThreadPoolExecutor.
@@ -288,37 +288,3 @@ with ParallelConfig(parallel_config=config, action_executor_mapping=mapping):
     # Make sure to call _result inside of the context manager
     result = future._result()
 ```
-
-````{admonition} Note for parallel Pipeline developers
-:class: warning
-If you have something like this in a pipeline:
-
-```python
-try:
-    result1, result2 = some_action(*args)
-except SomeException:
-    do.something()
-```
-
-You must call `_result()` on the return value from `some_action` in the try/except block.
-This is necessary to allow users to run your pipeline in parallel.
-If you do not do this, and a user attempts to run your pipeline in parallel, it will most likely fail.
-
-```python
-try:
-    results = some_action(*args)
-    result1, result2 = results._result()
-except SomeException:
-    do.something()
-```
-
-The reason this needs to be done is a bit technical.
-Basically, if the pipeline is being executed in parallel, the return value from the action will be a future that will eventually resolve into your results when the parallel thread returns.
-Calling `._result()` blocks the main thread and waits for results before proceeding.
-
-If you do not call `_result()` in the try/except, the future will most likely resolve into results after the main Python thread has exited the try/except block.
-This will lead to the exception not being caught because it is now actually being raised outside of the try/except.
-
-This is a bit confusing, as parallelism often is.
-We tried hard to ensure that developers wouldn't need to change anything about their pipelines to parallelize them, but we did need to make this one concession.
-````
