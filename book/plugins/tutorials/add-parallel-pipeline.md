@@ -1,3 +1,4 @@
+(plugin-tutorial-parallel-pipeline)=
 # Add a Pipeline with parallel computing support
 
 In this chapter we'll add a second {term}`Pipeline` to our plugin, and then we'll add parallel computing support to that `Pipeline`.
@@ -429,9 +430,3 @@ When I do this, I observe the following run times associated with the data prove
 :::
 
 ::::
-
-
-
-
-
-
