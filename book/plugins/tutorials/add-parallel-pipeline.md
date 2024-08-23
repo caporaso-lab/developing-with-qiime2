@@ -7,9 +7,10 @@ This will enable your users to utilize multi-processor computers or multi-node h
 ```{admonition} tl;dr
 :class: tip
 
-The complete code that I wrote to add the second `Pipeline` to my plugin can be found here: {{ dwq2_add_parallel_pipeline_commit_1_url }}. The code that I developed to add parallel computing support to the new `Pipeline` can be found here: {{ dwq2_add_parallel_pipeline_commit_2_url }}.
-I also included a usage example at the end which you can use to compare the performance of serial and parallel runs of the new Pipeline here: {{ dwq2_add_parallel_pipeline_commit_3_url }}.
-That third commit does increase the runtime of the unit tests considerably (from about 30 seconds to about 6 minutes, on the computer that I'm developing on).
+1. The complete code that I wrote to add the second `Pipeline` to my plugin can be found here: {{ dwq2_add_parallel_pipeline_commit_1_url }}.
+2. The code that I developed to add parallel computing support to the new `Pipeline` can be found here: {{ dwq2_add_parallel_pipeline_commit_2_url }}.
+3. Finally, I added a usage example that can be used to compare the performance of serial and parallel runs of the new Pipeline here: {{ dwq2_add_parallel_pipeline_commit_3_url }}.
+Because the third commit includes (a small amount) of real data, as opposed to the toy-sized data we've been using in unit tests, it increases the runtime of the test suite considerably (from about 30 seconds to about 6 minutes, on the M3 MacBook Pro that that I'm developing on).
 ```
 
 ## Add a local alignment search `Pipeline`
@@ -396,6 +397,7 @@ After making all of the changes described here to your `_pipelines.py` and `test
 If all tests pass, you should be good to go.
 If not, compare your code to mine ({{ dwq2_add_parallel_pipeline_commit_2_url }}) to see what's different.
 
+(serial-parallel-runtime)=
 ## Compare the serial versus parallel run times of the `search-and-summarize`
 
 Now that we've added parallel computing support to our `search-and-summarize` Pipeline, we can try it out to see how it impacts run time.
