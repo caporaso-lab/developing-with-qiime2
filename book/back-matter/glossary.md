@@ -20,9 +20,9 @@ Artifact API
   See {term}`Python 3 API`.
 
 Conda metapackage
-  > A metapackage is a package  with no  files,  only  metadata.
-  > They are typically used to collect several packages together into a single package via dependencies.
-  > ([source](https://docs.conda.io/projects/conda-build/en/stable/resources/commands/conda-metapackage.html))
+  A metapackage is a package  with no  files,  only  metadata.
+  They are typically used to collect several packages together into a single package via dependencies.
+  ([source](https://docs.conda.io/projects/conda-build/en/stable/resources/commands/conda-metapackage.html))
 
 Deployment
   An installation of QIIME 2 as well as zero-or-more {term}`interfaces <Interface>` and {term}`plugins <Plugin>`.
