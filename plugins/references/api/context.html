@@ -185,6 +185,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../tutorials/add-2nd-transformer.html">Add a second transformer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../tutorials/add-pipeline.html">Add a first Pipeline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../tutorials/add-parallel-pipeline.html">Add a Pipeline with parallel computing support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/integrate-metadata.html">Integrate metadata in Actions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../tutorials/conclusion.html">Conclusion</a></li>
 </ul>
 </details></li>
@@ -459,7 +460,7 @@ document.write(`
 Plugins may use these methods to invoke other registered actions or create artifacts.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.sdk.Context.get_action">
-<span class="sig-prename descclassname"><span class="pre">Context.</span></span><span class="sig-name descname"><span class="pre">get_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plugin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2c4c7d2/qiime2/sdk/context.py#L43"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.sdk.Context.get_action" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Context.</span></span><span class="sig-name descname"><span class="pre">get_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plugin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/3581493/qiime2/sdk/context.py#L43"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.sdk.Context.get_action" title="Link to this definition">#</a></dt>
 <dd><p>Return a function matching the callable API of an action.
 This function is aware of the pipeline context and manages its own
 cleanup as appropriate.</p>
@@ -469,7 +470,7 @@ cleanup as appropriate.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.sdk.Context.make_artifact">
-<span class="sig-prename descclassname"><span class="pre">Context.</span></span><span class="sig-name descname"><span class="pre">make_artifact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2c4c7d2/qiime2/sdk/context.py#L166"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.sdk.Context.make_artifact" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Context.</span></span><span class="sig-name descname"><span class="pre">make_artifact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/3581493/qiime2/sdk/context.py#L166"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.sdk.Context.make_artifact" title="Link to this definition">#</a></dt>
 <dd><p>Return a new artifact from a given view.</p>
 <p>This artifact is automatically tracked and cleaned by the pipeline
 context.</p>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Create your plugin from a template &#8212; Developing with QIIME 2</title>
+    <title>Integrate metadata in Actions &#8212; Developing with QIIME 2</title>
   
   
   
@@ -58,12 +58,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/tutorials/create-from-template';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/tutorials/integrate-metadata';</script>
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Add a first (real) Method" href="add-nw-align-method.html" />
-    <link rel="prev" title="Tutorial: A step-by-step guide to building your first QIIME 2 plugin" href="intro.html" />
+    <link rel="next" title="Conclusion" href="conclusion.html" />
+    <link rel="prev" title="Add a Pipeline with parallel computing support" href="add-parallel-pipeline.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -177,7 +177,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Plugin Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Create your plugin from a template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create-from-template.html">Create your plugin from a template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-nw-align-method.html">Add a first (real) Method</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-alignment-visualizer.html">Add a first Visualizer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-artifact-class.html">Add a new Artifact Class</a></li>
@@ -185,7 +185,7 @@
 <li class="toctree-l3"><a class="reference internal" href="add-2nd-transformer.html">Add a second transformer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-pipeline.html">Add a first Pipeline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add-parallel-pipeline.html">Add a Pipeline with parallel computing support</a></li>
-<li class="toctree-l3"><a class="reference internal" href="integrate-metadata.html">Integrate metadata in Actions</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Integrate metadata in Actions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conclusion.html">Conclusion</a></li>
 </ul>
 </details></li>
@@ -347,7 +347,7 @@
       
       
       
-      <li><a href="../../_sources/plugins/tutorials/create-from-template.md" target="_blank"
+      <li><a href="../../_sources/plugins/tutorials/integrate-metadata.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -431,7 +431,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Create your plugin from a template</h1>
+    <h1>Integrate metadata in Actions</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -441,9 +441,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-tools-needed-for-templating-your-plugin">Install the tools needed for templating your plugin</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-cookiecutter-to-create-your-plugin">Run <code class="docutils literal notranslate"><span class="pre">cookiecutter</span></code> to create your plugin</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-and-test-your-new-plugin">Install and test your new plugin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-input-metadata">The input metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-an-optional-input-to-tabulate-las-results">Add an optional input to <code class="docutils literal notranslate"><span class="pre">tabulate_las_results</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-search-and-summarize">Update <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-plugin-setup-py">Update <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-unit-tests-and-update-the-search-and-summarize-usage-example">Add unit tests and update the <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> usage example</a></li>
 </ul>
             </nav>
         </div>
@@ -455,100 +457,138 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="create-your-plugin-from-a-template">
-<span id="plugin-from-template"></span><h1>Create your plugin from a template<a class="headerlink" href="#create-your-plugin-from-a-template" title="Link to this heading">#</a></h1>
-<p>The easiest way to create a new QIIME 2 plugin is using our <a class="reference external" href="https://cookiecutter.readthedocs.io/en/stable/">Cookiecutter template</a>, which can be found at <a class="github reference external" href="https://github.com/caporaso-lab/cookiecutter-qiime2-plugin">caporaso-lab/cookiecutter-qiime2-plugin</a>.
-Here we’ll work through building your QIIME 2 plugin from this template.</p>
-<section id="install-the-tools-needed-for-templating-your-plugin">
-<h2>Install the tools needed for templating your plugin<a class="headerlink" href="#install-the-tools-needed-for-templating-your-plugin" title="Link to this heading">#</a></h2>
-<p>To start building your new plugin, first install cookiecutter using <a class="reference external" href="https://cookiecutter.readthedocs.io/en/stable/README.html#installation">their installation instructions</a>. (If you opt to install cookiecutter with <code class="docutils literal notranslate"><span class="pre">pipx</span></code>, which the cookiecutter developers recommend, you can find the <code class="docutils literal notranslate"><span class="pre">pipx</span></code> installation instructions <a class="reference external" href="https://pipx.pypa.io/stable/">here</a>.)</p>
-<div class="dropdown admonition">
-<p class="admonition-title">Optionally initialize a git repository during plugin templating</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">git</span></code> is installed in your environment, at the end of the templating process, a new git repository will be initialized and a first commit will be made.
-This facilitates managing your plugin in version control, and is especially good practice if you are templating a plugin that you ultimately plan to distribute to others.</p>
-<p>You can check if you have git installed by running <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">--version</span></code>.
-If you get a response with a version number (something like <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">version</span> <span class="pre">2.44.0</span></code>), git is installed and a new local repository will be initialized.
-If you get a response suggesting that <code class="docutils literal notranslate"><span class="pre">git</span></code> is not installed, you can just continue and not have cookiecutter create a git repository for you, or you can install <a class="reference external" href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">git</a> and then continue.</p>
-<p>The git repository that is created will be a local git repository, meaning that it only exists on your computer and won’t be shared through a site like GitHub.
-If you’d like to learn how to share your plugins, see <a class="reference internal" href="../how-to-guides/distribute-on-gh.html#share-on-github"><span class="std std-ref">Distribute plugins on GitHub</span></a>.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="integrate-metadata-in-actions">
+<span id="integrate-metadata"></span><h1>Integrate metadata in Actions<a class="headerlink" href="#integrate-metadata-in-actions" title="Link to this heading">#</a></h1>
+<p>We’ve done a lot so far in q2-dwq2, but we’ve left out one thing that is common in almost all <em>real</em> plugins: the integration of metadata in Actions.
+In this relatively brief section, we’ll enable users to optionally provide metadata associated with reference sequences to the tables generated by the <code class="docutils literal notranslate"><span class="pre">tabulate-las-results</span></code> Visualizer and the <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> Pipeline.
+This metadata could be just about anything.
+For example, reference metadata could be taxonomic information about the reference sequences, enabling viewers of the resulting visualization to infer the taxonomic origin of their query sequences from the taxonomy associated with the closest matching reference sequences.
+(That example is also used in the <em>Sequence Homology Searching</em> chapter of <a class="reference external" href="https://readIAB.org">An Introduction to Applied Bioinformatics</a> <span id="id1">[<a class="reference internal" href="../../back-matter/bibliography.html#id5" title="J Gregory Caporaso. An introduction to applied bioinformatics, 2nd edition. 2021. URL: https://readiab.org.">3</a>]</span>, so you can refer there if the idea isn’t familar.)</p>
+<p>Let’s get started.</p>
+<div class="tip admonition" id="integrate-metadata-commits">
+<p class="admonition-title">tl;dr</p>
+<p>The code that I wrote for this section can be found here: <a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/ab244d80340f323ec05d294cca1b3cebc52f0d17">caporaso-lab/q2-dwq2</a>.</p>
 </div>
-</section>
-<section id="run-cookiecutter-to-create-your-plugin">
-<h2>Run <code class="docutils literal notranslate"><span class="pre">cookiecutter</span></code> to create your plugin<a class="headerlink" href="#run-cookiecutter-to-create-your-plugin" title="Link to this heading">#</a></h2>
-<p>Next, run <code class="docutils literal notranslate"><span class="pre">cookiecutter</span></code> to create your plugin from the template using the following command.
-If you used <code class="docutils literal notranslate"><span class="pre">pipx</span></code> to install <code class="docutils literal notranslate"><span class="pre">cookiecutter</span></code>, follow the instructions in the <em>pipx</em> tab - otherwise follow the instructions in the <em>Other</em> tab.</p>
-<div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
-<label class="sd-tab-label" for="sd-tab-item-0">
-pipx</label><div class="sd-tab-content docutils">
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pipx<span class="w"> </span>run<span class="w"> </span>cookiecutter<span class="w"> </span>gh:caporaso-lab/cookiecutter-qiime2-plugin
+<section id="the-input-metadata">
+<h2>The input metadata<a class="headerlink" href="#the-input-metadata" title="Link to this heading">#</a></h2>
+<p>In this example, the reference metadata will be a QIIME 2 metadata file that has reference sequence ids as its identifiers, and some number of additional columns containing the actual metadata.
+For example, the tab-separated text (<code class="docutils literal notranslate"><span class="pre">.tsv</span></code>) metadata file could look like:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>id	phylum	class genus	species
+ref-seq1	Bacteria	Bacillota	Bacillus_A	paranthracis
+ref-seq2	Bacteria	Pseudomonadota	Photobacterium	kishitanii
+ref-seq3	Bacteria	Actinomycetota	Cryptosporangium	arvum
 </pre></div>
 </div>
-</div>
-<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
-<label class="sd-tab-label" for="sd-tab-item-1">
-Other</label><div class="sd-tab-content docutils">
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cookiecutter<span class="w"> </span>gh:caporaso-lab/cookiecutter-qiime2-plugin
-</pre></div>
-</div>
-</div>
-</div>
-<p>During the plugin templating process, you’ll be prompted for information on your new plugin.
-For the questions about the <em>Target distribution</em> and whether you’re <em>targeting the stable or latest development QIIME 2 release</em>, use the default values unless you have a specific reason not to; these are the last two questions, as of this writing in May 2024.
-For all of the other questions, feel free to customize your plugin by providing whatever values you’d like.</p>
-<p>The plugin I’m going to create will be called <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code> (for <em>Developing with QIIME 2</em>).
-After you’ve answered all of the questions, your plugin should have been successfully created and be ready to be installed and used.</p>
+<p>This metadata file will be passed into <code class="docutils literal notranslate"><span class="pre">tabulate_las_results</span></code> along with the <code class="docutils literal notranslate"><span class="pre">LocalAlignmentSearchResults</span></code> artifact that it already takes.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you’d like to learn more about the files that were created in this process, you can refer to <a class="reference internal" href="../explanations/package-structure.html#plugin-package-explanation"><span class="std std-ref">The structure of QIIME 2 plugin packages</span></a>.
-You don’t need to know what all of these files are to continue the tutorial though, so you can also come back to that later.</p>
+<p>By convention in QIIME 2, all relevant identifiers (in our case, those that could be present in the <code class="docutils literal notranslate"><span class="pre">LocalAlignmentSearchResults</span></code> artifact) should be represented in the metadata, or an error should be raised.
+However, “extra” identifiers in the metadata that do not show up in the corresponding artifacts (again, the <code class="docutils literal notranslate"><span class="pre">LocalAlignmentSearchResults</span></code> in this example) are allowed.</p>
+<p>The goal of this convention is that we want to facilitate users maintaining only a single metadata file.
+If an upstream artifact - in this case the sequences in the <code class="docutils literal notranslate"><span class="pre">FeatureData[Sequence]</span></code> artifact that is passed into <code class="docutils literal notranslate"><span class="pre">local-alignment-search</span></code> as <code class="docutils literal notranslate"><span class="pre">reference_seqs</span></code> - is ever filtered to remove some sequences, the user shouldn’t have to create a filtered version of their metadata file.
+The reason for this is two-fold.
+First of all, that would generally be an extra, unnecessary step, so it complicates users’ workflows.
+But, more importantly, that could result in a proliferation of metadata files that need to be kept in sync.
+This is another application of the <a class="reference internal" href="../../back-matter/glossary.html#term-DRY"><span class="xref std std-term">DRY</span></a> principle: don’t encourage your users to duplicate information represented in their metadata file.</p>
 </div>
 </section>
-<section id="install-and-test-your-new-plugin">
-<h2>Install and test your new plugin<a class="headerlink" href="#install-and-test-your-new-plugin" title="Link to this heading">#</a></h2>
-<p>After the plugin has been created, change into the top-level directory for the plugin.
-For me, that’s <code class="docutils literal notranslate"><span class="pre">q2-dwq2/</span></code>.
-In that directory, you’ll find a file called <code class="docutils literal notranslate"><span class="pre">README.md</span></code>, which has a section in it containing <em>Installation instructions</em>.
-Follow all of the installation instructions, and then follow the instructions in that file for testing and using your new plugin.</p>
-<p>After completing all of those steps, you now have a QIIME 2 <a class="reference internal" href="../../back-matter/glossary.html#term-Deployment"><span class="xref std std-term">deployment</span></a> on your computer that includes your new plugin.
-When you requested help text on your plugin (e.g., <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dwq2</span> <span class="pre">--help</span></code>), you should have seen some of the information you provided when creating the plugin.</p>
-<p>The template plugin includes a simple (and silly) action called <code class="docutils literal notranslate"><span class="pre">duplicate-table</span></code>, along with associated unit tests.
-This provides an example action and example unit tests.
-You’ll ultimately want to delete this action, but for now let’s use it to make sure everything is working as expected.</p>
-<p>Call your plugin’s <code class="docutils literal notranslate"><span class="pre">duplicate-table</span></code> action with the <code class="docutils literal notranslate"><span class="pre">--help</span></code> parameter (e.g., <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dwq2</span> <span class="pre">duplicate-table</span> <span class="pre">--help</span></code>).
-You should see text that looks like the following:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Usage:<span class="w"> </span>qiime<span class="w"> </span>dwq2<span class="w"> </span>duplicate-table<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
-
-<span class="w">  </span>Create<span class="w"> </span>a<span class="w"> </span>copy<span class="w"> </span>of<span class="w"> </span>a<span class="w"> </span>feature<span class="w"> </span>table<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>uuid.<span class="w"> </span>This<span class="w"> </span>is<span class="w"> </span><span class="k">for</span><span class="w"> </span>demonstration
-<span class="w">  </span>purposes<span class="w"> </span>only.<span class="w"> </span>🧐
-
-Inputs:
-<span class="w">  </span>--i-table<span class="w"> </span>ARTIFACT<span class="w"> </span>FeatureTable<span class="o">[</span>Frequency<span class="o">]</span>
-<span class="w">                          </span>The<span class="w"> </span>feature<span class="w"> </span>table<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>duplicated.<span class="w">       </span><span class="o">[</span>required<span class="o">]</span>
-Outputs:
-<span class="w">  </span>--o-new-table<span class="w"> </span>ARTIFACT<span class="w"> </span>FeatureTable<span class="o">[</span>Frequency<span class="o">]</span>
-<span class="w">                          </span>The<span class="w"> </span>duplicated<span class="w"> </span>feature<span class="w"> </span>table.<span class="w">             </span><span class="o">[</span>required<span class="o">]</span>
-Miscellaneous:
-<span class="w">  </span>--output-dir<span class="w"> </span>PATH<span class="w">       </span>Output<span class="w"> </span>unspecified<span class="w"> </span>results<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>directory
-<span class="w">  </span>--verbose<span class="w"> </span>/<span class="w"> </span>--quiet<span class="w">     </span>Display<span class="w"> </span>verbose<span class="w"> </span>output<span class="w"> </span>to<span class="w"> </span>stdout<span class="w"> </span>and/or<span class="w"> </span>stderr
-<span class="w">                          </span>during<span class="w"> </span>execution<span class="w"> </span>of<span class="w"> </span>this<span class="w"> </span>action.<span class="w"> </span>Or<span class="w"> </span>silence<span class="w"> </span>output
-<span class="w">                          </span><span class="k">if</span><span class="w"> </span>execution<span class="w"> </span>is<span class="w"> </span>successful<span class="w"> </span><span class="o">(</span>silence<span class="w"> </span>is<span class="w"> </span>golden<span class="o">)</span>.
-<span class="w">  </span>--example-data<span class="w"> </span>PATH<span class="w">     </span>Write<span class="w"> </span>example<span class="w"> </span>data<span class="w"> </span>and<span class="w"> </span>exit.
-<span class="w">  </span>--citations<span class="w">             </span>Show<span class="w"> </span>citations<span class="w"> </span>and<span class="w"> </span>exit.
-<span class="w">  </span>--help<span class="w">                  </span>Show<span class="w"> </span>this<span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span>exit.
+<section id="add-an-optional-input-to-tabulate-las-results">
+<h2>Add an optional input to <code class="docutils literal notranslate"><span class="pre">tabulate_las_results</span></code><a class="headerlink" href="#add-an-optional-input-to-tabulate-las-results" title="Link to this heading">#</a></h2>
+<p>Now that we know what the metadata will look like, let’s add a new optional input to our <code class="docutils literal notranslate"><span class="pre">tabulate_las_results</span></code> function.
+The new input we add will be called <code class="docutils literal notranslate"><span class="pre">reference_metadata</span></code>, and it will be received as a <code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> object.
+Our updated function signature in <code class="docutils literal notranslate"><span class="pre">_visualizers.py</span></code> will look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tabulate_las_results</span><span class="p">(</span><span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                         <span class="n">hits</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+                         <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">_tabulate_las_defaults</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">],</span>
+                         <span class="n">reference_metadata</span><span class="p">:</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Metadata</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> \
+                         <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </pre></div>
 </div>
-<p>If you’d like to try the action out, you can call your <code class="docutils literal notranslate"><span class="pre">duplicate-table</span></code> action on any QIIME 2 <code class="docutils literal notranslate"><span class="pre">FeatureTable[Frequency]</span></code> artifact (e.g., you can download one from the <a class="reference external" href="https://docs.qiime2.org">QIIME 2 user documentation</a>).
-Load your duplicated table with <a class="reference external" href="https://view.qiime2.org">QIIME 2 View</a>, and poke through its Provenance to see how data provenance is recorded for your plugin.</p>
-<p>Congratulations - you’ve created a working QIIME 2 plugin from a template!
-If you’d like to learn QIIME 2 plugin development, in the next step of the tutorial we’ll <a class="reference internal" href="add-nw-align-method.html"><span class="doc std std-doc">Add a first (real) Method</span></a>.
-If you’re already comfortable with QIIME 2 plugin development, you’re all set to make this plugin your own.
-In either case, if you’d like to host your plugin in a GitHub repository, you can refer to <a class="reference internal" href="../how-to-guides/distribute-on-gh.html#share-on-github"><span class="std std-ref">Distribute plugins on GitHub</span></a>.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>You can see my code after following these steps by looking at the specific commit in my plugin repository on GitHub: <a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/3465ea40b18ae15825411a5930cfd24016f5d872">caporaso-lab/q2-dwq2</a>.
-My code may look a little different than yours as I may have been using an older version of the template plugin than you used - everything in the tutorial will still work the same though.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">reference_metadata</span></code> is provided, we’ll take a few steps to integrate it into <code class="docutils literal notranslate"><span class="pre">hits</span></code> before we write out our HTML file.
+Otherwise, <code class="docutils literal notranslate"><span class="pre">tabulate_las_results</span></code> will behave exactly as it did before.
+I added the following <code class="docutils literal notranslate"><span class="pre">if</span></code> block:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">reference_metadata</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">reference_metadata</span> <span class="o">=</span> <span class="n">reference_metadata</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+
+    <span class="n">hits</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">metadata_index</span> <span class="o">=</span> <span class="n">reference_metadata</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">metadata_columns</span> <span class="o">=</span> <span class="n">reference_metadata</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+    <span class="n">reference_metadata</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">missing_ids</span> <span class="o">=</span> \
+        <span class="nb">set</span><span class="p">(</span><span class="n">hits</span><span class="p">[</span><span class="s1">&#39;reference id&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">reference_metadata</span><span class="p">[</span><span class="n">metadata_index</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing_ids</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;The following </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">missing_ids</span><span class="p">)</span><span class="si">}</span><span class="s2"> IDs are missing from &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;reference metadata: </span><span class="si">{</span><span class="n">missing_ids</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="n">hits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">hits</span><span class="p">,</span> <span class="n">reference_metadata</span><span class="p">,</span>
+                    <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;reference id&#39;</span><span class="p">,</span>
+                    <span class="n">right_on</span><span class="o">=</span><span class="n">metadata_index</span><span class="p">,</span>
+                    <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+
+    <span class="n">hits</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;query id&#39;</span><span class="p">,</span> <span class="s1">&#39;reference id&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">column_order</span> <span class="o">=</span> \
+        <span class="p">[</span><span class="s1">&#39;percent similarity&#39;</span><span class="p">,</span> <span class="s1">&#39;alignment length&#39;</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">]</span> <span class="o">+</span> \
+        <span class="n">metadata_columns</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;aligned query&#39;</span><span class="p">,</span> <span class="s1">&#39;aligned reference&#39;</span><span class="p">]</span>
+    <span class="n">hits</span> <span class="o">=</span> <span class="n">hits</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">column_order</span><span class="p">)</span>
+</pre></div>
 </div>
+<p>This looks like a lot, but it’s really a few simple actions.</p>
+<ol class="arabic simple">
+<li><p>First, convert the <code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> object to a <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> using the built-in method on <code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code>.</p></li>
+<li><p>Then, remove the index from <code class="docutils literal notranslate"><span class="pre">hits</span></code> to prepare it for a <code class="docutils literal notranslate"><span class="pre">pd.merge</span></code> operation.</p></li>
+<li><p>Next, cache the metadata’s index name because - importantly - we don’t know exactly what this index name will be.
+The QIIME 2 metadata format allows for a few available options, including <code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">sample-id</span></code>, <code class="docutils literal notranslate"><span class="pre">feature-id</span></code>, and several others, and we don’t want to restrict a user to providing any specific one of these.
+We also cache the list of metadata columns, and remove the index to prepare it for the <code class="docutils literal notranslate"><span class="pre">pd.merge</span></code> operation with <code class="docutils literal notranslate"><span class="pre">hits</span></code>.
+Remember that we also don’t know what metadata columns the user will provide, and in this example we’re not putting any restrictions on this.</p></li>
+<li><p>Then, we confirm that all ids that are represented in <code class="docutils literal notranslate"><span class="pre">hits</span></code> are present in <code class="docutils literal notranslate"><span class="pre">reference_metadata</span></code>, and we throw an informative error message if any are missing.
+Our error message should help a user identify what’s wrong, so I chose to indicate how many ids were missing, and provide a list of them.</p></li>
+<li><p>Next, we merge our hits and the reference metadata on the index of <code class="docutils literal notranslate"><span class="pre">hits</span></code> and the index of our metadata.
+Unlike for the metadata, we <em>do</em> know what the index name of <code class="docutils literal notranslate"><span class="pre">hits</span></code> will be because we were explicit about this when we defined our <code class="docutils literal notranslate"><span class="pre">LocalAlignmentSearchResultsFormat</span></code>, so we can refer to it directly.
+This is an important distinction that differentiates metadata from <a class="reference internal" href="../../back-matter/glossary.html#term-File-Format"><span class="xref std std-term">File Formats</span></a> we define: if we need the flexibility to allow for arbitrary column names, we’re generally working with metadata. On the other hand, if our column names are predefined, we should generally be working with a File Format.</p></li>
+<li><p>Then, we prepare the <code class="docutils literal notranslate"><span class="pre">hits</span></code> DataFrame for use downstream.
+To do this, we first set the MultiIndex.
+I also sorted the columns such that all of the metadata columns come between the <em>percent similarity</em>, <em>alignment length</em>, and <em>score</em> columns and the <em>aligned query</em> and <em>reference query</em> columns of the original <code class="docutils literal notranslate"><span class="pre">hits</span></code> DataFrame.
+When developing, I found this column order to be useful for reviewing the results.</p></li>
+</ol>
+<p>After this, our action proceeds the same as if no metadata was provided.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;index.html&quot;</span><span class="p">),</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+    <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_html_template</span> <span class="o">%</span> <span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">hits</span><span class="o">.</span><span class="n">to_html</span><span class="p">()))</span>
+</pre></div>
+</div>
+</section>
+<section id="update-search-and-summarize">
+<h2>Update <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code><a class="headerlink" href="#update-search-and-summarize" title="Link to this heading">#</a></h2>
+<p>We’ll also want this option to be available to users of <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code>.
+Since <code class="docutils literal notranslate"><span class="pre">tabulate-las-results</span></code> is already part of the <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> Pipeline, all we need to do in our <code class="docutils literal notranslate"><span class="pre">_pipelines.py</span></code> file is add the new optional parameter (<code class="docutils literal notranslate"><span class="pre">reference_metadata</span></code>), and pass it through in our call to <code class="docutils literal notranslate"><span class="pre">tabulate_las_results_action</span></code>.
+Try to do that yourself, and refer to my code (<a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/ab244d80340f323ec05d294cca1b3cebc52f0d17">caporaso-lab/q2-dwq2</a>) as needed.</p>
+</section>
+<section id="update-plugin-setup-py">
+<h2>Update <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code><a class="headerlink" href="#update-plugin-setup-py" title="Link to this heading">#</a></h2>
+<p>Next, we’ll need to make the plugin aware of this new parameter when we register the <code class="docutils literal notranslate"><span class="pre">tabulate-las-results</span></code> and <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> actions.
+Metadata files are provided as <a class="reference internal" href="../../back-matter/glossary.html#term-Parameter"><span class="xref std std-term">Parameters</span></a> of type <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.Metadata</span></code> on action registration.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code>, add <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> to the list of imports from <code class="docutils literal notranslate"><span class="pre">qiime2.plugin</span></code>.
+Then, add the new parameter and description to the dictionaries we created to house these for <code class="docutils literal notranslate"><span class="pre">tabulate-las-results</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_tabulate_las_parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">Str</span><span class="p">,</span>
+                            <span class="s1">&#39;reference_metadata&#39;</span><span class="p">:</span> <span class="n">Metadata</span><span class="p">}</span>
+<span class="n">_tabulate_las_parameter_descriptions</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Title to use inside visualization.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;reference_metadata&#39;</span><span class="p">:</span> <span class="s1">&#39;Reference metadata to be integrated in output.&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Recall that we reuse these dictionaries when we register <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code>, so we only need to add this parameter and description in this one place.</p>
+<p>At this point, you should be ready to use this new functionality with your plugin.
+Open a terminal in a environment where your implementation of <code class="docutils literal notranslate"><span class="pre">q2-dwq2</span></code> is installed, run <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dev</span> <span class="pre">refresh-cache</span></code>, and you should see the new parameter in calls to <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dwq2</span> <span class="pre">tabulate-las-results</span> <span class="pre">--help</span></code> and <code class="docutils literal notranslate"><span class="pre">qiime</span> <span class="pre">dwq2</span> <span class="pre">search-and-summarize</span> <span class="pre">--help</span></code>.</p>
+</section>
+<section id="add-unit-tests-and-update-the-search-and-summarize-usage-example">
+<h2>Add unit tests and update the <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> usage example<a class="headerlink" href="#add-unit-tests-and-update-the-search-and-summarize-usage-example" title="Link to this heading">#</a></h2>
+<p>Finally, wrap this up by adding new unit tests for the functionality.
+Do this on your own, and then refer my code (<a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/ab244d80340f323ec05d294cca1b3cebc52f0d17">caporaso-lab/q2-dwq2</a>) to see how I did it.</p>
+<p>In my code for this section, you’ll also find a metadata file that I provided which corresponds to the example reference sequences that were provided.
+Use that file to update the <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> usage example, and then test your code on the command line with the new usage example.</p>
 </section>
 </section>
 
@@ -583,20 +623,20 @@ My code may look a little different than yours as I may have been using an older
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="add-parallel-pipeline.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tutorial: A step-by-step guide to building your first QIIME 2 plugin</p>
+        <p class="prev-next-title">Add a Pipeline with parallel computing support</p>
       </div>
     </a>
     <a class="right-next"
-       href="add-nw-align-method.html"
+       href="conclusion.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Add a first (real) Method</p>
+        <p class="prev-next-title">Conclusion</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -616,9 +656,11 @@ My code may look a little different than yours as I may have been using an older
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-tools-needed-for-templating-your-plugin">Install the tools needed for templating your plugin</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-cookiecutter-to-create-your-plugin">Run <code class="docutils literal notranslate"><span class="pre">cookiecutter</span></code> to create your plugin</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-and-test-your-new-plugin">Install and test your new plugin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-input-metadata">The input metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-an-optional-input-to-tabulate-las-results">Add an optional input to <code class="docutils literal notranslate"><span class="pre">tabulate_las_results</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-search-and-summarize">Update <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-plugin-setup-py">Update <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-unit-tests-and-update-the-search-and-summarize-usage-example">Add unit tests and update the <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> usage example</a></li>
 </ul>
   </nav></div>
 

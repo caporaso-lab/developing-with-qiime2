@@ -185,6 +185,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../tutorials/add-2nd-transformer.html">Add a second transformer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../tutorials/add-pipeline.html">Add a first Pipeline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../tutorials/add-parallel-pipeline.html">Add a Pipeline with parallel computing support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/integrate-metadata.html">Integrate metadata in Actions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../tutorials/conclusion.html">Conclusion</a></li>
 </ul>
 </details></li>
@@ -465,12 +466,12 @@ This is done via <a class="reference internal" href="#qiime2.plugin.CitationReco
 (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#list" title="Python 3.9"><code class="docutils literal notranslate"><span class="pre">list</span></code></a> and <a class="reference internal" href="#qiime2.plugin.Citations" title="qiime2.plugin.Citations"><code class="xref myst py py-class docutils literal notranslate"><span class="pre">Citations</span></code></a>).</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.plugin.Citations">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Citations</span></span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2c4c7d2/qiime2/core/cite.py#L39"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Citations" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Citations</span></span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/3581493/qiime2/core/cite.py#L39"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Citations" title="Link to this definition">#</a></dt>
 <dd><p>A simple subclass of <a class="reference external" href="https://docs.python.org/3.9/library/collections.html#collections.OrderedDict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.OrderedDict</span></code></a>
 but iterates over values instead of keys by default.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.Citations.load">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2c4c7d2/qiime2/core/cite.py#L42"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Citations.load" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/3581493/qiime2/core/cite.py#L42"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Citations.load" title="Link to this definition">#</a></dt>
 <dd><p>Load a bibtex file from a path (or relative package path)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -488,13 +489,13 @@ relative to the python package.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.Citations.__iter__">
-<span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2c4c7d2/qiime2/core/cite.py#L86"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Citations.__iter__" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/3581493/qiime2/core/cite.py#L86"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Citations.__iter__" title="Link to this definition">#</a></dt>
 <dd><p>Iterates over the contained <a class="reference internal" href="#qiime2.plugin.CitationRecord" title="qiime2.plugin.CitationRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">CitationRecord</span></code></a>’s</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.Citations.save">
-<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2c4c7d2/qiime2/core/cite.py#L90"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Citations.save" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/3581493/qiime2/core/cite.py#L90"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Citations.save" title="Link to this definition">#</a></dt>
 <dd><p>Save object as bibtex to a filepath or filehandle</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -510,7 +511,7 @@ relative to the python package.</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.plugin.CitationRecord">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">CitationRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2c4c7d2/qiime2/core/cite.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.CitationRecord" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">CitationRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/3581493/qiime2/core/cite.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.CitationRecord" title="Link to this definition">#</a></dt>
 <dd><p>A <a class="reference external" href="https://docs.python.org/3.9/library/collections.html#collections.namedtuple" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">collections.namedtuple()</span></code></a> of bibtex entry type and entry fields.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
