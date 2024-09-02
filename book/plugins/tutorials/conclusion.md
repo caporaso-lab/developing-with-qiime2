@@ -10,5 +10,4 @@ The easiest way to do that is to go back to the first section of the tutorial, [
 Start working on adding your methods and visualizers, and don't forget your unit tests and usage examples!
 Come join the {{ developer_discussion }} if you need help, have feedback on this tutorial, or have more general feedback on developing QIIME 2 plugins.
 
-Thanks for reading and for your interest in QIIME 2!
-Happy coding!
+Thanks for reading and for your interest in QIIME 2 - happy coding!
