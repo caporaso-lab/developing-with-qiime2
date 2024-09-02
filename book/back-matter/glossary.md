@@ -40,6 +40,7 @@ Distribution
 DRY
   An acronym of *Don't Repeat Yourself*, and a critical principle of software engineering.
   For more information on DRY and software engineering in general, see {cite:t}`pragprog20`.
+  The {cite:t}`pragprog20` content on DRY is available in a [free example chapter here](https://media.pragprog.com/titles/tpp20/dry.pdf).
 
 
 File Format
