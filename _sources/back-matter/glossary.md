@@ -20,9 +20,9 @@ Artifact API
   See {term}`Python 3 API`.
 
 Conda metapackage
-  > A metapackage is a package  with no  files,  only  metadata.
-  > They are typically used to collect several packages together into a single package via dependencies.
-  > ([source](https://docs.conda.io/projects/conda-build/en/stable/resources/commands/conda-metapackage.html))
+  A metapackage is a package  with no  files,  only  metadata.
+  They are typically used to collect several packages together into a single package via dependencies.
+  ([source](https://docs.conda.io/projects/conda-build/en/stable/resources/commands/conda-metapackage.html))
 
 Deployment
   An installation of QIIME 2 as well as zero-or-more {term}`interfaces <Interface>` and {term}`plugins <Plugin>`.
@@ -40,6 +40,7 @@ Distribution
 DRY
   An acronym of *Don't Repeat Yourself*, and a critical principle of software engineering.
   For more information on DRY and software engineering in general, see {cite:t}`pragprog20`.
+  The {cite:t}`pragprog20` content on DRY is available in a [free example chapter here](https://media.pragprog.com/titles/tpp20/dry.pdf).
 
 
 File Format
