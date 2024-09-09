@@ -37,6 +37,15 @@ With the following terms defined:
 - `<repository-name>`: the name of your plugin repository on GitHub (this often will be the same as your plugin's package name, e.g., `q2-dwq2`)
 - `<target-branch>` (optional): the relevant branch that users should be utilizing to install your plugin - if not specified, this will default to your repository's *Default branch* (e.g., `main`). If you don't include this, you should leave off the `@` symbol following `.git`
 
+``````{Note}
+In the examples provided in this guide, we utilize the `released` channel for our QIIME 2 packages (i.e. `packages.qiime2.org/qiime2/<target-epoch>/<target-distribution>/released`).
+If you are interested in creating and/or sharing instructions for installing a version of your plugin that relies on one of our development environments (meaning the current development cycle environment prior to an official release version), you'll want to target the `passed` channel of that particular distribution.
+Here's an example of what this channel might look like (as of Sept. 2024, prior to the 2024.10 release):
+```
+https://packages.qiime2.org/qiime2/2024.10/amplicon/passed
+```
+``````
+
 Using the above guidelines, you can provide the following install instructions for your users:
 ```
 conda env create \
