@@ -479,6 +479,14 @@ We plan to develop functionality as part of the QIIME 2 Library that will help t
 Github Actions can be a bit confusing to set up.
 We recommend the online course, <a class="reference external" href="https://hutchdatascience.org/GitHub_Automation_for_Scientists"><em>GitHub Automation for Scientists</em></a>, developed by the <a class="reference external" href="https://www.itcrtraining.org/">ITCR Training Network</a>, before moving forward.
 Once you’ve read through this (and hopefully played around with a few of the toy examples provided therein), you can start to put together a CI workflow based the examples provided here.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before creating any GHAs for your plugin, you’ll start by creating a top-level directory within your plugin’s repository with the following name:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">github</span><span class="o">/</span><span class="n">workflows</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>This naming structure is what allows Github to identify any relevant actions or workflows that should be run within your repository, and is where all of your GHA files should be created.</p>
+</div>
 <p>Here is what the basic structure of your GHA will look like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="p">:</span> <span class="n">ci</span><span class="o">-&lt;</span><span class="n">repository</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
 <span class="n">on</span><span class="p">:</span>
@@ -501,7 +509,7 @@ This will typically be your <code class="docutils literal notranslate"><span cla
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;repository-name&gt;</span></code>: the name of your repository on GitHub</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;target-epoch&gt;-&lt;package-name&gt;-environment.yml</span></code>: the name of your environment file. If you haven’t created this yet, refer back to <a class="reference internal" href="facilitate-installation.html#facilitating-installation"><span class="std std-ref">Facilitating installation of your plugin for users</span></a> before continuing.</p></li>
 </ul>
-<p>Your GHA file will be stored under under <code class="docutils literal notranslate"><span class="pre">.github/workflows/</span></code> in your repository, and you can use the same name as your Github Action for the filename (e.g., <code class="docutils literal notranslate"><span class="pre">ci-&lt;repository-name&gt;.yml</span></code>).
+<p>Your GHA file will be stored under the <code class="docutils literal notranslate"><span class="pre">.github/workflows/</span></code> directory in your repository, and you can use the same name as your Github Action for the filename (e.g., <code class="docutils literal notranslate"><span class="pre">ci-&lt;repository-name&gt;.yml</span></code>).
 Note that the extension will also be <code class="docutils literal notranslate"><span class="pre">.yml</span></code> (same as your environment file(s)).</p>
 <p>After creating this file and pushing it to the main branch of your repository, this GHA should run anytime there is a commit to <code class="docutils literal notranslate"><span class="pre">&lt;target-branch&gt;</span></code> or a pull request against <code class="docutils literal notranslate"><span class="pre">&lt;target-branch&gt;</span></code>.</p>
 </section>
@@ -529,6 +537,7 @@ We suggest having these tests run on a weekly basis to make sure you have ample 
       <span class="n">env</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">name</span><span class="p">:</span> <span class="n">development</span><span class="o">-&lt;</span><span class="n">repository</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;-</span><span class="n">environment</span><span class="o">.</span><span class="n">yml</span><span class="o">&gt;</span>
 </pre></div>
 </div>
+<p>This GHA file will also be stored under the <code class="docutils literal notranslate"><span class="pre">.github/workflows/</span></code> directory in your repository, and you can use the same name as your Github Action for the filename (e.g., <code class="docutils literal notranslate"><span class="pre">cron-&lt;repository-name&gt;.yml</span></code>).</p>
 <p>Relative to the GHA example above, the differences are:</p>
 <ul class="simple">
 <li><p>The trigger for this action (i.e., <code class="docutils literal notranslate"><span class="pre">on</span></code>) is either manual (<code class="docutils literal notranslate"><span class="pre">workflow_dispatch</span></code>) or a schedule (<code class="docutils literal notranslate"><span class="pre">cron</span></code>) (previously it was commits and pull requests).

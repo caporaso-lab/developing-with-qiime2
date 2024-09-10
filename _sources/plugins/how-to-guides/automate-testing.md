@@ -26,6 +26,15 @@ Github Actions can be a bit confusing to set up.
 We recommend the online course, [*GitHub Automation for Scientists*](https://hutchdatascience.org/GitHub_Automation_for_Scientists), developed by the [ITCR Training Network](https://www.itcrtraining.org/), before moving forward.
 Once you've read through this (and hopefully played around with a few of the toy examples provided therein), you can start to put together a CI workflow based the examples provided here.
 
+``````{Note}
+Before creating any GHAs for your plugin, you'll start by creating a top-level directory within your plugin's repository with the following name:
+```
+.github/workflows/
+```
+
+This naming structure is what allows Github to identify any relevant actions or workflows that should be run within your repository, and is where all of your GHA files should be created.
+``````
+
 Here is what the basic structure of your GHA will look like:
 
 ```
@@ -49,7 +58,7 @@ This will typically be your `main` branch, but may differ if you've customized t
 - `<repository-name>`: the name of your repository on GitHub
 - `<target-epoch>-<package-name>-environment.yml`: the name of your environment file. If you haven't created this yet, refer back to [](facilitating-installation) before continuing.
 
-Your GHA file will be stored under under `.github/workflows/` in your repository, and you can use the same name as your Github Action for the filename (e.g., `ci-<repository-name>.yml`).
+Your GHA file will be stored under the `.github/workflows/` directory in your repository, and you can use the same name as your Github Action for the filename (e.g., `ci-<repository-name>.yml`).
 Note that the extension will also be `.yml` (same as your environment file(s)).
 
 After creating this file and pushing it to the main branch of your repository, this GHA should run anytime there is a commit to `<target-branch>` or a pull request against `<target-branch>`.
@@ -81,6 +90,8 @@ jobs:
       github-repo: <repository-name>
       env-file-name: development-<repository-name>-environment.yml>
 ```
+
+This GHA file will also be stored under the `.github/workflows/` directory in your repository, and you can use the same name as your Github Action for the filename (e.g., `cron-<repository-name>.yml`).
 
 Relative to the GHA example above, the differences are:
 
