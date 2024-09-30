@@ -467,7 +467,7 @@ For example, reference metadata could be taxonomic information about the referen
 <p>Let’s get started.</p>
 <div class="tip admonition" id="integrate-metadata-commits">
 <p class="admonition-title">tl;dr</p>
-<p>The code that I wrote for this section can be found here: <a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/ab244d80340f323ec05d294cca1b3cebc52f0d17">caporaso-lab/q2-dwq2</a>.</p>
+<p>The code that I wrote for this section can be found here: <a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/153d6a21a2fff54cdf934560ad26832cf9946aff">caporaso-lab/q2-dwq2</a>.</p>
 </div>
 <section id="the-input-metadata">
 <h2>The input metadata<a class="headerlink" href="#the-input-metadata" title="Link to this heading">#</a></h2>
@@ -563,7 +563,7 @@ When developing, I found this column order to be useful for reviewing the result
 <h2>Update <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code><a class="headerlink" href="#update-search-and-summarize" title="Link to this heading">#</a></h2>
 <p>We’ll also want this option to be available to users of <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code>.
 Since <code class="docutils literal notranslate"><span class="pre">tabulate-las-results</span></code> is already part of the <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> Pipeline, all we need to do in our <code class="docutils literal notranslate"><span class="pre">_pipelines.py</span></code> file is add the new optional parameter (<code class="docutils literal notranslate"><span class="pre">reference_metadata</span></code>), and pass it through in our call to <code class="docutils literal notranslate"><span class="pre">tabulate_las_results_action</span></code>.
-Try to do that yourself, and refer to my code (<a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/ab244d80340f323ec05d294cca1b3cebc52f0d17">caporaso-lab/q2-dwq2</a>) as needed.</p>
+Try to do that yourself, and refer to my code (<a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/153d6a21a2fff54cdf934560ad26832cf9946aff">caporaso-lab/q2-dwq2</a>) as needed.</p>
 </section>
 <section id="update-plugin-setup-py">
 <h2>Update <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code><a class="headerlink" href="#update-plugin-setup-py" title="Link to this heading">#</a></h2>
@@ -586,7 +586,7 @@ Open a terminal in a environment where your implementation of <code class="docut
 <section id="add-unit-tests-and-update-the-search-and-summarize-usage-example">
 <h2>Add unit tests and update the <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> usage example<a class="headerlink" href="#add-unit-tests-and-update-the-search-and-summarize-usage-example" title="Link to this heading">#</a></h2>
 <p>Finally, wrap this up by adding new unit tests for the functionality.
-Do this on your own, and then refer my code (<a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/ab244d80340f323ec05d294cca1b3cebc52f0d17">caporaso-lab/q2-dwq2</a>) to see how I did it.</p>
+Do this on your own, and then refer my code (<a class="github reference external" href="https://github.com/caporaso-lab/q2-dwq2/commit/153d6a21a2fff54cdf934560ad26832cf9946aff">caporaso-lab/q2-dwq2</a>) to see how I did it.</p>
 <p>In my code for this section, you’ll also find a metadata file that I provided which corresponds to the example reference sequences that were provided.
 Use that file to update the <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> usage example, and then test your code on the command line with the new usage example.</p>
 </section>
