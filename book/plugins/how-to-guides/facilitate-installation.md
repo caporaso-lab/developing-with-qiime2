@@ -13,7 +13,7 @@ environment-files/
 ```
 
 Within this directory, create environment file(s) for current and/or past installable versions of your plugin.
-You can name them with a pattern like `<target-epoch>-<package-name>-environment.yml` (for example, `2024.05-q2-dwq2-environment.yml`).
+You can name them with a pattern like `<package-name>-qiime2-<target-distribution>-<target-epoch>.yml` (for example, `q2-dwq2-qiime2-amplicon-2024.5.yml`).
 
 The contents of your environment file should look something like this:
 
@@ -50,7 +50,7 @@ Using the above guidelines, you can provide the following install instructions f
 ```
 conda env create \
  -n <target-epoch>-<package-name> \
- -f https://raw.githubusercontent.com/<owner>/<repository-name>/<target-branch>/environment-files/<target-epoch>-<package-name>-environment.yml
+ -f https://raw.githubusercontent.com/<owner>/<repository-name>/<target-branch>/environment-files/<package-name>-qiime2-<target-distribution>-<target-epoch>.yml
 ```
 
 Again, you'll fill in the values enclosed in the `<` and `>` brackets.
@@ -73,7 +73,7 @@ You could then have environment files and install instructions for these differe
 `````{tab-set}
 ````{tab-item} release-2024.5
 
-Environment file: `2024.5-q2-dwq2-environment.yml`
+Environment file: `q2-dwq2-qiime2-amplicon-2024.5.yml`
 
 ```
 channels:
@@ -92,14 +92,14 @@ Install instructions:
 ```
 conda env create \
  -n q2-dwq2 \
- -f https://raw.githubusercontent.com/caporaso-lab/q2-dwq2.git/main/environment-files/2024.5-q2-dwq2-environment.yml
+ -f https://raw.githubusercontent.com/caporaso-lab/q2-dwq2.git/main/environment-files/q2-dwq2-qiime2-amplicon-2024.5.yml
 ```
 
 ````
 
 ````{tab-item} release-2024.10
 
-Environment file: `2024.10-q2-dwq2-environment.yml`
+Environment file: `q2-dwq2-qiime2-amplicon-2024.10.yml`
 
 ```
 channels:
@@ -118,14 +118,14 @@ Install instructions:
 ```
 conda env create \
  -n q2-dwq2 \
- -f https://raw.githubusercontent.com/caporaso-lab/q2-dwq2.git/main/environment-files/2024.10-q2-dwq2-environment.yml
+ -f https://raw.githubusercontent.com/caporaso-lab/q2-dwq2.git/main/environment-files/q2-dwq2-qiime2-amplicon-2024.10.yml
 ```
 
 ````
 
 ````{tab-item} main (development)
 
-Environment file: `development-q2-dwq2-environment.yml`
+Environment file: `q2-dwq2-qiime2-amplicon-development.yml`
 
 ```
 channels:
@@ -144,7 +144,7 @@ Install instructions:
 ```
 conda env create \
  -n q2-dwq2 \
- -f https://raw.githubusercontent.com/caporaso-lab/q2-dwq2.git/main/environment-files/development-q2-dwq2-environment.yml
+ -f https://raw.githubusercontent.com/caporaso-lab/q2-dwq2.git/main/environment-files/q2-dwq2-qiime2-amplicon-development.yml
 ```
 
 ````
