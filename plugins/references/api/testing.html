@@ -16,17 +16,19 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -37,10 +39,11 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=d05ccb96" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
@@ -66,6 +69,7 @@
     <link rel="prev" title="Citations" href="citations.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -81,19 +85,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../../search.html"
       method="get">
@@ -101,7 +94,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -109,8 +101,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -126,7 +118,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -156,21 +149,17 @@
     
     
     <img src="../../../_static/dwq2-light.png" class="logo__image only-light" alt="Developing with QIIME 2 - Home"/>
-    <script>document.write(`<img src="../../../_static/dwq2-dark.png" class="logo__image only-dark" alt="Developing with QIIME 2 - Home"/>`);</script>
+    <img src="../../../_static/dwq2-dark.png" class="logo__image only-dark pst-js-only" alt="Developing with QIIME 2 - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins 🔌</span></p>
@@ -400,24 +389,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -470,7 +451,7 @@ document.write(`
 <span id="testing-api-docs"></span><h1>Testing<a class="headerlink" href="#testing" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.testing.</span></span><span class="sig-name descname"><span class="pre">TestPluginBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/plugin/testing.py#L39"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.testing.</span></span><span class="sig-name descname"><span class="pre">TestPluginBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/plugin/testing.py#L39"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase" title="Link to this definition">#</a></dt>
 <dd><p>Test harness for simplifying testing QIIME 2 plugins.</p>
 <p><code class="docutils literal notranslate"><span class="pre">TestPluginBase</span></code> extends <code class="docutils literal notranslate"><span class="pre">unittest.TestCase</span></code>, with a few extra helpers
 and assertions.</p>
@@ -503,7 +484,7 @@ method when executed. Raises a ValueError if the instance does
 not have a method with the specified name.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.setUp">
-<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/plugin/testing.py#L60"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.setUp" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/plugin/testing.py#L60"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.setUp" title="Link to this definition">#</a></dt>
 <dd><p>Test runner setup hook.</p>
 <p>If overriding this hook in a test, call <code class="docutils literal notranslate"><span class="pre">__super__</span></code> to invoke this
 method in the overridden hook, otherwise the harness might not work
@@ -512,7 +493,7 @@ as expected.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.tearDown">
-<span class="sig-name descname"><span class="pre">tearDown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/plugin/testing.py#L91"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.tearDown" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">tearDown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/plugin/testing.py#L91"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.tearDown" title="Link to this definition">#</a></dt>
 <dd><p>Test runner teardown hook.</p>
 <p>If overriding this hook in a test, call <code class="docutils literal notranslate"><span class="pre">__super__</span></code> to invoke this
 method in the overridden hook, otherwise the harness might not work
@@ -521,7 +502,7 @@ as expected.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.get_data_path">
-<span class="sig-name descname"><span class="pre">get_data_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_as_str</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/plugin/testing.py#L102"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.get_data_path" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_data_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_as_str</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/plugin/testing.py#L102"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.get_data_path" title="Link to this definition">#</a></dt>
 <dd><p>Convenience method for getting a data asset while testing.</p>
 <p>Test data stored in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> dir local to the running test
 can be accessed via this method.</p>
@@ -545,7 +526,7 @@ pathlib.FilePath object.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.get_transformer">
-<span class="sig-name descname"><span class="pre">get_transformer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_type</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/plugin/testing.py#L130"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.get_transformer" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_transformer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_type</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/plugin/testing.py#L130"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.get_transformer" title="Link to this definition">#</a></dt>
 <dd><p>Convenience method for getting a registered transformer.</p>
 <p>This helper deliberately side-steps the framework’s validation
 machinery, so that it is possible for plugin developers to test
@@ -568,7 +549,7 @@ failing conditions.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.assertRegisteredSemanticType">
-<span class="sig-name descname"><span class="pre">assertRegisteredSemanticType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">semantic_type</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/plugin/testing.py#L160"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.assertRegisteredSemanticType" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">assertRegisteredSemanticType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">semantic_type</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/plugin/testing.py#L160"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.assertRegisteredSemanticType" title="Link to this definition">#</a></dt>
 <dd><p>Test assertion for ensuring a plugin’s semantic type is registered.</p>
 <p>Fails if the semantic type requested is not found in the Plugin
 Manager.</p>
@@ -581,7 +562,7 @@ Manager.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.assertSemanticTypeRegisteredToFormat">
-<span class="sig-name descname"><span class="pre">assertSemanticTypeRegisteredToFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">semantic_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp_format</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/plugin/testing.py#L182"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.assertSemanticTypeRegisteredToFormat" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">assertSemanticTypeRegisteredToFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">semantic_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exp_format</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/plugin/testing.py#L182"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.assertSemanticTypeRegisteredToFormat" title="Link to this definition">#</a></dt>
 <dd><p>Test assertion for ensuring a semantic type is registered to a
 format.</p>
 <p>Fails if the semantic type requested is not registered to the format
@@ -599,7 +580,7 @@ registered to <strong>any</strong> format.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.transform_format">
-<span class="sig-name descname"><span class="pre">transform_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filenames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/plugin/testing.py#L214"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.transform_format" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">transform_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filenames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/plugin/testing.py#L214"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.transform_format" title="Link to this definition">#</a></dt>
 <dd><p>Helper utility for loading data and transforming it.</p>
 <p>Combines several other utilities in this class, will load files from
 <code class="docutils literal notranslate"><span class="pre">data/</span></code>, as <code class="docutils literal notranslate"><span class="pre">source_format</span></code>, then transform to the <code class="docutils literal notranslate"><span class="pre">target</span></code> view.</p>
@@ -631,7 +612,7 @@ exclusive with the <code class="docutils literal notranslate"><span class="pre">
 
 <dl class="py method">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.TestPluginBase.execute_examples">
-<span class="sig-name descname"><span class="pre">execute_examples</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/plugin/testing.py#L279"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.execute_examples" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">execute_examples</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/plugin/testing.py#L279"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.TestPluginBase.execute_examples" title="Link to this definition">#</a></dt>
 <dd><p>Runs all usage examples defined in the plugin.</p>
 </dd></dl>
 
@@ -639,7 +620,7 @@ exclusive with the <code class="docutils literal notranslate"><span class="pre">
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.testing.assert_no_nans_in_tables">
-<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.testing.</span></span><span class="sig-name descname"><span class="pre">assert_no_nans_in_tables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fh</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/plugin/testing.py#L292"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.assert_no_nans_in_tables" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.testing.</span></span><span class="sig-name descname"><span class="pre">assert_no_nans_in_tables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fh</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/plugin/testing.py#L292"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.testing.assert_no_nans_in_tables" title="Link to this definition">#</a></dt>
 <dd><p>Checks for NaNs present in any of the tables in the indicated file then
 resets to the head of the file.</p>
 </dd></dl>
@@ -701,7 +682,8 @@ resets to the head of the file.</p>
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -772,8 +754,8 @@ By Greg Caporaso and Evan Bolyen
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

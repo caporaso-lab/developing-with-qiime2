@@ -16,17 +16,19 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -37,10 +39,11 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=d05ccb96" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
@@ -66,6 +69,7 @@
     <link rel="prev" title="Formats" href="formats.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -81,19 +85,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../../search.html"
       method="get">
@@ -101,7 +94,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -109,8 +101,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -126,7 +118,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -156,21 +149,17 @@
     
     
     <img src="../../../_static/dwq2-light.png" class="logo__image only-light" alt="Developing with QIIME 2 - Home"/>
-    <script>document.write(`<img src="../../../_static/dwq2-dark.png" class="logo__image only-dark" alt="Developing with QIIME 2 - Home"/>`);</script>
+    <img src="../../../_static/dwq2-dark.png" class="logo__image only-dark pst-js-only" alt="Developing with QIIME 2 - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins 🔌</span></p>
@@ -400,24 +389,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -507,7 +488,7 @@ document.write(`
 <h2>Semantic Type<a class="headerlink" href="#semantic-type" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.SemanticType">
-<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">SemanticType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_members</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variant_of</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/core/type/semantic.py#L42"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.SemanticType" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">SemanticType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_members</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variant_of</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/core/type/semantic.py#L42"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.SemanticType" title="Link to this definition">#</a></dt>
 <dd><p>Create a new semantic type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -539,7 +520,7 @@ returned by this factory will cause <cite>is_semantic_type</cite> to return True
 <h3>Predicates<a class="headerlink" href="#predicates" title="Link to this heading">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.plugin.Properties">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Properties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">include</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/core/type/semantic.py#L241"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Properties" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Properties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">include</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/core/type/semantic.py#L241"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Properties" title="Link to this definition">#</a></dt>
 <dd><p>A one or more semantic properties to add to an existing type.</p>
 <p>Semantic properties make an existing semantic type “smaller” than it
 would otherwise be. If a union causes types to become larger, then a
@@ -796,7 +777,7 @@ dictated by system resources.</p>
 <h3>Predicates<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.plugin.Choices">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Choices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">choices</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/core/type/primitive.py#L310"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Choices" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Choices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">choices</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/core/type/primitive.py#L310"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Choices" title="Link to this definition">#</a></dt>
 <dd><p>A predicate which defines a set of allowable values.</p>
 <p>Can be used with <a class="reference internal" href="#qiime2.plugin.Str" title="qiime2.plugin.Str"><code class="xref py py-data docutils literal notranslate"><span class="pre">Str</span></code></a> and <a class="reference internal" href="#qiime2.plugin.Bool" title="qiime2.plugin.Bool"><code class="xref py py-data docutils literal notranslate"><span class="pre">Bool</span></code></a>.</p>
 <dl class="field-list simple">
@@ -817,7 +798,7 @@ enumeration will be considered outside of the domain of the base type.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.plugin.Range">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Range</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <span class="optional">]</span><em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive_start=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive_end=False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/core/type/primitive.py#L31"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Range" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Range</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <span class="optional">]</span><em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive_start=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive_end=False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/core/type/primitive.py#L31"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Range" title="Link to this definition">#</a></dt>
 <dd><p>A predicate which defines a contiguous range of allowable values.</p>
 <p>Can be used with <a class="reference internal" href="#qiime2.plugin.Int" title="qiime2.plugin.Int"><code class="xref py py-data docutils literal notranslate"><span class="pre">Int</span></code></a> and <a class="reference internal" href="#qiime2.plugin.Float" title="qiime2.plugin.Float"><code class="xref py py-data docutils literal notranslate"><span class="pre">Float</span></code></a>.</p>
 <dl class="field-list simple">
@@ -882,7 +863,7 @@ Will be <code class="docutils literal notranslate"><span class="pre">None</span>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Start">
-<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/core/type/primitive.py#L260"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Start" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/core/type/primitive.py#L260"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Start" title="Link to this definition">#</a></dt>
 <dd><p>Shorthand to generate a <a class="reference internal" href="#qiime2.plugin.Range" title="qiime2.plugin.Range"><code class="xref py py-class docutils literal notranslate"><span class="pre">Range</span></code></a></p>
 <p>The end of the resulting range is <code class="docutils literal notranslate"><span class="pre">None</span></code> (infinity).</p>
 <dl class="field-list simple">
@@ -907,7 +888,7 @@ Will be <code class="docutils literal notranslate"><span class="pre">None</span>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.End">
-<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">End</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/core/type/primitive.py#L285"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.End" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">End</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/core/type/primitive.py#L285"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.End" title="Link to this definition">#</a></dt>
 <dd><p>Shorthand to generate a <a class="reference internal" href="#qiime2.plugin.Range" title="qiime2.plugin.Range"><code class="xref py py-class docutils literal notranslate"><span class="pre">Range</span></code></a></p>
 <p>The start of the resulting range is <code class="docutils literal notranslate"><span class="pre">None</span></code> (negative infinity).</p>
 <dl class="field-list simple">
@@ -1075,7 +1056,7 @@ auto-incrementing integer keys.</p>
 <h2>Dependent Types<a class="headerlink" href="#dependent-types" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.plugin.TypeMap">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">TypeMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/core/type/meta.py#L92"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.TypeMap" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">TypeMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/core/type/meta.py#L92"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.TypeMap" title="Link to this definition">#</a></dt>
 <dd><p>A table of input types which match to output types.</p>
 <p>The TypeMap is best thought of as a table in which QIIME 2 is trying to
 find a row that matches the user’s input. Once found, the row-wise search
@@ -1153,7 +1134,7 @@ will correspond to the number of “columns” in the TypeMap.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.plugin.TypeMatch">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">TypeMatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">listing</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2a4dc50/qiime2/core/type/meta.py#L236"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.TypeMatch" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">TypeMatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">listing</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/5fb10c4/qiime2/core/type/meta.py#L236"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.TypeMatch" title="Link to this definition">#</a></dt>
 <dd><p>A trivial <a class="reference internal" href="#qiime2.plugin.TypeMap" title="qiime2.plugin.TypeMap"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeMap</span></code></a> such that every entry maps to itself.</p>
 <p>A TypeMatch which looked like this:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">TypeMatch</span><span class="p">([</span><span class="n">Foo</span><span class="p">,</span> <span class="n">Bar</span><span class="p">,</span> <span class="n">Baz</span><span class="p">])</span>
@@ -1257,7 +1238,8 @@ output type will then be the same as the input type.</p>
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1363,8 +1345,8 @@ By Greg Caporaso and Evan Bolyen
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>
