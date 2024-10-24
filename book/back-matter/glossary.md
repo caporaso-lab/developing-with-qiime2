@@ -124,6 +124,9 @@ Semantic Type
   When associated with a {term}`directory format`, the combination defines an {term}`artifact class`.
   These types may be extended by {term}`plugins<Plugin>`.
 
+Single-Use Plugin (SUP)
+  A plugin that is intended for one specific use case, such as generating figures for a single manuscript, as opposed to a plugin that is intended for general widespread usage.
+
 tl;dr
   "Too long; didn't read."
   In other words, a quick summary of the content that follows.
