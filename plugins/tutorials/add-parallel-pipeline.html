@@ -247,11 +247,6 @@ window.addEventListener("load", () => mermaid.run());
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Framework 🌳</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../framework/intro.html">Framework Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/how-to-guides/intro.html">How-To Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../framework/how-to-guides/parallel-configuration.html">Parallel configuration and usage in QIIME 2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../framework/how-to-guides/pipeline-resumption.html">Pipeline Resumption in QIIME 2</a></li>
-</ul>
-</details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../framework/explanations/intro.html">Explanations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/architecture.html">QIIME 2 architecture overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../framework/explanations/data-storage.html">How Data is Stored</a></li>
@@ -680,7 +675,7 @@ Then we iterate over the splits, <em>applying</em> the local alignment search me
 </div>
 <p>Under the hood is where the magic happens here.
 Because we’re iterating over a collection of QIIME 2 Artifacts (the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop above) in a QIIME 2 <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code>, each <code class="docutils literal notranslate"><span class="pre">las_result</span></code> object is a proxy for a real QIIME 2 artifact.
-The jobs to create them are distributed as indicated in the user’s <a class="reference internal" href="../../framework/how-to-guides/parallel-configuration.html#parallel-configuration"><span class="std std-ref">QIIME 2 parallel configuration</span></a>.
+The jobs to create them are distributed as indicated in the user’s <a class="reference internal" href="#parallel-configuration"><span class="xref myst">QIIME 2 parallel configuration</span></a>.
 The code continues executing as if these were real Artifacts, not proxy Artifacts, until something is needed from them.
 At that point, the code will block (i.e., wait) until the proxy Artifacts become real Artifacts, and then continue processing.</p>
 <div class="tip admonition">
