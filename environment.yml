@@ -3,7 +3,6 @@ channels:
 - https://packages.qiime2.org/qiime2/2024.10/tiny/passed
 - conda-forge
 - bioconda
-- defaults
 dependencies:
   - qiime2-tiny
   - pip:
