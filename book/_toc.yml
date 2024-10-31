@@ -75,10 +75,6 @@ parts:
     chapters:
       - file: framework/intro
         sections:
-        - file: framework/how-to-guides/intro
-          sections:
-            - file: framework/how-to-guides/parallel-configuration
-            - file: framework/how-to-guides/pipeline-resumption
         - file: framework/explanations/intro
           sections:
             - file: framework/explanations/architecture
