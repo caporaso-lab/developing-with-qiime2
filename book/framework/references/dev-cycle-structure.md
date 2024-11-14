@@ -11,7 +11,15 @@ This schedule provides us with ample development time between releases, and prov
 
 The following diagram outlines relevant timepoints between each release, with terms defined below.
 
-```{image} ../../_static/q2-dev-cycle-diagram.png
+```{figure} ../images/q2-dev-cycle-diagram.png
 :align: center
-:width: 400
+:width: 300
 ```
+
+
+- `20XX.REL`: The most current, released version of QIIME 2.
+- `20XX.REL+1`: The upcoming release version for QIIME 2.
+- `'Approved but Unscheduled' Project Board`: One of the QIIME 2 Github Project Boards, used to store issues/pull requests that we think are good ideas, but don't have the immediate bandwidth to address.
+- `External dependency version changes`: Any changes to the external (non-QIIME 2) dependencies within any of our Distributions. These changes include bumping a dependency's version to either a newer/older pin, or removing/adding dependencies.
+- `Development cycle environment files`: These can be found under the QIIME 2 Distributions repository under `20XX.REL+1/<distro>/passed/` (with `<distro>` being each QIIME 2 Distribution), and reflect our current development cycle (i.e. non-release versioned) environment files.
+- `Repository freeze`: All plugin repositories within any QIIME 2 Distribution will not commit any code changes to the main branch from the Friday prior to the scheduled release date until the `20XX.REL+1` announcement goes live on the user forum.
