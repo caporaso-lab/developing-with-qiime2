@@ -88,6 +88,7 @@ parts:
         - file: framework/references/intro
           sections:
             - file: framework/references/archive-versions
+            - file: framework/references/dev-cycle-structure
 
   - caption: "Documentation 📚"
     chapters:
