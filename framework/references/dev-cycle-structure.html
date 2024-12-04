@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>QIIME 2 architecture overview &#8212; Developing with QIIME 2</title>
+    <title>QIIME 2 Development and Release Cycle Structure &#8212; Developing with QIIME 2</title>
   
   
   
@@ -61,12 +61,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'framework/explanations/architecture';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'framework/references/dev-cycle-structure';</script>
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="How Data is Stored" href="data-storage.html" />
-    <link rel="prev" title="Explanations" href="intro.html" />
+    <link rel="next" title="Docs Development" href="../../docs/intro.html" />
+    <link rel="prev" title="Archive versions" href="archive-versions.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -240,20 +240,20 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">The Framework 🌳</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Framework Development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Explanations</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">QIIME 2 architecture overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="data-storage.html">How Data is Stored</a></li>
-<li class="toctree-l3"><a class="reference internal" href="archives.html">Anatomy of an Archive</a></li>
-<li class="toctree-l3"><a class="reference internal" href="types.html">Semantic Types, Primitives, and Visualizations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="formats.html">File Formats and Directory Formats</a></li>
-<li class="toctree-l3"><a class="reference internal" href="provenance.html">Decentralized retrospective provenance tracking</a></li>
-<li class="toctree-l3"><a class="reference internal" href="garbage-collection.html">Garbage Collection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="metaprogramming.html">Metaprogramming</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../explanations/intro.html">Explanations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/architecture.html">QIIME 2 architecture overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/data-storage.html">How Data is Stored</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/archives.html">Anatomy of an Archive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/types.html">Semantic Types, Primitives, and Visualizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/formats.html">File Formats and Directory Formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/provenance.html">Decentralized retrospective provenance tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/garbage-collection.html">Garbage Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../explanations/metaprogramming.html">Metaprogramming</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../references/intro.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../references/archive-versions.html">Archive versions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../references/dev-cycle-structure.html">QIIME 2 Development and Release Cycle Structure</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">References</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="archive-versions.html">Archive versions</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">QIIME 2 Development and Release Cycle Structure</a></li>
 </ul>
 </details></li>
 </ul>
@@ -333,7 +333,7 @@
       
       
       
-      <li><a href="../../_sources/framework/explanations/architecture.md" target="_blank"
+      <li><a href="../../_sources/framework/references/dev-cycle-structure.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -409,7 +409,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>QIIME 2 architecture overview</h1>
+    <h1>QIIME 2 Development and Release Cycle Structure</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -419,9 +419,16 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-component-diagram">Detailed Component Diagram</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#following-a-command-through-qiime-2">Following A Command Through QIIME 2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime-2-release-cycle-structure">QIIME 2 Release Cycle Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime-2-development-cycle-structure">QIIME 2 Development Cycle Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developmental-best-practices">Developmental Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#issue-pull-request-prefixes">Issue/Pull Request Prefixes</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-plugin-specific-development">Standard/plugin-specific development</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#misc-non-standard-development">Misc/non-standard development</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -433,101 +440,94 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="qiime-2-architecture-overview">
-<span id="q2-architecture-overview"></span><h1>QIIME 2 architecture overview<a class="headerlink" href="#qiime-2-architecture-overview" title="Link to this heading">#</a></h1>
-<p>The goal of this document is to give the reader a high-level understanding of the components of QIIME 2, and how they are inter-related.</p>
-<p>At the highest level, there are three kinds of components in QIIME 2:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="qiime-2-development-and-release-cycle-structure">
+<h1>QIIME 2 Development and Release Cycle Structure<a class="headerlink" href="#qiime-2-development-and-release-cycle-structure" title="Link to this heading">#</a></h1>
+<p>In the sections below, we will go through the development cycle structure and release process for QIIME 2.
+The aim is to provide insight into our structure for other research software engineering teams that may want to utilize any/all of these processes, as well as to assist our community developers in knowing what timeline/deadlines they should be aware of within each development/release cycle.
+If you have any questions on this process, please don’t hesitate to reach out on our user forum under the <a class="reference external" href="https://forum.qiime2.org/c/dev-discussion">Developer Discussion</a> category!</p>
+<section id="qiime-2-release-cycle-structure">
+<h2>QIIME 2 Release Cycle Structure<a class="headerlink" href="#qiime-2-release-cycle-structure" title="Link to this heading">#</a></h2>
+<p>As of 2024.10, QIIME 2 Distributions are released bi-anually, on the first Wednesday of April and October.
+This schedule provides us with ample development time between releases, and provides our developer community with at least a three month notice for any external dependency changes (i.e. bumping Python, removing a deprecated package, etc).</p>
+<p>The following diagram outlines relevant timepoints between each release, with terms defined below.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/q2-dev-cycle-diagram.png"><img alt="../../_images/q2-dev-cycle-diagram.png" src="../../_images/q2-dev-cycle-diagram.png" style="width: 300px;" /></a>
+</figure>
 <ul class="simple">
-<li><p>The interfaces, which are responsible for translating user intent into action.</p></li>
-<li><p>The framework, whose behavior and purpose will be described in further detail below.</p></li>
-<li><p>The plugins, which define <em>all</em> domain-specific functionality.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">20XX.REL</span></code>: The most current, released version of QIIME 2.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">20XX.REL+1</span></code>: The upcoming release version for QIIME 2.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'Approved</span> <span class="pre">but</span> <span class="pre">Unscheduled'</span> <span class="pre">Project</span> <span class="pre">Board</span></code>: One of the QIIME 2 Github Project Boards, used to store issues/pull requests that we think are good ideas, but don’t have the immediate bandwidth to address.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">External</span> <span class="pre">dependency</span> <span class="pre">version</span> <span class="pre">changes</span></code>: Any changes to the external (non-QIIME 2) dependencies within any of our Distributions. These changes include bumping a dependency’s version to either a newer/older pin, or removing/adding dependencies.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Development</span> <span class="pre">cycle</span> <span class="pre">environment</span> <span class="pre">files</span></code>: These can be found under the QIIME 2 Distributions repository under <code class="docutils literal notranslate"><span class="pre">20XX.REL+1/&lt;distro&gt;/passed/</span></code> (with <code class="docutils literal notranslate"><span class="pre">&lt;distro&gt;</span></code> being each QIIME 2 Distribution), and reflect our current development cycle (i.e. non-release versioned) environment files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Repository</span> <span class="pre">freeze</span></code>: All plugin repositories within any QIIME 2 Distribution will not commit any code changes to the main branch from the Friday prior to the scheduled release date until the <code class="docutils literal notranslate"><span class="pre">20XX.REL+1</span></code> announcement goes live on the user forum.</p></li>
 </ul>
-<figure class="align-default" id="box-and-arrow-diagram-of-qiime-2-components">
-<img alt="../../_images/simple_component_diagram.svg" src="../../_images/simple_component_diagram.svg" />
-<figcaption>
-<p><span class="caption-number">Fig. 2 </span><span class="caption-text"><strong>Box and Arrow diagram of QIIME 2 components.</strong>
-Interfaces only interact with plugins through the framework, which will invoke plugin behavior as needed.
-Solid arrows are direct dependency.
-Dash-dotted arrows are a deferred dependency (via entry-point).</span><a class="headerlink" href="#box-and-arrow-diagram-of-qiime-2-components" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>The above diagram illustrates the most important restriction of the architecture.
-Interfaces cannot and <em>should not</em> have any particular knowledge about plugins ahead of time.
-Instead they must request that information from the framework, which provides a high-level description of all of the actions available via SDK (Software Development Kit) objects.</p>
-<p>At first glance, this restriction may seem onerous.
-However, because interfaces cannot communicate directly with plugins, they also never need to coordinate with them.
-This means interfaces are entirely decoupled from the plugins and more importantly, plugins are always decoupled from interfaces.
-A developer of a plugin, does not need to concern themselves with providing any interface-specific functionality, meaning development of both plugins and interfaces can be done in parallel.
-Only changes in the framework itself require coordination between the other two component types.
-This key constraint coupled with a set of semantically rich SDK objects allows <em>multiple</em> kinds of interfaces to be dynamically generated.
-This allows QIIME 2 to adapt its UI to both the audience and the task at hand.</p>
-<section id="detailed-component-diagram">
-<h2>Detailed Component Diagram<a class="headerlink" href="#detailed-component-diagram" title="Link to this heading">#</a></h2>
-<p>A more complete version of the above figure is found below:</p>
-<figure class="align-default" id="detailed-box-and-arrow-diagram-of-qiime-2-components">
-<img alt="../../_images/complex_component_diagram.svg" src="../../_images/complex_component_diagram.svg" />
-<figcaption>
-<p><span class="caption-number">Fig. 3 </span><span class="caption-text"><strong>Detailed Box and Arrow diagram of QIIME 2 components.</strong>
-Solid arrows are a direct dependency.
-Dash-dotted arrows are a deferred dependency (via entry-point).
-Dashed rounded boxes surrounding other components indicate a group of like-components.
-The larger gray box indicates a nested component, containing sub-components.
-Text within angle-brackets (<code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code>) indicate a Python package/import name.</span><a class="headerlink" href="#detailed-box-and-arrow-diagram-of-qiime-2-components" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Here we observe that interfaces use a particular sub-component of the framework called the SDK.
-We also see that one of the interfaces is built into the framework itself (the Artifact API), however it is not any more privileged compared to any of the other interfaces, and none of the other interfaces use it directly.</p>
-<p>Looking now at the plugins we see that they use a sub-component of the framework called the Plugin API.
-This is responsible for constructing and registering the relevant SDK objects for use by interfaces.
-We also see that plugins can depend on other plugins.</p>
-<p>At this point the rough picture of how an interface uses a plugin can be seen.
-Plugins are loaded by the framework’s SDK via an entry-point (more on that later).
-This in turn causes the plugin code to interact with the Plugin API, which constructs SDK objects.
-These SDK objects are then introspected and manipulated by any number of Interfaces.</p>
 </section>
-<section id="following-a-command-through-qiime-2">
-<h2>Following A Command Through QIIME 2<a class="headerlink" href="#following-a-command-through-qiime-2" title="Link to this heading">#</a></h2>
-<p>To get a better idea of where the responsibility of these components starts and ends, we can look at a sequence diagram describing the execution of an action by a user.</p>
-<figure class="align-default" id="uml-sequence-diagram-of-an-action-call-in-qiime-2">
-<img alt="../../_images/action_call_sequence_diagram.svg" src="../../_images/action_call_sequence_diagram.svg" />
-<figcaption>
-<p><span class="caption-number">Fig. 4 </span><span class="caption-text"><strong>UML Sequence Diagram of an action-call in QIIME 2</strong>
-This diagram is read from top to bottom, which indicates the passage of some non-specific amount of time.
-Components are vertical columns.
-An activated state of a component is indicated by a narrow box.
-Components can perform actions either upon other components, or upon themselves.
-These actions are denoted with a solid arrow pointing at the actor in question.
-The label indicates what action is performed and, when provided, parenthesis indicate some kind of argument that is provided.
-Not all arguments are enumerated for brevity.
-Results of an action are denoted with a dashed arrow and are usually labeled with the result’s name.</span><a class="headerlink" href="#uml-sequence-diagram-of-an-action-call-in-qiime-2" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>This figure has four components: a User, an Interface, the Framework, and a Plugin.
-We see first, a User invoking some action with some files and parameters.
-The Interface receives this and is activated.
-It locates the plugin and the action requested from the Framework, receiving SDK objects (not shown).
-Then it loads the provided files as QIIME 2 Artifacts.
-It is then ready to call the action (an SDK object) with the User’s artifacts and parameters.</p>
-<p>The Framework then provides some input validation (it is much faster to check that the data provided will work for the action requested than to fail halfway through a very long process, requiring the User to start over).
-The Framework then identifies what format the data should be in, and invokes relevant code defined by a Plugin (though not necessarily the same one) for converting that data.
-Finally, with validated input and a compatible format, the data is provided to the plugin to perform whatever task the User intended.</p>
-<p>Once finished, the Plugin returns the results and the Framework will again convert that data into a particular format for storage using a Plugin.
-The Framework then writes that data into an archive (as <code class="docutils literal notranslate"><span class="pre">/data/</span></code>) and records what steps just occurred (in <code class="docutils literal notranslate"><span class="pre">/provenance/</span></code>).
-This completed archive is now an artifact and is returned to the Interface.
-The Interface decides to save the artifact to a file and then returns that to the User.</p>
-</section>
-<section id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
-<p>In this example we see that the activation of each component is strictly nested.
-It forms a sort of “onion of responsibility” between the component layers.
-We also note that the Interface waits for the task to finish before becoming inactive; there are other modes of calling actions which are asynchronous and can be used instead.
-In either case, we see that each component is successively responsible for less tasks which become more specific as we move to the right.</p>
-<p>The end result is:</p>
+<section id="qiime-2-development-cycle-structure">
+<h2>QIIME 2 Development Cycle Structure<a class="headerlink" href="#qiime-2-development-cycle-structure" title="Link to this heading">#</a></h2>
+<p>Our current development cycle structure aims to strike a balance between completing our team’s grant funded deliverables and managing new/ongoing community contributions.
+We have several project boards within the QIIME 2 Github Organization that aid in this, which we will outline below.</p>
+<p><a class="reference external" href="https://github.com/orgs/qiime2/projects/36/views/1?sortedBy%5Bdirection%5D=asc&amp;amp;sortedBy%5BcolumnId%5D=Status&amp;amp;sortedBy%5Bdirection%5D=asc&amp;amp;sortedBy%5BcolumnId%5D=Repository"><strong>Triage Board</strong></a></p>
 <ul class="simple">
-<li><p>The Interface need only care about communicating with the User.</p></li>
-<li><p>The Plugin need only care about manipulating data to some effect.</p></li>
-<li><p>The Framework concerns itself with coordinating the overall effort and recording the data surrounding the action.</p></li>
+<li><p>This project board is what we use to ‘catch’ any new issues or pull requests we receive within the QIIME 2 Github Organization. Our team reviews this board once a week to determine if the given submission(s) are something we will/won’t do, what the timeline for completion would be (i.e. current release or future release), and if we require any additional information before moving forward.</p></li>
 </ul>
+<p><a class="reference external" href="https://github.com/orgs/qiime2/projects/40"><strong>Approved but Unscheduled Board</strong></a></p>
+<ul class="simple">
+<li><p>This project board is for issues or pull requests that contain improvements or new feature requests that we’ve approved conceptually, but that we don’t currently have the bandwidth and/or funding to support work on. We will review this board at the beginning and middle of each development cycle (specific dates listed in the release cycle diagram above) as we are sorting through what each team member should be prioritizing for the upcoming release, and will move things from this board to the current release project board as we have time/funding.</p></li>
+</ul>
+<p><strong>Current Dev Cycle Project Board (20XX.REL+1)</strong></p>
+<ul class="simple">
+<li><p>This project board is where we track all issues and pull requests that we aim to complete within the current <em>development</em> cycle (i.e. the <em>next</em> release of QIIME 2). This view of the board shows the following:</p>
+<ul>
+<li><p><strong>Backlog</strong>: Items that haven’t been picked up by a developer yet.</p></li>
+<li><p><strong>In Development</strong>: Items that are currently in progress (i.e. someone on our team is actively working on them).</p></li>
+<li><p><strong>Needs Review</strong>: Items that require a code review before they can be merged.</p></li>
+<li><p><strong>In Review</strong>: Items that a member of our team are currently in the process of reviewing.</p></li>
+<li><p><strong>Ready for Merge</strong>: Items that have been reviewed and approved and are ready to be merged.</p></li>
+<li><p><strong>Changelog Needed</strong>: Items that have been merged but still need to be added to our development changelog.</p></li>
+<li><p><strong>Completed</strong>: Items that have been merged and added to our development changelog.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Current Dev Cycle Assignments</strong></p>
+<ul class="simple">
+<li><p>This view of our current dev cycle project board shows which developer on our team is assigned to particular issues and/or pull requests, along with the type of project these assignments fall under. We do a weekly review of each team member’s assignments, provide additional tasks to everyone as needed (capping anyone’s current workload at ten assignments at any given time). Assignments can fall under the following project types:</p>
+<ul>
+<li><p><strong>Urgent</strong>: This is something that requires immediate attention (typically a bug that will warrant a patch release).</p></li>
+<li><p><strong>Funded Objective</strong>: This is something that is required for our current grant deliverables, and must be completed within the designated time frame.</p></li>
+<li><p><strong>Maintenance</strong>: This is something that is required for general software upkeep within the QIIME 2 ecosystem. Examples of this include documentation updates, changes to our packaging infrastructure, and general code updates related to deprecated dependency versions/actions/etc.</p></li>
+<li><p><strong>Weekly</strong>: This is something that doesn’t fall in any of the categories above, but will be assigned to someone on our team as a weekly round-robin task. This is typically where our community contributions/requests will be managed on a more regular basis, so that we can continue integrating helpful ideas/features/requests from our developer community!</p></li>
+</ul>
+</li>
+</ul>
+<p>We hope this helps provide more insight into what’s happening behind the scenes, and can help each of you to better understand what we’re prioritizing and currently working on.</p>
+</section>
+<section id="developmental-best-practices">
+<h2>Developmental Best Practices<a class="headerlink" href="#developmental-best-practices" title="Link to this heading">#</a></h2>
+<p>These are a few of our recommendations to our developer community to help us to better address any incoming issues/pull requests you submit within the QIIME 2 Organization (i.e. any plugin repository housed under the QIIME 2 or caporaso-lab organizations on Github).</p>
+<section id="issue-pull-request-prefixes">
+<h3>Issue/Pull Request Prefixes<a class="headerlink" href="#issue-pull-request-prefixes" title="Link to this heading">#</a></h3>
+<p>These prefixes help us to quickly review and organize any incoming issues or pull requests, based on the type of code change/request that they fall under.</p>
+<section id="standard-plugin-specific-development">
+<h4>Standard/plugin-specific development<a class="headerlink" href="#standard-plugin-specific-development" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>NEW</strong>: a new feature</p></li>
+<li><p><strong>IMP</strong>: an improvement to an existing feature</p></li>
+<li><p><strong>MAINT</strong>: general code maintenance</p></li>
+<li><p><strong>REF</strong>: refactoring existing code/methods</p></li>
+<li><p><strong>TEST</strong>: refactors or adds new tests</p></li>
+<li><p><strong>BUG</strong>: self-explanatory (fixes a bug)</p></li>
+<li><p><strong>DEP</strong>: adds/removes an external dependency within a specific plugin</p></li>
+<li><p><strong>PIN</strong>: changes an existing version pin for an external dependency within a specific plugin</p></li>
+</ul>
+</section>
+<section id="misc-non-standard-development">
+<h4>Misc/non-standard development<a class="headerlink" href="#misc-non-standard-development" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>CI</strong>: continuous integration/Github Actions</p></li>
+<li><p><strong>DOC</strong>: documentation</p></li>
+</ul>
+</section>
+</section>
 </section>
 </section>
 
@@ -544,7 +544,7 @@ In either case, we see that each component is successively responsible for less 
         },
         kernelOptions: {
             name: "python3",
-            path: "./framework/explanations"
+            path: "./framework/references"
         },
         predefinedOutput: true
     }
@@ -562,20 +562,20 @@ In either case, we see that each component is successively responsible for less 
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="archive-versions.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Explanations</p>
+        <p class="prev-next-title">Archive versions</p>
       </div>
     </a>
     <a class="right-next"
-       href="data-storage.html"
+       href="../../docs/intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">How Data is Stored</p>
+        <p class="prev-next-title">Docs Development</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -596,9 +596,16 @@ In either case, we see that each component is successively responsible for less 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-component-diagram">Detailed Component Diagram</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#following-a-command-through-qiime-2">Following A Command Through QIIME 2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime-2-release-cycle-structure">QIIME 2 Release Cycle Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qiime-2-development-cycle-structure">QIIME 2 Development Cycle Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developmental-best-practices">Developmental Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#issue-pull-request-prefixes">Issue/Pull Request Prefixes</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-plugin-specific-development">Standard/plugin-specific development</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#misc-non-standard-development">Misc/non-standard development</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
