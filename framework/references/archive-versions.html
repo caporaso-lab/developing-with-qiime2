@@ -182,7 +182,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/distribute-on-gh.html">Distribute plugins on GitHub</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/distribute-on-library.html">Distribute plugins on QIIME 2 Library</a></li>
-
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/support-your-users.html">Provide technical support for your users</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/maximize-compatibility.html">Maximize compatibility between your plugin(s) and existing QIIME 2 distribution(s)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/facilitate-installation.html">Facilitating installation of your plugin for users</a></li>
@@ -452,11 +451,11 @@ This section describes each historical version of the QIIME 2 Archive format, an
 <li><p>a directory named with the Archive UUID, directly under the archive root at <code class="docutils literal notranslate"><span class="pre">/&lt;UUID&gt;/</span></code>, and</p></li>
 <li><p>a file <code class="docutils literal notranslate"><span class="pre">/&lt;UUID&gt;/VERSION</span></code> within that directory, formatted as shown below.</p></li>
 </ul>
-<p><a class="reference internal" href="#format-agnostic-archive-structure"><span class="std std-numref">Fig. 7</span></a> illustrates the Archive file system.</p>
+<p><a class="reference internal" href="#format-agnostic-archive-structure"><span class="std std-numref">Fig. 8</span></a> illustrates the Archive file system.</p>
 <figure class="align-default" id="format-agnostic-archive-structure">
 <img alt="../../_images/format-agnostic-archive-structure.svg" src="../../_images/format-agnostic-archive-structure.svg" />
 <figcaption>
-<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Box and arrow diagram of the guaranteed components of an archive.</span><a class="headerlink" href="#format-agnostic-archive-structure" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">Box and arrow diagram of the guaranteed components of an archive.</span><a class="headerlink" href="#format-agnostic-archive-structure" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The VERSION file format is described <a class="reference internal" href="../explanations/archives.html#archive-version-file"><span class="std std-ref">above</span></a>.</p>
@@ -470,11 +469,11 @@ V0 Archives were produced by alpha versions of the QIIME 2 framework, and were s
 <li><p>Result UUID, semantic type, and format information are saved in <code class="docutils literal notranslate"><span class="pre">/&lt;UUID&gt;/metadata.yaml</span></code>.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">ArchiveFormat</span></code> class in <a class="reference external" href="https://github.com/qiime2/qiime2/blob/master/qiime2/core/archive/format/v0.py"><code class="docutils literal notranslate"><span class="pre">v0.py</span></code></a> offers convenience methods for loading and parsing <code class="docutils literal notranslate"><span class="pre">metadata.yaml</span></code> files.</p></li>
 </ul>
-<p><a class="reference internal" href="#v0-archive-format"><span class="std std-numref">Fig. 8</span></a> illustrates the format of a Version 0 Archive.</p>
+<p><a class="reference internal" href="#v0-archive-format"><span class="std std-numref">Fig. 9</span></a> illustrates the format of a Version 0 Archive.</p>
 <figure class="align-default" id="v0-archive-format">
 <img alt="../../_images/v0-archive-format.svg" src="../../_images/v0-archive-format.svg" />
 <figcaption>
-<p><span class="caption-number">Fig. 8 </span><span class="caption-text">Box and arrow diagram of a v0 archive.</span><a class="headerlink" href="#v0-archive-format" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Box and arrow diagram of a v0 archive.</span><a class="headerlink" href="#v0-archive-format" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -492,19 +491,19 @@ This makes it easier for humans to interpret the version history.</p>
 Specifically, <code class="docutils literal notranslate"><span class="pre">metadata.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">action.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">VERSION</span></code> files are captured for the current Result and each of its ancestors.
 Each Result’s <code class="docutils literal notranslate"><span class="pre">action.yaml</span></code> file and associated data artifacts (e.g. sample metadata) are stored in an <code class="docutils literal notranslate"><span class="pre">action</span></code> directory alongside that Result’s <code class="docutils literal notranslate"><span class="pre">VERSION</span></code> and <code class="docutils literal notranslate"><span class="pre">metadata.yaml</span></code>.
 Considered together, we can describe these as “provenance files”.
-This structure is illustrated in <a class="reference internal" href="#v1-archive-provenance-format"><span class="std std-numref">Fig. 9</span></a>.</p>
+This structure is illustrated in <a class="reference internal" href="#v1-archive-provenance-format"><span class="std std-numref">Fig. 10</span></a>.</p>
 <figure class="align-default" id="v1-archive-provenance-format">
 <img alt="../../_images/v1-archive-provenance-format.svg" src="../../_images/v1-archive-provenance-format.svg" />
 <figcaption>
-<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Box and arrow diagram of the provenance files in a v1 archive.
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Box and arrow diagram of the provenance files in a v1 archive.
 The blue “multiple files” icon represents all provenance files associated with a single action (e.g. the current action, or one of its ancestors).</span><a class="headerlink" href="#v1-archive-provenance-format" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The structure of V1 Archives as a whole is illustrated in <a class="reference internal" href="#v1-v4-archive-format"><span class="std std-numref">Fig. 10</span></a>.</p>
+<p>The structure of V1 Archives as a whole is illustrated in <a class="reference internal" href="#v1-v4-archive-format"><span class="std std-numref">Fig. 11</span></a>.</p>
 <figure class="align-default" id="v1-v4-archive-format">
 <img alt="../../_images/v1-v4-archive-format.svg" src="../../_images/v1-v4-archive-format.svg" />
 <figcaption>
-<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Box and arrow diagram of a v1 archive.</span><a class="headerlink" href="#v1-v4-archive-format" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Box and arrow diagram of a v1 archive.</span><a class="headerlink" href="#v1-v4-archive-format" title="Link to this image">#</a></p>
 <div class="legend">
 <p>Provenance files for the current Result are stored in <code class="docutils literal notranslate"><span class="pre">/&lt;UUID&gt;/provenance/</span></code>.
 Provenance files for each ancestor Result are stored in directory at <code class="docutils literal notranslate"><span class="pre">/&lt;root_UUID&gt;/provenance/artifacts/&lt;ancestor_UUID&gt;/</span></code>.</p>
@@ -539,10 +538,10 @@ Citations for all of the current Result’s ancestors are stored in their respec
 <figure class="align-default" id="v4-archive-provenance-format">
 <img alt="../../_images/v4-archive-provenance-format.svg" src="../../_images/v4-archive-provenance-format.svg" />
 <figcaption>
-<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Box and arrow diagram of the provenance files in a v4 archive.</span><a class="headerlink" href="#v4-archive-provenance-format" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">Box and arrow diagram of the provenance files in a v4 archive.</span><a class="headerlink" href="#v4-archive-provenance-format" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The overall directory structure remains identical to a v1 archive (<a class="reference internal" href="#v1-archive-provenance-format"><span class="std std-numref">Fig. 9</span></a>).</p>
+<p>The overall directory structure remains identical to a v1 archive (<a class="reference internal" href="#v1-archive-provenance-format"><span class="std std-numref">Fig. 10</span></a>).</p>
 <p>Result-specific citation tags are also written to the <code class="docutils literal notranslate"><span class="pre">transformers</span></code> and <code class="docutils literal notranslate"><span class="pre">environment</span></code> sections of the <code class="docutils literal notranslate"><span class="pre">action.yaml</span></code> files, for the current Result and for all ancestors with registered citations.
 A new custom <code class="docutils literal notranslate"><span class="pre">!cite</span> <span class="pre">'&lt;citation</span> <span class="pre">key&gt;'</span></code> tag is use to support this in YAML.</p>
 <p>A <code class="docutils literal notranslate"><span class="pre">transformers</span></code> section is added between the <code class="docutils literal notranslate"><span class="pre">action</span></code> and <code class="docutils literal notranslate"><span class="pre">environment</span></code> sections of <code class="docutils literal notranslate"><span class="pre">action.yaml</span></code>.
@@ -591,11 +590,11 @@ It looks like the following:</p>
 <span class="l l-Scalar l-Scalar-Plain">ae0d0e26da5b84a6c0722148789c51e0  provenance/artifacts/f6105891-2c00-4886-b733-6dada99d0c81/action/action.yaml</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="#v5-archive-format"><span class="std std-numref">Fig. 12</span></a> illustrates the V5 Archive.</p>
+<p><a class="reference internal" href="#v5-archive-format"><span class="std std-numref">Fig. 13</span></a> illustrates the V5 Archive.</p>
 <figure class="align-default" id="v5-archive-format">
 <img alt="../../_images/v5-archive-format.svg" src="../../_images/v5-archive-format.svg" />
 <figcaption>
-<p><span class="caption-number">Fig. 12 </span><span class="caption-text">Box and arrow diagram of a v5 archive.</span><a class="headerlink" href="#v5-archive-format" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Box and arrow diagram of a v5 archive.</span><a class="headerlink" href="#v5-archive-format" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>

@@ -182,7 +182,6 @@
 <li class="toctree-l3"><a class="reference internal" href="set-up-development-environment.html">Set up your development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="distribute-on-gh.html">Distribute plugins on GitHub</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Distribute plugins on QIIME 2 Library</a></li>
-
 <li class="toctree-l3"><a class="reference internal" href="support-your-users.html">Provide technical support for your users</a></li>
 <li class="toctree-l3"><a class="reference internal" href="maximize-compatibility.html">Maximize compatibility between your plugin(s) and existing QIIME 2 distribution(s)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="facilitate-installation.html">Facilitating installation of your plugin for users</a></li>
@@ -419,22 +418,9 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Distribute plugins on QIIME 2 Library</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-github-repo">A GitHub repo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-github-about-section">A GitHub about section</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-top-level-readme">A top level README</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-environment-files-for-installation">Conda environment files for Installation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-requirements-for-environment-files">Additional requirements for environment files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements-before-requesting-the-addition-of-your-plugin-to-the-library">Requirements before requesting the addition of your plugin to the Library</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requesting-addition-of-your-plugin-to-the-library">Requesting addition of your plugin to the Library</a></li>
 </ul>
-</li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-plugin-to-the-qiime-2-library">How to add a plugin to the QIIME 2 Library</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pr">Example PR</a></li>
-</ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -447,49 +433,58 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="distribute-plugins-on-qiime-2-library">
 <span id="share-on-qiime2-library"></span><h1>Distribute plugins on QIIME 2 Library<a class="headerlink" href="#distribute-plugins-on-qiime-2-library" title="Link to this heading">#</a></h1>
-<p>Distributing your plugin on the QIIME 2 Library is a simple process that requires your plugin to conform to the following standards.</p>
-<section id="a-github-repo">
-<h2>A GitHub repo<a class="headerlink" href="#a-github-repo" title="Link to this heading">#</a></h2>
-<p>Your plugin must exist as a GitHub repo. Please consult the <a class="reference internal" href="distribute-on-gh.html#share-on-github"><span class="std std-ref">Distribute plugins on GitHub</span></a> documentation if you need help with this.</p>
-</section>
-<section id="a-github-about-section">
-<h2>A GitHub about section<a class="headerlink" href="#a-github-about-section" title="Link to this heading">#</a></h2>
-<p>Your GitHub repo must have an about section.</p>
-<p>This will be used as the short description for your plugin in Library. It should be 300 or so characters max and should describe what your plugin is.</p>
-</section>
-<section id="a-top-level-readme">
-<h2>A top level README<a class="headerlink" href="#a-top-level-readme" title="Link to this heading">#</a></h2>
-<p>Your GitHub repo must contain a top level README. This README must be written in GitHub MarkDown.</p>
-<p>This will be rendered as MarkDown on Library and should give a detailed description of your plugin and what it does.</p>
-<p>NOTE: If your README references any resources using paths relative to the root of your repository (images for example) these resources WILL NOT LOAD on QIIME 2 Library. Only resources referenced with absolute URLs will load. This is because we are not cloning and rehosting your assets. We need a valid URL to a resource hosted somewhere online.</p>
-</section>
-<section id="conda-environment-files-for-installation">
-<h2>Conda environment files for Installation<a class="headerlink" href="#conda-environment-files-for-installation" title="Link to this heading">#</a></h2>
-<p>This is the highest bar to clear to get your plugin hosted on the QIIME 2 Library.</p>
-<p>More detailed instructions on how to do this are provided at <a class="reference internal" href="facilitate-installation.html#facilitating-installation"><span class="std std-ref">Facilitating installation of your plugin for users</span></a>.</p>
-<p>In broad strokes, your repo must include environment.yml files installing your plugin for each QIIME 2 release you support using following naming scheme <code class="docutils literal notranslate"><span class="pre">&lt;plugin-name&gt;-qiime2-&lt;distro&gt;-&lt;epoch&gt;.yml</span></code>. These files must be located in the <code class="docutils literal notranslate"><span class="pre">/environment-files</span></code> folder.</p>
-<section id="additional-requirements-for-environment-files">
-<h3>Additional requirements for environment files<a class="headerlink" href="#additional-requirements-for-environment-files" title="Link to this heading">#</a></h3>
+<p>Distributing your plugin on the QIIME 2 Library is a great way to share your plugin with the QIIME 2 community, and we are regularly adding new functionality to make “the Library” more useful for both users and developers.</p>
+<p>Having your plugin listed on the Library requires a few specific things, but as long as these are in place it’s a simple process.</p>
+<section id="requirements-before-requesting-the-addition-of-your-plugin-to-the-library">
+<h2>Requirements before requesting the addition of your plugin to the Library<a class="headerlink" href="#requirements-before-requesting-the-addition-of-your-plugin-to-the-library" title="Link to this heading">#</a></h2>
+<aside class="sidebar">
+<figure class="align-default" id="github-about-example">
+<img alt="../../_images/github-about-example.png" src="../../_images/github-about-example.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">The <em>About</em> section of a GitHub repository.</span><a class="headerlink" href="#github-about-example" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</aside>
 <ol class="arabic simple">
-<li><p>Your plugin must be fully installable via these environment files with no extra steps required.</p></li>
-<li><p>Your environment files must NOT contain a <code class="docutils literal notranslate"><span class="pre">name</span></code> field. The end user is expected to provide the name of the environment on the command line when they install.</p></li>
+<li><p>Your plugin’s source code must be hosted in a GitHub repository.
+See <a class="reference internal" href="distribute-on-gh.html#share-on-github"><span class="std std-ref">Distribute plugins on GitHub</span></a> if you need help with this.</p></li>
+<li><p>You must have a brief description of your plugin in the <em>About</em> field for the repository.
+The <em>About</em> field will be on the top-right of your repository’s front page (see <a class="reference internal" href="#github-about-example"><span class="std std-numref">Fig. 1</span></a>).
+This will be used as the short description for your plugin in Library and should be about 300 characters long at the most.</p></li>
+<li><p>You must have a top-level <code class="docutils literal notranslate"><span class="pre">README.md</span></code> in your repository, and this file must be written in <a class="reference external" href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">GitHub-flavored Markdown</a>.
+This will be rendered as Markdown on Library and should give a detailed description of your plugin and what it does.
+If your <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file references any resources (such as images) using paths relative to the root of your repository, these resources WILL NOT LOAD on the Library.
+Only resources referenced with absolute URLs will load.</p></li>
+<li><p>Conda environment files must be provided for installation, and they must meet a few formatting requirements.
+This is the highest bar to clear to have your plugin be compatible with the QIIME 2 Library.</p>
+<ul class="simple">
+<li><p>Your repository must include environment YAML files for each QIIME 2 release you support using the naming scheme <code class="docutils literal notranslate"><span class="pre">&lt;plugin-name&gt;-qiime2-&lt;distro&gt;-&lt;epoch&gt;.yml</span></code>.
+These files must be located in your repository’s <code class="docutils literal notranslate"><span class="pre">/environment-files</span></code> folder.
+More detailed instructions on how to do this are provided in <a class="reference internal" href="facilitate-installation.html#facilitating-installation"><span class="std std-ref">Facilitating installation of your plugin for users</span></a>.
+One feature that we’re working on adding to the Library is a system that can automatically submit PRs against your plugin repository to add new environment files when new QIIME 2 releases come out, to help you keep your plugin up-to-date with QIIME 2 - more on this soon!</p></li>
+<li><p>Your plugin must be fully installable via these environment files with no extra steps required.
+If this isn’t possible, you can still distribute your plugin in other ways (e.g., see <a class="reference internal" href="distribute-on-gh.html#share-on-github"><span class="std std-ref">Distribute plugins on GitHub</span></a>), but it won’t work with the QIIME 2 Library.</p></li>
+<li><p>Your environment files must <em>not</em> contain a <code class="docutils literal notranslate"><span class="pre">name</span></code> field.
+The install instructions that are created by the Library will include a name for the environment.</p></li>
+</ul>
+</li>
 </ol>
 </section>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="how-to-add-a-plugin-to-the-qiime-2-library">
-<h1>How to add a plugin to the QIIME 2 Library<a class="headerlink" href="#how-to-add-a-plugin-to-the-qiime-2-library" title="Link to this heading">#</a></h1>
-<p>Once you have met the above requirements, open a PR against the <a class="reference external" href="https://github.com/qiime2/library-plugins">library-plugins</a> GitHub repo adding a <code class="docutils literal notranslate"><span class="pre">&lt;my-plugin-name&gt;.yml</span></code> file to the <code class="docutils literal notranslate"><span class="pre">plugins</span></code> folder. This file must have the following <code class="docutils literal notranslate"><span class="pre">key:</span> <span class="pre">value</span></code> pairs:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">owner</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">repo</span><span class="o">-</span><span class="n">owner</span><span class="o">&gt;</span>
-<span class="n">name</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">repo</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+<section id="requesting-addition-of-your-plugin-to-the-library">
+<h2>Requesting addition of your plugin to the Library<a class="headerlink" href="#requesting-addition-of-your-plugin-to-the-library" title="Link to this heading">#</a></h2>
+<p>Once you have met the above requirements, open a pull request against the <a class="reference external" href="https://github.com/qiime2/library-plugins">library-plugins</a> GitHub repository.
+Your pull request should add a <code class="docutils literal notranslate"><span class="pre">&lt;my-plugin-name&gt;.yml</span></code> file to the <code class="docutils literal notranslate"><span class="pre">plugins</span></code> directory in that repository containing the following key-value pairs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">owner</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">repository</span><span class="o">-</span><span class="n">owner</span><span class="o">&gt;</span>
+<span class="n">name</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">repository</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
 <span class="n">branch</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">target</span><span class="o">-</span><span class="n">branch</span><span class="o">&gt;</span>
-<span class="n">docs</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">latest</span><span class="o">-</span><span class="n">docs</span><span class="o">-</span><span class="n">url</span><span class="o">&gt;</span>
+<span class="n">docs</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">latest</span><span class="o">-</span><span class="n">documentation</span><span class="o">-</span><span class="n">url</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<section id="example-pr">
-<h2>Example PR<a class="headerlink" href="#example-pr" title="Link to this heading">#</a></h2>
-<p>An <a class="reference external" href="https://github.com/qiime2/library-plugins/pull/3">example PR</a> showing the addition of a plugin to the library in a single atomic commit.</p>
-<p>NOTE: Your plugin must be compliant with the above specifications for us to merge your PR.</p>
+<p>This <a class="reference external" href="https://github.com/qiime2/library-plugins/pull/3/files">pull request</a> illustrates the addition of a plugin to the library in a single atomic commit, and can be used as an example for how to create your pull request.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Your plugin must be compliant with the above specifications for us to merge your pull request.</p>
+</div>
 </section>
 </section>
 
@@ -558,22 +553,9 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Distribute plugins on QIIME 2 Library</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-github-repo">A GitHub repo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-github-about-section">A GitHub about section</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-top-level-readme">A top level README</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-environment-files-for-installation">Conda environment files for Installation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-requirements-for-environment-files">Additional requirements for environment files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements-before-requesting-the-addition-of-your-plugin-to-the-library">Requirements before requesting the addition of your plugin to the Library</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requesting-addition-of-your-plugin-to-the-library">Requesting addition of your plugin to the Library</a></li>
 </ul>
-</li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-plugin-to-the-qiime-2-library">How to add a plugin to the QIIME 2 Library</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pr">Example PR</a></li>
-</ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>

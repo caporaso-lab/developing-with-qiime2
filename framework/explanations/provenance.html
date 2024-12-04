@@ -182,7 +182,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/distribute-on-gh.html">Distribute plugins on GitHub</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/distribute-on-library.html">Distribute plugins on QIIME 2 Library</a></li>
-
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/support-your-users.html">Provide technical support for your users</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/maximize-compatibility.html">Maximize compatibility between your plugin(s) and existing QIIME 2 distribution(s)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/facilitate-installation.html">Facilitating installation of your plugin for users</a></li>
@@ -490,7 +489,7 @@ In other words, a QIIME 2 analysis can be performed across various host systems,
 <section id="what-provenance-data-is-captured">
 <h2>What Provenance Data is Captured?<a class="headerlink" href="#what-provenance-data-is-captured" title="Link to this heading">#</a></h2>
 <p>In order to focus on provenance data, we will consider a relatively simple example QIIME 2 Archive structure, with limited non-provenance content.
-In <a class="reference internal" href="#whole-archive"><span class="std std-numref">Fig. 5</span></a> the outer <a class="reference internal" href="../../back-matter/glossary.html#term-UUID"><span class="xref std std-term">UUID</span></a> directory of this <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact"><span class="xref std std-term">Artifact</span></a> holds the data it produced in a <code class="docutils literal notranslate"><span class="pre">data</span></code> directory (see <a class="reference internal" href="archives.html#data-goes-in-data"><span class="std std-ref">Data Goes In /data/</span></a>), and a few “clerical” files (see <a class="reference internal" href="archives.html#archive-anatomy"><span class="std std-ref">Anatomy of an Archive</span></a>).
+In <a class="reference internal" href="#whole-archive"><span class="std std-numref">Fig. 6</span></a> the outer <a class="reference internal" href="../../back-matter/glossary.html#term-UUID"><span class="xref std std-term">UUID</span></a> directory of this <a class="reference internal" href="../../back-matter/glossary.html#term-Artifact"><span class="xref std std-term">Artifact</span></a> holds the data it produced in a <code class="docutils literal notranslate"><span class="pre">data</span></code> directory (see <a class="reference internal" href="archives.html#data-goes-in-data"><span class="std std-ref">Data Goes In /data/</span></a>), and a few “clerical” files (see <a class="reference internal" href="archives.html#archive-anatomy"><span class="std std-ref">Anatomy of an Archive</span></a>).
 Here we focus on the <code class="docutils literal notranslate"><span class="pre">provenance/</span></code> directory.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
@@ -503,20 +502,20 @@ Including their data would result in massive file sizes and duplication of data.
 <figure class="align-default" id="whole-archive">
 <img alt="Simplified representation of the files within one Archive, emphasizing how an Archive holds provenance for an arbitrary number of Actions." src="../../_images/whole-archive.svg" />
 <figcaption>
-<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Simplified representation of the files within one Archive.</span><a class="headerlink" href="#whole-archive" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Simplified representation of the files within one Archive.</span><a class="headerlink" href="#whole-archive" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>In <a class="reference internal" href="#whole-archive"><span class="std std-numref">Fig. 5</span></a>, we use a blue “multiple-files” icon to represent the collection of provenance data associated with one single QIIME 2 action.
+<p>In <a class="reference internal" href="#whole-archive"><span class="std std-numref">Fig. 6</span></a>, we use a blue “multiple-files” icon to represent the collection of provenance data associated with one single QIIME 2 action.
 When this icon appears directly within <code class="docutils literal notranslate"><span class="pre">provenance/</span></code> the files describe the “current” <a class="reference internal" href="../../back-matter/glossary.html#term-Result"><span class="xref std std-term">Result</span></a>.
 All remaining icons appear within the <code class="docutils literal notranslate"><span class="pre">artifacts/</span></code> subdirectory.
 These file collections describe all “parent” Results used in the creation of the current Result, and are housed in directories named with their respective UUIDs.</p>
 <figure class="align-default" id="provenance-files">
 <img alt="A detail indicating how we abbreviate one action's provenance records with a single &quot;multiple-files&quot; icon." src="../../_images/provenance-files.svg" />
 <figcaption>
-<p><span class="caption-number">Fig. 6 </span><span class="caption-text">A detail indicating how we abbreviate one action’s provenance records in <a class="reference internal" href="#whole-archive"><span class="std std-numref">Fig. 5</span></a>.</span><a class="headerlink" href="#provenance-files" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">A detail indicating how we abbreviate one action’s provenance records in <a class="reference internal" href="#whole-archive"><span class="std std-numref">Fig. 6</span></a>.</span><a class="headerlink" href="#provenance-files" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>With the exception of the current Result (whose provenance lives in <code class="docutils literal notranslate"><span class="pre">provenance/</span></code>, every Action is captured in a directory titled with the Action’s <a class="reference internal" href="../../back-matter/glossary.html#term-UUID"><span class="xref std std-term">UUID</span></a> <a class="reference internal" href="#provenance-files"><span class="std std-numref">Fig. 6</span></a>.</p>
+<p>With the exception of the current Result (whose provenance lives in <code class="docutils literal notranslate"><span class="pre">provenance/</span></code>, every Action is captured in a directory titled with the Action’s <a class="reference internal" href="../../back-matter/glossary.html#term-UUID"><span class="xref std std-term">UUID</span></a> <a class="reference internal" href="#provenance-files"><span class="std std-numref">Fig. 7</span></a>.</p>
 <p>That directory contains:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">VERSION</span></code> (see <a class="reference internal" href="archives.html#identifying-an-archive"><span class="std std-ref">Rules for identifying an archive</span></a>)</p></li>

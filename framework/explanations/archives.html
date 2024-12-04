@@ -182,7 +182,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/set-up-development-environment.html">Set up your development environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/distribute-on-gh.html">Distribute plugins on GitHub</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/distribute-on-library.html">Distribute plugins on QIIME 2 Library</a></li>
-
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/support-your-users.html">Provide technical support for your users</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/maximize-compatibility.html">Maximize compatibility between your plugin(s) and existing QIIME 2 distribution(s)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins/how-to-guides/facilitate-installation.html">Facilitating installation of your plugin for users</a></li>
@@ -466,11 +465,11 @@ The structure of this subdirectory depends on the payload.</p>
 <p>In addition to storing data, QIIME 2 stores <em>metadata</em> including what actions were performed to generate the current <code class="docutils literal notranslate"><span class="pre">Result</span></code>, what versions of QIIME 2 and other dependencies were used, and what references to cite if the data is used in a publication (for example)</p>
 <p>As it relates to the archive structure, the <code class="docutils literal notranslate"><span class="pre">/provenance/</span></code> directory is designed to be self-contained and self-referential.
 This means that it duplicates some of the information available in the root of the <a class="reference internal" href="../../back-matter/glossary.html#term-Archive"><span class="xref std std-term">archive</span></a>, but this simplifies the code responsible for tracking and reading provenance.</p>
-<p><a class="reference internal" href="#archive-structure"><span class="std std-numref">Fig. 4</span></a> illustrates this idea.</p>
+<p><a class="reference internal" href="#archive-structure"><span class="std std-numref">Fig. 5</span></a> illustrates this idea.</p>
 <figure class="align-default" id="archive-structure">
 <img alt="../../_images/archive-structure.svg" src="../../_images/archive-structure.svg" />
 <figcaption>
-<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Description of the QIIME 2 archive structure.</span><a class="headerlink" href="#archive-structure" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Description of the QIIME 2 archive structure.</span><a class="headerlink" href="#archive-structure" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Looking closely we see the previously described <code class="docutils literal notranslate"><span class="pre">/data/</span></code> directory and <code class="docutils literal notranslate"><span class="pre">metadata.yaml</span></code> file, in addition to a <code class="docutils literal notranslate"><span class="pre">VERSION</span></code> file (described below), and the <code class="docutils literal notranslate"><span class="pre">/provenance/</span></code> directory in question.</p>
