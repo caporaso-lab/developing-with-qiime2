@@ -90,6 +90,7 @@ parts:
           sections:
             - file: framework/references/archive-versions
             - file: framework/references/dev-cycle-structure
+            - file: framework/references/how-to-install
 
   - caption: "Documentation 📚"
     chapters:
