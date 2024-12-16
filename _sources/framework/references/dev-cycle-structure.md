@@ -7,7 +7,7 @@ If you have any questions on this process, please don't hesitate to reach out on
 ## QIIME 2 Release Cycle Structure
 
 As of 2024.10, QIIME 2 Distributions are released bi-anually, on the first Wednesday of April and October.
-This schedule provides us with ample development time between releases, and provides our developer community with at least a three month notice for any external dependency changes (i.e. bumping Python, removing a deprecated package, etc).
+This schedule provides us with ample development time between releases, and provides our developer community with at least a three month notice for any interface/API changes and any external dependency changes (i.e. bumping Python, removing a deprecated package, etc).
 
 The following diagram outlines relevant timepoints between each release, with terms defined below.
 
