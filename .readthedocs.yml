@@ -14,6 +14,7 @@ conda:
 
 sphinx:
   builder: html
+  configuration: book/conf.py
   # fail on warning is false until i get the API doc build sorted out
   fail_on_warning: false
 
