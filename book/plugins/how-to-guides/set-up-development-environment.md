@@ -150,19 +150,19 @@ conda config --env --set subdir osx-64
 `````{tab-set}
 ````{tab-item} macOS
 ```bash
-conda env create -n moshpit-dev --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-macos-latest-conda.yml
+conda env create -n moshpit-dev --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-macos-latest-conda.yml
 ```
 ````
 
 ````{tab-item} Linux
 ```bash
-conda env create -n moshpit-dev --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-ubuntu-latest-conda.yml
+conda env create -n moshpit-dev --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-ubuntu-latest-conda.yml
 ```
 ````
 
 ````{tab-item} macOS (Apple Silicon)
 ```bash
-CONDA_SUBDIR=osx-64 conda env create -n moshpit-dev --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-macos-latest-conda.yml
+CONDA_SUBDIR=osx-64 conda env create -n moshpit-dev --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-macos-latest-conda.yml
 conda config --env --set subdir osx-64
 ```
 ````
