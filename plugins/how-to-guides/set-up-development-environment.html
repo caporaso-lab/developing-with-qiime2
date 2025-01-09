@@ -435,7 +435,7 @@
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-other-qiime-2-distributions">Installing other QIIME 2 distributions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#amplicon-distribution">Amplicon distribution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metagenome-distribution">Metagenome distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moshpit-previously-known-as-the-metagenome-distribution">MOSHPIT (previously known as the <em>Metagenome distribution</em>)</a></li>
 </ul>
 </li>
 </ul>
@@ -474,7 +474,7 @@ Follow the instructions for downloading and installing Miniconda.</p>
 <p>The QIIME 2 “Tiny Distribution” is a minimal set of QIIME 2 functionality for building and using plugins through the QIIME 2 command line, and is intended for use by developers who want a minimal QIIME 2 environment to work in.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We recommend starting your development with the “Tiny Distribution”, unless you specifically need plugins that are installed in other QIIME 2 distributions, such as the “Amplicon” or “Metagenome” distributions, in which case see <a class="reference internal" href="#other-distros"><span class="std std-ref">Installing other QIIME 2 distributions</span></a>.</p>
+<p>We recommend starting your development with the “Tiny Distribution”, unless you specifically need plugins that are installed in other QIIME 2 distributions, such as the Amplicon Distribution or MOSHPIT (previously known as the Metagenome Distribution), in which case see <a class="reference internal" href="#other-distros"><span class="std std-ref">Installing other QIIME 2 distributions</span></a>.</p>
 </div>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
@@ -592,27 +592,27 @@ conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w">
 </div>
 </div>
 </section>
-<section id="metagenome-distribution">
-<h3>Metagenome distribution<a class="headerlink" href="#metagenome-distribution" title="Link to this heading">#</a></h3>
+<section id="moshpit-previously-known-as-the-metagenome-distribution">
+<h3>MOSHPIT (previously known as the <em>Metagenome distribution</em>)<a class="headerlink" href="#moshpit-previously-known-as-the-metagenome-distribution" title="Link to this heading">#</a></h3>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-6" name="sd-tab-set-2" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-6">
 macOS</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-metagenome<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-macos-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>moshpit-dev<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-macos-latest-conda.yml
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-7" name="sd-tab-set-2" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-7">
 Linux</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-metagenome<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-ubuntu-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>moshpit-dev<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-ubuntu-latest-conda.yml
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-8" name="sd-tab-set-2" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-8">
 macOS (Apple Silicon)</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-metagenome<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-macos-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>moshpit-dev<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-macos-latest-conda.yml
 conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w"> </span>--set<span class="w"> </span>subdir<span class="w"> </span>osx-64
 </pre></div>
 </div>
@@ -697,7 +697,7 @@ conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w">
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-other-qiime-2-distributions">Installing other QIIME 2 distributions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#amplicon-distribution">Amplicon distribution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metagenome-distribution">Metagenome distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moshpit-previously-known-as-the-metagenome-distribution">MOSHPIT (previously known as the <em>Metagenome distribution</em>)</a></li>
 </ul>
 </li>
 </ul>

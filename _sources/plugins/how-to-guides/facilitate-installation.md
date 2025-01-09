@@ -31,7 +31,7 @@ dependencies:
 
 With the following terms defined:
 - `<target-epoch>`: the QIIME 2 epoch that your plugin should be installed under (e.g., `2024.5` or `2024.10`)
-- `<target-distribution>`: the QIIME 2 distribution that your plugin should be installed under (e.g., `amplicon`, or `metagenome`)
+- `<target-distribution>`: the QIIME 2 distribution that your plugin should be installed under (e.g., `amplicon` or `moshpit`)
 - `<package-name>`: your plugin's package name (e.g., `q2-dwq2`)
 - `<owner>`: the github organization your plugin is hosted under, or your personal github account name
 - `<repository-name>`: the name of your plugin repository on GitHub (this often will be the same as your plugin's package name, e.g., `q2-dwq2`)

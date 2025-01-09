@@ -27,7 +27,7 @@ conda update conda
 The QIIME 2 "Tiny Distribution" is a minimal set of QIIME 2 functionality for building and using plugins through the QIIME 2 command line, and is intended for use by developers who want a minimal QIIME 2 environment to work in.
 
 ```{note}
-We recommend starting your development with the "Tiny Distribution", unless you specifically need plugins that are installed in other QIIME 2 distributions, such as the "Amplicon" or "Metagenome" distributions, in which case see [](other-distros).
+We recommend starting your development with the "Tiny Distribution", unless you specifically need plugins that are installed in other QIIME 2 distributions, such as the Amplicon Distribution or MOSHPIT (previously known as the Metagenome Distribution), in which case see [](other-distros).
 ```
 
 `````{tab-set}
@@ -145,24 +145,24 @@ conda config --env --set subdir osx-64
 ````
 `````
 
-### Metagenome distribution
+### MOSHPIT (previously known as the *Metagenome distribution*)
 
 `````{tab-set}
 ````{tab-item} macOS
 ```bash
-conda env create -n q2dev-metagenome --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-macos-latest-conda.yml
+conda env create -n moshpit-dev --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-macos-latest-conda.yml
 ```
 ````
 
 ````{tab-item} Linux
 ```bash
-conda env create -n q2dev-metagenome --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-ubuntu-latest-conda.yml
+conda env create -n moshpit-dev --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-ubuntu-latest-conda.yml
 ```
 ````
 
 ````{tab-item} macOS (Apple Silicon)
 ```bash
-CONDA_SUBDIR=osx-64 conda env create -n q2dev-metagenome --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-metagenome-macos-latest-conda.yml
+CONDA_SUBDIR=osx-64 conda env create -n moshpit-dev --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-macos-latest-conda.yml
 conda config --env --set subdir osx-64
 ```
 ````
