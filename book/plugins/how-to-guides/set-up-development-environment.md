@@ -16,13 +16,19 @@ If you expect that you might need help setting up your development environment, 
 {{ miniconda_url }} provides the ``conda`` environment and package manager, and is currently the only supported way to install QIIME 2.
 Follow the instructions for downloading and installing Miniconda.
 
-After installing Miniconda and opening a new terminal, make sure you're running the latest version of ``conda``:
+```{note}
+We are experimentally supporting [miniforge](https://github.com/conda-forge/miniforge) instead of Miniconda.
+miniforge use is more permissive (notably it doesn't ever use Anaconda's `defaults` channel).
+Consider installing and using miniforge instead of Miniconda, and let us know on [the Forum](https://forum.qiime2.org) if you run into any issues.
+```
+
+After installing and opening a new terminal, make sure you're running the latest version of ``conda``:
 
 ```bash
 conda update conda
 ```
 
-## Install the latest development version of the QIIME 2 "Tiny Distribution"
+## Install the latest development version of the QIIME 2 "Tiny Distribution" and activate its environment
 
 The QIIME 2 "Tiny Distribution" is a minimal set of QIIME 2 functionality for building and using plugins through the QIIME 2 command line, and is intended for use by developers who want a minimal QIIME 2 environment to work in.
 
@@ -30,36 +36,43 @@ The QIIME 2 "Tiny Distribution" is a minimal set of QIIME 2 functionality for bu
 We recommend starting your development with the "Tiny Distribution", unless you specifically need plugins that are installed in other QIIME 2 distributions, such as the Amplicon Distribution or MOSHPIT (previously known as the Metagenome Distribution), in which case see [](other-distros).
 ```
 
+```{note}
+The commands on this page add the current date to the conda environment names, which can be helpful for managing development environments.
+QIIME 2 keeps track of the versions of all dependencies in data provenance (including specific git commits for packages in the QIIME 2 ecosystem) so that information -- not the conda environment name -- is the definitive source of specific versions that were used to generate a result.
+Things change relatively quickly with development environments, so it doesn't hurt to remove old ones and create new ones regularly (e.g., every few weeks).
+```
+
+
 `````{tab-set}
 ````{tab-item} macOS
 ```bash
-conda env create -n q2dev-tiny --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
+__Q2DEV_ENV_NAME=q2dev-tiny-$(date "+%Y-%m-%d")
+conda env create -n $__Q2DEV_ENV_NAME --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
+conda activate $__Q2DEV_ENV_NAME
 ```
 ````
 
 ````{tab-item} Linux
 ```bash
-conda env create -n q2dev-tiny --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-ubuntu-latest-conda.yml
+__Q2DEV_ENV_NAME=q2dev-tiny-$(date "+%Y-%m-%d")
+conda env create -n $__Q2DEV_ENV_NAME --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-ubuntu-latest-conda.yml
+conda activate $__Q2DEV_ENV_NAME
 ```
 ````
 
 ````{tab-item} macOS (Apple Silicon)
 ```bash
-CONDA_SUBDIR=osx-64 conda env create -n q2dev-tiny --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
+__Q2DEV_ENV_NAME=q2dev-tiny-$(date "+%Y-%m-%d")
+CONDA_SUBDIR=osx-64 conda env create -n $__Q2DEV_ENV_NAME --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
+conda activate $__Q2DEV_ENV_NAME
 conda config --env --set subdir osx-64
 ```
 ````
 `````
 
-## Activate the ``conda`` environment
+## Test your new environment
 
-You can now activate the environment you just created as follows.
-
-```bash
-conda activate q2dev-tiny
-```
-
-To test your QIIME 2 environment, run:
+After activating your new environment, you can test it by running:
 
 ```bash
 qiime info
@@ -69,22 +82,27 @@ You should see something like the following, though the version numbers you'll s
 
 ```
 System versions
-Python version: 3.8.18
-QIIME 2 release: 2023.11
-QIIME 2 version: 2023.11.0.dev0+15.g8ac7e3e
-q2cli version: 2023.11.0.dev0+12.g7cf7a7a
+Python version: 3.10.14
+QIIME 2 release: 2025.4
+QIIME 2 version: 2025.4.0.dev0+18.g9414a65
+q2cli version: 2025.4.0.dev0+21.g97e80cc
 
 Installed plugins
-types: 2023.11.0.dev0+2.g1827eab
+metadata: 2025.4.0.dev0+8.g66139ab
+types: 2025.4.0.dev0+16.g229da69
 
 Application config directory
-/Users/gregcaporaso/miniconda3/envs/q2dev-tiny/var/q2cli
+/Users/q2-user/miniforge3/envs/q2dev-tiny-2025-04-30/var/q2cli
+
+Config
+Config Source: /Users/q2-user/miniforge3/envs/q2dev-tiny-2025-04-30/etc/qiime2_config.toml
 
 Getting help
-To get help with QIIME 2, visit https://qiime2.org
+To find help and learning resources, visit https://qiime2.org.
+To get help with configuring and/or understanding QIIME 2 parallelization, visit https://use.qiime2.org/en/latest/references/parallel-configuration.html
 ```
 
-The versions listed here, for QIIME 2, q2cli, and q2-types, are development versions as defined by [versioneer](https://github.com/python-versioneer/python-versioneer), and these indicate that you're working in a QIIME 2 development environment (as opposed to working with a specific release version of QIIME 2).
+The versions listed here, for QIIME 2, q2cli, q2-types, and q2-metadata are development versions as defined by [versioneer](https://github.com/python-versioneer/python-versioneer), and these indicate that you're working in a QIIME 2 development environment (as opposed to working with a specific release version of QIIME 2).
 
 At this stage you should now have a working development environment - time to start hacking!
 
@@ -118,28 +136,30 @@ make test
 (other-distros)=
 ## Installing other QIIME 2 distributions
 
-```{note}
-If you install a distribution other than the "Tiny Distribution", be sure that the environment name in your `conda activate` command (in the example above this was `q2dev-tiny`) matches the value that you provided to the `conda env create` command through the `-n` parameter.
-```
-
 ### Amplicon distribution
 
 `````{tab-set}
 ````{tab-item} macOS
 ```bash
-conda env create -n q2dev-amplicon --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
+__Q2DEV_ENV_NAME=q2dev-amplicon-$(date "+%Y-%m-%d")
+conda env create -n $__Q2DEV_ENV_NAME --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
+conda activate $__Q2DEV_ENV_NAME
 ```
 ````
 
 ````{tab-item} Linux
 ```bash
-conda env create -n q2dev-amplicon --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-ubuntu-latest-conda.yml
+__Q2DEV_ENV_NAME=q2dev-amplicon-$(date "+%Y-%m-%d")
+conda env create -n $__Q2DEV_ENV_NAME --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-ubuntu-latest-conda.yml
+conda activate $__Q2DEV_ENV_NAME
 ```
 ````
 
 ````{tab-item} macOS (Apple Silicon)
 ```bash
-CONDA_SUBDIR=osx-64 conda env create -n q2dev-amplicon --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
+__Q2DEV_ENV_NAME=q2dev-amplicon-$(date "+%Y-%m-%d")
+CONDA_SUBDIR=osx-64 conda env create -n $__Q2DEV_ENV_NAME --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
+conda activate $__Q2DEV_ENV_NAME
 conda config --env --set subdir osx-64
 ```
 ````
@@ -150,19 +170,25 @@ conda config --env --set subdir osx-64
 `````{tab-set}
 ````{tab-item} macOS
 ```bash
-conda env create -n moshpit-dev --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-macos-latest-conda.yml
+__Q2DEV_ENV_NAME=moshpit-dev-$(date "+%Y-%m-%d")
+conda env create -n $__Q2DEV_ENV_NAME --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-macos-latest-conda.yml
+conda activate $__Q2DEV_ENV_NAME
 ```
 ````
 
 ````{tab-item} Linux
 ```bash
-conda env create -n moshpit-dev --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-ubuntu-latest-conda.yml
+__Q2DEV_ENV_NAME=moshpit-dev-$(date "+%Y-%m-%d")
+conda env create -n $__Q2DEV_ENV_NAME --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-ubuntu-latest-conda.yml
+conda activate $__Q2DEV_ENV_NAME
 ```
 ````
 
 ````{tab-item} macOS (Apple Silicon)
 ```bash
-CONDA_SUBDIR=osx-64 conda env create -n moshpit-dev --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-macos-latest-conda.yml
+__Q2DEV_ENV_NAME=moshpit-dev-$(date "+%Y-%m-%d")
+CONDA_SUBDIR=osx-64 conda env create -n $__Q2DEV_ENV_NAME --file https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-macos-latest-conda.yml
+conda activate $__Q2DEV_ENV_NAME
 conda config --env --set subdir osx-64
 ```
 ````
