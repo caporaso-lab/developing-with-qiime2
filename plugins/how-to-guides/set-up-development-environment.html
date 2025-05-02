@@ -16,22 +16,20 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -39,11 +37,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=d05ccb96" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -69,7 +66,6 @@
     <link rel="prev" title="How-To Guides" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -85,8 +81,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -94,6 +101,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -101,8 +109,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -118,8 +126,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -149,17 +156,21 @@
     
     
     <img src="../../_static/dwq2-light.png" class="logo__image only-light" alt="Developing with QIIME 2 - Home"/>
-    <img src="../../_static/dwq2-dark.png" class="logo__image only-dark pst-js-only" alt="Developing with QIIME 2 - Home"/>
+    <script>document.write(`<img src="../../_static/dwq2-dark.png" class="logo__image only-dark" alt="Developing with QIIME 2 - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Plugins 🔌</span></p>
@@ -288,14 +299,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -392,16 +398,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -426,8 +440,8 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-prerequisites">Install Prerequisites</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-latest-development-version-of-the-qiime-2-tiny-distribution">Install the latest development version of the QIIME 2 “Tiny Distribution”</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activate-the-conda-environment">Activate the <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-latest-development-version-of-the-qiime-2-tiny-distribution-and-activate-its-environment">Install the latest development version of the QIIME 2 “Tiny Distribution” and activate its environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-your-new-environment">Test your new environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next steps</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-your-first-plugin">Building your first plugin</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-to-existing-plugins">Contributing to existing plugins</a></li>
@@ -464,71 +478,90 @@ If you expect that you might need help setting up your development environment, 
 <h2>Install Prerequisites<a class="headerlink" href="#install-prerequisites" title="Link to this heading">#</a></h2>
 <p><a class="reference external" href="https://conda.io/miniconda.html">Miniconda</a> provides the <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment and package manager, and is currently the only supported way to install QIIME 2.
 Follow the instructions for downloading and installing Miniconda.</p>
-<p>After installing Miniconda and opening a new terminal, make sure you’re running the latest version of <code class="docutils literal notranslate"><span class="pre">conda</span></code>:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We are experimentally supporting <a class="reference external" href="https://github.com/conda-forge/miniforge">miniforge</a> instead of Miniconda.
+miniforge use is more permissive (notably it doesn’t ever use Anaconda’s <code class="docutils literal notranslate"><span class="pre">defaults</span></code> channel).
+Consider installing and using miniforge instead of Miniconda, and let us know on <a class="reference external" href="https://forum.qiime2.org">the Forum</a> if you run into any issues.</p>
+</div>
+<p>After installing and opening a new terminal, make sure you’re running the latest version of <code class="docutils literal notranslate"><span class="pre">conda</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>update<span class="w"> </span>conda
 </pre></div>
 </div>
 </section>
-<section id="install-the-latest-development-version-of-the-qiime-2-tiny-distribution">
-<h2>Install the latest development version of the QIIME 2 “Tiny Distribution”<a class="headerlink" href="#install-the-latest-development-version-of-the-qiime-2-tiny-distribution" title="Link to this heading">#</a></h2>
+<section id="install-the-latest-development-version-of-the-qiime-2-tiny-distribution-and-activate-its-environment">
+<h2>Install the latest development version of the QIIME 2 “Tiny Distribution” and activate its environment<a class="headerlink" href="#install-the-latest-development-version-of-the-qiime-2-tiny-distribution-and-activate-its-environment" title="Link to this heading">#</a></h2>
 <p>The QIIME 2 “Tiny Distribution” is a minimal set of QIIME 2 functionality for building and using plugins through the QIIME 2 command line, and is intended for use by developers who want a minimal QIIME 2 environment to work in.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We recommend starting your development with the “Tiny Distribution”, unless you specifically need plugins that are installed in other QIIME 2 distributions, such as the Amplicon Distribution or MOSHPIT (previously known as the Metagenome Distribution), in which case see <a class="reference internal" href="#other-distros"><span class="std std-ref">Installing other QIIME 2 distributions</span></a>.</p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The commands on this page add the current date to the conda environment names, which can be helpful for managing development environments.
+QIIME 2 keeps track of the versions of all dependencies in data provenance (including specific git commits for packages in the QIIME 2 ecosystem) so that information – not the conda environment name – is the definitive source of specific versions that were used to generate a result.
+Things change relatively quickly with development environments, so it doesn’t hurt to remove old ones and create new ones regularly (e.g., every few weeks).</p>
+</div>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-0">
 macOS</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-tiny<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">__Q2DEV_ENV_NAME</span><span class="o">=</span>q2dev-tiny-<span class="k">$(</span>date<span class="w"> </span><span class="s2">&quot;+%Y-%m-%d&quot;</span><span class="k">)</span>
+conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span><span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
+conda<span class="w"> </span>activate<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span>
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-1">
 Linux</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-tiny<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-ubuntu-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">__Q2DEV_ENV_NAME</span><span class="o">=</span>q2dev-tiny-<span class="k">$(</span>date<span class="w"> </span><span class="s2">&quot;+%Y-%m-%d&quot;</span><span class="k">)</span>
+conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span><span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-ubuntu-latest-conda.yml
+conda<span class="w"> </span>activate<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span>
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-2">
 macOS (Apple Silicon)</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-tiny<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">__Q2DEV_ENV_NAME</span><span class="o">=</span>q2dev-tiny-<span class="k">$(</span>date<span class="w"> </span><span class="s2">&quot;+%Y-%m-%d&quot;</span><span class="k">)</span>
+<span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span><span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-tiny-macos-latest-conda.yml
+conda<span class="w"> </span>activate<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span>
 conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w"> </span>--set<span class="w"> </span>subdir<span class="w"> </span>osx-64
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="activate-the-conda-environment">
-<h2>Activate the <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment<a class="headerlink" href="#activate-the-conda-environment" title="Link to this heading">#</a></h2>
-<p>You can now activate the environment you just created as follows.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>q2dev-tiny
-</pre></div>
-</div>
-<p>To test your QIIME 2 environment, run:</p>
+<section id="test-your-new-environment">
+<h2>Test your new environment<a class="headerlink" href="#test-your-new-environment" title="Link to this heading">#</a></h2>
+<p>After activating your new environment, you can test it by running:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qiime<span class="w"> </span>info
 </pre></div>
 </div>
 <p>You should see something like the following, though the version numbers you’ll see will be different:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">System</span> <span class="n">versions</span>
-<span class="n">Python</span> <span class="n">version</span><span class="p">:</span> <span class="mf">3.8.18</span>
-<span class="n">QIIME</span> <span class="mi">2</span> <span class="n">release</span><span class="p">:</span> <span class="mf">2023.11</span>
-<span class="n">QIIME</span> <span class="mi">2</span> <span class="n">version</span><span class="p">:</span> <span class="mf">2023.11.0</span><span class="o">.</span><span class="n">dev0</span><span class="o">+</span><span class="mf">15.</span><span class="n">g8ac7e3e</span>
-<span class="n">q2cli</span> <span class="n">version</span><span class="p">:</span> <span class="mf">2023.11.0</span><span class="o">.</span><span class="n">dev0</span><span class="o">+</span><span class="mf">12.</span><span class="n">g7cf7a7a</span>
+<span class="n">Python</span> <span class="n">version</span><span class="p">:</span> <span class="mf">3.10.14</span>
+<span class="n">QIIME</span> <span class="mi">2</span> <span class="n">release</span><span class="p">:</span> <span class="mf">2025.4</span>
+<span class="n">QIIME</span> <span class="mi">2</span> <span class="n">version</span><span class="p">:</span> <span class="mf">2025.4.0</span><span class="o">.</span><span class="n">dev0</span><span class="o">+</span><span class="mf">18.</span><span class="n">g9414a65</span>
+<span class="n">q2cli</span> <span class="n">version</span><span class="p">:</span> <span class="mf">2025.4.0</span><span class="o">.</span><span class="n">dev0</span><span class="o">+</span><span class="mf">21.</span><span class="n">g97e80cc</span>
 
 <span class="n">Installed</span> <span class="n">plugins</span>
-<span class="n">types</span><span class="p">:</span> <span class="mf">2023.11.0</span><span class="o">.</span><span class="n">dev0</span><span class="o">+</span><span class="mf">2.</span><span class="n">g1827eab</span>
+<span class="n">metadata</span><span class="p">:</span> <span class="mf">2025.4.0</span><span class="o">.</span><span class="n">dev0</span><span class="o">+</span><span class="mf">8.</span><span class="n">g66139ab</span>
+<span class="n">types</span><span class="p">:</span> <span class="mf">2025.4.0</span><span class="o">.</span><span class="n">dev0</span><span class="o">+</span><span class="mf">16.</span><span class="n">g229da69</span>
 
 <span class="n">Application</span> <span class="n">config</span> <span class="n">directory</span>
-<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">gregcaporaso</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">q2dev</span><span class="o">-</span><span class="n">tiny</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">q2cli</span>
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">q2</span><span class="o">-</span><span class="n">user</span><span class="o">/</span><span class="n">miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">q2dev</span><span class="o">-</span><span class="n">tiny</span><span class="o">-</span><span class="mi">2025</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">30</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">q2cli</span>
+
+<span class="n">Config</span>
+<span class="n">Config</span> <span class="n">Source</span><span class="p">:</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">q2</span><span class="o">-</span><span class="n">user</span><span class="o">/</span><span class="n">miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">q2dev</span><span class="o">-</span><span class="n">tiny</span><span class="o">-</span><span class="mi">2025</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">30</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">qiime2_config</span><span class="o">.</span><span class="n">toml</span>
 
 <span class="n">Getting</span> <span class="n">help</span>
-<span class="n">To</span> <span class="n">get</span> <span class="n">help</span> <span class="k">with</span> <span class="n">QIIME</span> <span class="mi">2</span><span class="p">,</span> <span class="n">visit</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">qiime2</span><span class="o">.</span><span class="n">org</span>
+<span class="n">To</span> <span class="n">find</span> <span class="n">help</span> <span class="ow">and</span> <span class="n">learning</span> <span class="n">resources</span><span class="p">,</span> <span class="n">visit</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">qiime2</span><span class="o">.</span><span class="n">org</span><span class="o">.</span>
+<span class="n">To</span> <span class="n">get</span> <span class="n">help</span> <span class="k">with</span> <span class="n">configuring</span> <span class="ow">and</span><span class="o">/</span><span class="ow">or</span> <span class="n">understanding</span> <span class="n">QIIME</span> <span class="mi">2</span> <span class="n">parallelization</span><span class="p">,</span> <span class="n">visit</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">use</span><span class="o">.</span><span class="n">qiime2</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">references</span><span class="o">/</span><span class="n">parallel</span><span class="o">-</span><span class="n">configuration</span><span class="o">.</span><span class="n">html</span>
 </pre></div>
 </div>
-<p>The versions listed here, for QIIME 2, q2cli, and q2-types, are development versions as defined by <a class="reference external" href="https://github.com/python-versioneer/python-versioneer">versioneer</a>, and these indicate that you’re working in a QIIME 2 development environment (as opposed to working with a specific release version of QIIME 2).</p>
+<p>The versions listed here, for QIIME 2, q2cli, q2-types, and q2-metadata are development versions as defined by <a class="reference external" href="https://github.com/python-versioneer/python-versioneer">versioneer</a>, and these indicate that you’re working in a QIIME 2 development environment (as opposed to working with a specific release version of QIIME 2).</p>
 <p>At this stage you should now have a working development environment - time to start hacking!</p>
 </section>
 <section id="next-steps">
@@ -561,31 +594,33 @@ make<span class="w"> </span><span class="nb">test</span>
 </section>
 <section id="installing-other-qiime-2-distributions">
 <span id="other-distros"></span><h2>Installing other QIIME 2 distributions<a class="headerlink" href="#installing-other-qiime-2-distributions" title="Link to this heading">#</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you install a distribution other than the “Tiny Distribution”, be sure that the environment name in your <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span></code> command (in the example above this was <code class="docutils literal notranslate"><span class="pre">q2dev-tiny</span></code>) matches the value that you provided to the <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span></code> command through the <code class="docutils literal notranslate"><span class="pre">-n</span></code> parameter.</p>
-</div>
 <section id="amplicon-distribution">
 <h3>Amplicon distribution<a class="headerlink" href="#amplicon-distribution" title="Link to this heading">#</a></h3>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-3">
 macOS</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-amplicon<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">__Q2DEV_ENV_NAME</span><span class="o">=</span>q2dev-amplicon-<span class="k">$(</span>date<span class="w"> </span><span class="s2">&quot;+%Y-%m-%d&quot;</span><span class="k">)</span>
+conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span><span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
+conda<span class="w"> </span>activate<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span>
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-4" name="sd-tab-set-1" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-4">
 Linux</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-amplicon<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-ubuntu-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">__Q2DEV_ENV_NAME</span><span class="o">=</span>q2dev-amplicon-<span class="k">$(</span>date<span class="w"> </span><span class="s2">&quot;+%Y-%m-%d&quot;</span><span class="k">)</span>
+conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span><span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-ubuntu-latest-conda.yml
+conda<span class="w"> </span>activate<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span>
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-5" name="sd-tab-set-1" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-5">
 macOS (Apple Silicon)</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>q2dev-amplicon<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">__Q2DEV_ENV_NAME</span><span class="o">=</span>q2dev-amplicon-<span class="k">$(</span>date<span class="w"> </span><span class="s2">&quot;+%Y-%m-%d&quot;</span><span class="k">)</span>
+<span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span><span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-amplicon-macos-latest-conda.yml
+conda<span class="w"> </span>activate<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span>
 conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w"> </span>--set<span class="w"> </span>subdir<span class="w"> </span>osx-64
 </pre></div>
 </div>
@@ -598,21 +633,27 @@ conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w">
 <input checked="checked" id="sd-tab-item-6" name="sd-tab-set-2" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-6">
 macOS</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>moshpit-dev<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-macos-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">__Q2DEV_ENV_NAME</span><span class="o">=</span>moshpit-dev-<span class="k">$(</span>date<span class="w"> </span><span class="s2">&quot;+%Y-%m-%d&quot;</span><span class="k">)</span>
+conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span><span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-macos-latest-conda.yml
+conda<span class="w"> </span>activate<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span>
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-7" name="sd-tab-set-2" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-7">
 Linux</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>moshpit-dev<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-ubuntu-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">__Q2DEV_ENV_NAME</span><span class="o">=</span>moshpit-dev-<span class="k">$(</span>date<span class="w"> </span><span class="s2">&quot;+%Y-%m-%d&quot;</span><span class="k">)</span>
+conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span><span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-ubuntu-latest-conda.yml
+conda<span class="w"> </span>activate<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span>
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-8" name="sd-tab-set-2" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-8">
 macOS (Apple Silicon)</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>moshpit-dev<span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-macos-latest-conda.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">__Q2DEV_ENV_NAME</span><span class="o">=</span>moshpit-dev-<span class="k">$(</span>date<span class="w"> </span><span class="s2">&quot;+%Y-%m-%d&quot;</span><span class="k">)</span>
+<span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span><span class="w"> </span>--file<span class="w"> </span>https://raw.githubusercontent.com/qiime2/distributions/dev/latest/passed/qiime2-moshpit-macos-latest-conda.yml
+conda<span class="w"> </span>activate<span class="w"> </span><span class="nv">$__Q2DEV_ENV_NAME</span>
 conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w"> </span>--set<span class="w"> </span>subdir<span class="w"> </span>osx-64
 </pre></div>
 </div>
@@ -677,8 +718,7 @@ conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w">
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -688,8 +728,8 @@ conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w">
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-prerequisites">Install Prerequisites</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-latest-development-version-of-the-qiime-2-tiny-distribution">Install the latest development version of the QIIME 2 “Tiny Distribution”</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activate-the-conda-environment">Activate the <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-latest-development-version-of-the-qiime-2-tiny-distribution-and-activate-its-environment">Install the latest development version of the QIIME 2 “Tiny Distribution” and activate its environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-your-new-environment">Test your new environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next steps</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-your-first-plugin">Building your first plugin</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-to-existing-plugins">Contributing to existing plugins</a></li>
@@ -748,8 +788,8 @@ By Greg Caporaso and Evan Bolyen
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
