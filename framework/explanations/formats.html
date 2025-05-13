@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -481,14 +481,14 @@ The one “gotcha” here is that in order to keep things quick, we typically re
 Because of this, formats allow for multiple levels of sniffing to be defined.
 As of this writing (March 2024) there currently there are two validation levels: <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code>.</p>
 <p>Here we provide an example of a <code class="docutils literal notranslate"><span class="pre">TextFileFormat</span></code> definition, with a focus on the <code class="docutils literal notranslate"><span class="pre">_validate_</span></code> function.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">IntSequenceFormat</span><span class="p">(</span><span class="n">TextFileFormat</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">IntSequenceFormat</span><span class="p">(</span><span class="n">TextFileFormat</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A sequence of integers stored on new lines in a file.</span>
 <span class="sd">    To make validation more interesting, values in the list can be any integer as long</span>
 <span class="sd">    as that integer is not equal to the previous value plus 3</span>
 <span class="sd">    (i.e., `line[i] != (line[i-1]) + 3`).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">_validate_n_ints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_n_ints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="n">previous_val</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
@@ -508,7 +508,7 @@ As of this writing (March 2024) there currently there are two validation levels:
                 <span class="n">previous_val</span> <span class="o">=</span> <span class="n">val</span>
 
     <span class="c1"># `_validate_` is exposed through the public method `validate`.</span>
-    <span class="k">def</span> <span class="nf">_validate_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
         <span class="n">record_map</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_validate_n_ints</span><span class="p">(</span><span class="n">record_map</span><span class="p">[</span><span class="n">level</span><span class="p">])</span>
 
@@ -550,7 +550,7 @@ QIIME 2 allows more than one <code class="docutils literal notranslate"><span cl
 An example of this is the <a class="reference external" href="https://github.com/qiime2/q2-demux/blob/6e9a0cc8841a9cfbb5f517a256872700c7b75732/q2_demux/_format.py#L28"><code class="docutils literal notranslate"><span class="pre">EMPPairedEndDirFmt</span></code></a>.
 This directory format is always composed of three <a class="reference external" href="https://github.com/qiime2/q2-types/blob/e25f9355958755343977e037bbe39110cfb56a63/q2_types/per_sample_sequences/_format.py#L236"><code class="docutils literal notranslate"><span class="pre">FastqGzFormat</span></code></a> files: one for the forward reads (<code class="docutils literal notranslate"><span class="pre">forward.fastq.gz</span></code>), one for the reverse reads (<code class="docutils literal notranslate"><span class="pre">reverse.fastq.gz</span></code>), and one for the barcodes (<code class="docutils literal notranslate"><span class="pre">barcodes.fastq.gz</span></code>).
 The underlying <code class="docutils literal notranslate"><span class="pre">FastqGzFormat</span></code> is defined once — it doesn’t need to know about the sematic difference between biological reads and barcode reads, unlike the <code class="docutils literal notranslate"><span class="pre">EMPPairedEndDirFmt</span></code> which must be able to differentiate these.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>   <span class="k">class</span> <span class="nc">EMPPairedEndDirFmt</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">DirectoryFormat</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>   <span class="k">class</span><span class="w"> </span><span class="nc">EMPPairedEndDirFmt</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">DirectoryFormat</span><span class="p">):</span>
        <span class="n">forward</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;forward.fastq.gz&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">FastqGzFormat</span><span class="p">)</span>
        <span class="n">reverse</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;reverse.fastq.gz&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">FastqGzFormat</span><span class="p">)</span>
        <span class="n">barcodes</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;barcodes.fastq.gz&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">FastqGzFormat</span><span class="p">)</span>
@@ -565,13 +565,13 @@ An example of this kind of format are any of the demultiplexed file formats — 
 One study might have 5 samples, while another has 5000.
 For these situations the <code class="docutils literal notranslate"><span class="pre">DirectoryFormat</span></code> (<code class="docutils literal notranslate"><span class="pre">qiime2.plugin.DirectoryFormat</span></code>) can be configured to watch for set pattern of filenames present in its <a class="reference internal" href="../../back-matter/glossary.html#term-Payload"><span class="xref std std-term">payload</span></a>.
 An example of this is the <a class="reference external" href="https://github.com/qiime2/q2-types/blob/e25f9355958755343977e037bbe39110cfb56a63/q2_types/per_sample_sequences/_format.py#L292"><code class="docutils literal notranslate"><span class="pre">CasavaOneEightSingleLanePerSampleDirFmt</span></code></a> class, which stores demultiplexed sequence data in files named with a pattern used by Illumina’s Casava v1.8 software.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CasavaOneEightSingleLanePerSampleDirFmt</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">DirectoryFormat</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CasavaOneEightSingleLanePerSampleDirFmt</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">DirectoryFormat</span><span class="p">):</span>
     <span class="n">sequences</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">FileCollection</span><span class="p">(</span>
         <span class="sa">r</span><span class="s1">&#39;.+_.+_L[0-9][0-9][0-9]_R[12]_001\.fastq\.gz&#39;</span><span class="p">,</span>
         <span class="nb">format</span><span class="o">=</span><span class="n">FastqGzFormat</span><span class="p">)</span>
 
     <span class="nd">@sequences</span><span class="o">.</span><span class="n">set_path_maker</span>
-    <span class="k">def</span> <span class="nf">sequences_path_maker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample_id</span><span class="p">,</span> <span class="n">barcode_id</span><span class="p">,</span> <span class="n">lane_number</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sequences_path_maker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample_id</span><span class="p">,</span> <span class="n">barcode_id</span><span class="p">,</span> <span class="n">lane_number</span><span class="p">,</span>
                             <span class="n">read_number</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_L</span><span class="si">%03d</span><span class="s1">_R</span><span class="si">%d</span><span class="s1">_001.fastq.gz&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sample_id</span><span class="p">,</span> <span class="n">barcode_id</span><span class="p">,</span>
                                                 <span class="n">lane_number</span><span class="p">,</span> <span class="n">read_number</span><span class="p">)</span>

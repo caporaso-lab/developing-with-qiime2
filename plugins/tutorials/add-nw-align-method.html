@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -524,12 +524,12 @@ The <code class="docutils literal notranslate"><span class="pre">_</span></code>
 <span class="c1"># The full license is in the file LICENSE, distributed with this software.</span>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<span class="kn">from</span> <span class="nn">skbio.alignment</span> <span class="kn">import</span> <span class="n">global_pairwise_align_nucleotide</span><span class="p">,</span> <span class="n">TabularMSA</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skbio.alignment</span><span class="w"> </span><span class="kn">import</span> <span class="n">global_pairwise_align_nucleotide</span><span class="p">,</span> <span class="n">TabularMSA</span>
 
-<span class="kn">from</span> <span class="nn">q2_types.feature_data</span> <span class="kn">import</span> <span class="n">DNAIterator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">q2_types.feature_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DNAIterator</span>
 
 
-<span class="k">def</span> <span class="nf">nw_align</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="n">DNAIterator</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">nw_align</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="n">DNAIterator</span><span class="p">,</span>
              <span class="n">seq2</span><span class="p">:</span> <span class="n">DNAIterator</span><span class="p">,</span>
              <span class="n">gap_open_penalty</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
              <span class="n">gap_extend_penalty</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
@@ -681,10 +681,10 @@ Earlier in the <code class="docutils literal notranslate"><span class="pre">plug
 </ul>
 <p>After adding this code and the corresponding <code class="docutils literal notranslate"><span class="pre">import</span></code> statements to your <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code>, you should be ready to try this action out.</p>
 <p>My <code class="docutils literal notranslate"><span class="pre">import</span></code> statements now look like the following:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Citations</span><span class="p">,</span> <span class="n">Plugin</span><span class="p">,</span> <span class="n">Float</span><span class="p">,</span> <span class="n">Range</span>
-<span class="kn">from</span> <span class="nn">q2_types.feature_data</span> <span class="kn">import</span> <span class="n">FeatureData</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">AlignedSequence</span>
-<span class="kn">from</span> <span class="nn">q2_dwq2</span> <span class="kn">import</span> <span class="n">__version__</span>
-<span class="kn">from</span> <span class="nn">q2_dwq2._methods</span> <span class="kn">import</span> <span class="n">nw_align</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">Citations</span><span class="p">,</span> <span class="n">Plugin</span><span class="p">,</span> <span class="n">Float</span><span class="p">,</span> <span class="n">Range</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">q2_types.feature_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">FeatureData</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">AlignedSequence</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">q2_dwq2</span><span class="w"> </span><span class="kn">import</span> <span class="n">__version__</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">q2_dwq2._methods</span><span class="w"> </span><span class="kn">import</span> <span class="n">nw_align</span>
 </pre></div>
 </div>
 </section>
@@ -766,7 +766,7 @@ Miscellaneous:
 </pre></div>
 </div>
 <p>Similarly, if you start an iPython session by calling <code class="docutils literal notranslate"><span class="pre">ipython</span></code> in your activated development environment, you can access the <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> method through its Python 3 API as follows.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">qiime2.plugins.dwq2</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">import</span><span class="w"> </span><span class="nn">qiime2.plugins.dwq2</span>
 <span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">plugins</span><span class="o">.</span><span class="n">dwq2</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">nw_align</span><span class="err">?</span>
 </pre></div>
 </div>
@@ -854,20 +854,20 @@ Remove the tests of <code class="docutils literal notranslate"><span class="pre"
 We’ll use those shortly.</p>
 </div>
 </aside>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skbio.alignment</span> <span class="kn">import</span> <span class="n">TabularMSA</span>
-<span class="kn">from</span> <span class="nn">skbio.sequence</span> <span class="kn">import</span> <span class="n">DNA</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skbio.alignment</span><span class="w"> </span><span class="kn">import</span> <span class="n">TabularMSA</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skbio.sequence</span><span class="w"> </span><span class="kn">import</span> <span class="n">DNA</span>
 
-<span class="kn">from</span> <span class="nn">qiime2.plugin.testing</span> <span class="kn">import</span> <span class="n">TestPluginBase</span>
-<span class="kn">from</span> <span class="nn">qiime2.plugin.util</span> <span class="kn">import</span> <span class="n">transform</span>
-<span class="kn">from</span> <span class="nn">q2_types.feature_data</span> <span class="kn">import</span> <span class="n">DNAFASTAFormat</span><span class="p">,</span> <span class="n">DNAIterator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin.testing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestPluginBase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">transform</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">q2_types.feature_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DNAFASTAFormat</span><span class="p">,</span> <span class="n">DNAIterator</span>
 
-<span class="kn">from</span> <span class="nn">q2_dwq2._methods</span> <span class="kn">import</span> <span class="n">nw_align</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">q2_dwq2._methods</span><span class="w"> </span><span class="kn">import</span> <span class="n">nw_align</span>
 
 
-<span class="k">class</span> <span class="nc">NWAlignTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">NWAlignTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
     <span class="n">package</span> <span class="o">=</span> <span class="s1">&#39;q2_dwq2.tests&#39;</span>
 
-    <span class="k">def</span> <span class="nf">test_simple1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_simple1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># test alignment of a pair of sequences</span>
         <span class="n">sequence1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAAAAAGGTGGCCTTTTTTTT&#39;</span><span class="p">)</span>
         <span class="n">sequence1</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">sequence1</span><span class="p">])</span>
@@ -922,7 +922,7 @@ So we’re ready to move on.</p>
 <h4>A second test of our action<a class="headerlink" href="#a-second-test-of-our-action" title="Link to this heading">#</a></h4>
 <p>All of that said, sometimes you do want to store data that you use in tests in files in the repository (for example, if they are large - in which case it’s a pain to store the test data in your unit test Python files).
 The following unit test illustrates how this can be achieved.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">test_simple2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span><span class="w"> </span><span class="nf">test_simple2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># test alignment of a different pair of sequences</span>
         <span class="c1"># loaded from file this time, for demonstration purposes</span>
         <span class="n">sequence1</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span>
@@ -974,7 +974,7 @@ After loading the files and transforming them, the test looks identical to the p
 <h4>A few additional tests<a class="headerlink" href="#a-few-additional-tests" title="Link to this heading">#</a></h4>
 <p>Because we want to test that our function generates the results that we would expect from <code class="docutils literal notranslate"><span class="pre">skbio.alignment.global_pairwise_align_nucleotide</span></code>, it’s good to check that the parameter values that we provide impact the results in the expected ways.
 I did this with four additional unit tests, each focused on a different input parameter.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">test_alt_match_score</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span><span class="w"> </span><span class="nf">test_alt_match_score</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">s1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAATTT&#39;</span><span class="p">)</span>
         <span class="n">sequence1</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s1</span><span class="p">])</span>
         <span class="n">s2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAGGTTT&#39;</span><span class="p">)</span>
@@ -1007,7 +1007,7 @@ I did this with four additional unit tests, each focused on a different input pa
 
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_alt_gap_open_penalty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_alt_gap_open_penalty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">s1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAATTT&#39;</span><span class="p">)</span>
         <span class="n">sequence1</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s1</span><span class="p">])</span>
         <span class="n">s2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAGGTTT&#39;</span><span class="p">)</span>
@@ -1030,7 +1030,7 @@ I did this with four additional unit tests, each focused on a different input pa
 
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_alt_gap_extend_penalty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_alt_gap_extend_penalty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">s1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAATTT&#39;</span><span class="p">)</span>
         <span class="n">sequence1</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s1</span><span class="p">])</span>
         <span class="n">s2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAGGTTT&#39;</span><span class="p">)</span>
@@ -1054,7 +1054,7 @@ I did this with four additional unit tests, each focused on a different input pa
 
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_alt_mismatch_score</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_alt_mismatch_score</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">s1</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAATTT&#39;</span><span class="p">)</span>
         <span class="n">sequence1</span> <span class="o">=</span> <span class="n">DNAIterator</span><span class="p">([</span><span class="n">s1</span><span class="p">])</span>
         <span class="n">s2</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;AAAAGGTTT&#39;</span><span class="p">)</span>

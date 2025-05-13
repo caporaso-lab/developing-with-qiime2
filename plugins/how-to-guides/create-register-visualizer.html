@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -471,7 +471,7 @@ If your function does create many different files, an <code class="docutils lite
 <p><a class="reference external" href="https://github.com/qiime2/q2-diversity/blob/99a0ccaaec14838b95845dbfe57f874d092b65c7/q2_diversity/_alpha/_visualizer.py#L31"><code class="docutils literal notranslate"><span class="pre">q2_diversity.alpha_group_significance</span></code></a> is an example of a function that can be registered as a <code class="docutils literal notranslate"><span class="pre">Visualizer</span></code>.
 In addition to its <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>, it takes alpha diversity results in a <code class="docutils literal notranslate"><span class="pre">pandas.Series</span></code> and sample metadata in a <code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> object and creates several different files (figures and tables) that are linked and/or presented in an <code class="docutils literal notranslate"><span class="pre">index.html</span></code> file.
 The signature of this function is:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">alpha_group_significance</span><span class="p">(</span><span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">alpha_group_significance</span><span class="p">(</span><span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                              <span class="n">alpha_diversity</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
                              <span class="n">metadata</span><span class="p">:</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Metadata</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </pre></div>

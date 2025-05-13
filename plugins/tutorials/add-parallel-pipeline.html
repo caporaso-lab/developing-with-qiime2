@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -591,7 +591,7 @@ This can look like the following:</p>
     <span class="s1">&#39;split_size&#39;</span><span class="p">:</span> <span class="mi">5</span>
 <span class="p">}</span>
 
-<span class="k">def</span> <span class="nf">split_sequences</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">split_sequences</span><span class="p">(</span>
         <span class="n">seqs</span><span class="p">:</span> <span class="n">DNAIterator</span><span class="p">,</span>
         <span class="n">split_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">_split_seqs_defaults</span><span class="p">[</span><span class="s1">&#39;split_size&#39;</span><span class="p">])</span> \
         <span class="o">-&gt;</span> <span class="n">DNAIterator</span><span class="p">:</span>
@@ -639,7 +639,7 @@ Once you’ve done that and have it working, take a look at my call to <code cla
 <p>Our <em>combine</em> method is effectively performing the opposite operation relative to our <em>split</em> method.
 In this case, we need a method that takes multiple <code class="docutils literal notranslate"><span class="pre">LocalAlignmentSearchResults</span></code> Artifacts as input, and returns them in a single, combined <code class="docutils literal notranslate"><span class="pre">LocalAlignmentSearchResults</span></code> Artifact.
 Let’s create a new <code class="docutils literal notranslate"><span class="pre">combine_las_reports</span></code> function.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">combine_las_reports</span><span class="p">(</span><span class="n">reports</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">combine_las_reports</span><span class="p">(</span><span class="n">reports</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
     <span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">reports</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
     <span class="k">return</span> <span class="n">results</span>
 </pre></div>
@@ -662,7 +662,7 @@ These operations can be more complex in some cases (at some point, I’ll <a cla
 <h3>Update <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> to use <em>split</em> and <em>combine</em> Methods<a class="headerlink" href="#update-search-and-summarize-to-use-split-and-combine-methods" title="Link to this heading">#</a></h3>
 <p>We’re now ready to update <code class="docutils literal notranslate"><span class="pre">search-and-summarize</span></code> to run in parallel.</p>
 <p>First, we’ll add the <code class="docutils literal notranslate"><span class="pre">split_size</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">search_and_summarize</span></code>, so we can pass it through to <code class="docutils literal notranslate"><span class="pre">split_sequences</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">search_and_summarize</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">search_and_summarize</span><span class="p">(</span>
     <span class="o">...</span>
     <span class="n">split_size</span><span class="o">=</span><span class="n">_split_seqs_defaults</span><span class="p">[</span><span class="s1">&#39;split_size&#39;</span><span class="p">],</span>
     <span class="o">...</span>
@@ -720,10 +720,10 @@ This ensures that any upstream configuration is still happening.
 Then, I moved the code from <code class="docutils literal notranslate"><span class="pre">test_simple1</span></code> that accessed the <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> and created the input <code class="docutils literal notranslate"><span class="pre">Artifacts</span></code> to this function and set all of these as attributes on the <code class="docutils literal notranslate"><span class="pre">SearchAndSummarizeTests</span></code> class.
 Now I can access these via the <code class="docutils literal notranslate"><span class="pre">self</span></code> variable in the methods of this class.
 After all of these changes, my <code class="docutils literal notranslate"><span class="pre">class</span></code> definition starts as follows:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SearchAndSummarizeTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SearchAndSummarizeTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
     <span class="n">package</span> <span class="o">=</span> <span class="s1">&#39;q2_dwq2.tests&#39;</span>
 
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">setUp</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">search_and_summarize_pipeline</span> <span class="o">=</span> \
@@ -749,7 +749,7 @@ After all of these changes, my <code class="docutils literal notranslate"><span 
 </div>
 <p>The next thing I did was define a helper function that compares the observed results to the expected results.
 Like the creation of the Artifacts above, this code was also moved from <code class="docutils literal notranslate"><span class="pre">test_simple1</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">_test_simple1_helper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observed_hits</span><span class="p">,</span> <span class="n">observed_viz</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span><span class="w"> </span><span class="nf">_test_simple1_helper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observed_hits</span><span class="p">,</span> <span class="n">observed_viz</span><span class="p">):</span>
         <span class="n">expected_hits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
           <span class="p">[</span><span class="s1">&#39;q1&#39;</span><span class="p">,</span> <span class="s1">&#39;r2&#39;</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">40.</span><span class="p">,</span> <span class="s1">&#39;ACACTCTCCACCCATTTGCT&#39;</span><span class="p">,</span>
                                       <span class="s1">&#39;ACACTCTCCACCCATTTGCT&#39;</span><span class="p">],</span>
@@ -784,7 +784,7 @@ Like the creation of the Artifacts above, this code was also moved from <code cl
 </pre></div>
 </div>
 <p>Then, I modified the name of <code class="docutils literal notranslate"><span class="pre">test_simple1</span></code> to <code class="docutils literal notranslate"><span class="pre">test_simple1_serial</span></code>, and adapted it to use the pipeline and artifact attributes, and to call <code class="docutils literal notranslate"><span class="pre">_test_simple1_helper</span></code> to compare the observed and expected results.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_simple1_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_simple1_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
     <span class="n">observed_hits</span><span class="p">,</span> <span class="n">observed_viz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_and_summarize_pipeline</span><span class="p">(</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">query_sequences_art</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference_sequences_art</span><span class="p">)</span>
@@ -795,11 +795,11 @@ Like the creation of the Artifacts above, this code was also moved from <code cl
 The only difference is that in this test <code class="docutils literal notranslate"><span class="pre">search_and_summarize</span></code> is running in parallel instead of serially.
 This is achieved by using the <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">ParallelConfig()</span></code> context manager, and calling the Pipeline using its <code class="docutils literal notranslate"><span class="pre">.parallel</span></code> method.</p>
 <p>Add the following import to the top of your <code class="docutils literal notranslate"><span class="pre">test_pipeline.py</span></code> file:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiime2.sdk.parallel_config</span> <span class="kn">import</span> <span class="n">ParallelConfig</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.sdk.parallel_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParallelConfig</span>
 </pre></div>
 </div>
 <p>Then add the following test function:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_simple1_parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_simple1_parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">ParallelConfig</span><span class="p">():</span>
         <span class="n">observed_hits</span><span class="p">,</span> <span class="n">observed_viz</span> <span class="o">=</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">search_and_summarize_pipeline</span><span class="o">.</span><span class="n">parallel</span><span class="p">(</span>

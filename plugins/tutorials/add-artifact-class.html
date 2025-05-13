@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -562,7 +562,7 @@ Defining <code class="docutils literal notranslate"><span class="pre">SingleDNAS
 <p>Start by creating a new file, <code class="docutils literal notranslate"><span class="pre">_types_and_formats.py</span></code> in your module’s top-level directory.
 For me, this file will be <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_types_and_formats.py</span></code>.
 Add the following code to that file.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">SemanticType</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">SemanticType</span>
 
 <span class="n">SingleDNASequence</span> <span class="o">=</span> <span class="n">SemanticType</span><span class="p">(</span><span class="s2">&quot;SingleDNASequence&quot;</span><span class="p">)</span>
 </pre></div>
@@ -598,14 +598,14 @@ So automate everything you can… but I digress.</p>
 For example, if you wanted an easy way to get the identifier of the sequence in this object, you could add a <code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTAFormat.get_sequence_id()</span></code> method (for example), and then access that in the normal way when you have an instance of this class.</p>
 </div>
 <p>Add the following code to <code class="docutils literal notranslate"><span class="pre">_types_and_formats.py</span></code> (note that I’m building on my <code class="docutils literal notranslate"><span class="pre">import</span></code> statement from the previous code block here):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skbio</span> <span class="kn">import</span> <span class="n">DNA</span>
-<span class="kn">from</span> <span class="nn">skbio.io</span> <span class="kn">import</span> <span class="n">UnrecognizedFormatError</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skbio</span><span class="w"> </span><span class="kn">import</span> <span class="n">DNA</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skbio.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">UnrecognizedFormatError</span>
 
-<span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">SemanticType</span><span class="p">,</span> <span class="n">TextFileFormat</span><span class="p">,</span> <span class="n">ValidationError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">SemanticType</span><span class="p">,</span> <span class="n">TextFileFormat</span><span class="p">,</span> <span class="n">ValidationError</span>
 
-<span class="k">class</span> <span class="nc">SingleRecordDNAFASTAFormat</span><span class="p">(</span><span class="n">TextFileFormat</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SingleRecordDNAFASTAFormat</span><span class="p">(</span><span class="n">TextFileFormat</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">_confirm_single_record</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_confirm_single_record</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="c1"># DNA.read(..., validate = False) disables checking to ensure</span>
@@ -633,7 +633,7 @@ For example, if you wanted an easy way to get the identifier of the sequence in 
                     <span class="s2">&quot;than one record was found.&quot;</span>
                 <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_confirm_acgt_only</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_chars</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_confirm_acgt_only</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_chars</span><span class="p">):</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="n">seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="n">seq_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="n">validation_seq</span> <span class="o">=</span> <span class="n">seq</span><span class="p">[:</span><span class="n">n_chars</span><span class="p">]</span>
@@ -646,7 +646,7 @@ For example, if you wanted an easy way to get the identifier of the sequence in 
                 <span class="sa">f</span><span class="s2">&quot;during validation of </span><span class="si">{</span><span class="n">validation_seq_len</span><span class="si">}</span><span class="s2"> positions.&quot;</span>
             <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_validate_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
         <span class="n">validation_level_to_n_chars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_confirm_single_record</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_confirm_acgt_only</span><span class="p">(</span><span class="n">validation_level_to_n_chars</span><span class="p">[</span><span class="n">level</span><span class="p">])</span>
@@ -665,10 +665,10 @@ However in other cases, there may be multiple files and/or subdirectories.
 Because we’re defining the contents of a directory when registering a new artifact class, we actually need to associate a <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.DirectoryFormat</span></code> with our new artifact class.</p>
 <p>For simple cases like ours, where there will only be a single file in that directory, QIIME 2 has a helper function, <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.model.SingleFileDirectoryFormat</span></code>, which we can use to create a directory format.
 Add the following code to <code class="docutils literal notranslate"><span class="pre">_types_and_formats.py</span></code> to define your directory format.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skbio</span> <span class="kn">import</span> <span class="n">DNA</span>
-<span class="kn">from</span> <span class="nn">skbio.io</span> <span class="kn">import</span> <span class="n">UnrecognizedFormatError</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skbio</span><span class="w"> </span><span class="kn">import</span> <span class="n">DNA</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skbio.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">UnrecognizedFormatError</span>
 
-<span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">SemanticType</span><span class="p">,</span> <span class="n">TextFileFormat</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">ValidationError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">SemanticType</span><span class="p">,</span> <span class="n">TextFileFormat</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">ValidationError</span>
 
 <span class="n">SingleRecordDNAFASTADirectoryFormat</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">SingleFileDirectoryFormat</span><span class="p">(</span>
     <span class="s1">&#39;SingleRecordDNAFASTADirectoryFormat&#39;</span><span class="p">,</span> <span class="s1">&#39;sequence.fasta&#39;</span><span class="p">,</span>
@@ -691,7 +691,7 @@ We’ll now move on to registering these, so we can use them.</p>
 <p>Next, open the <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> in the top-level directory of your module.
 For me, this will be <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/__init__.py</span></code>.
 Add the following lines to the imports at the top of your file:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">._types_and_formats</span> <span class="kn">import</span> <span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">._types_and_formats</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">SingleDNASequence</span><span class="p">,</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">,</span>
     <span class="n">SingleRecordDNAFASTADirectoryFormat</span><span class="p">)</span>
 </pre></div>
@@ -709,7 +709,7 @@ This gives you the freedom to reorganize files or file contents internally in yo
 <span id="register-artifact-class"></span><h3>Registering the type, formats, and artifact class<a class="headerlink" href="#registering-the-type-formats-and-artifact-class" title="Link to this heading">#</a></h3>
 <p>Next, we’ll edit our <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code> file to register our new type, our new formats, and our new artifact class.
 To do this, first we’ll import those three objects in <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">q2_dwq2</span> <span class="kn">import</span> <span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">q2_dwq2</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">SingleDNASequence</span><span class="p">,</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">,</span>
     <span class="n">SingleRecordDNAFASTADirectoryFormat</span><span class="p">)</span>
 </pre></div>
@@ -754,7 +754,7 @@ Inside of our action, we could then open that and do whatever we need to with it
 This approach of working with file formats or directory formats directly is common, for example, when processing raw sequence data such as collections of demutiplexed sequence reads.
 This might look like the following in our action definition:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># this is just an example - don&#39;t put this code in your plugin</span>
-<span class="k">def</span> <span class="nf">nw_align</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">nw_align</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">,</span>
              <span class="n">seq2</span><span class="p">:</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">,</span>
              <span class="o">...</span>
 </pre></div>
@@ -764,16 +764,16 @@ So, we need to transform our fasta-formatted file into an <code class="docutils 
 <p>Create a new file, <code class="docutils literal notranslate"><span class="pre">_transformers.py</span></code>, in your top-level module directory.
 Mine is called <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_transformers.py</span></code>.
 Add the following code to that file:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skbio</span> <span class="kn">import</span> <span class="n">DNA</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skbio</span><span class="w"> </span><span class="kn">import</span> <span class="n">DNA</span>
 
-<span class="kn">from</span> <span class="nn">q2_dwq2</span> <span class="kn">import</span> <span class="n">SingleRecordDNAFASTAFormat</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">q2_dwq2</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleRecordDNAFASTAFormat</span>
 
-<span class="kn">from</span> <span class="nn">.plugin_setup</span> <span class="kn">import</span> <span class="n">plugin</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.plugin_setup</span><span class="w"> </span><span class="kn">import</span> <span class="n">plugin</span>
 
 
 <span class="c1"># Define and register transformers</span>
 <span class="nd">@plugin</span><span class="o">.</span><span class="n">register_transformer</span>
-<span class="k">def</span> <span class="nf">_1</span><span class="p">(</span><span class="n">ff</span><span class="p">:</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DNA</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_1</span><span class="p">(</span><span class="n">ff</span><span class="p">:</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DNA</span><span class="p">:</span>
     <span class="c1"># by default, DNA.read will read the first sequence in the file</span>
     <span class="k">with</span> <span class="n">ff</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">DNA</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">fh</span><span class="p">)</span>
@@ -814,7 +814,7 @@ For example:</p>
 <p>To make this transformer accessible to your plugin, there’s just one last thing to do, which is make sure that the code in this file runs when the <code class="docutils literal notranslate"><span class="pre">plugin</span></code> object is created.
 For this, we go back to <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code>.
 Add the following line to the imports at the top of that file:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">importlib</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
 </pre></div>
 </div>
 <p>Then, add the following as the last line in your file:</p>
@@ -838,25 +838,25 @@ I like to start with confirming that a few valid examples of my format pass vali
 It’s also a good idea to confirm that your validation level is functioning as expected.</p>
 <p>Below is my test code, which lives in <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/test_types_and_formats.py</span></code>.
 I added a few new test data files to support these tests, which you can access from <a class="reference internal" href="#add-artifact-class-commit"><span class="std std-ref">my code on GitHub</span></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">ValidationError</span>
-<span class="kn">from</span> <span class="nn">qiime2.plugin.testing</span> <span class="kn">import</span> <span class="n">TestPluginBase</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">ValidationError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin.testing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestPluginBase</span>
 
-<span class="kn">from</span> <span class="nn">q2_dwq2</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">q2_dwq2</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">SingleDNASequence</span><span class="p">,</span> <span class="n">SingleRecordDNAFASTAFormat</span>
 <span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">SingleDNASequenceTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SingleDNASequenceTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
     <span class="n">package</span> <span class="o">=</span> <span class="s1">&#39;q2_dwq2.tests&#39;</span>
 
-    <span class="k">def</span> <span class="nf">test_semantic_type_registration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_semantic_type_registration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertRegisteredSemanticType</span><span class="p">(</span><span class="n">SingleDNASequence</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">SingleRecordDNAFASTAFormatTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SingleRecordDNAFASTAFormatTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
     <span class="n">package</span> <span class="o">=</span> <span class="s1">&#39;q2_dwq2.tests&#39;</span>
 
-    <span class="k">def</span> <span class="nf">test_simple1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_simple1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;seq-1.fasta&#39;</span><span class="p">,</span> <span class="s1">&#39;seq-2.fasta&#39;</span><span class="p">,</span> <span class="s1">&#39;t-thermophilis-rrna.fasta&#39;</span><span class="p">]</span>
         <span class="n">filepaths</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_data_path</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span> <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">]</span>
 
@@ -864,14 +864,14 @@ I added a few new test data files to support these tests, which you can access f
             <span class="nb">format</span> <span class="o">=</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
             <span class="nb">format</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">test_invalid_default_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_default_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">fp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data_path</span><span class="p">(</span><span class="s1">&#39;bad-sequence-1.fasta&#39;</span><span class="p">)</span>
         <span class="nb">format</span> <span class="o">=</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="n">ValidationError</span><span class="p">,</span>
                                <span class="s2">&quot;4 non-ACGT characters.*171 positions.&quot;</span><span class="p">,</span>
                                <span class="nb">format</span><span class="o">.</span><span class="n">validate</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_invalid_max_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_max_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">fp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data_path</span><span class="p">(</span><span class="s1">&#39;bad-sequence-1.fasta&#39;</span><span class="p">)</span>
         <span class="nb">format</span> <span class="o">=</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertRaisesRegex</span><span class="p">(</span><span class="n">ValidationError</span><span class="p">,</span>
@@ -879,7 +879,7 @@ I added a few new test data files to support these tests, which you can access f
                                <span class="nb">format</span><span class="o">.</span><span class="n">validate</span><span class="p">,</span>
                                <span class="n">level</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_invalid_min_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_min_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">fp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data_path</span><span class="p">(</span><span class="s1">&#39;bad-sequence-1.fasta&#39;</span><span class="p">)</span>
         <span class="nb">format</span> <span class="o">=</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
         <span class="c1"># min validation is successful</span>
@@ -906,17 +906,17 @@ Here, we should provide a few different valid inputs, and test that they are tra
 Generally you should use the <code class="docutils literal notranslate"><span class="pre">transform_format</span></code> action in <code class="docutils literal notranslate"><span class="pre">qiime2.plugin.testing.TestPluginBase</span></code> to access and run the transformer (as opposed to importing the function directly from <code class="docutils literal notranslate"><span class="pre">_transformers.py</span></code>).
 This also tests that the transformer is registered with the plugin.</p>
 <p>The test code that I wrote for this is in <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/tests/test_transformers.py</span></code>, and follows here:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skbio</span> <span class="kn">import</span> <span class="n">DNA</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skbio</span><span class="w"> </span><span class="kn">import</span> <span class="n">DNA</span>
 
-<span class="kn">from</span> <span class="nn">qiime2.plugin.testing</span> <span class="kn">import</span> <span class="n">TestPluginBase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin.testing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestPluginBase</span>
 
-<span class="kn">from</span> <span class="nn">q2_dwq2</span> <span class="kn">import</span> <span class="n">SingleRecordDNAFASTAFormat</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">q2_dwq2</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleRecordDNAFASTAFormat</span>
 
 
-<span class="k">class</span> <span class="nc">SingleDNASequenceTransformerTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SingleDNASequenceTransformerTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
     <span class="n">package</span> <span class="o">=</span> <span class="s1">&#39;q2_dwq2.tests&#39;</span>
 
-    <span class="k">def</span> <span class="nf">test_single_record_fasta_to_DNA_simple1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_single_record_fasta_to_DNA_simple1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">observed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform_format</span><span class="p">(</span>
             <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">,</span> <span class="n">DNA</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;seq-1.fasta&#39;</span><span class="p">)</span>
 
@@ -925,7 +925,7 @@ This also tests that the transformer is registered with the plugin.</p>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_single_record_fasta_to_DNA_simple2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_single_record_fasta_to_DNA_simple2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">observed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform_format</span><span class="p">(</span>
             <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">,</span> <span class="n">DNA</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;seq-2.fasta&#39;</span><span class="p">)</span>
 
@@ -971,7 +971,7 @@ Let’s now update the code, and we’ll know we’re done when these tests pass
 <p>First, update the method itself, as I did in <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_methods.py</span></code>.
 Here you’re telling QIIME 2 to use a different view type inside this function, and then we’re removing some of the clunky code that we no longer need.
 Here’s my <code class="docutils literal notranslate"><span class="pre">nw_align</span></code> function after making these changes:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">nw_align</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="n">DNA</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">nw_align</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="n">DNA</span><span class="p">,</span>
              <span class="n">seq2</span><span class="p">:</span> <span class="n">DNA</span><span class="p">,</span>
              <span class="n">gap_open_penalty</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
              <span class="n">gap_extend_penalty</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>

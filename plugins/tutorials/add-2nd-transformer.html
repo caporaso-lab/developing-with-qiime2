@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -458,7 +458,7 @@ document.write(`
 Let’s circle back to that now with the goal of developing a better understanding of the role of transformers in QIIME 2, and also to simplify the code for generating usage examples that we just wrote.</p>
 <p>Take a minute to review the helper function we defined in our <code class="docutils literal notranslate"><span class="pre">_examples.py</span></code> file, and try to describe in a sentence or two what that code is doing.
 Here it is again, for reference:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_create_seq_artifact</span><span class="p">(</span><span class="n">seq</span><span class="p">:</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_create_seq_artifact</span><span class="p">(</span><span class="n">seq</span><span class="p">:</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">):</span>
     <span class="n">ff</span> <span class="o">=</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">()</span>
     <span class="n">seq</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ff</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Artifact</span><span class="o">.</span><span class="n">import_data</span><span class="p">(</span><span class="s2">&quot;SingleDNASequence&quot;</span><span class="p">,</span> <span class="n">ff</span><span class="p">)</span>
@@ -483,7 +483,7 @@ Once we have a helper function for creating <code class="docutils literal notran
 QIIME 2 enables us to define and register functions that convert between object types as transformers, making them universally accessible in deployments where the plugin that defines and registers them is installed.</p>
 <p>We can adapt the code from our <code class="docutils literal notranslate"><span class="pre">_create_seq_artifact</span></code> function into a new transformer in our <code class="docutils literal notranslate"><span class="pre">_transformers.py</span></code> file as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@plugin</span><span class="o">.</span><span class="n">register_transformer</span>
-<span class="k">def</span> <span class="nf">_2</span><span class="p">(</span><span class="n">seq</span><span class="p">:</span> <span class="n">DNA</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_2</span><span class="p">(</span><span class="n">seq</span><span class="p">:</span> <span class="n">DNA</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">:</span>
     <span class="n">ff</span> <span class="o">=</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">()</span>
     <span class="n">seq</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ff</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">ff</span>
@@ -492,13 +492,13 @@ QIIME 2 enables us to define and register functions that convert between object 
 <p>If you don’t recall exactly what this is doing, review <a class="reference internal" href="add-usage-examples.html#create-seq-artifact-helper-function"><span class="std std-ref">the text that described this when we defined <code class="docutils literal notranslate"><span class="pre">_create_seq_artifact</span></code></span></a>.
 The only difference here is that we’re returning the <code class="docutils literal notranslate"><span class="pre">SingleRecordDNAFASTAFormat</span></code>, where in <code class="docutils literal notranslate"><span class="pre">_create_seq_artifact</span></code> we imported this into a <code class="docutils literal notranslate"><span class="pre">qiime2.Aritfact</span></code> as well.</p>
 <p>This new transformer enables us to adapt our factory functions in <code class="docutils literal notranslate"><span class="pre">_examples.py</span></code> to look like the following:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">seq1_factory</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">seq1_factory</span><span class="p">():</span>
     <span class="n">seq</span> <span class="o">=</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">(</span><span class="s2">&quot;AACCGGTTGGCCAA&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;seq1&quot;</span><span class="p">})</span>
     <span class="k">return</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Artifact</span><span class="o">.</span><span class="n">import_data</span><span class="p">(</span>
         <span class="s2">&quot;SingleDNASequence&quot;</span><span class="p">,</span> <span class="n">seq</span><span class="p">,</span> <span class="n">view_type</span><span class="o">=</span><span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">seq2_factory</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">seq2_factory</span><span class="p">():</span>
     <span class="n">seq</span> <span class="o">=</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">(</span><span class="s2">&quot;AACCGCTGGCGAA&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;seq2&quot;</span><span class="p">})</span>
     <span class="k">return</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Artifact</span><span class="o">.</span><span class="n">import_data</span><span class="p">(</span>
         <span class="s2">&quot;SingleDNASequence&quot;</span><span class="p">,</span> <span class="n">seq</span><span class="p">,</span> <span class="n">view_type</span><span class="o">=</span><span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">)</span>
@@ -514,7 +514,7 @@ Cool! 😎</p>
 <h2>Add unit tests of the new transfomer<a class="headerlink" href="#add-unit-tests-of-the-new-transfomer" title="Link to this heading">#</a></h2>
 <p>As always, before this new code is ready for use, we need to write some unit tests.
 Here are the tests that I wrote in <code class="docutils literal notranslate"><span class="pre">test_transformers.py</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">test_DNA_to_single_record_fasta_simple1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span><span class="w"> </span><span class="nf">test_DNA_to_single_record_fasta_simple1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">in_</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;ACCGGTGGAACCGGTAACACCCAC&#39;</span><span class="p">,</span>
                   <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;example-sequence-1&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">})</span>
         <span class="n">tx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_transformer</span><span class="p">(</span><span class="n">DNA</span><span class="p">,</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">)</span>
@@ -525,7 +525,7 @@ Here are the tests that I wrote in <code class="docutils literal notranslate"><s
         <span class="c1"># sequence</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">observed</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">DNA</span><span class="p">),</span> <span class="n">in_</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_DNA_to_single_record_fasta_simple2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_DNA_to_single_record_fasta_simple2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">in_</span> <span class="o">=</span> <span class="n">DNA</span><span class="p">(</span><span class="s1">&#39;ACCGGTAACCGGTTAACACCCAC&#39;</span><span class="p">,</span>
                   <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;example-sequence-2&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">})</span>
         <span class="n">tx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_transformer</span><span class="p">(</span><span class="n">DNA</span><span class="p">,</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">)</span>

@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -462,7 +462,7 @@ These output artifacts could subsequently be used as input to other QIIME 2 <cod
 mypy annotation does not impact functionality (though the syntax is new to Python 3), so these can be added to existing functions in your Python 3 software project.
 An example is <a class="reference external" href="https://github.com/qiime2/q2-diversity/blob/99a0ccaaec14838b95845dbfe57f874d092b65c7/q2_diversity/_ordination.py#L23C1-L24C71"><code class="docutils literal notranslate"><span class="pre">q2_diversity.pcoa</span></code></a>, which takes an <code class="docutils literal notranslate"><span class="pre">skbio.DistanceMatrix</span></code> and an <code class="docutils literal notranslate"><span class="pre">int</span></code> as input, and produces an <code class="docutils literal notranslate"><span class="pre">skbio.OrdinationResults</span></code> as output.
 The signature for this function is:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pcoa</span><span class="p">(</span><span class="n">distance_matrix</span><span class="p">:</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DistanceMatrix</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pcoa</span><span class="p">(</span><span class="n">distance_matrix</span><span class="p">:</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DistanceMatrix</span><span class="p">,</span>
          <span class="n">number_of_dimensions</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">skbio</span><span class="o">.</span><span class="n">OrdinationResults</span><span class="p">:</span>
 </pre></div>
 </div>
@@ -474,10 +474,10 @@ For example, <code class="docutils literal notranslate"><span class="pre">q2_div
 <p>Once you have a function that you’d like to register as a <code class="docutils literal notranslate"><span class="pre">Method</span></code>, and you’ve instantiated your <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> object, you are ready to register that function as a <code class="docutils literal notranslate"><span class="pre">Method</span></code>.
 This will likely be done in the file where the <code class="docutils literal notranslate"><span class="pre">Plugin</span></code> object was instantiated, as it will use that instance (which will be referred to as <code class="docutils literal notranslate"><span class="pre">plugin</span></code> in the following examples).</p>
 <p>We register a <code class="docutils literal notranslate"><span class="pre">Method</span></code> by calling <code class="docutils literal notranslate"><span class="pre">plugin.methods.register_function</span></code> as follows (see the original source <a class="reference external" href="https://github.com/qiime2/q2-diversity/blob/99a0ccaaec14838b95845dbfe57f874d092b65c7/q2_diversity/plugin_setup.py#L192">here</a>).</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">q2_types</span> <span class="kn">import</span> <span class="n">DistanceMatrix</span><span class="p">,</span> <span class="n">PCoAResults</span>
-<span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Int</span><span class="p">,</span> <span class="n">Citations</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">q2_types</span><span class="w"> </span><span class="kn">import</span> <span class="n">DistanceMatrix</span><span class="p">,</span> <span class="n">PCoAResults</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">Int</span><span class="p">,</span> <span class="n">Citations</span>
 
-<span class="kn">import</span> <span class="nn">q2_diversity</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">q2_diversity</span>
 
 
 <span class="n">citations</span> <span class="o">=</span> <span class="n">Citations</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;citations.bib&#39;</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="s1">&#39;q2_diversity&#39;</span><span class="p">)</span>

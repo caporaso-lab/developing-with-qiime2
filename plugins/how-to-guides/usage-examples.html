@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -501,13 +501,13 @@ Parameter literals may be passed directly, and do not require factories.</p>
 <p>This example shows a factory function that returns a <code class="docutils literal notranslate"><span class="pre">FeatureTable[Frequency]</span></code>.
 We use the Python 3 API to import a <code class="docutils literal notranslate"><span class="pre">biom.Table</span></code> of the appropriate artifact class.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># from q2-feature-table/examples.py</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">biom</span> <span class="kn">import</span> <span class="n">Table</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">biom</span><span class="w"> </span><span class="kn">import</span> <span class="n">Table</span>
 
-<span class="kn">from</span> <span class="nn">qiime2</span> <span class="kn">import</span> <span class="n">Artifact</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiime2</span><span class="w"> </span><span class="kn">import</span> <span class="n">Artifact</span>
 
 
-<span class="k">def</span> <span class="nf">ft1_factory</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ft1_factory</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">Artifact</span><span class="o">.</span><span class="n">import_data</span><span class="p">(</span>
         <span class="s1">&#39;FeatureTable[Frequency]&#39;</span><span class="p">,</span>
         <span class="n">Table</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]),</span>
@@ -526,7 +526,7 @@ defined in <code class="docutils literal notranslate"><span class="pre">qiime2.s
 This “Usage API” is common to all Usage drivers,
 which reimplement the methods to meet their own needs.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># also from q2-feature-table/examples.py</span>
-<span class="k">def</span> <span class="nf">feature_table_merge_example</span><span class="p">(</span><span class="n">use</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">feature_table_merge_example</span><span class="p">(</span><span class="n">use</span><span class="p">):</span>
     <span class="n">feature_table1</span> <span class="o">=</span> <span class="n">use</span><span class="o">.</span><span class="n">init_artifact</span><span class="p">(</span><span class="s1">&#39;feature_table1&#39;</span><span class="p">,</span> <span class="n">ft1_factory</span><span class="p">)</span>
     <span class="n">feature_table2</span> <span class="o">=</span> <span class="n">use</span><span class="o">.</span><span class="n">init_artifact</span><span class="p">(</span><span class="s1">&#39;feature_table2&#39;</span><span class="p">,</span> <span class="n">ft2_factory</span><span class="p">)</span>
 
@@ -561,7 +561,7 @@ in the <code class="docutils literal notranslate"><span class="pre">register_fun
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># from q2-feature-table/plugin_setup.py</span>
 
 <span class="c1"># we need to import the examples to use them</span>
-<span class="kn">from</span> <span class="nn">.examples</span> <span class="kn">import</span> <span class="p">(</span><span class="n">feature_table_merge_example</span><span class="p">,</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.examples</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">feature_table_merge_example</span><span class="p">,</span>
                        <span class="n">feature_table_merge_three_tables_example</span><span class="p">)</span>
 
 <span class="n">plugin</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span>
@@ -593,7 +593,7 @@ These may be run by any usage driver that cares about them,
 allowing both local smoke testing (“Can my examples be executed successfully?”),
 and automated integration testing by interfaces like the QIIME 2 library.</p>
 <p>Here, we assert that our results are of the expected type.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">observed_features_example</span><span class="p">(</span><span class="n">use</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">observed_features_example</span><span class="p">(</span><span class="n">use</span><span class="p">):</span>
     <span class="n">ft</span> <span class="o">=</span> <span class="n">use</span><span class="o">.</span><span class="n">init_artifact</span><span class="p">(</span><span class="s1">&#39;feature_table&#39;</span><span class="p">,</span> <span class="n">ft1_factory</span><span class="p">)</span>
     <span class="c1"># NOTE: we must unpack UsageVariables from the returned UsageOutputs</span>
     <span class="c1"># if we wish to use their assertion methods.</span>
@@ -683,7 +683,7 @@ including inferring that this action would produce a <code class="docutils liter
 we would confirm that our conda environment included our code (as above).
 The cache is a q2cli thing, so we don’t need to refresh anything,
 and we would render the examples manually.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugins</span> <span class="kn">import</span> <span class="n">feature_table</span><span class="p">,</span> <span class="n">ArtifactAPIUsage</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">feature_table</span><span class="p">,</span> <span class="n">ArtifactAPIUsage</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the examples</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">examples</span> <span class="o">=</span> <span class="n">feature_table</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">merge</span><span class="o">.</span><span class="n">examples</span>
@@ -698,13 +698,13 @@ and we would render the examples manually.</p>
 </pre></div>
 </div>
 <p>Which renders the following:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiime2.plugins.feature_table.methods</span> <span class="kn">import</span> <span class="n">merge</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugins.feature_table.methods</span><span class="w"> </span><span class="kn">import</span> <span class="n">merge</span>
 
 <span class="n">merged_table</span><span class="p">,</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span>
     <span class="n">tables</span><span class="o">=</span><span class="p">[</span><span class="n">feature_table1</span><span class="p">,</span> <span class="n">feature_table2</span><span class="p">],</span>
 <span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">qiime2.plugins.feature_table.methods</span> <span class="kn">import</span> <span class="n">merge</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugins.feature_table.methods</span><span class="w"> </span><span class="kn">import</span> <span class="n">merge</span>
 
 <span class="n">merged_table</span><span class="p">,</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span>
     <span class="n">tables</span><span class="o">=</span><span class="p">[</span><span class="n">feature_table1</span><span class="p">,</span> <span class="n">feature_table2</span><span class="p">,</span> <span class="n">feature_table3</span><span class="p">],</span>

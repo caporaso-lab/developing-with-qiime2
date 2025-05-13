@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -494,26 +494,26 @@ This is done by creating a function that returns a QIIME 2 artifact that is used
 <p>Start by creating a top-level file in your module called <code class="docutils literal notranslate"><span class="pre">_examples.py</span></code>.
 Mine will be called <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_examples.py</span></code>.
 Add the following code, and then we’ll work through it.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tempfile</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
 
-<span class="kn">import</span> <span class="nn">skbio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">skbio</span>
 
-<span class="kn">import</span> <span class="nn">qiime2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">qiime2</span>
 
-<span class="kn">from</span> <span class="nn">q2_dwq2</span> <span class="kn">import</span> <span class="n">SingleRecordDNAFASTAFormat</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">q2_dwq2</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleRecordDNAFASTAFormat</span>
 
 
-<span class="k">def</span> <span class="nf">seq1_factory</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">seq1_factory</span><span class="p">():</span>
     <span class="n">seq</span> <span class="o">=</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">(</span><span class="s2">&quot;AACCGGTTGGCCAA&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;seq1&quot;</span><span class="p">})</span>
     <span class="k">return</span> <span class="n">_create_seq_artifact</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">seq2_factory</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">seq2_factory</span><span class="p">():</span>
     <span class="n">seq</span> <span class="o">=</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">(</span><span class="s2">&quot;AACCGCTGGCGAA&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;seq2&quot;</span><span class="p">})</span>
     <span class="k">return</span> <span class="n">_create_seq_artifact</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_create_seq_artifact</span><span class="p">(</span><span class="n">seq</span><span class="p">:</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_create_seq_artifact</span><span class="p">(</span><span class="n">seq</span><span class="p">:</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DNA</span><span class="p">):</span>
     <span class="n">ff</span> <span class="o">=</span> <span class="n">SingleRecordDNAFASTAFormat</span><span class="p">()</span>
     <span class="n">seq</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ff</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Artifact</span><span class="o">.</span><span class="n">import_data</span><span class="p">(</span><span class="s2">&quot;SingleDNASequence&quot;</span><span class="p">,</span> <span class="n">ff</span><span class="p">)</span>
@@ -551,7 +551,7 @@ It then defines the relevant action call, which in our case will be to the <code
 It also assigns the inputs, and provides a name for the output.</p>
 <p>This usage example is using default parameter values, but you could addionally pass parameters to the action in this usage example, or add a second usage example that does that which you also associate with this action.</p>
 <p>The following code in my <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_examples.py</span></code> file defines the usage example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">nw_align_example_1</span><span class="p">(</span><span class="n">use</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">nw_align_example_1</span><span class="p">(</span><span class="n">use</span><span class="p">):</span>
     <span class="n">seq1</span> <span class="o">=</span> <span class="n">use</span><span class="o">.</span><span class="n">init_artifact</span><span class="p">(</span><span class="s1">&#39;seq1&#39;</span><span class="p">,</span> <span class="n">seq1_factory</span><span class="p">)</span>
     <span class="n">seq2</span> <span class="o">=</span> <span class="n">use</span><span class="o">.</span><span class="n">init_artifact</span><span class="p">(</span><span class="s1">&#39;seq2&#39;</span><span class="p">,</span> <span class="n">seq2_factory</span><span class="p">)</span>
 
@@ -569,7 +569,7 @@ It also assigns the inputs, and provides a name for the output.</p>
 <p>Finally, we’re ready to register the usage example.
 For this, we’ll go back to the <code class="docutils literal notranslate"><span class="pre">plugin_setup.py</span></code> file.</p>
 <p>You should first import the new usage example function by adding the following line to your imports at the top of the file:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">q2_dwq2._examples</span> <span class="kn">import</span> <span class="n">nw_align_example_1</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">q2_dwq2._examples</span><span class="w"> </span><span class="kn">import</span> <span class="n">nw_align_example_1</span>
 </pre></div>
 </div>
 <p>Then, in the call to <code class="docutils literal notranslate"><span class="pre">plugin.methods.register_function</span></code>, you should add an <code class="docutils literal notranslate"><span class="pre">examples</span></code> parameter, to which you can provide a dictionary mapping example names to usage example functions.
@@ -616,7 +616,7 @@ Examples:
 <h3>Python 3 API<a class="headerlink" href="#python-3-api" title="Link to this heading">#</a></h3>
 <p>As mentioned above, the abstract nature of our usage example definition enables it to be interpreted by different usage drivers, enabling the same example to be presented as it would be used through different interfaces.
 Open an <code class="docutils literal notranslate"><span class="pre">ipython</span></code> shell in your development environment, and try the following:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiime2.plugins</span> <span class="kn">import</span> <span class="n">dwq2</span><span class="p">,</span> <span class="n">ArtifactAPIUsage</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">dwq2</span><span class="p">,</span> <span class="n">ArtifactAPIUsage</span>
 
 <span class="n">examples</span> <span class="o">=</span> <span class="n">dwq2</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">nw_align</span><span class="o">.</span><span class="n">examples</span>
 
@@ -628,7 +628,7 @@ Open an <code class="docutils literal notranslate"><span class="pre">ipython</sp
 </div>
 <p>This should display how to run this example through the Python 3 API.
 Try it out with the same example data that you generated above (you can use <code class="docutils literal notranslate"><span class="pre">qiime2.Artifact.load</span></code> to load the example files into QIIME 2 artifacts to be provided as input to this call to <code class="docutils literal notranslate"><span class="pre">nw_align</span></code>).</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qiime2.plugins.dwq2.actions</span> <span class="k">as</span> <span class="nn">dwq2_actions</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">qiime2.plugins.dwq2.actions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dwq2_actions</span>
 
 <span class="n">msa</span><span class="p">,</span> <span class="o">=</span> <span class="n">dwq2_actions</span><span class="o">.</span><span class="n">nw_align</span><span class="p">(</span>
     <span class="n">seq1</span><span class="o">=</span><span class="n">seq1</span><span class="p">,</span>
@@ -644,13 +644,13 @@ Try it out with the same example data that you generated above (you can use <cod
 To do this, create a new test file in your <code class="docutils literal notranslate"><span class="pre">tests</span></code> directory.
 Mine is called <code class="docutils literal notranslate"><span class="pre">q2-dwq2/tests/test_examples.py</span></code>.
 Add the following code to that file:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiime2.plugin.testing</span> <span class="kn">import</span> <span class="n">TestPluginBase</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin.testing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestPluginBase</span>
 
 
-<span class="k">class</span> <span class="nc">UsageExampleTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">UsageExampleTests</span><span class="p">(</span><span class="n">TestPluginBase</span><span class="p">):</span>
     <span class="n">package</span> <span class="o">=</span> <span class="s1">&#39;q2_dwq2.tests&#39;</span>
 
-    <span class="k">def</span> <span class="nf">test_examples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_examples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">execute_examples</span><span class="p">()</span>
 </pre></div>
 </div>

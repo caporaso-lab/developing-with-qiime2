@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -495,7 +495,7 @@ This is another application of the <a class="reference internal" href="../../bac
 <p>Now that we know what the metadata will look like, let’s add a new optional input to our <code class="docutils literal notranslate"><span class="pre">tabulate_las_results</span></code> function.
 The new input we add will be called <code class="docutils literal notranslate"><span class="pre">reference_metadata</span></code>, and it will be received as a <code class="docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code> object.
 Our updated function signature in <code class="docutils literal notranslate"><span class="pre">_visualizers.py</span></code> will look like this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tabulate_las_results</span><span class="p">(</span><span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tabulate_las_results</span><span class="p">(</span><span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                          <span class="n">hits</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
                          <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">_tabulate_las_defaults</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">],</span>
                          <span class="n">reference_metadata</span><span class="p">:</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Metadata</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> \

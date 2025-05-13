@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -496,7 +496,7 @@ For a list input, the syntax is <code class="docutils literal notranslate"><span
 The fact that the annotations indicate the view type and not the artifact class is due to the fact that by the time we reach the actual method <code class="docutils literal notranslate"><span class="pre">int_list</span></code> will be a list of integers and not <code class="docutils literal notranslate"><span class="pre">SingleInt</span></code> Artifacts.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note type annotations are currently just int or bool,</span>
 <span class="c1"># not dict[int] or list[bool] as you might expect.</span>
-<span class="k">def</span> <span class="nf">example_function</span><span class="p">(</span><span class="n">int_list</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">example_function</span><span class="p">(</span><span class="n">int_list</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                      <span class="n">int_dict</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                      <span class="n">bool_list</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
                      <span class="n">bool_dict</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -534,7 +534,7 @@ Using the same example method as earlier, you register your return as a Collecti
 <p>The return type annotation on the action itself is still the view type of the Artifacts within the collection.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note type annotations are currently just int or bool,</span>
 <span class="c1"># not dict[int] or list[bool] as you might expect.</span>
-<span class="k">def</span> <span class="nf">example_function</span><span class="p">(</span><span class="n">int_list</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">example_function</span><span class="p">(</span><span class="n">int_list</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                      <span class="n">int_dict</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                      <span class="n">bool_list</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
                      <span class="n">bool_dict</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>

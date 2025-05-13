@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -505,7 +505,7 @@ document.write(`
 <h2>Semantic Type<a class="headerlink" href="#semantic-type" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.SemanticType">
-<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">SemanticType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_members</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variant_of</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.10.1/qiime2/core/type/semantic.py#L42"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.SemanticType" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">SemanticType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_members</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variant_of</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/dev/qiime2/core/type/semantic.py#L42"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.SemanticType" title="Link to this definition">#</a></dt>
 <dd><p>Create a new semantic type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -537,7 +537,7 @@ returned by this factory will cause <cite>is_semantic_type</cite> to return True
 <h3>Predicates<a class="headerlink" href="#predicates" title="Link to this heading">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.plugin.Properties">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Properties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">include</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.10.1/qiime2/core/type/semantic.py#L242"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Properties" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Properties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">include</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/dev/qiime2/core/type/semantic.py#L242"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Properties" title="Link to this definition">#</a></dt>
 <dd><p>A one or more semantic properties to add to an existing type.</p>
 <p>Semantic properties make an existing semantic type “smaller” than it
 would otherwise be. If a union causes types to become larger, then a
@@ -562,7 +562,7 @@ It may be deprecated in the future.</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Properties</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">Properties</span>
 </pre></div>
 </div>
 <p>Properties must match:</p>
@@ -609,7 +609,7 @@ It may be deprecated in the future.</p></li>
 <p>An output with this type provides no assurances about the structure of the data
 as it is meant for human interpretation.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Visualization</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">Visualization</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Visualization</span>
 <span class="go">Visualization</span>
 </pre></div>
@@ -630,7 +630,7 @@ user affordances for.</p>
 It can use the predicate <a class="reference internal" href="#qiime2.plugin.Choices" title="qiime2.plugin.Choices"><code class="xref py py-class docutils literal notranslate"><span class="pre">Choices</span></code></a> (but this is only interesting
 when using <a class="reference internal" href="#qiime2.plugin.TypeMap" title="qiime2.plugin.TypeMap"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeMap</span></code></a>)</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Bool</span><span class="p">,</span> <span class="n">Choices</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">Bool</span><span class="p">,</span> <span class="n">Choices</span>
 </pre></div>
 </div>
 <p>Normal values:</p>
@@ -655,7 +655,7 @@ when using <a class="reference internal" href="#qiime2.plugin.TypeMap" title="qi
 <dd><p>A string of Unicode characters (i.e. text).
 It can use the predicate <a class="reference internal" href="#qiime2.plugin.Choices" title="qiime2.plugin.Choices"><code class="xref py py-class docutils literal notranslate"><span class="pre">Choices</span></code></a> to create strict enumeration.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Str</span><span class="p">,</span> <span class="n">Choices</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">Str</span><span class="p">,</span> <span class="n">Choices</span>
 </pre></div>
 </div>
 <p>Arbitrary string:</p>
@@ -686,7 +686,7 @@ interface to store (and manipulate) your data as it sees fit.</p>
 It can use the predicates <a class="reference internal" href="#qiime2.plugin.Range" title="qiime2.plugin.Range"><code class="xref py py-class docutils literal notranslate"><span class="pre">Range</span></code></a>, <a class="reference internal" href="#qiime2.plugin.Start" title="qiime2.plugin.Start"><code class="xref py py-func docutils literal notranslate"><span class="pre">Start()</span></code></a>, and
 <a class="reference internal" href="#qiime2.plugin.End" title="qiime2.plugin.End"><code class="xref py py-func docutils literal notranslate"><span class="pre">End()</span></code></a></p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Int</span><span class="p">,</span> <span class="n">Range</span><span class="p">,</span> <span class="n">Start</span><span class="p">,</span> <span class="n">End</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">Int</span><span class="p">,</span> <span class="n">Range</span><span class="p">,</span> <span class="n">Start</span><span class="p">,</span> <span class="n">End</span>
 </pre></div>
 </div>
 <p>No bounds on the value:</p>
@@ -717,7 +717,7 @@ It can use the predicates <a class="reference internal" href="#qiime2.plugin.Ran
 It can use the predicates <a class="reference internal" href="#qiime2.plugin.Range" title="qiime2.plugin.Range"><code class="xref py py-class docutils literal notranslate"><span class="pre">Range</span></code></a>, <a class="reference internal" href="#qiime2.plugin.Start" title="qiime2.plugin.Start"><code class="xref py py-func docutils literal notranslate"><span class="pre">Start()</span></code></a>, and
 <a class="reference internal" href="#qiime2.plugin.End" title="qiime2.plugin.End"><code class="xref py py-func docutils literal notranslate"><span class="pre">End()</span></code></a></p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Float</span><span class="p">,</span> <span class="n">Range</span><span class="p">,</span> <span class="n">Start</span><span class="p">,</span> <span class="n">End</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">Float</span><span class="p">,</span> <span class="n">Range</span><span class="p">,</span> <span class="n">Start</span><span class="p">,</span> <span class="n">End</span>
 </pre></div>
 </div>
 <p>No bounds on the value:</p>
@@ -750,7 +750,7 @@ It can use the predicates <a class="reference internal" href="#qiime2.plugin.Ran
 dictated by system resources.</p>
 <p>It does not support any predicate expressions.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Threads</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">Threads</span>
 </pre></div>
 </div>
 <p>Positive integer for the number of logical threads to use:</p>
@@ -774,7 +774,7 @@ dictated by system resources.</p>
 (exclusive).</p>
 <p>It does not support any predicate expressions.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Jobs</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">Jobs</span>
 </pre></div>
 </div>
 <p>Positive integer for the number of jobs to use:</p>
@@ -794,7 +794,7 @@ dictated by system resources.</p>
 <h3>Predicates<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.plugin.Choices">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Choices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">choices</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.10.1/qiime2/core/type/primitive.py#L310"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Choices" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Choices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">choices</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/dev/qiime2/core/type/primitive.py#L310"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Choices" title="Link to this definition">#</a></dt>
 <dd><p>A predicate which defines a set of allowable values.</p>
 <p>Can be used with <a class="reference internal" href="#qiime2.plugin.Str" title="qiime2.plugin.Str"><code class="xref py py-data docutils literal notranslate"><span class="pre">Str</span></code></a> and <a class="reference internal" href="#qiime2.plugin.Bool" title="qiime2.plugin.Bool"><code class="xref py py-data docutils literal notranslate"><span class="pre">Bool</span></code></a>.</p>
 <dl class="field-list simple">
@@ -804,7 +804,7 @@ enumeration will be considered outside of the domain of the base type.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Str</span><span class="p">,</span> <span class="n">Choices</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">Str</span><span class="p">,</span> <span class="n">Choices</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;apple&quot;</span> <span class="ow">in</span> <span class="n">Str</span> <span class="o">%</span> <span class="n">Choices</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">)</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;airplane&quot;</span> <span class="ow">in</span> <span class="n">Str</span> <span class="o">%</span> <span class="n">Choices</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">)</span>
@@ -815,7 +815,7 @@ enumeration will be considered outside of the domain of the base type.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.plugin.Range">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Range</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <span class="optional">]</span><em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive_start=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive_end=False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.10.1/qiime2/core/type/primitive.py#L31"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Range" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Range</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <span class="optional">]</span><em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive_start=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive_end=False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/dev/qiime2/core/type/primitive.py#L31"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Range" title="Link to this definition">#</a></dt>
 <dd><p>A predicate which defines a contiguous range of allowable values.</p>
 <p>Can be used with <a class="reference internal" href="#qiime2.plugin.Int" title="qiime2.plugin.Int"><code class="xref py py-data docutils literal notranslate"><span class="pre">Int</span></code></a> and <a class="reference internal" href="#qiime2.plugin.Float" title="qiime2.plugin.Float"><code class="xref py py-data docutils literal notranslate"><span class="pre">Float</span></code></a>.</p>
 <dl class="field-list simple">
@@ -831,7 +831,7 @@ Will be <code class="docutils literal notranslate"><span class="pre">None</span>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Float</span><span class="p">,</span> <span class="n">Range</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">Float</span><span class="p">,</span> <span class="n">Range</span>
 </pre></div>
 </div>
 <p>A simple proportion without 100%:</p>
@@ -880,7 +880,7 @@ Will be <code class="docutils literal notranslate"><span class="pre">None</span>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.Start">
-<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.10.1/qiime2/core/type/primitive.py#L260"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Start" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">Start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/dev/qiime2/core/type/primitive.py#L260"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.Start" title="Link to this definition">#</a></dt>
 <dd><p>Shorthand to generate a <a class="reference internal" href="#qiime2.plugin.Range" title="qiime2.plugin.Range"><code class="xref py py-class docutils literal notranslate"><span class="pre">Range</span></code></a></p>
 <p>The end of the resulting range is <code class="docutils literal notranslate"><span class="pre">None</span></code> (infinity).</p>
 <dl class="field-list simple">
@@ -892,7 +892,7 @@ Will be <code class="docutils literal notranslate"><span class="pre">None</span>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Start</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">Start</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Start</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="go">Range(0, None)</span>
 </pre></div>
@@ -905,7 +905,7 @@ Will be <code class="docutils literal notranslate"><span class="pre">None</span>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="qiime2.plugin.End">
-<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">End</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.10.1/qiime2/core/type/primitive.py#L285"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.End" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">End</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/dev/qiime2/core/type/primitive.py#L285"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.End" title="Link to this definition">#</a></dt>
 <dd><p>Shorthand to generate a <a class="reference internal" href="#qiime2.plugin.Range" title="qiime2.plugin.Range"><code class="xref py py-class docutils literal notranslate"><span class="pre">Range</span></code></a></p>
 <p>The start of the resulting range is <code class="docutils literal notranslate"><span class="pre">None</span></code> (negative infinity).</p>
 <dl class="field-list simple">
@@ -917,7 +917,7 @@ Will be <code class="docutils literal notranslate"><span class="pre">None</span>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">End</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">End</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">End</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 <span class="go">Range(None, 100)</span>
 </pre></div>
@@ -940,9 +940,9 @@ per-feature metadata. But there is nothing special about those axes.</p>
 <dd><p>Tabular metadata where unique identifiers can be associated with columns.</p>
 <p>This is the type that represents <a class="reference internal" href="../metadata-api.html#qiime2.Metadata" title="qiime2.Metadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code></a>.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">qiime2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Metadata</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">qiime2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">Metadata</span>
 </pre></div>
 </div>
 <p>Note the distinct module paths:</p>
@@ -960,9 +960,9 @@ per-feature metadata. But there is nothing special about those axes.</p>
 <dd><p>A column of a <a class="reference internal" href="../metadata-api.html#qiime2.Metadata" title="qiime2.Metadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">qiime2.Metadata</span></code></a>.</p>
 <p>Has two variants: <a class="reference internal" href="#qiime2.plugin.Categorical" title="qiime2.plugin.Categorical"><code class="xref py py-data docutils literal notranslate"><span class="pre">Categorical</span></code></a> and <a class="reference internal" href="#qiime2.plugin.Numeric" title="qiime2.plugin.Numeric"><code class="xref py py-data docutils literal notranslate"><span class="pre">Numeric</span></code></a>.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">qiime2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Metadata</span><span class="p">,</span> <span class="n">Categorical</span><span class="p">,</span> <span class="n">Numeric</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">qiime2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">Metadata</span><span class="p">,</span> <span class="n">Categorical</span><span class="p">,</span> <span class="n">Numeric</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">qiime2</span><span class="o">.</span><span class="n">Metadata</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([{</span><span class="s1">&#39;num&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">:</span> <span class="s1">&#39;a&#39;</span><span class="p">}],</span>
 <span class="gp">... </span>                                  <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;s1&#39;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">md</span>
@@ -1029,7 +1029,7 @@ a semantic type, in which case, the views are provided to the plugin as a list.<
 <span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">List</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">List[{type}]</span></em><a class="headerlink" href="#qiime2.plugin.List" title="Link to this definition">#</a></dt>
 <dd><p>An alias for a <a class="reference internal" href="#qiime2.plugin.Collection" title="qiime2.plugin.Collection"><code class="xref py py-data docutils literal notranslate"><span class="pre">Collection</span></code></a> with numeric auto-incrementing keys.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Str</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Str</span>
 </pre></div>
 </div>
 <p>A regular list:</p>
@@ -1053,7 +1053,7 @@ variant provided to the type-field.</p>
 <p>Whenever a list is provided, it will be coerced into a dictionary with
 auto-incrementing integer keys.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Str</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Str</span>
 </pre></div>
 </div>
 <p>A regular dictionary:</p>
@@ -1073,7 +1073,7 @@ auto-incrementing integer keys.</p>
 <h2>Dependent Types<a class="headerlink" href="#dependent-types" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.plugin.TypeMap">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">TypeMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.10.1/qiime2/core/type/meta.py#L92"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.TypeMap" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">TypeMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/dev/qiime2/core/type/meta.py#L92"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.TypeMap" title="Link to this definition">#</a></dt>
 <dd><p>A table of input types which match to output types.</p>
 <p>The TypeMap is best thought of as a table in which QIIME 2 is trying to
 find a row that matches the user’s input. Once found, the row-wise search
@@ -1151,7 +1151,7 @@ will correspond to the number of “columns” in the TypeMap.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="qiime2.plugin.TypeMatch">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">TypeMatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">listing</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/2024.10.1/qiime2/core/type/meta.py#L236"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.TypeMatch" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qiime2.plugin.</span></span><span class="sig-name descname"><span class="pre">TypeMatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">listing</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/qiime2/qiime2/tree/dev/qiime2/core/type/meta.py#L236"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiime2.plugin.TypeMatch" title="Link to this definition">#</a></dt>
 <dd><p>A trivial <a class="reference internal" href="#qiime2.plugin.TypeMap" title="qiime2.plugin.TypeMap"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeMap</span></code></a> such that every entry maps to itself.</p>
 <p>A TypeMatch which looked like this:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">TypeMatch</span><span class="p">([</span><span class="n">Foo</span><span class="p">,</span> <span class="n">Bar</span><span class="p">,</span> <span class="n">Baz</span><span class="p">])</span>
@@ -1180,8 +1180,8 @@ output type will then be the same as the input type.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.plugin</span> <span class="kn">import</span> <span class="n">TypeMatch</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qiime2.core.testing.type</span> <span class="kn">import</span> <span class="n">Foo</span><span class="p">,</span> <span class="n">Bar</span><span class="p">,</span> <span class="n">Baz</span><span class="p">,</span> <span class="n">C1</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.plugin</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeMatch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">qiime2.core.testing.type</span><span class="w"> </span><span class="kn">import</span> <span class="n">Foo</span><span class="p">,</span> <span class="n">Bar</span><span class="p">,</span> <span class="n">Baz</span><span class="p">,</span> <span class="n">C1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="n">TypeMatch</span><span class="p">([</span><span class="n">Foo</span><span class="p">,</span> <span class="n">Bar</span><span class="p">,</span> <span class="n">Baz</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">C1</span><span class="p">[</span><span class="n">Foo</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">C1</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
 <span class="go">True</span>

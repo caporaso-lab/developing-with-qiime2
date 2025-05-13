@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -446,15 +446,15 @@ document.write(`
 <p>Transformers are often short Python functions that convert one file format or data type to another file format or data type.
 These functions are never directly called by users or developers, so by convention they don’t get informative function names (as the annotations of the input and output provide complete detail on what they do).</p>
 <p>Here’s are two example <code class="docutils literal notranslate"><span class="pre">transformer</span></code> that are <a class="reference external" href="https://github.com/qiime2/q2-types/blob/e25f9355958755343977e037bbe39110cfb56a63/q2_types/distance_matrix/_transformer.py#L16">defined and registered in <code class="docutils literal notranslate"><span class="pre">q2-types</span></code></a>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">skbio</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">skbio</span>
 
-<span class="kn">from</span> <span class="nn">..plugin_setup</span> <span class="kn">import</span> <span class="n">plugin</span>
-<span class="kn">from</span> <span class="nn">.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..plugin_setup</span><span class="w"> </span><span class="kn">import</span> <span class="n">plugin</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span>
 <span class="kn">import</span> <span class="n">LSMatFormat</span>
 
 
 <span class="nd">@plugin</span><span class="o">.</span><span class="n">register_transformer</span>
-<span class="k">def</span> <span class="nf">_1</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DistanceMatrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LSMatFormat</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_1</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DistanceMatrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LSMatFormat</span><span class="p">:</span>
     <span class="n">ff</span> <span class="o">=</span> <span class="n">LSMatFormat</span><span class="p">()</span>
     <span class="k">with</span> <span class="n">ff</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
         <span class="n">data</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;lsmat&#39;</span><span class="p">)</span>
@@ -462,7 +462,7 @@ These functions are never directly called by users or developers, so by conventi
 
 
 <span class="nd">@plugin</span><span class="o">.</span><span class="n">register_transformer</span>
-<span class="k">def</span> <span class="nf">_2</span><span class="p">(</span><span class="n">ff</span><span class="p">:</span> <span class="n">LSMatFormat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DistanceMatrix</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_2</span><span class="p">(</span><span class="n">ff</span><span class="p">:</span> <span class="n">LSMatFormat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DistanceMatrix</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">skbio</span><span class="o">.</span><span class="n">DistanceMatrix</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ff</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;lsmat&#39;</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>

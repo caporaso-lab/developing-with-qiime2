@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -493,8 +493,8 @@ This would result in different output when calling <code class="docutils literal
 <p>We’ll address this by putting the default parameter settings in a <code class="docutils literal notranslate"><span class="pre">dict</span></code>.
 We can then look up the values in that <code class="docutils literal notranslate"><span class="pre">dict</span></code> anywhere we need them, so they only need to be defined that one time.
 To achieve this, update the <code class="docutils literal notranslate"><span class="pre">_methods.py</span></code> file, to look like the following:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skbio.alignment</span> <span class="kn">import</span> <span class="n">global_pairwise_align_nucleotide</span><span class="p">,</span> <span class="n">TabularMSA</span>
-<span class="kn">from</span> <span class="nn">skbio</span> <span class="kn">import</span> <span class="n">DNA</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skbio.alignment</span><span class="w"> </span><span class="kn">import</span> <span class="n">global_pairwise_align_nucleotide</span><span class="p">,</span> <span class="n">TabularMSA</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skbio</span><span class="w"> </span><span class="kn">import</span> <span class="n">DNA</span>
 
 <span class="n">_nw_align_defaults</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;gap_open_penalty&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
@@ -504,7 +504,7 @@ To achieve this, update the <code class="docutils literal notranslate"><span cla
 <span class="p">}</span>
 
 
-<span class="k">def</span> <span class="nf">nw_align</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">nw_align</span><span class="p">(</span>
         <span class="n">seq1</span><span class="p">:</span> <span class="n">DNA</span><span class="p">,</span>
         <span class="n">seq2</span><span class="p">:</span> <span class="n">DNA</span><span class="p">,</span>
         <span class="n">gap_open_penalty</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">_nw_align_defaults</span><span class="p">[</span><span class="s1">&#39;gap_open_penalty&#39;</span><span class="p">],</span>
@@ -529,10 +529,10 @@ To achieve this, update the <code class="docutils literal notranslate"><span cla
 Start by creating a new file, <code class="docutils literal notranslate"><span class="pre">_pipelines.py</span></code> in your module’s top-level directory.
 For me, this file will be <code class="docutils literal notranslate"><span class="pre">q2-dwq2/q2_dwq2/_pipelines.py</span></code>.
 Add the following code to that file.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">._methods</span> <span class="kn">import</span> <span class="n">_nw_align_defaults</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">._methods</span><span class="w"> </span><span class="kn">import</span> <span class="n">_nw_align_defaults</span>
 
 
-<span class="k">def</span> <span class="nf">align_and_summarize</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">align_and_summarize</span><span class="p">(</span>
         <span class="n">ctx</span><span class="p">,</span> <span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">,</span>
         <span class="n">gap_open_penalty</span><span class="o">=</span><span class="n">_nw_align_defaults</span><span class="p">[</span><span class="s1">&#39;gap_open_penalty&#39;</span><span class="p">],</span>
         <span class="n">gap_extend_penalty</span><span class="o">=</span><span class="n">_nw_align_defaults</span><span class="p">[</span><span class="s1">&#39;gap_extend_penalty&#39;</span><span class="p">],</span>
