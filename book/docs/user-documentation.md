@@ -27,7 +27,7 @@ These cover things (or will cover things) like:
 
 **Data-set specific tutorials**, like the [Moving Pictures tutorial](https://moving-pictures-tutorial.readthedocs.io/) or the more recent [gut-to-soil microbiome axis tutorial](https://gut-to-soil-tutorial.readthedocs.io/), will be dataset specific and may cross distributions (like the [Cancer Microbiome Intervention Tutorial](https://docs.qiime2.org/jupyterbooks/cancer-microbiome-intervention-tutorial/)).
 This will facilitate the transition from replayed provenance to tutorial, ideally helping to blur the line between replayed provenance and a tutorial over time.
-To support this, we will likely add a usage driver that generates usage driver source code (for example, select `View Source (qiime2.sdk)` from a [multi-interface tutorial](https://docs.qiime2.org/2023.9/tutorials/moving-pictures-usage/), so this can template documentation.
+To support this, we will likely add a usage driver to Provenance Replay that generates usage driver source code (for example, select `View Source (qiime2.sdk)` from a multi-interface tutorial [like *gut-to-soil*](https://gut-to-soil-tutorial.readthedocs.io/), so Provenance Replay can template documentation.
 
 **Plugin-specific documentation**, like the [q2-boots documentation](https://q2-boots.readthedocs.io/).
 
