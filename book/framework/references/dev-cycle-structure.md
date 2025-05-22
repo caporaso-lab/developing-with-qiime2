@@ -27,7 +27,7 @@ The important dates mentioned above within each development cycle are as follows
  - The Friday before each release day (bonus and major), we will have a repository freeze (i.e. no more merging to main branch) on all plugins that are a part of any of our supported distributions.
    This freeze is to remain in effect until after our release announcement has been posted, and will allow for a smoother build process on release day (so we don't run into any unexpected behavior due to last minute plugin changes).
 
-This schedule provides us with ample development time between releases, and provides our developer community with at least a two month notice for any interface/API changes and any external dependency changes (i.e. bumping the Python version, removing a deprecated package, etc).
+This schedule provides us with ample development time between major releases, and provides our developer community with at least a two month notice for any interface/API changes and any external dependency changes (i.e. bumping the Python version, removing a deprecated package, etc).
 
 The following diagram outlines relevant timepoints between each release, with terms defined below.
 
