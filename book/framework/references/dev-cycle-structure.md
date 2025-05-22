@@ -6,8 +6,28 @@ If you have any questions on this process, please don't hesitate to reach out on
 
 ## QIIME 2 Release Cycle Structure
 
-As of 2024.10, QIIME 2 Distributions are released bi-anually, on the first Wednesday of April and October.
-This schedule provides us with ample development time between releases, and provides our developer community with at least a three month notice for any interface/API changes and any external dependency changes (i.e. bumping Python, removing a deprecated package, etc).
+As of 2025.4, QIIME 2 Distributions releases occur as follows:
+ - bi-annual major releases, on the first Wednesday of April and October, and
+ - bi-annual minor releases, on the first Wednesday of January and July.
+
+Major releases contain all development work that has taken place over the previous development epoch (i.e. the last 6 months), along with **any first-order dependency updates** (i.e. version changes within one of our distributions’ seed environments, excluding our internally maintained plugins).
+
+At the three month mark between each major release, we have a minor release.
+These bonus releases contain all development work that has taken place over the last three months of the current development epoch, but **don’t contain any first-order dependency updates**.
+This allows users access to additional new features or updates we weren’t able to complete in the previous major release, while ensuring that developers still know what to expect in terms of environment solvability.
+
+Once a minor release has been announced, we will subsequently finalize any first order dependency changes that may be required (or desired) for the next major release.
+The next month is spent integrating and testing these dependency updates to ensure compatibility within each relevant QIIME 2 distribution.
+At the end of this month (2 months prior to the major release), the list of dependency updates within each distribution will be announced and no further dependency updates will be made in the final two months of the development epoch.
+This allows our development community enough time to make any requisite changes to their plugins in order to remain compatible with a QIIME 2 distribution.
+
+The important dates mentioned above within each development cycle are as follows:
+ - Immediately following each bonus release (Jan/July) we will decide what (if any) external dependency versions we will be updating for the upcoming major release (i.e. bumping python/pandas/etc, removing/adding any deps).
+ - Two months prior to each major release (Feb/Aug) we will aim to have our development environment files in their 'final' state (i.e. seed envs will remain unchanged) so that community developers can test out any changes they need to make to remain compatible with the upcoming release environment files.
+ - The Friday before each release day (bonus and major), we will have a repository freeze (i.e. no more merging to main branch) on all plugins that are a part of any of our supported distributions.
+   This freeze is to remain in effect until after our release announcement has been posted, and will allow for a smoother build process on release day (so we don't run into any unexpected behavior due to last minute plugin changes).
+
+This schedule provides us with ample development time between releases, and provides our developer community with at least a two month notice for any interface/API changes and any external dependency changes (i.e. bumping the Python version, removing a deprecated package, etc).
 
 The following diagram outlines relevant timepoints between each release, with terms defined below.
 
