@@ -697,7 +697,7 @@ Then we iterate over the splits, <em>applying</em> the local alignment search me
 </div>
 <p>Under the hood is where the magic happens here.
 Because we’re iterating over a collection of QIIME 2 Artifacts (the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop above) in a QIIME 2 <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code>, each <code class="docutils literal notranslate"><span class="pre">las_result</span></code> object is a proxy for a real QIIME 2 artifact.
-The jobs to create them are distributed as indicated in the user’s <a class="reference internal" href="#parallel-configuration"><span class="xref myst">QIIME 2 parallel configuration</span></a>.
+The jobs to create them are distributed as indicated in the user’s <a class="reference external" href="https://use.qiime2.org/en/latest/references/parallel-configuration.html">QIIME 2 parallel configuration</a>.
 The code continues executing as if these were real Artifacts, not proxy Artifacts, until something is needed from them.
 At that point, the code will block (i.e., wait) until the proxy Artifacts become real Artifacts, and then continue processing.</p>
 <div class="tip admonition">

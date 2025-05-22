@@ -439,8 +439,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plans-for-refactoring-of-user-documentation">Plans for refactoring of user documentation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-to-the-current-user-documentation">Contributing to the current user documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-documentation-refactor">User documentation refactor</a></li>
 </ul>
             </nav>
         </div>
@@ -454,54 +453,36 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="user-documentation">
 <h1>User documentation<a class="headerlink" href="#user-documentation" title="Link to this heading">#</a></h1>
-<p>As of the time of this writing (12 January 2023) the QIIME 2 user documentation is in a state of transition.
-This document presents ideas about where we’re planning to go with the user documentation in the future and then covers how to contribute to the current user documentation (<a class="reference external" href="https://docs.qiime2.org">https://docs.qiime2.org</a>)</p>
-<section id="plans-for-refactoring-of-user-documentation">
-<span id="users-docs-refactor"></span><h2>Plans for refactoring of user documentation<a class="headerlink" href="#plans-for-refactoring-of-user-documentation" title="Link to this heading">#</a></h2>
-<p>We are moving from a single source of documentation (the current content at <a class="reference external" href="https://docs.qiime2.org">https://docs.qiime2.org</a>) to resources for <strong>cross-distribution QIIME 2 documentation</strong>, <strong>within-distribution QIIME 2 reference material</strong>, and <strong>data set specific usage documentation</strong>.</p>
-<p>We expect that the <strong>cross-distribution user documentation</strong> will cover topics including:</p>
+<p>As of the time of this writing (22 May 2025) the QIIME 2 user documentation is in a state of transition.
+Most new documentation is currently being built using <a class="reference external" href="https://next.jupyterbook.org">Jupyter Book 2</a>.</p>
+<section id="user-documentation-refactor">
+<span id="users-docs-refactor"></span><h2>User documentation refactor<a class="headerlink" href="#user-documentation-refactor" title="Link to this heading">#</a></h2>
+<p>We have recently (as of 22 May 2025) moved from a single source of documentation (previously at <code class="docutils literal notranslate"><span class="pre">https://docs.qiime2.org</span></code>) to resources for <strong>cross-distribution QIIME 2 documentation</strong>, <strong>within-distribution QIIME 2 documentation</strong>, <strong>plugin-specific documentation</strong>, and <strong>data set specific usage documentation</strong>.</p>
+<p>The primary sources of <strong>cross-distribution user documentation</strong> are <a class="reference external" href="https://use.qiime2.org"><em>Using QIIME 2</em></a> and <a class="reference external" href="https://develop.qiime2.org"><em>Developing with QIIME 2</em></a>.
+These cover things (or will cover things) like:</p>
 <ul class="simple">
-<li><p>building and use a cache, which will expand on the <a class="reference external" href="https://forum.qiime2.org/t/qiime-2-2022-11-is-now-available/25074#artifact-cachehttpsdevqiime2orglatestapi-referencecache-3">content here</a></p></li>
-<li><p>parallel support, which will expand on the <a class="reference internal" href="#parallel-configuration"><span class="xref myst">content here</span></a></p></li>
+<li><p>developing QIIME 2 plugins and interfaces</p></li>
+<li><p><a class="reference external" href="https://use.qiime2.org/en/latest/tutorials/use-the-artifact-cache.html">building and use an artifact cache</a></p></li>
+<li><p><a class="reference external" href="https://use.qiime2.org/en/latest/references/parallel-configuration.html">parallel analysis support</a></p></li>
 <li><p>provenance replay/viewing, which will expand on the <a class="reference external" href="https://forum.qiime2.org/t/provenance-replay-beta-release-and-tutorial/23279">content here</a></p></li>
 <li><p>using the interfaces</p></li>
-<li><p>recycling old results</p></li>
+<li><p><a class="reference external" href="https://use.qiime2.org/en/latest/how-to-guides/pipeline-resumption.html">recycling results from failed runs</a></p></li>
 <li><p>installing old versions of QIIME 2 (why, why not, and how)</p></li>
 <li><p>discussion of distributions (why are there multiple? how to deal with that)</p></li>
 <li><p>importing/exporting</p></li>
-<li><p>viewing .qzvs</p></li>
+<li><p><a class="reference external" href="https://use.qiime2.org/en/latest/how-to-guides/view-visualizations.html">viewing QIIME 2 <code class="docutils literal notranslate"><span class="pre">Visualizations</span></code></a></p></li>
 </ul>
-<p><strong>Distribution specific reference material</strong> will likely be the equivalent of our <a class="reference external" href="https://docs.qiime2.org/2023.9/plugins/">current plugin/action pages</a>. These will render all usage examples associated with actions as well, to avoid the need for things like the <a class="reference external" href="https://docs.qiime2.org/2023.9/tutorials/filtering/">“filtering tutorial”</a> (which isn’t really a tutorial, but rather a list of different approaches for filtering data). Ideally generation of distribution-specific reference documentation will be fully automated, such that these docs can be built from any QIIME 2 environment using the <code class="docutils literal notranslate"><span class="pre">PluginManager</span></code>.</p>
-<p><strong>Usage tutorials</strong>, like the <a class="reference external" href="https://docs.qiime2.org/2023.9/tutorials/moving-pictures-usage/">Moving Pictures tutorial</a>, will be dataset specific and may cross distributions (like the <a class="reference external" href="https://docs.qiime2.org/jupyterbooks/cancer-microbiome-intervention-tutorial/">Cancer Microbiome Intervention Tutorial</a>). This will facilitate the transition from replayed provenance to tutorial, ideally helping to blur the line between replayed provenance and a tutorial over time. To support this, we will likely add a usage driver that generates usage driver source code (for example, select <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Source</span> <span class="pre">(qiime2.sdk)</span></code> from a <a class="reference external" href="https://docs.qiime2.org/2023.9/tutorials/moving-pictures-usage/">multi-interface tutorial</a>, so this can template documentation.</p>
-</section>
-<section id="contributing-to-the-current-user-documentation">
-<h2>Contributing to the current user documentation<a class="headerlink" href="#contributing-to-the-current-user-documentation" title="Link to this heading">#</a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>These instructions are a little sparse at the moment and don’t cover things like working on your own fork or branch of the documentation. We do recommend forking and working on your own change-specific branch.</p>
-</div>
-<p>First, install the most recent release version of the QIIME 2 Amplicon Distribution, or <a class="reference internal" href="../plugins/how-to-guides/set-up-development-environment.html#setup-dev-environment"><span class="std std-ref">create a QIIME 2 Amplicon Distribution development environment</span></a>. Switch to that new environment.</p>
-<p>Then, clone the QIIME 2 User documentation repository and install its requirements.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/qiime2/docs.git
-<span class="nb">cd</span><span class="w"> </span>docs
-pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
-</pre></div>
-</div>
-<p>Build the documentation in <code class="docutils literal notranslate"><span class="pre">preview</span></code> mode to confirm that the build works before making your changes.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Building the documentation in <code class="docutils literal notranslate"><span class="pre">preview</span></code> mode will avoid running all of the QIIME 2 steps covered in the tutorials during the build of the documentation, which will be vastly faster than doing a complete build (i.e., <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code>) of the documentation.</p>
-</div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>preview
-</pre></div>
-</div>
-<p>Make your edits, and re-build and view them. Iterate on this process until you’re done.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>preview
-<span class="nb">cd</span><span class="w"> </span>build/preview<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>http.server<span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>-
-</pre></div>
-</div>
-<p>The above command will launch a web server on your computer. Open <a class="reference external" href="http://localhost:8000/">http://localhost:8000/</a> in your browser to view the documentation as hosted on that local web server.</p>
-<p>When you’re ready, submit a pull request in the usual way.</p>
+<p><strong>Distribution specific documentation</strong> will cover pre-built distributions of QIIME 2, including:</p>
+<ul class="simple">
+<li><p>the <a class="reference external" href="https://amplicon-docs.qiime2.org">amplicon distribution documentation</a></p></li>
+<li><p><a class="reference external" href="https://moshpit.qiime2.org">MOSHPIT documentation</a> (MOSHPIT was previously referred to as the <em>metagenome distribution</em>)</p></li>
+</ul>
+<p><strong>Data-set specific tutorials</strong>, like the <a class="reference external" href="https://moving-pictures-tutorial.readthedocs.io/">Moving Pictures tutorial</a> or the more recent <a class="reference external" href="https://gut-to-soil-tutorial.readthedocs.io/">gut-to-soil microbiome axis tutorial</a>, will be dataset specific and may cross distributions (like the <a class="reference external" href="https://docs.qiime2.org/jupyterbooks/cancer-microbiome-intervention-tutorial/">Cancer Microbiome Intervention Tutorial</a>).
+This will facilitate the transition from replayed provenance to tutorial, ideally helping to blur the line between replayed provenance and a tutorial over time.
+To support this, we will likely add a usage driver to Provenance Replay that generates usage driver source code (for example, select <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Source</span> <span class="pre">(qiime2.sdk)</span></code> from a multi-interface tutorial <a class="reference external" href="https://gut-to-soil-tutorial.readthedocs.io/">like <em>gut-to-soil</em></a>, so Provenance Replay can template documentation.</p>
+<p><strong>Plugin-specific documentation</strong>, like the <a class="reference external" href="https://q2-boots.readthedocs.io/">q2-boots documentation</a>.</p>
+<p>The use of Jupyter Book 2 allows us to re-use content as relevant across these resources.</p>
+<p>If you’d like to contribute documentation, this should be done in the context of a specific documentation project.</p>
 </section>
 </section>
 
@@ -569,8 +550,7 @@ pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </s
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plans-for-refactoring-of-user-documentation">Plans for refactoring of user documentation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-to-the-current-user-documentation">Contributing to the current user documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-documentation-refactor">User documentation refactor</a></li>
 </ul>
   </nav></div>
 

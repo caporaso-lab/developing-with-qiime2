@@ -28,7 +28,7 @@ You do not need to read all of these parts to develop with QIIME 2.
 If you are interested in creating plugins, then the only part you need to concern yourself with is [](plugin-intro).
 Similarly, if you want to build an interface, you only need [](interface-intro).
 Other parts, such as [](framework-intro) and [](ci-intro), are currently targeted primarily for the development team in the [Caporaso Lab](https://cap-lab.bio).
-[](documentation-intro) is slated for a full re-write as we [adapt our approach to user documentation](users-docs-refactor).
+[](documentation-intro) is slated for a full re-write as we [recently changed our approach to user documentation](users-docs-refactor).
 
 The content in each part of this book is organized under the [Diátaxis](https://diataxis.fr/) framework {cite}`diataxis`.
 This means that you can expect *Chapters* containing *Tutorials*, *How-To-Guides*, *Explanations*, and *References* in each part.
