@@ -6,8 +6,28 @@ If you have any questions on this process, please don't hesitate to reach out on
 
 ## QIIME 2 Release Cycle Structure
 
-As of 2024.10, QIIME 2 Distributions are released bi-anually, on the first Wednesday of April and October.
-This schedule provides us with ample development time between releases, and provides our developer community with at least a three month notice for any interface/API changes and any external dependency changes (i.e. bumping Python, removing a deprecated package, etc).
+As of 2025.4, QIIME 2 Distributions releases occur as follows:
+ - bi-annual full releases, on the first Wednesday of April and October, and
+ - bi-annual feature releases, on the first Wednesday of January and July.
+
+Full releases contain all development work that has taken place over the previous development epoch (i.e. the last 6 months), along with **any first-order dependency updates** (i.e. version changes within one of our distributions’ seed environments, excluding our internally maintained plugins).
+
+At the three month mark between each full release, we have a feature release.
+These feature releases contain all development work that has taken place over the last three months of the current development epoch, but **don’t contain any first-order dependency updates**.
+This allows users access to additional new features or updates we weren’t able to complete in the previous full release, while ensuring that developers still know what to expect in terms of environment solvability.
+
+Once a feature release has been announced, we will subsequently finalize any first order dependency changes that may be required (or desired) for the next full release.
+The next month is spent integrating and testing these dependency updates to ensure compatibility within each relevant QIIME 2 distribution.
+At the end of this month (2 months prior to the next full release), the list of dependency updates within each distribution will be announced and no further dependency updates will be made in the final two months of the development epoch.
+This allows our development community enough time to make any requisite changes to their plugins in order to remain compatible with a QIIME 2 distribution.
+
+The important dates mentioned above within each development cycle are as follows:
+ - Immediately following each feature release (Jan/July) we will decide what (if any) external dependency versions we will be updating for the upcoming full release (i.e. bumping python/pandas/etc, removing/adding any deps).
+ - Two months prior to each full release (Feb/Aug) we will aim to have our development environment files in their 'final' state (i.e. seed envs will remain unchanged) so that community developers can test out any changes they need to make to remain compatible with the upcoming release environment files.
+ - The Friday before each release day (feature and full), we will have a repository freeze (i.e. no more merging to main branch) on all plugins that are a part of any of our supported distributions.
+   This freeze is to remain in effect until after our release announcement has been posted, and will allow for a smoother build process on release day (so we don't run into any unexpected behavior due to last minute plugin changes).
+
+This schedule provides us with ample development time between full releases, and provides our developer community with at least a two month notice for any interface/API changes and any external dependency changes (i.e. bumping the Python version, removing a deprecated package, etc).
 
 The following diagram outlines relevant timepoints between each release, with terms defined below.
 
@@ -16,8 +36,9 @@ The following diagram outlines relevant timepoints between each release, with te
 :width: 300
 ```
 
-- `20XX.REL`: The most current, released version of QIIME 2.
-- `20XX.REL+1`: The upcoming release version for QIIME 2.
+- `20XX.FULL`: The most current, (full) released version of QIIME 2.
+- `20XX.FEAT`: The most current, (feature) released version of QIIME 2.
+- `20XX.FULL+1`: The upcoming (full) release version for QIIME 2.
 - `'Approved but Unscheduled' Project Board`: One of the QIIME 2 Github Project Boards, used to store issues/pull requests that we think are good ideas, but don't have the immediate bandwidth to address.
 - `External dependency version changes`: Any changes to the external (non-QIIME 2) dependencies within any of our Distributions. These changes include bumping a dependency's version to either a newer/older pin, or removing/adding dependencies.
 - `Development cycle environment files`: These can be found under the QIIME 2 Distributions repository under `20XX.REL+1/<distro>/passed/` (with `<distro>` being each QIIME 2 Distribution), and reflect our current development cycle (i.e. non-release versioned) environment files.
