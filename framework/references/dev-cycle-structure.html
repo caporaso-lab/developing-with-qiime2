@@ -467,16 +467,36 @@ The aim is to provide insight into our structure for other research software eng
 If you have any questions on this process, please don’t hesitate to reach out on our user forum under the <a class="reference external" href="https://forum.qiime2.org/c/dev-discussion">Developer Discussion</a> category!</p>
 <section id="qiime-2-release-cycle-structure">
 <h2>QIIME 2 Release Cycle Structure<a class="headerlink" href="#qiime-2-release-cycle-structure" title="Link to this heading">#</a></h2>
-<p>As of 2024.10, QIIME 2 Distributions are released bi-anually, on the first Wednesday of April and October.
-This schedule provides us with ample development time between releases, and provides our developer community with at least a three month notice for any interface/API changes and any external dependency changes (i.e. bumping Python, removing a deprecated package, etc).</p>
+<p>As of 2025.4, QIIME 2 Distributions releases occur as follows:</p>
+<ul class="simple">
+<li><p>bi-annual full releases, on the first Wednesday of April and October, and</p></li>
+<li><p>bi-annual feature releases, on the first Wednesday of January and July.</p></li>
+</ul>
+<p>Full releases contain all development work that has taken place over the previous development epoch (i.e. the last 6 months), along with <strong>any first-order dependency updates</strong> (i.e. version changes within one of our distributions’ seed environments, excluding our internally maintained plugins).</p>
+<p>At the three month mark between each full release, we have a feature release.
+These feature releases contain all development work that has taken place over the last three months of the current development epoch, but <strong>don’t contain any first-order dependency updates</strong>.
+This allows users access to additional new features or updates we weren’t able to complete in the previous full release, while ensuring that developers still know what to expect in terms of environment solvability.</p>
+<p>Once a feature release has been announced, we will subsequently finalize any first order dependency changes that may be required (or desired) for the next full release.
+The next month is spent integrating and testing these dependency updates to ensure compatibility within each relevant QIIME 2 distribution.
+At the end of this month (2 months prior to the next full release), the list of dependency updates within each distribution will be announced and no further dependency updates will be made in the final two months of the development epoch.
+This allows our development community enough time to make any requisite changes to their plugins in order to remain compatible with a QIIME 2 distribution.</p>
+<p>The important dates mentioned above within each development cycle are as follows:</p>
+<ul class="simple">
+<li><p>Immediately following each feature release (Jan/July) we will decide what (if any) external dependency versions we will be updating for the upcoming full release (i.e. bumping python/pandas/etc, removing/adding any deps).</p></li>
+<li><p>Two months prior to each full release (Feb/Aug) we will aim to have our development environment files in their ‘final’ state (i.e. seed envs will remain unchanged) so that community developers can test out any changes they need to make to remain compatible with the upcoming release environment files.</p></li>
+<li><p>The Friday before each release day (feature and full), we will have a repository freeze (i.e. no more merging to main branch) on all plugins that are a part of any of our supported distributions.
+This freeze is to remain in effect until after our release announcement has been posted, and will allow for a smoother build process on release day (so we don’t run into any unexpected behavior due to last minute plugin changes).</p></li>
+</ul>
+<p>This schedule provides us with ample development time between full releases, and provides our developer community with at least a two month notice for any interface/API changes and any external dependency changes (i.e. bumping the Python version, removing a deprecated package, etc).</p>
 <p>The following diagram outlines relevant timepoints between each release, with terms defined below.</p>
 <figure class="align-center">
 <a class="reference internal image-reference" href="../../_images/q2-dev-cycle-diagram.png"><img alt="../../_images/q2-dev-cycle-diagram.png" src="../../_images/q2-dev-cycle-diagram.png" style="width: 300px;" />
 </a>
 </figure>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">20XX.REL</span></code>: The most current, released version of QIIME 2.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">20XX.REL+1</span></code>: The upcoming release version for QIIME 2.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">20XX.FULL</span></code>: The most current, (full) released version of QIIME 2.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">20XX.FEAT</span></code>: The most current, (feature) released version of QIIME 2.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">20XX.FULL+1</span></code>: The upcoming (full) release version for QIIME 2.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">'Approved</span> <span class="pre">but</span> <span class="pre">Unscheduled'</span> <span class="pre">Project</span> <span class="pre">Board</span></code>: One of the QIIME 2 Github Project Boards, used to store issues/pull requests that we think are good ideas, but don’t have the immediate bandwidth to address.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">External</span> <span class="pre">dependency</span> <span class="pre">version</span> <span class="pre">changes</span></code>: Any changes to the external (non-QIIME 2) dependencies within any of our Distributions. These changes include bumping a dependency’s version to either a newer/older pin, or removing/adding dependencies.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Development</span> <span class="pre">cycle</span> <span class="pre">environment</span> <span class="pre">files</span></code>: These can be found under the QIIME 2 Distributions repository under <code class="docutils literal notranslate"><span class="pre">20XX.REL+1/&lt;distro&gt;/passed/</span></code> (with <code class="docutils literal notranslate"><span class="pre">&lt;distro&gt;</span></code> being each QIIME 2 Distribution), and reflect our current development cycle (i.e. non-release versioned) environment files.</p></li>
