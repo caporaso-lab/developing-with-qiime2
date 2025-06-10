@@ -1,3 +1,0 @@
-jupyter-book
-sphinxcontrib.mermaid
-q2doc@git+https://github.com/qiime2/sphinx-ext-qiime2.git@master

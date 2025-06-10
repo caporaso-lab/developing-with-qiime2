@@ -1,4 +1,4 @@
-.PHONY: lint install html clean cacheclean
+.PHONY: lint html clean cacheclean
 
 lint:
 	jupyter book build book/ \
@@ -7,9 +7,6 @@ lint:
 	  --keep-going \
 	  --all \
 	  --verbose
-
-install:
-	pip install -r requirements.txt
 
 html:
 	jupyter book build book/
