@@ -1,47 +1,30 @@
 (plugin-from-template)=
 # Create your plugin from a template
 
-The easiest way to create a new QIIME 2 plugin is using our [Cookiecutter template](https://cookiecutter.readthedocs.io/en/stable/), which can be found at https://github.com/caporaso-lab/cookiecutter-qiime2-plugin.
+The easiest way to create a new QIIME 2 plugin is using our [Copier template](https://copier.readthedocs.io/en/stable/), which can be found at https://github.com/caporaso-lab/plugin-template.
 Here we'll work through building your QIIME 2 plugin from this template.
 
 ## Install the tools needed for templating your plugin
 
-To start building your new plugin, first install cookiecutter using [their installation instructions](https://cookiecutter.readthedocs.io/en/stable/README.html#installation). (If you opt to install cookiecutter with `pipx`, which the cookiecutter developers recommend, you can find the `pipx` installation instructions [here](https://pipx.pypa.io/stable/).)
+Here we'll illustrate how to install and use Copier with `pipx`, though these instructions can be adapted to follow any of the approaches documented in the [Copier installation instructions](https://copier.readthedocs.io/en/stable/).
 
-```{admonition} Optionally initialize a git repository during plugin templating
-:class: dropdown
-If `git` is installed in your environment, at the end of the templating process, a new git repository will be initialized and a first commit will be made.
-This facilitates managing your plugin in version control, and is especially good practice if you are templating a plugin that you ultimately plan to distribute to others.
+First, install `pipx`, as documented in their install instructions [here](https://pipx.pypa.io/stable/).
+Then, install Copier by running the following commands:
 
-You can check if you have git installed by running `git --version`.
-If you get a response with a version number (something like `git version 2.44.0`), git is installed and a new local repository will be initialized.
-If you get a response suggesting that `git` is not installed, you can just continue and not have cookiecutter create a git repository for you, or you can install [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and then continue.
-
-The git repository that is created will be a local git repository, meaning that it only exists on your computer and won't be shared through a site like GitHub.
-If you'd like to learn how to share your plugins, see [](share-on-github).
+```bash
+pipx install copier
 ```
 
-## Run `cookiecutter` to create your plugin
+## Run `Copier` to create your plugin
 
-Next, run `cookiecutter` to create your plugin from the template using the following command.
-If you used `pipx` to install `cookiecutter`, follow the instructions in the *pipx* tab - otherwise follow the instructions in the *Other* tab.
+Next, run `Copier` to create your plugin from the template using the following command.
 
-`````{tab-set}
-````{tab-item} pipx
 ```shell
-pipx run cookiecutter gh:caporaso-lab/cookiecutter-qiime2-plugin
+copier copy https://github.com/caporaso-lab/plugin-template.git .
 ```
-````
-
-````{tab-item} Other
-```shell
-cookiecutter gh:caporaso-lab/cookiecutter-qiime2-plugin
-```
-````
-`````
 
 During the plugin templating process, you'll be prompted for information on your new plugin.
-For the questions about the *Target distribution* and whether you're *targeting the stable or latest development QIIME 2 release*, use the default values unless you have a specific reason not to; these are the last two questions, as of this writing in May 2024.
+For the questions about the *Target distribution* and whether you're *targeting the stable or latest development QIIME 2 release*, use the default values unless you have a specific reason not to.
 For all of the other questions, feel free to customize your plugin by providing whatever values you'd like.
 
 The plugin I'm going to create will be called `q2-dwq2` (for *Developing with QIIME 2*).
@@ -91,8 +74,36 @@ Miscellaneous:
   --help                  Show this message and exit.
 ```
 
-If you'd like to try the action out, you can call your `duplicate-table` action on any QIIME 2 `FeatureTable[Frequency]` artifact (e.g., you can download one from the [QIIME 2 user documentation](https://docs.qiime2.org)).
+If you'd like to try the action out, you can call your `duplicate-table` action on any QIIME 2 `FeatureTable[Frequency]` artifact (e.g., you can download one from the QIIME 2 user documentation with [this link](https://gut-to-soil-tutorial.readthedocs.io/en/latest/data/gut-to-soil/asv-table.qza)).
 Load your duplicated table with [QIIME 2 View](https://view.qiime2.org), and poke through its Provenance to see how data provenance is recorded for your plugin.
+
+## Initialize a git repository (optional but recommended)
+
+At this stage, I recommend initializing a git repository.
+This facilitates managing your plugin in version control, and is especially good practice if you are templating a plugin that you ultimately plan to distribute to others.
+
+You can check if you have git installed by running `git --version`.
+If you get a response with a version number (something like `git version 2.44.0`), git is installed and a new local repository will be initialized.
+If you get a response suggesting that `git` is not installed, you can install [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and then continue.
+
+From the top-level directory of your new plugin (for me, that's `q2-dwq2/`), run the following commands:
+
+```
+git init -b main
+```
+
+```
+git add .
+git commit \
+ -m "initial commit" \
+ -m "This plugin was initiated from the Copier template at https://github.com/caporaso-lab/plugin-template" \
+ -m "See https://develop.qiime2.org to learn more."
+```
+
+The git repository that is created will be a local git repository, meaning that it only exists on your computer and won't be shared through a site like GitHub.
+If you'd like to learn how to share your plugins, see [](share-on-github).
+
+## Next steps
 
 Congratulations - you've created a working QIIME 2 plugin from a template!
 If you'd like to learn QIIME 2 plugin development, in the next step of the tutorial we'll [](add-nw-align-method).
@@ -101,5 +112,5 @@ In either case, if you'd like to host your plugin in a GitHub repository, you ca
 
 ```{tip}
 You can see my code after following these steps by looking at the specific commit in my plugin repository on GitHub: {{ dwq2_cookiecutter_build_commit_url }}.
-My code may look a little different than yours as I may have been using an older version of the template plugin than you used - everything in the tutorial will still work the same though.
+My code will look a little different than yours as I generated it using an older version of the template plugin than you used - everything in the tutorial will still work the same though.
 ```
