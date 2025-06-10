@@ -5,6 +5,7 @@ channels:
 - bioconda
 dependencies:
   - qiime2-tiny
+  - pip
   - pip:
     - jupyter-book
     - sphinxcontrib-mermaid
