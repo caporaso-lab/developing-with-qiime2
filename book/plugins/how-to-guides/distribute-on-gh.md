@@ -71,10 +71,11 @@ The templated *Installation instructions* in the `README.md` file are intended t
 You'll almost certainly want to update the install instructions for your plugin as you develop it.
 
 Here are some tips related to updating the installation instructions for your plugin:
-- If your plugin requires additional dependencies that can be installed with either conda or pip, you can add those in the environment yaml file that was templated in the `environments/` directory.
+- If your plugin requires additional dependencies that can be installed with either conda or pip, you can add those in the environment yaml file that was templated into the `environments/` directory.
 - We recommend doing what you can in the `Makefile` in your repository, so that the command `make install` continues to be the mechanism by which your plugin should be installed.
 - Be sure to update the `README.md` if you introduce any new constraints (e.g., that your plugin can only be installed on Linux).
   It's fine to do that, but you should let your users know so they don't get grumpy about your plugin.
 
-If you're ready to start getting users, the next steps are [helping prospective users discover your plugin](plugin-how-to-publicize), and [supporting them as they use it](plugin-how-to-support-your-users).
+For more information on how to create a formal software release for your plugin, please see [release your plugin on Github](release-on-gh).
 
+If you're ready to start getting users, the next steps are [helping prospective users discover your plugin](plugin-how-to-publicize), and [supporting them as they use it](plugin-how-to-support-your-users).
