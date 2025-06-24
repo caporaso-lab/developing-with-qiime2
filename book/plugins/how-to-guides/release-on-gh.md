@@ -2,8 +2,9 @@
 # Creating a new release of your plugin on GitHub
 
 As you add new features into your plugin, you may wish to create *release* versions to share with your users.
-We’ve created a GitHub workflow automation that runs each time you publish a new release on your plugin’s repository.
+We’ve created a GitHub workflow automation that runs each time you publish a new release on your plugin’s repository that will mint and test a new release environment file, so you don't have to!
 If you used our plugin template (see [](plugin-from-template)) on or after 20 June 2025, this automation is already included!
+You can determine whether or not you have this automation by looking under the `.github/workflows/` directory in your plugin's repository - the file that creates this automation will be titled `release-env.yml`.
 
 A GitHub workflow is included upon creation of your plugin (using our plugin template) that will automatically run when a new GitHub release is published on your plugin's repository.
 This workflow will mint a new *release* environment file that includes the latest QIIME 2 release of the given distribution you specified upon plugin creation, as well as the newly minted release version of your plugin.
