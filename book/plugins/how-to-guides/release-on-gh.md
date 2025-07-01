@@ -48,3 +48,5 @@ From this page, you'll scroll down to the 'Workflow permissions' section, and se
 Now that you've updated your GitHub repository's settings, you should be ready to publish your first GitHub release!
 
 GitHub Documentation offers a helpful walkthrough of creating a new release, which you can find [here](https://docs.GitHub.com/en/repositories/releasing-projects-on-GitHub/managing-releases-in-a-repository#creating-a-release).
+
+For more information on how to structure your release versions, check out [versioning guidelines for your plugin](versioning-your-plugin).
