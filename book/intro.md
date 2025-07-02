@@ -9,14 +9,10 @@ If you just want to find instructions for creating your QIIME 2 development envi
 
 ```{admonition} Development status of this content
 :class: note
-*Developing with QIIME 2* remains in [very active development](https://github.com/caporaso-lab/developing-with-qiime2/commits/main/), and as a result some URLs may change.
+*Developing with QIIME 2* remains in [active development](https://github.com/caporaso-lab/developing-with-qiime2/commits/main/), and as a result some URLs may change.
 It should be getting more complete by the day. 🚀
 
-The canonical URL for this project is now https://develop.qiime2.org.
-
-The "old developer documentation", which was previously hosted at `https://dev.qiime2.org`, is now deprecated.
-All content that is still relevant has been ported from that documentation to *Developing with QIIME 2*.
-If you want to access that archival content, you can find it in the [project's GitHub repository](https://github.com/qiime2/dev-docs).
+The canonical URL for this project is now https://develop.qiime2.org. [^old-docs]
 
 The [](plugin-tutorial-intro) chapter is where the focus is for the near future, though all of the [](plugins/intro.md) chapters have useful and up-to-date content in them.
 You'll also find content in [](framework-explanations) and various other chapters throughout, but those are currently less thorough and generally need some updates.
@@ -28,9 +24,10 @@ You do not need to read all of these parts to develop with QIIME 2.
 If you are interested in creating plugins, then the only part you need to concern yourself with is [](plugin-intro).
 Similarly, if you want to build an interface, you only need [](interface-intro).
 Other parts, such as [](framework-intro) and [](ci-intro), are currently targeted primarily for the development team in the [Caporaso Lab](https://cap-lab.bio).
-[](documentation-intro) is slated for a full re-write as we [recently changed our approach to user documentation](users-docs-refactor).
+[](documentation-intro) isn't really written yet, but you will find relevant and up-to-date (as of 2 July 2025) information here if you're interested in writing documentation for developers or users of QIIME 2.
 
-The content in each part of this book is organized under the [Diátaxis](https://diataxis.fr/) framework {cite}`diataxis`.
+
+The content in each part of this book is organized under the {{ diataxis }} framework.
 This means that you can expect *Chapters* containing *Tutorials*, *How-To-Guides*, *Explanations*, and *References* in each part.
 Each serves a different goal for the reader:
 
@@ -83,3 +80,7 @@ Initial support for the development of QIIME 2 was provided through a [grant](ht
 
 The QIIME 2 plugin [cookiecutter template](https://github.com/caporaso-lab/cookiecutter-qiime2-plugin) is made available under the BSD 3-Clause license.
 Unlike DWQ2, derivative works of that template *are* allowed (i.e., you can build real plugins that you intend to distribute for any purpose, including commercial, from the template).
+
+[^old-docs]: The "old developer documentation", which was previously hosted at `https://dev.qiime2.org`, is now deprecated.
+ All content that is still relevant has been ported from that documentation to *Developing with QIIME 2*.
+ If you want to access that archival content, you can find it in the [project's GitHub repository](https://github.com/qiime2/dev-docs).

@@ -73,6 +73,7 @@ html:
 
 parse:
   myst_substitutions:
+    diataxis: "[Diátaxis](https://diataxis.fr/)"
     miniconda_url: "[Miniconda](https://conda.io/miniconda.html)"
     developer_discussion: "[QIIME 2 Forum Developer Discussion](https://forum.qiime2.org/c/dev-discussion)"
     dwq2_gh_commit_url: "https://github.com/caporaso-lab/q2-dwq2/commit/{}"
