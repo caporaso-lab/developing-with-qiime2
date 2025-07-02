@@ -1,3 +1,4 @@
+(usage-example-api)=
 # Usage Examples
 
 This page outlines elements of the Usage API which are used by example authors
