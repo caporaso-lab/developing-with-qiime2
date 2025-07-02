@@ -26,6 +26,7 @@ parts:
             - file: plugins/how-to-guides/set-up-development-environment
             - file: plugins/how-to-guides/distribute-on-gh
             - file: plugins/how-to-guides/release-on-gh
+            - file: plugins/how-to-guides/versioning-your-plugin
             - file: plugins/how-to-guides/distribute-on-library
             - file: plugins/how-to-guides/support-your-users
             - file: plugins/how-to-guides/maximize-compatibility
