@@ -13,7 +13,7 @@ git clone https://github.com/caporaso-lab/developing-with-qiime2.git
 cd developing-with-qiime2
 ```
 
-1. Create the book's build environment:
+2. Create the book's build environment:
 
 ```bash
 __DWQ2_ENV_NAME=dwq2-$(date "+%Y-%m-%d")
@@ -21,12 +21,12 @@ conda env create -n $__DWQ2_ENV_NAME --file ./environment.yml
 conda activate $__DWQ2_ENV_NAME
 ```
 
-1. Build the book.
+3. Build the book.
 
 ```bash
 make html
 ```
 
-1. View the result.
+4. View the result.
 
 Open `book/_build/html/index.html` in a web browser.
