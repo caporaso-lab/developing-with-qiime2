@@ -32,18 +32,18 @@ This schedule provides us with ample development time between full releases, and
 ### Python Version Updates
 
 To balance platform stability with the need for modernization, Python version updates will occur at most once per year, targeting the April full release.
+The current annual timeline is as follows:
 
-#### Annual Python Update Timeline
+- **Post-October full release**: We evaluate whether a Python bump is needed.
+  If so, we attempt to solve development environments using the new version alongside other requested dependency updates.
+  If solving fails, we begin addressing any blockers.
 
-    Post-October full release: We evaluate whether a Python bump is needed. If so, we attempt to solve development environments using the new version alongside other requested dependency updates. If solving fails, we begin addressing any blockers.
+- **Post-January feature release**: We re-test environments using the target Python version.
+If solves are successful, the updated version is locked in and included in the finalized environment files for the April release.
 
-    Post-January feature release: We re-test environments using the target Python version. If solves are successful, the updated version is locked in and included in the finalized environment files for the April release.
+This schedule provides us with a consistent and predictable upgrade path for our developer community, and ample time for resolving any upstream packaging issues (e.g., missing or outdated builds).
 
-This schedule provides:
-
-  - A consistent and predictable upgrade path for our developer community.
-  - A two-month window for resolving upstream packaging issues (e.g., missing or outdated builds).
-  - A six-month lead time before Python end-of-life deadlines, allowing us to avoid last-minute transitions.
+### Annual Release Timeline
 
 The following diagram outlines relevant timepoints between each release, with terms defined below.
 
