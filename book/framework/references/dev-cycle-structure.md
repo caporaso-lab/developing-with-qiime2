@@ -27,7 +27,23 @@ The important dates mentioned above within each development cycle are as follows
  - The Friday before each release day (feature and full), we will have a repository freeze (i.e. no more merging to main branch) on all plugins that are a part of any of our supported distributions.
    This freeze is to remain in effect until after our release announcement has been posted, and will allow for a smoother build process on release day (so we don't run into any unexpected behavior due to last minute plugin changes).
 
-This schedule provides us with ample development time between full releases, and provides our developer community with at least a two month notice for any interface/API changes and any external dependency changes (i.e. bumping the Python version, removing a deprecated package, etc).
+This schedule provides us with ample development time between full releases, and provides our developer community with at least a two month notice for any interface/API changes and any external dependency changes (i.e. bumping the version of scikit-bio, removing a deprecated package, etc).
+
+### Python Version Updates
+
+To balance platform stability with the need for modernization, Python version updates will occur at most once per year, targeting the April full release.
+
+#### Annual Python Update Timeline
+
+    Post-October full release: We evaluate whether a Python bump is needed. If so, we attempt to solve development environments using the new version alongside other requested dependency updates. If solving fails, we begin addressing any blockers.
+
+    Post-January feature release: We re-test environments using the target Python version. If solves are successful, the updated version is locked in and included in the finalized environment files for the April release.
+
+This schedule provides:
+
+  - A consistent and predictable upgrade path for our developer community.
+  - A two-month window for resolving upstream packaging issues (e.g., missing or outdated builds).
+  - A six-month lead time before Python end-of-life deadlines, allowing us to avoid last-minute transitions.
 
 The following diagram outlines relevant timepoints between each release, with terms defined below.
 
