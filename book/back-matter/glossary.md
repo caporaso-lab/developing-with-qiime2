@@ -19,6 +19,10 @@ Artifact class
 Artifact API
   See {term}`Python 3 API`.
 
+Collection
+  An ordered list of `key: value` pairs. Think of an ordered [Python dictionary](https://docs.python.org/3/tutorial/datastructures.html#dictionaries).
+  These can be used as {term}`Input`, {term}`Parameter`, and {term}`Output` {term}`Types <Type>`.
+
 Conda metapackage
   A metapackage is a package  with no  files,  only  metadata.
   They are typically used to collect several packages together into a single package via dependencies.
