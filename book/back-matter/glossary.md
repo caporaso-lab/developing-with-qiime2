@@ -46,7 +46,6 @@ DRY
   For more information on DRY and software engineering in general, see {cite:t}`pragprog20`.
   The {cite:t}`pragprog20` content on DRY is available in a [free example chapter here](https://media.pragprog.com/titles/tpp20/dry.pdf).
 
-
 File Format
   An object which subclasses either `qiime2.plugin.TextFileFormat` or `qiime2.plugin.BinaryFileFormat`.
   File formats define the particular format of a file, and define a process for validating the format.
