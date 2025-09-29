@@ -180,7 +180,6 @@ Box and arrow diagram of a v5 archive.
 Released in QIIME 2 version [2023.5](https://github.com/qiime2/qiime2/releases/tag/2023.5.1) ([changelog](https://forum.qiime2.org/t/qiime-2-2023-5-is-now-available/26579)) [commit `85f7111`](https://github.com/qiime2/qiime2/commit/85f71118c0394647779397ebf116480b9498426a), this version adds `execution_context` to the `execution` section of `action.yaml` and adds support for {term}`input`, {term}`parameter`, and {term}`output` {term}`Collections <Collection>` in `action.yaml`.
 
 The `execution_context` goes at the bottom of the `execution` section of `action.yaml` and gives some details about how the {term}`Action` that produced this {term}`Result` was executed. It indicates whether the {term}`Action` was executed synchronously, asynchronously, or using Parsl. If Parsl was used it indicates what type of Parsl executor was used to run it. If more execution contexts are added in the future, the possibilities here may expand.
-,
 ```yaml
 execution:
     uuid: 8b1ddcc2-b4e7-4c9f-9338-a7785a47862e
