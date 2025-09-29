@@ -175,9 +175,68 @@ ae0d0e26da5b84a6c0722148789c51e0  provenance/artifacts/f6105891-2c00-4886-b733-6
 Box and arrow diagram of a v5 archive.
 ```
 
+(archive-version-6)=
 ## Archive Version 6
-Full documentation for [Archive Version 6 is pending](https://github.com/caporaso-lab/developing-with-qiime2/issues/32).
-The source code can be found [here](https://github.com/qiime2/qiime2/blob/630696237166f60765f7bbe6e3c668ea0e1495d9/qiime2/core/archive/format/v6.py).
+Released in QIIME 2 version [2023.5](https://github.com/qiime2/qiime2/releases/tag/2023.5.1) ([changelog](https://forum.qiime2.org/t/qiime-2-2023-5-is-now-available/26579)) [commit `85f7111`](https://github.com/qiime2/qiime2/commit/85f71118c0394647779397ebf116480b9498426a), this version adds `execution_context` to the `execution` section of `action.yaml` and adds support for {term}`input`, {term}`parameter`, and {term}`output` {term}`Collections <Collection>` in `action.yaml`.
+
+The `execution_context` goes at the bottom of the `execution` section of `action.yaml` and gives some details about how the {term}`Action` that produced this {term}`Result` was executed. It indicates whether the {term}`Action` was executed synchronously, asynchronously, or using Parsl. If Parsl was used it indicates what type of Parsl executor was used to run it. If more execution contexts are added in the future, the possibilities here may expand.
+```yaml
+execution:
+    uuid: 8b1ddcc2-b4e7-4c9f-9338-a7785a47862e
+    runtime:
+        start: 2025-09-18T11:45:15.273922-07:00
+        end: 2025-09-18T11:45:15.659510-07:00
+        duration: 385588 microseconds
+    execution_context:
+        type: parsl/synchronous/asynchronous
+        parsl_type: (if type is parsl) <Type of executor used>
+```
+
+Support for {term}`input`, {term}`parameter` and {term}`output` {term}`Collections <Collection>` of `key: value` pairs was also added in v6.
+
+{term}`Input` {term}`Collections <Collection>` go under the `inputs` section of `action.yaml` and take the form of a list of yaml `key: value` pairs where the key is a given {term}`Artifact's <Artifact>` key in the {term}`Collection` and the value is its {term}`UUID`.
+
+```yaml
+action:
+    type: <type>
+    plugin: <plugin>
+    action: <action>
+    inputs:
+        - <input collection name>:
+            - '<key1>': <uuid1>
+            - '<key2>': <uuid2>
+            ...
+```
+
+{term}`Parameter` {term}`Collections <Collection>` go under the `parameters` section of `action.yaml` and are formatted identically to {term}`input` {term}`Collections <Collection>` only the values will be of whatever type the {term}`Parameter` {term}`Collection` is not {term}`UUIDs <UUID>`.
+
+```yaml
+action:
+    type: <type>
+    plugin: <plugin>
+    action: <action>
+    inputs: <inputs>
+    parameters:
+        - <parameter collection name>:
+            - '<key1>': <value1>
+            - '<key2>': <value2>
+            ...
+```
+
+If a {term}`Result` is part of an {term}`Output` {term}`Collection`, the `output-name` section of its `action.yaml` will contain two additional pieces of information. The key of this {term}`Result` in the {term}`Collection`, and the index of this {term}`Result` in the {term}`Collection` of the form `x/y` where `x` is this {term}`Result's <Result>` index and `y` is the size of the {term}`Collection`.
+
+```yaml
+action:
+    type: <type>
+    plugin: <plugin>
+    action: <action>
+    inputs: <inputs>
+    parameters: <parameters>
+    output-name:
+    - <output collection name>
+    - <key of this element in the output collection>
+    - <index of this element in the collection out of total elements in the collection e.g. 1/100 for the first element in a collection of 100>
+```
 
 ## Archive Version 7
 Archive Version 7 development is [currently being planned](https://github.com/qiime2/qiime2/issues/747).

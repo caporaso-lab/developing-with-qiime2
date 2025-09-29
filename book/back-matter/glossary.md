@@ -19,6 +19,10 @@ Artifact class
 Artifact API
   See {term}`Python 3 API`.
 
+Collection
+  An ordered list of `key: value` pairs. Think of an ordered [Python dictionary](https://docs.python.org/3/tutorial/datastructures.html#dictionaries).
+  These can be used as {term}`Input`, {term}`Parameter`, and {term}`Output` {term}`Types <Type>`.
+
 Conda metapackage
   A metapackage is a package  with no  files,  only  metadata.
   They are typically used to collect several packages together into a single package via dependencies.
@@ -41,7 +45,6 @@ DRY
   An acronym of *Don't Repeat Yourself*, and a critical principle of software engineering.
   For more information on DRY and software engineering in general, see {cite:t}`pragprog20`.
   The {cite:t}`pragprog20` content on DRY is available in a [free example chapter here](https://media.pragprog.com/titles/tpp20/dry.pdf).
-
 
 File Format
   An object which subclasses either `qiime2.plugin.TextFileFormat` or `qiime2.plugin.BinaryFileFormat`.
