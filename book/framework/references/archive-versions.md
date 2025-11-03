@@ -239,4 +239,18 @@ action:
 ```
 
 ## Archive Version 7
-Archive Version 7 development is [currently being planned](https://github.com/qiime2/qiime2/issues/747).
+Starting with QIIME 2 version [2025.4](https://github.com/qiime2/qiime2/releases/tag/2025.4.0), QIIME 2 Archive Versions 7+ will now utilize semantic versioning.
+What this means is each new QIIME 2 Archive Version will be broken up into a major version and a minor version.
+Major version updates (i.e. version 6.x -> 7.x) will include a significantly different internal structure, such as new files within the zip archive.
+Backwards compatibility across major versions is not guaranteed.
+Minor version updates (i.e. 7.n -> 7.n+1) will include minor differing internal structor and/or features/capabilities - all of which will be backwards compatible to the nearest major version (i.e. versions 7.* will all be compatible).
+
+### Archive Version 7.0
+
+
+### Archive Version 7.1
+Released in QIIME 2 version [2025.10](https://github.com/qiime2/qiime2/releases/tag/2025.4.0)
+[commit `7d2a9b1`](https://github.com/qiime2/qiime2/commit/7d2a9b12d98666200b370de89e9e633b33e9acb8), this version adds .
+
+### Archive Version 7.2
+Archive Version 7.2 development is currently being planned.
