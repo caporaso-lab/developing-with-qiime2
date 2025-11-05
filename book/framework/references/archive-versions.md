@@ -248,12 +248,111 @@ Minor version updates (i.e. 7.n -> 7.n+1) include minor differing internal struc
 
 ### Archive Version 7.0
 Released in QIIME 2 version [2025.4](https://github.com/qiime2/qiime2/releases/tag/2025.4.0) ([changelog](https://forum.qiime2.org/t/qiime-2-2025-4-is-now-available/33088)) [commit `0d2c8ec`](https://github.com/qiime2/qiime2/commit/0d2c8ec7d0cb6e3b81c4ab621e78bd0df74c11a0), this version adds support for creation of {term}`Annotations <Annotation>` (of sub-type {term}`Note`) to a QIIME 2 {term}`Result`, an all-new `conda-env.yaml` file containing all environment dependencies a {term}`Result` was created from, updated checksum calculations from `md5` to `sha512`, and total file size calculation for all files within the `data` directory as a new entry under the top level/provenance level `metadata.yaml` files.
+All of the new additions to the {term}`Archive` file structure are outlined below.
 
-{term}`Annotations <Annotation>` are a way of attaching information to a QIIME 2 {term}`Result`.
+{term}`Annotations <Annotation>` are a way of attaching additional information to a QIIME 2 {term}`Result`.
+In version 7.0, {term}`Note` has been added as a supported {term}`Annotation` sub-type.
+{term}`Notes <Note>` can either contain inline text or a filepath whose contents will be written to the {term}`Note`.
+
+The updated structure of a QIIME 2 {term}`Result` includes a new top-level `annotations` directory, where all {term}`Annotations <Annotation>` will be written.
+Each {term}`Note` that is created and written to this directory will have the following structure:
+
+```yaml
+annotations/
+    8b1ddcc2-b4e7-4c9f-9338-a7785a47862e/
+        checksums.sha512
+        metadata.yaml
+        note.txt
+    217d5eb4-febf-48e8-83ac-1a4dbebe8cf5/
+        checksums.sha512
+        metadata.yaml
+        note.txt
+```
+
+With each sub-directory underneath the `annotations` directory corresponding to the UUID associated with each {term}`Note` {term}`Annotation` that was added to the {term}`Result.`
+In each UUID's subdirectory, a {term}`Note` will contain the following files:
+- A `note.txt` file that contains either the inline text or the contents of the filepath provided upon creation of the {term}`Note`.
+- A `metadata.yaml` file that contains specific details about the {term}`Annotation`, which will be laid out in detail below.
+- A `checksums.sha512` file with the sha512 calculated checksum for each file within the directory (`metadata.yaml` and `note.txt`).
+
+The contents of the `metadata.yaml` file are as follows:
+
+```yaml
+id: 8b1ddcc2-b4e7-4c9f-9338-a7785a47862e
+name: <note-name>
+type: Note
+created_at: <yyyy-mm-ddThh:mm:ss.ms>
+root_result_uuid: d594e658-65fd-4658-8de1-88097ce43abd
+referenced_result_uuid: d594e658-65fd-4658-8de1-88097ce43abd
+```
+
+With `id` corresponding to the {term}`Annotation's <Annotation>` UUID, the `root_result_uuid` corresponding to the UUID of the {term}`Result` the {term}`Annotation` is attached to, and the `referenced_result_uuid` corresponding to the UUID of the {term}`Result` the {term}`Annotation` is in reference to.
+Note that the current implementation of {term}`Annotations <Annotation>` doesn't support referencing a {term}`Result` separate from the one the {term}`Annotation` is attached to, but these separate fields have been created to allow for this functionality to be supported in future {term}`Archive` versions.
+
+In addition to {term}`Annotations <Annotation>`, a new `conda-env.yaml` file (located under the `provenance` directory) has been added within the {term}`Archive` structure.
+This file contains all of the dependencies present in the conda environment where the {term}`Result` in question was created from.
+The contents of this file look something like this (with this example showing a very minimal environment for the sake of space):
+
+```yaml
+dependencies:
+    - numpy=1.26.4=py310h4bfa8fc_0
+    - pandas=2.2.2=py310hbf2a7f0_1
+    - python=3.10.14=h00d2728_0_cpython
+    - q2-metadata=2025.10.0.dev0+1.g61b847b=py310hd4cd7ad_0
+    - q2-mystery-stew=2025.10.0.dev0+1.g25270e3=py310h3cfa9b4_0
+    - q2-types=2025.10.0.dev0+5.g4a8aaa7=py310h974e487_0
+    - q2cli=2025.10.0.dev0+2.g2976552=py310h68e8629_0
+    - q2galaxy=2025.10.0.dev0=py310hac6da46_0
+    - q2templates=2025.10.0.dev0+1.g695609d=py310h88e6d8d_0
+    - qiime2=2025.10.0.dev0+6.g65a1488=py310hf606c39_0
+```
+
+With each entry consisting of the structure `<package-name>=<package-version>=<build-number>`.
 
 ### Archive Version 7.1
 Released in QIIME 2 version [2025.10](https://github.com/qiime2/qiime2/releases/tag/2025.10.1) ([changelog](https://forum.qiime2.org/t/qiime-2-2025-10-is-now-available/33760))
-[commit `7d2a9b1`](https://github.com/qiime2/qiime2/commit/7d2a9b12d98666200b370de89e9e633b33e9acb8), this version adds .
+[commit `7d2a9b1`](https://github.com/qiime2/qiime2/commit/7d2a9b12d98666200b370de89e9e633b33e9acb8), this version adds {term}`Signatures <Signature>`, a new {term}`Annotation` sub-type that provides support for cryptographically signing a QIIME 2 {term}`Result`.
+
+A new {term}`Signature` is created by using the fingerprint of an existing GnuPG keypair to cryptographically sign a {term}`Result`, thus providing a verifiable identity associated with that {term}`Result`.
+
+The structure of a {term}`Signature` {term}`Annotation` within a {term}`Result` is as follows:
+
+```yaml
+annotations/
+    217d5eb4-febf-48e8-83ac-1a4dbebe8cf5/
+        checksums.sha512
+        metadata.yaml
+        signature.gpg
+```
+
+Each {term}`Signature` (separated by their associated UUID sub-directories) contains the following files:
+- A `signature.gpg` file that contains the cryptographic signature created with the provided GnuPG keypair.
+- A `metadata.yaml` file that contains specific details about the {term}`Signature`, which will be laid out in detail below.
+- A `checksums.sha512` file with the sha512 calculated checksum for each file within the directory (`metadata.yaml` and `signature.gpg`).
+
+The contents of the `metadata.yaml` file are as follows:
+
+```yaml
+id: 217d5eb4-febf-48e8-83ac-1a4dbebe8cf5
+name: <signature-name>
+type: Signature
+created_at: <yyyy-mm-ddThh:mm:ss.ms>
+root_result_uuid: 046a982d-dbfa-41d1-8596-f767c71f4673
+referenced_result_uuid: 046a982d-dbfa-41d1-8596-f767c71f4673
+algorithm: <GnuPG keypair algorithm>
+checksum_digest: <sha512sum>
+signer_name: <signer-name>
+signer_email: <signer-email>
+fingerprint: <GnuPG keypair fingerprint>
+```
+
+With the {term}`Signature`-specific fields outlined below:
+- `algorithm` refers to the encryption algorithm used when generating the GnuPG keypair used for creating the {term}`Signature`.
+- `checksum_digest` refers to the calculated `sha512` sum of the root-level `checksums.sha512` file, used for {term}`Signature` verification.
+- `signer_name` and `signer_email` refer to the GnuPG uid credentials associated with the keypair used for creating the {term}`Signature`.
+- `fingerprint` refers to the fingerprint associated with the GnuPG keypair used for creating the {term}`Signature`.
+
+More details on {term}`Signature` creation (and verification) along with information on installing and using GnuPG for this purpose can be found in [this tutorial](TODO: link to user tutorial goes here).
 
 ### Archive Version 7.2
 Archive Version 7.2 development is currently being planned.
