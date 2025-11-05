@@ -240,8 +240,8 @@ action:
 
 (archive-version-7)=
 ## Archive Version 7
-Starting with QIIME 2 version [2025.4](https://github.com/qiime2/qiime2/releases/tag/2025.4.0), QIIME 2 Archive Versions 7+ utilize semantic versioning.
-What this means is each new QIIME 2 Archive Version is broken up into a major version and a minor version.
+Starting with QIIME 2 version [2025.4](https://github.com/qiime2/qiime2/releases/tag/2025.4.0), QIIME 2 {term}`Archive` versions 7+ utilize semantic versioning.
+What this means is each new QIIME 2 {term}`Archive` version is broken up into a major version and a minor version.
 Major version updates (i.e. version 6.x -> 7.x) include a significantly different internal structure, such as new files within the zip archive.
 Backwards compatibility across major versions is not guaranteed.
 Minor version updates (i.e. 7.n -> 7.n+1) include minor differing internal structor and/or features/capabilities - all of which will be backwards compatible to the nearest major version (i.e. versions 7.* will all be compatible).
@@ -272,7 +272,7 @@ annotations/
 With each sub-directory underneath the `annotations` directory corresponding to the UUID associated with each {term}`Note` {term}`Annotation` that was added to the {term}`Result.`
 In each UUID's subdirectory, a {term}`Note` will contain the following files:
 - A `note.txt` file that contains either the inline text or the contents of the filepath provided upon creation of the {term}`Note`.
-- A `metadata.yaml` file that contains specific details about the {term}`Annotation`, which will be laid out in detail below.
+- A `metadata.yaml` file that contains specific details about the {term}`Annotation` (which will be laid out in detail below).
 - A `checksums.sha512` file with the sha512 calculated checksum for each file within the directory (`metadata.yaml` and `note.txt`).
 
 The contents of the `metadata.yaml` file are as follows:
@@ -291,7 +291,7 @@ Note that the current implementation of {term}`Annotations <Annotation>` doesn't
 
 In addition to {term}`Annotations <Annotation>`, a new `conda-env.yaml` file (located under the `provenance` directory) has been added within the {term}`Archive` structure.
 This file contains all of the dependencies present in the conda environment where the {term}`Result` in question was created from.
-The contents of this file look something like this (with this example showing a very minimal environment for the sake of space):
+The contents of this file are as follows (with this example showing a very minimal environment):
 
 ```yaml
 dependencies:
@@ -327,7 +327,7 @@ annotations/
 
 Each {term}`Signature` (separated by their associated UUID sub-directories) contains the following files:
 - A `signature.gpg` file that contains the cryptographic signature created with the provided GnuPG keypair.
-- A `metadata.yaml` file that contains specific details about the {term}`Signature`, which will be laid out in detail below.
+- A `metadata.yaml` file that contains specific details about the {term}`Signature` (laid out in detail below).
 - A `checksums.sha512` file with the sha512 calculated checksum for each file within the directory (`metadata.yaml` and `signature.gpg`).
 
 The contents of the `metadata.yaml` file are as follows:
