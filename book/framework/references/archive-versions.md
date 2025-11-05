@@ -238,18 +238,21 @@ action:
     - <index of this element in the collection out of total elements in the collection e.g. 1/100 for the first element in a collection of 100>
 ```
 
+(archive-version-7)=
 ## Archive Version 7
-Starting with QIIME 2 version [2025.4](https://github.com/qiime2/qiime2/releases/tag/2025.4.0), QIIME 2 Archive Versions 7+ will now utilize semantic versioning.
-What this means is each new QIIME 2 Archive Version will be broken up into a major version and a minor version.
-Major version updates (i.e. version 6.x -> 7.x) will include a significantly different internal structure, such as new files within the zip archive.
+Starting with QIIME 2 version [2025.4](https://github.com/qiime2/qiime2/releases/tag/2025.4.0), QIIME 2 Archive Versions 7+ utilize semantic versioning.
+What this means is each new QIIME 2 Archive Version is broken up into a major version and a minor version.
+Major version updates (i.e. version 6.x -> 7.x) include a significantly different internal structure, such as new files within the zip archive.
 Backwards compatibility across major versions is not guaranteed.
-Minor version updates (i.e. 7.n -> 7.n+1) will include minor differing internal structor and/or features/capabilities - all of which will be backwards compatible to the nearest major version (i.e. versions 7.* will all be compatible).
+Minor version updates (i.e. 7.n -> 7.n+1) include minor differing internal structor and/or features/capabilities - all of which will be backwards compatible to the nearest major version (i.e. versions 7.* will all be compatible).
 
 ### Archive Version 7.0
+Released in QIIME 2 version [2025.4](https://github.com/qiime2/qiime2/releases/tag/2025.4.0) ([changelog](https://forum.qiime2.org/t/qiime-2-2025-4-is-now-available/33088)) [commit `0d2c8ec`](https://github.com/qiime2/qiime2/commit/0d2c8ec7d0cb6e3b81c4ab621e78bd0df74c11a0), this version adds support for creation of {term}`Annotations <Annotation>` (of sub-type {term}`Note`) to a QIIME 2 {term}`Result`, an all-new `conda-env.yaml` file containing all environment dependencies a {term}`Result` was created from, updated checksum calculations from `md5` to `sha512`, and total file size calculation for all files within the `data` directory as a new entry under the top level/provenance level `metadata.yaml` files.
 
+{term}`Annotations <Annotation>` are a way of attaching information to a QIIME 2 {term}`Result`.
 
 ### Archive Version 7.1
-Released in QIIME 2 version [2025.10](https://github.com/qiime2/qiime2/releases/tag/2025.4.0)
+Released in QIIME 2 version [2025.10](https://github.com/qiime2/qiime2/releases/tag/2025.10.1) ([changelog](https://forum.qiime2.org/t/qiime-2-2025-10-is-now-available/33760))
 [commit `7d2a9b1`](https://github.com/qiime2/qiime2/commit/7d2a9b12d98666200b370de89e9e633b33e9acb8), this version adds .
 
 ### Archive Version 7.2
