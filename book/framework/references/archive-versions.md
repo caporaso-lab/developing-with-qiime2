@@ -243,11 +243,16 @@ action:
 Starting with QIIME 2 version [2025.4](https://github.com/qiime2/qiime2/releases/tag/2025.4.0), QIIME 2 {term}`Archive` versions 7+ utilize semantic versioning.
 What this means is each new QIIME 2 {term}`Archive` version is broken up into a major version and a minor version.
 Major version updates (i.e. version 6.x -> 7.x) include a significantly different internal structure, such as new files within the zip archive.
-Backwards compatibility across major versions is not guaranteed.
-Minor version updates (i.e. 7.n -> 7.n+1) include minor differing internal structor and/or features/capabilities - all of which will be backwards compatible to the nearest major version (i.e. versions 7.* will all be compatible).
+Backward compatibility across major versions is not guaranteed (such that a version 7.0 archive will not be compatible with older software versions that didn't yet know about that version).
+Minor version updates (i.e. 7.n -> 7.n+1) include minor differing internal structure and/or features/capabilities.
+These will be backwards compatible to the nearest major version (such that a version 7.1 or 7.2 archive will be compatible with other software versions as long as they knew about 7.0).
 
 ### Archive Version 7.0
-Released in QIIME 2 version [2025.4](https://github.com/qiime2/qiime2/releases/tag/2025.4.0) ([changelog](https://forum.qiime2.org/t/qiime-2-2025-4-is-now-available/33088)) [commit `0d2c8ec`](https://github.com/qiime2/qiime2/commit/0d2c8ec7d0cb6e3b81c4ab621e78bd0df74c11a0), this version adds support for creation of {term}`Annotations <Annotation>` (of sub-type {term}`Note`) to a QIIME 2 {term}`Result`, an all-new `conda-env.yaml` file containing all environment dependencies a {term}`Result` was created from, updated checksum calculations from `md5` to `sha512`, and total file size calculation for all files within the `data` directory as a new entry under the top level/provenance level `metadata.yaml` files.
+Released in QIIME 2 version [2025.4](https://github.com/qiime2/qiime2/releases/tag/2025.4.0) ([changelog](https://forum.qiime2.org/t/qiime-2-2025-4-is-now-available/33088)) [commit `0d2c8ec`](https://github.com/qiime2/qiime2/commit/0d2c8ec7d0cb6e3b81c4ab621e78bd0df74c11a0), this version adds:
+ - support for creation of {term}`Annotations <Annotation>` (of sub-type {term}`Note`) to a QIIME 2 {term}`Result`;
+ - an all-new `conda-env.yaml` file containing all environment dependencies a {term}`Result` was created from;
+ - updated checksum calculations from `md5` to `sha512`;
+ - and total file size calculation for all files within the `data` directory as a new entry under the top level/provenance level `metadata.yaml` files.
 All of the new additions to the {term}`Archive` file structure are outlined below.
 
 {term}`Annotations <Annotation>` are a way of attaching additional information to a QIIME 2 {term}`Result`.
@@ -269,11 +274,11 @@ annotations/
         note.txt
 ```
 
-With each sub-directory underneath the `annotations` directory corresponding to the UUID associated with each {term}`Note` {term}`Annotation` that was added to the {term}`Result.`
+Each sub-directory underneath the `annotations` directory corresponds to the UUID associated with each {term}`Note` {term}`Annotation` that was added to the {term}`Result`.
 In each UUID's subdirectory, a {term}`Note` will contain the following files:
-- A `note.txt` file that contains either the inline text or the contents of the filepath provided upon creation of the {term}`Note`.
-- A `metadata.yaml` file that contains specific details about the {term}`Annotation` (which will be laid out in detail below).
-- A `checksums.sha512` file with the sha512 calculated checksum for each file within the directory (`metadata.yaml` and `note.txt`).
+ - A `note.txt` file that contains either the inline text or the contents of the filepath provided upon creation of the {term}`Note`.
+ - A `metadata.yaml` file that contains specific details about the {term}`Annotation` (which will be laid out in detail below).
+ - A `checksums.sha512` file with the sha512 calculated checksum for each file within the directory (`metadata.yaml` and `note.txt`).
 
 The contents of the `metadata.yaml` file are as follows:
 
@@ -286,7 +291,7 @@ root_result_uuid: d594e658-65fd-4658-8de1-88097ce43abd
 referenced_result_uuid: d594e658-65fd-4658-8de1-88097ce43abd
 ```
 
-With `id` corresponding to the {term}`Annotation's <Annotation>` UUID, the `root_result_uuid` corresponding to the UUID of the {term}`Result` the {term}`Annotation` is attached to, and the `referenced_result_uuid` corresponding to the UUID of the {term}`Result` the {term}`Annotation` is in reference to.
+`id` corresponds to the {term}`Annotation's <Annotation>` UUID, the `root_result_uuid` corresponds to the UUID of the {term}`Result` the {term}`Annotation` is attached to, and the `referenced_result_uuid` corresponds to the UUID of the {term}`Result` the {term}`Annotation` is in reference to.
 Note that the current implementation of {term}`Annotations <Annotation>` doesn't support referencing a {term}`Result` separate from the one the {term}`Annotation` is attached to, but these separate fields have been created to allow for this functionality to be supported in future {term}`Archive` versions.
 
 In addition to {term}`Annotations <Annotation>`, a new `conda-env.yaml` file (located under the `provenance` directory) has been added within the {term}`Archive` structure.
@@ -307,7 +312,7 @@ dependencies:
     - qiime2=2025.10.0.dev0+6.g65a1488=py310hf606c39_0
 ```
 
-With each entry consisting of the structure `<package-name>=<package-version>=<build-number>`.
+Each entry matches the pattern: `<package-name>=<package-version>=<build-number>`.
 
 ### Archive Version 7.1
 Released in QIIME 2 version [2025.10](https://github.com/qiime2/qiime2/releases/tag/2025.10.1) ([changelog](https://forum.qiime2.org/t/qiime-2-2025-10-is-now-available/33760))
@@ -346,13 +351,13 @@ signer_email: <signer-email>
 fingerprint: <GnuPG keypair fingerprint>
 ```
 
-With the {term}`Signature`-specific fields outlined below:
+The {term}`Signature`-specific field are defined as follows:
 - `algorithm` refers to the encryption algorithm used when generating the GnuPG keypair used for creating the {term}`Signature`.
 - `checksum_digest` refers to the calculated `sha512` sum of the root-level `checksums.sha512` file, used for {term}`Signature` verification.
 - `signer_name` and `signer_email` refer to the GnuPG uid credentials associated with the keypair used for creating the {term}`Signature`.
 - `fingerprint` refers to the fingerprint associated with the GnuPG keypair used for creating the {term}`Signature`.
 
-More details on {term}`Signature` creation (and verification) along with information on installing and using GnuPG for this purpose can be found in [this tutorial](TODO: link to user tutorial goes here).
+More details on {term}`Signature` creation and verification, along with information on installing and using GnuPG for this purpose, can be found in [How to sign and verify Results](TODO: add link!!).
 
 ### Archive Version 7.2
 Archive Version 7.2 development is currently being planned.

@@ -6,8 +6,8 @@ Action
   Actions accept parameters and/or {term}`Artifacts <Artifact>` and/or {term}`Metadata`) as input, and generate one or more {term}`Results <Result>` as output.
 
 Annotation
-Additional information that can be attached to a QIIME 2 {term}`Result`, such as a text file or cryptographic signature.
-See {term}`Note` and {term}`Signature` for more information on the respective {term}`Annotation` types that have been implemented, and what they can contain.
+  Additional information that can be attached to a QIIME 2 {term}`Result`, such as a text file or cryptographic signature.
+  See {term}`Note` and {term}`Signature` for more information on the respective {term}`Annotation` types that have been implemented, and what they can contain.
 
 Archive
   The directory structure of a QIIME 2 {term}`Result`.
