@@ -351,7 +351,7 @@ signer_email: <signer-email>
 fingerprint: <GnuPG keypair fingerprint>
 ```
 
-The {term}`Signature`-specific field are defined as follows:
+The {term}`Signature`-specific fields are defined as follows:
 - `algorithm` refers to the encryption algorithm used when generating the GnuPG keypair used for creating the {term}`Signature`.
 - `checksum_digest` refers to the calculated `sha512` sum of the root-level `checksums.sha512` file, used for {term}`Signature` verification.
 - `signer_name` and `signer_email` refer to the GnuPG uid credentials associated with the keypair used for creating the {term}`Signature`.
