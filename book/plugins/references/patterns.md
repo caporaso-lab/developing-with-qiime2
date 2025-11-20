@@ -21,7 +21,7 @@ We make the following recommendations for naming `Metadata` parameters, based on
 - If your action takes more than one sample metadata input, called them `metadata1`, `metadatá2`, ... ([example: `merge`](https://amplicon-docs.qiime2.org/en/latest/references/plugins/metadata.html#q2-action-metadata-merge))
 - If your action takes more than one feature metadata input, called them `feature-metadata1`, `feature-metadata2`, ...
 
-[^my-name-is-better]: Sometimes you may have a slightly better name than what is widely used.
+[^my-name-is-better]: Sometimes you may have a slightly better name for an input, output, or parameter than what is widely used.
  Counterintuitively, using that name might make your users' experience more challenging because it's not the name they've come to expect.
  In this case, it probably makes sense to go with the existing name.
  Other times you might have a name that's *much* better than what others are using (e.g., because the other name is actively misleading).
