@@ -53,6 +53,7 @@ parts:
             - file: plugins/explanations/transformers
         - file: plugins/references/intro
           sections:
+            - file: plugins/references/patterns
             - file: plugins/references/antipatterns
             - file: plugins/references/api/intro
               sections:
